@@ -1,0 +1,83 @@
+CRITICAL - 2022-05-03 12:27:30 --> user_id is not a valid rule.
+#0 D:\wamp64\www\webppi\system\Validation\Validation.php(300): CodeIgniter\Validation\Exceptions\ValidationException::forRuleNotFound('user_id')
+#1 D:\wamp64\www\webppi\system\Validation\Validation.php(157): CodeIgniter\Validation\Validation->processRules('user_id', 'user_id', '4', Array, Array)
+#2 D:\wamp64\www\webppi\system\Controller.php(160): CodeIgniter\Validation\Validation->run()
+#3 D:\wamp64\www\webppi\app\Controllers\Register.php(252): CodeIgniter\Controller->validate(Array)
+#4 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Register->buatprofileproses()
+#5 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Register))
+#6 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#8 {main}
+ERROR - 2022-05-03 12:28:44 --> Unknown column 'userid' in 'where clause'
+CRITICAL - 2022-05-03 12:28:44 --> Call to a member function getRow() on bool
+#0 D:\wamp64\www\webppi\system\Validation\Validation.php(292): CodeIgniter\Validation\Rules->is_unique('4', 'userid', Array, NULL)
+#1 D:\wamp64\www\webppi\system\Validation\Validation.php(157): CodeIgniter\Validation\Validation->processRules('user_id', 'user_id', '4', Array, Array)
+#2 D:\wamp64\www\webppi\system\Controller.php(160): CodeIgniter\Validation\Validation->run()
+#3 D:\wamp64\www\webppi\app\Controllers\Register.php(252): CodeIgniter\Controller->validate(Array)
+#4 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Register->buatprofileproses()
+#5 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Register))
+#6 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#8 {main}
+ERROR - 2022-05-03 12:29:00 --> Unknown column 'userid' in 'where clause'
+CRITICAL - 2022-05-03 12:29:00 --> Call to a member function getRow() on bool
+#0 D:\wamp64\www\webppi\system\Validation\Validation.php(292): CodeIgniter\Validation\Rules->is_unique('4', 'userid', Array, NULL)
+#1 D:\wamp64\www\webppi\system\Validation\Validation.php(157): CodeIgniter\Validation\Validation->processRules('user_id', 'user_id', '4', Array, Array)
+#2 D:\wamp64\www\webppi\system\Controller.php(160): CodeIgniter\Validation\Validation->run()
+#3 D:\wamp64\www\webppi\app\Controllers\Register.php(252): CodeIgniter\Controller->validate(Array)
+#4 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Register->buatprofileproses()
+#5 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Register))
+#6 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#8 {main}
+ERROR - 2022-05-03 12:29:30 --> Unknown column 'userid' in 'where clause'
+CRITICAL - 2022-05-03 12:29:30 --> Call to a member function getRow() on bool
+#0 D:\wamp64\www\webppi\system\Validation\Validation.php(292): CodeIgniter\Validation\Rules->is_unique('4', 'userid', Array, NULL)
+#1 D:\wamp64\www\webppi\system\Validation\Validation.php(157): CodeIgniter\Validation\Validation->processRules('user_id', 'user_id', '4', Array, Array)
+#2 D:\wamp64\www\webppi\system\Controller.php(160): CodeIgniter\Validation\Validation->run()
+#3 D:\wamp64\www\webppi\app\Controllers\Register.php(252): CodeIgniter\Controller->validate(Array)
+#4 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Register->buatprofileproses()
+#5 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Register))
+#6 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2022-05-03 19:25:32 --> Call to undefined function set_value()
+#0 D:\wamp64\www\webppi\system\View\View.php(210): include()
+#1 D:\wamp64\www\webppi\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#2 D:\wamp64\www\webppi\system\Common.php(1089): CodeIgniter\View\View->render('register/buatpr...', Array, true)
+#3 D:\wamp64\www\webppi\app\Controllers\Register.php(235): view('register/buatpr...', Array)
+#4 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Register->buatprofile()
+#5 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Register))
+#6 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2022-05-03 19:25:33 --> Call to undefined function set_value()
+#0 D:\wamp64\www\webppi\system\View\View.php(210): include()
+#1 D:\wamp64\www\webppi\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#2 D:\wamp64\www\webppi\system\Common.php(1089): CodeIgniter\View\View->render('register/buatpr...', Array, true)
+#3 D:\wamp64\www\webppi\app\Controllers\Register.php(235): view('register/buatpr...', Array)
+#4 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Register->buatprofile()
+#5 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Register))
+#6 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2022-05-03 19:26:03 --> Call to undefined function set_value()
+#0 D:\wamp64\www\webppi\system\View\View.php(210): include()
+#1 D:\wamp64\www\webppi\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#2 D:\wamp64\www\webppi\system\Common.php(1089): CodeIgniter\View\View->render('register/buatpr...', Array, true)
+#3 D:\wamp64\www\webppi\app\Controllers\Register.php(235): view('register/buatpr...', Array)
+#4 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Register->buatprofile()
+#5 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Register))
+#6 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2022-05-03 23:13:45 --> Call to undefined function set_value()
+#0 D:\wamp64\www\webppi\system\View\View.php(210): include()
+#1 D:\wamp64\www\webppi\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#2 D:\wamp64\www\webppi\system\Common.php(1089): CodeIgniter\View\View->render('register/ubahpr...', Array, true)
+#3 D:\wamp64\www\webppi\app\Controllers\Register.php(532): view('register/ubahpr...', Array)
+#4 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Register->ubahprofile('4')
+#5 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Register))
+#6 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#8 {main}

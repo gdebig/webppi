@@ -1,0 +1,42 @@
+CRITICAL - 2022-04-27 21:43:05 --> Class 'App\Controllers\AdminModel' not found
+#0 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Register->buatakunproses()
+#1 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Register))
+#2 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2022-04-27 21:43:28 --> Class 'App\Controllers\AkunModel' not found
+#0 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Register->buatakunproses()
+#1 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Register))
+#2 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2022-04-27 21:43:37 --> Class 'App\Controllers\AkunModel' not found
+#0 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Register->buatakunproses()
+#1 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Register))
+#2 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2022-04-27 21:45:35 --> Class 'App\Controllers\AkunModel' not found
+#0 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Register->buatakunproses()
+#1 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Register))
+#2 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2022-04-27 22:03:45 --> Call to a member function setFlashdata() on null
+#0 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Register->buatakunproses()
+#1 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Register))
+#2 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2022-04-27 23:38:04 --> authcapes filter must have a matching alias defined.
+#0 D:\wamp64\www\webppi\system\Filters\Filters.php(340): CodeIgniter\Filters\Exceptions\FilterException::forNoAlias('authcapes')
+#1 D:\wamp64\www\webppi\system\CodeIgniter.php(384): CodeIgniter\Filters\Filters->enableFilter('authcapes', 'before')
+#2 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2022-04-27 23:49:39 --> authcapes filter must have a matching alias defined.
+#0 D:\wamp64\www\webppi\system\Filters\Filters.php(340): CodeIgniter\Filters\Exceptions\FilterException::forNoAlias('authcapes')
+#1 D:\wamp64\www\webppi\system\CodeIgniter.php(384): CodeIgniter\Filters\Filters->enableFilter('authcapes', 'before')
+#2 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}

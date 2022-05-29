@@ -1,0 +1,51 @@
+CRITICAL - 2022-05-07 17:33:01 --> Call to undefined function set_value()
+#0 D:\wamp64\www\webppi\system\View\View.php(210): include()
+#1 D:\wamp64\www\webppi\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#2 D:\wamp64\www\webppi\system\Common.php(1089): CodeIgniter\View\View->render('register/ubahor...', Array, true)
+#3 D:\wamp64\www\webppi\app\Controllers\Register.php(1813): view('register/ubahor...', Array)
+#4 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Register->ubahorg('2')
+#5 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Register))
+#6 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2022-05-07 17:42:02 --> Call to a member function move() on null
+#0 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Register->ubahorgproses()
+#1 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Register))
+#2 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2022-05-07 21:56:15 --> Invalid argument supplied for foreach()
+#0 D:\wamp64\www\webppi\app\Views\register\pelatihan.php(53): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Invalid argumen...', 'D:\\wamp64\\www\\w...', 53, Array)
+#1 D:\wamp64\www\webppi\system\View\View.php(210): include('D:\\wamp64\\www\\w...')
+#2 D:\wamp64\www\webppi\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 D:\wamp64\www\webppi\system\Common.php(1089): CodeIgniter\View\View->render('register/pelati...', Array, true)
+#4 D:\wamp64\www\webppi\app\Controllers\Register.php(2033): view('register/pelati...', Array)
+#5 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Register->pelatihan()
+#6 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Register))
+#7 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2022-05-07 22:03:01 --> syntax error, unexpected ''Kota'' (T_CONSTANT_ENCAPSED_STRING), expecting ')'
+#0 D:\wamp64\www\webppi\system\Router\Router.php(175): CodeIgniter\Router\Router->autoRoute('register/hapusl...')
+#1 D:\wamp64\www\webppi\system\CodeIgniter.php(726): CodeIgniter\Router\Router->handle('register/hapusl...')
+#2 D:\wamp64\www\webppi\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->tryToRouteIt(Object(CodeIgniter\Router\RouteCollection))
+#3 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2022-05-07 22:10:27 --> syntax error, unexpected '=>' (T_DOUBLE_ARROW), expecting ')'
+#0 D:\wamp64\www\webppi\system\Router\Router.php(175): CodeIgniter\Router\Router->autoRoute('register/pelati...')
+#1 D:\wamp64\www\webppi\system\CodeIgniter.php(726): CodeIgniter\Router\Router->handle('register/pelati...')
+#2 D:\wamp64\www\webppi\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->tryToRouteIt(Object(CodeIgniter\Router\RouteCollection))
+#3 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+ERROR - 2022-05-07 22:11:19 --> You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ':0:
+AND 1 = :1:' at line 3
+CRITICAL - 2022-05-07 22:11:19 --> Call to a member function getResult() on bool
+#0 D:\wamp64\www\webppi\system\BaseModel.php(584): CodeIgniter\Model->doFindAll(0, 0)
+#1 D:\wamp64\www\webppi\app\Controllers\Register.php(2025): CodeIgniter\BaseModel->findAll()
+#2 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Register->pelatihan()
+#3 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Register))
+#4 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#6 {main}
