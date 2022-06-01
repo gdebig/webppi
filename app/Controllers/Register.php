@@ -783,27 +783,45 @@ class Register extends BaseController
                 $pindahregular = $this->request->getVar('pindahregular');
 
                 $ext1 = $sip->getClientExtension();
-                if (empty($sipname)){
-                    $sipname = $user_id.'_sip.'.$ext1;
-                }
-                if (!empty($ext1)){
-                    $sip->move('uploads/docs/',$sipname,true);
+                if ((empty($sipname))&&(!empty($ext1))){
+                    $sipnamenew = $user_id.'_sip_'.$ext1;
+                    $sip->move('uploads/docs/',$sipnamenew,true);
+                } elseif ((!empty($sipname))&&(!empty($ext1))){
+                    $oldext = substr($sipname, -4);
+                    if ($oldext==$ext1){
+                        $sip->move('uploads/docs/',$sipname,true);
+                        $sipnamenew = $sipname;
+                    }else{
+                        $sipnamenew = $user_id.'_sip_'.$ext1;
+                        $sip->move('uploads/docs/',$sipnamenew,true);
+                    }
+                }else{
+                    $sipnamenew=$sipname;
                 }
 
                 $ext = $photo->getClientExtension();
-                if (empty($photoname)){
-                    $photoname = $user_id.'_profilpic.'.$ext;
+                if ((empty($photoname))&&(!empty($ext))){
+                    $photonamenew = $user_id.'_profilpic_'.$ext;
+                    $photo->move('uploads/profilpic/',$photonamenew,true);
+                } elseif ((!empty($photoname))&&(!empty($ext))){
+                    $oldext = substr($photoname, -4);
+                    if ($oldext==$ext){
+                        $photo->move('uploads/profilpic/',$photoname,true);
+                        $photonamenew = $photoname;
+                    }else{
+                        $photonamenew = $user_id.'_profilpic_'.$ext;
+                        $photo->move('uploads/profilpic/',$photonamenew,true);
+                    }
+                }else{
+                    $photonamenew=$photoname;
                 }
-                if (!empty($ext)){
-                    $photo->move('uploads/profilpic/',$photoname,true);
-                }
-    
+
                 $dataprofile = array(
                     'FullName' => $fullname,
                     'BirthPlace' => $birthplace,
                     'Birthdate' => $birthdate,
                     'KTA' => $kta,
-                    'SIP' => $sipname,
+                    'SIP' => $sipnamenew,
                     'Vocational' => $vocational,
                     'HAddr' => $haddress,
                     'HCity' => $hcity,
@@ -823,7 +841,7 @@ class Register extends BaseController
                     'Wtelex' => $wtelex,
                     'Wemail1' => $wemail1,
                     'Wemail2' => $wemail2,
-                    'Photo' => $photoname,
+                    'Photo' => $photonamenew,
                     'pindahregular' => $pindahregular,
                     'date_modified' => date('Y-m-d')
                 );
@@ -1282,13 +1300,19 @@ class Register extends BaseController
 
                 $ext = $File->getClientExtension();
                 if ((empty($filename))&&(!empty($ext))){
-                    $filename = $user_id.'_ijazah_'.$jenjang.'.'.$ext;
-                    $ijazah->move('uploads/docs/',$filename,true);
-                } elseif (!empty($filename))
-                if ((!empty($filename))&&(!empty($ext))){
-                    $ijazah->move('uploads/docs/',$filename,true);
+                    $filenamenew = $user_id.'_ijazah_'.$jenjang.'.'.$ext;
+                    $ijazah->move('uploads/docs/',$filenamenew,true);
+                } elseif ((!empty($filename))&&(!empty($ext))){
+                    $oldext = substr($filename, -4);
+                    if ($oldext == $ext){
+                        $ijazah->move('uploads/docs/',$filename,true);
+                        $filenamenew = $filename;
+                    }else{
+                        $filenamenew = $user_id.'_ijazah_'.$jenjang.'.'.$ext;
+                        $ijazah->move('uploads/docs/',$filenamenew,true);
+                    }
                 }else{
-                    $filename="";
+                    $filenamenew=$filename;
                 }
     
                 $data = array(
@@ -1304,7 +1328,7 @@ class Register extends BaseController
                     'Desc' => $Desc,
                     'Mark' => $Mark,
                     'Judicium' => $Judicium,
-                    'File' => $filename,
+                    'File' => $filenamenew,
                     'date_modified' => date('Y-m-d')
                 );
     
@@ -1706,13 +1730,19 @@ class Register extends BaseController
 
                 $ext = $File->getClientExtension();
                 if ((empty($filename))&&(!empty($ext))){
-                    $filename = $user_id.'_pengkerja_'.str_replace(' ','',$NameInstance).'_'.str_replace(' ','',$Position).'.'.$ext;
-                    $File->move('uploads/docs/',$filename,true);
-                } elseif (!empty($filename))
-                if ((!empty($filename))&&(!empty($ext))){
-                    $File->move('uploads/docs/',$filename,true);
+                    $filenamenew = $user_id.'_pengkerja_'.str_replace(' ','',$NameInstance).'_'.str_replace(' ','',$Position).'.'.$ext;
+                    $File->move('uploads/docs/',$filenamenew,true);
+                } elseif ((!empty($filename))&&(!empty($ext))){
+                    $oldext = substr($filename,-4);
+                    if ($oldext == $ext){
+                        $File->move('uploads/docs/',$filename,true);
+                        $filenamenew = $filename;
+                    }else{
+                        $filenamenew = $user_id.'_pengkerja_'.str_replace(' ','',$NameInstance).'_'.str_replace(' ','',$Position).'.'.$ext;
+                        $File->move('uploads/docs/',$filenamenew,true);
+                    }
                 }else{
-                    $filename="";
+                    $filenamenew=$filename;
                 }
     
                 $data = array(
@@ -1734,7 +1764,7 @@ class Register extends BaseController
                     'Diff' => $Diff,
                     'Scale' => $Scale,
                     'Desc' => $Desc,
-                    'File' => $filename,
+                    'File' => $filenamenew,
                     'date_modified' => date('Y-m-d')
                 );
 
@@ -2212,13 +2242,19 @@ class Register extends BaseController
 
                 $ext = $File->getClientExtension();
                 if ((empty($filename))&&(!empty($ext))){
-                    $filename = $user_id.'_organisasi_'.str_replace(' ','',$Name).'_'.str_replace(' ','',$Position).'.'.$ext;
-                    $File->move('uploads/docs/',$filename,true);
-                } elseif (!empty($filename))
-                if ((!empty($filename))&&(!empty($ext))){
-                    $File->move('uploads/docs/',$filename,true);
+                    $filenamenew = $user_id.'_organisasi_'.str_replace(' ','',$Name).'_'.str_replace(' ','',$Position).'.'.$ext;
+                    $File->move('uploads/docs/',$filenamenew,true);
+                } elseif ((!empty($filename))&&(!empty($ext))){
+                    $oldext = substr($filename,-4);
+                    if ($oldext == $ext){
+                        $File->move('uploads/docs/',$filename,true);
+                        $filenamenew = $filename;
+                    }else{
+                        $filenamenew = $user_id.'_organisasi_'.str_replace(' ','',$Name).'_'.str_replace(' ','',$Position).'.'.$ext;
+                        $File->move('uploads/docs/',$filenamenew,true);
+                    }
                 }else{
-                    $filename="";
+                    $filenamenew=$filename;
                 }
     
                 $data = array(
@@ -2235,7 +2271,7 @@ class Register extends BaseController
                     'OrgLevel' => $OrgLevel,
                     'OrgScp' => $OrgScp,
                     'Desc' => $Desc,
-                    'File' => $filename,
+                    'File' => $filenamenew,
                     'date_modified' => date('Y-m-d')
                 );
 
@@ -2632,13 +2668,19 @@ class Register extends BaseController
 
                 $ext = $File->getClientExtension();
                 if ((empty($filename))&&(!empty($ext))){
-                    $filename = $user_id.'_pelatihan_'.str_replace(' ','',$Name).'.'.$ext;
-                    $File->move('uploads/docs/',$filename,true);
-                } elseif (!empty($filename))
-                if ((!empty($filename))&&(!empty($ext))){
-                    $File->move('uploads/docs/',$filename,true);
+                    $filenamenew = $user_id.'_pelatihan_'.str_replace(' ','',$Name).'.'.$ext;
+                    $File->move('uploads/docs/',$filenamenew,true);
+                } elseif ((!empty($filename))&&(!empty($ext))){
+                    $oldext = substr($filename,-4);
+                    if ($oldext == $ext){
+                        $File->move('uploads/docs/',$filename,true);
+                        $filenamenew = $filename;
+                    }else{
+                        $filenamenew = $user_id.'_pelatihan_'.str_replace(' ','',$Name).'.'.$ext;
+                        $File->move('uploads/docs/',$filenamenew,true);
+                    }
                 }else{
-                    $filename="";
+                    $filenamenew=$filename;
                 }
     
                 $data = array(
@@ -3044,13 +3086,19 @@ class Register extends BaseController
 
                 $ext = $File->getClientExtension();
                 if ((empty($filename))&&(!empty($ext))){
-                    $filename = $user_id.'_sertifikat_'.str_replace(' ','',$Name).'.'.$ext;
-                    $File->move('uploads/docs/',$filename,true);
-                } elseif (!empty($filename))
-                if ((!empty($filename))&&(!empty($ext))){
-                    $File->move('uploads/docs/',$filename,true);
+                    $filenamenew = $user_id.'_sertifikat_'.str_replace(' ','',$Name).'.'.$ext;
+                    $File->move('uploads/docs/',$filenamenew,true);
+                } elseif ((!empty($filename))&&(!empty($ext))){
+                    $oldext = substr($filename,-4);
+                    if ($oldext == $ext){
+                        $File->move('uploads/docs/',$filename,true);
+                        $filenamenew = $filename;
+                    }else{
+                        $filenamenew = $user_id.'_sertifikat_'.str_replace(' ','',$Name).'.'.$ext;
+                        $File->move('uploads/docs/',$filenamenew,true);
+                    }
                 }else{
-                    $filename="";
+                    $filenamenew=$filename;
                 }
     
                 $data = array(
@@ -3456,13 +3504,20 @@ class Register extends BaseController
                 $ext = $File->getClientExtension();
                 if ((empty($filename))&&(!empty($ext))){
                     $random = bin2hex(random_bytes(4));
-                    $filename = $user_id.'_karyatulis_'.str_replace(' ','',$Media).'_'.$random.'.'.$ext;
-                    $File->move('uploads/docs/',$filename,true);
-                } elseif (!empty($filename))
-                if ((!empty($filename))&&(!empty($ext))){
-                    $File->move('uploads/docs/',$filename,true);
+                    $filenamenew = $user_id.'_karyatulis_'.str_replace(' ','',$Media).'_'.$random.'.'.$ext;
+                    $File->move('uploads/docs/',$filenamenew,true);
+                } elseif ((!empty($filename))&&(!empty($ext))){
+                    $oldext = substr($filename,-4);
+                    if ($oldext == $ext){
+                        $File->move('uploads/docs/',$filename,true);
+                        $filenamenew = $filename;
+                    }else{
+                        $random = bin2hex(random_bytes(4));
+                        $filenamenew = $user_id.'_karyatulis_'.str_replace(' ','',$Media).'_'.$random.'.'.$ext;
+                        $File->move('uploads/docs/',$filenamenew,true);
+                    }
                 }else{
-                    $filename="";
+                    $filenamenew=$filename;
                 }
     
                 $data = array(
@@ -3475,7 +3530,7 @@ class Register extends BaseController
                     'Mediatype' => $Mediatype,
                     'Diffbenefit' => $Diffbenefit,
                     'Desc' => $Desc,
-                    'File' => $filename,
+                    'File' => $filenamenew,
                     'date_modified' => date('Y-m-d')
                 );
 
@@ -3884,13 +3939,20 @@ class Register extends BaseController
                 $ext = $File->getClientExtension();
                 if ((empty($filename))&&(!empty($ext))){
                     $random = bin2hex(random_bytes(4));
-                    $filename = $user_id.'_seminar_'.str_replace(' ','',$Name).'_'.$random.'.'.$ext;
-                    $File->move('uploads/docs/',$filename,true);
-                } elseif (!empty($filename))
-                if ((!empty($filename))&&(!empty($ext))){
-                    $File->move('uploads/docs/',$filename,true);
+                    $filenamenew = $user_id.'_seminar_'.str_replace(' ','',$Name).'_'.$random.'.'.$ext;
+                    $File->move('uploads/docs/',$filenamenew,true);
+                } elseif ((!empty($filename))&&(!empty($ext))){
+                    $oldext = substr($filename,-4);
+                    if ($oldext == $ext){
+                        $File->move('uploads/docs/',$filename,true);
+                        $filenamenew = $filename;
+                    }else{
+                        $random = bin2hex(random_bytes(4));
+                        $filenamenew = $user_id.'_seminar_'.str_replace(' ','',$Name).'_'.$random.'.'.$ext;
+                        $File->move('uploads/docs/',$filenamenew,true);
+                    }
                 }else{
-                    $filename="";
+                    $filenamenew=$filename;
                 }
     
                 $data = array(
@@ -3905,7 +3967,7 @@ class Register extends BaseController
                     'Level' => $Level,
                     'DiffBenefit' => $DiffBenefit,
                     'Desc' => $Desc,
-                    'File' => $filename,
+                    'File' => $filenamenew,
                     'date_modified' => date('Y-m-d')
                 );
 
