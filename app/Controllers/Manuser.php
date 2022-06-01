@@ -42,6 +42,5 @@ class Manuser extends BaseController
         $data['data_bread'] = "Tambah Data Anggota";
         $data['user_id'] = $user_id;
         return view('maintemp/tambahanggota', $data);
-
     }
 }
