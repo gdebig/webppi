@@ -11,7 +11,8 @@ class Manpenilai extends BaseController
         $session = session();
         $logged_in = $session->get('logged_in');
         $issadmin = $session->get('issadmin');
-        if ((!$logged_in)&&($issadmin)){
+        $isadmin = $session->get('isadmin');
+        if ((!$logged_in)&&(($issadmin)||($isadmin))){
             return redirect()->to('/home');
         }
         helper(['tanggal']);
@@ -20,7 +21,7 @@ class Manpenilai extends BaseController
         $model = new UserModel();
         $data['logged_in'] = $logged_in;
         $where = "tipe_user LIKE '__y_'";
-        $user = $model->where($where)->findall();
+        $user = $model->where($where)->orderby('user_id', 'DESC')->findall();
         if (!empty($user)){
             $data['data_user'] = $user;
         }else{
@@ -28,7 +29,7 @@ class Manpenilai extends BaseController
         }
         $data['title_page'] = "Data Penilai PPI RPL";
         $data['data_bread'] = "Penilai";
-        return view('maintemp/anggota', $data);
+        return view('maintemp/penilai', $data);
     }
 
     public function tambahanggota(){
