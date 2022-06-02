@@ -104,6 +104,27 @@
                             <option value="Genap">Genap</option>
                         </select>
                     </div>
+                    <br />
+                    <label for="tipeuser" class="element">Tipe User</label>
+                    <div class="element">
+                        <div class="custom-control custom-checkbox">
+                            <input class="custom-control-input" type="checkbox" id="superadmin" name="superadmin"
+                                value="yes">
+                            <label for="superadmin" class="custom-control-label">Super Admin</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                            <input class="custom-control-input" type="checkbox" id="admin" name="admin" value="yes">
+                            <label for="admin" class="custom-control-label">Admin</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                            <input class="custom-control-input" type="checkbox" id="penilai" name="penilai" value="yes">
+                            <label for="penilai" class="custom-control-label">Penilai</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                            <input class="custom-control-input" type="checkbox" id="peserta" name="peserta" value="yes">
+                            <label for="peserta" class="custom-control-label">Peserta</label>
+                        </div>
+                    </div><br /><br />
                     <div class="form-group">
                         <label>Field bertanda * harus diisi.</label>
                     </div>

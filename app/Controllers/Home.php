@@ -11,7 +11,26 @@ class Home extends BaseController
         $session = session();
         $logged_in = $session->get('logged_in');
         if ($logged_in){
-            return redirect()->to('/home/dashboard');
+            $issadmin = $session->get('issadmin');
+            $isadmin = $session->get('isadmin');
+            $ispenilai = $session->get('ispenilai');
+            $ispeserta = $session->get('ispeserta');
+            if ($issadmin){
+                $session->set('role', 'superadmin');
+                return redirect()->to('/superadmin');                        
+            }elseif($isadmin){
+                $session->set('role', 'admin');
+                return redirect()->to('/admin');
+            }elseif($ispenilai){
+                $session->set('role', 'penilai');
+                return redirect()->to('/penilai');
+            }elseif($ispeserta){
+                $session->set('role', 'peserta');
+                return redirect()->to('/peserta');
+            }else{
+                $session->destroy();
+                return redirect()->to('/home');
+            }
         }
         return view('login');
     }
