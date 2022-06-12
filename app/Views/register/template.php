@@ -202,6 +202,31 @@
     <!-- AdminLTE -->
     <script src="<?php echo base_url();?>/assets/dist/js/adminlte.js"></script>
 
+    <!-- Inputmask -->
+    <script src="<?php echo base_url();?>/assets/plugins/inputmask/jquery.inputmask.min.js"></script>
+
+    <script>
+    Inputmask.extendAliases({
+        pesos: {
+            prefix: "₱ ",
+            groupSeparator: ".",
+            alias: "numeric",
+            placeholder: "0",
+            autoGroup: true,
+            digits: 2,
+            digitsOptional: false,
+            clearMaskOnLostFocus: false
+        }
+    });
+
+    $(document).ready(function() {
+        $("#ProjValue").inputmask({
+            alias: "currency",
+            prefix: 'Rp. '
+        });
+    });
+    </script>
+
     <!-- OPTIONAL SCRIPTS -->
     <script src="<?php echo base_url();?>/assets/plugins/chart.js/Chart.min.js"></script>
     <!-- AdminLTE for demo purposes -->

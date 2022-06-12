@@ -11,6 +11,8 @@ use App\Models\CapesSertModel;
 use App\Models\CapesKartulModel;
 use App\Models\CapesSemModel;
 
+use App\Libraries\Slug;
+
 class Register extends BaseController
 {
     //Fungsi yang pertama kali dijalankan saat membuka halaman registrasi CaPes
@@ -1409,6 +1411,7 @@ class Register extends BaseController
     }
 
     public function tambahkerjaproses(){
+        $slug = new Slug();
         $session = session();
         $capeslogged_in = $session->get('capeslogged_in');
         $confirmcapes = $session->get('confirmcapes');
@@ -1508,7 +1511,10 @@ class Register extends BaseController
                 
                 $ext = $File->getClientExtension();
                 if (!empty($ext)){
-                    $filename = $user_id.'_pengkerja_'.str_replace(' ','',$NameInstance).'_'.str_replace(' ','',$Position).'.'.$ext;
+                    $namainstansi = $slug->slugify($NameInstance);
+                    $posisi = $slug->slugify($Position);
+                    $filename = $user_id.'_pengkerja_'.$namainstansi.'_'.$posisi.'.'.$ext;
+                    echo $filename;
                     $File->move('uploads/docs/',$filename,true);
                 }else{
                     $filename="";
@@ -1630,6 +1636,7 @@ class Register extends BaseController
 
     public function ubahpengkerjaproses(){
         $session = session();
+        $slug = new Slug();
         $capeslogged_in = $session->get('capeslogged_in');
         $confirmcapes = $session->get('confirmcapes');
         if (!$capeslogged_in){
@@ -1728,9 +1735,11 @@ class Register extends BaseController
                 $Desc = $this->request->getVar('Desc');
                 $File = $this->request->getFile('File');
 
+                $namainstansi = $slug->slugify($NameInstance);
+                $posisi = $slug->slugify($Position);
                 $ext = $File->getClientExtension();
                 if ((empty($filename))&&(!empty($ext))){
-                    $filenamenew = $user_id.'_pengkerja_'.str_replace(' ','',$NameInstance).'_'.str_replace(' ','',$Position).'.'.$ext;
+                    $filenamenew = $user_id.'_pengkerja_'.$namainstansi.'_'.$posisi.'.'.$ext;
                     $File->move('uploads/docs/',$filenamenew,true);
                 } elseif ((!empty($filename))&&(!empty($ext))){
                     $oldext = substr($filename,-4);
@@ -1738,7 +1747,7 @@ class Register extends BaseController
                         $File->move('uploads/docs/',$filename,true);
                         $filenamenew = $filename;
                     }else{
-                        $filenamenew = $user_id.'_pengkerja_'.str_replace(' ','',$NameInstance).'_'.str_replace(' ','',$Position).'.'.$ext;
+                        $filenamenew = $user_id.'_pengkerja_'.$namainstansi.'_'.$posisi.'.'.$ext;
                         $File->move('uploads/docs/',$filenamenew,true);
                     }
                 }else{
@@ -1858,6 +1867,7 @@ class Register extends BaseController
 
     public function tambahorgproses(){
         $session = session();
+        $slug = new Slug();
         $capeslogged_in = $session->get('capeslogged_in');
         $confirmcapes = $session->get('confirmcapes');
         if (!$capeslogged_in){
@@ -1994,9 +2004,11 @@ class Register extends BaseController
                 $Desc = $this->request->getVar('Desc');
                 $File = $this->request->getFile('File');
                 
+                $namaorganisasi = $slug->slugify($Name);
+                $posisi = $slug->slugify($Position);
                 $ext = $File->getClientExtension();
                 if (!empty($ext)){
-                    $filename = $user_id.'_organisasi_'.str_replace(' ','',$Name).'_'.str_replace(' ','',$Position).'.'.$ext;
+                    $filename = $user_id.'_organisasi_'.$namaorganisasi.'_'.$posisi.'.'.$ext;
                     $File->move('uploads/docs/',$filename,true);
                 }else{
                     $filename="";
@@ -2102,6 +2114,7 @@ class Register extends BaseController
 
     public function ubahorgproses(){
         $session = session();
+        $slug = new Slug();
         $capeslogged_in = $session->get('capeslogged_in');
         $confirmcapes = $session->get('confirmcapes');
         if (!$capeslogged_in){
@@ -2240,9 +2253,11 @@ class Register extends BaseController
                 $Desc = $this->request->getVar('Desc');
                 $File = $this->request->getFile('File');
 
+                $namaorganisasi = $slug->slugify($Name);
+                $posisi = $slug->slugify($Position);
                 $ext = $File->getClientExtension();
                 if ((empty($filename))&&(!empty($ext))){
-                    $filenamenew = $user_id.'_organisasi_'.str_replace(' ','',$Name).'_'.str_replace(' ','',$Position).'.'.$ext;
+                    $filenamenew = $user_id.'_organisasi_'.$namaorganisasi.'_'.$posisi.'.'.$ext;
                     $File->move('uploads/docs/',$filenamenew,true);
                 } elseif ((!empty($filename))&&(!empty($ext))){
                     $oldext = substr($filename,-4);
@@ -2250,7 +2265,7 @@ class Register extends BaseController
                         $File->move('uploads/docs/',$filename,true);
                         $filenamenew = $filename;
                     }else{
-                        $filenamenew = $user_id.'_organisasi_'.str_replace(' ','',$Name).'_'.str_replace(' ','',$Position).'.'.$ext;
+                        $filenamenew = $user_id.'_organisasi_'.$namaorganisasi.'_'.$posisi.'.'.$ext;
                         $File->move('uploads/docs/',$filenamenew,true);
                     }
                 }else{
@@ -2355,6 +2370,7 @@ class Register extends BaseController
 
     public function tambahlatihproses(){
         $session = session();
+        $slug = new Slug();
         $capeslogged_in = $session->get('capeslogged_in');
         $confirmcapes = $session->get('confirmcapes');
         if (!$capeslogged_in){
@@ -2459,9 +2475,10 @@ class Register extends BaseController
                 $Description = $this->request->getVar('Description');
                 $File = $this->request->getFile('File');
                 
+                $namalatih = $slug->slugify($Name);
                 $ext = $File->getClientExtension();
                 if (!empty($ext)){
-                    $filename = $user_id.'_pelatihan_'.str_replace(' ','',$Name).'.'.$ext;
+                    $filename = $user_id.'_pelatihan_'.$namalatih.'.'.$ext;
                     $File->move('uploads/docs/',$filename,true);
                 }else{
                     $filename="";
@@ -2560,6 +2577,7 @@ class Register extends BaseController
 
     public function ubahlatihproses(){
         $session = session();
+        $slug = new Slug();
         $capeslogged_in = $session->get('capeslogged_in');
         $confirmcapes = $session->get('confirmcapes');
         if (!$capeslogged_in){
@@ -2666,9 +2684,10 @@ class Register extends BaseController
                 $Description = $this->request->getVar('Description');
                 $File = $this->request->getFile('File');
 
+                $namalatih = $slug->slugify($Name);
                 $ext = $File->getClientExtension();
                 if ((empty($filename))&&(!empty($ext))){
-                    $filenamenew = $user_id.'_pelatihan_'.str_replace(' ','',$Name).'.'.$ext;
+                    $filenamenew = $user_id.'_pelatihan_'.$namalatih.'.'.$ext;
                     $File->move('uploads/docs/',$filenamenew,true);
                 } elseif ((!empty($filename))&&(!empty($ext))){
                     $oldext = substr($filename,-4);
@@ -2676,7 +2695,7 @@ class Register extends BaseController
                         $File->move('uploads/docs/',$filename,true);
                         $filenamenew = $filename;
                     }else{
-                        $filenamenew = $user_id.'_pelatihan_'.str_replace(' ','',$Name).'.'.$ext;
+                        $filenamenew = $user_id.'_pelatihan_'.$namalatih.'.'.$ext;
                         $File->move('uploads/docs/',$filenamenew,true);
                     }
                 }else{
@@ -2773,6 +2792,7 @@ class Register extends BaseController
 
     public function tambahsertproses(){
         $session = session();
+        $slug = new Slug();
         $capeslogged_in = $session->get('capeslogged_in');
         $confirmcapes = $session->get('confirmcapes');
         if (!$capeslogged_in){
@@ -2877,9 +2897,10 @@ class Register extends BaseController
                 $Description = $this->request->getVar('Description');
                 $File = $this->request->getFile('File');
                 
+                $namasert = $slug->slugify($Name);
                 $ext = $File->getClientExtension();
                 if (!empty($ext)){
-                    $filename = $user_id.'_sertifikat_'.str_replace(' ','',$Name).'.'.$ext;
+                    $filename = $user_id.'_sertifikat_'.$namasert.'.'.$ext;
                     $File->move('uploads/docs/',$filename,true);
                 }else{
                     $filename="";
@@ -2978,6 +2999,7 @@ class Register extends BaseController
 
     public function ubahsertproses(){
         $session = session();
+        $slug = new Slug();
         $capeslogged_in = $session->get('capeslogged_in');
         $confirmcapes = $session->get('confirmcapes');
         if (!$capeslogged_in){
@@ -3084,9 +3106,10 @@ class Register extends BaseController
                 $Description = $this->request->getVar('Description');
                 $File = $this->request->getFile('File');
 
+                $namasert = $slug->slugify($Name);
                 $ext = $File->getClientExtension();
                 if ((empty($filename))&&(!empty($ext))){
-                    $filenamenew = $user_id.'_sertifikat_'.str_replace(' ','',$Name).'.'.$ext;
+                    $filenamenew = $user_id.'_sertifikat_'.$namasert.'.'.$ext;
                     $File->move('uploads/docs/',$filenamenew,true);
                 } elseif ((!empty($filename))&&(!empty($ext))){
                     $oldext = substr($filename,-4);
@@ -3094,7 +3117,7 @@ class Register extends BaseController
                         $File->move('uploads/docs/',$filename,true);
                         $filenamenew = $filename;
                     }else{
-                        $filenamenew = $user_id.'_sertifikat_'.str_replace(' ','',$Name).'.'.$ext;
+                        $filenamenew = $user_id.'_sertifikat_'.$namasert.'.'.$ext;
                         $File->move('uploads/docs/',$filenamenew,true);
                     }
                 }else{
@@ -3190,6 +3213,7 @@ class Register extends BaseController
 
     public function tambahkartulproses(){
         $session = session();
+        $slug = new Slug();
         $capeslogged_in = $session->get('capeslogged_in');
         $confirmcapes = $session->get('confirmcapes');
         if (!$capeslogged_in){
@@ -3294,10 +3318,11 @@ class Register extends BaseController
                 $Desc = $this->request->getVar('Desc');
                 $File = $this->request->getFile('File');
                 
+                $mediakartul = $slug->slugify($Media);
                 $ext = $File->getClientExtension();
                 if (!empty($ext)){
                     $random = bin2hex(random_bytes(4));
-                    $filename = $user_id.'_karyatulis_'.str_replace(' ','',$Media).'_'.$random.'.'.$ext;
+                    $filename = $user_id.'_karyatulis_'.$mediakartul.'_'.$random.'.'.$ext;
                     $File->move('uploads/docs/',$filename,true);
                 }else{
                     $filename="";
@@ -3395,6 +3420,7 @@ class Register extends BaseController
 
     public function ubahkartulproses(){
         $session = session();
+        $slug = new Slug();
         $capeslogged_in = $session->get('capeslogged_in');
         $confirmcapes = $session->get('confirmcapes');
         if (!$capeslogged_in){
@@ -3501,10 +3527,11 @@ class Register extends BaseController
                 $Desc = $this->request->getVar('Desc');
                 $File = $this->request->getFile('File');
 
+                $mediakartul = $slug->slugify($Media);
                 $ext = $File->getClientExtension();
                 if ((empty($filename))&&(!empty($ext))){
                     $random = bin2hex(random_bytes(4));
-                    $filenamenew = $user_id.'_karyatulis_'.str_replace(' ','',$Media).'_'.$random.'.'.$ext;
+                    $filenamenew = $user_id.'_karyatulis_'.$mediakartul.'_'.$random.'.'.$ext;
                     $File->move('uploads/docs/',$filenamenew,true);
                 } elseif ((!empty($filename))&&(!empty($ext))){
                     $oldext = substr($filename,-4);
@@ -3606,6 +3633,7 @@ class Register extends BaseController
 
     public function tambahsemproses(){
         $session = session();
+        $slug = new Slug();
         $capeslogged_in = $session->get('capeslogged_in');
         $confirmcapes = $session->get('confirmcapes');
         if (!$capeslogged_in){
@@ -3718,10 +3746,11 @@ class Register extends BaseController
                 $Desc = $this->request->getVar('Desc');
                 $File = $this->request->getFile('File');
                 
+                $namaseminar = $slug->slugify($Name);
                 $ext = $File->getClientExtension();
                 if (!empty($ext)){
                     $random = bin2hex(random_bytes(4));
-                    $filename = $user_id.'_seminar_'.str_replace(' ','',$Name).'_'.$random.'.'.$ext;
+                    $filename = $user_id.'_seminar_'.$namaseminar.'_'.$random.'.'.$ext;
                     $File->move('uploads/docs/',$filename,true);
                 }else{
                     $filename="";
@@ -3822,6 +3851,7 @@ class Register extends BaseController
 
     public function ubahsemproses(){
         $session = session();
+        $slug = new Slug();
         $capeslogged_in = $session->get('capeslogged_in');
         $confirmcapes = $session->get('confirmcapes');
         if (!$capeslogged_in){
@@ -3936,10 +3966,11 @@ class Register extends BaseController
                 $Desc = $this->request->getVar('Desc');
                 $File = $this->request->getFile('File');
 
+                $namaseminar = $slug->slugify($Name);
                 $ext = $File->getClientExtension();
                 if ((empty($filename))&&(!empty($ext))){
                     $random = bin2hex(random_bytes(4));
-                    $filenamenew = $user_id.'_seminar_'.str_replace(' ','',$Name).'_'.$random.'.'.$ext;
+                    $filenamenew = $user_id.'_seminar_'.$namaseminar.'_'.$random.'.'.$ext;
                     $File->move('uploads/docs/',$filenamenew,true);
                 } elseif ((!empty($filename))&&(!empty($ext))){
                     $oldext = substr($filename,-4);
@@ -3948,7 +3979,7 @@ class Register extends BaseController
                         $filenamenew = $filename;
                     }else{
                         $random = bin2hex(random_bytes(4));
-                        $filenamenew = $user_id.'_seminar_'.str_replace(' ','',$Name).'_'.$random.'.'.$ext;
+                        $filenamenew = $user_id.'_seminar_'.$namaseminar.'_'.$random.'.'.$ext;
                         $File->move('uploads/docs/',$filenamenew,true);
                     }
                 }else{
