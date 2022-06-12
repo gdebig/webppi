@@ -254,7 +254,6 @@ $session = session();
             showDropdowns: true,
             changeMonth: true,
             minYear: 1901,
-            maxYear: parseInt(moment().format('YYYY'), 10),
             locale: {
                 format: 'YYYY-MM-DD'
             }

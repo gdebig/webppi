@@ -11,7 +11,7 @@ class Manuser extends BaseController
         $session = session();
         $logged_in = $session->get('logged_in');
         $issadmin = $session->get('issadmin');
-        if ((!$logged_in)&&($issadmin)){
+        if ((!$logged_in)&&(!$issadmin)){
             return redirect()->to('/home');
         }
         helper(['tanggal']);

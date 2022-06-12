@@ -1,0 +1,102 @@
+<?= $this->extend('maintemp/template');?>
+
+<?= $this->section('content');?>
+
+<div class="card card-primary" style="width: auto; margin: 30px;">
+    <div class="col-sm-13" style="width: auto; margin: 30px;">
+        <!-- /.card-header -->
+        <div class="card">
+            <div class="card-body">
+
+                <div class="col">
+                    <?php if(session()->getFlashdata('msg')):?>
+                    <div class="alert alert-success"><?= session()->getFlashdata('msg') ?></div>
+                    <?php endif;?>
+                </div>
+
+                <div class="col">
+                    <div class="row">
+                        <a href="<?php echo base_url();?>/tugasakhir/tambahta" class="btn btn-primary">Tambah
+                            Tugas Akhir</a>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="row">
+                        &nbsp;
+                    </div>
+                </div>
+
+                <?php if(isset($data_ta)&&($data_ta=="kosong")){
+                    ?>
+
+                <div class="alert alert-danger">Data Tugas Akhir belum ada. <a
+                        href="<?= base_url();?>/tugasakhir/tambahta">Klik
+                        di sini untuk menambah data Tugas Akhir</a></div>
+                <?php }else{ ?>
+
+                <table id="tabledata" class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Judul TA</th>
+                            <th>Term</th>
+                            <th>Pembimbing</th>
+                            <th>Buku TA</th>
+                            <th>Log</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                                    $i=1; 
+                                    foreach ($data_ta as $ta) : 
+                                    ?>
+                        <tr>
+                            <td><?php echo $i;$i++;?></td>
+                            <td><?= $ta['ta_usuljudul'];?></td>
+                            <td><?= $ta['ta_tahun'].' / '.$ta['ta_semester'];?></td>
+                            <td><?php
+                            if (!empty($ta['FullName'])){
+                                echo $ta['FullName'];
+                            }else{
+                                echo "Pembimbing belum di assign.";
+                            }
+                            ?></td>
+                            <td><?php
+                            if (!empty($ta['ta_buku'])){
+                                echo "<a href='".base_url()."/uploads/docs/".$ta['ta_buku']."' target='_blank'>Buku TA</a>";
+                            }else{
+                                echo "Belum ada buku";
+                            }
+                            ?></td>
+                            <td><?php
+                            if (!empty($ta['ta_log'])){
+                                echo "<a href='".base_url()."/uploads/docs/".$ta['ta_log']."' target='_blank'>LOG</a>";
+                            }else{
+                                echo "Belum ada LOG";
+                            }
+                            ?></td>
+                            <td style="text-align: center"><a
+                                    href="<?php echo base_url();?>/tugasakhir/ubahta/<?=$ta['ta_id'];?>"
+                                    class="btn btn-warning"> <i class="fas fa-file-signature"></i> Ubah</a>
+                                <a href="<?php echo base_url();?>/tugasakhir/hapusta/<?=$ta['ta_id'];?>"
+                                    onclick="return confirm('Apakah anda yakin akan menghapus data Tugas Akhir?')"
+                                    class="btn btn-danger"> <i class="fas fa-trash"></i>
+                                    Hapus</a>
+                            </td>
+                        </tr>
+                        <?php 
+                                    endforeach 
+                                    ?>
+                    </tbody>
+                </table>
+                <?php } ?>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.content-wrapper -->
+<!-- Control Sidebar -->
+
+<?= $this->endSection();?>

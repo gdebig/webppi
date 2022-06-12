@@ -5,8 +5,14 @@
     </a>
 </li>
 <li class="nav-item">
-    <a href="<?php echo base_url();?>/mantugasakhir" class="nav-link">
+    <a href="<?php echo base_url();?>/tugasakhir" class="nav-link">
         <i class="fas fa-graduation-cap nav-icon"></i>
         <p>Tugas Akhir</p>
+    </a>
+</li>
+<li class="nav-item">
+    <a href="<?php echo base_url();?>/jadwalta" class="nav-link">
+        <i class="fas fa-graduation-cap nav-icon"></i>
+        <p>Jadwal Sidang TA</p>
     </a>
 </li>

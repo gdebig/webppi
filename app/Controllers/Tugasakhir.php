@@ -1,0 +1,271 @@
+<?php
+
+namespace App\Controllers;
+
+use App\Models\TugasAkhirModel;
+
+class Tugasakhir extends BaseController
+{
+    public function index()
+    {
+        $session = session();
+        $logged_in = $session->get('logged_in');
+        $ispeserta = $session->get('ispeserta');
+        if ((!$logged_in)&&(!$ispeserta)){
+            return redirect()->to('/home');
+        }
+        helper(['tanggal']);
+        
+        $user_id = $session->get('user_id');
+        $model = new TugasAkhirModel();
+        $data['logged_in'] = $logged_in;
+        $ta = $model->where('tbl_tugasakhir.user_id', $user_id)->orderBy('tbl_tugasakhir.ta_id', 'DESC')->join('tbl_profile', 'tbl_profile.user_id = tbl_tugasakhir.ta_bimbing', 'left')->findall();
+        if (!empty($ta)){
+            $data['data_ta'] = $ta;
+        }else{
+            $data['data_ta'] = 'kosong';
+        }
+        $data['title_page'] = "Tugas Akhir PPI";
+        $data['data_bread'] = "Tugas Akhir";
+        return view('maintemp/tugasakhir', $data);
+    }
+
+    public function tambahta(){
+        $session = session();
+        $user_id = $session->get('user_id');
+        $logged_in = $session->get('logged_in');
+        $ispeserta = $session->get('ispeserta');
+        if ((!$logged_in)&&(!$ispeserta)){
+            return redirect()->to('/home');
+        }
+        $data['logged_in'] = $logged_in;
+        $data['title_page'] = "Tambah Data Tugas Akhir";
+        $data['data_bread'] = "Tambah Data Tugas Akhir";
+        $data['user_id'] = $user_id;
+        return view('maintemp/tambahta', $data);
+    }
+
+    public function tambahtaproses(){
+        
+        $model = new TugasAkhirModel();
+        $session = session();
+        $user_id = $session->get('user_id');
+        $ispeserta = $session->get('ispeserta');
+        $logged_in = $session->get('logged_in');
+        if ((!$logged_in)&&(!$ispeserta)){
+            return redirect()->to('/home');
+        }
+
+        $button = $this->request->getVar('submit');
+        if ($button=="batal"){
+            return redirect()->to('/tugasakhir');
+        }else{
+            helper(['form', 'url']);
+
+            $formvalid = $this->validate([
+                'ta_usuljudul' => [
+                    'label'  => 'Judul Tugas Akhir',
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => 'Field Judul Tugas Akhir harus diisi',
+                    ],
+                ],
+            ]);
+
+            if ($formvalid){
+
+                $ta_usuljudul = $this->request->getVar('ta_usuljudul');
+                $ta_semester = $this->request->getVar('ta_semester');
+                $ta_tahun = $this->request->getVar('ta_tahun');
+                $ta_buku = $this->request->getFile('ta_buku');
+                $ta_log = $this->request->getFile('ta_log');
+
+                $ext = $ta_buku->getClientExtension();
+                if (!empty($ext)){
+                    $bukuname = $user_id."_bukuta.".$ext;                    
+                    $ta_buku->move('uploads/docs/',$bukuname,true);
+                }else{
+                    $bukuname="";
+                }
+
+                $ext1 = $ta_log->getClientExtension();
+                if (!empty($ext1)){
+                    $logname = $user_id."_logta.".$ext1;                    
+                    $ta_log->move('uploads/docs/',$logname,true);
+                }else{
+                    $logname="";
+                }
+
+                $datata = array(
+                    'user_id' => $user_id,
+                    'ta_usuljudul' => $ta_usuljudul,
+                    'ta_semester' => $ta_semester,
+                    'ta_tahun' => $ta_tahun,
+                    'ta_buku' => $bukuname,
+                    'ta_log' => $logname,
+                    'date_created' => date('Y-m-d H:i:s'),
+                    'date_modified' => date('Y-m-d H:i:s')
+                );
+
+                $model->save($datata);
+
+                $session->setFlashdata('msg', 'Data tugas akhir berhasil ditambahkan.');
+    
+                return redirect()->to('/tugasakhir');
+                
+            }else{
+                $user_id = $session->get('user_id');
+                $data['logged_in'] = $logged_in;
+                $data['title_page'] = "Tambah Data Tugas Akhir";
+                $data['data_bread'] = "Tambah Data Tugas Akhir";
+                $data['validation'] = $this->validator;
+                $data['user_id'] = $user_id;
+                return view('maintemp/tambahtavalid', $data);
+            }
+        }
+    }
+
+    public function hapusta($id){
+        $model = new TugasAkhirModel();
+        $session = session();
+        $user_id = $session->get('user_id');
+        $logged_in = $session->get('logged_in');
+        $ispeserta = $session->get('ispeserta');
+        if ((!$logged_in)&&(!$ispeserta)){
+            return redirect()->to('/home');
+        }        
+
+        $ta = $model->find($id);
+        $path = './uploads/docs/'.$ta['ta_buku'];
+        if (is_file($path)){
+            unlink($path);
+        }
+        $path = './uploads/docs/'.$ta['ta_log'];
+        if (is_file($path)){
+            unlink($path);
+        }
+
+        $model->delete($id);
+        $session->setFlashdata('msg', 'Data tugas akhir berhasil dihapus.');
+        return redirect()->to('/tugasakhir');
+    }
+
+    public function ubahta($id){
+        $model = new TugasAkhirModel();
+        $session = session();
+        $logged_in = $session->get('logged_in');
+        $ispeserta = $session->get('ispeserta');
+        if ((!$logged_in)&&(!$ispeserta)){
+            return redirect()->to('/home');
+        }
+        $ta = $model->where('ta_id', $id)->first();
+        if ($ta){
+            $data = [
+                'ta_id' => $ta['ta_id'],
+                'user_id' => $ta['user_id'],
+                'ta_usuljudul' => $ta['ta_usuljudul'],
+                'ta_semester' => $ta['ta_semester'],
+                'ta_tahun' => $ta['ta_tahun'],
+                'ta_buku' => $ta['ta_buku'],
+                'ta_log' => $ta['ta_log']
+            ];
+        }
+        $data['logged_in'] = $logged_in;
+        $data['title_page'] = "Ubah Data Tugas Akhir";
+        $data['data_bread'] = "Ubah Data Tugas Akhir";
+        return view('maintemp/ubahta', $data);
+    }
+
+    public function ubahtaproses(){
+        $model = new TugasAkhirModel();
+        $session = session();
+        $user_id = $this->request->getVar('user_id');
+        $ta_id = $this->request->getVar('ta_id');
+        $logged_in = $session->get('logged_in');
+        $ispeserta = $session->get('ispeserta');
+        if ((!$logged_in)&&(!$ispeserta)){
+            return redirect()->to('/home');
+        }
+
+        $button=$this->request->getVar('submit');
+        
+        if ($button=="batal"){
+            return redirect()->to('/tugasakhir');
+        }else{
+            helper(['form', 'url']);
+
+            $formvalid = $this->validate([
+                'ta_usuljudul' => [
+                    'label'  => 'Judul Tugas Akhir',
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => 'Field Judul Tugas Akhir harus diisi',
+                    ],
+                ],
+            ]);
+
+            if ($formvalid){
+                $user_id = $this->request->getVar('user_id');
+                $namabuku = $this->request->getVar('namabuku');
+                $namalog = $this->request->getVar('namalog');
+                $ta_usuljudul = $this->request->getVar('ta_usuljudul');
+                $ta_semester = $this->request->getVar('ta_semester');
+                $ta_tahun = $this->request->getVar('ta_tahun');
+                $ta_buku = $this->request->getFile('ta_buku');
+                $ta_log = $this->request->getFile('ta_log');
+
+                $ext = $ta_buku->getClientExtension();
+                if (!empty($ext)){
+                    $bukuname = $user_id."_bukuta.".$ext;                    
+                    $ta_buku->move('uploads/docs/',$bukuname,true);
+                }else{
+                    $bukuname=$namabuku;
+                }
+
+                $ext1 = $ta_log->getClientExtension();
+                if (!empty($ext1)){
+                    $logname = $user_id."_logta.".$ext1;                    
+                    $ta_log->move('uploads/docs/',$logname,true);
+                }else{
+                    $logname=$namalog;
+                }
+
+                $datata = array(
+                    'user_id' => $user_id,
+                    'ta_usuljudul' => $ta_usuljudul,
+                    'ta_semester' => $ta_semester,
+                    'ta_tahun' => $ta_tahun,
+                    'ta_buku' => $bukuname,
+                    'ta_log' => $logname,
+                    'date_created' => date('Y-m-d H:i:s'),
+                    'date_modified' => date('Y-m-d H:i:s')
+                );
+
+                $model->update($ta_id,$datata);
+
+                $session->setFlashdata('msg', 'Data tugas akhir berhasil diubah.');
+    
+                return redirect()->to('/tugasakhir');
+            }else{
+                $ta = $model->where('ta_id', $ta_id)->first();
+                if ($ta){
+                    $data = [
+                        'ta_id' => $ta['ta_id'],
+                        'user_id' => $ta['user_id'],
+                        'ta_usuljudul' => $ta['ta_usuljudul'],
+                        'ta_semester' => $ta['ta_semester'],
+                        'ta_tahun' => $ta['ta_tahun'],
+                        'ta_buku' => $ta['ta_buku'],
+                        'ta_log' => $ta['ta_log']
+                    ];
+                }
+                $data['logged_in'] = $logged_in;
+                $data['title_page'] = "Ubah Data Tugas Akhir";
+                $data['data_bread'] = "Ubah Data Tugas Akhir";
+                $data['user_id'] = $user_id;
+                $data['validation'] = $this->validator;
+                return view('maintemp/ubahta', $data);
+            }
+        }
+    }
+}
