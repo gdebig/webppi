@@ -229,7 +229,9 @@
                         ?></td>
                     </tr>
                     <tr>
-                        <td width="30%">Bersedia pindah ke PPI Regular bila DOKUMEN tidak lengkap?</td>
+                        <td width="30%">Bersedia pindah ke PPI Regular bila DOKUMEN tidak lengkap? (Informasi lebih
+                            lengkap dapat dilihat di <a href="https://eng.ui.ac.id/ppi/" target="_blank">link web
+                                PPI.</a>)</td>
                         <td width="5%" style="text-align:center">:</td>
                         <td width="65%"><?= $pindahregular;?></td>
                     </tr>

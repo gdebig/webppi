@@ -115,16 +115,16 @@
                         </select>
                     </div>
                     <br />
-                    <label for="ProjValue" class="element">Nilai Proyek</label>
-                    <div class="element">
-                        <input class="form-control" id="ProjValue" name="ProjValue" type="text"
-                            placeholder="Nilai Proyek..." />
-                    </div>
-                    <br />
-                    <label for="RspnValue" class="element">Nilai Tanggung Jawab</label>
+                    <label for="RspnValue" class="element">Nilai Tanggung Jawab (Detail posisi dalam proyek)</label>
                     <div class="element">
                         <input class="form-control" id="RspnValue" name="RspnValue" type="text"
                             placeholder="Nilai Tanggung Jawab..." />
+                    </div>
+                    <br />
+                    <label for="ProjValue" class="element">Nilai Proyek (Angka dalam rupiah)</label>
+                    <div class="element">
+                        <input class="form-control" id="ProjValue" name="ProjValue" type="text"
+                            placeholder="Nilai Proyek..." />
                     </div>
                     <br />
                     <label for="Hresource" class="element">SDM yang terlibat</label>
