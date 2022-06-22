@@ -2766,7 +2766,7 @@ class Register extends BaseController
         }else{
             $data['data_latih'] = 'kosong';
         }
-        $data['title_page'] = "Data Sertifikat Kompotenesi Calon Peserta PPI RPL";
+        $data['title_page'] = "Data Sertifikat Kompetensi Calon Peserta PPI RPL";
         $data['data_bread'] = "Sertifikat";
         return view('register/sertifikat', $data);
     }

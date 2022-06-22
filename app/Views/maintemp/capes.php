@@ -58,7 +58,7 @@ use App\Models\CapesSemModel;
                             <th>Pelatihan</th>
                             <th>Sertifikat</th>
                             <th>Karya Tulis</th>
-                            <th>Makalah</th>
+                            <th>Seminar</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -91,7 +91,9 @@ use App\Models\CapesSemModel;
                         <tr>
                             <td><?php echo $i;$i++;?></td>
                             <td style="text-align:center"><input type="checkbox" /></td>
-                            <td><?= $user['FullName'];?></td>
+                            <td><a
+                                    href="<?= base_url();?>/mancapes/doklengkap/<?= $user['user_id'];?>"><?= $user['FullName'];?></a>
+                            </td>
                             <td>
                                 <?php
                                 if ($isprofile=="Ada"){

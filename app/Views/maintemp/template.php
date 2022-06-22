@@ -277,7 +277,7 @@ $session = session();
     <script src="<?php echo base_url();?>/assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
     <script>
     $(function() {
-        $('#tabledata').DataTable({
+        $('table.display').DataTable({
             "paging": true,
             "lengthChange": false,
             "searching": true,
@@ -287,6 +287,20 @@ $session = session();
             "responsive": true,
             "buttons": ["csv", "excel", "pdf", "print"]
         }).buttons().container().appendTo('#tabledata_wrapper .col-md-6:eq(0)');
+    });
+    </script>
+    <script>
+    $(function() {
+        $('table.display1').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+            "buttons": ["csv", "excel", "pdf", "print"]
+        }).buttons().container().appendTo('#tabledata_wrapper1 .col-md-6:eq(0)');
     });
     </script>
 </body>
