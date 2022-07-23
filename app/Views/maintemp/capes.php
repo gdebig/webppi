@@ -46,12 +46,14 @@ use App\Models\CapesSemModel;
                         di sini untuk menambah data penilai</a></div>
                 <?php }else{ ?>
 
-                <table id="tabledata" class="table table-bordered table-hover">
+                <table id="tabledata" class="display table table-bordered table-hover">
                     <thead>
                         <tr>
                             <th>No</th>
                             <th width="5%">Opsi</th>
                             <th>Nama Lengkap</th>
+                            <th>Badan Kejuruan</th>
+                            <th>Bersedia Pindah Reguler?</th>
                             <th>Profile</th>
                             <th>Pengalaman Kerja</th>
                             <th>Organisasi</th>
@@ -94,6 +96,57 @@ use App\Models\CapesSemModel;
                             <td><a
                                     href="<?= base_url();?>/mancapes/doklengkap/<?= $user['user_id'];?>"><?= $user['FullName'];?></a>
                             </td>
+                            <td><?php
+                                switch($user['Vocational']){
+                                    case 'Ars':
+                                        echo "Arsitektur";
+                                        break;
+                                    case 'Ele':
+                                        echo "Teknik Elektro";
+                                        break;
+                                    case 'Wil':
+                                        echo "Teknik Kewilayahan dan Perkotaan";
+                                        break;
+                                    case 'Ind':
+                                        echo "Teknik Industri";
+                                        break;
+                                    case 'Kim':
+                                        echo "Teknik Kimia";
+                                        break;
+                                    case 'Mes':
+                                        echo "Teknik Mesin";
+                                        break;
+                                    case 'Lin':
+                                        echo "Teknik Lingkungan";
+                                        break;
+                                    case 'Sip':
+                                        echo "Teknik Sipil";
+                                        break;
+                                    case 'Mat':
+                                        echo "Teknik Material";
+                                        break;
+                                    case 'Met':
+                                        echo "Teknik Metalurgi";
+                                        break;
+                                    case 'Inf':
+                                        echo "Teknik Informatika";
+                                        break;
+                                    case 'Kap':
+                                        echo "Teknik Perkapalan";
+                                        break;
+                                    case 'Tra':
+                                        echo "Transportasi";
+                                        break;
+                                    case "Kom":
+                                        echo "Teknik Komputer";
+                                        break;
+                                    case "Bio":
+                                        echo "Teknik Biomedik";
+                                        break;
+                                }
+                            ?>
+                            </td>
+                            <td><?= $user['pindahregular'];?></td>
                             <td>
                                 <?php
                                 if ($isprofile=="Ada"){

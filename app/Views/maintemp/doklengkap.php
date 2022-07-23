@@ -134,6 +134,22 @@
                         }
                          ?></td>
                     </tr>
+                    <tr>
+                        <td width="30%">Bersedia Pindah Regular?</td>
+                        <td width="5%" style="text-align:center">:</td>
+                        <td width="65%"><?= $pindahregular;?></td>
+                    </tr>
+                    <tr>
+                        <td width="30%">SIP</td>
+                        <td width="5%" style="text-align:center">:</td>
+                        <td width="65%"><?php 
+                        if (empty($SIP)){
+                            echo "Belum ada";
+                        }else{
+                            echo "<a href='".base_url('uploads/docs/'.$SIP)."' target='_blank'>".$SIP."</a>";
+                        }
+                        ?></td>
+                    </tr>
                 </table>
             </div>
             <!-- /.card-body -->
