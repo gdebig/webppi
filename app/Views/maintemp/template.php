@@ -300,7 +300,77 @@ $session = session();
             "autoWidth": false,
             "responsive": true,
             "buttons": ["csv", "excel", "pdf", "print"]
-        }).buttons().container().appendTo('#tabledata_wrapper1 .col-md-6:eq(0)');
+        }).buttons().container().appendTo('#tabledata1_wrapper .col-md-6:eq(0)');
+    });
+    </script>
+    <script>
+    $(function() {
+        $('table.display2').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+            "buttons": ["csv", "excel", "pdf", "print"]
+        }).buttons().container().appendTo('#tabledata2_wrapper .col-md-6:eq(0)');
+    });
+    </script>
+    <script>
+    $(function() {
+        $('table.display3').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+            "buttons": ["csv", "excel", "pdf", "print"]
+        }).buttons().container().appendTo('#tabledata3_wrapper .col-md-6:eq(0)');
+    });
+    </script>
+    <script>
+    $(function() {
+        $('table.display4').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+            "buttons": ["csv", "excel", "pdf", "print"]
+        }).buttons().container().appendTo('#tabledata4_wrapper .col-md-6:eq(0)');
+    });
+    </script>
+    <script>
+    $(function() {
+        $('table.display5').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+            "buttons": ["csv", "excel", "pdf", "print"]
+        }).buttons().container().appendTo('#tabledata5_wrapper .col-md-6:eq(0)');
+    });
+    </script>
+    <script>
+    $(function() {
+        $('table.display6').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+            "buttons": ["csv", "excel", "pdf", "print"]
+        }).buttons().container().appendTo('#tabledata6_wrapper .col-md-6:eq(0)');
     });
     </script>
 </body>

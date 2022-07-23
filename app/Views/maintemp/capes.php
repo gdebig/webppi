@@ -55,6 +55,7 @@ use App\Models\CapesSemModel;
                             <th>Badan Kejuruan</th>
                             <th>Bersedia Pindah Reguler?</th>
                             <th>Profile</th>
+                            <th>Pendidikan</th>
                             <th>Pengalaman Kerja</th>
                             <th>Organisasi</th>
                             <th>Pelatihan</th>
@@ -70,6 +71,8 @@ use App\Models\CapesSemModel;
                                         
                                         $profile = new CapesProfileModel();
                                         $dataprofile = $profile->where('user_id', $user['user_id'])->first();
+                                        $pendidikan = new CapesPendModel();
+                                        $datapend = $pendidikan->where('user_id', $user['user_id'])->first();
                                         $pengkerja = new CapesKualifikasiModel();
                                         $datapengkerja = $pengkerja->where('user_id',$user['user_id'])->first();
                                         $organ = new CapesOrgModel();
@@ -83,6 +86,7 @@ use App\Models\CapesSemModel;
                                         $datasem = $sem->where('user_id', $user['user_id'])->where('Type', 'Sem')->first();
 
                                         $isprofile = !empty($dataprofile) ? "Ada" : "Tidak";
+                                        $ispend = !empty($datapend) ? "Ada" : "Tidak";
                                         $ispengkerja = !empty($datapengkerja) ? "Ada" : "Tidak";
                                         $isorgan = !empty($dataorgan) ? "Ada" : "Tidak";
                                         $islatih = !empty($datalatih) ? "Ada" : "Tidak";
@@ -156,6 +160,18 @@ use App\Models\CapesSemModel;
                                 <?php
                                 }else{
                                     echo $isprofile;
+                                }
+                                ?>
+                            </td>
+                            <td>
+                                <?php
+                                if ($ispend=="Ada"){
+                                ?>
+                                <a
+                                    href="<?= base_url();?>/mancapes/pendidikan/<?= $user['user_id'];?>"><?= $ispend;?></a>
+                                <?php
+                                }else{
+                                    echo $ispend;
                                 }
                                 ?>
                             </td>

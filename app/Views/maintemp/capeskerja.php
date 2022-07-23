@@ -31,9 +31,7 @@
                 <?php if(isset($data_kerja)&&($data_kerja=="kosong")){
                     ?>
 
-                <div class="alert alert-danger">Data pengalaman kerja belum ada. <a
-                        href="<?= base_url();?>/register/tambahkerja">Klik
-                        di sini untuk menambah data pengalaman kerja</a></div>
+                <div class="alert alert-danger">Data pengalaman kerja belum ada.</div>
                 <?php }else{ ?>
 
                 <table id="tabledata" class="table table-bordered table-hover">

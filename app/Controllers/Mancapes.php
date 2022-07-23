@@ -139,6 +139,15 @@ class Mancapes extends BaseController
             $data['kosong'] = "kosong";
         }
         
+        $model = new CapesPendModel();
+        $data['capeslogged_in'] = $session->get('capeslogged_in');
+        $pend = $model->where('user_id', $id)->orderby('GradYear','DESC')->findall();
+        if (!empty($pend)){
+            $data['data_pend'] = $pend;
+        }else{
+            $data['data_pend'] = 'kosong';
+        }
+        
         $model = new CapesKualifikasiModel();
         $data['capeslogged_in'] = $session->get('capeslogged_in');
         $kerja = $model->where('user_id', $id)->orderby('ProjValue','DESC')->findall();
@@ -196,6 +205,28 @@ class Mancapes extends BaseController
         $data['title_page'] = "Profile Calon Peserta";
         $data['data_bread'] = "Profile Calon Peserta";
         return view('maintemp/doklengkap', $data);
+    }
+
+    public function pendidikan($id){
+        $session = session();
+        $logged_in = $session->get('logged_in');
+        $issadmin = $session->get('issadmin');
+        $isadmin = $session->get('isadmin');
+        if ((!$logged_in)&&(($issadmin)||($isadmin))){
+            return redirect()->to('/home');
+        }
+        helper(['tanggal']);
+        $model = new CapesPendModel();
+        $data['capeslogged_in'] = $session->get('capeslogged_in');
+        $pend = $model->where('user_id', $id)->orderby('GradYear','DESC')->findall();
+        if (!empty($pend)){
+            $data['data_pend'] = $pend;
+        }else{
+            $data['data_pend'] = 'kosong';
+        }
+        $data['title_page'] = "Data Pendidikan Calon Peserta PPI RPL";
+        $data['data_bread'] = "Pendidikan";
+        return view('maintemp/capespend', $data);
     }
 
     public function kerja($id){

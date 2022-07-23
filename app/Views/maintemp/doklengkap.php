@@ -226,7 +226,12 @@
                     <div class="card-header p-0 pt-1">
                         <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active" id="custom-tabs-one-pengkerja-tab" data-toggle="pill"
+                                <a class="nav-link active" id="custom-tabs-one-pendidikan-tab" data-toggle="pill"
+                                    href="#custom-tabs-one-pendidikan" role="tab"
+                                    aria-controls="custom-tabs-one-pendidikan" aria-selected="true">Pendidikan</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="custom-tabs-one-pengkerja-tab" data-toggle="pill"
                                     href="#custom-tabs-one-pengkerja" role="tab"
                                     aria-controls="custom-tabs-one-pengkerja" aria-selected="true">Pengalaman Kerja</a>
                             </li>
@@ -259,7 +264,70 @@
                     </div>
                     <div class="card-body">
                         <div class="tab-content" id="custom-tabs-one-tabContent">
-                            <div class="tab-pane fade show active" id="custom-tabs-one-pengkerja" role="tabpanel"
+                            <div class="tab-pane fade show active" id="custom-tabs-one-pendidikan" role="tabpanel"
+                                aria-labelledby="custom-tabs-one-pendidikan-tab">
+
+                                <?php if(isset($data_pend)&&($data_pend=="kosong")){
+                    ?>
+
+                                <div class="alert alert-danger">Data pendidikan belum ada.</div>
+                                <?php }else{ ?>
+
+                                <table id="tabledata6" class="display6 table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Jenjang</th>
+                                            <th>Universitas</th>
+                                            <th>Fakultas</th>
+                                            <th>Program Studi</th>
+                                            <th>Alamat</th>
+                                            <th>Tahun Lulus</th>
+                                            <th>Gelar</th>
+                                            <th>Judul Tugas Akhir</th>
+                                            <th>Uraian Tugas Akhir</th>
+                                            <th>Nilai</th>
+                                            <th>Scan Ijazah</th>
+                                            <th>Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                    $i=1; 
+                                    foreach ($data_pend as $pend) : 
+                                    ?>
+                                        <tr>
+                                            <td><?php echo $i;$i++;?></td>
+                                            <td><?= $pend['Rank'];?></td>
+                                            <td><?= $pend['Name'];?></td>
+                                            <td><?= $pend['Faculty'];?></td>
+                                            <td><?= $pend['Major'];?></td>
+                                            <td><?= $pend['City'].", ".$pend['Country'] ?></td>
+                                            <td><?= $pend['GradYear'];?></td>
+                                            <td><?= $pend['Degree'];?></td>
+                                            <td><?= $pend['Title'];?></td>
+                                            <td><?= $pend['Desc'];?></td>
+                                            <td><?= $pend['Mark'];?></td>
+                                            <td><a href="<?=base_url();?>/uploads/docs/<?=$pend['File'];?>"
+                                                    target="_blank"><?= $pend['File'];?></a></td>
+                                            <td style="text-align: center"><a
+                                                    href="<?php echo base_url();?>/register/ubahpendidikan/<?=$pend['Num'];?>"
+                                                    class="btn btn-warning"> <i class="fas fa-file-signature"></i>
+                                                    Ubah</a>
+                                                <a href="<?php echo base_url();?>/register/hapuspendidikan/<?=$pend['Num'];?>"
+                                                    onclick="return confirm('Apakah anda yakin akan menghapus data pendidikan?')"
+                                                    class="btn btn-danger"> <i class="fas fa-trash"></i>
+                                                    Hapus</a>
+                                            </td>
+                                        </tr>
+                                        <?php 
+                                    endforeach 
+                                    ?>
+                                    </tbody>
+                                </table>
+                                <?php } ?>
+                            </div>
+                            <div class="tab-pane fade" id="custom-tabs-one-pengkerja" role="tabpanel"
                                 aria-labelledby="custom-tabs-one-pengkerja-tab">
 
                                 <?php if(isset($data_kerja)&&($data_kerja=="kosong")){
@@ -416,7 +484,7 @@
                                 <div class="alert alert-danger">Data organisasi belum ada.</div>
                                 <?php }else{ ?>
 
-                                <table id="tabledata" class="display1 table table-bordered table-hover">
+                                <table id="tabledata1" class="display1 table table-bordered table-hover">
                                     <thead>
                                         <tr>
                                             <th>No</th>
@@ -549,7 +617,7 @@
                                 </div>
                                 <?php }else{ ?>
 
-                                <table id="tabledata" class="display table table-bordered table-hover">
+                                <table id="tabledata2" class="display2 table table-bordered table-hover">
                                     <thead>
                                         <tr>
                                             <th>No</th>
@@ -631,7 +699,7 @@
                                     Diikuti belum ada.</div>
                                 <?php }else{ ?>
 
-                                <table id="tabledata" class="display table table-bordered table-hover">
+                                <table id="tabledata3" class="display3 table table-bordered table-hover">
                                     <thead>
                                         <tr>
                                             <th>No</th>
@@ -712,7 +780,7 @@
                                 <div class="alert alert-danger">Data Karya Tulis belum ada.</div>
                                 <?php }else{ ?>
 
-                                <table id="tabledata" class="display table table-bordered table-hover">
+                                <table id="tabledata4" class="display4 table table-bordered table-hover">
                                     <thead>
                                         <tr>
                                             <th>No</th>
@@ -785,7 +853,7 @@
                                 <div class="alert alert-danger">Data seminar/lokakarya belum ada.</div>
                                 <?php }else{ ?>
 
-                                <table id="tabledata" class="display table table-bordered table-hover">
+                                <table id="tabledata5" class="display5 table table-bordered table-hover">
                                     <thead>
                                         <tr>
                                             <th>No</th>
