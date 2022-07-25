@@ -21,7 +21,7 @@ class Manpenilai extends BaseController
         $model = new UserModel();
         $data['logged_in'] = $logged_in;
         $where = "tipe_user LIKE '__y_'";
-        $user = $model->where($where)->orderby('user_id', 'DESC')->findall();
+        $user = $model->join('tbl_profile', 'tbl_user.user_id = tbl_profile.user_id', 'left')->where($where)->orderby('tbl_user.user_id', 'DESC')->findall();
         if (!empty($user)){
             $data['data_user'] = $user;
         }else{

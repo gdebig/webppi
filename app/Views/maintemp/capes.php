@@ -22,20 +22,10 @@ use App\Models\CapesSemModel;
                     <?php if(session()->getFlashdata('msg')):?>
                     <div class="alert alert-success"><?= session()->getFlashdata('msg') ?></div>
                     <?php endif;?>
+                    <?php if(session()->getFlashdata('errmsg')):?>
+                    <div class="alert alert-danger"><?= session()->getFlashdata('errmsg') ?></div>
+                    <?php endif;?>
                 </div>
-                <!--
-                <div class="col">
-                    <div class="row">
-                        <a href="<?php echo base_url();?>/manc/tambahpenilai" class="btn btn-primary">Tambah
-                            Penilai</a>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="row">
-                        &nbsp;
-                    </div>
-                </div>-->
 
                 <?php if(isset($data_user)&&($data_user=="kosong")){
                     
@@ -46,26 +36,29 @@ use App\Models\CapesSemModel;
                         di sini untuk menambah data penilai</a></div>
                 <?php }else{ ?>
 
-                <table id="tabledata" class="display table table-bordered table-hover">
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th width="5%">Opsi</th>
-                            <th>Nama Lengkap</th>
-                            <th>Badan Kejuruan</th>
-                            <th>Bersedia Pindah Reguler?</th>
-                            <th>Profile</th>
-                            <th>Pendidikan</th>
-                            <th>Pengalaman Kerja</th>
-                            <th>Organisasi</th>
-                            <th>Pelatihan</th>
-                            <th>Sertifikat</th>
-                            <th>Karya Tulis</th>
-                            <th>Seminar</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
+                <form action="<?php echo base_url();?>/mancapes/prosescapes" method="post"
+                    enctype="multipart/form-data">
+
+                    <table id="tabledata" class="display table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th width="5%">Check</th>
+                                <th>Nama Lengkap</th>
+                                <th>Badan Kejuruan</th>
+                                <th>Bersedia Pindah Reguler?</th>
+                                <th>Profile</th>
+                                <th>Pendidikan</th>
+                                <th>Pengalaman Kerja</th>
+                                <th>Organisasi</th>
+                                <th>Pelatihan</th>
+                                <th>Sertifikat</th>
+                                <th>Karya Tulis</th>
+                                <th>Seminar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
                                     $i=1; 
                                     foreach ($data_user as $user) : 
                                         
@@ -94,13 +87,15 @@ use App\Models\CapesSemModel;
                                         $iskartul = !empty($datakartul) ? "Ada" : "Tidak";
                                         $issem = !empty($datasem) ? "Ada" : "Tidak";
                                     ?>
-                        <tr>
-                            <td><?php echo $i;$i++;?></td>
-                            <td style="text-align:center"><input type="checkbox" /></td>
-                            <td><a
-                                    href="<?= base_url();?>/mancapes/doklengkap/<?= $user['user_id'];?>"><?= $user['FullName'];?></a>
-                            </td>
-                            <td><?php
+                            <tr>
+                                <td><?php echo $i;$i++;?></td>
+                                <td style="text-align:center">
+                                    <input type="checkbox" name="user_id[]" value="<?= $user['user_id'];?>" />
+                                </td>
+                                <td><a
+                                        href="<?= base_url();?>/mancapes/doklengkap/<?= $user['user_id'];?>"><?= $user['FullName'];?></a>
+                                </td>
+                                <td><?php
                                 switch($user['Vocational']){
                                     case 'Ars':
                                         echo "Arsitektur";
@@ -149,105 +144,133 @@ use App\Models\CapesSemModel;
                                         break;
                                 }
                             ?>
-                            </td>
-                            <td><?= $user['pindahregular'];?></td>
-                            <td>
-                                <?php
+                                </td>
+                                <td><?= $user['pindahregular'];?></td>
+                                <td>
+                                    <?php
                                 if ($isprofile=="Ada"){
                                 ?>
-                                <a
-                                    href="<?= base_url();?>/mancapes/profile/<?= $user['user_id'];?>"><?= $isprofile;?></a>
-                                <?php
+                                    <a
+                                        href="<?= base_url();?>/mancapes/profile/<?= $user['user_id'];?>"><?= $isprofile;?></a>
+                                    <?php
                                 }else{
                                     echo $isprofile;
                                 }
                                 ?>
-                            </td>
-                            <td>
-                                <?php
+                                </td>
+                                <td>
+                                    <?php
                                 if ($ispend=="Ada"){
                                 ?>
-                                <a
-                                    href="<?= base_url();?>/mancapes/pendidikan/<?= $user['user_id'];?>"><?= $ispend;?></a>
-                                <?php
+                                    <a
+                                        href="<?= base_url();?>/mancapes/pendidikan/<?= $user['user_id'];?>"><?= $ispend;?></a>
+                                    <?php
                                 }else{
                                     echo $ispend;
                                 }
                                 ?>
-                            </td>
-                            <td>
-                                <?php
+                                </td>
+                                <td>
+                                    <?php
                                 if ($ispengkerja=="Ada"){
                                 ?>
-                                <a
-                                    href="<?= base_url();?>/mancapes/kerja/<?= $user['user_id'];?>"><?= $ispengkerja;?></a>
-                                <?php
+                                    <a
+                                        href="<?= base_url();?>/mancapes/kerja/<?= $user['user_id'];?>"><?= $ispengkerja;?></a>
+                                    <?php
                                 }else{
                                     echo $ispengkerja;
                                 }
                                 ?>
-                            </td>
-                            <td>
-                                <?php
+                                </td>
+                                <td>
+                                    <?php
                                 if ($isorgan=="Ada"){
                                 ?>
-                                <a href="<?= base_url();?>/mancapes/organ/<?= $user['user_id'];?>"><?= $isorgan;?></a>
-                                <?php
+                                    <a
+                                        href="<?= base_url();?>/mancapes/organ/<?= $user['user_id'];?>"><?= $isorgan;?></a>
+                                    <?php
                                 }else{
                                     echo $isorgan;
                                 }
                                 ?>
-                            </td>
-                            <td>
-                                <?php
+                                </td>
+                                <td>
+                                    <?php
                                 if ($islatih=="Ada"){
                                 ?>
-                                <a href="<?= base_url();?>/mancapes/latih/<?= $user['user_id'];?>"><?= $islatih;?></a>
-                                <?php
+                                    <a
+                                        href="<?= base_url();?>/mancapes/latih/<?= $user['user_id'];?>"><?= $islatih;?></a>
+                                    <?php
                                 }else{
                                     echo $islatih;
                                 }
                                 ?>
-                            </td>
-                            <td>
-                                <?php
+                                </td>
+                                <td>
+                                    <?php
                                 if ($issert=="Ada"){
                                 ?>
-                                <a href="<?= base_url();?>/mancapes/sert/<?= $user['user_id'];?>"><?= $issert;?></a>
-                                <?php
+                                    <a href="<?= base_url();?>/mancapes/sert/<?= $user['user_id'];?>"><?= $issert;?></a>
+                                    <?php
                                 }else{
                                     echo $issert;
                                 }
                                 ?>
-                            </td>
-                            <td>
-                                <?php
+                                </td>
+                                <td>
+                                    <?php
                                 if ($iskartul=="Ada"){
                                 ?>
-                                <a href="<?= base_url();?>/mancapes/kartul/<?= $user['user_id'];?>"><?= $iskartul;?></a>
-                                <?php
+                                    <a
+                                        href="<?= base_url();?>/mancapes/kartul/<?= $user['user_id'];?>"><?= $iskartul;?></a>
+                                    <?php
                                 }else{
                                     echo $iskartul;
                                 }
                                 ?>
-                            </td>
-                            <td>
-                                <?php
+                                </td>
+                                <td>
+                                    <?php
                                 if ($issem=="Ada"){
                                 ?>
-                                <a href="<?= base_url();?>/mancapes/sem/<?= $user['user_id'];?>"><?= $issem;?></a>
-                                <?php
+                                    <a href="<?= base_url();?>/mancapes/sem/<?= $user['user_id'];?>"><?= $issem;?></a>
+                                    <?php
                                 }else{
                                     echo $issem;
                                 }
                                 ?>
-                            </td>
-                        </tr>
-                        <?php 
+                                </td>
+                            </tr>
+                            <?php 
                                     endforeach 
                                     ?>
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                    <br /><br />
+                    <div class="card card-success">
+                        <div class="card-header">
+                            <h3 class="card-title">Ubah status semua user yang dicentang.</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="statusbaru" class="element">Status Baru</label>
+                                <div class="element">
+                                    <select name="statusbaru" id="statusbaru" class="form-control">
+                                        <option value="diterima">Diterima</option>
+                                        <option value="ditolak">Ditolak</option>
+                                        <option value="regular">Pindah ke Regular</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div><br />
+                    <div class="row">
+                        <div class="col">
+                            <button type="submit" name="submit" value="ubahstatus" class="btn btn-primary col">Ubah
+                                Status</button>
+                        </div>
+                    </div>
+                </form>
                 <?php } ?>
             </div>
         </div>

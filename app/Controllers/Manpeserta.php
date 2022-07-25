@@ -10,8 +10,9 @@ use App\Models\CapesOrgModel;
 use App\Models\CapesSertModel;
 use App\Models\CapesKartulModel;
 use App\Models\CapesSemModel;
+use App\Models\BimbingModel;
 
-class Mancapes extends BaseController
+class Manpeserta extends BaseController
 {
     public function index()
     {
@@ -28,16 +29,25 @@ class Mancapes extends BaseController
         $model = new UserModel();
         $data['logged_in'] = $logged_in;
         $where = "tipe_user LIKE '___y'";
-        $where1 = "nodaftar <> ''";
-        $user = $model->join('tbl_profile', 'tbl_user.user_id = tbl_profile.user_id', 'left')->where($where1)->where($where)->where('tbl_user.status', 'baru')->where('tbl_user.softdelete','no')->orderby('tbl_user.user_id', 'DESC')->findall();
+        $where1 = "status IN ('diterima', 'regular')";
+        $user = $model->join('tbl_profile', 'tbl_user.user_id = tbl_profile.user_id', 'left')->join('tbl_bimbing', 'tbl_user.user_id = tbl_bimbing.mhs_id', 'left')->where($where1)->where($where)->where('tbl_user.softdelete', 'no')->orderby('tbl_user.user_id', 'DESC')->findall();
         if (!empty($user)){
             $data['data_user'] = $user;
         }else{
             $data['data_user'] = 'kosong';
         }
-        $data['title_page'] = "Daftar Calon Peserta PPI RPL";
-        $data['data_bread'] = "Calon Peserta";
-        return view('maintemp/capes', $data);
+        
+        $where2 = "tipe_user LIKE '__y_'";
+        $dosbing = $model->join('tbl_profile', 'tbl_user.user_id = tbl_profile.user_id', 'left')->where($where2)->where('tbl_user.softdelete', 'no')->orderby('tbl_user.user_id', 'DESC')->findall();
+        if (!empty($dosbing)){
+            $data['data_dosbing'] = $dosbing;
+        }else{
+            $data['data_dosbing'] = 'kosong';
+        }
+
+        $data['title_page'] = "Daftar Peserta PPI RPL";
+        $data['data_bread'] = "Peserta";
+        return view('maintemp/peserta', $data);
     }
 
     public function profile($id){
@@ -361,9 +371,9 @@ class Mancapes extends BaseController
         return view('maintemp/capessem', $data);
     }
 
-    public function prosescapes(){
+    public function prosesdosbing(){
         $session = session();
-        $model = new UserModel();
+        $model = new BimbingModel();
         $user_id = $session->get('user_id');
         $logged_in = $session->get('logged_in');
         if (!$logged_in){
@@ -372,33 +382,58 @@ class Mancapes extends BaseController
 
         $button=$this->request->getVar('submit');
 
-        if ($button == "ubahstatus"){
+        if ($button == "set"){
             $user_id = $this->request->getVar('user_id');
-            $statusbaru = $this->request->getVar('statusbaru');
-            $index = 0;
+            $dosbing = $this->request->getVar('dosbing');
             if (!empty($user_id)){
                 foreach ($user_id as $userid){                   
     
                     $data = array(
-                        'status' => $statusbaru,
+                        'mhs_id' => $userid,
+                        'dosen_id' => $dosbing,
+                        'date_created' => date('Y-m-d'),
                         'date_modified' => date('Y-m-d')
                     );
     
-                    $model->update($userid, $data);
-                    $index++;
+                    $model->save($data);
                 }
 
-                $session->setFlashdata('msg', 'Status Calon Peserta berhasil diubah.');
+                $session->setFlashdata('msg', 'Dosen pembimbing berhasil ditetapkan.');
     
-                return redirect()->to('/mancapes');
+                return redirect()->to('/manpeserta');
             }else{
 
-                $session->setFlashdata('errmsg', 'Tidak ada Calon Peserta yang dicentang.');
+                $session->setFlashdata('errmsg', 'Tidak ada peserta yang dicentang.');
     
-                return redirect()->to('/mancapes');
+                return redirect()->to('/manpeserta');
+            }
+        }elseif ($button == "ganti"){
+            $user_id = $this->request->getVar('user_id');
+            $dosbing = $this->request->getVar('dosbing');
+            if (!empty($user_id)){
+                foreach ($user_id as $userid){
+                    echo $userid."<br />";
+                    $bimbing = $model->where('mhs_id', $userid)->first();
+                    echo $bimbing['bimbing_id']."<br />";
+                    $data = array(
+                        'dosen_id' => $dosbing,
+                        'date_modified' => date('Y-m-d')
+                    );
+    
+                    $model->update($bimbing['bimbing_id'], $data);
+                }
+
+                $session->setFlashdata('msg', 'Dosen pembimbing berhasil diubah.');
+    
+                return redirect()->to('/manpeserta');
+            }else{
+
+                $session->setFlashdata('errmsg', 'Tidak ada peserta yang dicentang.');
+    
+                return redirect()->to('/manpeserta');
             }
         }else{
-            return redirect()->to('/mancapes');
+            return redirect()->to('/manpeserta');
         }
     }
 }

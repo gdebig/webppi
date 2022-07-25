@@ -35,16 +35,15 @@
                         di sini untuk menambah data anggota</a></div>
                 <?php }else{ ?>
 
-                <table id="tabledata" class="table table-bordered table-hover">
+                <table id="tabledata" class="display table table-bordered table-hover">
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Opsi</th>
                             <th>Username</th>
                             <th>No Daftar</th>
                             <th>NPM</th>
                             <th>NIP</th>
-                            <th>Status Peserta</th>
+                            <th>Status User</th>
                             <th>Status Keaktifan</th>
                             <th>Tahun Terdaftar</th>
                             <th>Tipe User</th>
@@ -58,7 +57,6 @@
                                     ?>
                         <tr>
                             <td><?php echo $i;$i++;?></td>
-                            <td>&nbsp;</td>
                             <td><?= $user['username'];?></td>
                             <td><?= $user['nodaftar'];?></td>
                             <td><?= $user['NPM'];?></td>

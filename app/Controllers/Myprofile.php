@@ -258,7 +258,6 @@ class Myprofile extends BaseController
                     'BirthPlace' => $birthplace,
                     'Birthdate' => $birthdate,
                     'KTA' => $kta,
-                    'SIP' => $sipname,
                     'Vocational' => $vocational,
                     'HAddr' => $haddress,
                     'HCity' => $hcity,
@@ -283,8 +282,6 @@ class Myprofile extends BaseController
                     'date_created' => date('Y-m-d'),
                     'date_modified' => date('Y-m-d')
                 );
-
-                print_r($dataprofile);
     
                 $model->save($dataprofile);
     

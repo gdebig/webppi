@@ -1,5 +1,9 @@
 <?= $this->extend('maintemp/template');?>
 
+<?php
+use App\Models\BimbingModel;
+?>
+
 <?= $this->section('content');?>
 
 <div class="card card-primary" style="width: auto; margin: 30px;">
@@ -13,19 +17,6 @@
                     <div class="alert alert-success"><?= session()->getFlashdata('msg') ?></div>
                     <?php endif;?>
                 </div>
-                <!--
-                <div class="col">
-                    <div class="row">
-                        <a href="<?php echo base_url();?>/manpenilai/tambahpenilai" class="btn btn-primary">Tambah
-                            Penilai</a>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="row">
-                        &nbsp;
-                    </div>
-                </div>-->
 
                 <?php if(isset($data_user)&&($data_user=="kosong")){
                     ?>
@@ -40,7 +31,7 @@
                         <tr>
                             <th>No</th>
                             <th>Nama Lengkap</th>
-                            <th>Jumlah Mahasiswa</th>
+                            <th>Jumlah Mahasiswa Bimbingan</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -51,8 +42,14 @@
                                     ?>
                         <tr>
                             <td><?php echo $i;$i++;?></td>
-                            <td><?= $user['username'];?></td>
-                            <td>Jumlah Mahasiswa</td>
+                            <td><?= $user['FullName'];?></td>
+                            <td>
+                                <?php
+                                $model = new BimbingModel();
+                                $model->where('dosen_id', $user['user_id']);
+                                echo $model->countAllResults();
+                                ?>
+                            </td>
                             <td style="text-align: center"><a
                                     href="<?php echo base_url();?>/manpenilai/ubahdatapenilai/<?=$user['user_id'];?>"
                                     class="btn btn-warning"> <i class="fas fa-file-signature"></i> Ubah</a>
