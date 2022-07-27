@@ -28,3 +28,9 @@
         <p>Manajemen Tugas Akhir</p>
     </a>
 </li>
+<li class="nav-item">
+    <a href="<?php echo base_url();?>/mankomp" class="nav-link">
+        <i class="fas fa-cogs nav-icon"></i>
+        <p>Manajemen Kompetensi</p>
+    </a>
+</li>

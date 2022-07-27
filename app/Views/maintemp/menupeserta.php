@@ -1,5 +1,5 @@
 <li class="nav-item">
-    <a href="<?php echo base_url();?>/manuser" class="nav-link">
+    <a href="<?php echo base_url();?>/userfair" class="nav-link">
         <i class="fas fa-users nav-icon"></i>
         <p>Dokumen FAIR</p>
     </a>

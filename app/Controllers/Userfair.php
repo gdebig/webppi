@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Models\AkunModel;
 
-class Peserta extends BaseController
+class Userfair extends BaseController
 {
     public function index()
     {
@@ -16,9 +16,9 @@ class Peserta extends BaseController
         }else{
             $session->set('role', 'peserta');
         }
-        $data['title_page'] = "Dashboard PPI RPL";
-        $data['data_bread'] = "dashboard";
+        $data['title_page'] = "Dokumen FAIR PPI RPL";
+        $data['data_bread'] = "Dokumen FAIR";
         $data['logged_in'] = $session->get('logged_in');
-        return view('maintemp/dashboard', $data);
+        return view('maintemp/userfair', $data);
     }
 }

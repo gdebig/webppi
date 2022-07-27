@@ -189,3 +189,118 @@ CRITICAL - 2022-07-25 12:51:58 --> count(): Parameter must be an array or an obj
 #7 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
 #8 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
 #9 {main}
+ERROR - 2022-07-25 19:21:21 --> Table '2022ppirpl.tbl_bimbing' doesn't exist
+CRITICAL - 2022-07-25 19:21:21 --> Table '2022ppirpl.tbl_bimbing' doesn't exist
+#0 D:\wamp64\www\webppi\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT COUNT(*)...', 0)
+#1 D:\wamp64\www\webppi\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('SELECT COUNT(*)...')
+#2 D:\wamp64\www\webppi\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT COUNT(*)...')
+#3 D:\wamp64\www\webppi\system\Database\BaseBuilder.php(1539): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(*)...', Array, false)
+#4 D:\wamp64\www\webppi\system\Model.php(509): CodeIgniter\Database\BaseBuilder->countAllResults(true)
+#5 D:\wamp64\www\webppi\app\Views\maintemp\penilai.php(50): CodeIgniter\Model->countAllResults()
+#6 D:\wamp64\www\webppi\system\View\View.php(210): include('D:\\wamp64\\www\\w...')
+#7 D:\wamp64\www\webppi\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#8 D:\wamp64\www\webppi\system\Common.php(1089): CodeIgniter\View\View->render('maintemp/penila...', Array, true)
+#9 D:\wamp64\www\webppi\app\Controllers\Manpenilai.php(32): view('maintemp/penila...', Array)
+#10 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Manpenilai->index()
+#11 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Manpenilai))
+#12 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#13 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#14 {main}
+ERROR - 2022-07-25 20:13:06 --> Table '2022ppirpl.tbl_komp' doesn't exist
+CRITICAL - 2022-07-25 20:13:06 --> Table '2022ppirpl.tbl_komp' doesn't exist
+#0 D:\wamp64\www\webppi\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT 1\nFROM `...', 0)
+#1 D:\wamp64\www\webppi\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('SELECT 1\nFROM `...')
+#2 D:\wamp64\www\webppi\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT 1\nFROM `...')
+#3 D:\wamp64\www\webppi\system\Database\BaseBuilder.php(1455): CodeIgniter\Database\BaseConnection->query('SELECT 1\nFROM `...', Array, false)
+#4 D:\wamp64\www\webppi\system\Validation\Rules.php(142): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\wamp64\www\webppi\system\Validation\Validation.php(292): CodeIgniter\Validation\Rules->is_unique('W.1.1.2', 'komp_code', Array, NULL)
+#6 D:\wamp64\www\webppi\system\Validation\Validation.php(157): CodeIgniter\Validation\Validation->processRules('code', 'code', 'W.1.1.2', Array, Array)
+#7 D:\wamp64\www\webppi\system\Controller.php(160): CodeIgniter\Validation\Validation->run()
+#8 D:\wamp64\www\webppi\app\Controllers\Mankomp.php(66): CodeIgniter\Controller->validate(Array)
+#9 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Mankomp->tambahkompproses()
+#10 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Mankomp))
+#11 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#13 {main}
+ERROR - 2022-07-25 20:14:41 --> Table '2022ppirpl.tbl_komp' doesn't exist
+CRITICAL - 2022-07-25 20:14:41 --> Table '2022ppirpl.tbl_komp' doesn't exist
+#0 D:\wamp64\www\webppi\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT 1\nFROM `...', 0)
+#1 D:\wamp64\www\webppi\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('SELECT 1\nFROM `...')
+#2 D:\wamp64\www\webppi\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT 1\nFROM `...')
+#3 D:\wamp64\www\webppi\system\Database\BaseBuilder.php(1455): CodeIgniter\Database\BaseConnection->query('SELECT 1\nFROM `...', Array, false)
+#4 D:\wamp64\www\webppi\system\Validation\Rules.php(142): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\wamp64\www\webppi\system\Validation\Validation.php(292): CodeIgniter\Validation\Rules->is_unique('W.1.1.2', 'komp_code', Array, NULL)
+#6 D:\wamp64\www\webppi\system\Validation\Validation.php(157): CodeIgniter\Validation\Validation->processRules('code', 'code', 'W.1.1.2', Array, Array)
+#7 D:\wamp64\www\webppi\system\Controller.php(160): CodeIgniter\Validation\Validation->run()
+#8 D:\wamp64\www\webppi\app\Controllers\Mankomp.php(66): CodeIgniter\Controller->validate(Array)
+#9 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Mankomp->tambahkompproses()
+#10 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Mankomp))
+#11 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#13 {main}
+CRITICAL - 2022-07-25 20:15:08 --> Invalid file: maintemp/komp.php
+#0 D:\wamp64\www\webppi\system\View\View.php(198): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('maintemp/komp.p...')
+#1 D:\wamp64\www\webppi\system\Common.php(1089): CodeIgniter\View\View->render('maintemp/komp', Array, true)
+#2 D:\wamp64\www\webppi\app\Controllers\Mankomp.php(30): view('maintemp/komp', Array)
+#3 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Mankomp->index()
+#4 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Mankomp))
+#5 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#7 {main}
+CRITICAL - 2022-07-25 20:15:10 --> Invalid file: maintemp/komp.php
+#0 D:\wamp64\www\webppi\system\View\View.php(198): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('maintemp/komp.p...')
+#1 D:\wamp64\www\webppi\system\Common.php(1089): CodeIgniter\View\View->render('maintemp/komp', Array, true)
+#2 D:\wamp64\www\webppi\app\Controllers\Mankomp.php(30): view('maintemp/komp', Array)
+#3 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Mankomp->index()
+#4 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Mankomp))
+#5 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#7 {main}
+CRITICAL - 2022-07-25 20:15:14 --> Invalid file: maintemp/komp.php
+#0 D:\wamp64\www\webppi\system\View\View.php(198): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('maintemp/komp.p...')
+#1 D:\wamp64\www\webppi\system\Common.php(1089): CodeIgniter\View\View->render('maintemp/komp', Array, true)
+#2 D:\wamp64\www\webppi\app\Controllers\Mankomp.php(30): view('maintemp/komp', Array)
+#3 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Mankomp->index()
+#4 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Mankomp))
+#5 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#7 {main}
+CRITICAL - 2022-07-25 20:15:53 --> Undefined variable: komp_desc
+#0 D:\wamp64\www\webppi\app\Views\maintemp\ubahkomp.php(30): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'D:\\wamp64\\www\\w...', 30, Array)
+#1 D:\wamp64\www\webppi\system\View\View.php(210): include('D:\\wamp64\\www\\w...')
+#2 D:\wamp64\www\webppi\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 D:\wamp64\www\webppi\system\Common.php(1089): CodeIgniter\View\View->render('maintemp/ubahko...', Array, true)
+#4 D:\wamp64\www\webppi\app\Controllers\Mankomp.php(153): view('maintemp/ubahko...', Array)
+#5 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Mankomp->ubahkomp('4')
+#6 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Mankomp))
+#7 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+ERROR - 2022-07-25 22:38:46 --> Table '2022ppirpl.tbl_tugasakhir' doesn't exist
+CRITICAL - 2022-07-25 22:38:46 --> Table '2022ppirpl.tbl_tugasakhir' doesn't exist
+#0 D:\wamp64\www\webppi\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT *\nFROM `...', 0)
+#1 D:\wamp64\www\webppi\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *\nFROM `...')
+#2 D:\wamp64\www\webppi\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *\nFROM `...')
+#3 D:\wamp64\www\webppi\system\Database\BaseBuilder.php(1455): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 D:\wamp64\www\webppi\system\Model.php(183): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\wamp64\www\webppi\system\BaseModel.php(584): CodeIgniter\Model->doFindAll(0, 0)
+#6 D:\wamp64\www\webppi\app\Controllers\Tugasakhir.php(22): CodeIgniter\BaseModel->findAll()
+#7 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Tugasakhir->index()
+#8 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Tugasakhir))
+#9 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#11 {main}
+ERROR - 2022-07-25 22:48:31 --> Table '2022ppirpl.tbl_tugasakhir' doesn't exist
+CRITICAL - 2022-07-25 22:48:31 --> Table '2022ppirpl.tbl_tugasakhir' doesn't exist
+#0 D:\wamp64\www\webppi\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT *\nFROM `...', 0)
+#1 D:\wamp64\www\webppi\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *\nFROM `...')
+#2 D:\wamp64\www\webppi\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *\nFROM `...')
+#3 D:\wamp64\www\webppi\system\Database\BaseBuilder.php(1455): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 D:\wamp64\www\webppi\system\Model.php(183): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\wamp64\www\webppi\system\BaseModel.php(584): CodeIgniter\Model->doFindAll(0, 0)
+#6 D:\wamp64\www\webppi\app\Controllers\Tugasakhir.php(22): CodeIgniter\BaseModel->findAll()
+#7 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Tugasakhir->index()
+#8 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Tugasakhir))
+#9 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#11 {main}
