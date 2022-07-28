@@ -20,13 +20,16 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col">
-                                    <a href="#" class="btn btn-block btn-primary btn-sm">I.1</a>
+                                    <a href="<?php echo base_url();?>/userfair11/docs/"
+                                        class="btn btn-block btn-primary btn-sm">I.1</a>
                                 </div>
                                 <div class="col">
-                                    <a href="#" class="btn btn-block btn-primary btn-sm">I.2</a>
+                                    <a href="<?php echo base_url();?>/userfair12/docs/"
+                                        class="btn btn-block btn-primary btn-sm">I.2</a>
                                 </div>
                                 <div class="col">
-                                    <a href="#" class="btn btn-block btn-primary btn-sm">I.3</a>
+                                    <a href="<?php echo base_url();?>/userfair13/docs/"
+                                        class="btn btn-block btn-primary btn-sm">I.3</a>
                                 </div>
                                 <div class="col">
                                     <a href="#" class="btn btn-block btn-primary btn-sm">I.4</a>

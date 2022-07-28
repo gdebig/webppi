@@ -198,7 +198,13 @@ $session = session();
                                 <?php
                                 }
                                 ?>
-                                <li class="breadcrumb-item active"><?= $data_bread?></li>
+                                <?php
+                                if (isset($stringbread)&&(!empty($stringbread))){
+                                    echo $stringbread;
+                                }else{
+                                    echo '<li class="breadcrumb-item active">'.$data_bread.'</li>';
+                                }
+                                ?>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
