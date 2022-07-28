@@ -24,7 +24,7 @@
     <link rel="stylesheet"
         href="<?php echo base_url();?>/assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet"
-        href="<?php echo base_url();?>/assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+        href="<?php echo base_url();?>/assets/plugins/datatables-scrollX/css/scrollX.bootstrap4.min.css">
     <link rel="stylesheet"
         href="<?php echo base_url();?>/assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 </head>
@@ -269,9 +269,9 @@ $session = session();
     <!-- DataTables  & Plugins -->
     <script src="<?php echo base_url();?>/assets/plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="<?php echo base_url();?>/assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-    <script src="<?php echo base_url();?>/assets/plugins/datatables-responsive/js/dataTables.responsive.min.js">
+    <script src="<?php echo base_url();?>/assets/plugins/datatables-scrollX/js/dataTables.scrollX.min.js">
     </script>
-    <script src="<?php echo base_url();?>/assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js">
+    <script src="<?php echo base_url();?>/assets/plugins/datatables-scrollX/js/scrollX.bootstrap4.min.js">
     </script>
     <script src="<?php echo base_url();?>/assets/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
     <script src="<?php echo base_url();?>/assets/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
@@ -290,7 +290,7 @@ $session = session();
             "ordering": true,
             "info": true,
             "autoWidth": false,
-            "responsive": true,
+            "scrollX": true,
             "buttons": ["csv", "excel", "pdf", "print"]
         }).buttons().container().appendTo('#tabledata_wrapper .col-md-6:eq(0)');
     });
@@ -304,7 +304,7 @@ $session = session();
             "ordering": true,
             "info": true,
             "autoWidth": false,
-            "responsive": true,
+            "scrollX": true,
             "buttons": ["csv", "excel", "pdf", "print"]
         }).buttons().container().appendTo('#tabledata1_wrapper .col-md-6:eq(0)');
     });
@@ -318,7 +318,7 @@ $session = session();
             "ordering": true,
             "info": true,
             "autoWidth": false,
-            "responsive": true,
+            "scrollX": true,
             "buttons": ["csv", "excel", "pdf", "print"]
         }).buttons().container().appendTo('#tabledata2_wrapper .col-md-6:eq(0)');
     });
@@ -332,7 +332,7 @@ $session = session();
             "ordering": true,
             "info": true,
             "autoWidth": false,
-            "responsive": true,
+            "scrollX": true,
             "buttons": ["csv", "excel", "pdf", "print"]
         }).buttons().container().appendTo('#tabledata3_wrapper .col-md-6:eq(0)');
     });
@@ -346,7 +346,7 @@ $session = session();
             "ordering": true,
             "info": true,
             "autoWidth": false,
-            "responsive": true,
+            "scrollX": true,
             "buttons": ["csv", "excel", "pdf", "print"]
         }).buttons().container().appendTo('#tabledata4_wrapper .col-md-6:eq(0)');
     });
@@ -360,7 +360,7 @@ $session = session();
             "ordering": true,
             "info": true,
             "autoWidth": false,
-            "responsive": true,
+            "scrollX": true,
             "buttons": ["csv", "excel", "pdf", "print"]
         }).buttons().container().appendTo('#tabledata5_wrapper .col-md-6:eq(0)');
     });
@@ -374,7 +374,7 @@ $session = session();
             "ordering": true,
             "info": true,
             "autoWidth": false,
-            "responsive": true,
+            "scrollX": true,
             "buttons": ["csv", "excel", "pdf", "print"]
         }).buttons().container().appendTo('#tabledata6_wrapper .col-md-6:eq(0)');
     });

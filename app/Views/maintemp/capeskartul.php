@@ -1,4 +1,4 @@
-<?= $this->extend('register/template');?>
+<?= $this->extend('maintemp/template');?>
 
 <?= $this->section('content');?>
 

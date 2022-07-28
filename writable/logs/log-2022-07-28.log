@@ -12,3 +12,9 @@ CRITICAL - 2022-07-28 03:04:37 --> Table '2022ppirpl.tbl_tugasakhir' doesn't exi
 #9 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
 #10 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
 #11 {main}
+CRITICAL - 2022-07-28 10:14:44 --> Class 'App\Controllers\CapesOrgModel' not found
+#0 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Userfair13->docs()
+#1 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Userfair13))
+#2 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}

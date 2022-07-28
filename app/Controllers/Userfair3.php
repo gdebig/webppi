@@ -2,9 +2,9 @@
 
 namespace App\Controllers;
 
-use App\Models\CapesOrgModel;
+use App\Models\CapesKualifikasiModel;
 
-class Userfair13 extends BaseController
+class Userfair3 extends BaseController
 {
     public function docs($id = false)
     {
@@ -23,18 +23,19 @@ class Userfair13 extends BaseController
             $user_id = $session->get('user_id');
         }
         helper(['tanggal']);
-        $model = new CapesOrgModel();
+        $model = new CapesKualifikasiModel();
         $data['capeslogged_in'] = $session->get('capeslogged_in');
-        $org = $model->where('user_id', $id)->orderby('StartPeriodYear','DESC')->findall();
-        if (!empty($org)){
-            $data['data_org'] = $org;
+        $kerja = $model->where('user_id', $id)->orderby('ProjValue','DESC')->findall();
+        if (!empty($kerja)){
+            $data['data_kerja'] = $kerja;
         }else{
-            $data['data_org'] = 'kosong';
+            $data['data_kerja'] = 'kosong';
         }
-        $data['title_page'] = "I.3. Organisasi Profesi & Organisasi Lainnya Yang Dimasuki (W1)";
+
+        $data['title_page'] = "III. KUALIFIKASI PROFESIONAL (W2,W3,W4,P6,P7,P8,P9,P10,P11)";
         $data['data_bread'] = '';
-        $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Organisasi</li>';
+        $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Kualifikasi Profesional</li>';
         $data['logged_in'] = $session->get('logged_in');
-        return view('maintemp/fairdok13', $data);
+        return view('maintemp/fairdok3', $data);
     }
 }

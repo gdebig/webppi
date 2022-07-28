@@ -4,9 +4,6 @@
 
 <div class="card card-primary" style="width: auto; margin: 30px;">
     <div class="col-sm-13" style="width: auto; margin: 30px;">
-        <div class="">
-            <h3>Pendidikan/Pelatihan Teknik/Manajemen</h3>
-        </div>
         <!-- /.card-header -->
         <div class="card">
             <div class="card-body">
@@ -17,8 +14,8 @@
 
                 <div class="col">
                     <div class="row">
-                        <a href="<?php echo base_url();?>/mancapes" class="btn btn-primary">Kembali ke Daftar Calon
-                            Peserta</a>
+                        <a href="<?php echo base_url();?>/register/tambahlatih" class="btn btn-primary">Tambah
+                            Data Pelatihan</a>
                     </div>
                 </div>
 
@@ -49,6 +46,7 @@
                             <th>Jumlah Jam</th>
                             <th>Uraian Singkat Materi Pendidikan/Pelatihan, Tingkat Pendidikan/Pelatihan</th>
                             <th>Bukti Pendidikan/Pelatihan</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -99,6 +97,14 @@
                                 echo "";
                             }
                             ?></td>
+                            <td style="text-align: center"><a
+                                    href="<?php echo base_url();?>/register/ubahlatih/<?=$latih['Num'];?>"
+                                    class="btn btn-warning"> <i class="fas fa-file-signature"></i> Ubah</a>
+                                <a href="<?php echo base_url();?>/register/hapuslatih/<?=$latih['Num'];?>"
+                                    onclick="return confirm('Apakah anda yakin akan menghapus data Pelatihan/Pendidikan?')"
+                                    class="btn btn-danger"> <i class="fas fa-trash"></i>
+                                    Hapus</a>
+                            </td>
                         </tr>
                         <?php 
                             endforeach 

@@ -4,9 +4,6 @@
 
 <div class="card card-primary" style="width: auto; margin: 30px;">
     <div class="col-sm-13" style="width: auto; margin: 30px;">
-        <div class="">
-            <h3>Organisasi</h3>
-        </div>
         <!-- /.card-header -->
         <div class="card">
             <div class="card-body">
@@ -14,13 +11,6 @@
                 <?php if(session()->getFlashdata('msg')):?>
                 <div class="alert alert-success"><?= session()->getFlashdata('msg') ?></div>
                 <?php endif;?>
-
-                <div class="col">
-                    <div class="row">
-                        <a href="<?php echo base_url();?>/mancapes" class="btn btn-primary">Kembali ke Daftar Calon
-                            Peserta</a>
-                    </div>
-                </div>
 
                 <div class="col">
                     <div class="row">

@@ -4,22 +4,14 @@
 
 <div class="card card-primary" style="width: auto; margin: 30px;">
     <div class="col-sm-13" style="width: auto; margin: 30px;">
-        <div class="">
-            <h3>Makalah/Tulisan Yang Disajikan Dalam Seminar/Lokakarya Keinsinyuran</h3>
-        </div>
         <!-- /.card-header -->
         <div class="card">
             <div class="card-body">
 
-                <?php if(session()->getFlashdata('msg')):?>
-                <div class="alert alert-success"><?= session()->getFlashdata('msg') ?></div>
-                <?php endif;?>
-
                 <div class="col">
-                    <div class="row">
-                        <a href="<?php echo base_url();?>/mancapes" class="btn btn-primary">Kembali ke daftar Calon
-                            Peserta</a>
-                    </div>
+                    <?php if(session()->getFlashdata('msg')):?>
+                    <div class="alert alert-success"><?= session()->getFlashdata('msg') ?></div>
+                    <?php endif;?>
                 </div>
 
                 <div class="col">
@@ -28,12 +20,12 @@
                     </div>
                 </div>
 
-                <?php if(isset($data_sem)&&($data_sem=="kosong")){
+                <?php if(isset($data_kartul)&&($data_kartul=="kosong")){
                     ?>
 
-                <div class="alert alert-danger">Data seminar/lokakarya belum ada. <a
-                        href="<?= base_url();?>/register/tambahseminar">Klik
-                        di sini untuk menambah data seminar/lokakarya</a></div>
+                <div class="alert alert-danger">Data Karya Tulis belum ada. <a
+                        href="<?= base_url();?>/register/tambahkartul">Klik
+                        di sini untuk menambah data Karya Tulis.</a></div>
                 <?php }else{ ?>
 
                 <table id="tabledata" class="table table-bordered table-hover">
@@ -41,43 +33,41 @@
                         <tr>
                             <th>No</th>
                             <th>Bulan-Tahun</th>
-                            <th>Judul Makalah/Tulisan</th>
-                            <th>Nama Seminar/Lokakarya</th>
-                            <th>Penyelenggara</th>
+                            <th>Judul Karya Tulis</th>
+                            <th>Nama Media Publikasi</th>
                             <th>Lokasi</th>
-                            <th>Seminar/Lokakarya Tingkat</th>
-                            <th>Tingkat Kesulitan dan Manfaat</th>
-                            <th>Uraian Singkat Materi Makalah/Tulisan</th>
-                            <th>Bukti Seminar</th>
+                            <th>Media Publikasi Tingkat</th>
+                            <th>Tingkat Kesulitan dan Manfaatnya</th>
+                            <th>Uraian Singkat Materi yang Dipublikasikan</th>
+                            <th>Bukti Karya Tulis</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
                                     $i=1; 
-                                    foreach ($data_sem as $sem) : 
+                                    foreach ($data_kartul as $kartul) : 
                                     ?>
                         <tr>
                             <td><?php echo $i;$i++;?></td>
-                            <td><?= $sem['Month'].'-'.$sem['Year'];?></td>
-                            <td><?= $sem['PaperName'];?></td>
-                            <td><?= $sem['Name'];?></td>
-                            <td><?= $sem['Organizer'];?></td>
-                            <td><?= $sem['LocCity'].", ".$sem['LocCountry'] ?></td>
+                            <td><?= $kartul['Month'].' - '.$kartul['Year'];?></td>
+                            <td><?= $kartul['Name'];?></td>
+                            <td><?= $kartul['Media'];?></td>
+                            <td><?= $kartul['LocCity'].", ".$kartul['LocCountry'] ?></td>
                             <td><?php
-                                switch ($sem['Level']){
+                                switch ($kartul['Mediatype']){
                                     case "Lok":
-                                        echo "Pada Seminar Lokal";
+                                        echo "Dimuat di Media Lokal";
                                         break;
                                     case "Nas":
-                                        echo "Pada Seminar Nasional";
+                                        echo "Dimuat di Media Nasional";
                                         break;
                                     case "Int":
-                                        echo "Pada Seminar Internasional";
+                                        echo "Dimuat di Media Internasional";
                                         break;
                                 }
                             ?></td>
                             <td><?php
-                                switch ($sem['DiffBenefit']){
+                                switch ($kartul['Diffbenefit']){
                                     case "ren":
                                         echo "Rendah";
                                         break;
@@ -92,9 +82,9 @@
                                         break;
                                 }
                             ?></td>
-                            <td><?= $sem['Desc'];?></td>
-                            <td><a href="<?=base_url();?>/uploads/docs/<?=$sem['File'];?>"
-                                    target="_blank"><?= $sem['File'];?></a></td>
+                            <td><?= $kartul['Desc'];?></td>
+                            <td><a href="<?=base_url();?>/uploads/docs/<?=$kartul['File'];?>"
+                                    target="_blank"><?= $kartul['File'];?></a></td>
                         </tr>
                         <?php 
                                     endforeach 

@@ -273,7 +273,7 @@
             "ordering": true,
             "info": true,
             "autoWidth": false,
-            "responsive": true,
+            "scrollX": true,
             "buttons": ["csv", "excel", "pdf", "print"]
         }).buttons().container().appendTo('#tabledata_wrapper .col-md-6:eq(0)');
     });
