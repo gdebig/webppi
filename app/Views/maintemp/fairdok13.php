@@ -14,6 +14,13 @@
 
                 <div class="col">
                     <div class="row">
+                        <a href="<?php echo base_url();?>/userfair13/tambahorganisasi" class="btn btn-primary">Tambah
+                            Data Organisasi</a>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="row">
                         &nbsp;
                     </div>
                 </div>
@@ -22,11 +29,11 @@
                     ?>
 
                 <div class="alert alert-danger">Data organisasi belum ada. <a
-                        href="<?= base_url();?>/register/tambahorganisasi">Klik
+                        href="<?= base_url();?>/userfair13/tambahorganisasi">Klik
                         di sini untuk menambah data organisasi</a></div>
                 <?php }else{ ?>
 
-                <table id="tabledata" class="table table-bordered table-hover">
+                <table id="tabledata" class="display table table-bordered table-hover">
                     <thead>
                         <tr>
                             <th>No</th>
@@ -41,6 +48,7 @@
                             <th>Lingkup Kegiatan Organisasi</th>
                             <th>Aktifitas Dalam Organisasi</th>
                             <th>Bukti Menjadi Pengurus</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -141,6 +149,14 @@
                             <td><?= $org['Desc'];?></td>
                             <td><a href="<?=base_url();?>/uploads/docs/<?=$org['File'];?>"
                                     target="_blank"><?= $org['File'];?></a></td>
+                            <td style="text-align: center"><a
+                                    href="<?php echo base_url();?>/userfair13/ubahorg/<?=$org['Num'];?>"
+                                    class="btn btn-warning"> <i class="fas fa-file-signature"></i> Ubah</a>
+                                <a href="<?php echo base_url();?>/userfair13/hapusorg/<?=$org['Num'];?>"
+                                    onclick="return confirm('Apakah anda yakin akan menghapus data organisasi?')"
+                                    class="btn btn-danger"> <i class="fas fa-trash"></i>
+                                    Hapus</a>
+                            </td>
                         </tr>
                         <?php 
                         endforeach 

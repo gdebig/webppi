@@ -1300,7 +1300,7 @@ class Register extends BaseController
                 $Judicium = $this->request->getVar('Judicium');
                 $ijazah = $this->request->getFile('ijazah');
 
-                $ext = $File->getClientExtension();
+                $ext = $ijazah->getClientExtension();
                 if ((empty($filename))&&(!empty($ext))){
                     $filenamenew = $user_id.'_ijazah_'.$jenjang.'.'.$ext;
                     $ijazah->move('uploads/docs/',$filenamenew,true);

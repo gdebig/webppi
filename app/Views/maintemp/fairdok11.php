@@ -17,7 +17,7 @@
         if(isset($kosong))
         {
         ?>
-        <div class="alert alert-danger">Data profile belum ada. <a href="<?= base_url();?>/myprofile/buatprofile">Klik
+        <div class="alert alert-danger">Data profile belum ada. <a href="<?= base_url();?>/userfair11/buatprofile">Klik
                 di sini untuk membuat profile</a></div>
         <?php
         }else{
@@ -210,6 +210,12 @@
             <!-- /.card-body -->
         </div>
         <!-- /.card -->
+        <div class="card">
+            <div class="card-body">
+                <a href="<?= base_url();?>/userfair11/ubahprofilefair" class="btn btn-block btn-primary">Ubah
+                    Profile</a>
+            </div>
+        </div>
         <?php
         }
         ?>

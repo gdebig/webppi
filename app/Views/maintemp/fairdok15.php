@@ -14,7 +14,7 @@
 
                 <div class="col">
                     <div class="row">
-                        <a href="<?php echo base_url();?>/register/tambahlatih" class="btn btn-primary">Tambah
+                        <a href="<?php echo base_url();?>/userfair15/tambahlatih" class="btn btn-primary">Tambah
                             Data Pelatihan</a>
                     </div>
                 </div>
@@ -29,7 +29,7 @@
                     ?>
 
                 <div class="alert alert-danger">Data pendidikan/pelatihan teknik/manajemen belum ada. <a
-                        href="<?= base_url();?>/register/tambahlatih">Klik
+                        href="<?= base_url();?>/userfair15/tambahlatih">Klik
                         di sini untuk menambah data pendidikan/pelatihan teknik/manajemen.</a></div>
                 <?php }else{ ?>
 
@@ -98,9 +98,9 @@
                             }
                             ?></td>
                             <td style="text-align: center"><a
-                                    href="<?php echo base_url();?>/register/ubahlatih/<?=$latih['Num'];?>"
+                                    href="<?php echo base_url();?>/userfair15/ubahlatih/<?=$latih['Num'];?>"
                                     class="btn btn-warning"> <i class="fas fa-file-signature"></i> Ubah</a>
-                                <a href="<?php echo base_url();?>/register/hapuslatih/<?=$latih['Num'];?>"
+                                <a href="<?php echo base_url();?>/userfair15/hapuslatih/<?=$latih['Num'];?>"
                                     onclick="return confirm('Apakah anda yakin akan menghapus data Pelatihan/Pendidikan?')"
                                     class="btn btn-danger"> <i class="fas fa-trash"></i>
                                     Hapus</a>
