@@ -48,12 +48,6 @@ class Userfair14 extends BaseController
         }else{
             $session->set('role', 'peserta');
         }
-
-        if (!empty($id)){
-            $user_id = $id;
-        }else{
-            $user_id = $session->get('user_id');
-        }
         helper(['tanggal']);
         $data['title_page'] = "I.4. Tanda Penghargaan Yang Diterima (W1)";
         $data['data_bread'] = '';
@@ -211,12 +205,6 @@ class Userfair14 extends BaseController
         }else{
             $session->set('role', 'peserta');
         }
-
-        if (!empty($id)){
-            $user_id = $id;
-        }else{
-            $user_id = $session->get('user_id');
-        }
         helper(['tanggal']);
 
         $penghargaan = $model->find($id);
@@ -239,12 +227,6 @@ class Userfair14 extends BaseController
             return redirect()->to('/home');
         }else{
             $session->set('role', 'peserta');
-        }
-
-        if (!empty($id)){
-            $user_id = $id;
-        }else{
-            $user_id = $session->get('user_id');
         }
         helper(['tanggal']);
 
@@ -283,12 +265,6 @@ class Userfair14 extends BaseController
             return redirect()->to('/home');
         }else{
             $session->set('role', 'peserta');
-        }
-
-        if (!empty($id)){
-            $user_id = $id;
-        }else{
-            $user_id = $session->get('user_id');
         }
         helper(['tanggal']);
         $Num = $this->request->getVar('Num');

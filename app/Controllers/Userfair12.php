@@ -249,12 +249,6 @@ class Userfair12 extends BaseController
         }else{
             $session->set('role', 'peserta');
         }
-
-        if (!empty($id)){
-            $user_id = $id;
-        }else{
-            $user_id = $session->get('user_id');
-        }
         helper(['tanggal']);
 
         $ijazah = $model->find($id);
@@ -276,12 +270,6 @@ class Userfair12 extends BaseController
             return redirect()->to('/home');
         }else{
             $session->set('role', 'peserta');
-        }
-
-        if (!empty($id)){
-            $user_id = $id;
-        }else{
-            $user_id = $session->get('user_id');
         }
         helper(['tanggal']);
         $model = new CapesPendModel();
@@ -330,7 +318,6 @@ class Userfair12 extends BaseController
         helper(['tanggal']);
         $model = new CapesPendModel();
         $pend_id = $this->request->getVar('pend_id');
-        $user_id = $session->get('user_id');
 
         $button=$this->request->getVar('submit');
         

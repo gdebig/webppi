@@ -47,12 +47,6 @@ class Userfair13 extends BaseController
         }else{
             $session->set('role', 'peserta');
         }
-
-        if (!empty($id)){
-            $user_id = $id;
-        }else{
-            $user_id = $session->get('user_id');
-        }
         helper(['tanggal']);
         $data['title_page'] = "I.3. Organisasi Profesi & Organisasi Lainnya Yang Dimasuki (W1)";
         $data['data_bread'] = '';
@@ -72,12 +66,7 @@ class Userfair13 extends BaseController
         }else{
             $session->set('role', 'peserta');
         }
-
-        if (!empty($id)){
-            $user_id = $id;
-        }else{
-            $user_id = $session->get('user_id');
-        }
+        $user_id = $session->get('user_id');
         helper(['tanggal']);
 
         $button=$this->request->getVar('submit');
@@ -260,12 +249,6 @@ class Userfair13 extends BaseController
         }else{
             $session->set('role', 'peserta');
         }
-
-        if (!empty($id)){
-            $user_id = $id;
-        }else{
-            $user_id = $session->get('user_id');
-        }
         helper(['tanggal']);
 
         $org = $model->find($id);
@@ -288,12 +271,6 @@ class Userfair13 extends BaseController
             return redirect()->to('/home');
         }else{
             $session->set('role', 'peserta');
-        }
-
-        if (!empty($id)){
-            $user_id = $id;
-        }else{
-            $user_id = $session->get('user_id');
         }
         helper(['tanggal']);
 
@@ -335,12 +312,6 @@ class Userfair13 extends BaseController
             return redirect()->to('/home');
         }else{
             $session->set('role', 'peserta');
-        }
-
-        if (!empty($id)){
-            $user_id = $id;
-        }else{
-            $user_id = $session->get('user_id');
         }
         helper(['tanggal']);
         $Num = $this->request->getVar('Num');
