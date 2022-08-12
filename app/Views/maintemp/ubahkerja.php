@@ -1,11 +1,11 @@
-<?= $this->extend('register/template');?>
+<?= $this->extend('maintemp/template');?>
 
 <?= $this->section('content');?>
 
 <div class="card card-primary" style="width: auto; margin: 30px;">
     <div class="col-sm-13" style="width: auto; margin: 30px;">
         <div class="">
-            <h3>Pengalaman Kerja</h3>
+            <h3>Ubah Kualifikasi Profesional</h3>
         </div>
 
         <?php if(isset($validation)):?>
@@ -14,7 +14,7 @@
         <br />
         <div class="col">
             <div class="row">
-                <p>Silakan isikan pengalaman kerja disini, dapat berupa:</p>
+                <p>Silakan isikan kualifikasi profesional disini, dapat berupa:</p>
                 <ul>
                     <li>Pengalaman Dalam Perencanan & Perancangan dan/atau Pengalaman Dalam Pengelolaan Tugas-Tugas
                         Keinsinyuran,</li>
@@ -31,7 +31,7 @@
 
         <!-- /.card-header -->
         <div class="card-body" style="width: auto; margin: 30px;">
-            <form action="<?php echo base_url();?>/register/ubahpengkerjaproses" method="post"
+            <form action="<?php echo base_url();?>/userfair3/ubahkerjaproses" method="post"
                 enctype="multipart/form-data">
                 <input type="hidden" id="Num" name="Num" value="<?= $Num;?>">
                 <input type="hidden" id="filename" name="filename" value="<?= $File?>">
@@ -110,7 +110,7 @@
                             </option>
                             <option value="smp7" <?php echo $Duration == "smp7" ? "selected" : "";?>>4 - 7 tahun
                             </option>
-                            <option value="smp10" <?php echo $Duration == "smp10" ? "selected" : "";?>>8 - 10 tahun
+                            <option value="smpe10" <?php echo $Duration == "smp10" ? "selected" : "";?>>8 - 10 tahun
                             </option>
                             <option value="lbh10" <?php echo $Duration == "lbh10" ? "selected" : "";?>>> dari 10 tahun
                             </option>
@@ -191,7 +191,7 @@
                     <div class="row">
                         <div class="col">
                             <button type="submit" name="submit" value="submit" class="btn btn-primary col">Ubah
-                                Pengalaman Kerja</button>
+                                Kualifikasi Profesional</button>
                         </div>
                         <div class="col">
                             <button type="submit" name="submit" value="batal"

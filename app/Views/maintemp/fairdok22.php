@@ -14,8 +14,8 @@
 
                 <div class="col">
                     <div class="row">
-                        <a href="<?php echo base_url();?>/userfair21/tambahref" class="btn btn-primary">Tambah
-                            Referensi Kode Etik</a>
+                        <a href="<?php echo base_url();?>/userfair22/tambahdapat" class="btn btn-primary">Tambah
+                            Pendapat</a>
                     </div>
                 </div>
 
@@ -25,44 +25,35 @@
                     </div>
                 </div>
 
-                <?php if(isset($data_etik)&&($data_etik=="kosong")){
+                <?php if(isset($data_dapat)&&($data_dapat=="kosong")){
                     ?>
 
-                <div class="alert alert-danger">Data referensi kode etik belum ada. <a
-                        href="<?= base_url();?>/userfair21/tambahref">Klik
-                        di sini untuk menambah data referensi kode etik</a></div>
+                <div class="alert alert-danger">Data pengertian, pendapat dan pengalaman sendiri belum ada. <a
+                        href="<?= base_url();?>/userfair22/tambahdapat">Klik
+                        di sini untuk menambah data pendapat</a></div>
                 <?php }else{ ?>
 
                 <table id="tabledata" class="display table table-bordered table-hover">
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Nama</th>
-                            <th>Alamat</th>
-                            <th>No. Telepon</th>
-                            <th>Email</th>
-                            <th>Hubungan</th>
+                            <th>Pendapat</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
                         $i=1; 
-                        foreach ($data_etik as $etik) : 
+                        foreach ($data_dapat as $dapat) : 
                         ?>
                         <tr>
                             <td><?php echo $i;$i++;?></td>
-                            <td><?= $etik['Name'];?></td>
-                            <td><?= $etik['Addr']."<br />".$etik['City'].', '.$etik['Prov'].', '.$etik['Country'];?>
-                            </td>
-                            <td><?= $etik['Pnum'];?></td>
-                            <td><?= $etik['Email'];?></td>
-                            <td><?= $etik['Relation'];?></td>
+                            <td><?= $dapat['Desc'];?></td>
                             <td style="text-align: center"><a
-                                    href="<?php echo base_url();?>/userfair21/ubahetik/<?=$etik['Num'];?>"
+                                    href="<?php echo base_url();?>/userfair22/ubahdapat/<?=$dapat['Num'];?>"
                                     class="btn btn-warning"> <i class="fas fa-file-signature"></i> Ubah</a>
-                                <a href="<?php echo base_url();?>/userfair21/hapusetik/<?=$etik['Num'];?>"
-                                    onclick="return confirm('Apakah anda yakin akan menghapus data referensi kode etik?')"
+                                <a href="<?php echo base_url();?>/userfair22/hapusdapat/<?=$dapat['Num'];?>"
+                                    onclick="return confirm('Apakah anda yakin akan menghapus data pengertian, pendapat dan pengalaman sendiri?')"
                                     class="btn btn-danger"> <i class="fas fa-trash"></i>
                                     Hapus</a>
                             </td>

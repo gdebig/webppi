@@ -96,7 +96,7 @@ class Userfair21 extends BaseController
                     'label'  => 'City',
                     'rules'  => 'required',
                     'errors' => [
-                        'required' => 'Field Kota Lokasi Sertifikat harus diisi.',
+                        'required' => 'Field City Lokasi Sertifikat harus diisi.',
                     ],
                 ],
                 'Prov' => [
@@ -177,7 +177,7 @@ class Userfair21 extends BaseController
         }
     }
 
-    public function hapussert($id){
+    public function hapusetik($id){
         $session = session();
         $logged_in = $session->get('logged_in');
         $ispeserta = $session->get('ispeserta');
@@ -188,18 +188,13 @@ class Userfair21 extends BaseController
         }
         $model = new EtikRefModel();
 
-        $latih = $model->find($id);
-        $path = './uploads/docs/'.$latih['File'];
-        if (is_file($path)){
-            unlink($path);
-        }
         $model->delete($id);
-        $session->setFlashdata('msg', 'Data Sertifikat Kompetensi berhasil dihapus.');
+        $session->setFlashdata('msg', 'Data referensi kode etik berhasil dihapus.');
 
-        return redirect()->to('/userfair16/docs');   
+        return redirect()->to('/userfair21/docs');   
     }
 
-    public function ubahsert($id){
+    public function ubahetik($id){
         $session = session();
         $logged_in = $session->get('logged_in');
         $ispeserta = $session->get('ispeserta');
@@ -209,34 +204,30 @@ class Userfair21 extends BaseController
             $session->set('role', 'peserta');
         }
         $model = new EtikRefModel();
-        $latih = $model->where('Num', $id)->first();
-        if ($latih){
+        $etik = $model->where('Num', $id)->first();
+        if ($etik){
             $data = [
-                'Num' => $latih['Num'],
-                'user_id' => $latih['user_id'],
-                'Name' => $latih['Name'],
-                'Addr' => $latih['Addr'],
-                'Kota' => $latih['Kota'],
-                'Country' => $latih['Country'],
-                'Email' => $latih['Email'],
-                'Pnum' => $latih['Pnum'],
-                'Relation' => $latih['Relation'],
-                'Length' =>  $latih['Length'],
-                'Description' => $latih['Description'],
-                'File' => $latih['File']
+                'Num' => $etik['Num'],
+                'user_id' => $etik['user_id'],
+                'Name' => $etik['Name'],
+                'Addr' => $etik['Addr'],
+                'City' => $etik['City'],
+                'Prov' => $etik['Prov'],
+                'Country' => $etik['Country'],
+                'Pnum' => $etik['Pnum'],
+                'Email' => $etik['Email'],
+                'Relation' => $etik['Relation']
             ];
         }
-
-        $data['title_page'] = "I.6. Sertifikat Kompetensi dan Bidang Lainnya (yang Relevan) Yang Diikuti (#) (W1,W4)";
+        $data['title_page'] = "II.1. Referensi Kode Etik dan Etika Profesi (#) (W1)";
         $data['data_bread'] = '';
-        $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Ubah Sertifikat Kompetensi</li>';
+        $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Ubah Referensi</li>';
         $data['logged_in'] = $session->get('logged_in');
-        return view('maintemp/ubahsertuserfair', $data);
+        return view('maintemp/ubahrefuserfair', $data);
     }
 
-    public function ubahsertproses(){
+    public function ubahrefproses(){
         $session = session();
-        $slug = new Slug();
         $logged_in = $session->get('logged_in');
         $ispeserta = $session->get('ispeserta');
         if ((!$logged_in)&&(!$ispeserta)){
@@ -251,7 +242,7 @@ class Userfair21 extends BaseController
         $button=$this->request->getVar('submit');
         
         if ($button=="batal"){
-            return redirect()->to('/userfair16/docs');
+            return redirect()->to('/userfair21/docs');
         }else{
             helper(['form', 'url']);
 
@@ -260,21 +251,28 @@ class Userfair21 extends BaseController
                     'label'  => 'Name',
                     'rules'  => 'required',
                     'errors' => [
-                        'required' => 'Field Nama Sertifikat Kompetensi harus diisi.',
+                        'required' => 'Field Nama Lengkap harus diisi.',
                     ],
                 ],
                 'Addr' => [
-                    'label'  => 'Addr',
+                    'label'  => 'Alamat',
                     'rules'  => 'required',
                     'errors' => [
-                        'required' => 'Field Penyelenggara harus diisi.',
+                        'required' => 'Field Alamat harus diisi.',
                     ],
                 ],
                 'City' => [
                     'label'  => 'City',
                     'rules'  => 'required',
                     'errors' => [
-                        'required' => 'Field Kota Lokasi Sertifikat harus diisi.',
+                        'required' => 'Field City Lokasi Sertifikat harus diisi.',
+                    ],
+                ],
+                'Prov' => [
+                    'label'  => 'Prov',
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => 'Field Provinsi Lokasi Sertifikat harus diisi.',
                     ],
                 ],
                 'Country' => [
@@ -288,122 +286,74 @@ class Userfair21 extends BaseController
                     'label'  => 'Pnum',
                     'rules'  => 'required',
                     'errors' => [
-                        'required' => 'Field Bulan harus diisi.',
+                        'required' => 'Field Nomor Telepon harus diisi.',
                     ],
                 ],
                 'Email' => [
-                    'labe|l'  => 'Email',
-                    'rules'  => 'required|',
+                    'label'  => 'Email',
+                    'rules'  => 'required|valid_email',
                     'errors' => [
-                        'required' => 'Field Tahun harus diisi.',
+                        'required' => 'Field Email harus diisi.',
+                        'valid_email' => 'Field Email harus diisi dengan format email yang sesuai'
                     ],
                 ],
                 'Relation' => [
                     'label'  => 'Relation',
                     'rules'  => 'required',
                     'errors' => [
-                        'required' => 'Field Tingkat Materi harus diisi.',
-                    ],
-                ],
-                'Length' => [
-                    'label'  => 'Length',
-                    'rules'  => 'required',
-                    'errors' => [
-                        'required' => 'Field Jumlah Jam harus diisi.',
-                    ],
-                ],
-                'Description' => [
-                    'label'  => 'Description',
-                    'rules'  => 'required',
-                    'errors' => [
-                        'required' => 'Field Uraian Singkat harus diisi.',
-                    ],
-                ],
-                'File' => [
-                    'rules'  => 'ext_in[File,jpg,jpeg,png,pdf]|max_size[File, 700]',
-                    'errors' => [
-                        'ext_in' => "Hanya menerima file PDF, JPG, JPEG atau PNG",
-                        'max_size' => "Ukuran File Maksimal 700KB"
+                        'required' => 'Field Hubungan harus diisi.',
                     ],
                 ]
             ]);
 
             if ($formvalid){
-                $filename = $this->request->getVar('File');
                 $Name = $this->request->getVar('Name');
                 $Addr = $this->request->getVar('Addr');
                 $City = $this->request->getVar('City');
+                $Prov = $this->request->getVar('Prov');
                 $Country = $this->request->getVar('Country');
                 $Pnum = $this->request->getVar('Pnum');
                 $Email = $this->request->getVar('Email');
                 $Relation = $this->request->getVar('Relation');
-                $Length = $this->request->getVar('Length');
-                $Description = $this->request->getVar('Description');
-                $File = $this->request->getFile('File');
-
-                $namasert = $slug->slugify($Name);
-                $ext = $File->getClientExtension();
-                if ((empty($filename))&&(!empty($ext))){
-                    $filenamenew = $user_id.'_sertifikat_'.$namasert.'.'.$ext;
-                    $File->move('uploads/docs/',$filenamenew,true);
-                } elseif ((!empty($filename))&&(!empty($ext))){
-                    $oldext = substr($filename,-4);
-                    if ($oldext == $ext){
-                        $File->move('uploads/docs/',$filename,true);
-                        $filenamenew = $filename;
-                    }else{
-                        $filenamenew = $user_id.'_sertifikat_'.$namasert.'.'.$ext;
-                        $File->move('uploads/docs/',$filenamenew,true);
-                    }
-                }else{
-                    $filenamenew=$filename;
-                }
     
                 $data = array(
                     'Name' => $Name,
-                    'Jenis' => 'sertifikat',
-                    'Name' => $Name,
                     'Addr' => $Addr,
-                    'Kota' => $City,
+                    'City' => $City,
+                    'Prov' => $Prov,
                     'Country' => $Country,
                     'Pnum' => $Pnum,
                     'Email' => $Email,
                     'Relation' => $Relation,
-                   'Length' => $Length,
-                    'Description' => $Description,
-                    'File' => $filename,
                     'date_modified' => date('Y-m-d')
                 );
 
                 $model->update($Num, $data);
-                $session->setFlashdata('msg', 'Data Sertifikat Kompetensi berhasil diubah.');
+                $session->setFlashdata('msg', 'Data referensi kode etik berhasil diubah.');
     
-                return redirect()->to('/userfair16/docs');
+                return redirect()->to('/userfair21/docs');
             }else{
-                $latih = $model->where('Num', $Num)->first();
-                if ($latih){
+                $etik = $model->where('Num', $Num)->first();
+                if ($etik){
                     $data = [
-                        'Num' => $latih['Num'],
-                        'user_id' => $latih['user_id'],
-                        'Name' => $latih['Name'],
-                        'Addr' => $latih['Addr'],
-                        'Kota' => $latih['Kota'],
-                        'Country' => $latih['Country'],
-                        'Email' => $latih['Email'],
-                        'Pnum' => $latih['Pnum'],
-                        'Relation' => $latih['Relation'],
-                        'Length' =>  $latih['Length'],
-                        'Description' => $latih['Description'],
-                        'File' => $latih['File']
+                        'Num' => $etik['Num'],
+                        'user_id' => $etik['user_id'],
+                        'Name' => $etik['Name'],
+                        'Addr' => $etik['Addr'],
+                        'City' => $etik['City'],
+                        'Prov' => $etik['Prov'],
+                        'Country' => $etik['Country'],
+                        'Pnum' => $etik['Pnum'],
+                        'Email' => $etik['Email'],
+                        'Relation' => $etik['Relation']
                     ];
                 }
-
-                $data['title_page'] = "I.6. Sertifikat Kompetensi dan Bidang Lainnya (yang Relevan) Yang Diikuti (#) (W1,W4)";
+                $data['title_page'] = "II.1. Referensi Kode Etik dan Etika Profesi (#) (W1)";
                 $data['data_bread'] = '';
-                $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Ubah Sertifikat Kompetensi</li>';
+                $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Ubah Referensi</li>';
                 $data['logged_in'] = $session->get('logged_in');
                 $data['validation'] = $this->validator;
-                return view('maintemp/ubahsertuserfair', $data);
+                return view('maintemp/ubahrefuserfair', $data);
             }
         }        
     }

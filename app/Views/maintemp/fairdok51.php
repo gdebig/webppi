@@ -16,6 +16,13 @@
 
                 <div class="col">
                     <div class="row">
+                        <a href="<?php echo base_url();?>/userfair51/tambahkartul" class="btn btn-primary">Tambah
+                            Data Karya Tulis</a>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="row">
                         &nbsp;
                     </div>
                 </div>
@@ -24,11 +31,11 @@
                     ?>
 
                 <div class="alert alert-danger">Data Karya Tulis belum ada. <a
-                        href="<?= base_url();?>/register/tambahkartul">Klik
+                        href="<?= base_url();?>/userfair51/tambahkartul">Klik
                         di sini untuk menambah data Karya Tulis.</a></div>
                 <?php }else{ ?>
 
-                <table id="tabledata" class="table table-bordered table-hover">
+                <table id="tabledata" class="display table table-bordered table-hover">
                     <thead>
                         <tr>
                             <th>No</th>
@@ -40,6 +47,7 @@
                             <th>Tingkat Kesulitan dan Manfaatnya</th>
                             <th>Uraian Singkat Materi yang Dipublikasikan</th>
                             <th>Bukti Karya Tulis</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -85,6 +93,14 @@
                             <td><?= $kartul['Desc'];?></td>
                             <td><a href="<?=base_url();?>/uploads/docs/<?=$kartul['File'];?>"
                                     target="_blank"><?= $kartul['File'];?></a></td>
+                            <td style="text-align: center"><a
+                                    href="<?php echo base_url();?>/userfair51/ubahkartul/<?=$kartul['Num'];?>"
+                                    class="btn btn-warning"> <i class="fas fa-file-signature"></i> Ubah</a>
+                                <a href="<?php echo base_url();?>/userfair51/hapuskartul/<?=$kartul['Num'];?>"
+                                    onclick="return confirm('Apakah anda yakin akan menghapus data karya tulis?')"
+                                    class="btn btn-danger"> <i class="fas fa-trash"></i>
+                                    Hapus</a>
+                            </td>
                         </tr>
                         <?php 
                                     endforeach 

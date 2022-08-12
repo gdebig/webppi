@@ -98,7 +98,7 @@
                         <select id="Duration" name="Duration" class="form-control">
                             <option value="smp3">1 - 3 tahun</option>
                             <option value="smp7">4 - 7 tahun</option>
-                            <option value="smpe10">8 - 10 tahun</option>
+                            <option value="smp10">8 - 10 tahun</option>
                             <option value="lbh10">> dari 10 tahun</option>
                         </select>
                     </div>

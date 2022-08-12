@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\CapesKartulModel;
+use App\Libraries\Slug;
 
 class Userfair51 extends BaseController
 {
@@ -25,7 +26,7 @@ class Userfair51 extends BaseController
         helper(['tanggal']);
         $model = new CapesKartulModel();
         $data['capeslogged_in'] = $session->get('capeslogged_in');
-        $kartul = $model->where('user_id', $id)->orderby('Year','DESC')->findall();
+        $kartul = $model->where('user_id', $user_id)->orderby('Year','DESC')->findall();
         if (!empty($kartul)){
             $data['data_kartul'] = $kartul;
         }else{
@@ -37,5 +38,399 @@ class Userfair51 extends BaseController
         $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Karya Tulis</li>';
         $data['logged_in'] = $session->get('logged_in');
         return view('maintemp/fairdok51', $data);
+    }
+
+    public function tambahkartul(){
+        $session = session();
+        $logged_in = $session->get('logged_in');
+        $ispeserta = $session->get('ispeserta');
+        if ((!$logged_in)&&(!$ispeserta)){
+            return redirect()->to('/home');
+        }else{
+            $session->set('role', 'peserta');
+        }
+
+        $data['title_page'] = "V.1. Karya Tulis di Bidang Keinsinyuran yang Dipublikasikan (W4)";
+        $data['data_bread'] = '';
+        $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Tambah Karya Tulis</li>';
+        $data['logged_in'] = $session->get('logged_in');
+        return view('maintemp/tambahkartul', $data);
+    }
+
+    public function tambahkartulproses(){
+        $session = session();
+        $slug = new Slug();
+        $logged_in = $session->get('logged_in');
+        $ispeserta = $session->get('ispeserta');
+        if ((!$logged_in)&&(!$ispeserta)){
+            return redirect()->to('/home');
+        }else{
+            $session->set('role', 'peserta');
+        }
+        $model = new CapesKartulModel();
+        $user_id = $session->get('user_id');
+
+        $button=$this->request->getVar('submit');
+        
+        if ($button=="batal"){
+            return redirect()->to('/userfair51/docs');
+        }else{
+            helper(['form', 'url']);
+
+            $formvalid = $this->validate([
+                'Name' => [
+                    'label'  => 'Name',
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => 'Field Judul Karya Tulis harus diisi.',
+                    ],
+                ],
+                'Media' => [
+                    'label'  => 'Media',
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => 'Field Nama Media Publikasi harus diisi.',
+                    ],
+                ],
+                'LocCity' => [
+                    'label'  => 'LocCity',
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => 'Field Kota Lokasi Media harus diisi.',
+                    ],
+                ],
+                'LocCountry' => [
+                    'label'  => 'LocCountry',
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => 'Field Negara Lokasi Media harus diisi.',
+                    ],
+                ],
+                'Month' => [
+                    'label'  => 'Month',
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => 'Field Bulan harus diisi.',
+                    ],
+                ],
+                'Year' => [
+                    'label'  => 'Year',
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => 'Field Tahun harus diisi.',
+                    ],
+                ],
+                'Mediatype' => [
+                    'label'  => 'Mediatype',
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => 'Field Media Publikasi Tingkat harus diisi.',
+                    ],
+                ],
+                'Diffbenefit' => [
+                    'label'  => 'Diffbenefit',
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => 'Field Tingkat Kesulitan dan Manfaat harus diisi.',
+                    ],
+                ],
+                'Desc' => [
+                    'label'  => 'Desc',
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => 'Field Uraian Singkat harus diisi.',
+                    ],
+                ],
+                'File' => [
+                    'rules'  => 'ext_in[File,jpg,jpeg,png,pdf]|max_size[File, 700]',
+                    'errors' => [
+                        'ext_in' => "Hanya menerima file PDF, JPG, JPEG atau PNG",
+                        'max_size' => "Ukuran File Maksimal 700KB"
+                    ],
+                ]
+            ]);
+
+            if ($formvalid){
+                $Name = $this->request->getVar('Name');
+                $Media = $this->request->getVar('Media');
+                $LocCity = $this->request->getVar('LocCity');
+                $LocCountry = $this->request->getVar('LocCountry');
+                $Bulan = $this->request->getVar('Month');
+                $Tahun = $this->request->getVar('Year');
+                $Mediatype = $this->request->getVar('Mediatype');
+                $Diffbenefit = $this->request->getVar('Diffbenefit');
+                $Desc = $this->request->getVar('Desc');
+                $File = $this->request->getFile('File');
+                
+                $mediakartul = $slug->slugify($Media);
+                $ext = $File->getClientExtension();
+                if (!empty($ext)){
+                    $random = bin2hex(random_bytes(4));
+                    $filename = $user_id.'_karyatulis_'.$mediakartul.'_'.$random.'.'.$ext;
+                    $File->move('uploads/docs/',$filename,true);
+                }else{
+                    $filename="";
+                }
+    
+                $data = array(
+                    'user_id' => $user_id,
+                    'Name' => $Name,
+                    'Media' => $Media,
+                    'LocCity' => $LocCity,
+                    'LocCountry' => $LocCountry,
+                    'Year' => $Tahun,
+                    'Month' => $Bulan,
+                    'Mediatype' => $Mediatype,
+                    'Diffbenefit' => $Diffbenefit,
+                    'Desc' => $Desc,
+                    'File' => $filename,
+                    'date_created' => date('Y-m-d'),
+                    'date_modified' => date('Y-m-d')
+                );
+    
+                $model->save($data);
+                $session->setFlashdata('msg', 'Data Karya Tulis berhasil ditambah.');
+    
+                return redirect()->to('/userfair51/docs');
+            }else{
+
+                $data['title_page'] = "V.1. Karya Tulis di Bidang Keinsinyuran yang Dipublikasikan (W4)";
+                $data['data_bread'] = '';
+                $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Tambah Karya Tulis</li>';
+                $data['logged_in'] = $session->get('logged_in');
+                $data['validation'] = $this->validator;
+                return view('maintemp/tambahkartulvalid', $data);
+            }
+        }
+    }
+
+    public function hapuskartul($id){
+        $session = session();
+        $logged_in = $session->get('logged_in');
+        $ispeserta = $session->get('ispeserta');
+        if ((!$logged_in)&&(!$ispeserta)){
+            return redirect()->to('/home');
+        }else{
+            $session->set('role', 'peserta');
+        }
+        $model = new CapesKartulModel();
+
+        $kartul = $model->find($id);
+        $path = './uploads/docs/'.$kartul['File'];
+        if (is_file($path)){
+            unlink($path);
+        }
+        $model->delete($id);
+        $session->setFlashdata('msg', 'Data Karya Tulis berhasil dihapus.');
+
+        return redirect()->to('/userfair51/docs');   
+    }
+
+    public function ubahkartul($id){
+        $session = session();
+        $logged_in = $session->get('logged_in');
+        $ispeserta = $session->get('ispeserta');
+        if ((!$logged_in)&&(!$ispeserta)){
+            return redirect()->to('/home');
+        }else{
+            $session->set('role', 'peserta');
+        }
+        $model = new CapesKartulModel();
+        $kartul = $model->where('Num', $id)->first();
+        if ($kartul){
+            $data = [
+                'Num' => $kartul['Num'],
+                'user_id' => $kartul['user_id'],
+                'Name' => $kartul['Name'],
+                'Media' => $kartul['Media'],
+                'LocCity' => $kartul['LocCity'],
+                'LocCountry' => $kartul['LocCountry'],
+                'Year' => $kartul['Year'],
+                'Month' => $kartul['Month'],
+                'Mediatype' => $kartul['Mediatype'],
+                'Diffbenefit' => $kartul['Diffbenefit'],
+                'Desc' => $kartul['Desc'],
+                'File' => $kartul['File']
+            ];
+        }
+
+        $data['title_page'] = "V.1. Karya Tulis di Bidang Keinsinyuran yang Dipublikasikan (W4)";
+        $data['data_bread'] = '';
+        $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Ubah Karya Tulis</li>';
+        $data['logged_in'] = $session->get('logged_in');
+        return view('maintemp/ubahkartul', $data);
+    }
+
+    public function ubahkartulproses(){
+        $session = session();
+        $slug = new Slug();
+        $logged_in = $session->get('logged_in');
+        $ispeserta = $session->get('ispeserta');
+        if ((!$logged_in)&&(!$ispeserta)){
+            return redirect()->to('/home');
+        }else{
+            $session->set('role', 'peserta');
+        }
+        $model = new CapesKartulModel();
+        $Num = $this->request->getVar('Num');
+        $user_id = $session->get('user_id');
+
+        $button=$this->request->getVar('submit');
+        
+        if ($button=="batal"){
+            return redirect()->to('/userfair51/docs');
+        }else{
+            helper(['form', 'url']);
+
+            $formvalid = $this->validate([
+                'Name' => [
+                    'label'  => 'Name',
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => 'Field Judul Karya Tulis harus diisi.',
+                    ],
+                ],
+                'Media' => [
+                    'label'  => 'Media',
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => 'Field Nama Media Publikasi harus diisi.',
+                    ],
+                ],
+                'LocCity' => [
+                    'label'  => 'LocCity',
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => 'Field Kota Lokasi Media harus diisi.',
+                    ],
+                ],
+                'LocCountry' => [
+                    'label'  => 'LocCountry',
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => 'Field Negara Lokasi Media harus diisi.',
+                    ],
+                ],
+                'Month' => [
+                    'label'  => 'Month',
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => 'Field Bulan harus diisi.',
+                    ],
+                ],
+                'Year' => [
+                    'label'  => 'Year',
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => 'Field Tahun harus diisi.',
+                    ],
+                ],
+                'Mediatype' => [
+                    'label'  => 'Mediatype',
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => 'Field Media Publikasi Tingkat harus diisi.',
+                    ],
+                ],
+                'Diffbenefit' => [
+                    'label'  => 'Diffbenefit',
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => 'Field Tingkat Kesulitan dan Manfaat harus diisi.',
+                    ],
+                ],
+                'Desc' => [
+                    'label'  => 'Desc',
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => 'Field Uraian Singkat harus diisi.',
+                    ],
+                ],
+                'File' => [
+                    'rules'  => 'ext_in[File,jpg,jpeg,png,pdf]|max_size[File, 700]',
+                    'errors' => [
+                        'ext_in' => "Hanya menerima file PDF, JPG, JPEG atau PNG",
+                        'max_size' => "Ukuran File Maksimal 700KB"
+                    ],
+                ]
+            ]);
+
+            if ($formvalid){
+                $filename = $this->request->getVar('File');
+                $Name = $this->request->getVar('Name');
+                $Media = $this->request->getVar('Media');
+                $LocCity = $this->request->getVar('LocCity');
+                $LocCountry = $this->request->getVar('LocCountry');
+                $Bulan = $this->request->getVar('Month');
+                $Tahun = $this->request->getVar('Year');
+                $Mediatype = $this->request->getVar('Mediatype');
+                $Diffbenefit = $this->request->getVar('Diffbenefit');
+                $Desc = $this->request->getVar('Desc');
+                $File = $this->request->getFile('File');
+
+                $mediakartul = $slug->slugify($Media);
+                $ext = $File->getClientExtension();
+                if ((empty($filename))&&(!empty($ext))){
+                    $random = bin2hex(random_bytes(4));
+                    $filenamenew = $user_id.'_karyatulis_'.$mediakartul.'_'.$random.'.'.$ext;
+                    $File->move('uploads/docs/',$filenamenew,true);
+                } elseif ((!empty($filename))&&(!empty($ext))){
+                    $oldext = substr($filename,-4);
+                    if ($oldext == $ext){
+                        $File->move('uploads/docs/',$filename,true);
+                        $filenamenew = $filename;
+                    }else{
+                        $random = bin2hex(random_bytes(4));
+                        $filenamenew = $user_id.'_karyatulis_'.str_replace(' ','',$Media).'_'.$random.'.'.$ext;
+                        $File->move('uploads/docs/',$filenamenew,true);
+                    }
+                }else{
+                    $filenamenew=$filename;
+                }
+    
+                $data = array(
+                    'Name' => $Name,
+                    'Media' => $Media,
+                    'LocCity' => $LocCity,
+                    'LocCountry' => $LocCountry,
+                    'Year' => $Tahun,
+                    'Month' => $Bulan,
+                    'Mediatype' => $Mediatype,
+                    'Diffbenefit' => $Diffbenefit,
+                    'Desc' => $Desc,
+                    'File' => $filenamenew,
+                    'date_modified' => date('Y-m-d')
+                );
+
+                $model->update($Num, $data);
+                $session->setFlashdata('msg', 'Data Karya Tulis berhasil diubah.');
+    
+                return redirect()->to('/userfair51/docs');
+            }else{
+                $kartul = $model->where('Num', $Num)->first();
+                if ($kartul){
+                    $data = [
+                        'Num' => $kartul['Num'],
+                        'Name' => $kartul['Name'],
+                        'Media' => $kartul['Media'],
+                        'LocCity' => $kartul['LocCity'],
+                        'LocCountry' => $kartul['LocCountry'],
+                        'Year' => $kartul['Year'],
+                        'Month' => $kartul['Month'],
+                        'Mediatype' => $kartul['Mediatype'],
+                        'Diffbenefit' => $kartul['Diffbenefit'],
+                        'Desc' => $kartul['Desc'],
+                        'File' => $kartul['File']
+                    ];
+                }
+
+                $data['title_page'] = "V.1. Karya Tulis di Bidang Keinsinyuran yang Dipublikasikan (W4)";
+                $data['data_bread'] = '';
+                $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Ubah Karya Tulis</li>';
+                $data['logged_in'] = $session->get('logged_in');
+                $data['validation'] = $this->validator;
+                return view('maintemp/ubahkartul', $data);
+            }
+        }        
     }
 }

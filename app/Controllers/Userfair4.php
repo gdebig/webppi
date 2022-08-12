@@ -2,10 +2,10 @@
 
 namespace App\Controllers;
 
-use App\Models\CapesKualifikasiModel;
+use App\Models\MengajarModel;
 use App\Libraries\Slug;
 
-class Userfair3 extends BaseController
+class Userfair4 extends BaseController
 {
     public function docs($id = false)
     {
@@ -24,23 +24,23 @@ class Userfair3 extends BaseController
             $user_id = $session->get('user_id');
         }
         helper(['tanggal']);
-        $model = new CapesKualifikasiModel();
+        $model = new MengajarModel();
         $data['capeslogged_in'] = $session->get('capeslogged_in');
-        $kerja = $model->where('user_id', $user_id)->orderby('ProjValue','DESC')->findall();
+        $kerja = $model->where('user_id', $user_id)->orderby('StartPeriod','DESC')->findall();
         if (!empty($kerja)){
             $data['data_kerja'] = $kerja;
         }else{
             $data['data_kerja'] = 'kosong';
         }
 
-        $data['title_page'] = "III. KUALIFIKASI PROFESIONAL (W2,W3,W4,P6,P7,P8,P9,P10,P11)";
+        $data['title_page'] = "IV. Pengalaman Mengajar Pelajaran Keinsinyuran dan/atau Manajemen dan/atau Pengalaman Mengembangkan Pendidikan/Pelatihan Keinsinyuran dan/atau Manajemen (W2,W3,W4,P5)";
         $data['data_bread'] = '';
-        $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Kualifikasi Profesional</li>';
+        $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Pengalaman Mengajar</li>';
         $data['logged_in'] = $session->get('logged_in');
-        return view('maintemp/fairdok3', $data);
+        return view('maintemp/fairdok4', $data);
     }
 
-    public function tambahkerja(){
+    public function tambahajar(){
         $session = session();
         $logged_in = $session->get('logged_in');
         $ispeserta = $session->get('ispeserta');
@@ -50,14 +50,14 @@ class Userfair3 extends BaseController
             $session->set('role', 'peserta');
         }
 
-        $data['title_page'] = "III. KUALIFIKASI PROFESIONAL (W2,W3,W4,P6,P7,P8,P9,P10,P11)";
+        $data['title_page'] = "IV. Pengalaman Mengajar Pelajaran Keinsinyuran dan/atau Manajemen dan/atau Pengalaman Mengembangkan Pendidikan/Pelatihan Keinsinyuran dan/atau Manajemen (W2,W3,W4,P5)";
         $data['data_bread'] = '';
-        $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Tambah Kualifikasi Profesional</li>';
+        $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Tambah Pengalaman Mengajar</li>';
         $data['logged_in'] = $session->get('logged_in');
-        return view('maintemp/tambahkerja', $data);
+        return view('maintemp/tambahajar', $data);
     }
 
-    public function tambahkerjaproses(){
+    public function tambahajarproses(){
         $slug = new Slug();
         $session = session();
         $logged_in = $session->get('logged_in');
@@ -67,36 +67,43 @@ class Userfair3 extends BaseController
         }else{
             $session->set('role', 'peserta');
         }
-        $model = new CapesKualifikasiModel();
+        $model = new MengajarModel();
         $user_id = $session->get('user_id');
 
         $button=$this->request->getVar('submit');
         
         if ($button=="batal"){
-            return redirect()->to('/userfair3/docs');
+            return redirect()->to('/userfair4/docs');
         }else{
             helper(['form', 'url']);
 
             $formvalid = $this->validate([
-                'startdate' => [
-                    'label'  => 'startdate',
+                'StartPeriod' => [
+                    'label'  => 'Tahun Mulai',
                     'rules'  => 'required',
                     'errors' => [
-                        'required' => 'Field Tanggal Mulai Kerja harus diisi.',
+                        'required' => 'Field Tahun Mulai harus diisi.',
                     ],
                 ],
-                'NameInstance' => [
-                    'label'  => 'NameInstance',
+                'EndPeriod' => [
+                    'label'  => 'Tahun Selesai',
                     'rules'  => 'required',
                     'errors' => [
-                        'required' => 'Field Nama Instansi / Perusahaan harus diisi.',
+                        'required' => 'Field Tahun Selesai harus diisi.',
                     ],
                 ],
-                'Position' => [
-                    'label'  => 'Position',
+                'Institution' => [
+                    'label'  => 'Nama Perguruan Tinggi / Lembaga',
                     'rules'  => 'required',
                     'errors' => [
-                        'required' => 'Field Jabatan/Tugas harus diisi.',
+                        'required' => 'Field Nama Perguruan Tinggi / Lembaga harus diisi.',
+                    ],
+                ],
+                'Name' => [
+                    'label'  => 'Nama Mata Ajaran',
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => 'Field Nama Mata Ajaran harus diisi.',
                     ],
                 ],
                 'LocCity' => [
@@ -120,6 +127,34 @@ class Userfair3 extends BaseController
                         'required' => 'Field Negara harus diisi.',
                     ],
                 ],
+                'Period' => [
+                    'label' => 'Perioda',
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => 'Field Perioad harus diisi.',
+                    ],
+                ],
+                'Position' => [
+                    'label' => 'Jabatan pada Perguruan Tinggi / Lembaga',
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => 'Field jabatan harus diisi.',
+                    ],
+                ],
+                'Skshour' => [
+                    'label' => 'Jumlah Jam atau S.K.S',
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => 'Field jumlah jam harus diisi.',
+                    ],
+                ],
+                'Desc' => [
+                    'label' => 'Uraian Singkat',
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => 'Field uraian singkat harus diisi.',
+                    ],
+                ],
                 'File' => [
                     'rules'  => 'ext_in[File,jpg,jpeg,png,pdf]|max_size[File, 700]',
                     'errors' => [
@@ -130,36 +165,24 @@ class Userfair3 extends BaseController
             ]);
 
             if ($formvalid){
-                $startdate = $this->request->getVar('startdate');
-                $masihkerja = $this->request->getVar('masihkerja');
-                if ((isset($masihkerja))&&$masihkerja=="masihkerja"){
-                    $enddate="";
-                }else{
-                    $enddate = $this->request->getVar('enddate');
-                }
-                $NameInstance = $this->request->getVar('NameInstance');
-                $Position = $this->request->getVar('Position');
+                $StartPeriod = $this->request->getVar('StartPeriod');
+                $EndPeriod = $this->request->getVar('EndPeriod');
+                $Institution = $this->request->getVar('Institution');
                 $Name = $this->request->getVar('Name');
-                $Giver = $this->request->getVar('Giver');
                 $LocCity = $this->request->getVar('LocCity');
                 $LocProv = $this->request->getVar('LocProv');
                 $LocCountry = $this->request->getVar('LocCountry');
-                $Duration = $this->request->getVar('Duration');
-                $Jabatan = $this->request->getVar('Jabatan');
-                $ProjValue = $this->request->getVar('ProjValue');
-                $RspnValue = $this->request->getVar('RspnValue');
-                $Hresource = $this->request->getVar('Hresource');
-                $Diff = $this->request->getVar('Diff');
-                $Scale = $this->request->getVar('Scale');
+                $Period = $this->request->getVar('Period');
+                $Position = $this->request->getVar('Position');
+                $Skshour = $this->request->getVar('Skshour');
                 $Desc = $this->request->getVar('Desc');
                 $File = $this->request->getFile('File');
                 
                 $ext = $File->getClientExtension();
                 if (!empty($ext)){
-                    $namainstansi = $slug->slugify($NameInstance);
-                    $posisi = $slug->slugify($Position);
-                    $filename = $user_id.'_pengkerja_'.$namainstansi.'_'.$posisi.'.'.$ext;
-                    echo $filename;
+                    $namainstansi = $slug->slugify($Institution);
+                    $namamk = $slug->slugify($Name);
+                    $filename = $user_id.'_pengajar_'.$namainstansi.'_'.$namamk.'.'.$ext;
                     $File->move('uploads/docs/',$filename,true);
                 }else{
                     $filename="";
@@ -167,22 +190,16 @@ class Userfair3 extends BaseController
     
                 $data = array(
                     'user_id' => $user_id,
-                    'StartDate' => $startdate,
-                    'EndDate' => $enddate,
-                    'NameInstance' => $NameInstance,
-                    'Position' => $Position,
+                    'Institution' => $Institution,
                     'Name' => $Name,
-                    'Giver' => $Giver,
                     'LocCity' => $LocCity,
                     'LocProv' => $LocProv,
                     'LocCountry' => $LocCountry,
-                    'Duration' => $Duration,
-                    'Jabatan' => $Jabatan,
-                    'ProjValue' => $ProjValue,
-                    'RspnValue' => $RspnValue,
-                    'Hresource' => $Hresource,
-                    'Diff' => $Diff,
-                    'Scale' => $Scale,
+                    'Period' => $Period,
+                    'StartPeriod' => $StartPeriod,
+                    'EndPeriod' => $EndPeriod,
+                    'Position' => $Position,
+                    'Skshour' => $Skshour,
                     'Desc' => $Desc,
                     'File' => $filename,
                     'date_created' => date('Y-m-d'),
@@ -190,22 +207,22 @@ class Userfair3 extends BaseController
                 );
     
                 $model->save($data);
-                $session->setFlashdata('msg', 'Data kualifikasi profesional berhasil ditambah.');
+                $session->setFlashdata('msg', 'Data pengalaman mengajar berhasil ditambah.');
     
-                return redirect()->to('/userfair3/docs');
+                return redirect()->to('/userfair4/docs');
             }else{
 
-                $data['title_page'] = "III. KUALIFIKASI PROFESIONAL (W2,W3,W4,P6,P7,P8,P9,P10,P11)";
+                $data['title_page'] = "IV. Pengalaman Mengajar Pelajaran Keinsinyuran dan/atau Manajemen dan/atau Pengalaman Mengembangkan Pendidikan/Pelatihan Keinsinyuran dan/atau Manajemen (W2,W3,W4,P5)";
                 $data['data_bread'] = '';
-                $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Tambah Kualifikasi Profesional</li>';
+                $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Tambah Pengalaman Mengajar</li>';
                 $data['logged_in'] = $session->get('logged_in');
                 $data['validation'] = $this->validator;
-                return view('maintemp/tambahkerjavalid', $data);
+                return view('maintemp/tambahajarvalid', $data);
             }
         }
     }
 
-    public function hapuskerja($id){
+    public function hapusajar($id){
         $session = session();
         $logged_in = $session->get('logged_in');
         $ispeserta = $session->get('ispeserta');
@@ -214,7 +231,7 @@ class Userfair3 extends BaseController
         }else{
             $session->set('role', 'peserta');
         }
-        $model = new CapesKualifikasiModel();
+        $model = new MengajarModel();
 
         $pengkerja = $model->find($id);
         $path = './uploads/docs/'.$pengkerja['File'];
@@ -224,10 +241,10 @@ class Userfair3 extends BaseController
         $model->delete($id);
         $session->setFlashdata('msg', 'Data kualifikasi profesional berhasil dihapus.');
 
-        return redirect()->to('/userfair3/docs');   
+        return redirect()->to('/userfair4/docs');   
     }
 
-    public function ubahkerja($id){
+    public function ubahajar($id){
         $session = session();
         $logged_in = $session->get('logged_in');
         $ispeserta = $session->get('ispeserta');
@@ -236,49 +253,35 @@ class Userfair3 extends BaseController
         }else{
             $session->set('role', 'peserta');
         }
-        $model = new CapesKualifikasiModel();
+        $model = new MengajarModel();
         $kerja = $model->where('Num', $id)->first();
         if ($kerja){
-            if ($kerja['EndDate']=="0000-00-00"){
-                $masihkerja = "checked";
-                $enddate = "";
-            }else{
-                $masihkerja = "";
-                $enddate = $kerja['EndDate'];
-            }
             $data = [
                 'Num' => $kerja['Num'],
                 'user_id' => $kerja['user_id'],
-                'StartDate' => $kerja['StartDate'],
-                'masihkerja' => $masihkerja,
-                'EndDate' => $enddate,
-                'NameInstance' => $kerja['NameInstance'],
-                'Position' => $kerja['Position'],
+                'Institution' => $kerja['Institution'],
                 'Name' => $kerja['Name'],
-                'Giver' => $kerja['Giver'],
                 'LocCity' => $kerja['LocCity'],
                 'LocProv' => $kerja['LocProv'],
                 'LocCountry' => $kerja['LocCountry'],
-                'Duration' => $kerja['Duration'],
-                'Jabatan' => $kerja['Jabatan'],
-                'ProjValue' => $kerja['ProjValue'],
-                'RspnValue' => $kerja['RspnValue'],
-                'Hresource' => $kerja['Hresource'],
-                'Diff' => $kerja['Diff'],
-                'Scale' => $kerja['Scale'],
+                'Period' => $kerja['Period'],
+                'StartPeriod' => $kerja['StartPeriod'],
+                'EndPeriod' => $kerja['EndPeriod'],
+                'Position' => $kerja['Position'],
+                'Skshour' => $kerja['Skshour'],
                 'Desc' => $kerja['Desc'],
                 'File' => $kerja['File']
             ];
         }
 
-        $data['title_page'] = "III. KUALIFIKASI PROFESIONAL (W2,W3,W4,P6,P7,P8,P9,P10,P11)";
+        $data['title_page'] = "IV. Pengalaman Mengajar Pelajaran Keinsinyuran dan/atau Manajemen dan/atau Pengalaman Mengembangkan Pendidikan/Pelatihan Keinsinyuran dan/atau Manajemen (W2,W3,W4,P5)";
         $data['data_bread'] = '';
-        $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Ubah Kualifikasi Profesional</li>';
+        $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Ubah Pengalaman Mengajar</li>';
         $data['logged_in'] = $session->get('logged_in');
-        return view('maintemp/ubahkerja', $data);
+        return view('maintemp/ubahajar', $data);
     }
 
-    public function ubahkerjaproses(){
+    public function ubahajarproses(){
         $session = session();
         $slug = new Slug();
         $logged_in = $session->get('logged_in');
@@ -288,37 +291,44 @@ class Userfair3 extends BaseController
         }else{
             $session->set('role', 'peserta');
         }
-        $model = new CapesKualifikasiModel();
+        $model = new MengajarModel();
         $Num = $this->request->getVar('Num');
         $user_id = $session->get('user_id');
 
         $button=$this->request->getVar('submit');
         
         if ($button=="batal"){
-            return redirect()->to('/userfair3/docs');
+            return redirect()->to('/userfair4/docs');
         }else{
             helper(['form', 'url']);
 
             $formvalid = $this->validate([
-                'startdate' => [
-                    'label'  => 'startdate',
+                'StartPeriod' => [
+                    'label'  => 'Tahun Mulai',
                     'rules'  => 'required',
                     'errors' => [
-                        'required' => 'Field Tanggal Mulai Kerja harus diisi.',
+                        'required' => 'Field Tahun Mulai harus diisi.',
                     ],
                 ],
-                'NameInstance' => [
-                    'label'  => 'NameInstance',
+                'EndPeriod' => [
+                    'label'  => 'Tahun Selesai',
                     'rules'  => 'required',
                     'errors' => [
-                        'required' => 'Field Nama Instansi / Perusahaan harus diisi.',
+                        'required' => 'Field Tahun Selesai harus diisi.',
                     ],
                 ],
-                'Position' => [
-                    'label'  => 'Position',
+                'Institution' => [
+                    'label'  => 'Nama Perguruan Tinggi / Lembaga',
                     'rules'  => 'required',
                     'errors' => [
-                        'required' => 'Field Jabatan/Tugas harus diisi.',
+                        'required' => 'Field Nama Perguruan Tinggi / Lembaga harus diisi.',
+                    ],
+                ],
+                'Name' => [
+                    'label'  => 'Nama Mata Ajaran',
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => 'Field Nama Mata Ajaran harus diisi.',
                     ],
                 ],
                 'LocCity' => [
@@ -342,6 +352,34 @@ class Userfair3 extends BaseController
                         'required' => 'Field Negara harus diisi.',
                     ],
                 ],
+                'Period' => [
+                    'label' => 'Perioda',
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => 'Field Perioad harus diisi.',
+                    ],
+                ],
+                'Position' => [
+                    'label' => 'Jabatan pada Perguruan Tinggi / Lembaga',
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => 'Field jabatan harus diisi.',
+                    ],
+                ],
+                'Skshour' => [
+                    'label' => 'Jumlah Jam atau S.K.S',
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => 'Field jumlah jam harus diisi.',
+                    ],
+                ],
+                'Desc' => [
+                    'label' => 'Uraian Singkat',
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => 'Field uraian singkat harus diisi.',
+                    ],
+                ],
                 'File' => [
                     'rules'  => 'ext_in[File,jpg,jpeg,png,pdf]|max_size[File, 700]',
                     'errors' => [
@@ -352,36 +390,25 @@ class Userfair3 extends BaseController
             ]);
 
             if ($formvalid){
-                $filename = $this->request->getVar('filename');
-                $startdate = $this->request->getVar('startdate');
-                $masihkerja = $this->request->getVar('masihkerja');
-                if ((isset($masihkerja))&&$masihkerja=="masihkerja"){
-                    $enddate="";
-                }else{
-                    $enddate = $this->request->getVar('enddate');
-                }
-                $NameInstance = $this->request->getVar('NameInstance');
-                $Position = $this->request->getVar('Position');
+                $filename = $this->request->getVar('File');
+                $StartPeriod = $this->request->getVar('StartPeriod');
+                $EndPeriod = $this->request->getVar('EndPeriod');
+                $Institution = $this->request->getVar('Institution');
                 $Name = $this->request->getVar('Name');
-                $Giver = $this->request->getVar('Giver');
                 $LocCity = $this->request->getVar('LocCity');
                 $LocProv = $this->request->getVar('LocProv');
                 $LocCountry = $this->request->getVar('LocCountry');
-                $Duration = $this->request->getVar('Duration');
-                $Jabatan = $this->request->getVar('Jabatan');
-                $ProjValue = $this->request->getVar('ProjValue');
-                $RspnValue = $this->request->getVar('RspnValue');
-                $Hresource = $this->request->getVar('Hresource');
-                $Diff = $this->request->getVar('Diff');
-                $Scale = $this->request->getVar('Scale');
+                $Period = $this->request->getVar('Period');
+                $Position = $this->request->getVar('Position');
+                $Skshour = $this->request->getVar('Skshour');
                 $Desc = $this->request->getVar('Desc');
                 $File = $this->request->getFile('File');
 
-                $namainstansi = $slug->slugify($NameInstance);
-                $posisi = $slug->slugify($Position);
+                $namainstansi = $slug->slugify($Institution);
+                $namamk = $slug->slugify($Name);
                 $ext = $File->getClientExtension();
-                if ((empty($filename))&&(!empty($ext))){
-                    $filenamenew = $user_id.'_pengkerja_'.$namainstansi.'_'.$posisi.'.'.$ext;
+                if ((empty($filename))&&(!empty($ext))){   
+                    $filenamenew = $user_id.'_pengajar_'.$namainstansi.'_'.$namamk.'.'.$ext;
                     $File->move('uploads/docs/',$filenamenew,true);
                 } elseif ((!empty($filename))&&(!empty($ext))){
                     $oldext = substr($filename,-4);
@@ -389,7 +416,7 @@ class Userfair3 extends BaseController
                         $File->move('uploads/docs/',$filename,true);
                         $filenamenew = $filename;
                     }else{
-                        $filenamenew = $user_id.'_pengkerja_'.$namainstansi.'_'.$posisi.'.'.$ext;
+                        $filenamenew = $user_id.'_pengajar_'.$namainstansi.'_'.$namamk.'.'.$ext;
                         $File->move('uploads/docs/',$filenamenew,true);
                     }
                 }else{
@@ -397,23 +424,16 @@ class Userfair3 extends BaseController
                 }
     
                 $data = array(
-                    'StartDate' => $startdate,
-                    'masihkerja' => $masihkerja,
-                    'EndDate' => $enddate,
-                    'NameInstance' => $NameInstance,
-                    'Position' => $Position,
+                    'Institution' => $Institution,
                     'Name' => $Name,
-                    'Giver' => $Giver,
                     'LocCity' => $LocCity,
                     'LocProv' => $LocProv,
                     'LocCountry' => $LocCountry,
-                    'Duration' => $Duration,
-                    'Jabatan' => $Jabatan,
-                    'ProjValue' => $ProjValue,
-                    'RspnValue' => $RspnValue,
-                    'Hresource' => $Hresource,
-                    'Diff' => $Diff,
-                    'Scale' => $Scale,
+                    'Period' => $Period,
+                    'StartPeriod' => $StartPeriod,
+                    'EndPeriod' => $EndPeriod,
+                    'Position' => $Position,
+                    'Skshour' => $Skshour,
                     'Desc' => $Desc,
                     'File' => $filenamenew,
                     'date_modified' => date('Y-m-d')
@@ -422,47 +442,33 @@ class Userfair3 extends BaseController
                 $model->update($Num, $data);
                 $session->setFlashdata('msg', 'Data kualifikasi profesional berhasil diubah.');
     
-                return redirect()->to('/userfair3/docs');
+                return redirect()->to('/userfair4/docs');
             }else{
                 $session = session();
-                $model = new CapesKualifikasiModel();
+                $model = new MengajarModel();
                 $kerja = $model->where('Num', $Num)->first();
                 if ($kerja){
-                    if ($kerja['EndDate']=="0000-00-00"){
-                        $masihkerja = "checked";
-                        $enddate = "";
-                    }else{
-                        $masihkerja = "";
-                        $enddate = $kerja['EndDate'];
-                    }
                     $data = [
                         'Num' => $kerja['Num'],
                         'user_id' => $kerja['user_id'],
-                        'StartDate' => $kerja['StartDate'],
-                        'masihkerja' => $masihkerja,
-                        'EndDate' => $enddate,
-                        'NameInstance' => $kerja['NameInstance'],
-                        'Position' => $kerja['Position'],
+                        'Institution' => $kerja['Institution'],
                         'Name' => $kerja['Name'],
-                        'Giver' => $kerja['Giver'],
                         'LocCity' => $kerja['LocCity'],
                         'LocProv' => $kerja['LocProv'],
                         'LocCountry' => $kerja['LocCountry'],
-                        'Duration' => $kerja['Duration'],
-                        'Jabatan' => $kerja['Jabatan'],
-                        'ProjValue' => $kerja['ProjValue'],
-                        'RspnValue' => $kerja['RspnValue'],
-                        'Hresource' => $kerja['Hresource'],
-                        'Diff' => $kerja['Diff'],
-                        'Scale' => $kerja['Scale'],
+                        'Period' => $kerja['Period'],
+                        'StartPeriod' => $kerja['StartPeriod'],
+                        'EndPeriod' => $kerja['EndPeriod'],
+                        'Position' => $kerja['Position'],
+                        'Skshour' => $kerja['Skshour'],
                         'Desc' => $kerja['Desc'],
                         'File' => $kerja['File']
                     ];
                 }
 
-                $data['title_page'] = "III. KUALIFIKASI PROFESIONAL (W2,W3,W4,P6,P7,P8,P9,P10,P11)";
+                $data['title_page'] = "IV. Pengalaman Mengajar Pelajaran Keinsinyuran dan/atau Manajemen dan/atau Pengalaman Mengembangkan Pendidikan/Pelatihan Keinsinyuran dan/atau Manajemen (W2,W3,W4,P5)";
                 $data['data_bread'] = '';
-                $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Ubah Kualifikasi Profesional</li>';
+                $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Ubah Pengalaman Mengajar</li>';
                 $data['logged_in'] = $session->get('logged_in');
                 $data['validation'] = $this->validator;
                 return view('maintemp/ubahkerja', $data);
