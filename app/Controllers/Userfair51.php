@@ -356,7 +356,7 @@ class Userfair51 extends BaseController
             ]);
 
             if ($formvalid){
-                $filename = $this->request->getVar('File');
+                $filename = $this->request->getVar('filename');
                 $Name = $this->request->getVar('Name');
                 $Media = $this->request->getVar('Media');
                 $LocCity = $this->request->getVar('LocCity');

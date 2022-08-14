@@ -14,8 +14,8 @@
 
                 <div class="col">
                     <div class="row">
-                        <a href="<?php echo base_url();?>/userfair52/tambahseminar" class="btn btn-primary">Tambah
-                            Seminar</a>
+                        <a href="<?php echo base_url();?>/userfair52/tambahmakalah" class="btn btn-primary">Tambah
+                            Makalah</a>
                     </div>
                 </div>
 
@@ -28,9 +28,9 @@
                 <?php if(isset($data_sem)&&($data_sem=="kosong")){
                     ?>
 
-                <div class="alert alert-danger">Data seminar/lokakarya belum ada. <a
-                        href="<?= base_url();?>/userfair52/tambahseminar">Klik
-                        di sini untuk menambah data seminar/lokakarya</a></div>
+                <div class="alert alert-danger">Data makalah belum ada. <a
+                        href="<?= base_url();?>/userfair52/tambahmakalah">Klik
+                        di sini untuk menambah data makalah</a></div>
                 <?php }else{ ?>
 
                 <table id="tabledata" class="display table table-bordered table-hover">

@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\TugasAkhirModel;
+use App\Models\BimbingModel;
 
 class Tugasakhir extends BaseController
 {
@@ -19,11 +20,18 @@ class Tugasakhir extends BaseController
         $user_id = $session->get('user_id');
         $model = new TugasAkhirModel();
         $data['logged_in'] = $logged_in;
-        $ta = $model->where('tbl_tugasakhir.user_id', $user_id)->orderBy('tbl_tugasakhir.ta_id', 'DESC')->join('tbl_profile', 'tbl_profile.user_id = tbl_tugasakhir.ta_bimbing', 'left')->findall();
+        $ta = $model->where('tbl_tugasakhir.user_id', $user_id)->orderBy('tbl_tugasakhir.ta_id', 'DESC')->findall();
         if (!empty($ta)){
             $data['data_ta'] = $ta;
         }else{
             $data['data_ta'] = 'kosong';
+        }
+        $model1 = new BimbingModel();
+        $bimbing = $model1->where('tbl_bimbing.mhs_id', $user_id)->join('tbl_profile', 'tbl_profile.user_id = tbl_bimbing.dosen_id', 'left')->first();
+        if ($bimbing){
+            $data['dosen_bimbing'] = $bimbing['FullName'];
+        } else {
+            $data['dosen_bimbing'] = "Belum ada pembimbing";
         }
         $data['title_page'] = "Tugas Akhir PPI";
         $data['data_bread'] = "Tugas Akhir";

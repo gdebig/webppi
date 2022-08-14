@@ -390,7 +390,7 @@ class Userfair4 extends BaseController
             ]);
 
             if ($formvalid){
-                $filename = $this->request->getVar('File');
+                $filename = $this->request->getVar('filename');
                 $StartPeriod = $this->request->getVar('StartPeriod');
                 $EndPeriod = $this->request->getVar('EndPeriod');
                 $Institution = $this->request->getVar('Institution');

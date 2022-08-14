@@ -31,19 +31,4 @@ class Manpenilai extends BaseController
         $data['data_bread'] = "Penilai";
         return view('maintemp/penilai', $data);
     }
-
-    public function tambahanggota(){
-        $session = session();
-        $logged_in = $session->get('logged_in');
-        $issadmin = $session->get('issadmin');
-        if ((!$logged_in)&&($issadmin)){
-            return redirect()->to('/home');
-        }
-        $data['logged_in'] = $logged_in;
-        $data['title_page'] = "Tambah Data Anggota";
-        $data['data_bread'] = "Tambah Data Anggota";
-        $data['user_id'] = $user_id;
-        return view('maintemp/tambahanggota', $data);
-
-    }
 }

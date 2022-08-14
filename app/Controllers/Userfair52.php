@@ -26,7 +26,7 @@ class Userfair52 extends BaseController
         helper(['tanggal']);
         $model = new CapesSemModel();
         $data['capeslogged_in'] = $session->get('capeslogged_in');
-        $sem = $model->where('user_id', $user_id)->where('Type', 'Sem')->orderby('Year', 'DESC')->findall();
+        $sem = $model->where('user_id', $user_id)->where('Type', 'Mak')->orderby('Year', 'DESC')->findall();
         if (!empty($sem)){
             $data['data_sem'] = $sem;
         }else{
@@ -40,7 +40,7 @@ class Userfair52 extends BaseController
         return view('maintemp/fairdok52', $data);
     }
 
-    public function tambahseminar(){
+    public function tambahmakalah(){
         $session = session();
         $logged_in = $session->get('logged_in');
         $ispeserta = $session->get('ispeserta');
@@ -54,10 +54,10 @@ class Userfair52 extends BaseController
         $data['data_bread'] = '';
         $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Tambah Makalah</li>';
         $data['logged_in'] = $session->get('logged_in');
-        return view('maintemp/tambahseminar', $data);
+        return view('maintemp/tambahmakalah', $data);
     }
 
-    public function tambahsemproses(){
+    public function tambahmakproses(){
         $session = session();
         $slug = new Slug();
         $logged_in = $session->get('logged_in');
@@ -182,7 +182,7 @@ class Userfair52 extends BaseController
     
                 $data = array(
                     'user_id' => $user_id,
-                    'Type' => 'Sem',
+                    'Type' => 'Mak',
                     'PaperName' => $PaperName,
                     'Name' => $Name,
                     'Organizer' => $Organizer,
@@ -209,12 +209,12 @@ class Userfair52 extends BaseController
                 $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Tambah Makalah</li>';
                 $data['logged_in'] = $session->get('logged_in');
                 $data['validation'] = $this->validator;
-                return view('maintemp/tambahsemvalid', $data);
+                return view('maintemp/tambahmakvalid', $data);
             }
         }
     }
 
-    public function hapussem($id){
+    public function hapusmak($id){
         $session = session();
         $logged_in = $session->get('logged_in');
         $ispeserta = $session->get('ispeserta');
@@ -231,12 +231,12 @@ class Userfair52 extends BaseController
             unlink($path);
         }
         $model->delete($id);
-        $session->setFlashdata('msg', 'Data Seminar berhasil dihapus.');
+        $session->setFlashdata('msg', 'Data makalah berhasil dihapus.');
 
         return redirect()->to('/userfair52/docs');   
     }
 
-    public function ubahsem($id){
+    public function ubahmak($id){
         $session = session();
         $logged_in = $session->get('logged_in');
         $ispeserta = $session->get('ispeserta');
@@ -269,10 +269,10 @@ class Userfair52 extends BaseController
         $data['data_bread'] = '';
         $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Ubah Makalah</li>';
         $data['logged_in'] = $session->get('logged_in');
-        return view('maintemp/ubahsem', $data);
+        return view('maintemp/ubahmak', $data);
     }
 
-    public function ubahsemproses(){
+    public function ubahmakproses(){
         $session = session();
         $slug = new Slug();
         $logged_in = $session->get('logged_in');
@@ -374,7 +374,7 @@ class Userfair52 extends BaseController
             ]);
 
             if ($formvalid){
-                $filename = $this->request->getVar('File');
+                $filename = $this->request->getVar('filename');
                 $PaperName = $this->request->getVar('PaperName');
                 $Name = $this->request->getVar('Name');
                 $Organizer = $this->request->getVar('Organizer');
@@ -408,7 +408,7 @@ class Userfair52 extends BaseController
                 }
     
                 $data = array(
-                    'Type' => 'Sem',
+                    'Type' => 'Mak',
                     'PaperName' => $PaperName,
                     'Name' => $Name,
                     'Organizer' => $Organizer,
@@ -424,7 +424,7 @@ class Userfair52 extends BaseController
                 );
 
                 $model->update($Num, $data);
-                $session->setFlashdata('msg', 'Data Seminar berhasil diubah.');
+                $session->setFlashdata('msg', 'Data makalah berhasil diubah.');
     
                 return redirect()->to('/userfair52/docs');
             }else{
@@ -452,7 +452,7 @@ class Userfair52 extends BaseController
                 $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Ubah Makalah</li>';
                 $data['logged_in'] = $session->get('logged_in');
                 $data['validation'] = $this->validator;
-                return view('maintemp/ubahsem', $data);
+                return view('maintemp/ubahmak', $data);
             }
         }        
     }

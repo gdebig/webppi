@@ -1,7 +1,7 @@
 <li class="nav-item">
-    <a href="<?php echo base_url();?>/manpenilai" class="nav-link">
+    <a href="<?php echo base_url();?>/manbimbing" class="nav-link">
         <i class="fas fa-users nav-icon"></i>
-        <p>Daftar Peserta Yang Dinilai</p>
+        <p>Daftar Peserta Yang Dibimbing</p>
     </a>
 </li>
 <li class="nav-item">

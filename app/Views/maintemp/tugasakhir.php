@@ -27,6 +27,11 @@
                     </div>
                 </div>
 
+                <div class="col">
+                    <div class="row">
+                        <p>Dosen pembimbing: <?= $dosen_bimbing;?></p>
+                    </div>
+                </div>
                 <?php if(isset($data_ta)&&($data_ta=="kosong")){
                     ?>
 
@@ -41,7 +46,6 @@
                             <th>No</th>
                             <th>Judul TA</th>
                             <th>Term</th>
-                            <th>Pembimbing</th>
                             <th>Buku TA</th>
                             <th>Log</th>
                             <th>Aksi</th>
@@ -55,14 +59,7 @@
                         <tr>
                             <td><?php echo $i;$i++;?></td>
                             <td><?= $ta['ta_usuljudul'];?></td>
-                            <td><?= $ta['ta_tahun'].' / '.$ta['ta_semester'];?></td>
-                            <td><?php
-                            if (!empty($ta['FullName'])){
-                                echo $ta['FullName'];
-                            }else{
-                                echo "Pembimbing belum di assign.";
-                            }
-                            ?></td>
+                            <td><?= $ta['ta_tahun'].' - '.$ta['ta_semester'];?></td>
                             <td><?php
                             if (!empty($ta['ta_buku'])){
                                 echo "<a href='".base_url()."/uploads/docs/".$ta['ta_buku']."' target='_blank'>Buku TA</a>";

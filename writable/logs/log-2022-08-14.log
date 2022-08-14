@@ -1,0 +1,43 @@
+CRITICAL - 2022-08-14 09:29:14 --> The original file is not a valid file.
+#0 D:\wamp64\www\webppi\system\HTTP\Files\UploadedFile.php(137): CodeIgniter\HTTP\Exceptions\HTTPException::forInvalidFile()
+#1 D:\wamp64\www\webppi\app\Controllers\Tugasakhir.php(94): CodeIgniter\HTTP\Files\UploadedFile->move('uploads/docs/', '4_logta.pdf', true)
+#2 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Tugasakhir->tambahtaproses()
+#3 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Tugasakhir))
+#4 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#6 {main}
+ERROR - 2022-08-14 10:45:17 --> Unknown column 'tbl_bimbing.mhs_id' in 'where clause'
+CRITICAL - 2022-08-14 10:45:17 --> Unknown column 'tbl_bimbing.mhs_id' in 'where clause'
+#0 D:\wamp64\www\webppi\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT *\nFROM `...', 0)
+#1 D:\wamp64\www\webppi\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *\nFROM `...')
+#2 D:\wamp64\www\webppi\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *\nFROM `...')
+#3 D:\wamp64\www\webppi\system\Database\BaseBuilder.php(1455): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 D:\wamp64\www\webppi\system\Model.php(210): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\wamp64\www\webppi\system\BaseModel.php(622): CodeIgniter\Model->doFirst()
+#6 D:\wamp64\www\webppi\app\Controllers\Tugasakhir.php(30): CodeIgniter\BaseModel->first()
+#7 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Tugasakhir->index()
+#8 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Tugasakhir))
+#9 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#11 {main}
+ERROR - 2022-08-14 10:46:45 --> Unknown column 'mhs_id' in 'where clause'
+CRITICAL - 2022-08-14 10:46:45 --> Unknown column 'mhs_id' in 'where clause'
+#0 D:\wamp64\www\webppi\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT *\nFROM `...', 0)
+#1 D:\wamp64\www\webppi\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *\nFROM `...')
+#2 D:\wamp64\www\webppi\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *\nFROM `...')
+#3 D:\wamp64\www\webppi\system\Database\BaseBuilder.php(1455): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 D:\wamp64\www\webppi\system\Model.php(210): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\wamp64\www\webppi\system\BaseModel.php(622): CodeIgniter\Model->doFirst()
+#6 D:\wamp64\www\webppi\app\Controllers\Tugasakhir.php(30): CodeIgniter\BaseModel->first()
+#7 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Tugasakhir->index()
+#8 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Tugasakhir))
+#9 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#11 {main}
+CRITICAL - 2022-08-14 10:52:59 --> Undefined index: FullName
+#0 D:\wamp64\www\webppi\app\Controllers\Tugasakhir.php(32): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'D:\\wamp64\\www\\w...', 32, Array)
+#1 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Tugasakhir->index()
+#2 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Tugasakhir))
+#3 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}

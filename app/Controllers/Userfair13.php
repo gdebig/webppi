@@ -425,7 +425,7 @@ class Userfair13 extends BaseController
             ]);
 
             if ($formvalid){
-                $filename = $this->request->getVar('File');
+                $filename = $this->request->getVar('filename');
                 $Name = $this->request->getVar('Name');
                 $Type = $this->request->getVar('Type');
                 $City = $this->request->getVar('City');

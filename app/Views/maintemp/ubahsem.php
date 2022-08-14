@@ -5,7 +5,7 @@
 <div class="card card-primary" style="width: auto; margin: 30px;">
     <div class="col-sm-13" style="width: auto; margin: 30px;">
         <div class="">
-            <h3>Ubah Makalah/Tulisan Yang Disajikan Dalam Seminar/Lokakarya Keinsinyuran</h3>
+            <h3>Ubah Seminar/Lokakarya Keinsinyuran Yang Diikuti (W2)</h3>
         </div>
 
         <?php if(isset($validation)):?>
@@ -14,17 +14,11 @@
 
         <!-- /.card-header -->
         <div class="card-body" style="width: auto; margin: 30px;">
-            <form action="<?php echo base_url();?>/userfair52/ubahsemproses" method="post"
+            <form action="<?php echo base_url();?>/userfair53/ubahsemproses" method="post"
                 enctype="multipart/form-data">
                 <input type="hidden" id="Num" name="Num" value="<?= $Num;?>">
                 <input type="hidden" id="filename" name="filename" value="<?= $File;?>">
                 <div class="form-group">
-                    <label for="PaperName" class="element">Judul Makalah/Tulisan
-                        <span class="required"> *</span>&nbsp; </label>
-                    <div class="element">
-                        <input class="form-control" id="PaperName" name="PaperName" type="text"
-                            placeholder="Judul Makalah/Tulisan..." value="<?= $PaperName;?>" />
-                    </div><br />
                     <label for="Name" class="element">Nama Seminar/Lokakarya <span class="required"> *</span>&nbsp;
                     </label>
                     <div class="element">

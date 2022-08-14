@@ -5,19 +5,13 @@
 <div class="card card-primary" style="width: auto; margin: 30px;">
     <div class="col-sm-13" style="width: auto; margin: 30px;">
         <div class="">
-            <h3>Tambah Makalah/Tulisan Yang Disajikan Dalam Seminar/Lokakarya Keinsinyuran</h3>
+            <h3>Tambah Seminar/Lokakarya Keinsinyuran Yang Diikuti</h3>
         </div>
         <!-- /.card-header -->
         <div class="card-body" style="width: auto; margin: 30px;">
-            <form action="<?php echo base_url();?>/userfair52/tambahsemproses" method="post"
+            <form action="<?php echo base_url();?>/userfair53/tambahsemproses" method="post"
                 enctype="multipart/form-data">
                 <div class="form-group">
-                    <label for="PaperName" class="element">Judul Makalah/Tulisan
-                        <span class="required"> *</span>&nbsp; </label>
-                    <div class="element">
-                        <input class="form-control" id="PaperName" name="PaperName" type="text"
-                            placeholder="Judul Makalah/Tulisan..." />
-                    </div><br />
                     <label for="Name" class="element">Nama Seminar/Lokakarya <span class="required"> *</span>&nbsp;
                     </label>
                     <div class="element">
