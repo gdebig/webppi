@@ -74,13 +74,13 @@
                                 <?php
                             if (!empty($ta['ta_buku'])){
                             ?>
-                                <a href="<?php echo base_url();?>/mantugasakhir/setjadwal/<?=$ta['ta_id'];?>"
+                                <a href="<?php echo base_url();?>/mantugasakhir/setjadwal/<?=$ta['ta_id'];?>/<?=$ta['user_id'];?>"
                                     class="btn btn-warning"> <i class="fas fa-calendar-alt"></i> Atur Jadwal
                                     Sidang</a><br /><a
-                                    href="<?php echo base_url();?>/mantugasakhir/admta/<?=$ta['ta_id'];?>"
+                                    href="<?php echo base_url();?>/mantugasakhir/admta/<?=$ta['ta_id'];?>/<?=$ta['user_id'];?>"
                                     class="btn btn-info"> <i class="fas fa-file-signature"></i> Lihat Administrasi
                                     TA</a><br /><a
-                                    href="<?php echo base_url();?>/mantugasakhir/setpenguji/<?=$ta['ta_id'];?>"
+                                    href="<?php echo base_url();?>/mantugasakhir/setpenguji/<?=$ta['ta_id'];?>/<?=$ta['user_id'];?>"
                                     class="btn btn-secondary"> <i class="fas fa-user-tie"></i> Atur Penguji
                                     TA</a>
                                 <?php

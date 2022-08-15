@@ -16,17 +16,15 @@
 
                 <div class="col">
                     <div class="row">
-                        <a href="<?php echo base_url();?>/mantugasakhir" class="btn btn-primary">Kembali ke daftar tugas
-                            akhir</a>
+                        <a href="<?php echo base_url();?>/peserta" class="btn btn-primary">Kembali ke dashboard</a>
                     </div>
                 </div>
 
                 <?php if(isset($data_js)&&($data_js=="kosong")){
                     ?>
 
-                <div class="alert alert-danger">Data jadwal sidang belum ada. <a
-                        href="<?= base_url();?>/mantugasakhir/tambahjadwal/<?= $ta_id;?>/<?= $user_id;?>">Klik
-                        di sini untuk menambah jadwal sidang</a></div>
+                <div class="alert alert-danger">Data jadwal sidang belum ada. <a href="<?= base_url();?>/peserta">Klik
+                        di sini untuk kembali ke dashboard.</a></div>
                 <?php }else{ ?>
 
                 <table id="tabledata" class="display table table-bordered table-hover">
@@ -35,28 +33,22 @@
                             <th>No</th>
                             <th>Ruang Sidang</th>
                             <th>Tanggal Sidang</th>
-                            <th>Aksi</th>
+                            <th>Perbaikan Judul (setelah sidang)</th>
+                            <th>Nilai (setelah sidang)</th>
+                            <th>Catatan (setelah sidang)</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php
-                                    $i=1; 
-                                    foreach ($data_js as $ta) : 
-                                    ?>
                         <tr>
-                            <td><?php echo $i;$i++;?></td>
-                            <td><?= $ta['sidang_ruang'];?></td>
-                            <td><?= $ta['sidang_tanggal'];?></td>
-                            <td style="text-align: center">
-                                <a href="<?php echo base_url();?>/mantugasakhir/hapusjadwal/<?=$ta['sidang_id'];?>/<?= $ta_id;?>/<?=$ta['user_id'];?>"
-                                    onclick="return confirm('Apakah anda yakin akan menghapus jadwal sidang?')"
-                                    class="btn btn-danger"> <i class="fas fa-trash"></i>
-                                    Hapus</a>
+                            <td>
+                                <p>1</p>
                             </td>
+                            <td><?= $data_js['sidang_ruang'];?></td>
+                            <td><?= $data_js['sidang_tanggal'];?></td>
+                            <td><?= $data_js['sidang_judul'];?></td>
+                            <td><?= $data_js['hasil_sidang'];?></td>
+                            <td><?= $data_js['cat_sidang'];?></td>
                         </tr>
-                        <?php 
-                                    endforeach 
-                                    ?>
                     </tbody>
                 </table>
                 <?php } ?>

@@ -40,7 +40,7 @@
                         di sini untuk menambah data Tugas Akhir</a></div>
                 <?php }else{ ?>
 
-                <table id="tabledata" class="table table-bordered table-hover">
+                <table id="tabledata" class="display table table-bordered table-hover">
                     <thead>
                         <tr>
                             <th>No</th>
@@ -48,7 +48,7 @@
                             <th>Term</th>
                             <th>Periode</th>
                             <th>Instansi</th>
-                            <td>Divisi</th>
+                            <th>Divisi</th>
                             <th>Buku TA</th>
                             <th>Log</th>
                             <th>Aksi</th>
