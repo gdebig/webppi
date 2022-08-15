@@ -52,6 +52,44 @@
                         </select>
                     </div>
                     <br />
+                    <label for="startdate" class="element">Tanggal Mulai <span class="required"> *</span>&nbsp;
+                    </label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="far fa-calendar-alt"></i>
+                            </span>
+                        </div>
+                        <input type="text" class="form-control float-right data-datepicker" id="startdate"
+                            name="startdate" placeholder="Tanggal Mulai..." />
+                    </div>
+                    <br />
+                    <label for="enddate" class="element">Tanggal Berakhir <span class="required"> *</span>&nbsp;
+                    </label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="far fa-calendar-alt"></i>
+                            </span>
+                        </div>
+                        <input type="text" class="form-control float-right data-datepicker" id="enddate" name="enddate"
+                            placeholder="Tanggal Berakhir..." />
+                    </div>
+                    <br />
+                    <label for="instansi" class="element">Nama Instansi <span class="required"> *</span>&nbsp;
+                    </label>
+                    <div class="element">
+                        <input id="instansi" name="instansi" class="form-control" type="text"
+                            placeholder="Nama Instansi..." />
+                    </div>
+                    <br />
+                    <label for="divisi" class="element">Nama Divisi <span class="required"> *</span>&nbsp;
+                    </label>
+                    <div class="element">
+                        <input id="divisi" name="divisi" class="form-control" type="text"
+                            placeholder="Nama Divisi..." />
+                    </div>
+                    <br />
                     <label for="ta_buku" class="element">File Buku Tugas Akhir</label>
                     <div class="element">
                         <input id="ta_buku" name="ta_buku" type="file" class="form-control"

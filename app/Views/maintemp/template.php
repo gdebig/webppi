@@ -292,6 +292,21 @@ $session = session();
         });
     });
     </script>
+    <script>
+    $(function() {
+        $('.data-datepicker1').daterangepicker({
+            singleDatePicker: true,
+            showDropdowns: true,
+            changeMonth: true,
+            timePicker: true,
+            timePickerIncrement: 30,
+            minYear: 1901,
+            locale: {
+                format: 'YYYY-MM-DD hh:mm A'
+            }
+        });
+    });
+    </script>
     <!-- DataTables  & Plugins -->
     <script src="<?php echo base_url();?>/assets/plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="<?php echo base_url();?>/assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>

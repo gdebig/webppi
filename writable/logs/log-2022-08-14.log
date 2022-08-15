@@ -41,3 +41,274 @@ CRITICAL - 2022-08-14 10:52:59 --> Undefined index: FullName
 #3 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
 #4 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
 #5 {main}
+CRITICAL - 2022-08-14 16:22:49 --> Call to undefined method App\Models\TugasAkhirModel::userorderby
+#0 D:\wamp64\www\webppi\app\Controllers\Mantugasakhir.php(26): CodeIgniter\Model->__call('userorderby', Array)
+#1 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Mantugasakhir->index()
+#2 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Mantugasakhir))
+#3 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2022-08-14 16:23:03 --> Call to undefined function App\Controllers\orderby()
+#0 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Mantugasakhir->index()
+#1 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Mantugasakhir))
+#2 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
+ERROR - 2022-08-14 16:23:20 --> You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '.`user_id` USING (`left`)
+ORDER BY `tbl_tugasakhir`.`ta_tahun` DESC, `tbl_tugasa' at line 4
+CRITICAL - 2022-08-14 16:23:20 --> You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '.`user_id` USING (`left`)
+ORDER BY `tbl_tugasakhir`.`ta_tahun` DESC, `tbl_tugasa' at line 4
+#0 D:\wamp64\www\webppi\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT *\nFROM `...', 0)
+#1 D:\wamp64\www\webppi\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *\nFROM `...')
+#2 D:\wamp64\www\webppi\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *\nFROM `...')
+#3 D:\wamp64\www\webppi\system\Database\BaseBuilder.php(1455): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 D:\wamp64\www\webppi\system\Model.php(183): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\wamp64\www\webppi\system\BaseModel.php(584): CodeIgniter\Model->doFindAll(0, 0)
+#6 D:\wamp64\www\webppi\app\Controllers\Mantugasakhir.php(26): CodeIgniter\BaseModel->findAll()
+#7 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Mantugasakhir->index()
+#8 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Mantugasakhir))
+#9 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#11 {main}
+ERROR - 2022-08-14 16:24:38 --> You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '.`user_id` USING (`left`)' at line 4
+CRITICAL - 2022-08-14 16:24:38 --> You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '.`user_id` USING (`left`)' at line 4
+#0 D:\wamp64\www\webppi\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT *\nFROM `...', 0)
+#1 D:\wamp64\www\webppi\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *\nFROM `...')
+#2 D:\wamp64\www\webppi\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *\nFROM `...')
+#3 D:\wamp64\www\webppi\system\Database\BaseBuilder.php(1455): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 D:\wamp64\www\webppi\system\Model.php(183): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\wamp64\www\webppi\system\BaseModel.php(584): CodeIgniter\Model->doFindAll(0, 0)
+#6 D:\wamp64\www\webppi\app\Controllers\Mantugasakhir.php(26): CodeIgniter\BaseModel->findAll()
+#7 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Mantugasakhir->index()
+#8 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Mantugasakhir))
+#9 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#11 {main}
+CRITICAL - 2022-08-14 16:30:53 --> Undefined variable: dosen_bimbing
+#0 D:\wamp64\www\webppi\app\Views\maintemp\mantugasakhir.php(32): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'D:\\wamp64\\www\\w...', 32, Array)
+#1 D:\wamp64\www\webppi\system\View\View.php(210): include('D:\\wamp64\\www\\w...')
+#2 D:\wamp64\www\webppi\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 D:\wamp64\www\webppi\system\Common.php(1089): CodeIgniter\View\View->render('maintemp/mantug...', Array, true)
+#4 D:\wamp64\www\webppi\app\Controllers\Mantugasakhir.php(35): view('maintemp/mantug...', Array)
+#5 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Mantugasakhir->index()
+#6 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Mantugasakhir))
+#7 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2022-08-14 16:52:29 --> Undefined variable: data_ta
+#0 D:\wamp64\www\webppi\app\Views\maintemp\manjadwalsidang.php(49): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'D:\\wamp64\\www\\w...', 49, Array)
+#1 D:\wamp64\www\webppi\system\View\View.php(210): include('D:\\wamp64\\www\\w...')
+#2 D:\wamp64\www\webppi\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 D:\wamp64\www\webppi\system\Common.php(1089): CodeIgniter\View\View->render('maintemp/manjad...', Array, true)
+#4 D:\wamp64\www\webppi\app\Controllers\Mantugasakhir.php(59): view('maintemp/manjad...', Array)
+#5 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Mantugasakhir->setjadwal('3')
+#6 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Mantugasakhir))
+#7 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2022-08-14 16:53:02 --> Undefined variable: logged_in
+#0 D:\wamp64\www\webppi\app\Views\maintemp\template.php(121): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'D:\\wamp64\\www\\w...', 121, Array)
+#1 D:\wamp64\www\webppi\system\View\View.php(210): include('D:\\wamp64\\www\\w...')
+#2 D:\wamp64\www\webppi\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 D:\wamp64\www\webppi\system\View\View.php(226): CodeIgniter\View\View->render('maintemp/templa...', Array, true)
+#4 D:\wamp64\www\webppi\system\Common.php(1089): CodeIgniter\View\View->render('maintemp/manjad...', Array, true)
+#5 D:\wamp64\www\webppi\app\Controllers\Mantugasakhir.php(59): view('maintemp/manjad...', Array)
+#6 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Mantugasakhir->setjadwal('3')
+#7 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Mantugasakhir))
+#8 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2022-08-14 17:28:52 --> Undefined variable: id
+#0 D:\wamp64\www\webppi\app\Controllers\Mantugasakhir.php(135): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'D:\\wamp64\\www\\w...', 135, Array)
+#1 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Mantugasakhir->tambahjsproses()
+#2 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Mantugasakhir))
+#3 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2022-08-14 17:29:16 --> Illegal string offset 'FullName'
+#0 D:\wamp64\www\webppi\app\Views\maintemp\manjadwalsidang.php(53): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Illegal string ...', 'D:\\wamp64\\www\\w...', 53, Array)
+#1 D:\wamp64\www\webppi\system\View\View.php(210): include('D:\\wamp64\\www\\w...')
+#2 D:\wamp64\www\webppi\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 D:\wamp64\www\webppi\system\Common.php(1089): CodeIgniter\View\View->render('maintemp/manjad...', Array, true)
+#4 D:\wamp64\www\webppi\app\Controllers\Mantugasakhir.php(61): view('maintemp/manjad...', Array)
+#5 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Mantugasakhir->setjadwal('3')
+#6 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Mantugasakhir))
+#7 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2022-08-14 17:33:21 --> Illegal string offset 'NPM'
+#0 D:\wamp64\www\webppi\app\Views\maintemp\manjadwalsidang.php(54): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Illegal string ...', 'D:\\wamp64\\www\\w...', 54, Array)
+#1 D:\wamp64\www\webppi\system\View\View.php(210): include('D:\\wamp64\\www\\w...')
+#2 D:\wamp64\www\webppi\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 D:\wamp64\www\webppi\system\Common.php(1089): CodeIgniter\View\View->render('maintemp/manjad...', Array, true)
+#4 D:\wamp64\www\webppi\app\Controllers\Mantugasakhir.php(61): view('maintemp/manjad...', Array)
+#5 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Mantugasakhir->setjadwal('3')
+#6 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Mantugasakhir))
+#7 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2022-08-14 17:36:24 --> Undefined index: NPM
+#0 D:\wamp64\www\webppi\app\Views\maintemp\manjadwalsidang.php(54): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'D:\\wamp64\\www\\w...', 54, Array)
+#1 D:\wamp64\www\webppi\system\View\View.php(210): include('D:\\wamp64\\www\\w...')
+#2 D:\wamp64\www\webppi\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 D:\wamp64\www\webppi\system\Common.php(1089): CodeIgniter\View\View->render('maintemp/manjad...', Array, true)
+#4 D:\wamp64\www\webppi\app\Controllers\Mantugasakhir.php(61): view('maintemp/manjad...', Array)
+#5 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Mantugasakhir->setjadwal('3')
+#6 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Mantugasakhir))
+#7 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2022-08-14 17:36:39 --> Undefined index: NPM
+#0 D:\wamp64\www\webppi\app\Views\maintemp\manjadwalsidang.php(54): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'D:\\wamp64\\www\\w...', 54, Array)
+#1 D:\wamp64\www\webppi\system\View\View.php(210): include('D:\\wamp64\\www\\w...')
+#2 D:\wamp64\www\webppi\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 D:\wamp64\www\webppi\system\Common.php(1089): CodeIgniter\View\View->render('maintemp/manjad...', Array, true)
+#4 D:\wamp64\www\webppi\app\Controllers\Mantugasakhir.php(61): view('maintemp/manjad...', Array)
+#5 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Mantugasakhir->setjadwal('3')
+#6 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Mantugasakhir))
+#7 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2022-08-14 17:37:43 --> Undefined index: ta_usuljudul
+#0 D:\wamp64\www\webppi\app\Views\maintemp\manjadwalsidang.php(55): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'D:\\wamp64\\www\\w...', 55, Array)
+#1 D:\wamp64\www\webppi\system\View\View.php(210): include('D:\\wamp64\\www\\w...')
+#2 D:\wamp64\www\webppi\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 D:\wamp64\www\webppi\system\Common.php(1089): CodeIgniter\View\View->render('maintemp/manjad...', Array, true)
+#4 D:\wamp64\www\webppi\app\Controllers\Mantugasakhir.php(61): view('maintemp/manjad...', Array)
+#5 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Mantugasakhir->setjadwal('3')
+#6 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Mantugasakhir))
+#7 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2022-08-14 17:39:20 --> Too few arguments to function App\Controllers\Mantugasakhir::setjadwal(), 0 passed in D:\wamp64\www\webppi\system\CodeIgniter.php on line 832 and exactly 1 expected
+#0 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Mantugasakhir->setjadwal()
+#1 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Mantugasakhir))
+#2 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
+ERROR - 2022-08-14 17:39:30 --> Unknown column 'tbl_profile.sidang_ruang' in 'order clause'
+CRITICAL - 2022-08-14 17:39:30 --> Unknown column 'tbl_profile.sidang_ruang' in 'order clause'
+#0 D:\wamp64\www\webppi\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT *\nFROM `...', 0)
+#1 D:\wamp64\www\webppi\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *\nFROM `...')
+#2 D:\wamp64\www\webppi\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *\nFROM `...')
+#3 D:\wamp64\www\webppi\system\Database\BaseBuilder.php(1455): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 D:\wamp64\www\webppi\system\Model.php(183): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\wamp64\www\webppi\system\BaseModel.php(584): CodeIgniter\Model->doFindAll(0, 0)
+#6 D:\wamp64\www\webppi\app\Controllers\Mantugasakhir.php(27): CodeIgniter\BaseModel->findAll()
+#7 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Mantugasakhir->index()
+#8 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Mantugasakhir))
+#9 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#11 {main}
+ERROR - 2022-08-14 17:39:57 --> Unknown column 'tbl_profile.sidang_ruang' in 'order clause'
+CRITICAL - 2022-08-14 17:39:57 --> Unknown column 'tbl_profile.sidang_ruang' in 'order clause'
+#0 D:\wamp64\www\webppi\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT *\nFROM `...', 0)
+#1 D:\wamp64\www\webppi\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *\nFROM `...')
+#2 D:\wamp64\www\webppi\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *\nFROM `...')
+#3 D:\wamp64\www\webppi\system\Database\BaseBuilder.php(1455): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 D:\wamp64\www\webppi\system\Model.php(183): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\wamp64\www\webppi\system\BaseModel.php(584): CodeIgniter\Model->doFindAll(0, 0)
+#6 D:\wamp64\www\webppi\app\Controllers\Mantugasakhir.php(27): CodeIgniter\BaseModel->findAll()
+#7 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Mantugasakhir->index()
+#8 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Mantugasakhir))
+#9 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#11 {main}
+ERROR - 2022-08-14 17:39:58 --> Unknown column 'tbl_profile.sidang_ruang' in 'order clause'
+CRITICAL - 2022-08-14 17:39:58 --> Unknown column 'tbl_profile.sidang_ruang' in 'order clause'
+#0 D:\wamp64\www\webppi\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT *\nFROM `...', 0)
+#1 D:\wamp64\www\webppi\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *\nFROM `...')
+#2 D:\wamp64\www\webppi\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *\nFROM `...')
+#3 D:\wamp64\www\webppi\system\Database\BaseBuilder.php(1455): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 D:\wamp64\www\webppi\system\Model.php(183): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\wamp64\www\webppi\system\BaseModel.php(584): CodeIgniter\Model->doFindAll(0, 0)
+#6 D:\wamp64\www\webppi\app\Controllers\Mantugasakhir.php(27): CodeIgniter\BaseModel->findAll()
+#7 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Mantugasakhir->index()
+#8 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Mantugasakhir))
+#9 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#11 {main}
+ERROR - 2022-08-14 17:40:12 --> Unknown column 'tbl_profile.sidang_ruang' in 'order clause'
+CRITICAL - 2022-08-14 17:40:12 --> Unknown column 'tbl_profile.sidang_ruang' in 'order clause'
+#0 D:\wamp64\www\webppi\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT *\nFROM `...', 0)
+#1 D:\wamp64\www\webppi\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *\nFROM `...')
+#2 D:\wamp64\www\webppi\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *\nFROM `...')
+#3 D:\wamp64\www\webppi\system\Database\BaseBuilder.php(1455): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 D:\wamp64\www\webppi\system\Model.php(183): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\wamp64\www\webppi\system\BaseModel.php(584): CodeIgniter\Model->doFindAll(0, 0)
+#6 D:\wamp64\www\webppi\app\Controllers\Mantugasakhir.php(27): CodeIgniter\BaseModel->findAll()
+#7 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Mantugasakhir->index()
+#8 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Mantugasakhir))
+#9 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#11 {main}
+ERROR - 2022-08-14 17:40:39 --> Unknown column 'tbl_profile.sidang_ruang' in 'order clause'
+CRITICAL - 2022-08-14 17:40:39 --> Unknown column 'tbl_profile.sidang_ruang' in 'order clause'
+#0 D:\wamp64\www\webppi\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT *\nFROM `...', 0)
+#1 D:\wamp64\www\webppi\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *\nFROM `...')
+#2 D:\wamp64\www\webppi\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *\nFROM `...')
+#3 D:\wamp64\www\webppi\system\Database\BaseBuilder.php(1455): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 D:\wamp64\www\webppi\system\Model.php(183): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\wamp64\www\webppi\system\BaseModel.php(584): CodeIgniter\Model->doFindAll(0, 0)
+#6 D:\wamp64\www\webppi\app\Controllers\Mantugasakhir.php(27): CodeIgniter\BaseModel->findAll()
+#7 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Mantugasakhir->index()
+#8 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Mantugasakhir))
+#9 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#11 {main}
+ERROR - 2022-08-14 17:41:37 --> Unknown column 'tbl_profile.sidang_ruang' in 'order clause'
+CRITICAL - 2022-08-14 17:41:37 --> Unknown column 'tbl_profile.sidang_ruang' in 'order clause'
+#0 D:\wamp64\www\webppi\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT *\nFROM `...', 0)
+#1 D:\wamp64\www\webppi\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *\nFROM `...')
+#2 D:\wamp64\www\webppi\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *\nFROM `...')
+#3 D:\wamp64\www\webppi\system\Database\BaseBuilder.php(1455): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 D:\wamp64\www\webppi\system\Model.php(183): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\wamp64\www\webppi\system\BaseModel.php(584): CodeIgniter\Model->doFindAll(0, 0)
+#6 D:\wamp64\www\webppi\app\Controllers\Mantugasakhir.php(27): CodeIgniter\BaseModel->findAll()
+#7 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Mantugasakhir->index()
+#8 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Mantugasakhir))
+#9 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#11 {main}
+ERROR - 2022-08-14 17:41:38 --> Unknown column 'tbl_profile.sidang_ruang' in 'order clause'
+CRITICAL - 2022-08-14 17:41:38 --> Unknown column 'tbl_profile.sidang_ruang' in 'order clause'
+#0 D:\wamp64\www\webppi\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT *\nFROM `...', 0)
+#1 D:\wamp64\www\webppi\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *\nFROM `...')
+#2 D:\wamp64\www\webppi\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *\nFROM `...')
+#3 D:\wamp64\www\webppi\system\Database\BaseBuilder.php(1455): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 D:\wamp64\www\webppi\system\Model.php(183): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\wamp64\www\webppi\system\BaseModel.php(584): CodeIgniter\Model->doFindAll(0, 0)
+#6 D:\wamp64\www\webppi\app\Controllers\Mantugasakhir.php(27): CodeIgniter\BaseModel->findAll()
+#7 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Mantugasakhir->index()
+#8 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Mantugasakhir))
+#9 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#11 {main}
+CRITICAL - 2022-08-14 17:43:06 --> Undefined index: ta_usuljudul
+#0 D:\wamp64\www\webppi\app\Views\maintemp\manjadwalsidang.php(55): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'D:\\wamp64\\www\\w...', 55, Array)
+#1 D:\wamp64\www\webppi\system\View\View.php(210): include('D:\\wamp64\\www\\w...')
+#2 D:\wamp64\www\webppi\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 D:\wamp64\www\webppi\system\Common.php(1089): CodeIgniter\View\View->render('maintemp/manjad...', Array, true)
+#4 D:\wamp64\www\webppi\app\Controllers\Mantugasakhir.php(61): view('maintemp/manjad...', Array)
+#5 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Mantugasakhir->setjadwal('3')
+#6 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Mantugasakhir))
+#7 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2022-08-14 17:44:05 --> Too few arguments to function App\Controllers\Mantugasakhir::setjadwal(), 0 passed in D:\wamp64\www\webppi\system\CodeIgniter.php on line 832 and exactly 1 expected
+#0 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Mantugasakhir->setjadwal()
+#1 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Mantugasakhir))
+#2 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2022-08-14 17:44:48 --> Undefined index: ta_tahun
+#0 D:\wamp64\www\webppi\app\Views\maintemp\manjadwalsidang.php(54): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'D:\\wamp64\\www\\w...', 54, Array)
+#1 D:\wamp64\www\webppi\system\View\View.php(210): include('D:\\wamp64\\www\\w...')
+#2 D:\wamp64\www\webppi\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 D:\wamp64\www\webppi\system\Common.php(1089): CodeIgniter\View\View->render('maintemp/manjad...', Array, true)
+#4 D:\wamp64\www\webppi\app\Controllers\Mantugasakhir.php(61): view('maintemp/manjad...', Array)
+#5 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Mantugasakhir->setjadwal('3')
+#6 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Mantugasakhir))
+#7 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}

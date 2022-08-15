@@ -14,41 +14,23 @@
                     <?php endif;?>
                 </div>
 
-                <div class="col">
-                    <div class="row">
-                        <a href="<?php echo base_url();?>/tugasakhir/tambahta" class="btn btn-primary">Tambah
-                            Tugas Akhir</a>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="row">
-                        &nbsp;
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="row">
-                        <p>Dosen pembimbing: <?= $dosen_bimbing;?></p>
-                    </div>
-                </div>
                 <?php if(isset($data_ta)&&($data_ta=="kosong")){
                     ?>
 
-                <div class="alert alert-danger">Data Tugas Akhir belum ada. <a
-                        href="<?= base_url();?>/tugasakhir/tambahta">Klik
-                        di sini untuk menambah data Tugas Akhir</a></div>
+                <div class="alert alert-danger">Data Tugas Akhir belum ada.</div>
                 <?php }else{ ?>
 
-                <table id="tabledata" class="table table-bordered table-hover">
+                <table id="tabledata" class="display table table-bordered table-hover">
                     <thead>
                         <tr>
                             <th>No</th>
+                            <th>Nama Peserta RPL</th>
+                            <th>NPM</th>
                             <th>Judul TA</th>
                             <th>Term</th>
                             <th>Periode</th>
                             <th>Instansi</th>
-                            <td>Divisi</th>
+                            <th>Divisi</th>
                             <th>Buku TA</th>
                             <th>Log</th>
                             <th>Aksi</th>
@@ -61,6 +43,8 @@
                                     ?>
                         <tr>
                             <td><?php echo $i;$i++;?></td>
+                            <td><?= $ta['FullName'];?></td>
+                            <td><?= $ta['NPM'];?></td>
                             <td><?= $ta['ta_usuljudul'];?></td>
                             <td><?= $ta['ta_tahun'].' - '.$ta['ta_semester'];?></td>
                             <td><?php
@@ -86,13 +70,24 @@
                                 echo "Belum ada LOG";
                             }
                             ?></td>
-                            <td style="text-align: center"><a
-                                    href="<?php echo base_url();?>/tugasakhir/ubahta/<?=$ta['ta_id'];?>"
-                                    class="btn btn-warning"> <i class="fas fa-file-signature"></i> Ubah</a>
-                                <a href="<?php echo base_url();?>/tugasakhir/hapusta/<?=$ta['ta_id'];?>"
-                                    onclick="return confirm('Apakah anda yakin akan menghapus data Tugas Akhir?')"
-                                    class="btn btn-danger"> <i class="fas fa-trash"></i>
-                                    Hapus</a>
+                            <td style="text-align: center">
+                                <?php
+                            if (!empty($ta['ta_buku'])){
+                            ?>
+                                <a href="<?php echo base_url();?>/mantugasakhir/setjadwal/<?=$ta['ta_id'];?>"
+                                    class="btn btn-warning"> <i class="fas fa-calendar-alt"></i> Atur Jadwal
+                                    Sidang</a><br /><a
+                                    href="<?php echo base_url();?>/mantugasakhir/admta/<?=$ta['ta_id'];?>"
+                                    class="btn btn-info"> <i class="fas fa-file-signature"></i> Lihat Administrasi
+                                    TA</a><br /><a
+                                    href="<?php echo base_url();?>/mantugasakhir/setpenguji/<?=$ta['ta_id'];?>"
+                                    class="btn btn-secondary"> <i class="fas fa-user-tie"></i> Atur Penguji
+                                    TA</a>
+                                <?php
+                            }else{
+                                echo "Tidak ada aksi. Softcopy buku belum diunggah oleh peserta.";
+                            }
+                            ?>
                             </td>
                         </tr>
                         <?php 

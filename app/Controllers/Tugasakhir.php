@@ -78,6 +78,34 @@ class Tugasakhir extends BaseController
                         'required' => 'Field Judul Tugas Akhir harus diisi',
                     ],
                 ],
+                'startdate' => [
+                    'label' => 'Tanggal Mulai',
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => 'Field tanggal mulai harus diisi',
+                    ],
+                ],
+                'enddate' => [
+                    'label' => 'Tanggal Berakhir',
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => 'Field tanggal berakhir harus diisi',
+                    ],
+                ],
+                'instansi' => [
+                    'label' => 'Instansi',
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => 'Field instansi harus diisi',
+                    ],
+                ],
+                'divisi' => [
+                    'label' => 'divisi',
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => 'Field divisi harus diisi',
+                    ],
+                ],
             ]);
 
             if ($formvalid){
@@ -85,6 +113,10 @@ class Tugasakhir extends BaseController
                 $ta_usuljudul = $this->request->getVar('ta_usuljudul');
                 $ta_semester = $this->request->getVar('ta_semester');
                 $ta_tahun = $this->request->getVar('ta_tahun');
+                $startdate = $this->request->getVar('startdate');
+                $enddate = $this->request->getVar('enddate');
+                $instansi = $this->request->getVar('instansi');
+                $divisi = $this->request->getVar('divisi');
                 $ta_buku = $this->request->getFile('ta_buku');
                 $ta_log = $this->request->getFile('ta_log');
 
@@ -109,6 +141,10 @@ class Tugasakhir extends BaseController
                     'ta_usuljudul' => $ta_usuljudul,
                     'ta_semester' => $ta_semester,
                     'ta_tahun' => $ta_tahun,
+                    'startdate' => $startdate,
+                    'enddate' => $enddate,
+                    'instansi' => $instansi,
+                    'divisi' => $divisi,
                     'ta_buku' => $bukuname,
                     'ta_log' => $logname,
                     'date_created' => date('Y-m-d H:i:s'),
@@ -174,6 +210,10 @@ class Tugasakhir extends BaseController
                 'ta_usuljudul' => $ta['ta_usuljudul'],
                 'ta_semester' => $ta['ta_semester'],
                 'ta_tahun' => $ta['ta_tahun'],
+                'startdate' => $ta['startdate'],
+                'enddate' => $ta['enddate'],
+                'instansi' => $ta['instansi'],
+                'divisi' => $ta['divisi'],
                 'ta_buku' => $ta['ta_buku'],
                 'ta_log' => $ta['ta_log']
             ];
@@ -210,6 +250,34 @@ class Tugasakhir extends BaseController
                         'required' => 'Field Judul Tugas Akhir harus diisi',
                     ],
                 ],
+                'startdate' => [
+                    'label' => 'Tanggal Mulai',
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => 'Field tanggal mulai harus diisi',
+                    ],
+                ],
+                'enddate' => [
+                    'label' => 'Tanggal Berakhir',
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => 'Field tanggal berakhir harus diisi',
+                    ],
+                ],
+                'instansi' => [
+                    'label' => 'Instansi',
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => 'Field instansi harus diisi',
+                    ],
+                ],
+                'divisi' => [
+                    'label' => 'divisi',
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => 'Field divisi harus diisi',
+                    ],
+                ],
             ]);
 
             if ($formvalid){
@@ -219,6 +287,10 @@ class Tugasakhir extends BaseController
                 $ta_usuljudul = $this->request->getVar('ta_usuljudul');
                 $ta_semester = $this->request->getVar('ta_semester');
                 $ta_tahun = $this->request->getVar('ta_tahun');
+                $startdate = $this->request->getVar('startdate');
+                $enddate = $this->request->getVar('enddate');
+                $instansi = $this->request->getVar('instansi');
+                $divisi = $this->request->getVar('divisi');
                 $ta_buku = $this->request->getFile('ta_buku');
                 $ta_log = $this->request->getFile('ta_log');
 
@@ -243,9 +315,12 @@ class Tugasakhir extends BaseController
                     'ta_usuljudul' => $ta_usuljudul,
                     'ta_semester' => $ta_semester,
                     'ta_tahun' => $ta_tahun,
+                    'startdate' => $startdate,
+                    'enddate' => $enddate,
+                    'instansi' => $instansi,
+                    'divisi' => $divisi,
                     'ta_buku' => $bukuname,
                     'ta_log' => $logname,
-                    'date_created' => date('Y-m-d H:i:s'),
                     'date_modified' => date('Y-m-d H:i:s')
                 );
 
@@ -263,6 +338,10 @@ class Tugasakhir extends BaseController
                         'ta_usuljudul' => $ta['ta_usuljudul'],
                         'ta_semester' => $ta['ta_semester'],
                         'ta_tahun' => $ta['ta_tahun'],
+                        'startdate' => $ta['startdate'],
+                        'enddate' => $ta['enddate'],
+                        'instansi' => $ta['instansi'],
+                        'divisi' => $ta['divisi'],
                         'ta_buku' => $ta['ta_buku'],
                         'ta_log' => $ta['ta_log']
                     ];

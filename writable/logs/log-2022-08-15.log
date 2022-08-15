@@ -1,0 +1,12 @@
+CRITICAL - 2022-08-15 08:52:38 --> Undefined offset: -1
+#0 D:\wamp64\www\webppi\app\Helpers\tanggal_helper.php(18): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined offse...', 'D:\\wamp64\\www\\w...', 18, Array)
+#1 D:\wamp64\www\webppi\app\Views\maintemp\tugasakhir.php(66): format_indo(NULL)
+#2 D:\wamp64\www\webppi\system\View\View.php(210): include('D:\\wamp64\\www\\w...')
+#3 D:\wamp64\www\webppi\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#4 D:\wamp64\www\webppi\system\Common.php(1089): CodeIgniter\View\View->render('maintemp/tugasa...', Array, true)
+#5 D:\wamp64\www\webppi\app\Controllers\Tugasakhir.php(38): view('maintemp/tugasa...', Array)
+#6 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Tugasakhir->index()
+#7 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Tugasakhir))
+#8 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#10 {main}
