@@ -16,40 +16,44 @@
 
                 <div class="col">
                     <div class="row">
-                        <a href="<?php echo base_url();?>/mantugasakhir" class="btn btn-primary">Kembali ke daftar tugas
-                            akhir</a>
+                        <a href="<?php echo base_url();?>/mantugasakhir/tambahpenguji/<?= $ta_id;?>/<?= $user_id;?>"
+                            class="btn btn-primary">Tambah Penguji</a>
                     </div>
                 </div>
 
-                <?php if(isset($data_js)&&($data_js=="kosong")){
+                <div class="col">
+                    <div class="row">
+                        &nbsp;
+                    </div>
+                </div>
+
+                <?php if(isset($data_uji)&&($data_uji=="kosong")){
                     ?>
 
-                <div class="alert alert-danger">Data jadwal sidang belum ada. <a
-                        href="<?= base_url();?>/mantugasakhir/tambahjadwal/<?= $ta_id;?>/<?= $user_id;?>">Klik
-                        di sini untuk menambah jadwal sidang</a></div>
+                <div class="alert alert-danger">Data penguji proyek akhir belum ada. <a
+                        href="<?= base_url();?>/mantugasakhir/tambahpenguji/<?= $ta_id;?>/<?= $user_id;?>">Klik
+                        di sini untuk menambah penguji</a></div>
                 <?php }else{ ?>
 
                 <table id="tabledata" class="display table table-bordered table-hover">
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Ruang Sidang</th>
-                            <th>Tanggal Sidang</th>
+                            <th>Nama Penguji</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
                                     $i=1; 
-                                    foreach ($data_js as $ta) : 
+                                    foreach ($data_uji as $ta) : 
                                     ?>
                         <tr>
                             <td><?php echo $i;$i++;?></td>
-                            <td><?= $ta['sidang_ruang'];?></td>
-                            <td><?= $ta['sidang_tanggal'];?></td>
+                            <td><?= $ta['FullName'];?></td>
                             <td style="text-align: center">
-                                <a href="<?php echo base_url();?>/mantugasakhir/hapusjadwal/<?=$ta['sidang_id'];?>/<?= $ta_id;?>/<?=$ta['user_id'];?>"
-                                    onclick="return confirm('Apakah anda yakin akan menghapus jadwal sidang?')"
+                                <a href="<?php echo base_url();?>/mantugasakhir/hapusuji/<?=$ta['uji_id'];?>/<?= $ta_id;?>/<?=$ta['user_id'];?>"
+                                    onclick="return confirm('Apakah anda yakin akan menghapus data penguji?')"
                                     class="btn btn-danger"> <i class="fas fa-trash"></i>
                                     Hapus</a>
                             </td>
