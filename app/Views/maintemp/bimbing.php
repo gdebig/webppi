@@ -32,6 +32,7 @@ use App\Models\BimbingModel;
                             <th>No</th>
                             <th>Nama Peserta PPI</th>
                             <th>Term</th>
+                            <th>Dokumen FAIR</th>
                             <th>Judul Proyek Akhir</th>
                             <th>Buku Proyek Akhir</th>
                             <th>Log Proyek Akhir</th>
@@ -46,6 +47,7 @@ use App\Models\BimbingModel;
                             <td><?php echo $i;$i++;?></td>
                             <td><?= $user['FullName'];?></td>
                             <td><?= $user['ta_tahun'].' - '.$user['ta_semester'];?></td>
+                            <td><a href="<?= base_url();?>/bimbingfair/<?= $user['mhs_id'];?>">Lihat Detail</a></td>
                             <td><?= $user['ta_usuljudul'];?></td>
                             <td><?php
                             if (!empty($user['ta_buku'])){
