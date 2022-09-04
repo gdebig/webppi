@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\CapesSertModel;
+use App\Models\KompModel;
 use App\Libraries\Slug;
 
 class Userfair15 extends BaseController
@@ -56,7 +57,9 @@ class Userfair15 extends BaseController
             $user_id = $session->get('user_id');
         }
         helper(['tanggal']);
-        $model = new CapesSertModel();
+        $model = new KompModel();
+        $where = "komp_cat LIKE 'W.2%' OR komp_cat LIKE 'W.4%' OR komp_cat LIKE 'P.10%'";
+        $data['data_komp'] = $model->where($where)->orderby('komp_id', 'ASC')->findall();
 
         $data['title_page'] = "I.5. Pendidikan/Pelatihan Teknik/Manajemen (W2,W4,P10)";
         $data['data_bread'] = '';
@@ -155,6 +158,13 @@ class Userfair15 extends BaseController
                         'required' => 'Field Uraian Singkat harus diisi.',
                     ],
                 ],
+                'komp15' => [
+                    'label'  => 'Kompetensi',
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => 'Field kompetensi harus diisi.',
+                    ],
+                ],
                 'File' => [
                     'rules'  => 'ext_in[File,jpg,jpeg,png,pdf]|max_size[File, 700]',
                     'errors' => [
@@ -174,6 +184,7 @@ class Userfair15 extends BaseController
                 $Level = $this->request->getVar('Level');
                 $Length = $this->request->getVar('Length');
                 $Description = $this->request->getVar('Description');
+                $komp15 = $this->request->getVar('komp15');
                 $File = $this->request->getFile('File');
                 
                 $namalatih = $slug->slugify($Name);
@@ -204,17 +215,22 @@ class Userfair15 extends BaseController
     
                 $model->save($data);
                 $session->setFlashdata('msg', 'Data Pendidikan/Pelatihan berhasil ditambah.');
+                print_r($komp15);
     
-                return redirect()->to('/userfair15/docs');
+                //return redirect()->to('/userfair15/docs');
             }else{
                 $session = session();
+                
+                $model = new KompModel();
+                $where = "komp_cat LIKE 'W.2%' OR komp_cat LIKE 'W.4%' OR komp_cat LIKE 'P.10%'";
+                $data['data_komp'] = $model->where($where)->orderby('komp_id', 'ASC')->findall();
 
                 $data['title_page'] = "I.5. Pendidikan/Pelatihan Teknik/Manajemen (W2,W4,P10)";
                 $data['data_bread'] = '';
                 $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Tambah Pelatihan Teknik</li>';
                 $data['logged_in'] = $session->get('logged_in');
                 $data['validation'] = $this->validator;
-                return view('register/tambahlatihuserfairvalid', $data);
+                return view('maintemp/tambahlatihuserfairvalid', $data);
             }
         }
     }
@@ -269,6 +285,10 @@ class Userfair15 extends BaseController
                 'File' => $latih['File']
             ];
         }
+
+        $model1 = new KompModel();
+        $where = "komp_cat LIKE 'W.2%' OR komp_cat LIKE 'W.4%' OR komp_cat LIKE 'P.10%'";
+        $data['data_komp'] = $model1->where($where)->orderby('komp_id', 'ASC')->findall();
 
         $data['title_page'] = "I.5. Pendidikan/Pelatihan Teknik/Manajemen (W2,W4,P10)";
         $data['data_bread'] = '';

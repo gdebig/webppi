@@ -34,6 +34,14 @@
                     <div class="element">
                         <input id="cat" name="cat" class="form-control" type="text" placeholder="Kategori..."
                             value="<?= set_value('cat');?>" />
+                    </div><br />
+                    <label for="parent" class="element">Parent Group <span class="required"> *</span>&nbsp;
+                    </label>
+                    <div class="element">
+                        <select id="parent" name="parent" class="form-control">
+                            <option value='n' <?= set_value('parent')=='n' ? 'selected' : '';?>>Tidak</option>
+                            <option value='y' <?= set_value('parent')=='y' ? 'selected' : '';?>>Ya</option>
+                        </select>
                     </div><br /><br />
                     <div class="form-group">
                         <label>Field bertanda * harus diisi.</label>

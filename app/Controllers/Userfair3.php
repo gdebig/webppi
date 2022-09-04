@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\CapesKualifikasiModel;
+use App\Models\KompModel;
 use App\Libraries\Slug;
 
 class Userfair3 extends BaseController
@@ -49,6 +50,10 @@ class Userfair3 extends BaseController
         }else{
             $session->set('role', 'peserta');
         }
+
+        $model1 = new KompModel();
+        $where = "komp_cat LIKE 'W.2%' OR komp_cat LIKE 'W.3%' OR komp_cat LIKE 'W.4%' OR komp_cat LIKE 'P.6%' OR komp_cat LIKE 'P.7%' OR komp_cat LIKE 'P.8%' OR komp_cat LIKE 'P.9%' OR komp_cat LIKE 'P.10%' OR komp_cat LIKE 'P.11%'";
+        $data['data_komp'] = $model1->where($where)->orderby('komp_id', 'ASC')->findall();
 
         $data['title_page'] = "III. KUALIFIKASI PROFESIONAL (W2,W3,W4,P6,P7,P8,P9,P10,P11)";
         $data['data_bread'] = '';
@@ -195,6 +200,10 @@ class Userfair3 extends BaseController
                 return redirect()->to('/userfair3/docs');
             }else{
 
+                $model1 = new KompModel();
+                $where = "komp_cat LIKE 'W.2%' OR komp_cat LIKE 'W.3%' OR komp_cat LIKE 'W.4%' OR komp_cat LIKE 'P.6%' OR komp_cat LIKE 'P.7%' OR komp_cat LIKE 'P.8%' OR komp_cat LIKE 'P.9%' OR komp_cat LIKE 'P.10%' OR komp_cat LIKE 'P.11%'";
+                $data['data_komp'] = $model1->where($where)->orderby('komp_id', 'ASC')->findall();
+
                 $data['title_page'] = "III. KUALIFIKASI PROFESIONAL (W2,W3,W4,P6,P7,P8,P9,P10,P11)";
                 $data['data_bread'] = '';
                 $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Tambah Kualifikasi Profesional</li>';
@@ -270,6 +279,10 @@ class Userfair3 extends BaseController
                 'File' => $kerja['File']
             ];
         }
+
+        $model1 = new KompModel();
+        $where = "komp_cat LIKE 'W.2%' OR komp_cat LIKE 'W.3%' OR komp_cat LIKE 'W.4%' OR komp_cat LIKE 'P.6%' OR komp_cat LIKE 'P.7%' OR komp_cat LIKE 'P.8%' OR komp_cat LIKE 'P.9%' OR komp_cat LIKE 'P.10%' OR komp_cat LIKE 'P.11%'";
+        $data['data_komp'] = $model1->where($where)->orderby('komp_id', 'ASC')->findall();
 
         $data['title_page'] = "III. KUALIFIKASI PROFESIONAL (W2,W3,W4,P6,P7,P8,P9,P10,P11)";
         $data['data_bread'] = '';

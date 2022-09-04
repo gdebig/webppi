@@ -14,7 +14,7 @@
 
         <!-- /.card-header -->
         <div class="card-body" style="width: auto; margin: 30px;">
-            <form action="<?php echo base_url();?>/userfair16/tambahlatihproses" method="post"
+            <form action="<?php echo base_url();?>/userfair16/tambahsertproses" method="post"
                 enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="Name" class="element">Nama Sertifikat
@@ -121,6 +121,36 @@
                     <div class="element">
                         <textarea class="form-control" id="Description" name="Description" placeholder="Deskripsi"
                             placeholder="Uraian Singkat..."><?= set_value('Description');?></textarea>
+                    </div>
+                    <br />
+                    <label for="komp15" class="element">Kompetensi (Gunakan tombol ctrl + klik kiri mouse untuk memilih
+                        lebih dari satu kompetensi)<span class="required"> *</span>&nbsp; </label>
+                    <div class="element">
+                        <select multiple class="form-control" name="komp15[]" id="komp15" size="10">
+                            <?php
+                            $i=1;
+                            $prev_cat = array();
+
+                            foreach ($data_komp as $komp) :
+                                $j = $i-1;
+                                $prev_cat[$i] = $komp['komp_cat'];
+                                if (!empty($prev_cat)&&($j!=0)){
+                                    if ($prev_cat[$i]!=$prev_cat[$j]){
+                                        echo "</optgroup>";
+                                    }
+                                }
+                                if ($komp['komp_parent']=='y'){
+                                    echo "<optgroup label='".$komp['komp_code']." ".$komp['komp_desc']."'>";
+                                }else{
+                                    if ($i==1){
+                                    }else{
+                                        echo "<option value='".$komp['komp_code']."' title='".$komp['komp_desc']."'>".$komp['komp_code']." ".$komp['komp_desc']."</option>";
+                                    }
+                                }
+                                $i++;
+                            endforeach;
+                            ?>
+                        </select>
                     </div>
                     <br />
                     <label for="File" class="element">Bukti Sertifikat</label>

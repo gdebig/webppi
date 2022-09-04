@@ -5,7 +5,7 @@ use CodeIgniter\Model;
 class KompModel extends Model{
     protected $table = 'tbl_kompetensi';
     protected $primaryKey = 'komp_id';
-    protected $allowedFields = ['komp_id', 'komp_code', 'komp_desc', 'komp_cat', 'date_created', 'date_modified'];
+    protected $allowedFields = ['komp_id', 'komp_code', 'komp_desc', 'komp_cat', 'komp_parent', 'date_created', 'date_modified'];
     protected $useAutoIncrement = true;
     protected $returnType     = 'array';
     

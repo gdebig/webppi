@@ -31,6 +31,14 @@
                     </label>
                     <div class="element">
                         <input id="cat" name="cat" class="form-control" type="text" placeholder="Kategori..." />
+                    </div><br />
+                    <label for="parent" class="element">Parent Group <span class="required"> *</span>&nbsp;
+                    </label>
+                    <div class="element">
+                        <select id="parent" name="parent" class="form-control">
+                            <option value='n'>Tidak</option>
+                            <option value='y'>Ya</option>
+                        </select>
                     </div><br /><br />
                     <div class="form-group">
                         <label>Field bertanda * harus diisi.</label>

@@ -42,7 +42,8 @@ use App\Models\BimbingModel;
                                     ?>
                         <tr>
                             <td><?php echo $i;$i++;?></td>
-                            <td><?= $user['FullName'];?></td>
+                            <td><?= empty($user['FullName']) ? $user['username']." (Belum isi Profile)" : $user['FullName'];?>
+                            </td>
                             <td>
                                 <?php
                                 $model = new BimbingModel();

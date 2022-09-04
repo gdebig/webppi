@@ -42,6 +42,7 @@
                             <th>Kode</th>
                             <th>Deskripsi</th>
                             <th>Kategori</th>
+                            <th>Parent</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -55,6 +56,7 @@
                             <td><?= $komp['komp_code'];?></td>
                             <td><?= $komp['komp_desc'];?></td>
                             <td><?= $komp['komp_cat'];?></td>
+                            <td><?= $komp['komp_parent'];?></td>
                             <td style="text-align: center"><a
                                     href="<?php echo base_url();?>/mankomp/ubahkomp/<?=$komp['komp_id'];?>"
                                     class="btn btn-warning"> <i class="fas fa-file-signature"></i> Ubah</a>

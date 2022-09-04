@@ -52,7 +52,7 @@ use App\Models\ProfileModel;
                                         class="form-check-input" />
                                 </td>
                                 <td><a
-                                        href="<?= base_url();?>/manpeserta/doklengkap/<?= $user['user_id'];?>"><?= $user['FullName'];?></a>
+                                        href="<?= base_url();?>/manpeserta/doklengkap/<?= $user['user_id'];?>"><?= empty($user['FullName']) ? $user['username']." (Belum isi Profile)" : $user['FullName'];?></a>
                                 </td>
                                 <td><?php
                                 switch($user['Vocational']){
@@ -135,7 +135,9 @@ use App\Models\ProfileModel;
                                         <?php
                                         foreach ($data_dosbing as $dosbing) :
                                         ?>
-                                        <option value="<?= $dosbing['user_id'];?>"><?= $dosbing['FullName'];?></option>
+                                        <option value="<?= $dosbing['user_id'];?>">
+                                            <?= empty($dosbing['FullName']) ? $dosbing['username'] : $dosbing['FullName'];?>
+                                        </option>
                                         <?php
                                         endforeach
                                         ?>

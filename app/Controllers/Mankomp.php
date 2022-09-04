@@ -19,7 +19,7 @@ class Mankomp extends BaseController
         $komp_id = $session->get('komp_id');
         $model = new KompModel();
         $data['logged_in'] = $logged_in;
-        $komp = $model->orderBy('komp_code', 'ASC')->findall();
+        $komp = $model->orderBy('komp_id', 'ASC')->findall();
         if (!empty($komp)){
             $data['data_komp'] = $komp;
         }else{
@@ -91,11 +91,13 @@ class Mankomp extends BaseController
                 $code = $this->request->getVar('code');
                 $desc = $this->request->getVar('desc');
                 $cat = $this->request->getVar('cat');
+                $parent = $this->request->getVar('parent');
 
                 $datakomp = array(
                     'komp_code' => $code,
                     'komp_desc' => $desc,
                     'komp_cat' => $cat,
+                    'komp_parent' => $parent,
                     'date_created' => date('Y-m-d H:i:s'),
                     'date_modified' => date('Y-m-d H:i:s')
                 );
@@ -144,6 +146,7 @@ class Mankomp extends BaseController
             $data = [
                 'komp_id' => $komp['komp_id'],
                 'komp_code' => $komp['komp_code'],
+                'komp_parent' => $komp['komp_parent'],
                 'komp_desc' => $komp['komp_desc'],
                 'komp_cat' => $komp['komp_cat']
             ];
@@ -202,11 +205,13 @@ class Mankomp extends BaseController
                 $code = $this->request->getVar('code');
                 $desc = $this->request->getVar('desc');
                 $cat = $this->request->getVar('cat');
+                $parent = $this->request->getVar('parent');
 
                 $datakomp = array(
                     'komp_code' => $code,
                     'komp_desc' => $desc,
                     'komp_cat' => $cat,
+                    'komp_parent' => $parent,
                     'date_created' => date('Y-m-d H:i:s'),
                     'date_modified' => date('Y-m-d H:i:s')
                 );
@@ -223,7 +228,8 @@ class Mankomp extends BaseController
                         'komp_id' => $komp['komp_id'],
                         'komp_code' => $komp['komp_code'],
                         'komp_desc' => $komp['komp_desc'],
-                        'komp_cat' => $komp['komp_cat']
+                        'komp_cat' => $komp['komp_cat'],
+                        'komp_parent' => $komp['komp_parent']
                     ];
                 }
                 $data['logged_in'] = $logged_in;

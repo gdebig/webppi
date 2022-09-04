@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\CapesSertModel;
+use App\Models\KompModel;
 use App\Libraries\Slug;
 
 class Userfair16 extends BaseController
@@ -48,7 +49,11 @@ class Userfair16 extends BaseController
         }else{
             $session->set('role', 'peserta');
         }
-        $model = new CapesSertmodel();
+
+        $model1 = new KompModel();
+        $where = "komp_cat LIKE 'W.1%' OR komp_cat LIKE 'W.4%'";
+        $data['data_komp'] = $model1->where($where)->orderby('komp_id', 'ASC')->findall();
+
         $user_id = $session->get('user_id');
 
         $data['title_page'] = "I.6. Sertifikat Kompetensi dan Bidang Lainnya (yang Relevan) Yang Diikuti (#) (W1,W4)";
@@ -195,6 +200,11 @@ class Userfair16 extends BaseController
                 return redirect()->to('/userfair16/docs');
             }else{
                 $session = session();
+
+                $model1 = new KompModel();
+                $where = "komp_cat LIKE 'W.1%' OR komp_cat LIKE 'W.4%'";
+                $data['data_komp'] = $model1->where($where)->orderby('komp_id', 'ASC')->findall();
+                
                 $data['title_page'] = "I.6. Sertifikat Kompetensi dan Bidang Lainnya (yang Relevan) Yang Diikuti (#) (W1,W4)";
                 $data['data_bread'] = '';
                 $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Tambah Sertifikat Kompetensi</li>';
@@ -254,6 +264,10 @@ class Userfair16 extends BaseController
                 'File' => $latih['File']
             ];
         }
+
+        $model1 = new KompModel();
+        $where = "komp_cat LIKE 'W.1%' OR komp_cat LIKE 'W.4%'";
+        $data['data_komp'] = $model1->where($where)->orderby('komp_id', 'ASC')->findall();
 
         $data['title_page'] = "I.6. Sertifikat Kompetensi dan Bidang Lainnya (yang Relevan) Yang Diikuti (#) (W1,W4)";
         $data['data_bread'] = '';

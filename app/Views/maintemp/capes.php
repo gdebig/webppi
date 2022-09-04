@@ -93,7 +93,7 @@ use App\Models\CapesSemModel;
                                     <input type="checkbox" name="user_id[]" value="<?= $user['user_id'];?>" />
                                 </td>
                                 <td><a
-                                        href="<?= base_url();?>/mancapes/doklengkap/<?= $user['user_id'];?>"><?= $user['FullName'];?></a>
+                                        href="<?= base_url();?>/mancapes/doklengkap/<?= $user['user_id'];?>"><?= empty($user['FullName']) ? $user['username']." (Belum isi Profile)" : $user['FullName'];?></a>
                                 </td>
                                 <td><?php
                                 switch($user['Vocational']){
