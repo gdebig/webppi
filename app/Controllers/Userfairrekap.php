@@ -41,7 +41,7 @@ class Userfairrekap extends BaseController
         $data['data_bread'] = '';
         $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Rekapitulasi</li>';
         $data['logged_in'] = $session->get('logged_in');
-        return view('maintemp/fairdok7', $data);
+        return view('maintemp/fairrekap', $data);
     }
 
     public function pernyataanproses(){
