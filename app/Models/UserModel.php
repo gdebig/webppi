@@ -5,7 +5,7 @@ use CodeIgniter\Model;
 class UserModel extends Model{
     protected $table = 'tbl_user';
     protected $primaryKey = 'user_id';
-    protected $allowedFields = ['user_id', 'username', 'password', 'active', 'nodaftar', 'NPM', 'NIP', 'status', 'thnajaran', 'semester', 'tipe_user', 'confirmcapes', 'softdelete', 'date_created', 'date_modified'];
+    protected $allowedFields = ['user_id', 'username', 'password', 'active', 'nodaftar', 'NPM', 'NIP', 'status', 'thnajaran', 'semester', 'tipe_user', 'confirmcapes', 'confirmfair', 'softdelete', 'date_created', 'date_modified'];
     protected $useAutoIncrement = true;
     protected $returnType     = 'array';
     

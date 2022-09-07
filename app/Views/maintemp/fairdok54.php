@@ -45,6 +45,7 @@
                             <th>Tingkat Kesulitan dan Manfaatnya Karya Temuan/Inovasi/Paten dan Implementasi Teknologi
                                 Baru</th>
                             <th>Bukti Dokumen</th>
+                            <th>Klaim Kompetensi</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -129,6 +130,7 @@
                             ?></td>
                             <td><a href="<?=base_url();?>/uploads/docs/<?=$inov['File'];?>"
                                     target="_blank"><?= $inov['File'];?></a></td>
+                            <td><?= $inov['kompetensi'];?></td>
                             <td style="text-align: center"><a
                                     href="<?php echo base_url();?>/userfair54/ubahinov/<?=$inov['Num'];?>"
                                     class="btn btn-warning"> <i class="fas fa-file-signature"></i> Ubah</a>

@@ -167,6 +167,50 @@ class Userfair16 extends BaseController
                 $Length = $this->request->getVar('Length');
                 $Description = $this->request->getVar('Description');
                 $File = $this->request->getFile('File');
+                $komp = $this->request->getVar('komp16');
+
+                $nilai_p = 0;
+                $nilai_q = 0;
+                $nilai_r = 0;
+                $stringkp = '';
+                $totarray = count($komp);
+                $i=0;
+                foreach ($komp as $kp) :
+                    $nilai_q = $nilai_q + 2;
+                    if ((substr($kp, 0, 3)=='W.1') OR (substr($kp, 0, 3)=='W.4')){
+                        switch ($Length){
+                            case 'sd36':
+                                $nilai_p = $nilai_p + 1;
+                                break;
+                            case 'smp100':
+                                $nilai_p = $nilai_p + 2;
+                                break;
+                            case 'smp240':
+                                $nilai_p = $nilai_p + 3;
+                                break;
+                            case 'lbih240':
+                                $nilai_p = $nilai_p + 4;
+                                break;
+                        }
+                        switch ($Level){
+                            case 'Dasar':
+                                $nilai_r = $nilai_r + 2;
+                                break;
+                            case 'Lanjut':
+                                $nilai_r = $nilai_r + 3;
+                                break;
+                        }
+                    }
+                    $i++;
+                    if ($i!=$totarray){
+                        $stringkp = $stringkp.$kp.', ';
+                    }else{
+                        $stringkp = $stringkp.$kp;
+                    }
+                endforeach;
+                $nilai_w1 = $nilai_p * $nilai_r;
+                $nilai_w4 = $nilai_p * $nilai_r;
+                
                 
                 $namasert = $slug->slugify($Name);
                 $ext = $File->getClientExtension();
@@ -190,6 +234,12 @@ class Userfair16 extends BaseController
                     'Length' => $Length,
                     'Description' => $Description,
                     'File' => $filename,
+                    'kompetensi' => $stringkp,
+                    'nilai_p' => $nilai_p,
+                    'nilai_q' => $nilai_q,
+                    'nilai_r' => $nilai_r,
+                    'nilai_w1' => $nilai_w1,
+                    'nilai_w4' => $nilai_w4,
                     'date_created' => date('Y-m-d'),
                     'date_modified' => date('Y-m-d')
                 );
@@ -200,6 +250,8 @@ class Userfair16 extends BaseController
                 return redirect()->to('/userfair16/docs');
             }else{
                 $session = session();
+
+                $data['datakomp'] = $this->request->getVar('komp16');
 
                 $model1 = new KompModel();
                 $where = "komp_cat LIKE 'W.1%' OR komp_cat LIKE 'W.4%'";
@@ -261,7 +313,8 @@ class Userfair16 extends BaseController
                 'Level' => $latih['Level'],
                 'Length' =>  $latih['Length'],
                 'Description' => $latih['Description'],
-                'File' => $latih['File']
+                'File' => $latih['File'],
+                'datakomp' => explode(", ", $latih['kompetensi'])
             ];
         }
 
@@ -382,6 +435,49 @@ class Userfair16 extends BaseController
                 $Length = $this->request->getVar('Length');
                 $Description = $this->request->getVar('Description');
                 $File = $this->request->getFile('File');
+                $komp = $this->request->getVar('komp16');
+
+                $nilai_p = 0;
+                $nilai_q = 0;
+                $nilai_r = 0;
+                $stringkp = '';
+                $totarray = count($komp);
+                $i=0;
+                foreach ($komp as $kp) :
+                    $nilai_q = $nilai_q + 2;
+                    if ((substr($kp, 0, 3)=='W.1') OR (substr($kp, 0, 3)=='W.4')){
+                        switch ($Length){
+                            case 'sd36':
+                                $nilai_p = $nilai_p + 1;
+                                break;
+                            case 'smp100':
+                                $nilai_p = $nilai_p + 2;
+                                break;
+                            case 'smp240':
+                                $nilai_p = $nilai_p + 3;
+                                break;
+                            case 'lbih240':
+                                $nilai_p = $nilai_p + 4;
+                                break;
+                        }
+                        switch ($Level){
+                            case 'Dasar':
+                                $nilai_r = $nilai_r + 2;
+                                break;
+                            case 'Lanjut':
+                                $nilai_r = $nilai_r + 3;
+                                break;
+                        }
+                    }
+                    $i++;
+                    if ($i!=$totarray){
+                        $stringkp = $stringkp.$kp.', ';
+                    }else{
+                        $stringkp = $stringkp.$kp;
+                    }
+                endforeach;
+                $nilai_w1 = $nilai_p * $nilai_r;
+                $nilai_w4 = $nilai_p * $nilai_r;
 
                 $namasert = $slug->slugify($Name);
                 $ext = $File->getClientExtension();
@@ -414,6 +510,12 @@ class Userfair16 extends BaseController
                     'Length' => $Length,
                     'Description' => $Description,
                     'File' => $filename,
+                    'kompetensi' => $stringkp,
+                    'nilai_p' => $nilai_p,
+                    'nilai_q' => $nilai_q,
+                    'nilai_r' => $nilai_r,
+                    'nilai_w1' => $nilai_w1,
+                    'nilai_w4' => $nilai_w4,
                     'date_modified' => date('Y-m-d')
                 );
 
@@ -436,9 +538,14 @@ class Userfair16 extends BaseController
                         'Level' => $latih['Level'],
                         'Length' =>  $latih['Length'],
                         'Description' => $latih['Description'],
-                        'File' => $latih['File']
+                        'File' => $latih['File'],
+                        'datakomp' => explode(", ", $latih['kompetensi'])
                     ];
                 }
+        
+                $model1 = new KompModel();
+                $where = "komp_cat LIKE 'W.2%' OR komp_cat LIKE 'W.4%' OR komp_cat LIKE 'P.10%'";
+                $data['data_komp'] = $model1->where($where)->orderby('komp_id', 'ASC')->findall();
 
                 $data['title_page'] = "I.6. Sertifikat Kompetensi dan Bidang Lainnya (yang Relevan) Yang Diikuti (#) (W1,W4)";
                 $data['data_bread'] = '';

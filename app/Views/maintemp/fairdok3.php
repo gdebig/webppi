@@ -52,6 +52,7 @@
                             <th>Skala Proyek</th>
                             <th>Uraian Singkat Tugas dan Tanggung Jawab Prof sesuai NSPK</th>
                             <th>Bukti kualifikasi profesional</th>
+                            <th>Klaim Kompetensi</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -164,6 +165,7 @@
                 echo "";
             }
             ?></td>
+                            <td><?= $kerja['kompetensi'];?></td>
                             <td style="text-align: center"><a
                                     href="<?php echo base_url();?>/userfair3/ubahkerja/<?=$kerja['Num'];?>"
                                     class="btn btn-warning"> <i class="fas fa-file-signature"></i> Ubah</a>

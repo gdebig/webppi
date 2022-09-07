@@ -43,6 +43,7 @@
                             <th>Jenis Tulisan yang Mampu Disusun</th>
                             <th>Nilai TOEFL atau yang Sejenisnya</th>
                             <th>Bukti Dokumen</th>
+                            <th>Kompetensi</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -81,6 +82,7 @@
                             <td><?= $bahasa['LangMark'];?></td>
                             <td><a href="<?=base_url();?>/uploads/docs/<?=$bahasa['File'];?>"
                                     target="_blank"><?= $bahasa['File'];?></a></td>
+                            <td><?= $bahasa['kompetensi'];?></td>
                             <td style="text-align: center"><a
                                     href="<?php echo base_url();?>/userfair6/ubahbahasa/<?=$bahasa['Num'];?>"
                                     class="btn btn-warning"> <i class="fas fa-file-signature"></i> Ubah</a>

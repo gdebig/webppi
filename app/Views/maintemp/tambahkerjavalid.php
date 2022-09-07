@@ -195,10 +195,10 @@
                             placeholder="Uraian Singkat..."><?php echo set_value('Desc');?></textarea>
                     </div>
                     <br />
-                    <label for="komp16" class="element">Kompetensi (Gunakan tombol ctrl + klik kiri mouse untuk memilih
+                    <label for="komp3" class="element">Kompetensi (Gunakan tombol ctrl + klik kiri mouse untuk memilih
                         lebih dari satu kompetensi)<span class="required"> *</span>&nbsp; </label>
                     <div class="element">
-                        <select multiple class="form-control" name="komp16[]" id="komp16" size="10">
+                        <select multiple class="form-control" name="komp3[]" id="komp3" size="10">
                             <?php
                             $i=1;
                             $prev_cat = array();
@@ -216,7 +216,8 @@
                                 }else{
                                     if ($i==1){
                                     }else{
-                                        echo "<option value='".$komp['komp_code']."' title='".$komp['komp_desc']."'>".$komp['komp_code']." ".$komp['komp_desc']."</option>";
+                                        $kompselected = array_search($komp['komp_code'], $datakomp) !== false ? 'selected' : '';
+                                        echo "<option value='".$komp['komp_code']."' title='".$komp['komp_desc']."' ".$kompselected.">".$komp['komp_code']." ".$komp['komp_desc']."</option>";
                                     }
                                 }
                                 $i++;

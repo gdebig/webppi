@@ -51,6 +51,7 @@
                             <th>Uraian Singkat Materi Pendidikan/Pelatihan, Tingkat Pendidikan/Pelatihan, Sertifikat
                             </th>
                             <th>Bukti Sertifikat</th>
+                            <th>Klaim Kompetensi</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -102,6 +103,7 @@
                                 echo "";
                             }
                             ?></td>
+                            <td><?= $latih['kompetensi'];?></td>
                             <td style="text-align: center"><a
                                     href="<?php echo base_url();?>/userfair16/ubahsert/<?=$latih['Num'];?>"
                                     class="btn btn-warning"> <i class="fas fa-file-signature"></i> Ubah</a>

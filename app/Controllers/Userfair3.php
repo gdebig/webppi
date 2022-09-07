@@ -158,6 +158,57 @@ class Userfair3 extends BaseController
                 $Scale = $this->request->getVar('Scale');
                 $Desc = $this->request->getVar('Desc');
                 $File = $this->request->getFile('File');
+                $komp = $this->request->getVar('komp3');
+
+                $nilai_p = 0;
+                $nilai_q = 0;
+                $nilai_r = 0;
+                $stringkp = '';
+                $totarray = count($komp);
+                $i=0;
+                foreach ($komp as $kp) :
+                    $nilai_q = $nilai_q + 2;
+                    if ((substr($kp, 0, 3)=='W.2') OR (substr($kp, 0, 3)=='W.3') OR (substr($kp, 0, 3)=='W.4') OR (substr($kp, 0, 1)=='P')){
+                        switch ($Duration){
+                            case 'smp3':
+                                $nilai_p = $nilai_p + 1;
+                                break;
+                            case 'smp7':
+                                $nilai_p = $nilai_p + 2;
+                                break;
+                            case 'smpe10':
+                                $nilai_p = $nilai_p + 3;
+                                break;
+                            case 'lbih10':
+                                $nilai_p = $nilai_p + 4;
+                                break;
+                        }
+                        switch ($Jabatan){
+                            case 'anggota':
+                                $nilai_q = $nilai_q + 1;
+                                break;
+                            case 'supervisor':
+                                $nilai_q = $nilai_q + 2;
+                                break;
+                            case 'direktur':
+                                $nilai_q = $nilai_q + 3;
+                                break;                            
+                            case 'pengarah':
+                                $nilai_q = $nilai_q + 4;
+                                break;
+                        }
+                    }
+                    $i++;
+                    if ($i!=$totarray){
+                        $stringkp = $stringkp.$kp.', ';
+                    }else{
+                        $stringkp = $stringkp.$kp;
+                    }
+                endforeach;
+                $nilai_w2 = $nilai_p * $nilai_q;
+                $nilai_w3 = $nilai_p * $nilai_q;
+                $nilai_w4 = $nilai_p * $nilai_q;
+                $nilai_pil = $nilai_p * $nilai_q;
                 
                 $ext = $File->getClientExtension();
                 if (!empty($ext)){
@@ -190,6 +241,14 @@ class Userfair3 extends BaseController
                     'Scale' => $Scale,
                     'Desc' => $Desc,
                     'File' => $filename,
+                    'kompetensi' => $stringkp,
+                    'nilai_p' => $nilai_p,
+                    'nilai_q' => $nilai_q,
+                    'nilai_r' => $nilai_r,
+                    'nilai_w2' => $nilai_w2,
+                    'nilai_w3' => $nilai_w3,
+                    'nilai_w4' => $nilai_w4,
+                    'nilai_pil' => $nilai_pil,
                     'date_created' => date('Y-m-d'),
                     'date_modified' => date('Y-m-d')
                 );
@@ -199,6 +258,8 @@ class Userfair3 extends BaseController
     
                 return redirect()->to('/userfair3/docs');
             }else{
+
+                $data['datakomp'] = $this->request->getVar('komp3');
 
                 $model1 = new KompModel();
                 $where = "komp_cat LIKE 'W.2%' OR komp_cat LIKE 'W.3%' OR komp_cat LIKE 'W.4%' OR komp_cat LIKE 'P.6%' OR komp_cat LIKE 'P.7%' OR komp_cat LIKE 'P.8%' OR komp_cat LIKE 'P.9%' OR komp_cat LIKE 'P.10%' OR komp_cat LIKE 'P.11%'";
@@ -276,7 +337,8 @@ class Userfair3 extends BaseController
                 'Diff' => $kerja['Diff'],
                 'Scale' => $kerja['Scale'],
                 'Desc' => $kerja['Desc'],
-                'File' => $kerja['File']
+                'File' => $kerja['File'],
+                'datakomp' => explode(", ", $kerja['kompetensi'])
             ];
         }
 
@@ -389,6 +451,57 @@ class Userfair3 extends BaseController
                 $Scale = $this->request->getVar('Scale');
                 $Desc = $this->request->getVar('Desc');
                 $File = $this->request->getFile('File');
+                $komp = $this->request->getVar('komp3');
+
+                $nilai_p = 0;
+                $nilai_q = 0;
+                $nilai_r = 0;
+                $stringkp = '';
+                $totarray = count($komp);
+                $i=0;
+                foreach ($komp as $kp) :
+                    $nilai_q = $nilai_q + 2;
+                    if ((substr($kp, 0, 3)=='W.2') OR (substr($kp, 0, 3)=='W.3') OR (substr($kp, 0, 3)=='W.4') OR (substr($kp, 0, 1)=='P')){
+                        switch ($Duration){
+                            case 'smp3':
+                                $nilai_p = $nilai_p + 1;
+                                break;
+                            case 'smp7':
+                                $nilai_p = $nilai_p + 2;
+                                break;
+                            case 'smpe10':
+                                $nilai_p = $nilai_p + 3;
+                                break;
+                            case 'lbih10':
+                                $nilai_p = $nilai_p + 4;
+                                break;
+                        }
+                        switch ($Jabatan){
+                            case 'anggota':
+                                $nilai_q = $nilai_q + 1;
+                                break;
+                            case 'supervisor':
+                                $nilai_q = $nilai_q + 2;
+                                break;
+                            case 'direktur':
+                                $nilai_q = $nilai_q + 3;
+                                break;                            
+                            case 'pengarah':
+                                $nilai_q = $nilai_q + 4;
+                                break;
+                        }
+                    }
+                    $i++;
+                    if ($i!=$totarray){
+                        $stringkp = $stringkp.$kp.', ';
+                    }else{
+                        $stringkp = $stringkp.$kp;
+                    }
+                endforeach;
+                $nilai_w2 = $nilai_p * $nilai_q;
+                $nilai_w3 = $nilai_p * $nilai_q;
+                $nilai_w4 = $nilai_p * $nilai_q;
+                $nilai_pil = $nilai_p * $nilai_q;
 
                 $namainstansi = $slug->slugify($NameInstance);
                 $posisi = $slug->slugify($Position);
@@ -429,6 +542,14 @@ class Userfair3 extends BaseController
                     'Scale' => $Scale,
                     'Desc' => $Desc,
                     'File' => $filenamenew,
+                    'kompetensi' => $stringkp,
+                    'nilai_p' => $nilai_p,
+                    'nilai_q' => $nilai_q,
+                    'nilai_r' => $nilai_r,
+                    'nilai_w2' => $nilai_w2,
+                    'nilai_w3' => $nilai_w3,
+                    'nilai_w4' => $nilai_w4,
+                    'nilai_pil' => $nilai_pil,
                     'date_modified' => date('Y-m-d')
                 );
 
@@ -469,9 +590,14 @@ class Userfair3 extends BaseController
                         'Diff' => $kerja['Diff'],
                         'Scale' => $kerja['Scale'],
                         'Desc' => $kerja['Desc'],
-                        'File' => $kerja['File']
+                        'File' => $kerja['File'],
+                        'datakomp' => explode(", ", $kerja['kompetensi'])
                     ];
                 }
+
+                $model1 = new KompModel();
+                $where = "komp_cat LIKE 'W.2%' OR komp_cat LIKE 'W.3%' OR komp_cat LIKE 'W.4%' OR komp_cat LIKE 'P.6%' OR komp_cat LIKE 'P.7%' OR komp_cat LIKE 'P.8%' OR komp_cat LIKE 'P.9%' OR komp_cat LIKE 'P.10%' OR komp_cat LIKE 'P.11%'";
+                $data['data_komp'] = $model1->where($where)->orderby('komp_id', 'ASC')->findall();
 
                 $data['title_page'] = "III. KUALIFIKASI PROFESIONAL (W2,W3,W4,P6,P7,P8,P9,P10,P11)";
                 $data['data_bread'] = '';

@@ -48,6 +48,7 @@
                             <th>Lingkup Kegiatan Organisasi</th>
                             <th>Aktifitas Dalam Organisasi</th>
                             <th>Bukti Menjadi Pengurus</th>
+                            <th>Klaim Kompetensi</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -149,6 +150,7 @@
                             <td><?= $org['Desc'];?></td>
                             <td><a href="<?=base_url();?>/uploads/docs/<?=$org['File'];?>"
                                     target="_blank"><?= $org['File'];?></a></td>
+                            <td><?= $org['kompetensi'];?></td>
                             <td style="text-align: center"><a
                                     href="<?php echo base_url();?>/userfair13/ubahorg/<?=$org['Num'];?>"
                                     class="btn btn-warning"> <i class="fas fa-file-signature"></i> Ubah</a>

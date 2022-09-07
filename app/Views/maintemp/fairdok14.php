@@ -45,6 +45,7 @@
                             <th>Penghargaan yang diterima tingkat</th>
                             <th>Penghargaan diberikan oleh lembaga</th>
                             <th>Uraian Singkat Tanda Penghargaan</th>
+                            <th>Klaim Kompetensi</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -134,6 +135,7 @@
                                 ?>
                             </td>
                             <td><?= $penghargaan['Desc'];?></td>
+                            <td><?= $penghargaan['kompetensi'];?></td>
                             <td style="text-align: center"><a
                                     href="<?php echo base_url();?>/userfair14/ubahpenghargaan/<?=$penghargaan['Num'];?>"
                                     class="btn btn-warning"> <i class="fas fa-file-signature"></i> Ubah</a>

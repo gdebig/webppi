@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\PenghargaanModel;
+use App\Models\KompModel;
 use App\Libraries\Slug;
 
 class Userfair14 extends BaseController
@@ -49,6 +50,11 @@ class Userfair14 extends BaseController
             $session->set('role', 'peserta');
         }
         helper(['tanggal']);
+
+        $model1 = new KompModel();
+        $where = "komp_cat LIKE 'W.1%'";
+        $data['data_komp'] = $model1->where($where)->orderby('komp_id', 'ASC')->findall();
+
         $data['title_page'] = "I.4. Tanda Penghargaan Yang Diterima (W1)";
         $data['data_bread'] = '';
         $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Tambah Penghargaan</li>';
@@ -153,6 +159,49 @@ class Userfair14 extends BaseController
                 $InstituteType = $this->request->getVar('InstituteType');
                 $Desc = $this->request->getVar('Desc');
                 $File = $this->request->getFile('File');
+                $komp = $this->request->getVar('komp14');
+
+                $nilai_p = 0;
+                $nilai_q = 0;
+                $nilai_r = 0;
+                $stringkp = '';
+                $totarray = count($komp);
+                $i=0;
+                foreach ($komp as $kp) :
+                    $i++;
+                    $nilai_p = $nilai_p + 1;
+                    switch ($Level){
+                        case "Mud":
+                            $nilai_q = $nilai_q + 2;
+                            break;
+                        case "Mad":
+                            $nilai_q = $nilai_q + 3;
+                            break;
+                        case "Uta":
+                            $nilai_q = $nilai_q + 4;
+                            break;
+                    }
+                    switch ($InstituteType){
+                        case "Lok":
+                            $nilai_r = $nilai_r+1;
+                            break;
+                        case "Nas":
+                            $nilai_r = $nilai_r+2;
+                            break;
+                        case "Reg":
+                            $nilai_r = $nilai_r+3;
+                            break;
+                        case "Int":
+                            $nilai_r = $nilai_r+4;
+                            break;
+                    }
+                    if ($i!=$totarray){
+                        $stringkp = $stringkp.$kp.', ';
+                    }else{
+                        $stringkp = $stringkp.$kp;
+                    }
+                endforeach;
+                $nilai_w1 = $nilai_q * $nilai_r;
                 
                 $namapenghargaan = $slug->slugify($Name);
                 $ext = $File->getClientExtension();
@@ -176,6 +225,11 @@ class Userfair14 extends BaseController
                     'InstituteType' => $InstituteType,
                     'Desc' => $Desc,
                     'File' => $filename,
+                    'kompetensi' => $stringkp,
+                    'nilai_p' => $nilai_p,
+                    'nilai_q' => $nilai_q,
+                    'nilai_r' => $nilai_r,
+                    'nilai_w1' => $nilai_w1,
                     'date_created' => date('Y-m-d'),
                     'date_modified' => date('Y-m-d')
                 );
@@ -185,6 +239,13 @@ class Userfair14 extends BaseController
     
                 return redirect()->to('/userfair14/docs');
             }else{
+
+                $data['datakomp'] = $this->request->getVar('komp14');
+
+                $model1 = new KompModel();
+                $where = "komp_cat LIKE 'W.1%'";
+                $data['data_komp'] = $model1->where($where)->orderby('komp_id', 'ASC')->findall();
+        
                 $data['title_page'] = "I.4. Tanda Penghargaan Yang Diterima (W1)";
                 $data['data_bread'] = '';
                 $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Tambah Penghargaan</li>';
@@ -245,9 +306,15 @@ class Userfair14 extends BaseController
                 'Level' => $penghargaan['Level'],
                 'InstituteType' => $penghargaan['InstituteType'],
                 'Desc' => $penghargaan['Desc'],
-                'File' => $penghargaan['File']
+                'File' => $penghargaan['File'],
+                'datakomp' => explode(", ", $penghargaan['kompetensi'])
             ];
         }
+
+        $model1 = new KompModel();
+        $where = "komp_cat LIKE 'W.1%'";
+        $data['data_komp'] = $model1->where($where)->orderby('komp_id', 'ASC')->findall();
+
         $data['title_page'] = "I.4. Tanda Penghargaan Yang Diterima (W1)";
         $data['data_bread'] = '';
         $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Ubah Penghargaan</li>';
@@ -348,6 +415,49 @@ class Userfair14 extends BaseController
                 $InstituteType = $this->request->getVar('InstituteType');
                 $Desc = $this->request->getVar('Desc');
                 $File = $this->request->getFile('File');
+                $komp = $this->request->getVar('komp14');
+
+                $nilai_p = 0;
+                $nilai_q = 0;
+                $nilai_r = 0;
+                $stringkp = '';
+                $totarray = count($komp);
+                $i=0;
+                foreach ($komp as $kp) :
+                    $i++;
+                    $nilai_p = $nilai_p + 1;
+                    switch ($Level){
+                        case "Mud":
+                            $nilai_q = $nilai_q + 2;
+                            break;
+                        case "Mad":
+                            $nilai_q = $nilai_q + 3;
+                            break;
+                        case "Uta":
+                            $nilai_q = $nilai_q + 4;
+                            break;
+                    }
+                    switch ($InstituteType){
+                        case "Lok":
+                            $nilai_r = $nilai_r+1;
+                            break;
+                        case "Nas":
+                            $nilai_r = $nilai_r+2;
+                            break;
+                        case "Reg":
+                            $nilai_r = $nilai_r+3;
+                            break;
+                        case "Int":
+                            $nilai_r = $nilai_r+4;
+                            break;
+                    }
+                    if ($i!=$totarray){
+                        $stringkp = $stringkp.$kp.', ';
+                    }else{
+                        $stringkp = $stringkp.$kp;
+                    }
+                endforeach;
+                $nilai_w1 = $nilai_q * $nilai_r;
 
                 $namapenghargaan = $slug->slugify($Name);
                 $ext = $File->getClientExtension();
@@ -379,6 +489,11 @@ class Userfair14 extends BaseController
                     'InstituteType' => $InstituteType,
                     'Desc' => $Desc,
                     'File' => $filenamenew,
+                    'kompetensi' => $stringkp,
+                    'nilai_p' => $nilai_p,
+                    'nilai_q' => $nilai_q,
+                    'nilai_r' => $nilai_r,
+                    'nilai_w1' => $nilai_w1,
                     'date_modified' => date('Y-m-d')
                 );
 
@@ -404,9 +519,15 @@ class Userfair14 extends BaseController
                         'Level' => $penghargaan['Level'],
                         'InstituteType' => $penghargaan['InstituteType'],
                         'Desc' => $penghargaan['Desc'],
-                        'File' => $penghargaan['File']
+                        'File' => $penghargaan['File'],
+                        'datakomp' => explode(", ", $penghargaan['kompetensi'])
                     ];
                 }
+
+                $model1 = new KompModel();
+                $where = "komp_cat LIKE 'W.1%'";
+                $data['data_komp'] = $model1->where($where)->orderby('komp_id', 'ASC')->findall();
+        
                 $data['title_page'] = "I.4. Tanda Penghargaan Yang Diterima (W1)";
                 $data['data_bread'] = '';
                 $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Ubah Penghargaan</li>';

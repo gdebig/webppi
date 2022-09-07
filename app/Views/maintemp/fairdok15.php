@@ -46,6 +46,7 @@
                             <th>Jumlah Jam</th>
                             <th>Uraian Singkat Materi Pendidikan/Pelatihan, Tingkat Pendidikan/Pelatihan</th>
                             <th>Bukti Pendidikan/Pelatihan</th>
+                            <th>Kompetensi</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -97,6 +98,7 @@
                                 echo "";
                             }
                             ?></td>
+                            <td><?= $latih['kompetensi'];?></td>
                             <td style="text-align: center"><a
                                     href="<?php echo base_url();?>/userfair15/ubahlatih/<?=$latih['Num'];?>"
                                     class="btn btn-warning"> <i class="fas fa-file-signature"></i> Ubah</a>

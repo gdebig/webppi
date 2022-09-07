@@ -45,6 +45,7 @@
                             <th>Tingkat Kesulitan dan Manfaat</th>
                             <th>Uraian Singkat Materi Makalah/Tulisan</th>
                             <th>Bukti Seminar</th>
+                            <th>Klaim Kompetensi</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -91,6 +92,7 @@
                             <td><?= $sem['Desc'];?></td>
                             <td><a href="<?=base_url();?>/uploads/docs/<?=$sem['File'];?>"
                                     target="_blank"><?= $sem['File'];?></a></td>
+                            <td><?= $sem['kompetensi'];?></td>
                             <td style="text-align: center"><a
                                     href="<?php echo base_url();?>/userfair53/ubahsem/<?=$sem['Num'];?>"
                                     class="btn btn-warning"> <i class="fas fa-file-signature"></i> Ubah</a>

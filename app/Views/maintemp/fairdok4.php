@@ -46,6 +46,7 @@
                             <th>Jumlah JAM atau S.K.S</th>
                             <th>Uraian Singkat yang Diajarkan/Dikembangkan</th>
                             <th>Bukti Pengalaman Mengajar</th>
+                            <th>Klaim Kompetensi</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -107,6 +108,7 @@
                                 echo "";
                             }
                             ?></td>
+                            <td><?= $kerja['kompetensi'];?></td>
                             <td style="text-align: center"><a
                                     href="<?php echo base_url();?>/userfair4/ubahajar/<?=$kerja['Num'];?>"
                                     class="btn btn-warning"> <i class="fas fa-file-signature"></i> Ubah</a>

@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\MengajarModel;
+use App\Models\KompModel;
 use App\Libraries\Slug;
 
 class Userfair4 extends BaseController
@@ -49,6 +50,10 @@ class Userfair4 extends BaseController
         }else{
             $session->set('role', 'peserta');
         }
+
+        $model1 = new KompModel();
+        $where = "komp_cat LIKE 'W.2%' OR komp_cat LIKE 'W.3%' OR komp_cat LIKE 'W.4%' OR komp_cat LIKE 'P.5%'";
+        $data['data_komp'] = $model1->where($where)->orderby('komp_id', 'ASC')->findall();
 
         $data['title_page'] = "IV. Pengalaman Mengajar Pelajaran Keinsinyuran dan/atau Manajemen dan/atau Pengalaman Mengembangkan Pendidikan/Pelatihan Keinsinyuran dan/atau Manajemen (W2,W3,W4,P5)";
         $data['data_bread'] = '';
@@ -177,6 +182,54 @@ class Userfair4 extends BaseController
                 $Skshour = $this->request->getVar('Skshour');
                 $Desc = $this->request->getVar('Desc');
                 $File = $this->request->getFile('File');
+                $komp = $this->request->getVar('komp4');
+
+                $nilai_p = 0;
+                $nilai_q = 0;
+                $nilai_r = 0;
+                $stringkp = '';
+                $totarray = count($komp);
+                $i=0;
+                foreach ($komp as $kp) :
+                    $nilai_q = $nilai_q + 2;
+                    if ((substr($kp, 0, 3)=='W.2') OR (substr($kp, 0, 3)=='W.3') OR (substr($kp, 0, 3)=='W.4') OR (substr($kp, 0, 1)=='P')){
+                        switch ($Period){
+                            case 'smp9':
+                                $nilai_p = $nilai_p + 1;
+                                break;
+                            case 'smp14':
+                                $nilai_p = $nilai_p + 2;
+                                break;
+                            case 'smpe19':
+                                $nilai_p = $nilai_p + 3;
+                                break;
+                            case 'lbih20':
+                                $nilai_p = $nilai_p + 4;
+                                break;
+                        }
+                        switch ($Skshour){
+                            case 'sks1':
+                                $nilai_r = $nilai_r + 1;
+                                break;
+                            case 'sks2':
+                                $nilai_r = $nilai_r + 2;
+                                break;
+                            case 'sks3':
+                                $nilai_r = $nilai_r + 3;
+                                break;
+                        }
+                    }
+                    $i++;
+                    if ($i!=$totarray){
+                        $stringkp = $stringkp.$kp.', ';
+                    }else{
+                        $stringkp = $stringkp.$kp;
+                    }
+                endforeach;
+                $nilai_w2 = $nilai_p * $nilai_q * $nilai_r;
+                $nilai_w3 = $nilai_p * $nilai_q * $nilai_r;
+                $nilai_w4 = $nilai_p * $nilai_q * $nilai_r;
+                $nilai_pil = $nilai_p * $nilai_q * $nilai_r;
                 
                 $ext = $File->getClientExtension();
                 if (!empty($ext)){
@@ -202,6 +255,14 @@ class Userfair4 extends BaseController
                     'Skshour' => $Skshour,
                     'Desc' => $Desc,
                     'File' => $filename,
+                    'kompetensi' => $stringkp,
+                    'nilai_p' => $nilai_p,
+                    'nilai_q' => $nilai_q,
+                    'nilai_r' => $nilai_r,
+                    'nilai_w2' => $nilai_w2,
+                    'nilai_w3' => $nilai_w3,
+                    'nilai_w4' => $nilai_w4,
+                    'nilai_pil' => $nilai_pil,
                     'date_created' => date('Y-m-d'),
                     'date_modified' => date('Y-m-d')
                 );
@@ -211,6 +272,12 @@ class Userfair4 extends BaseController
     
                 return redirect()->to('/userfair4/docs');
             }else{
+
+                $data['datakomp'] = $this->request->getVar('komp4');
+
+                $model1 = new KompModel();
+                $where = "komp_cat LIKE 'W.2%' OR komp_cat LIKE 'W.3%' OR komp_cat LIKE 'W.4%' OR komp_cat LIKE 'P.5%'";
+                $data['data_komp'] = $model1->where($where)->orderby('komp_id', 'ASC')->findall();
 
                 $data['title_page'] = "IV. Pengalaman Mengajar Pelajaran Keinsinyuran dan/atau Manajemen dan/atau Pengalaman Mengembangkan Pendidikan/Pelatihan Keinsinyuran dan/atau Manajemen (W2,W3,W4,P5)";
                 $data['data_bread'] = '';
@@ -270,9 +337,14 @@ class Userfair4 extends BaseController
                 'Position' => $kerja['Position'],
                 'Skshour' => $kerja['Skshour'],
                 'Desc' => $kerja['Desc'],
-                'File' => $kerja['File']
+                'File' => $kerja['File'],
+                'datakomp' => explode(", ", $kerja['kompetensi'])
             ];
         }
+
+        $model1 = new KompModel();
+        $where = "komp_cat LIKE 'W.2%' OR komp_cat LIKE 'W.3%' OR komp_cat LIKE 'W.4%' OR komp_cat LIKE 'P.5%'";
+        $data['data_komp'] = $model1->where($where)->orderby('komp_id', 'ASC')->findall();
 
         $data['title_page'] = "IV. Pengalaman Mengajar Pelajaran Keinsinyuran dan/atau Manajemen dan/atau Pengalaman Mengembangkan Pendidikan/Pelatihan Keinsinyuran dan/atau Manajemen (W2,W3,W4,P5)";
         $data['data_bread'] = '';
@@ -403,6 +475,54 @@ class Userfair4 extends BaseController
                 $Skshour = $this->request->getVar('Skshour');
                 $Desc = $this->request->getVar('Desc');
                 $File = $this->request->getFile('File');
+                $komp = $this->request->getVar('komp4');
+
+                $nilai_p = 0;
+                $nilai_q = 0;
+                $nilai_r = 0;
+                $stringkp = '';
+                $totarray = count($komp);
+                $i=0;
+                foreach ($komp as $kp) :
+                    $nilai_q = $nilai_q + 2;
+                    if ((substr($kp, 0, 3)=='W.2') OR (substr($kp, 0, 3)=='W.3') OR (substr($kp, 0, 3)=='W.4') OR (substr($kp, 0, 1)=='P')){
+                        switch ($Period){
+                            case 'smp9':
+                                $nilai_p = $nilai_p + 1;
+                                break;
+                            case 'smp14':
+                                $nilai_p = $nilai_p + 2;
+                                break;
+                            case 'smpe19':
+                                $nilai_p = $nilai_p + 3;
+                                break;
+                            case 'lbih20':
+                                $nilai_p = $nilai_p + 4;
+                                break;
+                        }
+                        switch ($Skshour){
+                            case 'sks1':
+                                $nilai_r = $nilai_r + 1;
+                                break;
+                            case 'sks2':
+                                $nilai_r = $nilai_r + 2;
+                                break;
+                            case 'sks4':
+                                $nilai_r = $nilai_r + 3;
+                                break;
+                        }
+                    }
+                    $i++;
+                    if ($i!=$totarray){
+                        $stringkp = $stringkp.$kp.', ';
+                    }else{
+                        $stringkp = $stringkp.$kp;
+                    }
+                endforeach;
+                $nilai_w2 = $nilai_p * $nilai_q * $nilai_r;
+                $nilai_w3 = $nilai_p * $nilai_q * $nilai_r;
+                $nilai_w4 = $nilai_p * $nilai_q * $nilai_r;
+                $nilai_pil = $nilai_p * $nilai_q * $nilai_r;
 
                 $namainstansi = $slug->slugify($Institution);
                 $namamk = $slug->slugify($Name);
@@ -436,6 +556,14 @@ class Userfair4 extends BaseController
                     'Skshour' => $Skshour,
                     'Desc' => $Desc,
                     'File' => $filenamenew,
+                    'kompetensi' => $stringkp,
+                    'nilai_p' => $nilai_p,
+                    'nilai_q' => $nilai_q,
+                    'nilai_r' => $nilai_r,
+                    'nilai_w2' => $nilai_w2,
+                    'nilai_w3' => $nilai_w3,
+                    'nilai_w4' => $nilai_w4,
+                    'nilai_pil' => $nilai_pil,
                     'date_modified' => date('Y-m-d')
                 );
 
@@ -462,16 +590,21 @@ class Userfair4 extends BaseController
                         'Position' => $kerja['Position'],
                         'Skshour' => $kerja['Skshour'],
                         'Desc' => $kerja['Desc'],
-                        'File' => $kerja['File']
+                        'File' => $kerja['File'],
+                        'datakomp' => explode(", ", $kerja['kompetensi'])
                     ];
                 }
+        
+                $model1 = new KompModel();
+                $where = "komp_cat LIKE 'W.2%' OR komp_cat LIKE 'W.3%' OR komp_cat LIKE 'W.4%' OR komp_cat LIKE 'P.5%'";
+                $data['data_komp'] = $model1->where($where)->orderby('komp_id', 'ASC')->findall();
 
                 $data['title_page'] = "IV. Pengalaman Mengajar Pelajaran Keinsinyuran dan/atau Manajemen dan/atau Pengalaman Mengembangkan Pendidikan/Pelatihan Keinsinyuran dan/atau Manajemen (W2,W3,W4,P5)";
                 $data['data_bread'] = '';
                 $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Ubah Pengalaman Mengajar</li>';
                 $data['logged_in'] = $session->get('logged_in');
                 $data['validation'] = $this->validator;
-                return view('maintemp/ubahkerja', $data);
+                return view('maintemp/ubahajar', $data);
             }
         }        
     }

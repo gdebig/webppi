@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\CapesKartulModel;
+use App\Models\KompModel;
 use App\Libraries\Slug;
 
 class Userfair51 extends BaseController
@@ -33,7 +34,7 @@ class Userfair51 extends BaseController
             $data['data_kartul'] = 'kosong';
         }
 
-        $data['title_page'] = "V.1. Karya Tulis di Bidang Keinsinyuran yang Dipublikasikan (W4)";
+        $data['title_page'] = "V.5.1. Karya Tulis di Bidang Keinsinyuran yang Dipublikasikan (W4)";
         $data['data_bread'] = '';
         $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Karya Tulis</li>';
         $data['logged_in'] = $session->get('logged_in');
@@ -50,7 +51,11 @@ class Userfair51 extends BaseController
             $session->set('role', 'peserta');
         }
 
-        $data['title_page'] = "V.1. Karya Tulis di Bidang Keinsinyuran yang Dipublikasikan (W4)";
+        $model1 = new KompModel();
+        $where = "komp_cat LIKE 'W.4%'";
+        $data['data_komp'] = $model1->where($where)->orderby('komp_id', 'ASC')->findall();
+
+        $data['title_page'] = "V.5.1. Karya Tulis di Bidang Keinsinyuran yang Dipublikasikan (W4)";
         $data['data_bread'] = '';
         $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Tambah Karya Tulis</li>';
         $data['logged_in'] = $session->get('logged_in');
@@ -161,6 +166,49 @@ class Userfair51 extends BaseController
                 $Diffbenefit = $this->request->getVar('Diffbenefit');
                 $Desc = $this->request->getVar('Desc');
                 $File = $this->request->getFile('File');
+                $komp = $this->request->getVar('komp51');
+
+                $nilai_p = 0;
+                $nilai_q = 0;
+                $nilai_r = 0;
+                $stringkp = '';
+                $totarray = count($komp);
+                $i=0;
+                foreach ($komp as $kp) :
+                    $nilai_p = $nilai_p + 1;
+                    switch ($Mediatype){
+                        case "Lok":
+                            $nilai_q = $nilai_q + 1;
+                            break;
+                        case "Nas":
+                            $nilai_q = $nilai_q + 2;
+                            break;
+                        case "Int":
+                            $nilai_q = $nilai_q + 4;
+                            break;
+                    }
+                    switch ($Diffbenefit){
+                        case "ren":
+                            $nilai_r = $nilai_r + 1;
+                            break;
+                        case "sed":
+                            $nilai_r = $nilai_r + 2;
+                            break;
+                        case "tin":
+                            $nilai_r = $nilai_r + 3;
+                            break;
+                        case "stin":
+                            $nilai_r = $nilai_r + 4;
+                            break;
+                    }
+                    $i++;
+                    if ($i!=$totarray){
+                        $stringkp = $stringkp.$kp.', ';
+                    }else{
+                        $stringkp = $stringkp.$kp;
+                    }
+                endforeach;
+                $nilai_w4 = $nilai_p * $nilai_q * $nilai_r;
                 
                 $mediakartul = $slug->slugify($Media);
                 $ext = $File->getClientExtension();
@@ -184,6 +232,11 @@ class Userfair51 extends BaseController
                     'Diffbenefit' => $Diffbenefit,
                     'Desc' => $Desc,
                     'File' => $filename,
+                    'kompetensi' => $stringkp,
+                    'nilai_p' => $nilai_p,
+                    'nilai_q' => $nilai_q,
+                    'nilai_r' => $nilai_r,
+                    'nilai_w4' => $nilai_w4,
                     'date_created' => date('Y-m-d'),
                     'date_modified' => date('Y-m-d')
                 );
@@ -193,8 +246,13 @@ class Userfair51 extends BaseController
     
                 return redirect()->to('/userfair51/docs');
             }else{
+                $data['datakomp'] = $this->request->getVar('komp51');
 
-                $data['title_page'] = "V.1. Karya Tulis di Bidang Keinsinyuran yang Dipublikasikan (W4)";
+                $model1 = new KompModel();
+                $where = "komp_cat LIKE 'W.4%'";
+                $data['data_komp'] = $model1->where($where)->orderby('komp_id', 'ASC')->findall();
+
+                $data['title_page'] = "V.5.1. Karya Tulis di Bidang Keinsinyuran yang Dipublikasikan (W4)";
                 $data['data_bread'] = '';
                 $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Tambah Karya Tulis</li>';
                 $data['logged_in'] = $session->get('logged_in');
@@ -250,11 +308,16 @@ class Userfair51 extends BaseController
                 'Mediatype' => $kartul['Mediatype'],
                 'Diffbenefit' => $kartul['Diffbenefit'],
                 'Desc' => $kartul['Desc'],
-                'File' => $kartul['File']
+                'File' => $kartul['File'],
+                'datakomp' => explode(", ", $kartul['kompetensi'])
             ];
         }
 
-        $data['title_page'] = "V.1. Karya Tulis di Bidang Keinsinyuran yang Dipublikasikan (W4)";
+        $model1 = new KompModel();
+        $where = "komp_cat LIKE 'W.4%'";
+        $data['data_komp'] = $model1->where($where)->orderby('komp_id', 'ASC')->findall();
+
+        $data['title_page'] = "V.5.1. Karya Tulis di Bidang Keinsinyuran yang Dipublikasikan (W4)";
         $data['data_bread'] = '';
         $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Ubah Karya Tulis</li>';
         $data['logged_in'] = $session->get('logged_in');
@@ -367,6 +430,49 @@ class Userfair51 extends BaseController
                 $Diffbenefit = $this->request->getVar('Diffbenefit');
                 $Desc = $this->request->getVar('Desc');
                 $File = $this->request->getFile('File');
+                $komp = $this->request->getVar('komp51');
+
+                $nilai_p = 0;
+                $nilai_q = 0;
+                $nilai_r = 0;
+                $stringkp = '';
+                $totarray = count($komp);
+                $i=0;
+                foreach ($komp as $kp) :
+                    $nilai_p = $nilai_p + 1;
+                    switch ($Mediatype){
+                        case "Lok":
+                            $nilai_q = $nilai_q + 1;
+                            break;
+                        case "Nas":
+                            $nilai_q = $nilai_q + 2;
+                            break;
+                        case "Int":
+                            $nilai_q = $nilai_q + 4;
+                            break;
+                    }
+                    switch ($Diffbenefit){
+                        case "ren":
+                            $nilai_r = $nilai_r + 1;
+                            break;
+                        case "sed":
+                            $nilai_r = $nilai_r + 2;
+                            break;
+                        case "tin":
+                            $nilai_r = $nilai_r + 3;
+                            break;
+                        case "stin":
+                            $nilai_r = $nilai_r + 4;
+                            break;
+                    }
+                    $i++;
+                    if ($i!=$totarray){
+                        $stringkp = $stringkp.$kp.', ';
+                    }else{
+                        $stringkp = $stringkp.$kp;
+                    }
+                endforeach;
+                $nilai_w4 = $nilai_p * $nilai_q * $nilai_r;
 
                 $mediakartul = $slug->slugify($Media);
                 $ext = $File->getClientExtension();
@@ -399,6 +505,11 @@ class Userfair51 extends BaseController
                     'Diffbenefit' => $Diffbenefit,
                     'Desc' => $Desc,
                     'File' => $filenamenew,
+                    'kompetensi' => $stringkp,
+                    'nilai_p' => $nilai_p,
+                    'nilai_q' => $nilai_q,
+                    'nilai_r' => $nilai_r,
+                    'nilai_w4' => $nilai_w4,
                     'date_modified' => date('Y-m-d')
                 );
 
@@ -420,11 +531,16 @@ class Userfair51 extends BaseController
                         'Mediatype' => $kartul['Mediatype'],
                         'Diffbenefit' => $kartul['Diffbenefit'],
                         'Desc' => $kartul['Desc'],
-                        'File' => $kartul['File']
+                        'File' => $kartul['File'],
+                        'datakomp' => explode(", ", $kartul['kompetensi'])
                     ];
                 }
+        
+                $model1 = new KompModel();
+                $where = "komp_cat LIKE 'W.4%'";
+                $data['data_komp'] = $model1->where($where)->orderby('komp_id', 'ASC')->findall();
 
-                $data['title_page'] = "V.1. Karya Tulis di Bidang Keinsinyuran yang Dipublikasikan (W4)";
+                $data['title_page'] = "V.5.1. Karya Tulis di Bidang Keinsinyuran yang Dipublikasikan (W4)";
                 $data['data_bread'] = '';
                 $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Ubah Karya Tulis</li>';
                 $data['logged_in'] = $session->get('logged_in');

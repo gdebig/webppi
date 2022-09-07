@@ -164,10 +164,10 @@
                             placeholder="Uraian Singkat..."></textarea>
                     </div>
                     <br />
-                    <label for="komp16" class="element">Kompetensi (Gunakan tombol ctrl + klik kiri mouse untuk memilih
+                    <label for="komp3" class="element">Kompetensi (Gunakan tombol ctrl + klik kiri mouse untuk memilih
                         lebih dari satu kompetensi)<span class="required"> *</span>&nbsp; </label>
                     <div class="element">
-                        <select multiple class="form-control" name="komp16[]" id="komp16" size="10">
+                        <select multiple class="form-control" name="komp3[]" id="komp3" size="10">
                             <?php
                             $i=1;
                             $prev_cat = array();

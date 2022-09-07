@@ -47,6 +47,7 @@
                             <th>Tingkat Kesulitan dan Manfaatnya</th>
                             <th>Uraian Singkat Materi yang Dipublikasikan</th>
                             <th>Bukti Karya Tulis</th>
+                            <th>Klaim Kompetensi</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -93,6 +94,7 @@
                             <td><?= $kartul['Desc'];?></td>
                             <td><a href="<?=base_url();?>/uploads/docs/<?=$kartul['File'];?>"
                                     target="_blank"><?= $kartul['File'];?></a></td>
+                            <td><?= $kartul['kompetensi'];?></td>
                             <td style="text-align: center"><a
                                     href="<?php echo base_url();?>/userfair51/ubahkartul/<?=$kartul['Num'];?>"
                                     class="btn btn-warning"> <i class="fas fa-file-signature"></i> Ubah</a>

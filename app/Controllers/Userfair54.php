@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\InovasiModel;
+use App\Models\KompModel;
 use App\Libraries\Slug;
 
 class Userfair54 extends BaseController
@@ -49,6 +50,10 @@ class Userfair54 extends BaseController
         }else{
             $session->set('role', 'peserta');
         }
+
+        $model1 = new KompModel();
+        $where = "komp_cat LIKE 'P.6%'";
+        $data['data_komp'] = $model1->where($where)->orderby('komp_id', 'ASC')->findall();
 
         $data['title_page'] = "V.4 Karya Temuan/Inovasi/Paten dan Implementasi Teknologi Baru (P6)";
         $data['data_bread'] = '';
@@ -124,6 +129,49 @@ class Userfair54 extends BaseController
                 $PubLevel = $this->request->getVar('PubLevel');
                 $DiffBenefit = $this->request->getVar('DiffBenefit');
                 $File = $this->request->getFile('File');
+                $komp = $this->request->getVar('komp54');
+
+                $nilai_p = 0;
+                $nilai_q = 0;
+                $nilai_r = 0;
+                $stringkp = '';
+                $totarray = count($komp);
+                $i=0;
+                foreach ($komp as $kp) :
+                    $nilai_p = $nilai_p + 1;
+                    switch ($Level){
+                        case "Lok":
+                            $nilai_q = $nilai_q + 2;
+                            break;
+                        case "Nas":
+                            $nilai_q = $nilai_q + 3;
+                            break;
+                        case "Int":
+                            $nilai_q = $nilai_q + 4;
+                            break;
+                    }
+                    switch ($DiffBenefit){
+                        case "ren":
+                            $nilai_r = $nilai_r + 1;
+                            break;
+                        case "sed":
+                            $nilai_r = $nilai_r + 2;
+                            break;
+                        case "tin":
+                            $nilai_r = $nilai_r + 3;
+                            break;
+                        case "stin":
+                            $nilai_r = $nilai_r + 4;
+                            break;
+                    }
+                    $i++;
+                    if ($i!=$totarray){
+                        $stringkp = $stringkp.$kp.', ';
+                    }else{
+                        $stringkp = $stringkp.$kp;
+                    }
+                endforeach;
+                $nilai_pil = $nilai_p * $nilai_q * $nilai_r;
                 
                 $namainovasi = $slug->slugify($Name);
                 $ext = $File->getClientExtension();
@@ -145,6 +193,11 @@ class Userfair54 extends BaseController
                     'PubLevel' => $PubLevel,
                     'DiffBenefit' => $DiffBenefit,
                     'File' => $filename,
+                    'kompetensi' => $stringkp,
+                    'nilai_p' => $nilai_p,
+                    'nilai_q' => $nilai_q,
+                    'nilai_r' => $nilai_r,
+                    'nilai_pil' => $nilai_pil,
                     'date_created' => date('Y-m-d'),
                     'date_modified' => date('Y-m-d')
                 );
@@ -154,6 +207,11 @@ class Userfair54 extends BaseController
     
                 return redirect()->to('/userfair54/docs');
             }else{
+                $data['datakomp'] = $this->request->getVar('komp54');
+
+                $model1 = new KompModel();
+                $where = "komp_cat LIKE 'P.6%'";
+                $data['data_komp'] = $model1->where($where)->orderby('komp_id', 'ASC')->findall();
 
                 $data['title_page'] = "V.4 Karya Temuan/Inovasi/Paten dan Implementasi Teknologi Baru (P6)";
                 $data['data_bread'] = '';
@@ -209,9 +267,14 @@ class Userfair54 extends BaseController
                 'PubLevel' => $inov['PubLevel'],
                 'DiffBenefit' => $inov['DiffBenefit'],
                 'Desc' => $inov['Desc'],
-                'File' => $inov['File']
+                'File' => $inov['File'],
+                'datakomp' => explode(", ", $inov['kompetensi'])
             ];
         }
+
+        $model1 = new KompModel();
+        $where = "komp_cat LIKE 'P.6%'";
+        $data['data_komp'] = $model1->where($where)->orderby('komp_id', 'ASC')->findall();
 
         $data['title_page'] = "V.4 Karya Temuan/Inovasi/Paten dan Implementasi Teknologi Baru (P6)";
         $data['data_bread'] = '';
@@ -289,6 +352,49 @@ class Userfair54 extends BaseController
                 $PubLevel = $this->request->getVar('PubLevel');
                 $DiffBenefit = $this->request->getVar('DiffBenefit');
                 $File = $this->request->getFile('File');
+                $komp = $this->request->getVar('komp54');
+
+                $nilai_p = 0;
+                $nilai_q = 0;
+                $nilai_r = 0;
+                $stringkp = '';
+                $totarray = count($komp);
+                $i=0;
+                foreach ($komp as $kp) :
+                    $nilai_p = $nilai_p + 1;
+                    switch ($PubLevel){
+                        case "Lok":
+                            $nilai_q = $nilai_q + 2;
+                            break;
+                        case "Nas":
+                            $nilai_q = $nilai_q + 3;
+                            break;
+                        case "Int":
+                            $nilai_q = $nilai_q + 4;
+                            break;
+                    }
+                    switch ($DiffBenefit){
+                        case "ren":
+                            $nilai_r = $nilai_r + 1;
+                            break;
+                        case "sed":
+                            $nilai_r = $nilai_r + 2;
+                            break;
+                        case "tin":
+                            $nilai_r = $nilai_r + 3;
+                            break;
+                        case "stin":
+                            $nilai_r = $nilai_r + 4;
+                            break;
+                    }
+                    $i++;
+                    if ($i!=$totarray){
+                        $stringkp = $stringkp.$kp.', ';
+                    }else{
+                        $stringkp = $stringkp.$kp;
+                    }
+                endforeach;
+                $nilai_pil = $nilai_p * $nilai_q * $nilai_r;
 
                 $namainovasi = $slug->slugify($Name);
                 $ext = $File->getClientExtension();
@@ -319,6 +425,11 @@ class Userfair54 extends BaseController
                     'PubLevel' => $PubLevel,
                     'DiffBenefit' => $DiffBenefit,
                     'File' => $filenamenew,
+                    'kompetensi' => $stringkp,
+                    'nilai_p' => $nilai_p,
+                    'nilai_q' => $nilai_q,
+                    'nilai_r' => $nilai_r,
+                    'nilai_pil' => $nilai_pil,
                     'date_modified' => date('Y-m-d')
                 );
 
@@ -339,9 +450,14 @@ class Userfair54 extends BaseController
                         'PubLevel' => $inov['PubLevel'],
                         'DiffBenefit' => $inov['DiffBenefit'],
                         'Desc' => $inov['Desc'],
-                        'File' => $inov['File']
+                        'File' => $inov['File'],
+                        'datakomp' => explode(", ", $inov['kompetensi'])
                     ];
                 }
+        
+                $model1 = new KompModel();
+                $where = "komp_cat LIKE 'P.6%'";
+                $data['data_komp'] = $model1->where($where)->orderby('komp_id', 'ASC')->findall();
 
                 $data['title_page'] = "V.4 Karya Temuan/Inovasi/Paten dan Implementasi Teknologi Baru (P6)";
                 $data['data_bread'] = '';

@@ -101,6 +101,36 @@
                             placeholder="Uraian Singkat..."></textarea>
                     </div>
                     <br />
+                    <label for="komp51" class="element">Kompetensi (Gunakan tombol ctrl + klik kiri mouse untuk memilih
+                        lebih dari satu kompetensi)<span class="required"> *</span>&nbsp; </label>
+                    <div class="element">
+                        <select multiple class="form-control" name="komp51[]" id="komp51" size="10">
+                            <?php
+                            $i=1;
+                            $prev_cat = array();
+
+                            foreach ($data_komp as $komp) :
+                                $j = $i-1;
+                                $prev_cat[$i] = $komp['komp_cat'];
+                                if (!empty($prev_cat)&&($j!=0)){
+                                    if ($prev_cat[$i]!=$prev_cat[$j]){
+                                        echo "</optgroup>";
+                                    }
+                                }
+                                if ($komp['komp_parent']=='y'){
+                                    echo "<optgroup label='".$komp['komp_code']." ".$komp['komp_desc']."'>";
+                                }else{
+                                    if ($i==1){
+                                    }else{
+                                        echo "<option value='".$komp['komp_code']."' title='".$komp['komp_desc']."'>".$komp['komp_code']." ".$komp['komp_desc']."</option>";
+                                    }
+                                }
+                                $i++;
+                            endforeach;
+                            ?>
+                        </select>
+                    </div>
+                    <br />
                     <label for="File" class="element">Bukti Karya Tulis</label>
                     <div class="element">
                         <input class="form-control" id="File" name="File" type="file" />
