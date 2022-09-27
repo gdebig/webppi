@@ -320,7 +320,7 @@ class Userfair52 extends BaseController
                 'DiffBenefit' => $sem['DiffBenefit'],
                 'Desc' => $sem['Desc'],
                 'File' => $sem['File'],
-                'datakomp' => explode(", ", $kartul['kompetensi'])
+                'datakomp' => explode(", ", $sem['kompetensi'])
             ];
         }
 
@@ -555,7 +555,7 @@ class Userfair52 extends BaseController
                         'DiffBenefit' => $sem['DiffBenefit'],
                         'Desc' => $sem['Desc'],
                         'File' => $sem['File'],
-                        'datakomp' => explode(", ", $kartul['kompetensi'])
+                        'datakomp' => explode(", ", $sem['kompetensi'])
                     ];
                 }
         
