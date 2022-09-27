@@ -139,7 +139,7 @@ class Userfair54 extends BaseController
                 $i=0;
                 foreach ($komp as $kp) :
                     $nilai_p = $nilai_p + 1;
-                    switch ($Level){
+                    switch ($PubLevel){
                         case "Lok":
                             $nilai_q = $nilai_q + 2;
                             break;
