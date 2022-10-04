@@ -145,7 +145,11 @@
                                 }else{
                                     if ($i==1){
                                     }else{
-                                        $kompselected = array_search($komp['komp_code'], $datakomp) !== false ? 'selected' : '';
+                                        if (!empty(set_value("komp4"))){
+                                            $kompselected = array_search($komp['komp_code'], set_value("komp4")) !== false ? 'selected' : '';
+                                        }else{
+                                            $kompselected = '';
+                                        }
                                         echo "<option value='".$komp['komp_code']."' title='".$komp['komp_desc']."' ".$kompselected.">".$komp['komp_code']." ".$komp['komp_desc']."</option>";
                                     }
                                 }
