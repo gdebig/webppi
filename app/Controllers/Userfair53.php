@@ -223,7 +223,6 @@ class Userfair53 extends BaseController
                 $data = array(
                     'user_id' => $user_id,
                     'Type' => 'Sem',
-                    'PaperName' => $PaperName,
                     'Name' => $Name,
                     'Organizer' => $Organizer,
                     'LocCity' => $LocCity,
@@ -526,7 +525,6 @@ class Userfair53 extends BaseController
                     $data = [
                         'Num' => $sem['Num'],
                         'user_id' => $sem['user_id'],
-                        'PaperName' => $sem['PaperName'],
                         'Name' => $sem['Name'],
                         'Organizer' => $sem['Organizer'],
                         'LocCity' => $sem['LocCity'],
