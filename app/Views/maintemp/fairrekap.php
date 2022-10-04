@@ -13,17 +13,65 @@
                     <tr>
                         <td width="25%">Nama Peserta</td>
                         <td width="5%" style="text-align: center;">:</td>
-                        <td width="70%">Nama Pemohon</td>
+                        <td width="70%"><?= $FullName;?></td>
                     </tr>
                     <tr>
                         <td width="25%">Badan Kejuruan</td>
                         <td width="5%" style="text-align: center;">:</td>
-                        <td width="70%">Nama Pemohon</td>
+                        <td width="70%"><?php
+                            switch($Vocational){
+                                case 'Ars':
+                                    echo "Arsitektur";
+                                    break;
+                                case 'Ele':
+                                    echo "Teknik Elektro";
+                                    break;
+                                case 'Wil':
+                                    echo "Teknik Kewilayahan dan Perkotaan";
+                                    break;
+                                case 'Ind':
+                                    echo "Teknik Industri";
+                                    break;
+                                case 'Kim':
+                                    echo "Teknik Kimia";
+                                    break;
+                                case 'Mes':
+                                    echo "Teknik Mesin";
+                                    break;
+                                case 'Lin':
+                                    echo "Teknik Lingkungan";
+                                    break;
+                                case 'Sip':
+                                    echo "Teknik Sipil";
+                                    break;
+                                case 'Mat':
+                                    echo "Teknik Material";
+                                    break;
+                                case 'Met':
+                                    echo "Teknik Metalurgi";
+                                    break;
+                                case 'Inf':
+                                    echo "Teknik Informatika";
+                                    break;
+                                case 'Kap':
+                                    echo "Teknik Perkapalan";
+                                    break;
+                                case 'Tra':
+                                    echo "Transportasi";
+                                    break;
+                                case "Kom":
+                                    echo "Teknik Komputer";
+                                    break;
+                                case "Bio":
+                                    echo "Teknik Biomedik";
+                                    break;
+                            }
+                        ?></td>
                     </tr>
                     <tr>
                         <td width="25%">Rekapitulasi Nilai Kegiatan</td>
                         <td width="5%" style="text-align: center;">:</td>
-                        <td width="70%">Nama Pemohon</td>
+                        <td width="70%"></td>
                     </tr>
                 </table>
                 <br /><br />

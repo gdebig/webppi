@@ -13,6 +13,7 @@ use App\Models\CapesKartulModel;
 use App\Models\CapesSemModel;
 use App\Models\InovasiModel;
 use App\Models\BahasaModel;
+use App\Models\ProfileModel;
 use App\Libraries\Slug;
 
 class Userfairrekap extends BaseController
@@ -41,6 +42,17 @@ class Userfairrekap extends BaseController
             $data = [
                 'user_id' => $user['user_id'],
                 'confirmfair' => $user['confirmfair']
+            ];
+        }else{
+            $data['kosong'] = "kosong";
+        }
+
+        $model1 = new ProfileModel();
+        $profile = $model1->where('user_id', $user_id)->first();
+        if ($profile){
+            $data = [
+                'FullName' => $profile['FullName'],
+                'Vocational' => $profile['Vocational']
             ];
         }else{
             $data['kosong'] = "kosong";
