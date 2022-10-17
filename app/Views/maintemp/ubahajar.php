@@ -17,7 +17,7 @@
             <form action="<?php echo base_url();?>/userfair4/ubahajarproses" method="post"
                 enctype="multipart/form-data">
                 <input type="hidden" name="Num" id="Num" value="<?= $Num;?>" />
-                <input type="hidden" id="File" name="File" value="<?= $File?>">
+                <input type="hidden" id="filename" name="filename" value="<?= $File?>">
                 <div class="form-group">
                     <label for="StartPeriod" class="element">Tahun Mulai <span class="required"> *</span>&nbsp;
                     </label>
@@ -124,13 +124,6 @@
                     <div class="element">
                         <textarea class="form-control" id="Desc" name="Desc" placeholder="Deskripsi"
                             placeholder="Uraian Singkat..."><?= $Desc;?></textarea>
-                    </div>
-                    <br />
-                    <label for="Desc" class="element">Uraian Singkat Tugas dan Tanggung Jawab Profesional sesuai
-                        NSPK</label>
-                    <div class="element">
-                        <textarea class="form-control" id="Desc" name="Desc" placeholder="Deskripsi"
-                            placeholder="Uraian Singkat..."><?php echo $Desc;?></textarea>
                     </div>
                     <br />
                     <label for="komp4" class="element">Kompetensi (Gunakan tombol ctrl + klik kiri mouse untuk memilih

@@ -316,6 +316,8 @@ class Userfair3 extends BaseController
                 $masihkerja = "";
                 $enddate = $kerja['EndDate'];
             }
+            $Project = explode(".", $kerja['ProjValue']);
+            $str = preg_replace('/[^0-9.]+/', '', $Project[1]);
             $data = [
                 'Num' => $kerja['Num'],
                 'user_id' => $kerja['user_id'],
@@ -331,7 +333,7 @@ class Userfair3 extends BaseController
                 'LocCountry' => $kerja['LocCountry'],
                 'Duration' => $kerja['Duration'],
                 'Jabatan' => $kerja['Jabatan'],
-                'ProjValue' => $kerja['ProjValue'],
+                'ProjValue' => $str,
                 'RspnValue' => $kerja['RspnValue'],
                 'Hresource' => $kerja['Hresource'],
                 'Diff' => $kerja['Diff'],
