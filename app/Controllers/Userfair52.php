@@ -470,7 +470,7 @@ class Userfair52 extends BaseController
                             $nilai_q = $nilai_q + 4;
                             break;
                     }
-                    switch ($Diffbenefit){
+                    /*switch ($Diffbenefit){
                         case "ren":
                             $nilai_r = $nilai_r + 1;
                             break;
@@ -483,7 +483,7 @@ class Userfair52 extends BaseController
                         case "stin":
                             $nilai_r = $nilai_r + 4;
                             break;
-                    }
+                    }*/
                     $i++;
                     if ($i!=$totarray){
                         $stringkp = $stringkp.$kp.', ';
