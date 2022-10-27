@@ -1099,6 +1099,7 @@ class Register extends BaseController
                 $data['title_page'] = "Tambah Data Pendidikan Calon Peserta PPI RPL";
                 $data['data_bread'] = "Tambah Data Pendidikan";
                 $data['capeslogged_in'] = $session->get('capeslogged_in');
+                $data['user_id'] = $user_id;
                 $data['validation'] = $this->validator;
                 return view('register/tambahpendvalid', $data);
             }
