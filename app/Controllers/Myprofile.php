@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\ProfileModel;
+use App\Models\AkunModel;
 
 class Myprofile extends BaseController
 {
@@ -630,6 +631,110 @@ class Myprofile extends BaseController
                 $data['logged_in'] = $session->get('logged_in');
                 $data['validation'] = $this->validator;
                 return view('maintemp/ubahprofile', $data);
+            }
+        }
+    }
+
+    public function ubahpass(){
+        $session = session();
+        $id = $session->get('user_id');
+        $logged_in = $session->get('logged_in');
+        if (!$logged_in){
+            return redirect()->to('/home');
+        }
+        helper(['tanggal']);
+
+        $model = new ProfileModel();
+        $user = $model->where('user_id', $id)->first();
+        if ($user){
+            $data = [
+                'ID' => $user['ID'],
+                'user_id' => $user['user_id'],
+                'FullName' => $user['FullName']
+            ];
+        }
+        $model1 = new AkunModel();
+        $user1 = $model1->where('user_id', $id)->first();
+        if ($user1){
+            $data = [
+                'username' => $user1['username']
+            ];
+        }
+        $data['title_page'] = "Ubah Password";
+        $data['data_bread'] = "Ubah Password";
+        $data['logged_in'] = $session->get('logged_in');
+        return view('maintemp/ubahpass', $data);
+    }
+
+    public function ubahpassproses(){
+        $session = session();
+        $logged_in = $session->get('logged_in');
+        if (!$logged_in){
+            return redirect()->to('/home');
+        }
+        helper(['tanggal']);
+        $user_id = $session->get('user_id');
+
+        $button=$this->request->getVar('submit');
+        
+        if ($button=="batal"){
+            return redirect()->to('/');
+        }else{
+            helper(['form']);
+            $rules = [
+                'oldpass'     => 'required',
+                'newpass'     => 'required|min_length[6]',
+                'confirmpass' => 'required|min_length[6]|matches[newpass]'
+            ];
+            
+            if($this->validate($rules)){
+                $session = session();
+                $model = new AkunModel();
+                $user_id = $session->get('user_id');
+                $oldpass = $this->request->getVar('oldpass');
+                $data = $model->where('user_id', $user_id)->first();
+                if($data){
+                    $pass = $data['password'];
+                    $verify_pass = password_verify($oldpass, $pass);
+                    if($verify_pass){
+                        $newpass = $this->request->getVar('newpass');
+                        $datauser = array(
+                            'password' => password_hash($newpass, PASSWORD_DEFAULT),
+                            'date_modified' => date('Y-m-d H:i:s')
+                        );
+                        $model->update($user_id, $datauser);
+                        $session->setFlashdata('msg1', 'Password berhasil diubah.');
+                        return redirect()->to('/myprofile/ubahpass');
+                    }else{
+                        $session->setFlashdata('msg', 'Password lama salah');
+                        return redirect()->to('/myprofile/ubahpass');
+                    }
+                }else{
+                    $session->setFlashdata('msg', 'Username tidak ditemukan');
+                    return redirect()->to('/myprofile/ubahpass');
+                }
+            }else{
+                $model = new ProfileModel();
+                $user = $model->where('user_id', $user_id)->first();
+                if ($user){
+                    $data = [
+                        'ID' => $user['ID'],
+                        'user_id' => $user['user_id'],
+                        'FullName' => $user['FullName']
+                    ];
+                }
+                $model1 = new AkunModel();
+                $user1 = $model1->where('user_id', $user_id)->first();
+                if ($user1){
+                    $data = [
+                        'username' => $user1['username']
+                    ];
+                }
+                $data['logged_in'] = $session->get('logged_in');
+                $data['title_page'] = "Ubah Password";
+                $data['data_bread'] = "Ubah Password";
+                $data['validation'] = $this->validator;
+                return view('maintemp/ubahpass', $data);
             }
         }
     }

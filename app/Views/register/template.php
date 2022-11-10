@@ -133,6 +133,12 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
+                                    <a href="<?php echo base_url();?>/register/ubahpass" class="nav-link">
+                                        <i class="fas fa-key nav-icon"></i>
+                                        <p>Ubah Password</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
                                     <a href="<?php echo base_url();?>/register/logout" class="nav-link">
                                         <i class="fas fa-sign-out-alt nav-icon"></i>
                                         <p>Keluar</p>

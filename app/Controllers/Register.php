@@ -108,6 +108,7 @@ class Register extends BaseController
                     'semester' => 'Ganjil',
                     'tipe_user' => 'nnny',
                     'confirmcapes' => 'Tidak',
+                    'softdelete' => 'no',
                     'date_created' => date('Y-m-d H:i:s'),
                     'date_modified' => date('Y-m-d H:i:s')
                 );
@@ -4044,6 +4045,7 @@ class Register extends BaseController
             return redirect()->to('/register');
         }
         $data['capeslogged_in'] = $session->get('capeslogged_in');
+        $data['confirmcapes'] = $confirmcapes;
         $data['title_page'] = "Konfirmasi Unggah Data Calon Peserta PPI RPL";
         $data['data_bread'] = "Konfirmasi";
         return view('register/konfirmasi', $data);
@@ -4052,6 +4054,10 @@ class Register extends BaseController
     public function konfirmproses(){
         $session = session();
         $model = new AkunModel();
+        $capeslogged_in = $session->get('capeslogged_in');
+        if (!$capeslogged_in){
+            return redirect()->to('/register');
+        }
         $button = $this->request->getVar('submit');
         $user_id = $session->get('user_id');
         if ($button == "batal"){
@@ -4084,11 +4090,82 @@ class Register extends BaseController
             }else{
                 $data['title_page'] = "Konfirmasi Unggah Data Calon Peserta PPI RPL";
                 $data['data_bread'] = "Konfirmasi";
+                $data['confirmcapes'] = $session->get('confirmcapes');
                 $data['capeslogged_in'] = $session->get('capeslogged_in');
                 $data['validation'] = $this->validator;
                 return view('register/konfirmasi', $data);
             }
         }
+    }
+
+    //Mengatur link ubah password
+    public function ubahpass(){
+        $session = session();
+        $capeslogged_in = $session->get('capeslogged_in');
+        if (!$capeslogged_in){
+            return redirect()->to('/register');
+        }
+        $data['capeslogged_in'] = $session->get('capeslogged_in');
+        $data['title_page'] = "Ubah Password";
+        $data['data_bread'] = "Ubah Password";
+        return view('register/ubahpass', $data);
+    }
+ 
+    //Fungsi proses ubah password
+    public function ubahpassproses()
+    {
+        $session = session();
+        $capeslogged_in = $session->get('capeslogged_in');
+        if (!$capeslogged_in){
+            return redirect()->to('/register');
+        }
+
+        $button=$this->request->getVar('submit');
+        
+        if ($button=="batal"){
+            return redirect()->to('/register/dashboard');
+        }else{
+            helper(['form']);
+            $rules = [
+                'oldpass'     => 'required',
+                'newpass'     => 'required|min_length[6]',
+                'confirmpass' => 'required|min_length[6]|matches[newpass]'
+            ];
+            
+            if($this->validate($rules)){
+                $session = session();
+                $model = new AkunModel();
+                $user_id = $session->get('user_id');
+                $oldpass = $this->request->getVar('oldpass');
+                $data = $model->where('user_id', $user_id)->first();
+                if($data){
+                    $pass = $data['password'];
+                    $verify_pass = password_verify($oldpass, $pass);
+                    if($verify_pass){
+                        $newpass = $this->request->getVar('newpass');
+                        $datauser = array(
+                            'password' => password_hash($newpass, PASSWORD_DEFAULT),
+                            'date_modified' => date('Y-m-d H:i:s')
+                        );
+                        $model->update($user_id, $datauser);
+                        $session->setFlashdata('msg1', 'Password berhasil diubah.');
+                        return redirect()->to('/register/ubahpass');
+                    }else{
+                        $session->setFlashdata('msg', 'Password lama salah');
+                        return redirect()->to('/register/ubahpass');
+                    }
+                }else{
+                    $session->setFlashdata('msg', 'Username tidak ditemukan');
+                    return redirect()->to('/register/ubahpass');
+                }
+            }else{
+                $data['capeslogged_in'] = $session->get('capeslogged_in');
+                $data['title_page'] = "Ubah Password";
+                $data['data_bread'] = "Ubah Password";
+                $data['validation'] = $this->validator;
+                return view('register/ubahpass', $data);
+            }
+        }        
     }
 
     public function petunjuk(){

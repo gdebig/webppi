@@ -71,8 +71,20 @@
                     <label for=" GradYear" class="element">Tahun Kelulusan <span class="required"> *</span>&nbsp;
                     </label>
                     <div class="element">
-                        <input id="GradYear" name="GradYear" class="form-control" placeholder="Tahun Kelulusan..."
-                            type="text" value="<?php echo set_value('GradYear');?>" />
+                        <select name="GradYear" id="GradYear" class="form-control">
+                            <?php
+                                    $lastyear = date("Y")+10;
+                                    $now = date("Y");
+                                    for ($tahun1 = 1901;$tahun1<=$lastyear;$tahun1++){
+                                        if ($tahun1 == $now){
+                                            $selected = "selected";
+                                        }else{
+                                            $selected ="";
+                                        }
+                                        echo "<option value='".$tahun1."' ".$selected.">".$tahun1."</option>";
+                                    }
+                                ?>
+                        </select>
                     </div>
                     <br />
                     <label for=" Degree" class="element">Gelar <span class="required"> *</span>&nbsp; </label>

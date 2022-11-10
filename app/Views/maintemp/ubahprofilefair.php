@@ -79,6 +79,9 @@
                                     <option value="Kim" <?php echo $Vocational == "Kim" ? "selected" : "";?>>Teknik
                                         Kimia
                                     </option>
+                                    <option value="Mes" <?php echo $Vocational == "Mes" ? "selected" : "";?>>Teknik
+                                        Mesin
+                                    </option>
                                     <option value="Lin" <?php echo $Vocational == "Lin" ? "selected" : "";?>>Teknik
                                         Lingkungan</option>
                                     <option value="Sip" <?php echo $Vocational == "Sip" ? "selected" : "";?>>Teknik
@@ -93,6 +96,10 @@
                                         Informatika</option>
                                     <option value="Kap" <?php echo $Vocational == "Kap" ? "selected" : "";?>>Teknik
                                         Perkapalan</option>
+                                    <option value="Kom" <?php echo $Vocational == "Kom" ? "selected" : "";?>>Teknik
+                                        Komputer</option>
+                                    <option value="Bio" <?php echo $Vocational == "Bio" ? "selected" : "";?>>Teknik
+                                        Biomedik</option>
                                 </select>
                             </div>
                         </div>

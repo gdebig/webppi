@@ -183,7 +183,9 @@ class Manuser extends BaseController
                 'status' => $anggota['status'],
                 'thnajaran' => $anggota['thnajaran'],
                 'semester' => $anggota['semester'],
-                'tipe_user' => $anggota['tipe_user']
+                'tipe_user' => $anggota['tipe_user'],
+                'confirmcapes' => $anggota['confirmcapes'],
+                'confirmfair' => $anggota['confirmfair']
             ];
         }
         $data['logged_in'] = $logged_in;
@@ -241,6 +243,8 @@ class Manuser extends BaseController
                 $penilai = $this->request->getVar('penilai') == "yes" ? "y" : "n";
                 $peserta = $this->request->getVar('peserta') == "yes" ? "y" : "n";
                 $tipe_user = $superadmin.$admin.$penilai.$peserta;
+                $confirmcapes = $this->request->getVar('confirmcapes');
+                $confirmfair = $this->request->getVar('confirmfair');
 
                 if (!empty($pass1)){
                 $datauser = array(
@@ -252,8 +256,8 @@ class Manuser extends BaseController
                     'thnajaran' => $thnajaran,
                     'semester' => 'Ganjil',
                     'tipe_user' => $tipe_user,
-                    'confirmcapes' => 'Ya',
-                    'softdelete' => 'no',
+                    'confirmcapes' => $confirmcapes,
+                    'confirmfair' => $confirmfair,
                     'date_modified' => date('Y-m-d H:i:s')
                 );
                 }else{
@@ -265,8 +269,8 @@ class Manuser extends BaseController
                         'thnajaran' => $thnajaran,
                         'semester' => 'Ganjil',
                         'tipe_user' => $tipe_user,
-                        'confirmcapes' => 'Ya',
-                        'softdelete' => 'no',
+                        'confirmcapes' => $confirmcapes,
+                        'confirmfair' => $confirmfair,
                         'date_modified' => date('Y-m-d H:i:s')
                     );                    
                 }
@@ -288,7 +292,9 @@ class Manuser extends BaseController
                         'status' => $anggota['status'],
                         'thnajaran' => $anggota['thnajaran'],
                         'semester' => $anggota['semester'],
-                        'tipe_user' => $anggota['tipe_user']
+                        'tipe_user' => $anggota['tipe_user'],
+                        'confirmcapes' => $anggota['confirmcapes'],
+                        'confirmfair' => $anggota['confirmfair']
                     ];
                 }
                 $data['logged_in'] = $logged_in;

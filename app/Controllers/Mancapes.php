@@ -224,6 +224,7 @@ class Mancapes extends BaseController
         }else{
             $data['data_pend'] = 'kosong';
         }
+        $data['logged_in'] = $logged_in;
         $data['title_page'] = "Data Pendidikan Calon Peserta PPI RPL";
         $data['data_bread'] = "Pendidikan";
         return view('maintemp/capespend', $data);
@@ -246,6 +247,7 @@ class Mancapes extends BaseController
         }else{
             $data['data_kerja'] = 'kosong';
         }
+        $data['logged_in'] = $logged_in;
         $data['title_page'] = "Data Pengalaman Kerja Calon Peserta PPI RPL";
         $data['data_bread'] = "Pengalaman Kerja";
         return view('maintemp/capeskerja', $data);
@@ -268,6 +270,7 @@ class Mancapes extends BaseController
         }else{
             $data['data_org'] = 'kosong';
         }
+        $data['logged_in'] = $logged_in;
         $data['title_page'] = "Data Organisasi Calon Peserta PPI RPL";
         $data['data_bread'] = "Organisasi";
         return view('maintemp/capesorg', $data);
@@ -290,6 +293,7 @@ class Mancapes extends BaseController
         }else{
             $data['data_latih'] = 'kosong';
         }
+        $data['logged_in'] = $logged_in;
         $data['title_page'] = "Data Pelatihan Teknik Calon Peserta PPI RPL";
         $data['data_bread'] = "Pelatihan";
         return view('maintemp/capeslatih', $data);
@@ -312,6 +316,7 @@ class Mancapes extends BaseController
         }else{
             $data['data_latih'] = 'kosong';
         }
+        $data['logged_in'] = $logged_in;
         $data['title_page'] = "Data Sertifikat Kompetensi Calon Peserta PPI RPL";
         $data['data_bread'] = "Sertifikat";
         return view('maintemp/capessert', $data);
@@ -334,6 +339,7 @@ class Mancapes extends BaseController
         }else{
             $data['data_kartul'] = 'kosong';
         }
+        $data['logged_in'] = $logged_in;
         $data['title_page'] = "Data Karya Tulis di Bidang Keinsinyuran Calon Peserta PPI RPL";
         $data['data_bread'] = "Karya Tulis";
         return view('maintemp/capeskartul', $data);
@@ -356,6 +362,7 @@ class Mancapes extends BaseController
         }else{
             $data['data_sem'] = 'kosong';
         }
+        $data['logged_in'] = $logged_in;
         $data['title_page'] = "Data Seminar/Lokakarya Calon Peserta PPI RPL";
         $data['data_bread'] = "Seminar";
         return view('maintemp/capessem', $data);

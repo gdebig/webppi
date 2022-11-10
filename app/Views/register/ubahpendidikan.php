@@ -14,8 +14,7 @@
 
         <!-- /.card-header -->
         <div class="card-body" style="width: auto; margin: 30px;">
-            <form action="<?php echo base_url();?>/register/ubahpendproses" method="post"
-                enctype="multipart/form-data">
+            <form action="<?php echo base_url();?>/register/ubahpendproses" method="post" enctype="multipart/form-data">
                 <input type="hidden" id="pend_id" name="pend_id" value="<?= $Num;?>" />
                 <input type="hidden" id="filename" name="filename" value="<?= $File;?>" />
                 <div class="form-group">
@@ -72,8 +71,20 @@
                     <label for=" GradYear" class="element">Tahun Kelulusan <span class="required"> *</span>&nbsp;
                     </label>
                     <div class="element">
-                        <input id="GradYear" name="GradYear" class="form-control" placeholder="Tahun Kelulusan..."
-                            type="text" value="<?php echo $GradYear;?>" />
+                        <select name="GradYear" id="GradYear" class="form-control">
+                            <?php
+                                    $lastyear = date("Y")+10;
+                                    $now = date("Y");
+                                    for ($tahun1 = 1901;$tahun1<=$lastyear;$tahun1++){
+                                        if ($tahun1 == $GradYear){
+                                            $selected = "selected";
+                                        }else{
+                                            $selected ="";
+                                        }
+                                        echo "<option value='".$tahun1."' ".$selected.">".$tahun1."</option>";
+                                    }
+                                ?>
+                        </select>
                     </div>
                     <br />
                     <label for=" Degree" class="element">Gelar <span class="required"> *</span>&nbsp; </label>

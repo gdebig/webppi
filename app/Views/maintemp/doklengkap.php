@@ -5,7 +5,7 @@
 <div class="card card-primary" style="width: auto; margin: 30px;">
     <div class="col-sm-13" style="width: auto; margin: 30px;">
         <div class="">
-            <h3>Profile Anggota ICHI</h3>
+            <h3>Profile Calon Peserta PPI RPL</h3>
         </div>
         <!-- data profile -->
         <?php

@@ -22,7 +22,8 @@
                             sudah benar. Setelah
                             klik tombol Simpan dan Keluar, data tidak bisa lagi diubah.</span><br /><br />
                         <div class="custom-control custom-checkbox">
-                            <input type="checkbox" name="terms2" class="custom-control-input" id="terms2" value="Ya">
+                            <input type="checkbox" name="terms2" class="custom-control-input" id="terms2" value="Ya"
+                                <?php echo $confirmcapes=="Ya" ? "checked" : "";?>>
                             <label class="custom-control-label" for="terms2">Semua informasi yang saya isi sudah
                                 benar.</label>
                         </div><br /><br />

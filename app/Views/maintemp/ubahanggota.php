@@ -134,6 +134,23 @@
                                 <?php echo $tipe_user[3] == "y" ? "checked" : "";?>>
                             <label for="peserta" class="custom-control-label">Peserta</label>
                         </div>
+                    </div>
+                    <br />
+                    <label for="confirmcapes" class="element">Konfirmasi Calon Peserta PPI RPL</label>
+                    <div class="element">
+                        <select name="confirmcapes" id="confirmcapes" class="form-control">
+                            <option value="Ya" <?php echo $confirmcapes == "Ya" ? "selected" : "";?>>Ya</option>
+                            <option value="Tidak" <?php echo $confirmcapes == "Tidak" ? "selected" : "";?>>Tidak
+                            </option>
+                        </select>
+                    </div>
+                    <br />
+                    <label for="confirmfair" class="element">Konfirmasi Dokumen Fair</label>
+                    <div class="element">
+                        <select name="confirmfair" id="confirmfair" class="form-control">
+                            <option value="Ya" <?php echo $confirmfair == "Ya" ? "selected" : "";?>>Ya</option>
+                            <option value="Tidak" <?php echo $confirmfair == "Tidak" ? "selected" : "";?>>Tidak</option>
+                        </select>
                     </div><br /><br />
                     <div class="form-group">
                         <label>Field bertanda * harus diisi.</label>

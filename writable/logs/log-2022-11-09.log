@@ -1,0 +1,144 @@
+CRITICAL - 2022-11-09 11:35:19 --> Undefined variable: confirmcapes
+#0 D:\wamp64\www\webppi\app\Views\register\konfirmasi.php(26): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'D:\\wamp64\\www\\w...', 26, Array)
+#1 D:\wamp64\www\webppi\system\View\View.php(210): include('D:\\wamp64\\www\\w...')
+#2 D:\wamp64\www\webppi\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 D:\wamp64\www\webppi\system\Common.php(1089): CodeIgniter\View\View->render('register/konfir...', Array, true)
+#4 D:\wamp64\www\webppi\app\Controllers\Register.php(4091): view('register/konfir...', Array)
+#5 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Register->konfirmproses()
+#6 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Register))
+#7 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2022-11-09 12:05:48 --> Undefined variable: session
+#0 D:\wamp64\www\webppi\app\Controllers\Register.php(4117): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'D:\\wamp64\\www\\w...', 4117, Array)
+#1 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Register->ubahpassproses()
+#2 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Register))
+#3 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2022-11-09 12:06:27 --> Undefined variable: title_page
+#0 D:\wamp64\www\webppi\app\Views\register\template.php(7): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'D:\\wamp64\\www\\w...', 7, Array)
+#1 D:\wamp64\www\webppi\system\View\View.php(210): include('D:\\wamp64\\www\\w...')
+#2 D:\wamp64\www\webppi\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 D:\wamp64\www\webppi\system\View\View.php(226): CodeIgniter\View\View->render('register/templa...', Array, true)
+#4 D:\wamp64\www\webppi\system\Common.php(1089): CodeIgniter\View\View->render('register/ubahpa...', Array, true)
+#5 D:\wamp64\www\webppi\app\Controllers\Register.php(4158): view('register/ubahpa...', Array)
+#6 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Register->ubahpassproses()
+#7 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Register))
+#8 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2022-11-09 12:09:16 --> Undefined variable: oldpass
+#0 D:\wamp64\www\webppi\app\Controllers\Register.php(4139): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'D:\\wamp64\\www\\w...', 4139, Array)
+#1 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Register->ubahpassproses()
+#2 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Register))
+#3 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2022-11-09 12:09:35 --> Argument 2 passed to CodeIgniter\HTTP\RedirectResponse::to() must be of the type int or null, array given, called in D:\wamp64\www\webppi\app\Controllers\Register.php on line 4153
+#0 D:\wamp64\www\webppi\app\Controllers\Register.php(4153): CodeIgniter\HTTP\RedirectResponse->to('/register/ubahp...', Array)
+#1 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Register->ubahpassproses()
+#2 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Register))
+#3 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2022-11-09 12:13:45 --> Undefined variable: newpass
+#0 D:\wamp64\www\webppi\app\Controllers\Register.php(4142): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'D:\\wamp64\\www\\w...', 4142, Array)
+#1 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Register->ubahpassproses()
+#2 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Register))
+#3 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2022-11-09 15:45:05 --> Undefined variable: logged_in
+#0 D:\wamp64\www\webppi\app\Views\maintemp\template.php(121): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'D:\\wamp64\\www\\w...', 121, Array)
+#1 D:\wamp64\www\webppi\system\View\View.php(210): include('D:\\wamp64\\www\\w...')
+#2 D:\wamp64\www\webppi\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 D:\wamp64\www\webppi\system\View\View.php(226): CodeIgniter\View\View->render('maintemp/templa...', Array, true)
+#4 D:\wamp64\www\webppi\system\Common.php(1089): CodeIgniter\View\View->render('maintemp/capesp...', Array, true)
+#5 D:\wamp64\www\webppi\app\Controllers\Mancapes.php(229): view('maintemp/capesp...', Array)
+#6 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Mancapes->pendidikan('4')
+#7 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Mancapes))
+#8 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2022-11-09 15:45:22 --> Undefined variable: logged_in
+#0 D:\wamp64\www\webppi\app\Views\maintemp\template.php(121): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'D:\\wamp64\\www\\w...', 121, Array)
+#1 D:\wamp64\www\webppi\system\View\View.php(210): include('D:\\wamp64\\www\\w...')
+#2 D:\wamp64\www\webppi\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 D:\wamp64\www\webppi\system\View\View.php(226): CodeIgniter\View\View->render('maintemp/templa...', Array, true)
+#4 D:\wamp64\www\webppi\system\Common.php(1089): CodeIgniter\View\View->render('maintemp/capesp...', Array, true)
+#5 D:\wamp64\www\webppi\app\Controllers\Mancapes.php(229): view('maintemp/capesp...', Array)
+#6 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Mancapes->pendidikan('4')
+#7 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Mancapes))
+#8 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2022-11-09 15:45:28 --> Undefined variable: logged_in
+#0 D:\wamp64\www\webppi\app\Views\maintemp\template.php(121): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'D:\\wamp64\\www\\w...', 121, Array)
+#1 D:\wamp64\www\webppi\system\View\View.php(210): include('D:\\wamp64\\www\\w...')
+#2 D:\wamp64\www\webppi\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 D:\wamp64\www\webppi\system\View\View.php(226): CodeIgniter\View\View->render('maintemp/templa...', Array, true)
+#4 D:\wamp64\www\webppi\system\Common.php(1089): CodeIgniter\View\View->render('maintemp/capess...', Array, true)
+#5 D:\wamp64\www\webppi\app\Controllers\Mancapes.php(361): view('maintemp/capess...', Array)
+#6 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Mancapes->sem('4')
+#7 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Mancapes))
+#8 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2022-11-09 15:46:22 --> Undefined variable: logged_in
+#0 D:\wamp64\www\webppi\app\Views\maintemp\template.php(121): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'D:\\wamp64\\www\\w...', 121, Array)
+#1 D:\wamp64\www\webppi\system\View\View.php(210): include('D:\\wamp64\\www\\w...')
+#2 D:\wamp64\www\webppi\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 D:\wamp64\www\webppi\system\View\View.php(226): CodeIgniter\View\View->render('maintemp/templa...', Array, true)
+#4 D:\wamp64\www\webppi\system\Common.php(1089): CodeIgniter\View\View->render('maintemp/capess...', Array, true)
+#5 D:\wamp64\www\webppi\app\Controllers\Mancapes.php(361): view('maintemp/capess...', Array)
+#6 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Mancapes->sem('4')
+#7 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Mancapes))
+#8 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2022-11-09 16:04:05 --> Too few arguments to function App\Controllers\Myprofile::ubahpass(), 0 passed in D:\wamp64\www\webppi\system\CodeIgniter.php on line 832 and exactly 1 expected
+#0 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Myprofile->ubahpass()
+#1 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Myprofile))
+#2 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2022-11-09 16:38:16 --> Invalid file: myprofile/ubahpass.php
+#0 D:\wamp64\www\webppi\system\View\View.php(198): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('myprofile/ubahp...')
+#1 D:\wamp64\www\webppi\system\Common.php(1089): CodeIgniter\View\View->render('myprofile/ubahp...', Array, true)
+#2 D:\wamp64\www\webppi\app\Controllers\Myprofile.php(721): view('myprofile/ubahp...', Array)
+#3 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Myprofile->ubahpassproses()
+#4 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Myprofile))
+#5 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#7 {main}
+CRITICAL - 2022-11-09 16:38:38 --> Undefined variable: username
+#0 D:\wamp64\www\webppi\app\Views\maintemp\ubahpass.php(8): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'D:\\wamp64\\www\\w...', 8, Array)
+#1 D:\wamp64\www\webppi\system\View\View.php(210): include('D:\\wamp64\\www\\w...')
+#2 D:\wamp64\www\webppi\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 D:\wamp64\www\webppi\system\Common.php(1089): CodeIgniter\View\View->render('maintemp/ubahpa...', Array, true)
+#4 D:\wamp64\www\webppi\app\Controllers\Myprofile.php(721): view('maintemp/ubahpa...', Array)
+#5 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Myprofile->ubahpassproses()
+#6 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Myprofile))
+#7 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2022-11-09 16:39:10 --> Undefined variable: id
+#0 D:\wamp64\www\webppi\app\Controllers\Myprofile.php(718): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'D:\\wamp64\\www\\w...', 718, Array)
+#1 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Myprofile->ubahpassproses()
+#2 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Myprofile))
+#3 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2022-11-09 16:42:05 --> Undefined variable: logged_in
+#0 D:\wamp64\www\webppi\app\Views\maintemp\template.php(121): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'D:\\wamp64\\www\\w...', 121, Array)
+#1 D:\wamp64\www\webppi\system\View\View.php(210): include('D:\\wamp64\\www\\w...')
+#2 D:\wamp64\www\webppi\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 D:\wamp64\www\webppi\system\View\View.php(226): CodeIgniter\View\View->render('maintemp/templa...', Array, true)
+#4 D:\wamp64\www\webppi\system\Common.php(1089): CodeIgniter\View\View->render('maintemp/capesp...', Array, true)
+#5 D:\wamp64\www\webppi\app\Controllers\Mancapes.php(229): view('maintemp/capesp...', Array)
+#6 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Mancapes->pendidikan('4')
+#7 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Mancapes))
+#8 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#10 {main}
