@@ -18,6 +18,12 @@ use App\Models\ProfileModel;
                     <?php endif;?>
                 </div>
 
+                <div class="col">
+                    <?php if(session()->getFlashdata('errmsg')):?>
+                    <div class="alert alert-danger"><?= session()->getFlashdata('errmsg') ?></div>
+                    <?php endif;?>
+                </div>
+
                 <?php 
                 if(isset($data_user)&&($data_user=="kosong")){                    
                 ?>

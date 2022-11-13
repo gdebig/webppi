@@ -383,19 +383,24 @@ class Manpeserta extends BaseController
         $button=$this->request->getVar('submit');
 
         if ($button == "set"){
-            $user_id = $this->request->getVar('user_id');
+            $userid = $this->request->getVar('user_id');
             $dosbing = $this->request->getVar('dosbing');
-            if (!empty($user_id)){
-                foreach ($user_id as $userid){                   
-    
-                    $data = array(
-                        'mhs_id' => $userid,
-                        'dosen_id' => $dosbing,
-                        'date_created' => date('Y-m-d'),
-                        'date_modified' => date('Y-m-d')
-                    );
-    
-                    $model->save($data);
+            if (!empty($userid)){
+                foreach ($userid as $id){                   
+                    $mhs = $model->where('mhs_id', $id)->countAllResults();
+                    if ($mhs>=2){
+                        $session->setFlashdata('errmsg', 'Mahasiswa yang sama, hanya boleh memiliki dua pembimbing.');
+                        return redirect()->to('/manpeserta');
+                    }else{
+                        $data = array(
+                            'mhs_id' => $userid,
+                            'dosen_id' => $dosbing,
+                            'date_created' => date('Y-m-d'),
+                            'date_modified' => date('Y-m-d')
+                        );
+        
+                        $model->save($data);
+                    }
                 }
 
                 $session->setFlashdata('msg', 'Dosen pembimbing berhasil ditetapkan.');
@@ -412,9 +417,7 @@ class Manpeserta extends BaseController
             $dosbing = $this->request->getVar('dosbing');
             if (!empty($user_id)){
                 foreach ($user_id as $userid){
-                    echo $userid."<br />";
                     $bimbing = $model->where('mhs_id', $userid)->first();
-                    echo $bimbing['bimbing_id']."<br />";
                     $data = array(
                         'dosen_id' => $dosbing,
                         'date_modified' => date('Y-m-d')
