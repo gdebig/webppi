@@ -10,7 +10,7 @@ class Penilai extends BaseController
     {
         $session = session();
         $logged_in = $session->get('logged_in');
-        $issadmin = $session->get('issadmin');
+        $ispenilai = $session->get('ispenilai');
         if ((!$logged_in)&&(!$ispenilai)){
             return redirect()->to('/home');
         }else{

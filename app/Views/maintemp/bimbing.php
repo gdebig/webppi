@@ -36,6 +36,8 @@ use App\Models\BimbingModel;
                             <th>Judul Proyek Akhir</th>
                             <th>Buku Proyek Akhir</th>
                             <th>Log Proyek Akhir</th>
+                            <th>Penilaian</th>
+                            <th>Administrasi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -47,7 +49,8 @@ use App\Models\BimbingModel;
                             <td><?php echo $i;$i++;?></td>
                             <td><?= $user['FullName'];?></td>
                             <td><?= $user['ta_tahun'].' - '.$user['ta_semester'];?></td>
-                            <td><a href="<?= base_url();?>/bimbingfair/<?= $user['mhs_id'];?>">Lihat Detail</a></td>
+                            <td><a href="<?= base_url();?>/bimbingfair/docs/<?= $user['mhs_id'];?>">Lihat Detail</a>
+                            </td>
                             <td><?= $user['ta_usuljudul'];?></td>
                             <td><?php
                             if (!empty($user['ta_buku'])){
@@ -58,11 +61,28 @@ use App\Models\BimbingModel;
                             ?></td>
                             <td><?php
                             if (!empty($user['ta_log'])){
-                                echo "<a href='".base_url()."/uploads/docs/".$user['ta_log']."' target='_blank'>Buku TA</a>";
+                                echo "<a href='".base_url()."/uploads/docs/".$user['ta_log']."' target='_blank'>Log TA</a>";
                             }else{
                                 echo "Belum ada buku";
                             }
                             ?></td>
+                            <td>
+                                <?php
+                                    if (!empty($user['penulisan'])){
+                                        $nilai = (0.3*$user['penulisan'])+(0.3*$user['presentasi'])+(0.4*$user['materi']);
+                                        echo $nilai;
+                                    }else{
+                                ?>
+                                <a
+                                    href="<?=base_url();?>/manbimbing/berinilai/<?=$user['mhs_id'];?>/<?=$user['dosen_id'];?>/<?=$user['ta_id'];?>">Beri
+                                    Nilai</a>
+                                <?php
+                                    }
+                                ?>
+                            </td>
+                            <td><a
+                                    href="<?=base_url();?>/manbimbing/lihatadm/<?=$user['mhs_id'];?>/<?=$user['dosen_id'];?>/<?=$user['ta_id'];?>">Lihat
+                                    Administrasi</a></td>
                         </tr>
                         <?php 
                                     endforeach 

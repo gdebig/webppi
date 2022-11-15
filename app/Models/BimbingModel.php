@@ -12,4 +12,8 @@ class BimbingModel extends Model{
     protected $useTimestamps = false;
     protected $createdField  = 'date_created';
     protected $updatedField  = 'data_modified';
+
+    public function getDataBimbing($id){
+        return $this->db->table('tbl_bimbing')->join('tbl_profile', 'tbl_bimbing.mhs_id = tbl_profile.user_id', 'left')->join('tbl_tugasakhir', 'tbl_bimbing.mhs_id = tbl_tugasakhir.user_id', 'left')->join('tbl_nilaita', 'tbl_bimbing.mhs_id = tbl_nilaita.mhs_id', 'left')->where('tbl_bimbing.dosen_id', $id)->get()->getResultArray();
+    }
 }
