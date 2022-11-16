@@ -24,8 +24,8 @@ class Manbimbing extends BaseController
         $user_id = $session->get('user_id');
         $model = new BimbingModel();
         $data['logged_in'] = $logged_in;
-        //$user = $model->where('tbl_bimbing.dosen_id', $user_id)->join('tbl_profile', 'tbl_bimbing.mhs_id = tbl_profile.user_id', 'left')->join('tbl_tugasakhir', 'tbl_bimbing.mhs_id = tbl_tugasakhir.user_id', 'left')->join('tbl_nilaita', 'tbl_bimbing.mhs_id = tbl_nilaita.mhs_id', 'left')->orderby('tbl_tugasakhir.ta_tahun', 'DESC')->orderby('tbl_profile.FullName', 'ASC')->findall();
-        $user = $model->getDataBimbing($user_id);
+        $user = $model->where('tbl_bimbing.dosen_id', $user_id)->join('tbl_profile', 'tbl_bimbing.mhs_id = tbl_profile.user_id', 'left')->join('tbl_tugasakhir', 'tbl_bimbing.mhs_id = tbl_tugasakhir.user_id', 'left')->orderby('tbl_tugasakhir.ta_tahun', 'DESC')->orderby('tbl_profile.FullName', 'ASC')->findall();
+        //$user = $model->getDataBimbing($user_id);
         if (!empty($user)){
             $data['data_user'] = $user;
         }else{
