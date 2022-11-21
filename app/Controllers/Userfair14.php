@@ -13,9 +13,10 @@ class Userfair14 extends BaseController
         $session = session();
         $logged_in = $session->get('logged_in');
         $ispeserta = $session->get('ispeserta');
-        $ispenilai = $session->get('ispenilai');
-        if ((!$logged_in)&&(!$ispeserta)||(!$ispenilai)){
+        if ((!$logged_in)&&(!$ispeserta)){
             return redirect()->to('/home');
+        }else{
+            $session->set('role', 'peserta');
         }
 
         if (!empty($id)){
@@ -323,6 +324,7 @@ class Userfair14 extends BaseController
 
     public function ubahpenghargaanproses(){
         $session = session();
+        $user_id = $session->get('user_id');
         $slug = new Slug();
         $model = new PenghargaanModel();
         $logged_in = $session->get('logged_in');

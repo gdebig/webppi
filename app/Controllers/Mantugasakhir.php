@@ -262,8 +262,16 @@ class Mantugasakhir extends BaseController
     
              return redirect()->to('/mantugasakhir/setjadwal/'.$ta_id.'/'.$user_id);
         }else{
+            $model = new UserModel();
+            $where = "tipe_user LIKE '__y_'";
+            $user = $model->join('tbl_profile', 'tbl_user.user_id = tbl_profile.user_id', 'left')->where($where)->orderby('tbl_profile.FullName', 'ASC')->findall();
+            if (!empty($user)){
+                $data['data_user'] = $user;
+            }else{
+                $data['data_user'] = 'kosong';
+            }
         
-            $data['ta_id'] = $id;
+            $data['ta_id'] = $user_id;
             $data['user_id'] = $user_id;
             $data['title_page'] = "Tambah Penguji Proyek Akhir Peserta PPI RPL";
             $data['data_bread'] = "Tambah Penguji";

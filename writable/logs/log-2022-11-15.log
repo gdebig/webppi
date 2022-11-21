@@ -110,3 +110,30 @@ CRITICAL - 2022-11-15 18:04:02 --> Undefined index: ta_tahun
 #7 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
 #8 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
 #9 {main}
+CRITICAL - 2022-11-15 23:04:09 --> Undefined variable: id
+#0 D:\wamp64\www\webppi\app\Controllers\Mantugasakhir.php(266): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'D:\\wamp64\\www\\w...', 266, Array)
+#1 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Mantugasakhir->tambahujiproses()
+#2 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Mantugasakhir))
+#3 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2022-11-15 23:04:51 --> Invalid file: maintemp/tambahpengujivalid.php
+#0 D:\wamp64\www\webppi\system\View\View.php(198): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('maintemp/tambah...')
+#1 D:\wamp64\www\webppi\system\Common.php(1089): CodeIgniter\View\View->render('maintemp/tambah...', Array, true)
+#2 D:\wamp64\www\webppi\app\Controllers\Mantugasakhir.php(272): view('maintemp/tambah...', Array)
+#3 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Mantugasakhir->tambahujiproses()
+#4 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Mantugasakhir))
+#5 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#7 {main}
+CRITICAL - 2022-11-15 23:05:23 --> Undefined variable: data_user
+#0 D:\wamp64\www\webppi\app\Views\maintemp\tambahpengujivalid.php(33): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'D:\\wamp64\\www\\w...', 33, Array)
+#1 D:\wamp64\www\webppi\system\View\View.php(210): include('D:\\wamp64\\www\\w...')
+#2 D:\wamp64\www\webppi\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 D:\wamp64\www\webppi\system\Common.php(1089): CodeIgniter\View\View->render('maintemp/tambah...', Array, true)
+#4 D:\wamp64\www\webppi\app\Controllers\Mantugasakhir.php(272): view('maintemp/tambah...', Array)
+#5 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Mantugasakhir->tambahujiproses()
+#6 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Mantugasakhir))
+#7 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
