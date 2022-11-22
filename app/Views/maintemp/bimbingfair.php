@@ -20,35 +20,35 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col">
-                                    <a href="<?php echo base_url();?>/userfair11/docs/<?=$mhs_id;?>"
+                                    <a href="<?php echo base_url();?>/bimbingfair11/docs/<?=$mhs_id;?>"
                                         class="btn btn-block btn-primary btn-sm">I.1</a>
                                 </div>
                                 <div class="col">
-                                    <a href="<?php echo base_url();?>/userfair12/docs/<?=$mhs_id;?>"
+                                    <a href="<?php echo base_url();?>/bimbingfair12/docs/<?=$mhs_id;?>"
                                         class="btn btn-block btn-primary btn-sm">I.2</a>
                                 </div>
                                 <div class="col">
-                                    <a href="<?php echo base_url();?>/userfair13/docs/<?=$mhs_id;?>"
+                                    <a href="<?php echo base_url();?>/bimbingfair13/docs/<?=$mhs_id;?>"
                                         class="btn btn-block btn-primary btn-sm">I.3</a>
                                 </div>
                                 <div class="col">
-                                    <a href="<?php echo base_url();?>/userfair14/docs/<?=$mhs_id;?>"
+                                    <a href="<?php echo base_url();?>/bimbingfair14/docs/<?=$mhs_id;?>"
                                         class="btn btn-block btn-primary btn-sm">I.4</a>
                                 </div>
                                 <div class="col">
-                                    <a href="<?php echo base_url();?>/userfair15/docs/<?=$mhs_id;?>"
+                                    <a href="<?php echo base_url();?>/bimbingfair15/docs/<?=$mhs_id;?>"
                                         class="btn btn-block btn-primary btn-sm">I.5</a>
                                 </div>
                                 <div class="col">
-                                    <a href="<?php echo base_url();?>/userfair16/docs/<?=$mhs_id;?>"
+                                    <a href="<?php echo base_url();?>/bimbingfair16/docs/<?=$mhs_id;?>"
                                         class="btn btn-block btn-primary btn-sm">I.6</a>
                                 </div>
                                 <div class="col">
-                                    <a href="<?php echo base_url();?>/userfair21/docs/<?=$mhs_id;?>"
+                                    <a href="<?php echo base_url();?>/bimbingfair21/docs/<?=$mhs_id;?>"
                                         class="btn btn-block btn-primary btn-sm">II.1</a>
                                 </div>
                                 <div class="col">
-                                    <a href="<?php echo base_url();?>/userfair22/docs/<?=$mhs_id;?>"
+                                    <a href="<?php echo base_url();?>/bimbingfair22/docs/<?=$mhs_id;?>"
                                         class="btn btn-block btn-primary btn-sm">II.2</a>
                                 </div>
                             </div>
@@ -57,35 +57,35 @@
                             </div>
                             <div class="row">
                                 <div class="col">
-                                    <a href="<?php echo base_url();?>/userfair3/docs/<?=$mhs_id;?>"
+                                    <a href="<?php echo base_url();?>/bimbingfair3/docs/<?=$mhs_id;?>"
                                         class="btn btn-block btn-primary btn-sm">III</a>
                                 </div>
                                 <div class="col">
-                                    <a href="<?php echo base_url();?>/userfair4/docs/<?=$mhs_id;?>"
+                                    <a href="<?php echo base_url();?>/bimbingfair4/docs/<?=$mhs_id;?>"
                                         class="btn btn-block btn-primary btn-sm">IV</a>
                                 </div>
                                 <div class="col">
-                                    <a href="<?php echo base_url();?>/userfair51/docs/<?=$mhs_id;?>"
+                                    <a href="<?php echo base_url();?>/bimbingfair51/docs/<?=$mhs_id;?>"
                                         class="btn btn-block btn-primary btn-sm">V.1</a>
                                 </div>
                                 <div class="col">
-                                    <a href="<?php echo base_url();?>/userfair52/docs/<?=$mhs_id;?>"
+                                    <a href="<?php echo base_url();?>/bimbingfair52/docs/<?=$mhs_id;?>"
                                         class="btn btn-block btn-primary btn-sm">V.2</a>
                                 </div>
                                 <div class="col">
-                                    <a href="<?php echo base_url();?>/userfair53/docs/<?=$mhs_id;?>"
+                                    <a href="<?php echo base_url();?>/bimbingfair53/docs/<?=$mhs_id;?>"
                                         class="btn btn-block btn-primary btn-sm">V.3</a>
                                 </div>
                                 <div class="col">
-                                    <a href="<?php echo base_url();?>/userfair54/docs/<?=$mhs_id;?>"
+                                    <a href="<?php echo base_url();?>/bimbingfair54/docs/<?=$mhs_id;?>"
                                         class="btn btn-block btn-primary btn-sm">V.4</a>
                                 </div>
                                 <div class="col">
-                                    <a href="<?php echo base_url();?>/userfair6/docs/<?=$mhs_id;?>"
+                                    <a href="<?php echo base_url();?>/bimbingfair6/docs/<?=$mhs_id;?>"
                                         class="btn btn-block btn-primary btn-sm">VI</a>
                                 </div>
                                 <div class="col">
-                                    <a href="<?php echo base_url();?>/userfair7/docs/<?=$mhs_id;?>"
+                                    <a href="<?php echo base_url();?>/bimbingfair7/docs/<?=$mhs_id;?>"
                                         class="btn btn-block btn-primary btn-sm">VII</a>
                                 </div>
                             </div>
@@ -94,11 +94,11 @@
                             </div>
                             <div class="row">
                                 <div class="col">
-                                    <a href="<?php echo base_url();?>/userfairrekap/docs/<?=$mhs_id;?>"
+                                    <a href="<?php echo base_url();?>/bimbingfairrekap/docs/<?=$mhs_id;?>"
                                         class="btn btn-block btn-primary btn-sm">Rekapitulasi</a>
                                 </div>
                                 <div class="col">
-                                    <a href="<?php echo base_url();?>/userfairlamp/docs/<?=$mhs_id;?>"
+                                    <a href="<?php echo base_url();?>/bimbingfairlamp/docs/<?=$mhs_id;?>"
                                         class="btn btn-block btn-primary btn-sm">Lampiran</a>
                                 </div>
                             </div>
