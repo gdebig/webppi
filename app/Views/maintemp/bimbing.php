@@ -32,12 +32,12 @@ use App\Models\BimbingModel;
                             <th>No</th>
                             <th>Nama Peserta PPI</th>
                             <th>Term</th>
-                            <th>Dokumen FAIR</th>
-                            <th>Judul Proyek Akhir</th>
+                            <th>Lihat Dokumen FAIR</th>
+                            <th>Nilai RPL</th>
                             <th>Buku Proyek Akhir</th>
                             <th>Log Proyek Akhir</th>
-                            <th>Penilaian</th>
-                            <th>Administrasi</th>
+                            <th>Penilaian PK</th>
+                            <th>Administrasi PK</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -51,7 +51,12 @@ use App\Models\BimbingModel;
                             <td><?= $user['ta_tahun'].' - '.$user['ta_semester'];?></td>
                             <td><a href="<?= base_url();?>/bimbingfair/docs/<?= $user['mhs_id'];?>">Lihat Detail</a>
                             </td>
-                            <td><?= $user['ta_usuljudul'];?></td>
+                            <td>
+
+                                <a
+                                    href="<?=base_url();?>/nilairpl/<?=$user['mhs_id'];?>/<?=$user['dosen_id'];?>/<?=$user['ta_id'];?>">Beri
+                                    Nilai RPL</a>
+                            </td>
                             <td><?php
                             if (!empty($user['ta_buku'])){
                                 echo "<a href='".base_url()."/uploads/docs/".$user['ta_buku']."' target='_blank'>Buku TA</a>";
