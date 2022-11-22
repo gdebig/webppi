@@ -1,0 +1,85 @@
+CRITICAL - 2022-11-22 11:04:00 --> Too few arguments to function App\Controllers\Manbimbing::berinilai(), 2 passed in D:\wamp64\www\webppi\system\CodeIgniter.php on line 832 and exactly 3 expected
+#0 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Manbimbing->berinilai('7', '1')
+#1 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Manbimbing))
+#2 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2022-11-22 11:55:41 --> Invalid file: maintemp/lihatnilaipk.php
+#0 D:\wamp64\www\webppi\system\View\View.php(198): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('maintemp/lihatn...')
+#1 D:\wamp64\www\webppi\system\Common.php(1089): CodeIgniter\View\View->render('maintemp/lihatn...', Array, true)
+#2 D:\wamp64\www\webppi\app\Controllers\Manbimbing.php(61): view('maintemp/lihatn...', Array)
+#3 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Manbimbing->lihatnilai('4', '1', '4')
+#4 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Manbimbing))
+#5 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#7 {main}
+CRITICAL - 2022-11-22 11:56:10 --> Undefined variable: data_user
+#0 D:\wamp64\www\webppi\app\Views\maintemp\lihatnilaipk.php(46): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'D:\\wamp64\\www\\w...', 46, Array)
+#1 D:\wamp64\www\webppi\system\View\View.php(210): include('D:\\wamp64\\www\\w...')
+#2 D:\wamp64\www\webppi\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 D:\wamp64\www\webppi\system\Common.php(1089): CodeIgniter\View\View->render('maintemp/lihatn...', Array, true)
+#4 D:\wamp64\www\webppi\app\Controllers\Manbimbing.php(61): view('maintemp/lihatn...', Array)
+#5 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Manbimbing->lihatnilai('4', '1', '4')
+#6 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Manbimbing))
+#7 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2022-11-22 12:04:39 --> Trying to access array offset on value of type null
+#0 D:\wamp64\www\webppi\app\Views\maintemp\lihatnilaipk.php(44): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to acces...', 'D:\\wamp64\\www\\w...', 44, Array)
+#1 D:\wamp64\www\webppi\system\View\View.php(210): include('D:\\wamp64\\www\\w...')
+#2 D:\wamp64\www\webppi\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 D:\wamp64\www\webppi\system\Common.php(1089): CodeIgniter\View\View->render('maintemp/lihatn...', Array, true)
+#4 D:\wamp64\www\webppi\app\Controllers\Manbimbing.php(61): view('maintemp/lihatn...', Array)
+#5 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Manbimbing->lihatnilai('4', '1', '4')
+#6 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Manbimbing))
+#7 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2022-11-22 12:05:23 --> Undefined variable: print_r
+#0 D:\wamp64\www\webppi\app\Controllers\Manbimbing.php(61): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'D:\\wamp64\\www\\w...', 61, Array)
+#1 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Manbimbing->lihatnilai('4', '1', '4')
+#2 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Manbimbing))
+#3 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2022-11-22 12:06:28 --> Undefined variable: user
+#0 D:\wamp64\www\webppi\app\Views\maintemp\lihatnilaipk.php(48): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'D:\\wamp64\\www\\w...', 48, Array)
+#1 D:\wamp64\www\webppi\system\View\View.php(210): include('D:\\wamp64\\www\\w...')
+#2 D:\wamp64\www\webppi\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 D:\wamp64\www\webppi\system\Common.php(1089): CodeIgniter\View\View->render('maintemp/lihatn...', Array, true)
+#4 D:\wamp64\www\webppi\app\Controllers\Manbimbing.php(61): view('maintemp/lihatn...', Array)
+#5 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Manbimbing->lihatnilai('4', '1', '4')
+#6 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Manbimbing))
+#7 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2022-11-22 12:06:44 --> Undefined variable: logged_in
+#0 D:\wamp64\www\webppi\app\Views\maintemp\template.php(136): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'D:\\wamp64\\www\\w...', 136, Array)
+#1 D:\wamp64\www\webppi\system\View\View.php(210): include('D:\\wamp64\\www\\w...')
+#2 D:\wamp64\www\webppi\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 D:\wamp64\www\webppi\system\View\View.php(226): CodeIgniter\View\View->render('maintemp/templa...', Array, true)
+#4 D:\wamp64\www\webppi\system\Common.php(1089): CodeIgniter\View\View->render('maintemp/lihatn...', Array, true)
+#5 D:\wamp64\www\webppi\app\Controllers\Manbimbing.php(61): view('maintemp/lihatn...', Array)
+#6 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Manbimbing->lihatnilai('4', '1', '4')
+#7 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Manbimbing))
+#8 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2022-11-22 12:21:09 --> Undefined variable: berinilai
+#0 D:\wamp64\www\webppi\app\Views\maintemp\lihatnilaipk.php(74): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'D:\\wamp64\\www\\w...', 74, Array)
+#1 D:\wamp64\www\webppi\system\View\View.php(210): include('D:\\wamp64\\www\\w...')
+#2 D:\wamp64\www\webppi\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 D:\wamp64\www\webppi\system\Common.php(1089): CodeIgniter\View\View->render('maintemp/lihatn...', Array, true)
+#4 D:\wamp64\www\webppi\app\Controllers\Manbimbing.php(63): view('maintemp/lihatn...', Array)
+#5 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Manbimbing->lihatnilai('13', '1', '6')
+#6 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Manbimbing))
+#7 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2022-11-22 13:23:03 --> Undefined variable: doseninp
+#0 D:\wamp64\www\webppi\app\Controllers\Manbimbing.php(213): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'D:\\wamp64\\www\\w...', 213, Array)
+#1 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Manbimbing->lihatformevaluasi('4', '1', '4')
+#2 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Manbimbing))
+#3 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}

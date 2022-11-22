@@ -54,7 +54,7 @@ use App\Models\BimbingModel;
                             <td>
 
                                 <a
-                                    href="<?=base_url();?>/nilairpl/<?=$user['mhs_id'];?>/<?=$user['dosen_id'];?>/<?=$user['ta_id'];?>">Beri
+                                    href="<?=base_url();?>/nilairpl/<?=$user['mhs_id'];?>/<?=$user['dosen_id'];?>/<?=$user['ta_id'];?>">Lihat
                                     Nilai RPL</a>
                             </td>
                             <td><?php
@@ -72,18 +72,9 @@ use App\Models\BimbingModel;
                             }
                             ?></td>
                             <td>
-                                <?php
-                                    if (!empty($user['penulisan'])){
-                                        $nilai = (0.3*$user['penulisan'])+(0.3*$user['presentasi'])+(0.4*$user['materi']);
-                                        echo $nilai;
-                                    }else{
-                                ?>
                                 <a
-                                    href="<?=base_url();?>/manbimbing/berinilai/<?=$user['mhs_id'];?>/<?=$user['dosen_id'];?>/<?=$user['ta_id'];?>">Beri
-                                    Nilai</a>
-                                <?php
-                                    }
-                                ?>
+                                    href="<?=base_url();?>/manbimbing/lihatnilai/<?=$user['mhs_id'];?>/<?=$user['dosen_id'];?>/<?=$user['ta_id'];?>">Lihat
+                                    Nilai PK</a>
                             </td>
                             <td><a
                                     href="<?=base_url();?>/manbimbing/lihatadm/<?=$user['mhs_id'];?>/<?=$user['dosen_id'];?>/<?=$user['ta_id'];?>">Lihat

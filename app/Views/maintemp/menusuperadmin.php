@@ -25,7 +25,7 @@
 <li class="nav-item">
     <a href="<?php echo base_url();?>/mantugasakhir" class="nav-link">
         <i class="fas fa-graduation-cap nav-icon"></i>
-        <p>Manajemen Tugas Akhir</p>
+        <p>Manajemen Praktek Keinsinyuran</p>
     </a>
 </li>
 <li class="nav-item">
