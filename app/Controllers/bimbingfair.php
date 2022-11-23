@@ -1,5 +1,7 @@
 <?php
 
+//tampilan fair utk penilai
+
 namespace App\Controllers;
 
 use App\Models\ProfileModel;
