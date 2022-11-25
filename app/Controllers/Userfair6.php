@@ -16,6 +16,8 @@ class Userfair6 extends BaseController
         $ispenilai = $session->get('ispenilai');
         if ((!$logged_in)&&(!$ispeserta)||(!$ispenilai)){
             return redirect()->to('/home');
+        }else{
+            $session->set('role', 'peserta');
         }
 
         if (!empty($id)){

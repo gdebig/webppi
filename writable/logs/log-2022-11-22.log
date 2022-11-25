@@ -83,3 +83,22 @@ CRITICAL - 2022-11-22 13:23:03 --> Undefined variable: doseninp
 #3 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
 #4 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
 #5 {main}
+CRITICAL - 2022-11-22 21:34:21 --> Too few arguments to function App\Controllers\Manbimbing::lihatnilai(), 2 passed in D:\wamp64\www\webppi\system\CodeIgniter.php on line 832 and exactly 3 expected
+#0 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Manbimbing->lihatnilai('13', '1')
+#1 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Manbimbing))
+#2 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2022-11-22 22:53:22 --> Undefined variable: user_id
+#0 D:\wamp64\www\webppi\app\Controllers\Nilairpl.php(61): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'D:\\wamp64\\www\\w...', 61, Array)
+#1 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Nilairpl->kodeetik('1')
+#2 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nilairpl))
+#3 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2022-11-22 22:54:10 --> Too few arguments to function App\Controllers\Nilairpl::kodeetik(), 1 passed in D:\wamp64\www\webppi\system\CodeIgniter.php on line 832 and exactly 2 expected
+#0 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Nilairpl->kodeetik('1')
+#1 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nilairpl))
+#2 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}

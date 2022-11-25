@@ -53,8 +53,7 @@ use App\Models\BimbingModel;
                             </td>
                             <td>
 
-                                <a
-                                    href="<?=base_url();?>/nilairpl/<?=$user['mhs_id'];?>/<?=$user['dosen_id'];?>/<?=$user['ta_id'];?>">Lihat
+                                <a href="<?=base_url();?>/nilairpl/docs/<?=$user['mhs_id'];?>/<?=$user['dosen_id'];?>">Lihat
                                     Nilai RPL</a>
                             </td>
                             <td><?php
