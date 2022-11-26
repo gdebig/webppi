@@ -390,6 +390,7 @@ class Userfair13 extends BaseController
         $session = session();
         $slug = new Slug();
         $model = new CapesOrgModel();
+        $user_id = $session->get('user_id');
         $logged_in = $session->get('logged_in');
         $ispeserta = $session->get('ispeserta');
         if ((!$logged_in)&&(!$ispeserta)){
