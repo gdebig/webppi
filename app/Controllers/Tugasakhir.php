@@ -107,13 +107,13 @@ class Tugasakhir extends BaseController
                     ],
                 ],
                 'ta_buku' => [
-                    'rules'  => 'ext_in[File,jpg,jpeg,png,pdf]',
+                    'rules'  => 'ext_in[ta_buku,jpg,jpeg,png,pdf]',
                     'errors' => [
                         'ext_in' => "Hanya menerima file PDF, JPG, JPEG atau PNG"
                     ],
                 ],
                 'ta_log' => [
-                    'rules'  => 'ext_in[File,jpg,jpeg,png,pdf]',
+                    'rules'  => 'ext_in[ta_log,jpg,jpeg,png,pdf]',
                     'errors' => [
                         'ext_in' => "Hanya menerima file PDF, JPG, JPEG atau PNG"
                     ],
