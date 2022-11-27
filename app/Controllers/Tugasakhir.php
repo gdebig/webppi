@@ -106,6 +106,18 @@ class Tugasakhir extends BaseController
                         'required' => 'Field divisi harus diisi',
                     ],
                 ],
+                'ta_buku' => [
+                    'rules'  => 'ext_in[File,jpg,jpeg,png,pdf]',
+                    'errors' => [
+                        'ext_in' => "Hanya menerima file PDF, JPG, JPEG atau PNG"
+                    ],
+                ],
+                'ta_log' => [
+                    'rules'  => 'ext_in[File,jpg,jpeg,png,pdf]',
+                    'errors' => [
+                        'ext_in' => "Hanya menerima file PDF, JPG, JPEG atau PNG"
+                    ],
+                ]
             ]);
 
             if ($formvalid){
