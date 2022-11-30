@@ -16,8 +16,21 @@
 
                 <div class="col">
                     <div class="row">
+                        <a href="<?php echo base_url();?>/mantugasakhir" class="btn btn-primary">Kembali ke Daftar
+                            Praktek Keinsinyuran</a>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="row">
+                        &nbsp;
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="row">
                         <a href="<?php echo base_url();?>/mantugasakhir/tambahpenguji/<?= $ta_id;?>/<?= $user_id;?>"
-                            class="btn btn-primary">Tambah Penguji</a>
+                            class="btn btn-primary">Atur Penguji</a>
                     </div>
                 </div>
 
@@ -32,7 +45,7 @@
 
                 <div class="alert alert-danger">Data penguji proyek akhir belum ada. <a
                         href="<?= base_url();?>/mantugasakhir/tambahpenguji/<?= $ta_id;?>/<?= $user_id;?>">Klik
-                        di sini untuk menambah penguji</a></div>
+                        di sini untuk mengatur data penguji</a></div>
                 <?php }else{ ?>
 
                 <table id="tabledata" class="display table table-bordered table-hover">
@@ -50,9 +63,9 @@
                                     ?>
                         <tr>
                             <td><?php echo $i;$i++;?></td>
-                            <td><?= $ta['FullName'];?></td>
+                            <td><?= !empty($ta['FullName']) ? $ta['FullName'] : "Belum ada penguji." ;?></td>
                             <td style="text-align: center">
-                                <a href="<?php echo base_url();?>/mantugasakhir/hapusuji/<?=$ta['uji_id'];?>/<?= $ta_id;?>/<?=$ta['user_id'];?>"
+                                <a href="<?php echo base_url();?>/mantugasakhir/hapusuji/<?=$ta['ta_id'];?>/<?= $ta_id;?>/<?=$ta['user_id'];?>"
                                     onclick="return confirm('Apakah anda yakin akan menghapus data penguji?')"
                                     class="btn btn-danger"> <i class="fas fa-trash"></i>
                                     Hapus</a>

@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\TugasAkhirModel;
 use App\Models\BimbingModel;
+use App\Models\NilaitaModel;
 
 class Tugasakhir extends BaseController
 {
@@ -20,7 +21,7 @@ class Tugasakhir extends BaseController
         $user_id = $session->get('user_id');
         $model = new TugasAkhirModel();
         $data['logged_in'] = $logged_in;
-        $ta = $model->where('tbl_tugasakhir.user_id', $user_id)->orderBy('tbl_tugasakhir.ta_id', 'DESC')->findall();
+        $ta = $model->where('tbl_tugasakhir.user_id', $user_id)->join('tbl_profile', 'tbl_tugasakhir.ta_penguji = tbl_profile.user_id', 'left')->orderBy('tbl_tugasakhir.ta_id', 'DESC')->findall();
         if (!empty($ta)){
             $data['data_ta'] = $ta;
         }else{
@@ -33,8 +34,8 @@ class Tugasakhir extends BaseController
         } else {
             $data['dosen_bimbing'] = "Belum ada pembimbing";
         }
-        $data['title_page'] = "Tugas Akhir PPI";
-        $data['data_bread'] = "Tugas Akhir";
+        $data['title_page'] = "Praktek Keinsinyuran PPI";
+        $data['data_bread'] = "Praktek Keinsinyuran";
         return view('maintemp/tugasakhir', $data);
     }
 
@@ -47,8 +48,8 @@ class Tugasakhir extends BaseController
             return redirect()->to('/home');
         }
         $data['logged_in'] = $logged_in;
-        $data['title_page'] = "Tambah Data Tugas Akhir";
-        $data['data_bread'] = "Tambah Data Tugas Akhir";
+        $data['title_page'] = "Upload Buku Revisi Praktek Keinsinyuran";
+        $data['data_bread'] = "Upload Buku Revisi Praktek Keinsinyuran";
         $data['user_id'] = $user_id;
         return view('maintemp/tambahta', $data);
     }
@@ -72,10 +73,10 @@ class Tugasakhir extends BaseController
 
             $formvalid = $this->validate([
                 'ta_usuljudul' => [
-                    'label'  => 'Judul Tugas Akhir',
+                    'label'  => 'Judul Praktek Keinsinyuran',
                     'rules'  => 'required',
                     'errors' => [
-                        'required' => 'Field Judul Tugas Akhir harus diisi',
+                        'required' => 'Field Judul Praktek Keinsinyuran harus diisi',
                     ],
                 ],
                 'startdate' => [
@@ -107,15 +108,15 @@ class Tugasakhir extends BaseController
                     ],
                 ],
                 'ta_buku' => [
-                    'rules'  => 'ext_in[ta_buku,jpg,jpeg,png,pdf]',
+                    'rules'  => 'ext_in[ta_buku,pdf]',
                     'errors' => [
-                        'ext_in' => "Hanya menerima file PDF, JPG, JPEG atau PNG"
+                        'ext_in' => "Hanya menerima file PDF."
                     ],
                 ],
                 'ta_log' => [
-                    'rules'  => 'ext_in[ta_log,jpg,jpeg,png,pdf]',
+                    'rules'  => 'ext_in[ta_log,pdf]',
                     'errors' => [
-                        'ext_in' => "Hanya menerima file PDF, JPG, JPEG atau PNG"
+                        'ext_in' => "Hanya menerima file PDF."
                     ],
                 ]
             ]);
@@ -165,15 +166,15 @@ class Tugasakhir extends BaseController
 
                 $model->save($datata);
 
-                $session->setFlashdata('msg', 'Data tugas akhir berhasil ditambahkan.');
+                $session->setFlashdata('msg', 'Data praktek keinsinyuran berhasil ditambahkan.');
     
                 return redirect()->to('/tugasakhir');
                 
             }else{
                 $user_id = $session->get('user_id');
                 $data['logged_in'] = $logged_in;
-                $data['title_page'] = "Tambah Data Tugas Akhir";
-                $data['data_bread'] = "Tambah Data Tugas Akhir";
+                $data['title_page'] = "Upload Buku Revisi Praktek Keinsinyuran";
+                $data['data_bread'] = "Upload Buku Revisi Praktek Keinsinyuran";
                 $data['validation'] = $this->validator;
                 $data['user_id'] = $user_id;
                 return view('maintemp/tambahtavalid', $data);
@@ -202,7 +203,7 @@ class Tugasakhir extends BaseController
         }
 
         $model->delete($id);
-        $session->setFlashdata('msg', 'Data tugas akhir berhasil dihapus.');
+        $session->setFlashdata('msg', 'Data praktek keinsinyuran berhasil dihapus.');
         return redirect()->to('/tugasakhir');
     }
 
@@ -231,8 +232,8 @@ class Tugasakhir extends BaseController
             ];
         }
         $data['logged_in'] = $logged_in;
-        $data['title_page'] = "Ubah Data Tugas Akhir";
-        $data['data_bread'] = "Ubah Data Tugas Akhir";
+        $data['title_page'] = "Ubah Data Praktek Keinsinyuran";
+        $data['data_bread'] = "Ubah Data Praktek Keinsinyuran";
         return view('maintemp/ubahta', $data);
     }
 
@@ -256,10 +257,10 @@ class Tugasakhir extends BaseController
 
             $formvalid = $this->validate([
                 'ta_usuljudul' => [
-                    'label'  => 'Judul Tugas Akhir',
+                    'label'  => 'Judul Praktek Keinsinyuran',
                     'rules'  => 'required',
                     'errors' => [
-                        'required' => 'Field Judul Tugas Akhir harus diisi',
+                        'required' => 'Field Judul Praktek Keinsinyuran harus diisi',
                     ],
                 ],
                 'startdate' => [
@@ -290,6 +291,18 @@ class Tugasakhir extends BaseController
                         'required' => 'Field divisi harus diisi',
                     ],
                 ],
+                'ta_buku' => [
+                    'rules'  => 'ext_in[ta_buku,pdf]',
+                    'errors' => [
+                        'ext_in' => "Hanya menerima file PDF."
+                    ],
+                ],
+                'ta_log' => [
+                    'rules'  => 'ext_in[ta_log,pdf]',
+                    'errors' => [
+                        'ext_in' => "Hanya menerima file PDF."
+                    ],
+                ]
             ]);
 
             if ($formvalid){
@@ -338,7 +351,7 @@ class Tugasakhir extends BaseController
 
                 $model->update($ta_id,$datata);
 
-                $session->setFlashdata('msg', 'Data tugas akhir berhasil diubah.');
+                $session->setFlashdata('msg', 'Data praktek keinsinyuran berhasil diubah.');
     
                 return redirect()->to('/tugasakhir');
             }else{
@@ -359,12 +372,121 @@ class Tugasakhir extends BaseController
                     ];
                 }
                 $data['logged_in'] = $logged_in;
-                $data['title_page'] = "Ubah Data Tugas Akhir";
-                $data['data_bread'] = "Ubah Data Tugas Akhir";
+                $data['title_page'] = "Ubah Data Praktek Keinsinyuran";
+                $data['data_bread'] = "Ubah Data Praktek Keinsinyuran";
                 $data['user_id'] = $user_id;
                 $data['validation'] = $this->validator;
                 return view('maintemp/ubahta', $data);
             }
         }
+    }
+
+    public function bukurevisi($ta_id){
+        $session = session();
+        $user_id = $session->get('user_id');
+        $logged_in = $session->get('logged_in');
+        $ispeserta = $session->get('ispeserta');
+        if ((!$logged_in)&&(!$ispeserta)){
+            return redirect()->to('/home');
+        }
+        $data['logged_in'] = $logged_in;
+        $data['title_page'] = "Upload Buku Revisi Praktek Keinsinyuran";
+        $data['data_bread'] = "Upload Buku Revisi Praktek Keinsinyuran";
+        $data['user_id'] = $user_id;
+        $data['ta_id'] = $ta_id;
+        return view('maintemp/bukurevisi', $data);
+    }
+
+    public function bukurevisiproses(){
+        $session = session();
+        $user_id = $session->get('user_id');
+        $logged_in = $session->get('logged_in');
+        $ispeserta = $session->get('ispeserta');
+        if ((!$logged_in)&&(!$ispeserta)){
+            return redirect()->to('/home');
+        }
+        $model = new TugasAkhirModel();
+        $button=$this->request->getVar('submit');
+        
+        if ($button=="batal"){
+            return redirect()->to('/tugasakhir');
+        }else{
+            helper(['form', 'url']);
+
+            $formvalid = $this->validate([                
+                'ta_bukurevisi' => [
+                    'rules'  => 'ext_in[ta_bukurevisi,pdf]',
+                    'errors' => [
+                        'ext_in' => "Hanya menerima file PDF"
+                    ],
+                ]
+            ]);
+
+            if ($formvalid){
+                $ta_id = $this->request->getVar('ta_id');
+                $ta_bukurevisi = $this->request->getFile('ta_bukurevisi');
+
+                $ta = $model->find($ta_id);
+                $path = './uploads/docs/'.$ta['ta_bukurevisi'];
+                if (is_file($path)){
+                    unlink($path);
+                }
+
+                $ext = $ta_bukurevisi->getClientExtension();
+                if (!empty($ext)){
+                    $bukuname = $user_id."_bukurevisita.".$ext;                    
+                    $ta_bukurevisi->move('uploads/docs/',$bukuname,true);
+                }else{
+                    $bukuname="";
+                }
+
+                $datata = array(
+                    'ta_bukurevisi' => $bukuname,
+                    'date_modified' => date('Y-m-d H:i:s')
+                );
+
+                $model->update($ta_id,$datata);
+
+                $session->setFlashdata('msg', 'Buku revisi praktek keinsinyuran berhasil diupload.');
+    
+                return redirect()->to('/tugasakhir');
+            }else{
+                $ta_id = $this->request->getVar('ta_id');
+                $data['logged_in'] = $logged_in;
+                $data['title_page'] = "Upload Buku Revisi Praktek Keinsinyuran";
+                $data['data_bread'] = "Upload Buku Revisi Praktek Keinsinyuran";
+                $data['user_id'] = $user_id;
+                $data['ta_id'] = $ta_id;
+                $data['validation'] = $this->validator;
+                return view('maintemp/bukurevisi', $data);
+            }
+        }
+    }
+
+    public function nilai($ta_id){
+        $session = session();
+        $user_id = $session->get('user_id');
+        $logged_in = $session->get('logged_in');
+        $ispeserta = $session->get('ispeserta');
+        if ((!$logged_in)&&(!$ispeserta)){
+            return redirect()->to('/home');
+        }
+
+        $model = new NilaitaModel();
+
+        $datanilai = $model->join('tbl_profile', 'tbl_nilaita.dosen_id = tbl_profile.user_id', 'left')->orderby('nilaita_id', 'DESC')->where('ta_id', $ta_id)->findall();
+
+        if($datanilai){
+            $data['datanilai'] = $datanilai;
+        }else{
+            $data['datanilai'] = 'kosong';
+        }
+
+        $data['logged_in'] = $logged_in;
+        $data['title_page'] = "Nilai Praktek Keinsinyuran";
+        $data['data_bread'] = "Nilai Praktek Keinsinyuran";
+        $data['user_id'] = $user_id;
+        $data['ta_id'] = $ta_id;
+        return view('maintemp/nilaipk', $data);
     }
 }

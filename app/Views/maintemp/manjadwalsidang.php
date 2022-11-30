@@ -16,8 +16,14 @@
 
                 <div class="col">
                     <div class="row">
-                        <a href="<?php echo base_url();?>/mantugasakhir" class="btn btn-primary">Kembali ke daftar tugas
-                            akhir</a>
+                        <a href="<?php echo base_url();?>/mantugasakhir" class="btn btn-primary">Kembali ke daftar
+                            praktek keinsinyuran.</a>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="row">
+                        &nbsp;
                     </div>
                 </div>
 

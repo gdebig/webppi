@@ -17,7 +17,7 @@
                 <div class="col">
                     <div class="row">
                         <a href="<?php echo base_url();?>/tugasakhir/tambahta" class="btn btn-primary">Tambah
-                            Tugas Akhir</a>
+                            Praktik Keinsinyuran</a>
                     </div>
                 </div>
 
@@ -35,9 +35,9 @@
                 <?php if(isset($data_ta)&&($data_ta=="kosong")){
                     ?>
 
-                <div class="alert alert-danger">Data Tugas Akhir belum ada. <a
+                <div class="alert alert-danger">Data Praktek Keinsinyuran belum ada. <a
                         href="<?= base_url();?>/tugasakhir/tambahta">Klik
-                        di sini untuk menambah data Tugas Akhir</a></div>
+                        di sini untuk menambah data Praktek Keinsinyuran</a></div>
                 <?php }else{ ?>
 
                 <table id="tabledata" class="display table table-bordered table-hover">
@@ -51,6 +51,9 @@
                             <th>Divisi</th>
                             <th>Buku TA</th>
                             <th>Log</th>
+                            <th>Penguji</th>
+                            <th>Nilai</th>
+                            <th>Buku Revisi</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -86,11 +89,31 @@
                                 echo "Belum ada LOG";
                             }
                             ?></td>
+                            <td>
+                                <?php
+                                if (!empty($ta['FullName'])){
+                                    echo $ta['FullName'];
+                                }else{
+                                    echo "Belum ada penguji";
+                                }
+                                ?>
+                            </td>
+                            <td><a href="<?php echo base_url();?>/tugasakhir/nilai/<?=$ta['ta_id'];?>">Lihat Nilai</a>
+                            </td>
+                            <td><?php
+                            if (!empty($ta['ta_bukurevisi'])){
+                                echo "<a href='".base_url()."/uploads/docs/".$ta['ta_bukurevisi']."' target='_blank'>Buku Revisi</a>";
+                            }else{
+                                echo "Belum ada buku revisi";
+                            }
+                            ?></td>
                             <td style="text-align: center"><a
-                                    href="<?php echo base_url();?>/tugasakhir/ubahta/<?=$ta['ta_id'];?>"
+                                    href="<?php echo base_url();?>/tugasakhir/bukurevisi/<?=$ta['ta_id'];?>"
+                                    class="btn btn-primary"> <i class="fas fa-upload"></i> Upload Buku
+                                    Revisi</a><a href="<?php echo base_url();?>/tugasakhir/ubahta/<?=$ta['ta_id'];?>"
                                     class="btn btn-warning"> <i class="fas fa-file-signature"></i> Ubah</a>
                                 <a href="<?php echo base_url();?>/tugasakhir/hapusta/<?=$ta['ta_id'];?>"
-                                    onclick="return confirm('Apakah anda yakin akan menghapus data Tugas Akhir?')"
+                                    onclick="return confirm('Apakah anda yakin akan menghapus data Praktek Keinsinyuran?')"
                                     class="btn btn-danger"> <i class="fas fa-trash"></i>
                                     Hapus</a>
                             </td>

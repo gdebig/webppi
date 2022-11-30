@@ -1,9 +1,5 @@
 <?= $this->extend('maintemp/template');?>
 
-<?php
-use App\Models\BimbingModel;
-?>
-
 <?= $this->section('content');?>
 
 <div class="card card-primary" style="width: auto; margin: 30px;">

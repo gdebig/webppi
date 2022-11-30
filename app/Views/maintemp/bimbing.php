@@ -1,9 +1,5 @@
 <?= $this->extend('maintemp/template');?>
 
-<?php
-use App\Models\BimbingModel;
-?>
-
 <?= $this->section('content');?>
 
 <div class="card card-primary" style="width: auto; margin: 30px;">
@@ -21,9 +17,7 @@ use App\Models\BimbingModel;
                 <?php if(isset($data_user)&&($data_user=="kosong")){
                     ?>
 
-                <div class="alert alert-danger">Data penilai belum ada. <a
-                        href="<?= base_url();?>/manpenilai/tambahpenilai">Klik
-                        di sini untuk menambah data penilai</a></div>
+                <div class="alert alert-danger">Data mahasiswa bimbingan belum ada.</div>
                 <?php }else{ ?>
 
                 <table id="tabledata" class="display table table-bordered table-hover">
@@ -70,14 +64,30 @@ use App\Models\BimbingModel;
                                 echo "Belum ada buku";
                             }
                             ?></td>
-                            <td>
+                            <td><?php
+                            if (!empty($user['ta_buku'])){
+                            ?>
                                 <a
                                     href="<?=base_url();?>/manbimbing/lihatnilai/<?=$user['mhs_id'];?>/<?=$user['dosen_id'];?>/<?=$user['ta_id'];?>">Lihat
                                     Nilai PK</a>
+                                <?php
+                            }else{
+                                echo "Belum ada buku";
+                            }
+                            ?>
                             </td>
-                            <td><a
+                            <td><?php
+                            if (!empty($user['ta_buku'])){
+                            ?>
+                                <a
                                     href="<?=base_url();?>/manbimbing/lihatadm/<?=$user['mhs_id'];?>/<?=$user['dosen_id'];?>/<?=$user['ta_id'];?>">Lihat
-                                    Administrasi</a></td>
+                                    Administrasi</a>
+                                <?php
+                            }else{
+                                echo "Belum ada buku";
+                            }
+                            ?>
+                            </td>
                         </tr>
                         <?php 
                                     endforeach 

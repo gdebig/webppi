@@ -5,7 +5,7 @@
 <div class="card card-primary" style="width: auto; margin: 30px;">
     <div class="col-sm-13" style="width: auto; margin: 30px;">
         <div class="">
-            <h3>Form Tambah Tugas Akhir</h3>
+            <h3>Form Tambah Praktek Keinsinyuran</h3>
         </div>
 
         <?php if(isset($validation)):?>
@@ -17,11 +17,12 @@
             <form action="<?php echo base_url();?>/tugasakhir/tambahtaproses" method="post"
                 enctype="multipart/form-data">
                 <div class="form-group">
-                    <label for="ta_usuljudul" class="element">Judul Tugas Akhir <span class="required"> *</span>&nbsp;
+                    <label for="ta_usuljudul" class="element">Judul Praktek Keinsinyuran <span class="required">
+                            *</span>&nbsp;
                     </label>
                     <div class="element">
                         <input id="ta_usuljudul" name="ta_usuljudul" class="form-control" type="text"
-                            placeholder="Judul Tugas Akhir..." />
+                            placeholder="Judul Praktek Keinsinyuran..." />
                     </div>
                     <br />
                     <label for="ta_semester" class="element">Semester <span class="required"> *</span>&nbsp;
@@ -33,7 +34,8 @@
                         </select>
                     </div>
                     <br />
-                    <label for="ta_tahun" class="element">Tahun Tugas Akhir <span class="required"> *</span>&nbsp;
+                    <label for="ta_tahun" class="element">Tahun Praktek Keinsinyuran <span class="required">
+                            *</span>&nbsp;
                     </label>
                     <div class="element">
                         <select name="ta_tahun" id="ta_tahun" class="form-control">
@@ -90,13 +92,13 @@
                             placeholder="Nama Divisi..." />
                     </div>
                     <br />
-                    <label for="ta_buku" class="element">File Buku Tugas Akhir</label>
+                    <label for="ta_buku" class="element">File Buku Praktek Keinsinyuran</label>
                     <div class="element">
                         <input id="ta_buku" name="ta_buku" type="file" class="form-control"
                             placeholder="File Buku TA..." />
                     </div>
                     <br />
-                    <label for="ta_log" class="element">Log Tugas Akhir</label>
+                    <label for="ta_log" class="element">Log Praktek Keinsinyuran</label>
                     <div class="element">
                         <input id="ta_log" name="ta_log" type="file" class="form-control"
                             placeholder="File Log TA..." />
@@ -108,7 +110,7 @@
                     <div class="row">
                         <div class="col">
                             <button type="submit" name="submit" value="submit" class="btn btn-primary col">Tambah
-                                Tugas Akhir</button>
+                                Praktek Keinsinyuran</button>
                         </div>
                         <div class="col">
                             <button type="submit" name="submit" value="batal"

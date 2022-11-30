@@ -18,7 +18,7 @@ class Manbimbing extends BaseController
         $issadmin = $session->get('issadmin');
         $isadmin = $session->get('isadmin');
         $ispenilai = $session->get('ispenilai');
-        if ((!$logged_in)&&(($issadmin)||($isadmin)||($ispenilai))){
+        if ((!$logged_in)&&((!$issadmin)||(!$isadmin)||(!$ispenilai))){
             return redirect()->to('/home');
         }
         helper(['tanggal']);
@@ -43,7 +43,7 @@ class Manbimbing extends BaseController
         $issadmin = $session->get('issadmin');
         $isadmin = $session->get('isadmin');
         $ispenilai = $session->get('ispenilai');
-        if ((!$logged_in)&&(($issadmin)||($isadmin)||($ispenilai))){
+        if ((!$logged_in)&&((!$issadmin)||(!$isadmin)||(!$ispenilai))){
             return redirect()->to('/home');
         }
         helper(['tanggal']);
@@ -72,7 +72,7 @@ class Manbimbing extends BaseController
         $issadmin = $session->get('issadmin');
         $isadmin = $session->get('isadmin');
         $ispenilai = $session->get('ispenilai');
-        if ((!$logged_in)&&(($issadmin)||($isadmin)||($ispenilai))){
+        if ((!$logged_in)&&((!$issadmin)||(!$isadmin)||(!$ispenilai))){
             return redirect()->to('/home');
         }
         helper(['tanggal']);
@@ -81,8 +81,8 @@ class Manbimbing extends BaseController
         $data['mhs_id'] = $mhs_id;
         $data['dosen_id'] = $dosen_id;
         $data['ta_id'] = $ta_id;
-        $data['title_page'] = "Nilai Tugas Akhir Mahasiswa Bimbingan PPI RPL";
-        $data['data_bread'] = "Nilai TA";
+        $data['title_page'] = "Nilai Praktek Keinsinyuran Mahasiswa Bimbingan PPI RPL";
+        $data['data_bread'] = "Nilai PK";
         return view('maintemp/nilaita', $data);
     }
 
@@ -92,7 +92,7 @@ class Manbimbing extends BaseController
         $issadmin = $session->get('issadmin');
         $isadmin = $session->get('isadmin');
         $ispenilai = $session->get('ispenilai');
-        if ((!$logged_in)&&(($issadmin)||($isadmin)||($ispenilai))){
+        if ((!$logged_in)&&((!$issadmin)||(!$isadmin)||(!$ispenilai))){
             return redirect()->to('/home');
         }
         helper(['tanggal']);
@@ -176,8 +176,8 @@ class Manbimbing extends BaseController
             $data['mhs_id'] = $mhs_id;
             $data['dosen_id'] = $dosen_id;
             $data['ta_id'] = $ta_id;
-            $data['title_page'] = "Nilai Tugas Akhir Mahasiswa Bimbingan PPI RPL";
-            $data['data_bread'] = "Nilai TA";
+            $data['title_page'] = "Nilai Praktek Keinsinyuran Mahasiswa Bimbingan PPI RPL";
+            $data['data_bread'] = "Nilai PK";
             $data['validation'] = $this->validator;
             return view('maintemp/nilaitavalid', $data);
         }
@@ -190,7 +190,7 @@ class Manbimbing extends BaseController
         $issadmin = $session->get('issadmin');
         $isadmin = $session->get('isadmin');
         $ispenilai = $session->get('ispenilai');
-        if ((!$logged_in)&&(($issadmin)||($isadmin)||($ispenilai))){
+        if ((!$logged_in)&&((!$issadmin)||(!$isadmin)||(!$ispenilai))){
             return redirect()->to('/home');
         }
         helper(['tanggal']);

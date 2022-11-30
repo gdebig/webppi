@@ -12,7 +12,7 @@ class Manpenilai extends BaseController
         $logged_in = $session->get('logged_in');
         $issadmin = $session->get('issadmin');
         $isadmin = $session->get('isadmin');
-        if ((!$logged_in)&&(($issadmin)||($isadmin))){
+        if ((!$logged_in)&&((!$issadmin)||(!$isadmin))){
             return redirect()->to('/home');
         }
         helper(['tanggal']);

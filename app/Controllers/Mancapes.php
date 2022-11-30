@@ -19,7 +19,7 @@ class Mancapes extends BaseController
         $logged_in = $session->get('logged_in');
         $issadmin = $session->get('issadmin');
         $isadmin = $session->get('isadmin');
-        if ((!$logged_in)&&(($issadmin)||($isadmin))){
+        if ((!$logged_in)&&((!$issadmin)||(!$isadmin))){
             return redirect()->to('/home');
         }
         helper(['tanggal']);
@@ -45,7 +45,7 @@ class Mancapes extends BaseController
         $logged_in = $session->get('logged_in');
         $issadmin = $session->get('issadmin');
         $isadmin = $session->get('isadmin');
-        if ((!$logged_in)&&(($issadmin)||($isadmin))){
+        if ((!$logged_in)&&((!$issadmin)||(!$isadmin))){
             return redirect()->to('/home');
         }
         helper(['tanggal']);
@@ -97,7 +97,7 @@ class Mancapes extends BaseController
         $logged_in = $session->get('logged_in');
         $issadmin = $session->get('issadmin');
         $isadmin = $session->get('isadmin');
-        if ((!$logged_in)&&(($issadmin)||($isadmin))){
+        if ((!$logged_in)&&((!$issadmin)||(!$isadmin))){
             return redirect()->to('/home');
         }
         helper(['tanggal']);
@@ -212,7 +212,7 @@ class Mancapes extends BaseController
         $logged_in = $session->get('logged_in');
         $issadmin = $session->get('issadmin');
         $isadmin = $session->get('isadmin');
-        if ((!$logged_in)&&(($issadmin)||($isadmin))){
+        if ((!$logged_in)&&((!$issadmin)||(!$isadmin))){
             return redirect()->to('/home');
         }
         helper(['tanggal']);
@@ -235,7 +235,7 @@ class Mancapes extends BaseController
         $logged_in = $session->get('logged_in');
         $issadmin = $session->get('issadmin');
         $isadmin = $session->get('isadmin');
-        if ((!$logged_in)&&(($issadmin)||($isadmin))){
+        if ((!$logged_in)&&((!$issadmin)||(!$isadmin))){
             return redirect()->to('/home');
         }
         helper(['tanggal']);
@@ -258,7 +258,7 @@ class Mancapes extends BaseController
         $logged_in = $session->get('logged_in');
         $issadmin = $session->get('issadmin');
         $isadmin = $session->get('isadmin');
-        if ((!$logged_in)&&(($issadmin)||($isadmin))){
+        if ((!$logged_in)&&((!$issadmin)||(!$isadmin))){
             return redirect()->to('/home');
         }
         helper(['tanggal']);
@@ -281,7 +281,7 @@ class Mancapes extends BaseController
         $logged_in = $session->get('logged_in');
         $issadmin = $session->get('issadmin');
         $isadmin = $session->get('isadmin');
-        if ((!$logged_in)&&(($issadmin)||($isadmin))){
+        if ((!$logged_in)&&((!$issadmin)||(!$isadmin))){
             return redirect()->to('/home');
         }
         helper(['tanggal']);
@@ -304,7 +304,7 @@ class Mancapes extends BaseController
         $logged_in = $session->get('logged_in');
         $issadmin = $session->get('issadmin');
         $isadmin = $session->get('isadmin');
-        if ((!$logged_in)&&(($issadmin)||($isadmin))){
+        if ((!$logged_in)&&((!$issadmin)||(!$isadmin))){
             return redirect()->to('/home');
         }
         helper(['tanggal']);
@@ -327,7 +327,7 @@ class Mancapes extends BaseController
         $logged_in = $session->get('logged_in');
         $issadmin = $session->get('issadmin');
         $isadmin = $session->get('isadmin');
-        if ((!$logged_in)&&(($issadmin)||($isadmin))){
+        if ((!$logged_in)&&((!$issadmin)||(!$isadmin))){
             return redirect()->to('/home');
         }
         helper(['tanggal']);
@@ -351,7 +351,7 @@ class Mancapes extends BaseController
         $logged_in = $session->get('logged_in');
         $issadmin = $session->get('issadmin');
         $isadmin = $session->get('isadmin');
-        if ((!$logged_in)&&(($issadmin)||($isadmin))){
+        if ((!$logged_in)&&((!$issadmin)||(!$isadmin))){
             return redirect()->to('/home');
         }
         $model = new CapesSemModel();
@@ -373,7 +373,7 @@ class Mancapes extends BaseController
         $model = new UserModel();
         $user_id = $session->get('user_id');
         $logged_in = $session->get('logged_in');
-        if (!$logged_in){
+        if ((!$logged_in)&&((!$issadmin)||(!$isadmin))){
             return redirect()->to('/home');
         }
 

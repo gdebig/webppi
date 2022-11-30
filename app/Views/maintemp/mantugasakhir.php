@@ -17,7 +17,7 @@
                 <?php if(isset($data_ta)&&($data_ta=="kosong")){
                     ?>
 
-                <div class="alert alert-danger">Data Tugas Akhir belum ada.</div>
+                <div class="alert alert-danger">Data praktek keinsinyuran belum ada.</div>
                 <?php }else{ ?>
 
                 <table id="tabledata" class="display table table-bordered table-hover">

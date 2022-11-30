@@ -20,7 +20,7 @@ class Manpeserta extends BaseController
         $logged_in = $session->get('logged_in');
         $issadmin = $session->get('issadmin');
         $isadmin = $session->get('isadmin');
-        if ((!$logged_in)&&(($issadmin)||($isadmin))){
+        if ((!$logged_in)&&((!$issadmin)||(!$isadmin))){
             return redirect()->to('/home');
         }
         helper(['tanggal']);
@@ -55,7 +55,7 @@ class Manpeserta extends BaseController
         $logged_in = $session->get('logged_in');
         $issadmin = $session->get('issadmin');
         $isadmin = $session->get('isadmin');
-        if ((!$logged_in)&&(($issadmin)||($isadmin))){
+        if ((!$logged_in)&&((!$issadmin)||(!$isadmin))){
             return redirect()->to('/home');
         }
         helper(['tanggal']);
@@ -107,7 +107,7 @@ class Manpeserta extends BaseController
         $logged_in = $session->get('logged_in');
         $issadmin = $session->get('issadmin');
         $isadmin = $session->get('isadmin');
-        if ((!$logged_in)&&(($issadmin)||($isadmin))){
+        if ((!$logged_in)&&((!$issadmin)||(!$isadmin))){
             return redirect()->to('/home');
         }
         helper(['tanggal']);
@@ -222,7 +222,7 @@ class Manpeserta extends BaseController
         $logged_in = $session->get('logged_in');
         $issadmin = $session->get('issadmin');
         $isadmin = $session->get('isadmin');
-        if ((!$logged_in)&&(($issadmin)||($isadmin))){
+        if ((!$logged_in)&&((!$issadmin)||(!$isadmin))){
             return redirect()->to('/home');
         }
         helper(['tanggal']);
@@ -244,7 +244,7 @@ class Manpeserta extends BaseController
         $logged_in = $session->get('logged_in');
         $issadmin = $session->get('issadmin');
         $isadmin = $session->get('isadmin');
-        if ((!$logged_in)&&(($issadmin)||($isadmin))){
+        if ((!$logged_in)&&((!$issadmin)||(!$isadmin))){
             return redirect()->to('/home');
         }
         helper(['tanggal']);
@@ -266,7 +266,7 @@ class Manpeserta extends BaseController
         $logged_in = $session->get('logged_in');
         $issadmin = $session->get('issadmin');
         $isadmin = $session->get('isadmin');
-        if ((!$logged_in)&&(($issadmin)||($isadmin))){
+        if ((!$logged_in)&&((!$issadmin)||(!$isadmin))){
             return redirect()->to('/home');
         }
         helper(['tanggal']);
@@ -288,7 +288,7 @@ class Manpeserta extends BaseController
         $logged_in = $session->get('logged_in');
         $issadmin = $session->get('issadmin');
         $isadmin = $session->get('isadmin');
-        if ((!$logged_in)&&(($issadmin)||($isadmin))){
+        if ((!$logged_in)&&((!$issadmin)||(!$isadmin))){
             return redirect()->to('/home');
         }
         helper(['tanggal']);
@@ -310,7 +310,7 @@ class Manpeserta extends BaseController
         $logged_in = $session->get('logged_in');
         $issadmin = $session->get('issadmin');
         $isadmin = $session->get('isadmin');
-        if ((!$logged_in)&&(($issadmin)||($isadmin))){
+        if ((!$logged_in)&&((!$issadmin)||(!$isadmin))){
             return redirect()->to('/home');
         }
         helper(['tanggal']);
@@ -332,7 +332,7 @@ class Manpeserta extends BaseController
         $logged_in = $session->get('logged_in');
         $issadmin = $session->get('issadmin');
         $isadmin = $session->get('isadmin');
-        if ((!$logged_in)&&(($issadmin)||($isadmin))){
+        if ((!$logged_in)&&((!$issadmin)||(!$isadmin))){
             return redirect()->to('/home');
         }
         helper(['tanggal']);
@@ -355,7 +355,7 @@ class Manpeserta extends BaseController
         $logged_in = $session->get('logged_in');
         $issadmin = $session->get('issadmin');
         $isadmin = $session->get('isadmin');
-        if ((!$logged_in)&&(($issadmin)||($isadmin))){
+        if ((!$logged_in)&&((!$issadmin)||(!$isadmin))){
             return redirect()->to('/home');
         }
         $model = new CapesSemModel();
@@ -376,7 +376,7 @@ class Manpeserta extends BaseController
         $model = new BimbingModel();
         $user_id = $session->get('user_id');
         $logged_in = $session->get('logged_in');
-        if (!$logged_in){
+        if ((!$logged_in)&&((!$issadmin)||(!$isadmin))){
             return redirect()->to('/home');
         }
 

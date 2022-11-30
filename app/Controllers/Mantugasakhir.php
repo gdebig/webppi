@@ -7,7 +7,7 @@ use App\Models\CapesProfileModel;
 use App\Models\TugasAkhirModel;
 use App\Models\BimbingModel;
 use App\Models\JadwalSidangModel;
-use App\Models\PengujiModel;
+//use App\Models\PengujiModel;
 
 class Mantugasakhir extends BaseController
 {
@@ -17,7 +17,7 @@ class Mantugasakhir extends BaseController
         $logged_in = $session->get('logged_in');
         $issadmin = $session->get('issadmin');
         $isadmin = $session->get('isadmin');
-        if ((!$logged_in)&&(($issadmin)||($isadmin))){
+        if ((!$logged_in)&&((!$issadmin)||(!$isadmin))){
             return redirect()->to('/home');
         }
         helper(['tanggal']);
@@ -31,8 +31,8 @@ class Mantugasakhir extends BaseController
         }else{
             $data['data_ta'] = 'kosong';
         }
-        $data['title_page'] = "Daftar Tugas Akhir Peserta PPI RPL";
-        $data['data_bread'] = "Tugas Akhir Peserta PPI RPL";
+        $data['title_page'] = "Daftar Praktek Keinsinyuran Peserta PPI RPL";
+        $data['data_bread'] = "Praktek Keinsinyuran Peserta PPI RPL";
         $data['logged_in'] = $logged_in;
         return view('maintemp/mantugasakhir', $data);
     }
@@ -42,7 +42,7 @@ class Mantugasakhir extends BaseController
         $logged_in = $session->get('logged_in');
         $issadmin = $session->get('issadmin');
         $isadmin = $session->get('isadmin');
-        if ((!$logged_in)&&(($issadmin)||($isadmin))){
+        if ((!$logged_in)&&((!$issadmin)||(!$isadmin))){
             return redirect()->to('/home');
         }
         helper(['tanggal']);
@@ -67,7 +67,7 @@ class Mantugasakhir extends BaseController
         $logged_in = $session->get('logged_in');
         $issadmin = $session->get('issadmin');
         $isadmin = $session->get('isadmin');
-        if ((!$logged_in)&&(($issadmin)||($isadmin))){
+        if ((!$logged_in)&&((!$issadmin)||(!$isadmin))){
             return redirect()->to('/home');
         }
         helper(['tanggal']);
@@ -85,7 +85,7 @@ class Mantugasakhir extends BaseController
         $logged_in = $session->get('logged_in');
         $issadmin = $session->get('issadmin');
         $isadmin = $session->get('isadmin');
-        if ((!$logged_in)&&(($issadmin)||($isadmin))){
+        if ((!$logged_in)&&((!$issadmin)||(!$isadmin))){
             return redirect()->to('/home');
         }
         helper(['tanggal']);
@@ -147,7 +147,7 @@ class Mantugasakhir extends BaseController
         $logged_in = $session->get('logged_in');
         $issadmin = $session->get('issadmin');
         $isadmin = $session->get('isadmin');
-        if ((!$logged_in)&&(($issadmin)||($isadmin))){
+        if ((!$logged_in)&&((!$issadmin)||(!$isadmin))){
             return redirect()->to('/home');
         }
         $model = new JadwalSidangModel();
@@ -162,11 +162,11 @@ class Mantugasakhir extends BaseController
         $logged_in = $session->get('logged_in');
         $issadmin = $session->get('issadmin');
         $isadmin = $session->get('isadmin');
-        if ((!$logged_in)&&(($issadmin)||($isadmin))){
+        if ((!$logged_in)&&((!$issadmin)||(!$isadmin))){
             return redirect()->to('/home');
         }
-        $model = new PengujiModel();
-        $penguji = $model->where('ta_id', $ta_id)->where('tbl_penguji.user_id', $user_id)->join('tbl_profile', 'tbl_penguji.penguji = tbl_profile.user_id', 'left')->orderby('uji_id', 'DESC')->findall();
+        $model = new TugasAkhirModel();
+        $penguji = $model->where('ta_id', $ta_id)->join('tbl_profile', 'tbl_tugasakhir.ta_penguji = tbl_profile.user_id', 'left')->orderby('ta_id', 'DESC')->findall();
 
         if ($penguji){
             $data['data_uji'] = $penguji;
@@ -189,7 +189,7 @@ class Mantugasakhir extends BaseController
         $logged_in = $session->get('logged_in');
         $issadmin = $session->get('issadmin');
         $isadmin = $session->get('isadmin');
-        if ((!$logged_in)&&(($issadmin)||($isadmin))){
+        if ((!$logged_in)&&((!$issadmin)||(!$isadmin))){
             return redirect()->to('/home');
         }
         helper(['tanggal']);
@@ -215,69 +215,29 @@ class Mantugasakhir extends BaseController
         $logged_in = $session->get('logged_in');
         $issadmin = $session->get('issadmin');
         $isadmin = $session->get('isadmin');
-        if ((!$logged_in)&&(($issadmin)||($isadmin))){
+        if ((!$logged_in)&&((!$issadmin)||(!$isadmin))){
             return redirect()->to('/home');
         }
         helper(['tanggal']);
+        $model = new TugasAkhirModel();
         $user_id = $this->request->getVar('user_id');
         $ta_id = $this->request->getVar('ta_id');
         $submit = $this->request->getVar('submit');
         if ($submit=="batal"){
             return redirect()->to('/mantugasakhir/setpenguji/'.$ta_id.'/'.$user_id);
         }else{
-            $model = new PengujiModel();
-            helper(['form', 'url']);
+            $penguji = $this->request->getVar('penguji');
+            $ta_id = $this->request->getVar('ta_id');
+            $user_id = $this->request->getVar('user_id');
 
-            $formvalid = $this->validate([
-                'sidang_ruang' => [
-                    'label'  => 'sidang_ruang',
-                    'rules'  => 'required',
-                    'errors' => [
-                        'required' => 'Field Ruang Sidang harus diisi.',
-                    ],
-                ],
-                'sidang_tanggal' => [
-                    'label'  => 'sidang_tanggal',
-                    'rules'  => 'required',
-                    'errors' => [
-                        'required' => 'Field Tanggal Sidang harus diisi.',
-                    ],
-                ]
-            ]);
-        }
-        if ($formvalid){
-            $sidang_ruang = $this->request->getVar('sidang_ruang');
-            $sidang_tanggal = $this->request->getVar('sidang_tanggal');
-
-            $data = array(
-                'ta_id' => $ta_id,
-                'user_id' => $user_id,
-                'sidang_ruang' => $sidang_ruang,
-                'sidang_tanggal' => $sidang_tanggal,
-                'date_created' => date('Y-m-d'),
-                'date_modified' => date('Y-m-d')
+            $dataarray = array(
+                'ta_penguji' => $penguji,                
             );
-    
-            $model->save($data);
-    
-             return redirect()->to('/mantugasakhir/setjadwal/'.$ta_id.'/'.$user_id);
-        }else{
-            $model = new UserModel();
-            $where = "tipe_user LIKE '__y_'";
-            $user = $model->join('tbl_profile', 'tbl_user.user_id = tbl_profile.user_id', 'left')->where($where)->orderby('tbl_profile.FullName', 'ASC')->findall();
-            if (!empty($user)){
-                $data['data_user'] = $user;
-            }else{
-                $data['data_user'] = 'kosong';
-            }
-        
-            $data['ta_id'] = $user_id;
-            $data['user_id'] = $user_id;
-            $data['title_page'] = "Tambah Penguji Proyek Akhir Peserta PPI RPL";
-            $data['data_bread'] = "Tambah Penguji";
-            $data['logged_in'] = $logged_in;
-            $data['validation'] = $this->validator;
-            return view('maintemp/tambahpengujivalid', $data);
+
+            $model->update($ta_id,$dataarray);
+
+            $session->setFlashdata('msg', 'Penguji Praktek Keinsinyuran berhasil di set.');
+            return redirect()->to('/mantugasakhir/setpenguji/'.$ta_id.'/'.$user_id);
         }
     }
 
@@ -286,13 +246,37 @@ class Mantugasakhir extends BaseController
         $logged_in = $session->get('logged_in');
         $issadmin = $session->get('issadmin');
         $isadmin = $session->get('isadmin');
-        if ((!$logged_in)&&(($issadmin)||($isadmin))){
+        if ((!$logged_in)&&((!$issadmin)||(!$isadmin))){
             return redirect()->to('/home');
         }
-        $model = new PengujiModel();
-        $model->delete($id);
+        $model = new TugasAkhirModel();
+
+        $dataarray = array(
+            'ta_penguji' => '',                
+        );
+
+        $model->update($ta_id,$dataarray);
         $session->setFlashdata('msg', 'Data penguji berhasil dihapus.');
 
         return redirect()->to('/mantugasakhir/setpenguji/'.$ta_id.'/'.$user_id);  
+    }
+
+    public function admta($ta_id, $user_id){
+        $session = session();
+        $logged_in = $session->get('logged_in');
+        $issadmin = $session->get('issadmin');
+        $isadmin = $session->get('isadmin');
+        if ((!$logged_in)&&((!$issadmin)||(!$isadmin))){
+            return redirect()->to('/home');
+        }
+
+        helper(['tanggal']);
+        
+        $data['ta_id'] = $ta_id;
+        $data['user_id'] = $user_id;
+        $data['title_page'] = "Daftar Administrasi Praktek Keinsinyuran";
+        $data['data_bread'] = "Daftar Administrasi";
+        $data['logged_in'] = $logged_in;
+        return view('maintemp/daftaradm', $data);
     }
 }
