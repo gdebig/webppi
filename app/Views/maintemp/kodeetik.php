@@ -24,18 +24,17 @@
                 <div class="alert alert-danger">Data kode etik belum ada.</div>
                 <?php }else{ ?>
 
+                <h3>II.1. Referensi Kode Etik dan Etika Profesi (#) (W1)</h3>
                 <table id="tabledata" class="display table table-bordered table-hover">
                     <thead>
                         <tr>
                             <th>No</th>
+                            <th>Check</th>
                             <th>Nama</th>
                             <th>Alamat</th>
                             <th>No. Telepon</th>
                             <th>Email</th>
                             <th>Hubungan</th>
-                            <th>Nilai P</th>
-                            <th>Nilai Q</th>
-                            <th>Nilai R</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -45,34 +44,70 @@
                         ?>
                         <tr>
                             <td><?php echo $i;$i++;?></td>
+                            <td><input type="checkbox" name="etik_id[]" value="<?= $etik['Num'];?>" /></td>
                             <td><?= $etik['Name'];?></td>
                             <td><?= $etik['Addr']."<br />".$etik['City'].', '.$etik['Prov'].', '.$etik['Country'];?>
                             </td>
                             <td><?= $etik['Pnum'];?></td>
                             <td><?= $etik['Email'];?></td>
                             <td><?= $etik['Relation'];?></td>
-                            <td style="text-align: center">
-                                <select name="nilaip" id="nilaip">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
+                        </tr>
+                        <?php 
+                        endforeach 
+                        ?>
+                    </tbody>
+                </table>
+                <?php } ?>
+                <br />
+                <?php if(isset($data_pendapat)&&($data_pendapat=="kosong")){
+                    ?>
+
+                <div class="alert alert-danger">Data kode etik belum ada.</div>
+                <?php }else{ ?>
+
+                <h3>II.2. Pengertian, Pendapat dan Pengalaman Sendiri (W1)</h3>
+                <table id="tabledata" class="display table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Check</th>
+                            <th>Pendapat</th>
+                            <th>Nilai P</th>
+                            <th>Nilai Q</th>
+                            <th>Nilai R</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $i=1; 
+                        foreach ($data_pendapat as $dapat) : 
+                        ?>
+                        <tr>
+                            <td><?php echo $i;$i++;?></td>
+                            <td><input type="checkbox" name="dapat_id[]" value="<?= $dapat['Num'];?>" /></td>
+                            <td><?= $dapat['Desc'];?></td>
+                            <td>
+                                <select name="nilai_p" id="nilai_p" class="form-control">
                                     <option value="4">4</option>
+                                    <option value="3">3</option>
+                                    <option value="2">2</option>
+                                    <option value="1">1</option>
                                 </select>
                             </td>
-                            <td style="text-align: center">
-                                <select name="nilaiq" id="nilaiq">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
+                            <td>
+                                <select name="nilai_q" id="nilai_q" class="form-control">
                                     <option value="4">4</option>
+                                    <option value="3">3</option>
+                                    <option value="2">2</option>
+                                    <option value="1">1</option>
                                 </select>
                             </td>
-                            <td style="text-align: center">
-                                <select name="nilair" id="nilair">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
+                            <td>
+                                <select name="nilai_r" id="nilai_r" class="form-control">
                                     <option value="4">4</option>
+                                    <option value="3">3</option>
+                                    <option value="2">2</option>
+                                    <option value="1">1</option>
                                 </select>
                             </td>
                         </tr>

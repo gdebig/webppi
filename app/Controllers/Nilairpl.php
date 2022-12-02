@@ -6,6 +6,13 @@ namespace App\Controllers;
 
 use App\Models\ProfileModel;
 use App\Models\EtikRefModel;
+use App\Models\PendapatModel;
+use App\Models\CapesPendModel;
+use App\Models\CapesOrgModel;
+use App\Models\KompModel;
+use App\Libraries\Slug;
+use App\Models\PenghargaanModel;
+use App\Models\CapesSertModel;
 
 class Nilairpl extends BaseController
 {
@@ -16,7 +23,7 @@ class Nilairpl extends BaseController
         $issadmin = $session->get('issadmin');
         $isadmin = $session->get('isadmin');
         $ispenilai = $session->get('ispenilai');
-        if ((!$logged_in)&&(($issadmin)||($isadmin)||($ispenilai))){
+        if ((!$logged_in)&&((!$issadmin)||(!$isadmin)||(!$ispenilai))){
             return redirect()->to('/home');
         }else{
             $session->set('role', 'penilai');
@@ -46,7 +53,7 @@ class Nilairpl extends BaseController
         $issadmin = $session->get('issadmin');
         $isadmin = $session->get('isadmin');
         $ispenilai = $session->get('ispenilai');
-        if ((!$logged_in)&&(($issadmin)||($isadmin)||($ispenilai))){
+        if ((!$logged_in)&&((!$issadmin)||(!$isadmin)||(!$ispenilai))){
             return redirect()->to('/home');
         }else{
             $session->set('role', 'penilai');
@@ -61,6 +68,14 @@ class Nilairpl extends BaseController
             $data['data_etik'] = 'kosong';
         }
 
+        $model1 = new PendapatModel();
+        $pendapat = $model1->where('user_id', $mhs_id)->orderby('Num', 'DESC')->findall();
+        if (!empty($pendapat)){
+            $data['data_pendapat'] = $pendapat;
+        }else{
+            $data['data_pendapat'] = 'kosong';
+        }
+
         $data['mhs_id'] = $mhs_id;
         $data['dosen_id'] = $dosen_id;
         $data['title_page'] = "Kode Etik dan Etika Profesi Insinyur";
@@ -68,5 +83,67 @@ class Nilairpl extends BaseController
         $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/nilairpl/docs/".$mhs_id.'/'.$dosen_id.'">Nilai RPL</a></li><li class="breadcrumb-item active">Kode Etik</li>';
         $data['logged_in'] = $session->get('logged_in');
         return view('maintemp/kodeetik', $data);
+    }
+
+    public function profesi($mhs_id, $dosen_id){
+        $session = session();
+        $logged_in = $session->get('logged_in');
+        $issadmin = $session->get('issadmin');
+        $isadmin = $session->get('isadmin');
+        $ispenilai = $session->get('ispenilai');
+        if ((!$logged_in)&&((!$issadmin)||(!$isadmin)||(!$ispenilai))){
+            return redirect()->to('/home');
+        }else{
+            $session->set('role', 'penilai');
+        }
+        helper(['tanggal']);
+
+        $model = new CapesPendModel();
+        
+        $pend = $model->where('user_id', $mhs_id)->orderby('GradYear','DESC')->findall();
+        if (!empty($pend)){
+            $data['data_pend'] = $pend;
+        }else{
+            $data['data_pend'] = 'kosong';
+        }
+
+        $model = new CapesOrgModel();
+        $org = $model->where('user_id', $mhs_id)->orderby('StartPeriodYear','DESC')->findall();
+        if (!empty($org)){
+            $data['data_org'] = $org;
+        }else{
+            $data['data_org'] = 'kosong';
+        }
+
+        $model = new PenghargaanModel();
+        $penghargaan = $model->where('user_id', $mhs_id)->orderby('Year','DESC')->orderby('Month','DESC')->findall();
+        if (!empty($penghargaan)){
+            $data['data_harga'] = $penghargaan;
+        }else{
+            $data['data_harga'] = 'kosong';
+        }        
+        
+        $model = new CapesSertModel();
+        $latih = $model->where('user_id', $mhs_id)->where('Jenis', 'pelatihan')->orderby('StartYear','DESC')->findall();
+        if (!empty($latih)){
+            $data['data_latih'] = $latih;
+        }else{
+            $data['data_latih'] = 'kosong';
+        }
+
+        $latih = $model->where('user_id', $mhs_id)->where('Jenis', 'sertifikat')->findall();
+        if (!empty($latih)){
+            $data['data_latih'] = $latih;
+        }else{
+            $data['data_latih'] = 'kosong';
+        }
+
+        $data['mhs_id'] = $mhs_id;
+        $data['dosen_id'] = $dosen_id;
+        $data['title_page'] = "Profesionalisme";
+        $data['data_bread'] = '';
+        $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/nilairpl/docs/".$mhs_id.'/'.$dosen_id.'">Nilai RPL</a></li><li class="breadcrumb-item active">Profesionalisme</li>';
+        $data['logged_in'] = $session->get('logged_in');
+        return view('maintemp/profesi', $data);
     }
 }
