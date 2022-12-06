@@ -71,7 +71,6 @@
                             <option value="ditolak">Ditolak</option>
                             <option value="lulus">Lulus</option>
                             <option value="keluar">Keluar / DO</option>
-                            <option value="diterima">Sudah Diterima</option>
                             <option value="staff">Staff / Penilai</option>
                         </select>
                     </div>
