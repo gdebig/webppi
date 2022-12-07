@@ -11,8 +11,8 @@
     </a>
 </li>
 <li class="nav-item">
-    <a href="<?php echo base_url();?>/jadwalta" class="nav-link">
-        <i class="fas fa-graduation-cap nav-icon"></i>
-        <p>Jadwal Sidang TA</p>
+    <a href="<?php echo base_url();?>/nilairpl" class="nav-link">
+        <i class="fas fa-check-square nav-icon"></i>
+        <p>Lihat Nilai RPL</p>
     </a>
 </li>

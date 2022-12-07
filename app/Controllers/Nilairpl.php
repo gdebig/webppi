@@ -13,6 +13,12 @@ use App\Models\KompModel;
 use App\Libraries\Slug;
 use App\Models\PenghargaanModel;
 use App\Models\CapesSertModel;
+use App\Models\CapesKualifikasiModel;
+use App\Models\MengajarModel;
+use App\Models\CapesKartulModel;
+use App\Models\CapesSemModel;
+use App\Models\InovasiModel;
+use App\Models\BahasaModel;
 
 class Nilairpl extends BaseController
 {
@@ -62,6 +68,7 @@ class Nilairpl extends BaseController
 
         $model = new EtikRefModel();
         $etik = $model->where('user_id', $mhs_id)->orderby('Name','ASC')->findall();
+        $data['jumlah_etik'] = $model->where('user_id', $mhs_id)->countAllResults();
         if (!empty($etik)){
             $data['data_etik'] = $etik;
         }else{
@@ -74,6 +81,33 @@ class Nilairpl extends BaseController
             $data['data_pendapat'] = $pendapat;
         }else{
             $data['data_pendapat'] = 'kosong';
+        }
+
+        $model2 = new CapesOrgModel();
+        $org = $model2->where('user_id', $mhs_id)->like('kompetensi', 'W.1.2.')->orderby('StartPeriodYear','DESC')->findall();
+        $data['jumlah_org'] = $model2->where('user_id', $mhs_id)->like('kompetensi', 'W.1.2.')->countAllResults();
+        $data['org_pii'] = $model2->where('Type', 'PII')->findall();
+        if (!empty($org)){
+            $data['data_org'] = $org;
+        }else{
+            $data['data_org'] = 'kosong';
+        }
+
+        $model3 = new PenghargaanModel();
+        $penghargaan = $model3->where('user_id', $mhs_id)->like('kompetensi', 'W.1.2.')->orderby('Year','DESC')->orderby('Month','DESC')->findall();
+        $data['jumlah_harga'] = $model3->where('user_id', $mhs_id)->like('kompetensi', 'W.1.2.')->countAllResults();
+        if (!empty($penghargaan)){
+            $data['data_harga'] = $penghargaan;
+        }else{
+            $data['data_harga'] = 'kosong';
+        }
+
+        $model4 = new CapesSertModel();
+        $latih = $model4->where('user_id', $mhs_id)->where('Jenis', 'sertifikat')->like('kompetensi', 'W.1.2.')->findall();
+        if (!empty($latih)){
+            $data['data_latih'] = $latih;
+        }else{
+            $data['data_latih'] = 'kosong';
         }
 
         $data['mhs_id'] = $mhs_id;

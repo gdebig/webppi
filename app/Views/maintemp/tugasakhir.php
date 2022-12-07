@@ -107,9 +107,10 @@
                                 echo "Belum ada buku revisi";
                             }
                             ?></td>
-                            <td style="text-align: center"><a
+                            <td style="text-align: center"><a href="<?php echo base_url();?>/jadwalta"
+                                    class="btn btn-primary"> <i class="fas fa-calendar-check"></i> Jadwal Sidang</a><a
                                     href="<?php echo base_url();?>/tugasakhir/bukurevisi/<?=$ta['ta_id'];?>"
-                                    class="btn btn-primary"> <i class="fas fa-upload"></i> Upload Buku
+                                    class="btn btn-secondary"> <i class="fas fa-upload"></i> Upload Buku
                                     Revisi</a><a href="<?php echo base_url();?>/tugasakhir/ubahta/<?=$ta['ta_id'];?>"
                                     class="btn btn-warning"> <i class="fas fa-file-signature"></i> Ubah</a>
                                 <a href="<?php echo base_url();?>/tugasakhir/hapusta/<?=$ta['ta_id'];?>"

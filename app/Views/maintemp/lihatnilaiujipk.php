@@ -51,7 +51,8 @@
                             <td>
                                 <?php
                                     $nilai = (0.3*$nilai['penulisan'])+(0.3*$nilai['presentasi'])+(0.4*$nilai['materi']);
-                                    echo $nilai;
+                                    $huruf = nilai_huruf($nilai);
+                                    echo $nilai.' ('.$huruf.')';
                                 ?>
                             </td>
                             <td>

@@ -79,8 +79,8 @@
                             <td><?php
                             if (!empty($user['ta_buku'])){
                             ?>
-                                <a
-                                    href="<?=base_url();?>/manbimbing/lihatadm/<?=$user['mhs_id'];?>/<?=$user['dosen_id'];?>/<?=$user['ta_id'];?>">Lihat
+                                <a href="<?=base_url();?>/manbimbing/lihatadm/<?=$user['mhs_id'];?>/<?=$user['dosen_id'];?>/<?=$user['ta_id'];?>"
+                                    target="_blank">Lihat
                                     Administrasi</a>
                                 <?php
                             }else{

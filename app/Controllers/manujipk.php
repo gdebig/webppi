@@ -47,9 +47,11 @@ class Manujipk extends BaseController
             return redirect()->to('/home');
         }
         helper(['tanggal']);
+        helper(['nilai']);
+        $user_id = $session->get('user_id');
 
         $model = new NilaitaModel();
-        $nilaita = $model->where('ta_id', $ta_id)->join('tbl_profile', 'tbl_nilaita.dosen_id = tbl_profile.user_id')->orderby('nilaita_id', 'ASC')->findall();
+        $nilaita = $model->where('ta_id', $ta_id)->where('dosen_id', $user_id)->join('tbl_profile', 'tbl_nilaita.dosen_id = tbl_profile.user_id')->orderby('nilaita_id', 'ASC')->findall();
         if(!empty($nilaita)){
             $data['nilai_ta'] = $nilaita;
         }else{
@@ -194,6 +196,7 @@ class Manujipk extends BaseController
             return redirect()->to('/home');
         }
         helper(['tanggal']);
+        helper(['nilai']);
 
         $model = new BimbingModel();
         $bimbing = $model->where('mhs_id', $mhs_id)->first();
@@ -244,31 +247,81 @@ class Manujipk extends BaseController
             $data['tipedosen'] = $nilaita['tipedosen'];
             $data['signed'] = $nilaita['signed'];
             $data['rerata'] = (0.3*$nilaita['penulisan'])+(0.3*$nilaita['presentasi'])+(0.4*$nilaita['materi']);
-            if ($data['rerata'] < 40){
-                $data['nilaihuruf'] = "E";
-            }elseif ($data['rerata'] < 49){
-                $data['nilaihuruf'] = "D";
-            }elseif ($data['rerata'] < 54){
-                $data['nilaihuruf'] = "C-";
-            }elseif ($data['rerata'] < 59){
-                $data['nilaihuruf'] = "C";
-            }elseif ($data['rerata'] < 64){
-                $data['nilaihuruf'] = "C+";
-            }elseif ($data['rerata'] < 69){
-                $data['nilaihuruf'] = "B-";
-            }elseif ($data['rerata'] < 74){
-                $data['nilaihuruf'] = "B";
-            }elseif ($data['rerata'] < 79){
-                $data['nilaihuruf'] = "B+";
-            }elseif ($data['rerata'] < 84){
-                $data['nilaihuruf'] = "A-";
-            }elseif ($data['rerata'] < 100){
-                $data['nilaihuruf'] = "A";
-            }
+            $data['nilaihuruf'] = nilai_huruf($data['rerata']);
         }
 
         $data['tglsekarang'] = format_indo(date("Y-m-d"));
         $data['title'] = 'Form Evaluasi - '.$data['namamahasiswa'];
         return view('maintemp/formevaluasi', $data);
+    }
+    
+    public function lihatadm($mhs_id, $dosen_id, $ta_id)
+    {
+        $session = session();
+        $logged_in = $session->get('logged_in');
+        $issadmin = $session->get('issadmin');
+        $isadmin = $session->get('isadmin');
+        $ispenilai = $session->get('ispenilai');
+        if ((!$logged_in)&&((!$issadmin)||(!$isadmin)||(!$ispenilai))){
+            return redirect()->to('/home');
+        }
+        helper(['tanggal']);
+        helper(['nilai']);
+
+        $model = new BimbingModel();
+        $bimbing = $model->where('mhs_id', $mhs_id)->first();
+        if ($bimbing){
+            $bimbing_id = $bimbing['dosen_id'];
+        }
+
+        $model = new ProfileModel();
+        $dosen = $model->where('user_id', $bimbing_id)->first();
+        if ($dosen){
+            $data['namapembimbing'] = $dosen['FullName'];
+        }
+
+        $dosenttd = $model->where('user_id', $dosen_id)->first();
+        if ($dosen){
+            $data['namattd'] = $dosenttd['FullName'];
+        }
+
+        $model = new UserModel();
+        $dosennip = $model->where('user_id', $bimbing_id)->first();
+        if ($dosennip){
+            $data['bimbingnip'] = $dosennip['NIP'];
+        }
+
+        $model = new UserModel();
+        $dosennipttd = $model->where('user_id', $dosen_id)->first();
+        if ($dosennip){
+            $data['nipttd'] = $dosennipttd['NIP'];
+        }
+
+        $model = new TugasAkhirModel();
+        $tugasakhir = $model->where('ta_id', $ta_id)->join('tbl_profile', 'tbl_tugasakhir.user_id = tbl_profile.user_id', 'left')->join('tbl_user', 'tbl_tugasakhir.user_id = tbl_user.user_id', 'left')->first();
+        if ($tugasakhir){
+            $data['namamahasiswa'] = $tugasakhir['FullName'];
+            $data['npm'] = $tugasakhir['NPM'];
+            $data['instansi'] = $tugasakhir['instansi'];
+            $data['divisi'] = $tugasakhir['divisi'];
+            $data['periode'] = format_indo($tugasakhir['startdate']).' - '.format_indo($tugasakhir['enddate']);
+            $data['lapjudul'] = $tugasakhir['ta_usuljudul']; 
+        }
+
+        $model = new NilaitaModel();
+        $nilaita = $model->where('ta_id', $ta_id)->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->first();
+        if($nilaita){
+            $data['penulisan'] = $nilaita['penulisan'];
+            $data['presentasi'] = $nilaita['presentasi'];
+            $data['materi'] = $nilaita['materi'];
+            $data['tipedosen'] = $nilaita['tipedosen'];
+            $data['signed'] = $nilaita['signed'];
+            $data['rerata'] = (0.3*$nilaita['penulisan'])+(0.3*$nilaita['presentasi'])+(0.4*$nilaita['materi']);
+            $data['nilaihuruf'] = nilai_huruf($data['rerata']);
+        }
+
+        $data['tglsekarang'] = format_indo(date("Y-m-d"));
+        $data['title'] = 'Form Evaluasi - '.$data['namamahasiswa'];
+        return view('maintemp/formdaftarhadir', $data);
     }
 }

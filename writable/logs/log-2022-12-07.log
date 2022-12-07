@@ -1,0 +1,11 @@
+CRITICAL - 2022-12-07 02:56:45 --> Undefined variable: penulisan
+#0 D:\wamp64\www\webppi\app\Views\maintemp\formevaluasi.php(238): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'D:\\wamp64\\www\\w...', 238, Array)
+#1 D:\wamp64\www\webppi\system\View\View.php(210): include('D:\\wamp64\\www\\w...')
+#2 D:\wamp64\www\webppi\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 D:\wamp64\www\webppi\system\Common.php(1089): CodeIgniter\View\View->render('maintemp/formev...', Array, true)
+#4 D:\wamp64\www\webppi\app\Controllers\Manujipk.php(272): view('maintemp/formev...', Array)
+#5 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Manujipk->lihatformevaluasi('4', '117', '3')
+#6 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Manujipk))
+#7 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
