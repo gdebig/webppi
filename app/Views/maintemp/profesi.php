@@ -7,29 +7,206 @@
         <!-- /.card-header -->
         <div class="card">
             <div class="card-body">
-
-                <?php if(session()->getFlashdata('msg')):?>
-                <div class="alert alert-success"><?= session()->getFlashdata('msg') ?></div>
-                <?php endif;?>
-
-                <div class="col">
-                    <div class="row">
-                        &nbsp;
-                    </div>
-                </div>
-
-                <?php if(isset($data_etik)&&($data_etik=="kosong")){
-                    ?>
-
-                <div class="alert alert-danger">Data kode etik belum ada.</div>
-                <?php }else{ ?>
-
-                <h3>I.2. Pendidikan Formal (W2)</h3>
+                <?php if(isset($data_kerja)&&($data_kerja!="kosong")){?>
+                <br />
+                <h3>III. KUALIFIKASI PROFESIONAL (W2,W3,W4,P6,P7,P8,P9,P10,P11)</h3>
+                <br />
                 <table id="tabledata" class="display table table-bordered table-hover">
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Check</th>
+                            <th>Periode</th>
+                            <th>Nama Instansi/Perusahaan</th>
+                            <th>Jabatan/tugas</th>
+                            <th>Nama Aktifitas/Kegiatan/Proyek</th>
+                            <th>Pemberi Tugas</th>
+                            <th>Lokasi</th>
+                            <th>Durasi</th>
+                            <th>Posisi Tugas, Jabatan</th>
+                            <th>Nilai Proyek</th>
+                            <th>Nilai Tanggung Jawab</th>
+                            <th>SDM yang terlibat</th>
+                            <th>Tingkat Kesulitan</th>
+                            <th>Skala Proyek</th>
+                            <th>Uraian Singkat Tugas dan Tanggung Jawab Prof sesuai NSPK</th>
+                            <th>Bukti kualifikasi profesional</th>
+                            <th>Klaim Kompetensi</th>
+                            <th>Nilai P</th>
+                            <th>Nilai Q</th>
+                            <th>Nilai R</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                    $i=1; 
+                   foreach ($data_kerja as $kerja) : 
+                    ?>
+                        <tr>
+                            <td><?php echo $i;$i++;?></td>
+                            <td><?php
+                if (!empty($kerja['EndDate'])&&($kerja['EndDate']!='0000-00-00')){
+                    echo format_indo($kerja['StartDate'])." hingga ".format_indo($kerja['EndDate']);
+                }else{
+                    echo format_indo($kerja['StartDate'])." hingga sekarang.";
+                }
+            ?></td>
+                            <td><?= $kerja['NameInstance'];?></td>
+                            <td><?= $kerja['Position'];?></td>
+                            <td><?= $kerja['Name'];?></td>
+                            <td><?= $kerja['Giver']; ?></td>
+                            <td><?= $kerja['LocCity'].', '.$kerja['LocProv'].', '.$kerja['LocCountry'];?></td>
+                            <td><?php
+                switch ($kerja['Duration']){
+                    case 'smp3':
+                        echo "1 - 3 tahun";
+                        break;
+                    case 'smp7':
+                        echo "4 - 7 tahun";
+                        break;
+                    case 'smpe10':
+                        echo "8 - 10 tahun";
+                        break;
+                    case 'lbh10':
+                        echo "> dari 10 tahun";
+                        break;
+                }
+            ?></td>
+                            <td><?php
+                switch ($kerja['Jabatan']){
+                    case 'anggota':
+                        echo "Anggota / Staff / Dosen";
+                        break;
+                    case 'supervisor':
+                        echo "Supervisor / Site Engineer / Site Manager / KaLab / Sekretaris Jurusan / Ketua Jurusan / PD";
+                        break;
+                    case 'direktur':
+                        echo "Direktur / Ketua Tim / Dekan / PR / Rektor";
+                        break;
+                    case 'pengarah':
+                        echo "Pengarah / Adviser / Narasumber Ahli";
+                        break;
+                }
+            ?></td>
+                            <td><?= $kerja['ProjValue'];?></td>
+                            <td><?= $kerja['RspnValue'];?></td>
+                            <td><?php
+                switch ($kerja['Hresource']){
+                    case 'dik':
+                        echo "Sedikit";
+                        break;
+                    case 'sed':
+                        echo "Sedang";
+                        break;
+                    case 'bny':
+                        echo "Banyak";
+                        break;
+                    case 'sbny':
+                        echo "Sangat Banyak";
+                        break;
+                }
+            ?></td>
+                            <td><?php
+                switch ($kerja['Diff']){
+                    case 'ren':
+                        echo "Rendah";
+                        break;
+                    case 'sed':
+                        echo "Sedang";
+                        break;
+                    case 'tin':
+                        echo "Tinggi";
+                        break;
+                    case 'stin':
+                        echo "Sangat Tinggi";
+                        break;
+                }
+            ?></td>
+                            <td><?php
+                switch ($kerja['Scale']){
+                    case 'ren':
+                        echo "Rendah";
+                        break;
+                    case 'sed':
+                        echo "Sedang";
+                        break;
+                    case 'tin':
+                        echo "Tinggi";
+                        break;
+                    case 'stin':
+                        echo "Sangat Tinggi";
+                        break;
+                }
+            ?></td>
+                            <td><?= $kerja['Desc'];?></td>
+                            <td><?php
+            if (!empty($kerja['File'])){
+                echo "<a href='".base_url('uploads/docs/'.$kerja['File'])."' target='_blank'>".$kerja['File']."</a>";
+            }else{
+                echo "";
+            }
+            ?></td>
+                            <td><?= $kerja['kompetensi'];?></td>
+                            <td>
+                                <?php
+                                    if($kerja['Duration'] == 'smp3'){
+                                        $durscore = 1;
+                                    }elseif($kerja['Duration'] == 'smp7'){
+                                        $durscore = 2;
+                                    }elseif($kerja['Duration'] == 'smp10'){
+                                        $durscore = 3;
+                                    }elseif($kerja['Duration'] == 'lbih10'){
+                                        $durscore = 4;
+                                    }
+                                ?>
+                                <select name="nilai_p" id="nilai_p" class="form-control">
+                                    <option value="4" <?= $durscore==4 ? 'selected' : '';?>>4</option>
+                                    <option value="3" <?= $durscore==3 ? 'selected' : '';?>>3</option>
+                                    <option value="2" <?= $durscore==2 ? 'selected' : '';?>>2</option>
+                                    <option value="1" <?= $durscore==1 ? 'selected' : '';?>>1</option>
+                                </select>
+                            </td>
+                            <td>
+                                <?php
+                                    if ($kerja['Jabatan'] == 'anggota'){
+                                        $jabscore = 1;
+                                    } elseif ($kerja['Jabatan'] == 'supervisor'){
+                                        $jabscore = 2;
+                                    } elseif ($kerja['Jabatan'] == 'direktur'){
+                                        $jabscore = 3;
+                                    } elseif ($kerja['Jabatan'] == 'pengarah'){
+                                        $jabscore = 4;
+                                    }
+                                ?>
+                                <select name="nilai_q" id="nilai_q" class="form-control">
+                                    <option value="4" <?= $jabscore==4 ? 'selected' : '';?>>4</option>
+                                    <option value="3" <?= $jabscore==4 ? 'selected' : '';?>>3</option>
+                                    <option value="2" <?= $jabscore==4 ? 'selected' : '';?>>2</option>
+                                    <option value="1" <?= $jabscore==4 ? 'selected' : '';?>>1</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select name="nilai_r" id="nilai_r" class="form-control">
+                                    <option value="4">4</option>
+                                    <option value="3">3</option>
+                                    <option value="2">2</option>
+                                    <option value="1">1</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <?php 
+            endforeach 
+        ?>
+                    </tbody>
+                </table>
+                <?php } ?>
+                <br />
+                <?php if(isset($data_pend)&&($data_pend!="kosong")){
+                    ?>
+
+                <table id="tabledata" class="display table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>No</th>
                             <th>Jenjang</th>
                             <th>Universitas</th>
                             <th>Fakultas</th>
@@ -50,7 +227,6 @@
                                     ?>
                         <tr>
                             <td><?php echo $i;$i++;?></td>
-                            <td><input type="checkbox" name="pend_id[]" value="<?= $pend['Num'];?>" /></td>
                             <td><?= $pend['Rank'];?></td>
                             <td><?= $pend['Name'];?></td>
                             <td><?= $pend['Faculty'];?></td>
@@ -61,6 +237,8 @@
                             <td><?= $pend['Title'];?></td>
                             <td><?= $pend['Desc'];?></td>
                             <td><?= $pend['Mark'];?></td>
+                            <td><a href="<?=base_url();?>/uploads/docs/<?=$pend['File'];?>"
+                                    target="_blank"><?= $pend['File'];?></a></td>
                         </tr>
                         <?php 
                                     endforeach 
@@ -68,245 +246,6 @@
                     </tbody>
                 </table>
                 <?php } ?>
-                <br />
-                <h3>I.3. Organisasi Profesi & Organisasi Lainnya Yang Dimasuki (W1)</h3>
-                <table id="tabledata" class="display table table-bordered table-hover">
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>Check</th>
-                            <th>Nama Organisasi</th>
-                            <th>Jenis Organisasi</th>
-                            <th>Kota</th>
-                            <th>Negara</th>
-                            <th>Perioda</th>
-                            <th>Sudah Berapa Lama Menjadi Anggota</th>
-                            <th>Jabatan Dalam Organisasi</th>
-                            <th>Tingkatan Organisasi</th>
-                            <th>Lingkup Kegiatan Organisasi</th>
-                            <th>Aktifitas Dalam Organisasi</th>
-                            <th>Bukti Menjadi Pengurus</th>
-                            <th>Klaim Kompetensi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                                    $i=1; 
-                                   foreach ($data_org as $org) : 
-                                    ?>
-                        <tr>
-                            <td><?php echo $i;$i++;?></td>
-                            <td><input type="checkbox" name="pend_id[]" value="<?= $pend['Num'];?>" /></td>
-                            <td><?= $org['Name'];?></td>
-                            <td><?php
-                                switch ($org['Type']){
-                                    case "PII":
-                                        echo "Organisasi PII";
-                                        break;
-                                    case "Ins":
-                                        echo "Organisasi Keinsinyuran Non PII";
-                                        break;
-                                    case "Non":
-                                        echo "Organisasi Non Keinsinyuran";
-                                        break;
-                                }
-                            ?></td>
-                            <td><?= $org['City'];?></td>
-                            <td><?= $org['Country'];?></td>
-                            <td><?= $org['StartPeriodBulan']." ".$org['StartPeriodYear']." hingga ".$org['EndPeriodBulan']." ".$org['EndPeriodYear'];?>
-                            </td>
-                            <td><?php
-                                switch ($org['Period']){
-                                    case "sd5":
-                                        echo "1 - 5 tahun";
-                                        break;
-                                    case "smp10":
-                                        echo "6 - 10 tahun";
-                                        break;
-                                    case "smp15":
-                                        echo "11 - 15 tahun";
-                                        break;
-                                    case "lbih15":
-                                        echo "Lebih dari 15 tahun";
-                                        break;
-                                }
-                            ?></td>
-                            <td><?php
-                                switch ($org['Position']){
-                                    case "Bias":
-                                        echo "Anggota Biasa";
-                                        break;
-                                    case "Peng":
-                                        echo "Anggota Pengurus";
-                                        break;
-                                    case "Pimp":
-                                        echo "Pimpinan";
-                                        break;
-                                }
-                            ?></td>
-                            <td><?php
-                                switch ($org['OrgLevel']){
-                                    case "Lok":
-                                        echo "Organisasi Lokal (Bukan Nasional)";
-                                        break;
-                                    case "Nas":
-                                        echo "Organisasi Nasional";
-                                        break;
-                                    case "Reg":
-                                        echo "Organisasi Regional";
-                                        break;
-                                    case "Int":
-                                        echo "Organisasi Internasional";
-                                        break;
-                                }
-                            ?></td>
-                            <td><?php
-                                switch ($org['OrgScp']){
-                                    case "Aso":
-                                        echo "Asosiasi Profesi";
-                                        break;
-                                    case "Pem":
-                                        echo "Lembaga Pemerintahan";
-                                        break;
-                                    case "Pen":
-                                        echo "Lembaga Pendidikan";
-                                        break;
-                                    case "Neg":
-                                        echo "Badan Usaha Milik Negara";
-                                        break;
-                                    case "Swa":
-                                        echo "Badan Usaha Milik Swasta";
-                                        break;
-                                    case "Mas":
-                                        echo "Organisasi Kemasyarakatan";
-                                        break;
-                                    case "Lai":
-                                        echo "Lain-lain";
-                                        break;
-                                }
-                            ?></td>
-                            <td><?= $org['Desc'];?></td>
-                            <td><a href="<?=base_url();?>/uploads/docs/<?=$org['File'];?>"
-                                    target="_blank"><?= $org['File'];?></a></td>
-                            <td><?= $org['kompetensi'];?></td>
-                        </tr>
-                        <?php 
-                        endforeach 
-                        ?>
-                    </tbody>
-                </table>
-                <br />
-                <h3>I.4. Tanda Penghargaan Yang Diterima (W1)</h3>
-                <table id="tabledata" class="display table table-bordered table-hover">
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>Check</th>
-                            <th>Tahun</th>
-                            <th>Nama Tanda Penghargaan</th>
-                            <th>Nama Lembaga yang Memberikan</th>
-                            <th>Lokasi</th>
-                            <th>Negara</th>
-                            <th>Penghargaan yang diterima tingkat</th>
-                            <th>Penghargaan diberikan oleh lembaga</th>
-                            <th>Uraian Singkat Tanda Penghargaan</th>
-                            <th>Klaim Kompetensi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                                    $i=1; 
-                                   foreach ($data_harga as $penghargaan) : 
-                                    ?>
-                        <tr>
-                            <td><?php echo $i;$i++;?></td>
-                            <td><input type="checkbox" name="pend_id[]" value="<?= $pend['Num'];?>" /></td>
-                            <td><?php
-                            switch ($penghargaan['Month']){
-                                case '1':
-                                    $bulan = "Jan";
-                                    break;
-                                case '2':
-                                    $bulan = "Feb";
-                                    break;
-                                case '3':
-                                    $bulan = "Mar";
-                                    break;
-                                case '4':
-                                    $bulan = "Apr";
-                                    break;
-                                case '5':
-                                    $bulan = "Mei";
-                                    break;
-                                case '6':
-                                    $bulan = "Jun";
-                                    break;
-                                case '7':
-                                    $bulan = "Jul";
-                                    break;
-                                case '8':
-                                    $bulan = "Agus";
-                                    break;
-                                case '9':
-                                    $bulan = "Sep";
-                                    break;
-                                case '10':
-                                    $bulan = "Okt";
-                                    break;
-                                case '11':
-                                    $bulan = "Nov";
-                                    break;
-                                case '12':
-                                    $bulan = "Des";
-                                    break;
-                            }
-                            echo $bulan.' - '.$penghargaan['Year'];
-                            ?></td>
-                            <td><?= $penghargaan['Name'];?></td>
-                            <td><?= $penghargaan['Institute'];?></td>
-                            <td><?= $penghargaan['City'].', '.$penghargaan['Prov'];?></td>
-                            <td><?= $penghargaan['Country'];?></td>
-                            <td>
-                                <?php
-                                switch ($penghargaan['Level']){
-                                    case 'Mud':
-                                        echo "Tingkatan Muda/Pemula";
-                                        break;
-                                    case 'Mad':
-                                        echo "Tingkatan Madya";
-                                        break;
-                                    case 'Uta':
-                                        echo "Tingkatan Utama";
-                                        break;
-                                }
-                                ?>
-                            </td>
-                            <td>
-                                <?php
-                                switch ($penghargaan['InstituteType']){
-                                    case 'Lok':
-                                        echo "Penghargaan Lokal";
-                                        break;
-                                    case 'Nas':
-                                        echo "Penghargaan Nasional";
-                                        break;
-                                    case 'Reg':
-                                        echo "Penghargaan Regional";
-                                        break;
-                                    case 'Int':
-                                        echo "Penghargaan Internasional";
-                                        break;
-                                }
-                                ?>
-                            </td>
-                            <td><?= $penghargaan['Desc'];?></td>
-                            <td><?= $penghargaan['kompetensi'];?></td>
-                        </tr>
-                        <?php 
-                        endforeach 
-                        ?>
-                    </tbody>
-                </table>
             </div>
         </div>
     </div>
