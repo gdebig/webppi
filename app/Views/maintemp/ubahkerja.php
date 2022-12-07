@@ -110,7 +110,7 @@
                             </option>
                             <option value="smp7" <?php echo $Duration == "smp7" ? "selected" : "";?>>4 - 7 tahun
                             </option>
-                            <option value="smpe10" <?php echo $Duration == "smp10" ? "selected" : "";?>>8 - 10 tahun
+                            <option value="smp10" <?php echo $Duration == "smp10" ? "selected" : "";?>>8 - 10 tahun
                             </option>
                             <option value="lbh10" <?php echo $Duration == "lbh10" ? "selected" : "";?>>> dari 10 tahun
                             </option>

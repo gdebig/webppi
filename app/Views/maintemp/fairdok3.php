@@ -83,7 +83,7 @@
                     case 'smp7':
                         echo "4 - 7 tahun";
                         break;
-                    case 'smpe10':
+                    case 'smp10':
                         echo "8 - 10 tahun";
                         break;
                     case 'lbh10':
