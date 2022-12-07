@@ -132,44 +132,22 @@ class Nilairpl extends BaseController
         }
         helper(['tanggal']);
 
-        $model = new CapesPendModel();
+        $model = new CapesKualifikasiModel();
+        $data['capeslogged_in'] = $session->get('capeslogged_in');
+        $kerja = $model->where('user_id', $mhs_id)->like('kompetensi', 'W.2.2.')->orderby('ProjValue','DESC')->findall();
+        if (!empty($kerja)){
+            $data['data_kerja'] = $kerja;
+        }else{
+            $data['data_kerja'] = 'kosong';
+        }
+
+        $model1 = new CapesPendModel();
         
-        $pend = $model->where('user_id', $mhs_id)->orderby('GradYear','DESC')->findall();
+        $pend = $model1->where('user_id', $mhs_id)->orderby('GradYear','DESC')->findall();
         if (!empty($pend)){
             $data['data_pend'] = $pend;
         }else{
             $data['data_pend'] = 'kosong';
-        }
-
-        $model = new CapesOrgModel();
-        $org = $model->where('user_id', $mhs_id)->orderby('StartPeriodYear','DESC')->findall();
-        if (!empty($org)){
-            $data['data_org'] = $org;
-        }else{
-            $data['data_org'] = 'kosong';
-        }
-
-        $model = new PenghargaanModel();
-        $penghargaan = $model->where('user_id', $mhs_id)->orderby('Year','DESC')->orderby('Month','DESC')->findall();
-        if (!empty($penghargaan)){
-            $data['data_harga'] = $penghargaan;
-        }else{
-            $data['data_harga'] = 'kosong';
-        }        
-        
-        $model = new CapesSertModel();
-        $latih = $model->where('user_id', $mhs_id)->where('Jenis', 'pelatihan')->orderby('StartYear','DESC')->findall();
-        if (!empty($latih)){
-            $data['data_latih'] = $latih;
-        }else{
-            $data['data_latih'] = 'kosong';
-        }
-
-        $latih = $model->where('user_id', $mhs_id)->where('Jenis', 'sertifikat')->findall();
-        if (!empty($latih)){
-            $data['data_latih'] = $latih;
-        }else{
-            $data['data_latih'] = 'kosong';
         }
 
         $data['mhs_id'] = $mhs_id;
