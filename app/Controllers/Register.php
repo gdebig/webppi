@@ -20,7 +20,7 @@ class Register extends BaseController
     {
         $session = session();
         $capeslogged = $session->get('capeslogged_in');
-        if ($capeslogged){
+        if ($capeslogged) {
             return redirect()->to('/register/dashboard');
         }
         $data['title_page'] = "Registrasi Calon Peserta PPI RPL";
@@ -30,10 +30,11 @@ class Register extends BaseController
     }
 
     //Fungsi untuk membuat akun CaPes
-    public function buatakun(){
+    public function buatakun()
+    {
         $session = session();
         $capeslogged = $session->get('capeslogged_in');
-        if ($capeslogged){
+        if ($capeslogged) {
             return redirect()->to('/register/dashboard');
         }
         $data['title_page'] = "Buat Akun Calon Peserta PPI RPL";
@@ -42,19 +43,20 @@ class Register extends BaseController
         return view('register/buatakun', $data);
     }
 
-    public function buatakunproses(){
-        
+    public function buatakunproses()
+    {
+
         $model = new AkunModel();
         $session = session();
         $capeslogged = $session->get('capeslogged_in');
-        if ($capeslogged){
+        if ($capeslogged) {
             return redirect()->to('/register/dashboard');
         }
 
         $button = $this->request->getVar('submit');
-        if ($button=="batal"){
+        if ($button == "batal") {
             return redirect()->to('/register');
-        }else{
+        } else {
             helper(['form', 'url']);
 
             $formvalid = $this->validate([
@@ -92,7 +94,7 @@ class Register extends BaseController
                 ],
             ]);
 
-            if ($formvalid){
+            if ($formvalid) {
 
                 $username = $this->request->getVar('username');
                 $newpass = $this->request->getVar('newpass');
@@ -115,11 +117,10 @@ class Register extends BaseController
 
                 $model->save($datauser);
 
-                $session->setFlashdata('msg', 'Data user berhasil ditambahkan. Gunakan akun yang sudah didaftar untuk login di <a href="'.base_url().'/register/capes">link berikut</a>.');
-    
+                $session->setFlashdata('msg', 'Data user berhasil ditambahkan. Gunakan akun yang sudah didaftar untuk login di <a href="' . base_url() . '/register/capes">link berikut</a>.');
+
                 return redirect()->to('/register');
-                
-            }else{
+            } else {
                 $data['capeslogged_in'] = $capeslogged;
                 $data['data_bread'] = "Buat Akun";
                 $data['title_page'] = "Buat Akun Calon Peserta PPI RPL";
@@ -130,10 +131,11 @@ class Register extends BaseController
     }
 
     //Fungsi untuk melakukan login bagi CaPes
-    public function capes(){
+    public function capes()
+    {
         $session = session();
         $capeslogged = $session->get('capeslogged_in');
-        if ($capeslogged){
+        if ($capeslogged) {
             return redirect()->to('/register/dashboard');
         }
         $data['capeslogged_in'] = $capeslogged;
@@ -141,7 +143,7 @@ class Register extends BaseController
         $data['data_bread'] = "Login Calon Peserta";
         return view('register/capes', $data);
     }
- 
+
     //Fungsi autentikasi hasil login CaPes
     public function auth()
     {
@@ -151,17 +153,17 @@ class Register extends BaseController
             'username'     => 'required',
             'password'     => 'required'
         ];
-        
-        if($this->validate($rules)){
+
+        if ($this->validate($rules)) {
             $session = session();
             $model = new AkunModel();
             $username = $this->request->getVar('username');
             $password = $this->request->getVar('password');
             $data = $model->where('username', $username)->first();
-            if($data){
+            if ($data) {
                 $pass = $data['password'];
                 $verify_pass = password_verify($password, $pass);
-                if($verify_pass){
+                if ($verify_pass) {
                     $ses_data = [
                         'user_id'           => $data['user_id'],
                         'username'          => $data['username'],
@@ -173,26 +175,27 @@ class Register extends BaseController
                     ];
                     $session->set($ses_data);
                     return redirect()->to('/register/dashboard');
-                }else{
+                } else {
                     $session->setFlashdata('msg', 'Salah password');
                     return redirect()->to('/register/capes');
                 }
-            }else{
+            } else {
                 $session->setFlashdata('msg', 'Username tidak ditemukan');
                 return redirect()->to('/register/capes');
             }
-        }else{
+        } else {
             $data['validation'] = $this->validator;
             return view('register/capes', $data);
         }
     }
 
     //halaman dashboard CaPes
-    public function dashboard(){
+    public function dashboard()
+    {
         $session = session();
 
         $capeslogged = $session->get('capeslogged_in');
-        if (empty($capeslogged)){
+        if (empty($capeslogged)) {
             return redirect()->to('/register');
         }
 
@@ -224,7 +227,7 @@ class Register extends BaseController
         $data['capeslogged_in'] = $session->get('capeslogged_in');
         return view('register/dashboard', $data);
     }
- 
+
     //fungsi logout
     public function logout()
     {
@@ -234,18 +237,19 @@ class Register extends BaseController
     }
 
     //Fungsi tentang profile CaPes
-    public function profile(){
+    public function profile()
+    {
         $session = session();
         $capeslogged_in = $session->get('capeslogged_in');
-        if (!$capeslogged_in){
+        if (!$capeslogged_in) {
             return redirect()->to('/register');
         }
         helper(['tanggal']);
-        
+
         $user_id = $session->get('user_id');
         $model = new CapesProfileModel();
         $user = $model->where('user_id', $user_id)->first();
-        if ($user){
+        if ($user) {
             $data = [
                 'ID' => $user['ID'],
                 'user_id' => $user['user_id'],
@@ -276,7 +280,7 @@ class Register extends BaseController
                 'Photo' => $user['Photo'],
                 'pindahregular' => $user['pindahregular']
             ];
-        }else{
+        } else {
             $data['kosong'] = "kosong";
         }
         $data['capeslogged_in'] = $capeslogged_in;
@@ -285,15 +289,16 @@ class Register extends BaseController
         return view('register/profile', $data);
     }
 
-    public function buatprofile(){
+    public function buatprofile()
+    {
         $session = session();
         $user_id = $session->get('user_id');
         $capeslogged_in = $session->get('capeslogged_in');
         $confirmcapes = $session->get('confirmcapes');
-        if (!$capeslogged_in){
+        if (!$capeslogged_in) {
             return redirect()->to('/register');
         }
-        if ($confirmcapes=="Ya"){
+        if ($confirmcapes == "Ya") {
             $session->setFlashdata('msg', 'Pengiriman data sudah dikonfirmasi. Data tidak lagi dapat diubah.');
             return redirect()->to('/register/profile');
         }
@@ -304,29 +309,30 @@ class Register extends BaseController
         return view('register/buatprofile', $data);
     }
 
-    public function buatprofileproses(){
+    public function buatprofileproses()
+    {
         $session = session();
         $model = new CapesProfileModel();
         $user_id = $session->get('user_id');
         $capeslogged_in = $session->get('capeslogged_in');
         $confirmcapes = $session->get('confirmcapes');
-        if (!$capeslogged_in){
+        if (!$capeslogged_in) {
             return redirect()->to('/register');
         }
-        if ($confirmcapes=="Ya"){
+        if ($confirmcapes == "Ya") {
             $session->setFlashdata('msg', 'Pengiriman data sudah dikonfirmasi. Data tidak lagi dapat diubah.');
             return redirect()->to('/register/profile');
         }
 
-        $button=$this->request->getVar('submit');
-        
-        if ($button=="batal"){
+        $button = $this->request->getVar('submit');
+
+        if ($button == "batal") {
             return redirect()->to('/register/profile');
-        }else{
+        } else {
             helper(['form', 'url']);
 
             $formvalid = $this->validate([
-                'user_id' =>[
+                'user_id' => [
                     'rules' => 'is_unique[tbl_profile.user_id]',
                     'errors' => [
                         'is_unique' => 'User sudah memiliki profile. Silahkan kembali ke Beranda.',
@@ -462,7 +468,7 @@ class Register extends BaseController
                 ]
             ]);
 
-            if ($formvalid){
+            if ($formvalid) {
                 $user_id = $this->request->getVar('user_id');
                 $fullname = $this->request->getVar('fullname');
                 $birthplace = $this->request->getVar('birthplace');
@@ -485,24 +491,24 @@ class Register extends BaseController
                 $wnum = $this->request->getVar('wnum');
                 $wfaks = $this->request->getVar('wfaks');
                 $wtelex = $this->request->getVar('wtelex');
-                $wemail1 = $this->request->getVar('wemail1');                
+                $wemail1 = $this->request->getVar('wemail1');
                 $wemail2 = $this->request->getVar('wemail2');
                 $sip = $this->request->getFile('sip');
                 $photo = $this->request->getFile('photo');
                 $pindahregular = $this->request->getVar('pindahregular');
 
                 $ext1 = $sip->getClientExtension();
-                if (!empty($ext1)){
-                    $sipname = $user_id.'_sip.'.$ext1;
-                    $sip->move('uploads/docs/',$sipname,true);
-                }else{
-                    $sipname="";
+                if (!empty($ext1)) {
+                    $sipname = $user_id . '_sip.' . $ext1;
+                    $sip->move('uploads/docs/', $sipname, true);
+                } else {
+                    $sipname = "";
                 }
 
                 $ext = $photo->getClientExtension();
-                $photoname = $user_id.'_profilpic.'.$ext;
-                $photo->move('uploads/profilpic/',$photoname,true);
-    
+                $photoname = $user_id . '_profilpic.' . $ext;
+                $photo->move('uploads/profilpic/', $photoname, true);
+
                 $dataprofile = array(
                     'user_id' => $user_id,
                     'FullName' => $fullname,
@@ -536,11 +542,11 @@ class Register extends BaseController
                 );
 
                 print_r($dataprofile);
-    
+
                 $model->save($dataprofile);
-    
+
                 return redirect()->to('/register/profile');
-            }else{
+            } else {
                 $session = session();
                 $data['user_id'] = $user_id;
                 $data['title_page'] = "Buat Profile Calon Peserta PPI RPL";
@@ -552,20 +558,21 @@ class Register extends BaseController
         }
     }
 
-    public function ubahprofile($id){
+    public function ubahprofile($id)
+    {
         $session = session();
         $capeslogged_in = $session->get('capeslogged_in');
         $confirmcapes = $session->get('confirmcapes');
-        if (!$capeslogged_in){
+        if (!$capeslogged_in) {
             return redirect()->to('/register');
         }
-        if ($confirmcapes=="Ya"){
+        if ($confirmcapes == "Ya") {
             $session->setFlashdata('msg', 'Pengiriman data sudah dikonfirmasi. Data tidak lagi dapat diubah.');
             return redirect()->to('/register/profile');
         }
         $model = new CapesProfileModel();
         $user = $model->where('user_id', $id)->first();
-        if ($user){
+        if ($user) {
             $data = [
                 'ID' => $user['ID'],
                 'user_id' => $user['user_id'],
@@ -603,25 +610,26 @@ class Register extends BaseController
         return view('register/ubahprofile', $data);
     }
 
-    public function ubahprofileproses(){
+    public function ubahprofileproses()
+    {
         $session = session();
         $model = new CapesProfileModel();
         $capeslogged_in = $session->get('capeslogged_in');
         $confirmcapes = $session->get('confirmcapes');
-        if (!$capeslogged_in){
+        if (!$capeslogged_in) {
             return redirect()->to('/register');
         }
-        if ($confirmcapes=="Ya"){
+        if ($confirmcapes == "Ya") {
             $session->setFlashdata('msg', 'Pengiriman data sudah dikonfirmasi. Data tidak lagi dapat diubah.');
             return redirect()->to('/register/profile');
         }
         $user_id = $session->get('user_id');
 
-        $button=$this->request->getVar('submit');
-        
-        if ($button=="batal"){
+        $button = $this->request->getVar('submit');
+
+        if ($button == "batal") {
             return redirect()->to('/register/profile');
-        }else{
+        } else {
             helper(['form', 'url']);
 
             $formvalid = $this->validate([
@@ -754,7 +762,7 @@ class Register extends BaseController
                 ]
             ]);
 
-            if ($formvalid){
+            if ($formvalid) {
                 $profile_id = $this->request->getVar('profile_id');
                 $photoname = $this->request->getVar('photoname');
                 $sipname = $this->request->getVar('sipname');
@@ -779,44 +787,44 @@ class Register extends BaseController
                 $wnum = $this->request->getVar('wnum');
                 $wfaks = $this->request->getVar('wfaks');
                 $wtelex = $this->request->getVar('wtelex');
-                $wemail1 = $this->request->getVar('wemail1');                
+                $wemail1 = $this->request->getVar('wemail1');
                 $wemail2 = $this->request->getVar('wemail2');
                 $sip = $this->request->getFile('sip');
                 $photo = $this->request->getFile('photo');
                 $pindahregular = $this->request->getVar('pindahregular');
 
                 $ext1 = $sip->getClientExtension();
-                if ((empty($sipname))&&(!empty($ext1))){
-                    $sipnamenew = $user_id.'_sip_'.$ext1;
-                    $sip->move('uploads/docs/',$sipnamenew,true);
-                } elseif ((!empty($sipname))&&(!empty($ext1))){
+                if ((empty($sipname)) && (!empty($ext1))) {
+                    $sipnamenew = $user_id . '_sip_' . $ext1;
+                    $sip->move('uploads/docs/', $sipnamenew, true);
+                } elseif ((!empty($sipname)) && (!empty($ext1))) {
                     $oldext = substr($sipname, -4);
-                    if ($oldext==$ext1){
-                        $sip->move('uploads/docs/',$sipname,true);
+                    if ($oldext == $ext1) {
+                        $sip->move('uploads/docs/', $sipname, true);
                         $sipnamenew = $sipname;
-                    }else{
-                        $sipnamenew = $user_id.'_sip_'.$ext1;
-                        $sip->move('uploads/docs/',$sipnamenew,true);
+                    } else {
+                        $sipnamenew = $user_id . '_sip_' . $ext1;
+                        $sip->move('uploads/docs/', $sipnamenew, true);
                     }
-                }else{
-                    $sipnamenew=$sipname;
+                } else {
+                    $sipnamenew = $sipname;
                 }
 
                 $ext = $photo->getClientExtension();
-                if ((empty($photoname))&&(!empty($ext))){
-                    $photonamenew = $user_id.'_profilpic_'.$ext;
-                    $photo->move('uploads/profilpic/',$photonamenew,true);
-                } elseif ((!empty($photoname))&&(!empty($ext))){
+                if ((empty($photoname)) && (!empty($ext))) {
+                    $photonamenew = $user_id . '_profilpic_' . $ext;
+                    $photo->move('uploads/profilpic/', $photonamenew, true);
+                } elseif ((!empty($photoname)) && (!empty($ext))) {
                     $oldext = substr($photoname, -4);
-                    if ($oldext==$ext){
-                        $photo->move('uploads/profilpic/',$photoname,true);
+                    if ($oldext == $ext) {
+                        $photo->move('uploads/profilpic/', $photoname, true);
                         $photonamenew = $photoname;
-                    }else{
-                        $photonamenew = $user_id.'_profilpic_'.$ext;
-                        $photo->move('uploads/profilpic/',$photonamenew,true);
+                    } else {
+                        $photonamenew = $user_id . '_profilpic_' . $ext;
+                        $photo->move('uploads/profilpic/', $photonamenew, true);
                     }
-                }else{
-                    $photonamenew=$photoname;
+                } else {
+                    $photonamenew = $photoname;
                 }
 
                 $dataprofile = array(
@@ -850,13 +858,13 @@ class Register extends BaseController
                 );
 
                 print_r($dataprofile);
-    
+
                 $model->update($profile_id, $dataprofile);
-    
-                 return redirect()->to('/register/profile');
-            }else{
+
+                return redirect()->to('/register/profile');
+            } else {
                 $user = $model->where('user_id', $user_id)->first();
-                if ($user){
+                if ($user) {
                     $data = [
                         'ID' => $user['ID'],
                         'user_id' => $user['user_id'],
@@ -898,19 +906,20 @@ class Register extends BaseController
     }
 
     //Fungsi tentang pendidikan CaPes
-    public function pendidikan(){
+    public function pendidikan()
+    {
         $session = session();
         $capeslogged_in = $session->get('capeslogged_in');
-        if (!$capeslogged_in){
+        if (!$capeslogged_in) {
             return redirect()->to('/register');
         }
         $model = new CapesPendModel();
         $data['capeslogged_in'] = $capeslogged_in;
         $user_id = $session->get('user_id');
         $pend = $model->where('user_id', $user_id)->findall();
-        if (!empty($pend)){
+        if (!empty($pend)) {
             $data['data_pend'] = $pend;
-        }else{
+        } else {
             $data['data_pend'] = 'kosong';
         }
         $data['title_page'] = "Data Pendidikan Calon Peserta PPI RPL";
@@ -918,14 +927,15 @@ class Register extends BaseController
         return view('register/pendidikan', $data);
     }
 
-    public function tambahpendidikan(){
+    public function tambahpendidikan()
+    {
         $session = session();
         $capeslogged_in = $session->get('capeslogged_in');
         $confirmcapes = $session->get('confirmcapes');
-        if (!$capeslogged_in){
+        if (!$capeslogged_in) {
             return redirect()->to('/register');
         }
-        if ($confirmcapes=="Ya"){
+        if ($confirmcapes == "Ya") {
             $session->setFlashdata('msg', 'Pengiriman data sudah dikonfirmasi. Data tidak lagi dapat diubah.');
             return redirect()->to('/register/pendidikan');
         }
@@ -937,25 +947,26 @@ class Register extends BaseController
         return view('register/tambahpendidikan', $data);
     }
 
-    public function tambahpendproses(){
+    public function tambahpendproses()
+    {
         $session = session();
         $model = new CapesPendModel();
         $user_id = $session->get('user_id');
         $capeslogged_in = $session->get('capeslogged_in');
         $confirmcapes = $session->get('confirmcapes');
-        if (!$capeslogged_in){
+        if (!$capeslogged_in) {
             return redirect()->to('/register');
         }
-        if ($confirmcapes=="Ya"){
+        if ($confirmcapes == "Ya") {
             $session->setFlashdata('msg', 'Pengiriman data sudah dikonfirmasi. Data tidak lagi dapat diubah.');
             return redirect()->to('/register/pendidikan');
         }
 
-        $button=$this->request->getVar('submit');
-        
-        if ($button=="batal"){
+        $button = $this->request->getVar('submit');
+
+        if ($button == "batal") {
             return redirect()->to('/register/pendidikan');
-        }else{
+        } else {
             helper(['form', 'url']);
 
             $formvalid = $this->validate([
@@ -1053,7 +1064,7 @@ class Register extends BaseController
                 ]
             ]);
 
-            if ($formvalid){
+            if ($formvalid) {
                 $jenjang = $this->request->getVar('jenjang');
                 $Name = $this->request->getVar('Name');
                 $Faculty = $this->request->getVar('Faculty');
@@ -1069,9 +1080,9 @@ class Register extends BaseController
                 $ijazah = $this->request->getFile('ijazah');
 
                 $ext = $ijazah->getClientExtension();
-                $filename = $user_id.'_ijazah_'.$jenjang.'.'.$ext;
-                $ijazah->move('uploads/docs/',$filename,true);
-    
+                $filename = $user_id . '_ijazah_' . $jenjang . '.' . $ext;
+                $ijazah->move('uploads/docs/', $filename, true);
+
                 $data = array(
                     'user_id' => $user_id,
                     'Rank' => $jenjang,
@@ -1090,12 +1101,12 @@ class Register extends BaseController
                     'date_created' => date('Y-m-d'),
                     'date_modified' => date('Y-m-d')
                 );
-    
+
                 $model->save($data);
                 $session->setFlashdata('msg', 'Data Pendidikan berhasil ditambah.');
-    
+
                 return redirect()->to('/register/pendidikan');
-            }else{
+            } else {
                 $session = session();
                 $data['title_page'] = "Tambah Data Pendidikan Calon Peserta PPI RPL";
                 $data['data_bread'] = "Tambah Data Pendidikan";
@@ -1104,47 +1115,49 @@ class Register extends BaseController
                 $data['validation'] = $this->validator;
                 return view('register/tambahpendvalid', $data);
             }
-        }        
+        }
     }
 
-    public function hapuspendidikan($id){
+    public function hapuspendidikan($id)
+    {
         $session = session();
         $model = new CapesPendModel();
         $capeslogged_in = $session->get('capeslogged_in');
         $confirmcapes = $session->get('confirmcapes');
-        if (!$capeslogged_in){
+        if (!$capeslogged_in) {
             return redirect()->to('/register');
         }
-        if ($confirmcapes=="Ya"){
+        if ($confirmcapes == "Ya") {
             $session->setFlashdata('msg', 'Pengiriman data sudah dikonfirmasi. Data tidak lagi dapat diubah.');
             return redirect()->to('/register/pendidikan');
         }
 
         $ijazah = $model->find($id);
-        $path = './uploads/docs/'.$ijazah['File'];
-        if (is_file($path)){
+        $path = './uploads/docs/' . $ijazah['File'];
+        if (is_file($path)) {
             unlink($path);
         }
         $model->delete($id);
         $session->setFlashdata('msg', 'Data pendidikan berhasil dihapus.');
 
-        return redirect()->to('/register/pendidikan');        
+        return redirect()->to('/register/pendidikan');
     }
 
-    public function ubahpendidikan($id){
+    public function ubahpendidikan($id)
+    {
         $session = session();
         $capeslogged_in = $session->get('capeslogged_in');
         $confirmcapes = $session->get('confirmcapes');
-        if (!$capeslogged_in){
+        if (!$capeslogged_in) {
             return redirect()->to('/register');
         }
-        if ($confirmcapes=="Ya"){
+        if ($confirmcapes == "Ya") {
             $session->setFlashdata('msg', 'Pengiriman data sudah dikonfirmasi. Data tidak lagi dapat diubah.');
             return redirect()->to('/register/pendidikan');
         }
         $model = new CapesPendModel();
         $pend = $model->where('Num', $id)->first();
-        if ($pend){
+        if ($pend) {
             $data = [
                 'Num' => $pend['Num'],
                 'user_id' => $pend['user_id'],
@@ -1169,14 +1182,15 @@ class Register extends BaseController
         return view('register/ubahpendidikan', $data);
     }
 
-    public function ubahpendproses(){
+    public function ubahpendproses()
+    {
         $session = session();
         $capeslogged_in = $session->get('capeslogged_in');
         $confirmcapes = $session->get('confirmcapes');
-        if (!$capeslogged_in){
+        if (!$capeslogged_in) {
             return redirect()->to('/register');
         }
-        if ($confirmcapes=="Ya"){
+        if ($confirmcapes == "Ya") {
             $session->setFlashdata('msg', 'Pengiriman data sudah dikonfirmasi. Data tidak lagi dapat diubah.');
             return redirect()->to('/register/pendidikan');
         }
@@ -1184,11 +1198,11 @@ class Register extends BaseController
         $pend_id = $this->request->getVar('pend_id');
         $user_id = $session->get('user_id');
 
-        $button=$this->request->getVar('submit');
-        
-        if ($button=="batal"){
+        $button = $this->request->getVar('submit');
+
+        if ($button == "batal") {
             return redirect()->to('/register/pendidikan');
-        }else{
+        } else {
             helper(['form', 'url']);
 
             $formvalid = $this->validate([
@@ -1286,7 +1300,7 @@ class Register extends BaseController
                 ]
             ]);
 
-            if ($formvalid){
+            if ($formvalid) {
                 $filename = $this->request->getVar('filename');
                 $jenjang = $this->request->getVar('jenjang');
                 $Name = $this->request->getVar('Name');
@@ -1303,22 +1317,22 @@ class Register extends BaseController
                 $ijazah = $this->request->getFile('ijazah');
 
                 $ext = $ijazah->getClientExtension();
-                if ((empty($filename))&&(!empty($ext))){
-                    $filenamenew = $user_id.'_ijazah_'.$jenjang.'.'.$ext;
-                    $ijazah->move('uploads/docs/',$filenamenew,true);
-                } elseif ((!empty($filename))&&(!empty($ext))){
+                if ((empty($filename)) && (!empty($ext))) {
+                    $filenamenew = $user_id . '_ijazah_' . $jenjang . '.' . $ext;
+                    $ijazah->move('uploads/docs/', $filenamenew, true);
+                } elseif ((!empty($filename)) && (!empty($ext))) {
                     $oldext = substr($filename, -4);
-                    if ($oldext == $ext){
-                        $ijazah->move('uploads/docs/',$filename,true);
+                    if ($oldext == $ext) {
+                        $ijazah->move('uploads/docs/', $filename, true);
                         $filenamenew = $filename;
-                    }else{
-                        $filenamenew = $user_id.'_ijazah_'.$jenjang.'.'.$ext;
-                        $ijazah->move('uploads/docs/',$filenamenew,true);
+                    } else {
+                        $filenamenew = $user_id . '_ijazah_' . $jenjang . '.' . $ext;
+                        $ijazah->move('uploads/docs/', $filenamenew, true);
                     }
-                }else{
-                    $filenamenew=$filename;
+                } else {
+                    $filenamenew = $filename;
                 }
-    
+
                 $data = array(
                     'Rank' => $jenjang,
                     'Name' => $Name,
@@ -1335,16 +1349,16 @@ class Register extends BaseController
                     'File' => $filenamenew,
                     'date_modified' => date('Y-m-d')
                 );
-    
+
                 $model->update($pend_id, $data);
                 $session->setFlashdata('msg', 'Data Pendidikan berhasil diubah.');
-    
+
                 return redirect()->to('/register/pendidikan');
-            }else{
+            } else {
                 $session = session();
                 $model = new CapesPendModel();
                 $pend = $model->where('Num', $pend_id)->first();
-                if ($pend){
+                if ($pend) {
                     $data = [
                         'Num' => $pend['Num'],
                         'user_id' => $pend['user_id'],
@@ -1369,14 +1383,15 @@ class Register extends BaseController
                 $data['validation'] = $this->validator;
                 return view('register/ubahpendidikan', $data);
             }
-        }        
+        }
     }
 
-    public function pengkerja(){
+    public function pengkerja()
+    {
         $session = session();
         $capeslogged_in = $session->get('capeslogged_in');
         $confirmcapes = $session->get('confirmcapes');
-        if (!$capeslogged_in){
+        if (!$capeslogged_in) {
             return redirect()->to('/register');
         }
         helper(['tanggal']);
@@ -1384,9 +1399,9 @@ class Register extends BaseController
         $data['capeslogged_in'] = $session->get('capeslogged_in');
         $user_id = $session->get('user_id');
         $kerja = $model->where('user_id', $user_id)->findall();
-        if (!empty($kerja)){
+        if (!empty($kerja)) {
             $data['data_kerja'] = $kerja;
-        }else{
+        } else {
             $data['data_kerja'] = 'kosong';
         }
         $data['title_page'] = "Data Pengalaman Kerja Calon Peserta PPI RPL";
@@ -1394,14 +1409,15 @@ class Register extends BaseController
         return view('register/pengkerja', $data);
     }
 
-    public function tambahkerja(){
+    public function tambahkerja()
+    {
         $session = session();
         $capeslogged_in = $session->get('capeslogged_in');
         $confirmcapes = $session->get('confirmcapes');
-        if (!$capeslogged_in){
+        if (!$capeslogged_in) {
             return redirect()->to('/register');
         }
-        if ($confirmcapes=="Ya"){
+        if ($confirmcapes == "Ya") {
             $session->setFlashdata('msg', 'Pengiriman data sudah dikonfirmasi. Data tidak lagi dapat diubah.');
             return redirect()->to('/register/pengkerja');
         }
@@ -1412,26 +1428,27 @@ class Register extends BaseController
         return view('register/tambahkerja', $data);
     }
 
-    public function tambahkerjaproses(){
+    public function tambahkerjaproses()
+    {
         $slug = new Slug();
         $session = session();
         $capeslogged_in = $session->get('capeslogged_in');
         $confirmcapes = $session->get('confirmcapes');
-        if (!$capeslogged_in){
+        if (!$capeslogged_in) {
             return redirect()->to('/register');
         }
-        if ($confirmcapes=="Ya"){
+        if ($confirmcapes == "Ya") {
             $session->setFlashdata('msg', 'Pengiriman data sudah dikonfirmasi. Data tidak lagi dapat diubah.');
             return redirect()->to('/register/pengkerja');
         }
         $model = new CapesKualifikasiModel();
         $user_id = $session->get('user_id');
 
-        $button=$this->request->getVar('submit');
-        
-        if ($button=="batal"){
+        $button = $this->request->getVar('submit');
+
+        if ($button == "batal") {
             return redirect()->to('/register/pengkerja');
-        }else{
+        } else {
             helper(['form', 'url']);
 
             $formvalid = $this->validate([
@@ -1486,12 +1503,12 @@ class Register extends BaseController
                 ]
             ]);
 
-            if ($formvalid){
+            if ($formvalid) {
                 $startdate = $this->request->getVar('startdate');
                 $masihkerja = $this->request->getVar('masihkerja');
-                if ((isset($masihkerja))&&$masihkerja=="masihkerja"){
-                    $enddate="";
-                }else{
+                if ((isset($masihkerja)) && $masihkerja == "masihkerja") {
+                    $enddate = "";
+                } else {
                     $enddate = $this->request->getVar('enddate');
                 }
                 $NameInstance = $this->request->getVar('NameInstance');
@@ -1510,18 +1527,18 @@ class Register extends BaseController
                 $Scale = $this->request->getVar('Scale');
                 $Desc = $this->request->getVar('Desc');
                 $File = $this->request->getFile('File');
-                
+
                 $ext = $File->getClientExtension();
-                if (!empty($ext)){
+                if (!empty($ext)) {
                     $namainstansi = $slug->slugify($NameInstance);
                     $posisi = $slug->slugify($Position);
-                    $filename = $user_id.'_pengkerja_'.$namainstansi.'_'.$posisi.'.'.$ext;
+                    $filename = $user_id . '_pengkerja_' . $namainstansi . '_' . $posisi . '.' . $ext;
                     echo $filename;
-                    $File->move('uploads/docs/',$filename,true);
-                }else{
-                    $filename="";
+                    $File->move('uploads/docs/', $filename, true);
+                } else {
+                    $filename = "";
                 }
-    
+
                 $data = array(
                     'user_id' => $user_id,
                     'StartDate' => $startdate,
@@ -1545,12 +1562,12 @@ class Register extends BaseController
                     'date_created' => date('Y-m-d'),
                     'date_modified' => date('Y-m-d')
                 );
-    
+
                 $model->save($data);
                 $session->setFlashdata('msg', 'Data Pengalaman Kerja berhasil ditambah.');
-    
+
                 return redirect()->to('/register/pengkerja');
-            }else{
+            } else {
                 $session = session();
                 $data['title_page'] = "Tambah Data Pengalaman Kerja Calon Peserta PPI RPL";
                 $data['data_bread'] = "Tambah Data Pengalaman Kerja";
@@ -1561,48 +1578,50 @@ class Register extends BaseController
         }
     }
 
-    public function hapuspengkerja($id){
+    public function hapuspengkerja($id)
+    {
         $session = session();
         $capeslogged_in = $session->get('capeslogged_in');
         $confirmcapes = $session->get('confirmcapes');
-        if (!$capeslogged_in){
+        if (!$capeslogged_in) {
             return redirect()->to('/register');
         }
-        if ($confirmcapes=="Ya"){
+        if ($confirmcapes == "Ya") {
             $session->setFlashdata('msg', 'Pengiriman data sudah dikonfirmasi. Data tidak lagi dapat diubah.');
             return redirect()->to('/register/pengkerja');
         }
         $model = new CapesKualifikasiModel();
 
         $pengkerja = $model->find($id);
-        $path = './uploads/docs/'.$pengkerja['File'];
-        if (is_file($path)){
+        $path = './uploads/docs/' . $pengkerja['File'];
+        if (is_file($path)) {
             unlink($path);
         }
         $model->delete($id);
         $session->setFlashdata('msg', 'Data Pengalaman kerja berhasil dihapus.');
 
-        return redirect()->to('/register/pengkerja');   
+        return redirect()->to('/register/pengkerja');
     }
 
-    public function ubahpengkerja($id){
+    public function ubahpengkerja($id)
+    {
         $session = session();
         $capeslogged_in = $session->get('capeslogged_in');
         $confirmcapes = $session->get('confirmcapes');
-        if (!$capeslogged_in){
+        if (!$capeslogged_in) {
             return redirect()->to('/register');
         }
-        if ($confirmcapes=="Ya"){
+        if ($confirmcapes == "Ya") {
             $session->setFlashdata('msg', 'Pengiriman data sudah dikonfirmasi. Data tidak lagi dapat diubah.');
             return redirect()->to('/register/pengkerja');
         }
         $model = new CapesKualifikasiModel();
         $kerja = $model->where('Num', $id)->first();
-        if ($kerja){
-            if ($kerja['EndDate']=="0000-00-00"){
+        if ($kerja) {
+            if ($kerja['EndDate'] == "0000-00-00") {
                 $masihkerja = "checked";
                 $enddate = "";
-            }else{
+            } else {
                 $masihkerja = "";
                 $enddate = $kerja['EndDate'];
             }
@@ -1636,15 +1655,16 @@ class Register extends BaseController
         return view('register/ubahpengkerja', $data);
     }
 
-    public function ubahpengkerjaproses(){
+    public function ubahpengkerjaproses()
+    {
         $session = session();
         $slug = new Slug();
         $capeslogged_in = $session->get('capeslogged_in');
         $confirmcapes = $session->get('confirmcapes');
-        if (!$capeslogged_in){
+        if (!$capeslogged_in) {
             return redirect()->to('/register');
         }
-        if ($confirmcapes=="Ya"){
+        if ($confirmcapes == "Ya") {
             $session->setFlashdata('msg', 'Pengiriman data sudah dikonfirmasi. Data tidak lagi dapat diubah.');
             return redirect()->to('/register/pengkerja');
         }
@@ -1652,11 +1672,11 @@ class Register extends BaseController
         $Num = $this->request->getVar('Num');
         $user_id = $session->get('user_id');
 
-        $button=$this->request->getVar('submit');
-        
-        if ($button=="batal"){
+        $button = $this->request->getVar('submit');
+
+        if ($button == "batal") {
             return redirect()->to('/register/pengkerja');
-        }else{
+        } else {
             helper(['form', 'url']);
 
             $formvalid = $this->validate([
@@ -1711,13 +1731,13 @@ class Register extends BaseController
                 ]
             ]);
 
-            if ($formvalid){
+            if ($formvalid) {
                 $filename = $this->request->getVar('filename');
                 $startdate = $this->request->getVar('startdate');
                 $masihkerja = $this->request->getVar('masihkerja');
-                if ((isset($masihkerja))&&$masihkerja=="masihkerja"){
-                    $enddate="";
-                }else{
+                if ((isset($masihkerja)) && $masihkerja == "masihkerja") {
+                    $enddate = "";
+                } else {
                     $enddate = $this->request->getVar('enddate');
                 }
                 $NameInstance = $this->request->getVar('NameInstance');
@@ -1740,22 +1760,22 @@ class Register extends BaseController
                 $namainstansi = $slug->slugify($NameInstance);
                 $posisi = $slug->slugify($Position);
                 $ext = $File->getClientExtension();
-                if ((empty($filename))&&(!empty($ext))){
-                    $filenamenew = $user_id.'_pengkerja_'.$namainstansi.'_'.$posisi.'.'.$ext;
-                    $File->move('uploads/docs/',$filenamenew,true);
-                } elseif ((!empty($filename))&&(!empty($ext))){
-                    $oldext = substr($filename,-4);
-                    if ($oldext == $ext){
-                        $File->move('uploads/docs/',$filename,true);
+                if ((empty($filename)) && (!empty($ext))) {
+                    $filenamenew = $user_id . '_pengkerja_' . $namainstansi . '_' . $posisi . '.' . $ext;
+                    $File->move('uploads/docs/', $filenamenew, true);
+                } elseif ((!empty($filename)) && (!empty($ext))) {
+                    $oldext = substr($filename, -4);
+                    if ($oldext == $ext) {
+                        $File->move('uploads/docs/', $filename, true);
                         $filenamenew = $filename;
-                    }else{
-                        $filenamenew = $user_id.'_pengkerja_'.$namainstansi.'_'.$posisi.'.'.$ext;
-                        $File->move('uploads/docs/',$filenamenew,true);
+                    } else {
+                        $filenamenew = $user_id . '_pengkerja_' . $namainstansi . '_' . $posisi . '.' . $ext;
+                        $File->move('uploads/docs/', $filenamenew, true);
                     }
-                }else{
-                    $filenamenew=$filename;
+                } else {
+                    $filenamenew = $filename;
                 }
-    
+
                 $data = array(
                     'StartDate' => $startdate,
                     'masihkerja' => $masihkerja,
@@ -1781,17 +1801,17 @@ class Register extends BaseController
 
                 $model->update($Num, $data);
                 $session->setFlashdata('msg', 'Data Pengalaman Kerja berhasil diubah.');
-    
+
                 return redirect()->to('/register/pengkerja');
-            }else{
+            } else {
                 $session = session();
                 $model = new CapesKualifikasiModel();
                 $kerja = $model->where('Num', $Num)->first();
-                if ($kerja){
-                    if ($kerja['EndDate']=="0000-00-00"){
+                if ($kerja) {
+                    if ($kerja['EndDate'] == "0000-00-00") {
                         $masihkerja = "checked";
                         $enddate = "";
-                    }else{
+                    } else {
                         $masihkerja = "";
                         $enddate = $kerja['EndDate'];
                     }
@@ -1825,23 +1845,24 @@ class Register extends BaseController
                 $data['validation'] = $this->validator;
                 return view('register/ubahpengkerja', $data);
             }
-        }        
+        }
     }
 
     //Fungsi untuk link organisasi
-    public function organisasi(){
+    public function organisasi()
+    {
         $session = session();
         $capeslogged_in = $session->get('capeslogged_in');
-        if (!$capeslogged_in){
+        if (!$capeslogged_in) {
             return redirect()->to('/register');
         }
         $model = new CapesOrgModel();
         $data['capeslogged_in'] = $session->get('capeslogged_in');
         $user_id = $session->get('user_id');
         $org = $model->where('user_id', $user_id)->findall();
-        if (!empty($org)){
+        if (!empty($org)) {
             $data['data_org'] = $org;
-        }else{
+        } else {
             $data['data_org'] = 'kosong';
         }
         $data['title_page'] = "Data Organisasi Calon Peserta PPI RPL";
@@ -1849,14 +1870,15 @@ class Register extends BaseController
         return view('register/organisasi', $data);
     }
 
-    public function tambahorganisasi(){
+    public function tambahorganisasi()
+    {
         $session = session();
         $capeslogged_in = $session->get('capeslogged_in');
         $confirmcapes = $session->get('confirmcapes');
-        if (!$capeslogged_in){
+        if (!$capeslogged_in) {
             return redirect()->to('/register');
         }
-        if ($confirmcapes=="Ya"){
+        if ($confirmcapes == "Ya") {
             $session->setFlashdata('msg', 'Pengiriman data sudah dikonfirmasi. Data tidak lagi dapat diubah.');
             return redirect()->to('/register/organisasi');
         }
@@ -1867,26 +1889,27 @@ class Register extends BaseController
         return view('register/tambahorganisasi', $data);
     }
 
-    public function tambahorgproses(){
+    public function tambahorgproses()
+    {
         $session = session();
         $slug = new Slug();
         $capeslogged_in = $session->get('capeslogged_in');
         $confirmcapes = $session->get('confirmcapes');
-        if (!$capeslogged_in){
+        if (!$capeslogged_in) {
             return redirect()->to('/register');
         }
-        if ($confirmcapes=="Ya"){
+        if ($confirmcapes == "Ya") {
             $session->setFlashdata('msg', 'Pengiriman data sudah dikonfirmasi. Data tidak lagi dapat diubah.');
             return redirect()->to('/register/organisasi');
         }
         $model = new CapesOrgModel();
         $user_id = $session->get('user_id');
 
-        $button=$this->request->getVar('submit');
-        
-        if ($button=="batal"){
+        $button = $this->request->getVar('submit');
+
+        if ($button == "batal") {
             return redirect()->to('/register/organisasi');
-        }else{
+        } else {
             helper(['form', 'url']);
 
             $formvalid = $this->validate([
@@ -1990,7 +2013,7 @@ class Register extends BaseController
                 ]
             ]);
 
-            if ($formvalid){
+            if ($formvalid) {
                 $Name = $this->request->getVar('Name');
                 $Type = $this->request->getVar('Type');
                 $City = $this->request->getVar('City');
@@ -2005,17 +2028,17 @@ class Register extends BaseController
                 $OrgScp = $this->request->getVar('OrgScp');
                 $Desc = $this->request->getVar('Desc');
                 $File = $this->request->getFile('File');
-                
+
                 $namaorganisasi = $slug->slugify($Name);
                 $posisi = $slug->slugify($Position);
                 $ext = $File->getClientExtension();
-                if (!empty($ext)){
-                    $filename = $user_id.'_organisasi_'.$namaorganisasi.'_'.$posisi.'.'.$ext;
-                    $File->move('uploads/docs/',$filename,true);
-                }else{
-                    $filename="";
+                if (!empty($ext)) {
+                    $filename = $user_id . '_organisasi_' . $namaorganisasi . '_' . $posisi . '.' . $ext;
+                    $File->move('uploads/docs/', $filename, true);
+                } else {
+                    $filename = "";
                 }
-    
+
                 $data = array(
                     'user_id' => $user_id,
                     'Name' => $Name,
@@ -2035,12 +2058,12 @@ class Register extends BaseController
                     'date_created' => date('Y-m-d'),
                     'date_modified' => date('Y-m-d')
                 );
-    
+
                 $model->save($data);
                 $session->setFlashdata('msg', 'Data Organisasi berhasil ditambah.');
-    
+
                 return redirect()->to('/register/organisasi');
-            }else{
+            } else {
                 $session = session();
                 $data['title_page'] = "Tambah Data Organisasi Calon Peserta PPI RPL";
                 $data['data_bread'] = "Tambah Data Organisasi";
@@ -2051,44 +2074,46 @@ class Register extends BaseController
         }
     }
 
-    public function hapusorg($id){
+    public function hapusorg($id)
+    {
         $session = session();
         $capeslogged_in = $session->get('capeslogged_in');
         $confirmcapes = $session->get('confirmcapes');
-        if (!$capeslogged_in){
+        if (!$capeslogged_in) {
             return redirect()->to('/register');
         }
-        if ($confirmcapes=="Ya"){
+        if ($confirmcapes == "Ya") {
             $session->setFlashdata('msg', 'Pengiriman data sudah dikonfirmasi. Data tidak lagi dapat diubah.');
             return redirect()->to('/register/organisasi');
         }
         $model = new CapesOrgModel();
 
         $org = $model->find($id);
-        $path = './uploads/docs/'.$org['File'];
-        if (is_file($path)){
+        $path = './uploads/docs/' . $org['File'];
+        if (is_file($path)) {
             unlink($path);
         }
         $model->delete($id);
         $session->setFlashdata('msg', 'Data Organisasi berhasil dihapus.');
 
-        return redirect()->to('/register/organisasi');   
+        return redirect()->to('/register/organisasi');
     }
 
-    public function ubahorg($id){
+    public function ubahorg($id)
+    {
         $session = session();
         $capeslogged_in = $session->get('capeslogged_in');
         $confirmcapes = $session->get('confirmcapes');
-        if (!$capeslogged_in){
+        if (!$capeslogged_in) {
             return redirect()->to('/register');
         }
-        if ($confirmcapes=="Ya"){
+        if ($confirmcapes == "Ya") {
             $session->setFlashdata('msg', 'Pengiriman data sudah dikonfirmasi. Data tidak lagi dapat diubah.');
             return redirect()->to('/register/organisasi');
         }
         $model = new CapesOrgModel();
         $org = $model->where('Num', $id)->first();
-        if ($org){
+        if ($org) {
             $data = [
                 'Num' => $org['Num'],
                 'user_id' => $org['user_id'],
@@ -2114,15 +2139,16 @@ class Register extends BaseController
         return view('register/ubahorg', $data);
     }
 
-    public function ubahorgproses(){
+    public function ubahorgproses()
+    {
         $session = session();
         $slug = new Slug();
         $capeslogged_in = $session->get('capeslogged_in');
         $confirmcapes = $session->get('confirmcapes');
-        if (!$capeslogged_in){
+        if (!$capeslogged_in) {
             return redirect()->to('/register');
         }
-        if ($confirmcapes=="Ya"){
+        if ($confirmcapes == "Ya") {
             $session->setFlashdata('msg', 'Pengiriman data sudah dikonfirmasi. Data tidak lagi dapat diubah.');
             return redirect()->to('/register/organisasi');
         }
@@ -2130,11 +2156,11 @@ class Register extends BaseController
         $Num = $this->request->getVar('Num');
         $user_id = $session->get('user_id');
 
-        $button=$this->request->getVar('submit');
-        
-        if ($button=="batal"){
+        $button = $this->request->getVar('submit');
+
+        if ($button == "batal") {
             return redirect()->to('/register/organisasi');
-        }else{
+        } else {
             helper(['form', 'url']);
 
             $formvalid = $this->validate([
@@ -2238,7 +2264,7 @@ class Register extends BaseController
                 ]
             ]);
 
-            if ($formvalid){
+            if ($formvalid) {
                 $filename = $this->request->getVar('File');
                 $Name = $this->request->getVar('Name');
                 $Type = $this->request->getVar('Type');
@@ -2258,22 +2284,22 @@ class Register extends BaseController
                 $namaorganisasi = $slug->slugify($Name);
                 $posisi = $slug->slugify($Position);
                 $ext = $File->getClientExtension();
-                if ((empty($filename))&&(!empty($ext))){
-                    $filenamenew = $user_id.'_organisasi_'.$namaorganisasi.'_'.$posisi.'.'.$ext;
-                    $File->move('uploads/docs/',$filenamenew,true);
-                } elseif ((!empty($filename))&&(!empty($ext))){
-                    $oldext = substr($filename,-4);
-                    if ($oldext == $ext){
-                        $File->move('uploads/docs/',$filename,true);
+                if ((empty($filename)) && (!empty($ext))) {
+                    $filenamenew = $user_id . '_organisasi_' . $namaorganisasi . '_' . $posisi . '.' . $ext;
+                    $File->move('uploads/docs/', $filenamenew, true);
+                } elseif ((!empty($filename)) && (!empty($ext))) {
+                    $oldext = substr($filename, -4);
+                    if ($oldext == $ext) {
+                        $File->move('uploads/docs/', $filename, true);
                         $filenamenew = $filename;
-                    }else{
-                        $filenamenew = $user_id.'_organisasi_'.$namaorganisasi.'_'.$posisi.'.'.$ext;
-                        $File->move('uploads/docs/',$filenamenew,true);
+                    } else {
+                        $filenamenew = $user_id . '_organisasi_' . $namaorganisasi . '_' . $posisi . '.' . $ext;
+                        $File->move('uploads/docs/', $filenamenew, true);
                     }
-                }else{
-                    $filenamenew=$filename;
+                } else {
+                    $filenamenew = $filename;
                 }
-    
+
                 $data = array(
                     'Name' => $Name,
                     'Type' => $Type,
@@ -2294,13 +2320,13 @@ class Register extends BaseController
 
                 $model->update($Num, $data);
                 $session->setFlashdata('msg', 'Data Organisasi berhasil diubah.');
-    
+
                 return redirect()->to('/register/organisasi');
-            }else{
+            } else {
                 $session = session();
                 $model = new CapesOrgModel();
                 $org = $model->where('Num', $Num)->first();
-                if ($org){
+                if ($org) {
                     $data = [
                         'Num' => $org['Num'],
                         'user_id' => $org['user_id'],
@@ -2316,8 +2342,8 @@ class Register extends BaseController
                         'Position' => $org['Position'],
                         'OrgLevel' => $org['OrgLevel'],
                         'OrgScp' => $org['OrgScp'],
-                        'Desc' => $kerja['Desc'],
-                        'File' => $kerja['File']
+                        'Desc' => $org['Desc'],
+                        'File' => $org['File']
                     ];
                 }
                 $data['title_page'] = "Ubah Data Organisasi Calon Peserta PPI RPL";
@@ -2326,24 +2352,25 @@ class Register extends BaseController
                 $data['validation'] = $this->validator;
                 return view('register/ubahorg', $data);
             }
-        }        
+        }
     }
-    
+
     //Fungsi untuk halaman pelatihan
-    public function pelatihan(){
+    public function pelatihan()
+    {
         $session = session();
         $capeslogged_in = $session->get('capeslogged_in');
         $confirmcapes = $session->get('confirmcapes');
-        if (!$capeslogged_in){
+        if (!$capeslogged_in) {
             return redirect()->to('/register');
         }
         $model = new CapesSertModel();
         $data['capeslogged_in'] = $session->get('capeslogged_in');
         $user_id = $session->get('user_id');
         $latih = $model->where('user_id', $user_id)->where('Jenis', 'pelatihan')->findall();
-        if (!empty($latih)){
+        if (!empty($latih)) {
             $data['data_latih'] = $latih;
-        }else{
+        } else {
             $data['data_latih'] = 'kosong';
         }
         $data['title_page'] = "Data Pelatihan Teknik Calon Peserta PPI RPL";
@@ -2351,14 +2378,15 @@ class Register extends BaseController
         return view('register/pelatihan', $data);
     }
 
-    public function tambahlatih(){
+    public function tambahlatih()
+    {
         $session = session();
         $capeslogged_in = $session->get('capeslogged_in');
         $confirmcapes = $session->get('confirmcapes');
-        if (!$capeslogged_in){
+        if (!$capeslogged_in) {
             return redirect()->to('/register');
         }
-        if ($confirmcapes=="Ya"){
+        if ($confirmcapes == "Ya") {
             $session->setFlashdata('msg', 'Pengiriman data sudah dikonfirmasi. Data tidak lagi dapat diubah.');
             return redirect()->to('/register/pelatihan');
         }
@@ -2370,26 +2398,27 @@ class Register extends BaseController
         return view('register/tambahlatih', $data);
     }
 
-    public function tambahlatihproses(){
+    public function tambahlatihproses()
+    {
         $session = session();
         $slug = new Slug();
         $capeslogged_in = $session->get('capeslogged_in');
         $confirmcapes = $session->get('confirmcapes');
-        if (!$capeslogged_in){
+        if (!$capeslogged_in) {
             return redirect()->to('/register');
         }
-        if ($confirmcapes=="Ya"){
+        if ($confirmcapes == "Ya") {
             $session->setFlashdata('msg', 'Pengiriman data sudah dikonfirmasi. Data tidak lagi dapat diubah.');
             return redirect()->to('/register/pelatihan');
         }
         $model = new CapesSertModel();
         $user_id = $session->get('user_id');
 
-        $button=$this->request->getVar('submit');
-        
-        if ($button=="batal"){
+        $button = $this->request->getVar('submit');
+
+        if ($button == "batal") {
             return redirect()->to('/register/pelatihan');
-        }else{
+        } else {
             helper(['form', 'url']);
 
             $formvalid = $this->validate([
@@ -2465,7 +2494,7 @@ class Register extends BaseController
                 ]
             ]);
 
-            if ($formvalid){
+            if ($formvalid) {
                 $Name = $this->request->getVar('Name');
                 $Organizer = $this->request->getVar('Organizer');
                 $City = $this->request->getVar('City');
@@ -2476,16 +2505,16 @@ class Register extends BaseController
                 $Length = $this->request->getVar('Length');
                 $Description = $this->request->getVar('Description');
                 $File = $this->request->getFile('File');
-                
+
                 $namalatih = $slug->slugify($Name);
                 $ext = $File->getClientExtension();
-                if (!empty($ext)){
-                    $filename = $user_id.'_pelatihan_'.$namalatih.'.'.$ext;
-                    $File->move('uploads/docs/',$filename,true);
-                }else{
-                    $filename="";
+                if (!empty($ext)) {
+                    $filename = $user_id . '_pelatihan_' . $namalatih . '.' . $ext;
+                    $File->move('uploads/docs/', $filename, true);
+                } else {
+                    $filename = "";
                 }
-    
+
                 $data = array(
                     'user_id' => $user_id,
                     'Jenis' => 'pelatihan',
@@ -2502,12 +2531,12 @@ class Register extends BaseController
                     'date_created' => date('Y-m-d'),
                     'date_modified' => date('Y-m-d')
                 );
-    
+
                 $model->save($data);
                 $session->setFlashdata('msg', 'Data Pendidikan/Pelatihan berhasil ditambah.');
-    
+
                 return redirect()->to('/register/pelatihan');
-            }else{
+            } else {
                 $session = session();
                 $data['title_page'] = "Tambah Data Pendidikan/Pelatihan Calon Peserta PPI RPL";
                 $data['data_bread'] = "Tambah Data Pendidikan/Pelatihan";
@@ -2518,44 +2547,46 @@ class Register extends BaseController
         }
     }
 
-    public function hapuslatih($id){
+    public function hapuslatih($id)
+    {
         $session = session();
         $capeslogged_in = $session->get('capeslogged_in');
         $confirmcapes = $session->get('confirmcapes');
-        if (!$capeslogged_in){
+        if (!$capeslogged_in) {
             return redirect()->to('/register');
         }
-        if ($confirmcapes=="Ya"){
+        if ($confirmcapes == "Ya") {
             $session->setFlashdata('msg', 'Pengiriman data sudah dikonfirmasi. Data tidak lagi dapat diubah.');
             return redirect()->to('/register/pelatihan');
         }
         $model = new CapesSertModel();
 
         $latih = $model->find($id);
-        $path = './uploads/docs/'.$latih['File'];
-        if (is_file($path)){
+        $path = './uploads/docs/' . $latih['File'];
+        if (is_file($path)) {
             unlink($path);
         }
         $model->delete($id);
         $session->setFlashdata('msg', 'Data Pendidikan/Pelatihan berhasil dihapus.');
 
-        return redirect()->to('/register/pelatihan');   
+        return redirect()->to('/register/pelatihan');
     }
 
-    public function ubahlatih($id){
+    public function ubahlatih($id)
+    {
         $session = session();
         $capeslogged_in = $session->get('capeslogged_in');
         $confirmcapes = $session->get('confirmcapes');
-        if (!$capeslogged_in){
+        if (!$capeslogged_in) {
             return redirect()->to('/register');
         }
-        if ($confirmcapes=="Ya"){
+        if ($confirmcapes == "Ya") {
             $session->setFlashdata('msg', 'Pengiriman data sudah dikonfirmasi. Data tidak lagi dapat diubah.');
             return redirect()->to('/register/pelatihan');
         }
         $model = new CapesSertModel();
         $latih = $model->where('Num', $id)->first();
-        if ($latih){
+        if ($latih) {
             $data = [
                 'Num' => $latih['Num'],
                 'user_id' => $latih['user_id'],
@@ -2577,15 +2608,16 @@ class Register extends BaseController
         return view('register/ubahlatih', $data);
     }
 
-    public function ubahlatihproses(){
+    public function ubahlatihproses()
+    {
         $session = session();
         $slug = new Slug();
         $capeslogged_in = $session->get('capeslogged_in');
         $confirmcapes = $session->get('confirmcapes');
-        if (!$capeslogged_in){
+        if (!$capeslogged_in) {
             return redirect()->to('/register');
         }
-        if ($confirmcapes=="Ya"){
+        if ($confirmcapes == "Ya") {
             $session->setFlashdata('msg', 'Pengiriman data sudah dikonfirmasi. Data tidak lagi dapat diubah.');
             return redirect()->to('/register/pelatihan');
         }
@@ -2593,11 +2625,11 @@ class Register extends BaseController
         $Num = $this->request->getVar('Num');
         $user_id = $session->get('user_id');
 
-        $button=$this->request->getVar('submit');
-        
-        if ($button=="batal"){
+        $button = $this->request->getVar('submit');
+
+        if ($button == "batal") {
             return redirect()->to('/register/pelatihan');
-        }else{
+        } else {
             helper(['form', 'url']);
 
             $formvalid = $this->validate([
@@ -2673,7 +2705,7 @@ class Register extends BaseController
                 ]
             ]);
 
-            if ($formvalid){
+            if ($formvalid) {
                 $filename = $this->request->getVar('File');
                 $Name = $this->request->getVar('Name');
                 $Organizer = $this->request->getVar('Organizer');
@@ -2688,22 +2720,22 @@ class Register extends BaseController
 
                 $namalatih = $slug->slugify($Name);
                 $ext = $File->getClientExtension();
-                if ((empty($filename))&&(!empty($ext))){
-                    $filenamenew = $user_id.'_pelatihan_'.$namalatih.'.'.$ext;
-                    $File->move('uploads/docs/',$filenamenew,true);
-                } elseif ((!empty($filename))&&(!empty($ext))){
-                    $oldext = substr($filename,-4);
-                    if ($oldext == $ext){
-                        $File->move('uploads/docs/',$filename,true);
+                if ((empty($filename)) && (!empty($ext))) {
+                    $filenamenew = $user_id . '_pelatihan_' . $namalatih . '.' . $ext;
+                    $File->move('uploads/docs/', $filenamenew, true);
+                } elseif ((!empty($filename)) && (!empty($ext))) {
+                    $oldext = substr($filename, -4);
+                    if ($oldext == $ext) {
+                        $File->move('uploads/docs/', $filename, true);
                         $filenamenew = $filename;
-                    }else{
-                        $filenamenew = $user_id.'_pelatihan_'.$namalatih.'.'.$ext;
-                        $File->move('uploads/docs/',$filenamenew,true);
+                    } else {
+                        $filenamenew = $user_id . '_pelatihan_' . $namalatih . '.' . $ext;
+                        $File->move('uploads/docs/', $filenamenew, true);
                     }
-                }else{
-                    $filenamenew=$filename;
+                } else {
+                    $filenamenew = $filename;
                 }
-    
+
                 $data = array(
                     'Name' => $Name,
                     'Jenis' => 'pelatihan',
@@ -2722,11 +2754,11 @@ class Register extends BaseController
 
                 $model->update($Num, $data);
                 $session->setFlashdata('msg', 'Data Pendidikan/Pelatihan berhasil diubah.');
-    
+
                 return redirect()->to('/register/pelatihan');
-            }else{
+            } else {
                 $latih = $model->where('Num', $Num)->first();
-                if ($latih){
+                if ($latih) {
                     $data = [
                         'Num' => $latih['Num'],
                         'user_id' => $latih['user_id'],
@@ -2748,24 +2780,25 @@ class Register extends BaseController
                 $data['validation'] = $this->validator;
                 return view('register/ubahlatih', $data);
             }
-        }        
+        }
     }
-    
+
     //Fungsi untuk halaman Sertifikat
-    public function sertifikat(){
+    public function sertifikat()
+    {
         $session = session();
         $capeslogged_in = $session->get('capeslogged_in');
         $confirmcapes = $session->get('confirmcapes');
-        if (!$capeslogged_in){
+        if (!$capeslogged_in) {
             return redirect()->to('/register');
         }
         $model = new CapesSertModel();
         $data['capeslogged_in'] = $session->get('capeslogged_in');
         $user_id = $session->get('user_id');
         $latih = $model->where('user_id', $user_id)->where('Jenis', 'sertifikat')->findall();
-        if (!empty($latih)){
+        if (!empty($latih)) {
             $data['data_latih'] = $latih;
-        }else{
+        } else {
             $data['data_latih'] = 'kosong';
         }
         $data['title_page'] = "Data Sertifikat Kompetensi Calon Peserta PPI RPL";
@@ -2773,14 +2806,15 @@ class Register extends BaseController
         return view('register/sertifikat', $data);
     }
 
-    public function tambahsert(){
+    public function tambahsert()
+    {
         $session = session();
         $capeslogged_in = $session->get('capeslogged_in');
         $confirmcapes = $session->get('confirmcapes');
-        if (!$capeslogged_in){
+        if (!$capeslogged_in) {
             return redirect()->to('/register');
         }
-        if ($confirmcapes=="Ya"){
+        if ($confirmcapes == "Ya") {
             $session->setFlashdata('msg', 'Pengiriman data sudah dikonfirmasi. Data tidak lagi dapat diubah.');
             return redirect()->to('/register/sertifikat');
         }
@@ -2792,26 +2826,27 @@ class Register extends BaseController
         return view('register/tambahsert', $data);
     }
 
-    public function tambahsertproses(){
+    public function tambahsertproses()
+    {
         $session = session();
         $slug = new Slug();
         $capeslogged_in = $session->get('capeslogged_in');
         $confirmcapes = $session->get('confirmcapes');
-        if (!$capeslogged_in){
+        if (!$capeslogged_in) {
             return redirect()->to('/register');
         }
-        if ($confirmcapes=="Ya"){
+        if ($confirmcapes == "Ya") {
             $session->setFlashdata('msg', 'Pengiriman data sudah dikonfirmasi. Data tidak lagi dapat diubah.');
             return redirect()->to('/register/sertifikat');
         }
         $model = new CapesSertModel();
         $user_id = $session->get('user_id');
 
-        $button=$this->request->getVar('submit');
-        
-        if ($button=="batal"){
+        $button = $this->request->getVar('submit');
+
+        if ($button == "batal") {
             return redirect()->to('/register/sertifikat');
-        }else{
+        } else {
             helper(['form', 'url']);
 
             $formvalid = $this->validate([
@@ -2887,7 +2922,7 @@ class Register extends BaseController
                 ]
             ]);
 
-            if ($formvalid){
+            if ($formvalid) {
                 $Name = $this->request->getVar('Name');
                 $Organizer = $this->request->getVar('Organizer');
                 $City = $this->request->getVar('City');
@@ -2898,16 +2933,16 @@ class Register extends BaseController
                 $Length = $this->request->getVar('Length');
                 $Description = $this->request->getVar('Description');
                 $File = $this->request->getFile('File');
-                
+
                 $namasert = $slug->slugify($Name);
                 $ext = $File->getClientExtension();
-                if (!empty($ext)){
-                    $filename = $user_id.'_sertifikat_'.$namasert.'.'.$ext;
-                    $File->move('uploads/docs/',$filename,true);
-                }else{
-                    $filename="";
+                if (!empty($ext)) {
+                    $filename = $user_id . '_sertifikat_' . $namasert . '.' . $ext;
+                    $File->move('uploads/docs/', $filename, true);
+                } else {
+                    $filename = "";
                 }
-    
+
                 $data = array(
                     'user_id' => $user_id,
                     'Jenis' => 'sertifikat',
@@ -2924,12 +2959,12 @@ class Register extends BaseController
                     'date_created' => date('Y-m-d'),
                     'date_modified' => date('Y-m-d')
                 );
-    
+
                 $model->save($data);
                 $session->setFlashdata('msg', 'Data Sertifikat Kompetensi berhasil ditambah.');
-    
+
                 return redirect()->to('/register/sertifikat');
-            }else{
+            } else {
                 $session = session();
                 $data['title_page'] = "Tambah Data Sertifikat Kompetensi Calon Peserta PPI RPL";
                 $data['data_bread'] = "Tambah Data Sertifikat Kompetensi";
@@ -2940,44 +2975,46 @@ class Register extends BaseController
         }
     }
 
-    public function hapussert($id){
+    public function hapussert($id)
+    {
         $session = session();
         $capeslogged_in = $session->get('capeslogged_in');
         $confirmcapes = $session->get('confirmcapes');
-        if (!$capeslogged_in){
+        if (!$capeslogged_in) {
             return redirect()->to('/register');
         }
-        if ($confirmcapes=="Ya"){
+        if ($confirmcapes == "Ya") {
             $session->setFlashdata('msg', 'Pengiriman data sudah dikonfirmasi. Data tidak lagi dapat diubah.');
             return redirect()->to('/register/sertifikat');
         }
         $model = new CapesSertModel();
 
         $latih = $model->find($id);
-        $path = './uploads/docs/'.$latih['File'];
-        if (is_file($path)){
+        $path = './uploads/docs/' . $latih['File'];
+        if (is_file($path)) {
             unlink($path);
         }
         $model->delete($id);
         $session->setFlashdata('msg', 'Data Sertifikat Kompetensi berhasil dihapus.');
 
-        return redirect()->to('/register/sertifikat');   
+        return redirect()->to('/register/sertifikat');
     }
 
-    public function ubahsert($id){
+    public function ubahsert($id)
+    {
         $session = session();
         $capeslogged_in = $session->get('capeslogged_in');
         $confirmcapes = $session->get('confirmcapes');
-        if (!$capeslogged_in){
+        if (!$capeslogged_in) {
             return redirect()->to('/register');
         }
-        if ($confirmcapes=="Ya"){
+        if ($confirmcapes == "Ya") {
             $session->setFlashdata('msg', 'Pengiriman data sudah dikonfirmasi. Data tidak lagi dapat diubah.');
             return redirect()->to('/register/sertifikat');
         }
         $model = new CapesSertModel();
         $latih = $model->where('Num', $id)->first();
-        if ($latih){
+        if ($latih) {
             $data = [
                 'Num' => $latih['Num'],
                 'user_id' => $latih['user_id'],
@@ -2999,15 +3036,16 @@ class Register extends BaseController
         return view('register/ubahsert', $data);
     }
 
-    public function ubahsertproses(){
+    public function ubahsertproses()
+    {
         $session = session();
         $slug = new Slug();
         $capeslogged_in = $session->get('capeslogged_in');
         $confirmcapes = $session->get('confirmcapes');
-        if (!$capeslogged_in){
+        if (!$capeslogged_in) {
             return redirect()->to('/register');
         }
-        if ($confirmcapes=="Ya"){
+        if ($confirmcapes == "Ya") {
             $session->setFlashdata('msg', 'Pengiriman data sudah dikonfirmasi. Data tidak lagi dapat diubah.');
             return redirect()->to('/register/sertifikat');
         }
@@ -3015,11 +3053,11 @@ class Register extends BaseController
         $Num = $this->request->getVar('Num');
         $user_id = $session->get('user_id');
 
-        $button=$this->request->getVar('submit');
-        
-        if ($button=="batal"){
+        $button = $this->request->getVar('submit');
+
+        if ($button == "batal") {
             return redirect()->to('/register/sertifikat');
-        }else{
+        } else {
             helper(['form', 'url']);
 
             $formvalid = $this->validate([
@@ -3095,7 +3133,7 @@ class Register extends BaseController
                 ]
             ]);
 
-            if ($formvalid){
+            if ($formvalid) {
                 $filename = $this->request->getVar('File');
                 $Name = $this->request->getVar('Name');
                 $Organizer = $this->request->getVar('Organizer');
@@ -3110,22 +3148,22 @@ class Register extends BaseController
 
                 $namasert = $slug->slugify($Name);
                 $ext = $File->getClientExtension();
-                if ((empty($filename))&&(!empty($ext))){
-                    $filenamenew = $user_id.'_sertifikat_'.$namasert.'.'.$ext;
-                    $File->move('uploads/docs/',$filenamenew,true);
-                } elseif ((!empty($filename))&&(!empty($ext))){
-                    $oldext = substr($filename,-4);
-                    if ($oldext == $ext){
-                        $File->move('uploads/docs/',$filename,true);
+                if ((empty($filename)) && (!empty($ext))) {
+                    $filenamenew = $user_id . '_sertifikat_' . $namasert . '.' . $ext;
+                    $File->move('uploads/docs/', $filenamenew, true);
+                } elseif ((!empty($filename)) && (!empty($ext))) {
+                    $oldext = substr($filename, -4);
+                    if ($oldext == $ext) {
+                        $File->move('uploads/docs/', $filename, true);
                         $filenamenew = $filename;
-                    }else{
-                        $filenamenew = $user_id.'_sertifikat_'.$namasert.'.'.$ext;
-                        $File->move('uploads/docs/',$filenamenew,true);
+                    } else {
+                        $filenamenew = $user_id . '_sertifikat_' . $namasert . '.' . $ext;
+                        $File->move('uploads/docs/', $filenamenew, true);
                     }
-                }else{
-                    $filenamenew=$filename;
+                } else {
+                    $filenamenew = $filename;
                 }
-    
+
                 $data = array(
                     'Name' => $Name,
                     'Jenis' => 'sertifikat',
@@ -3144,11 +3182,11 @@ class Register extends BaseController
 
                 $model->update($Num, $data);
                 $session->setFlashdata('msg', 'Data Sertifikat Kompetensi berhasil diubah.');
-    
+
                 return redirect()->to('/register/sertifikat');
-            }else{
+            } else {
                 $latih = $model->where('Num', $Num)->first();
-                if ($latih){
+                if ($latih) {
                     $data = [
                         'Num' => $latih['Num'],
                         'user_id' => $latih['user_id'],
@@ -3170,24 +3208,25 @@ class Register extends BaseController
                 $data['validation'] = $this->validator;
                 return view('register/ubahsert', $data);
             }
-        }        
+        }
     }
 
     //Fungsi untuk halaman Karya Tulis
-    public function kartul(){
+    public function kartul()
+    {
         $session = session();
         $capeslogged_in = $session->get('capeslogged_in');
         $confirmcapes = $session->get('confirmcapes');
-        if (!$capeslogged_in){
+        if (!$capeslogged_in) {
             return redirect()->to('/register');
         }
         $model = new CapesKartulModel();
         $data['capeslogged_in'] = $session->get('capeslogged_in');
         $user_id = $session->get('user_id');
         $kartul = $model->where('user_id', $user_id)->findall();
-        if (!empty($kartul)){
+        if (!empty($kartul)) {
             $data['data_kartul'] = $kartul;
-        }else{
+        } else {
             $data['data_kartul'] = 'kosong';
         }
         $data['title_page'] = "Data Karya Tulis di Bidang Keinsinyuran Calon Peserta PPI RPL";
@@ -3195,14 +3234,15 @@ class Register extends BaseController
         return view('register/kartul', $data);
     }
 
-    public function tambahkartul(){
+    public function tambahkartul()
+    {
         $session = session();
         $capeslogged_in = $session->get('capeslogged_in');
         $confirmcapes = $session->get('confirmcapes');
-        if (!$capeslogged_in){
+        if (!$capeslogged_in) {
             return redirect()->to('/register');
         }
-        if ($confirmcapes=="Ya"){
+        if ($confirmcapes == "Ya") {
             $session->setFlashdata('msg', 'Pengiriman data sudah dikonfirmasi. Data tidak lagi dapat diubah.');
             return redirect()->to('/register/kartul');
         }
@@ -3213,26 +3253,27 @@ class Register extends BaseController
         return view('register/tambahkartul', $data);
     }
 
-    public function tambahkartulproses(){
+    public function tambahkartulproses()
+    {
         $session = session();
         $slug = new Slug();
         $capeslogged_in = $session->get('capeslogged_in');
         $confirmcapes = $session->get('confirmcapes');
-        if (!$capeslogged_in){
+        if (!$capeslogged_in) {
             return redirect()->to('/register');
         }
-        if ($confirmcapes=="Ya"){
+        if ($confirmcapes == "Ya") {
             $session->setFlashdata('msg', 'Pengiriman data sudah dikonfirmasi. Data tidak lagi dapat diubah.');
             return redirect()->to('/register/kartul');
         }
         $model = new CapesKartulModel();
         $user_id = $session->get('user_id');
 
-        $button=$this->request->getVar('submit');
-        
-        if ($button=="batal"){
+        $button = $this->request->getVar('submit');
+
+        if ($button == "batal") {
             return redirect()->to('/register/kartul');
-        }else{
+        } else {
             helper(['form', 'url']);
 
             $formvalid = $this->validate([
@@ -3308,7 +3349,7 @@ class Register extends BaseController
                 ]
             ]);
 
-            if ($formvalid){
+            if ($formvalid) {
                 $Name = $this->request->getVar('Name');
                 $Media = $this->request->getVar('Media');
                 $LocCity = $this->request->getVar('LocCity');
@@ -3319,17 +3360,17 @@ class Register extends BaseController
                 $Diffbenefit = $this->request->getVar('Diffbenefit');
                 $Desc = $this->request->getVar('Desc');
                 $File = $this->request->getFile('File');
-                
+
                 $mediakartul = $slug->slugify($Media);
                 $ext = $File->getClientExtension();
-                if (!empty($ext)){
+                if (!empty($ext)) {
                     $random = bin2hex(random_bytes(4));
-                    $filename = $user_id.'_karyatulis_'.$mediakartul.'_'.$random.'.'.$ext;
-                    $File->move('uploads/docs/',$filename,true);
-                }else{
-                    $filename="";
+                    $filename = $user_id . '_karyatulis_' . $mediakartul . '_' . $random . '.' . $ext;
+                    $File->move('uploads/docs/', $filename, true);
+                } else {
+                    $filename = "";
                 }
-    
+
                 $data = array(
                     'user_id' => $user_id,
                     'Name' => $Name,
@@ -3345,12 +3386,12 @@ class Register extends BaseController
                     'date_created' => date('Y-m-d'),
                     'date_modified' => date('Y-m-d')
                 );
-    
+
                 $model->save($data);
                 $session->setFlashdata('msg', 'Data Karya Tulis berhasil ditambah.');
-    
+
                 return redirect()->to('/register/kartul');
-            }else{
+            } else {
                 $session = session();
                 $data['title_page'] = "Tambah Data Karya Tulis Calon Peserta PPI RPL";
                 $data['data_bread'] = "Tambah Data Karya Tulis";
@@ -3361,44 +3402,46 @@ class Register extends BaseController
         }
     }
 
-    public function hapuskartul($id){
+    public function hapuskartul($id)
+    {
         $session = session();
         $capeslogged_in = $session->get('capeslogged_in');
         $confirmcapes = $session->get('confirmcapes');
-        if (!$capeslogged_in){
+        if (!$capeslogged_in) {
             return redirect()->to('/register');
         }
-        if ($confirmcapes=="Ya"){
+        if ($confirmcapes == "Ya") {
             $session->setFlashdata('msg', 'Pengiriman data sudah dikonfirmasi. Data tidak lagi dapat diubah.');
             return redirect()->to('/register/kartul');
         }
         $model = new CapesKartulModel();
 
         $kartul = $model->find($id);
-        $path = './uploads/docs/'.$kartul['File'];
-        if (is_file($path)){
+        $path = './uploads/docs/' . $kartul['File'];
+        if (is_file($path)) {
             unlink($path);
         }
         $model->delete($id);
         $session->setFlashdata('msg', 'Data Karya Tulis berhasil dihapus.');
 
-        return redirect()->to('/register/kartul');   
+        return redirect()->to('/register/kartul');
     }
 
-    public function ubahkartul($id){
+    public function ubahkartul($id)
+    {
         $session = session();
         $capeslogged_in = $session->get('capeslogged_in');
         $confirmcapes = $session->get('confirmcapes');
-        if (!$capeslogged_in){
+        if (!$capeslogged_in) {
             return redirect()->to('/register');
         }
-        if ($confirmcapes=="Ya"){
+        if ($confirmcapes == "Ya") {
             $session->setFlashdata('msg', 'Pengiriman data sudah dikonfirmasi. Data tidak lagi dapat diubah.');
             return redirect()->to('/register/kartul');
         }
         $model = new CapesKartulModel();
         $kartul = $model->where('Num', $id)->first();
-        if ($kartul){
+        if ($kartul) {
             $data = [
                 'Num' => $kartul['Num'],
                 'user_id' => $kartul['user_id'],
@@ -3420,15 +3463,16 @@ class Register extends BaseController
         return view('register/ubahkartul', $data);
     }
 
-    public function ubahkartulproses(){
+    public function ubahkartulproses()
+    {
         $session = session();
         $slug = new Slug();
         $capeslogged_in = $session->get('capeslogged_in');
         $confirmcapes = $session->get('confirmcapes');
-        if (!$capeslogged_in){
+        if (!$capeslogged_in) {
             return redirect()->to('/register');
         }
-        if ($confirmcapes=="Ya"){
+        if ($confirmcapes == "Ya") {
             $session->setFlashdata('msg', 'Pengiriman data sudah dikonfirmasi. Data tidak lagi dapat diubah.');
             return redirect()->to('/register/kartul');
         }
@@ -3436,11 +3480,11 @@ class Register extends BaseController
         $Num = $this->request->getVar('Num');
         $user_id = $session->get('user_id');
 
-        $button=$this->request->getVar('submit');
-        
-        if ($button=="batal"){
+        $button = $this->request->getVar('submit');
+
+        if ($button == "batal") {
             return redirect()->to('/register/kartul');
-        }else{
+        } else {
             helper(['form', 'url']);
 
             $formvalid = $this->validate([
@@ -3516,7 +3560,7 @@ class Register extends BaseController
                 ]
             ]);
 
-            if ($formvalid){
+            if ($formvalid) {
                 $filename = $this->request->getVar('File');
                 $Name = $this->request->getVar('Name');
                 $Media = $this->request->getVar('Media');
@@ -3531,24 +3575,24 @@ class Register extends BaseController
 
                 $mediakartul = $slug->slugify($Media);
                 $ext = $File->getClientExtension();
-                if ((empty($filename))&&(!empty($ext))){
+                if ((empty($filename)) && (!empty($ext))) {
                     $random = bin2hex(random_bytes(4));
-                    $filenamenew = $user_id.'_karyatulis_'.$mediakartul.'_'.$random.'.'.$ext;
-                    $File->move('uploads/docs/',$filenamenew,true);
-                } elseif ((!empty($filename))&&(!empty($ext))){
-                    $oldext = substr($filename,-4);
-                    if ($oldext == $ext){
-                        $File->move('uploads/docs/',$filename,true);
+                    $filenamenew = $user_id . '_karyatulis_' . $mediakartul . '_' . $random . '.' . $ext;
+                    $File->move('uploads/docs/', $filenamenew, true);
+                } elseif ((!empty($filename)) && (!empty($ext))) {
+                    $oldext = substr($filename, -4);
+                    if ($oldext == $ext) {
+                        $File->move('uploads/docs/', $filename, true);
                         $filenamenew = $filename;
-                    }else{
+                    } else {
                         $random = bin2hex(random_bytes(4));
-                        $filenamenew = $user_id.'_karyatulis_'.str_replace(' ','',$Media).'_'.$random.'.'.$ext;
-                        $File->move('uploads/docs/',$filenamenew,true);
+                        $filenamenew = $user_id . '_karyatulis_' . str_replace(' ', '', $Media) . '_' . $random . '.' . $ext;
+                        $File->move('uploads/docs/', $filenamenew, true);
                     }
-                }else{
-                    $filenamenew=$filename;
+                } else {
+                    $filenamenew = $filename;
                 }
-    
+
                 $data = array(
                     'Name' => $Name,
                     'Media' => $Media,
@@ -3565,11 +3609,11 @@ class Register extends BaseController
 
                 $model->update($Num, $data);
                 $session->setFlashdata('msg', 'Data Karya Tulis berhasil diubah.');
-    
+
                 return redirect()->to('/register/kartul');
-            }else{
+            } else {
                 $kartul = $model->where('Num', $Num)->first();
-                if ($kartul){
+                if ($kartul) {
                     $data = [
                         'Num' => $kartul['Num'],
                         'Name' => $kartul['Name'],
@@ -3590,24 +3634,25 @@ class Register extends BaseController
                 $data['validation'] = $this->validator;
                 return view('register/ubahkartul', $data);
             }
-        }        
+        }
     }
 
     //Fungsi untuk link Seminar
-    public function seminar(){
+    public function seminar()
+    {
         $session = session();
         $capeslogged_in = $session->get('capeslogged_in');
         $confirmcapes = $session->get('confirmcapes');
-        if (!$capeslogged_in){
+        if (!$capeslogged_in) {
             return redirect()->to('/register');
         }
         $model = new CapesSemModel();
         $data['capeslogged_in'] = $session->get('capeslogged_in');
         $user_id = $session->get('user_id');
         $sem = $model->where('user_id', $user_id)->where('Type', 'Sem')->findall();
-        if (!empty($sem)){
+        if (!empty($sem)) {
             $data['data_sem'] = $sem;
-        }else{
+        } else {
             $data['data_sem'] = 'kosong';
         }
         $data['title_page'] = "Data Seminar/Lokakarya Calon Peserta PPI RPL";
@@ -3615,14 +3660,15 @@ class Register extends BaseController
         return view('register/seminar', $data);
     }
 
-    public function tambahseminar(){
+    public function tambahseminar()
+    {
         $session = session();
         $capeslogged_in = $session->get('capeslogged_in');
         $confirmcapes = $session->get('confirmcapes');
-        if (!$capeslogged_in){
+        if (!$capeslogged_in) {
             return redirect()->to('/register');
         }
-        if ($confirmcapes=="Ya"){
+        if ($confirmcapes == "Ya") {
             $session->setFlashdata('msg', 'Pengiriman data sudah dikonfirmasi. Data tidak lagi dapat diubah.');
             return redirect()->to('/register/seminar');
         }
@@ -3633,26 +3679,27 @@ class Register extends BaseController
         return view('register/tambahseminar', $data);
     }
 
-    public function tambahsemproses(){
+    public function tambahsemproses()
+    {
         $session = session();
         $slug = new Slug();
         $capeslogged_in = $session->get('capeslogged_in');
         $confirmcapes = $session->get('confirmcapes');
-        if (!$capeslogged_in){
+        if (!$capeslogged_in) {
             return redirect()->to('/register');
         }
-        if ($confirmcapes=="Ya"){
+        if ($confirmcapes == "Ya") {
             $session->setFlashdata('msg', 'Pengiriman data sudah dikonfirmasi. Data tidak lagi dapat diubah.');
             return redirect()->to('/register/seminar');
         }
         $model = new CapesSemModel();
         $user_id = $session->get('user_id');
 
-        $button=$this->request->getVar('submit');
-        
-        if ($button=="batal"){
+        $button = $this->request->getVar('submit');
+
+        if ($button == "batal") {
             return redirect()->to('/register/seminar');
-        }else{
+        } else {
             helper(['form', 'url']);
 
             $formvalid = $this->validate([
@@ -3735,7 +3782,7 @@ class Register extends BaseController
                 ]
             ]);
 
-            if ($formvalid){
+            if ($formvalid) {
                 $PaperName = $this->request->getVar('PaperName');
                 $Name = $this->request->getVar('Name');
                 $Organizer = $this->request->getVar('Organizer');
@@ -3747,17 +3794,17 @@ class Register extends BaseController
                 $DiffBenefit = $this->request->getVar('DiffBenefit');
                 $Desc = $this->request->getVar('Desc');
                 $File = $this->request->getFile('File');
-                
+
                 $namaseminar = $slug->slugify($Name);
                 $ext = $File->getClientExtension();
-                if (!empty($ext)){
+                if (!empty($ext)) {
                     $random = bin2hex(random_bytes(4));
-                    $filename = $user_id.'_seminar_'.$namaseminar.'_'.$random.'.'.$ext;
-                    $File->move('uploads/docs/',$filename,true);
-                }else{
-                    $filename="";
+                    $filename = $user_id . '_seminar_' . $namaseminar . '_' . $random . '.' . $ext;
+                    $File->move('uploads/docs/', $filename, true);
+                } else {
+                    $filename = "";
                 }
-    
+
                 $data = array(
                     'user_id' => $user_id,
                     'Type' => 'Sem',
@@ -3775,12 +3822,12 @@ class Register extends BaseController
                     'date_created' => date('Y-m-d'),
                     'date_modified' => date('Y-m-d')
                 );
-    
+
                 $model->save($data);
                 $session->setFlashdata('msg', 'Data Seminar berhasil ditambah.');
-    
+
                 return redirect()->to('/register/seminar');
-            }else{
+            } else {
                 $session = session();
                 $data['title_page'] = "Tambah Data Seminar/Lokakarya Calon Peserta PPI RPL";
                 $data['data_bread'] = "Tambah Data Seminar";
@@ -3791,44 +3838,46 @@ class Register extends BaseController
         }
     }
 
-    public function hapussem($id){
+    public function hapussem($id)
+    {
         $session = session();
         $capeslogged_in = $session->get('capeslogged_in');
         $confirmcapes = $session->get('confirmcapes');
-        if (!$capeslogged_in){
+        if (!$capeslogged_in) {
             return redirect()->to('/register');
         }
-        if ($confirmcapes=="Ya"){
+        if ($confirmcapes == "Ya") {
             $session->setFlashdata('msg', 'Pengiriman data sudah dikonfirmasi. Data tidak lagi dapat diubah.');
             return redirect()->to('/register/seminar');
         }
         $model = new CapesSemModel();
 
         $sem = $model->find($id);
-        $path = './uploads/docs/'.$sem['File'];
-        if (is_file($path)){
+        $path = './uploads/docs/' . $sem['File'];
+        if (is_file($path)) {
             unlink($path);
         }
         $model->delete($id);
         $session->setFlashdata('msg', 'Data Seminar berhasil dihapus.');
 
-        return redirect()->to('/register/seminar');   
+        return redirect()->to('/register/seminar');
     }
 
-    public function ubahsem($id){
+    public function ubahsem($id)
+    {
         $session = session();
         $capeslogged_in = $session->get('capeslogged_in');
         $confirmcapes = $session->get('confirmcapes');
-        if (!$capeslogged_in){
+        if (!$capeslogged_in) {
             return redirect()->to('/register');
         }
-        if ($confirmcapes=="Ya"){
+        if ($confirmcapes == "Ya") {
             $session->setFlashdata('msg', 'Pengiriman data sudah dikonfirmasi. Data tidak lagi dapat diubah.');
             return redirect()->to('/register/seminar');
         }
         $model = new CapesSemModel();
         $sem = $model->where('Num', $id)->first();
-        if ($sem){
+        if ($sem) {
             $data = [
                 'Num' => $sem['Num'],
                 'user_id' => $sem['user_id'],
@@ -3851,15 +3900,16 @@ class Register extends BaseController
         return view('register/ubahsem', $data);
     }
 
-    public function ubahsemproses(){
+    public function ubahsemproses()
+    {
         $session = session();
         $slug = new Slug();
         $capeslogged_in = $session->get('capeslogged_in');
         $confirmcapes = $session->get('confirmcapes');
-        if (!$capeslogged_in){
+        if (!$capeslogged_in) {
             return redirect()->to('/register');
         }
-        if ($confirmcapes=="Ya"){
+        if ($confirmcapes == "Ya") {
             $session->setFlashdata('msg', 'Pengiriman data sudah dikonfirmasi. Data tidak lagi dapat diubah.');
             return redirect()->to('/register/seminar');
         }
@@ -3867,11 +3917,11 @@ class Register extends BaseController
         $Num = $this->request->getVar('Num');
         $user_id = $session->get('user_id');
 
-        $button=$this->request->getVar('submit');
-        
-        if ($button=="batal"){
+        $button = $this->request->getVar('submit');
+
+        if ($button == "batal") {
             return redirect()->to('/register/seminar');
-        }else{
+        } else {
             helper(['form', 'url']);
 
             $formvalid = $this->validate([
@@ -3954,7 +4004,7 @@ class Register extends BaseController
                 ]
             ]);
 
-            if ($formvalid){
+            if ($formvalid) {
                 $filename = $this->request->getVar('File');
                 $PaperName = $this->request->getVar('PaperName');
                 $Name = $this->request->getVar('Name');
@@ -3970,24 +4020,24 @@ class Register extends BaseController
 
                 $namaseminar = $slug->slugify($Name);
                 $ext = $File->getClientExtension();
-                if ((empty($filename))&&(!empty($ext))){
+                if ((empty($filename)) && (!empty($ext))) {
                     $random = bin2hex(random_bytes(4));
-                    $filenamenew = $user_id.'_seminar_'.$namaseminar.'_'.$random.'.'.$ext;
-                    $File->move('uploads/docs/',$filenamenew,true);
-                } elseif ((!empty($filename))&&(!empty($ext))){
-                    $oldext = substr($filename,-4);
-                    if ($oldext == $ext){
-                        $File->move('uploads/docs/',$filename,true);
+                    $filenamenew = $user_id . '_seminar_' . $namaseminar . '_' . $random . '.' . $ext;
+                    $File->move('uploads/docs/', $filenamenew, true);
+                } elseif ((!empty($filename)) && (!empty($ext))) {
+                    $oldext = substr($filename, -4);
+                    if ($oldext == $ext) {
+                        $File->move('uploads/docs/', $filename, true);
                         $filenamenew = $filename;
-                    }else{
+                    } else {
                         $random = bin2hex(random_bytes(4));
-                        $filenamenew = $user_id.'_seminar_'.$namaseminar.'_'.$random.'.'.$ext;
-                        $File->move('uploads/docs/',$filenamenew,true);
+                        $filenamenew = $user_id . '_seminar_' . $namaseminar . '_' . $random . '.' . $ext;
+                        $File->move('uploads/docs/', $filenamenew, true);
                     }
-                }else{
-                    $filenamenew=$filename;
+                } else {
+                    $filenamenew = $filename;
                 }
-    
+
                 $data = array(
                     'Type' => 'Sem',
                     'PaperName' => $PaperName,
@@ -4006,11 +4056,11 @@ class Register extends BaseController
 
                 $model->update($Num, $data);
                 $session->setFlashdata('msg', 'Data Seminar berhasil diubah.');
-    
+
                 return redirect()->to('/register/seminar');
-            }else{
+            } else {
                 $sem = $model->where('Num', $Num)->first();
-                if ($sem){
+                if ($sem) {
                     $data = [
                         'Num' => $sem['Num'],
                         'user_id' => $sem['user_id'],
@@ -4033,15 +4083,16 @@ class Register extends BaseController
                 $data['validation'] = $this->validator;
                 return view('register/ubahsem', $data);
             }
-        }        
+        }
     }
 
     //Mengatur link konfirmasi
-    public function konfirmasi(){
+    public function konfirmasi()
+    {
         $session = session();
         $capeslogged_in = $session->get('capeslogged_in');
         $confirmcapes = $session->get('confirmcapes');
-        if (!$capeslogged_in){
+        if (!$capeslogged_in) {
             return redirect()->to('/register');
         }
         $data['capeslogged_in'] = $session->get('capeslogged_in');
@@ -4051,18 +4102,19 @@ class Register extends BaseController
         return view('register/konfirmasi', $data);
     }
 
-    public function konfirmproses(){
+    public function konfirmproses()
+    {
         $session = session();
         $model = new AkunModel();
         $capeslogged_in = $session->get('capeslogged_in');
-        if (!$capeslogged_in){
+        if (!$capeslogged_in) {
             return redirect()->to('/register');
         }
         $button = $this->request->getVar('submit');
         $user_id = $session->get('user_id');
-        if ($button == "batal"){
+        if ($button == "batal") {
             return redirect()->to('/register');
-        }else{
+        } else {
             helper(['form', 'url']);
 
             $formvalid = $this->validate([
@@ -4075,9 +4127,9 @@ class Register extends BaseController
                 ]
             ]);
 
-            if ($formvalid){
+            if ($formvalid) {
                 $terms2 = $this->request->getVar('terms2');
-    
+
                 $data = array(
                     'confirmcapes' => $terms2,
                     'date_modified' => date('Y-m-d')
@@ -4085,9 +4137,9 @@ class Register extends BaseController
                 $model->update($user_id, $data);
                 $session->set('confirmcapes', 'Ya');
                 $session->setFlashdata('msg', 'Data Sudah Disimpan Untuk Dinilai dan Tidak Bisa Lagi Dirubah.');
-    
+
                 return redirect()->to('/register');
-            }else{
+            } else {
                 $data['title_page'] = "Konfirmasi Unggah Data Calon Peserta PPI RPL";
                 $data['data_bread'] = "Konfirmasi";
                 $data['confirmcapes'] = $session->get('confirmcapes');
@@ -4099,10 +4151,11 @@ class Register extends BaseController
     }
 
     //Mengatur link ubah password
-    public function ubahpass(){
+    public function ubahpass()
+    {
         $session = session();
         $capeslogged_in = $session->get('capeslogged_in');
-        if (!$capeslogged_in){
+        if (!$capeslogged_in) {
             return redirect()->to('/register');
         }
         $data['capeslogged_in'] = $session->get('capeslogged_in');
@@ -4110,38 +4163,38 @@ class Register extends BaseController
         $data['data_bread'] = "Ubah Password";
         return view('register/ubahpass', $data);
     }
- 
+
     //Fungsi proses ubah password
     public function ubahpassproses()
     {
         $session = session();
         $capeslogged_in = $session->get('capeslogged_in');
-        if (!$capeslogged_in){
+        if (!$capeslogged_in) {
             return redirect()->to('/register');
         }
 
-        $button=$this->request->getVar('submit');
-        
-        if ($button=="batal"){
+        $button = $this->request->getVar('submit');
+
+        if ($button == "batal") {
             return redirect()->to('/register/dashboard');
-        }else{
+        } else {
             helper(['form']);
             $rules = [
                 'oldpass'     => 'required',
                 'newpass'     => 'required|min_length[6]',
                 'confirmpass' => 'required|min_length[6]|matches[newpass]'
             ];
-            
-            if($this->validate($rules)){
+
+            if ($this->validate($rules)) {
                 $session = session();
                 $model = new AkunModel();
                 $user_id = $session->get('user_id');
                 $oldpass = $this->request->getVar('oldpass');
                 $data = $model->where('user_id', $user_id)->first();
-                if($data){
+                if ($data) {
                     $pass = $data['password'];
                     $verify_pass = password_verify($oldpass, $pass);
-                    if($verify_pass){
+                    if ($verify_pass) {
                         $newpass = $this->request->getVar('newpass');
                         $datauser = array(
                             'password' => password_hash($newpass, PASSWORD_DEFAULT),
@@ -4150,25 +4203,26 @@ class Register extends BaseController
                         $model->update($user_id, $datauser);
                         $session->setFlashdata('msg1', 'Password berhasil diubah.');
                         return redirect()->to('/register/ubahpass');
-                    }else{
+                    } else {
                         $session->setFlashdata('msg', 'Password lama salah');
                         return redirect()->to('/register/ubahpass');
                     }
-                }else{
+                } else {
                     $session->setFlashdata('msg', 'Username tidak ditemukan');
                     return redirect()->to('/register/ubahpass');
                 }
-            }else{
+            } else {
                 $data['capeslogged_in'] = $session->get('capeslogged_in');
                 $data['title_page'] = "Ubah Password";
                 $data['data_bread'] = "Ubah Password";
                 $data['validation'] = $this->validator;
                 return view('register/ubahpass', $data);
             }
-        }        
+        }
     }
 
-    public function petunjuk(){
+    public function petunjuk()
+    {
         $session = session();
         $data['capeslogged_in'] = $session->get('capeslogged_in');
         $data['title_page'] = "Petunjuk Penggunaan Aplikasi";
