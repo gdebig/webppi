@@ -13,48 +13,49 @@ class Bimbingfair15 extends BaseController
         $session = session();
         $logged_in = $session->get('logged_in');
         $ispenilai = $session->get('ispenilai');
-        if ((!$logged_in)&&(!$ispenilai)){
+        if ((!$logged_in) && (!$ispenilai)) {
             return redirect()->to('/home');
-        }else{
+        } else {
             $session->set('role', 'penilai');
         }
 
-        if (!empty($id)){
+        if (!empty($id)) {
             $user_id = $id;
-        }else{
+        } else {
             $user_id = $session->get('user_id');
         }
         helper(['tanggal']);
         $model = new CapesSertModel();
         $data['capeslogged_in'] = $session->get('capeslogged_in');
-        $latih = $model->where('user_id', $user_id)->where('Jenis', 'pelatihan')->orderby('StartYear','DESC')->findall();
-        if (!empty($latih)){
+        $latih = $model->where('user_id', $user_id)->where('Jenis', 'pelatihan')->orderby('StartYear', 'DESC')->findall();
+        if (!empty($latih)) {
             $data['data_latih'] = $latih;
-        }else{
+        } else {
             $data['data_latih'] = 'kosong';
         }
-        
+
         $data['user_id'] = $user_id;
         $data['title_page'] = "I.5. Pendidikan/Pelatihan Teknik/Manajemen (W2,W4,P10)";
         $data['data_bread'] = '';
-        $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/bimbingfair/docs/".$id.'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Pelatihan Teknik</li>';
+        $data['stringbread'] = '<li class="breadcrumb-item active"><a href="' . base_url() . "/bimbingfair/docs/" . $id . '">Dokumen FAIR</a></li><li class="breadcrumb-item active">Pelatihan Teknik</li>';
         $data['logged_in'] = $session->get('logged_in');
         return view('maintemp/bimbingdok15', $data);
     }
 
-    public function tambahlatih(){
+    public function tambahlatih()
+    {
         $session = session();
         $logged_in = $session->get('logged_in');
         $ispenilai = $session->get('ispenilai');
-        if ((!$logged_in)&&(!$ispenilai)){
+        if ((!$logged_in) && (!$ispenilai)) {
             return redirect()->to('/home');
-        }else{
+        } else {
             $session->set('role', 'peserta');
         }
 
-        if (!empty($id)){
+        if (!empty($id)) {
             $user_id = $id;
-        }else{
+        } else {
             $user_id = $session->get('user_id');
         }
         helper(['tanggal']);
@@ -64,35 +65,36 @@ class Bimbingfair15 extends BaseController
 
         $data['title_page'] = "I.5. Pendidikan/Pelatihan Teknik/Manajemen (W2,W4,P10)";
         $data['data_bread'] = '';
-        $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Tambah Pelatihan Teknik</li>';
+        $data['stringbread'] = '<li class="breadcrumb-item active"><a href="' . base_url() . "/userfair" . '">Dokumen FAIR</a></li><li class="breadcrumb-item active">Tambah Pelatihan Teknik</li>';
         $data['logged_in'] = $session->get('logged_in');
         return view('maintemp/tambahlatihuserfair', $data);
     }
 
-    public function tambahlatihproses(){
+    public function tambahlatihproses()
+    {
         $session = session();
         $slug = new Slug();
         $logged_in = $session->get('logged_in');
         $ispenilai = $session->get('ispenilai');
-        if ((!$logged_in)&&(!$ispenilai)){
+        if ((!$logged_in) && (!$ispenilai)) {
             return redirect()->to('/home');
-        }else{
+        } else {
             $session->set('role', 'peserta');
         }
 
-        if (!empty($id)){
+        if (!empty($id)) {
             $user_id = $id;
-        }else{
+        } else {
             $user_id = $session->get('user_id');
         }
         helper(['tanggal']);
         $model = new CapesSertModel();
 
-        $button=$this->request->getVar('submit');
-        
-        if ($button=="batal"){
+        $button = $this->request->getVar('submit');
+
+        if ($button == "batal") {
             return redirect()->to('/userfair15/docs');
-        }else{
+        } else {
             helper(['form', 'url']);
 
             $formvalid = $this->validate([
@@ -175,7 +177,7 @@ class Bimbingfair15 extends BaseController
                 ]
             ]);
 
-            if ($formvalid){
+            if ($formvalid) {
                 $Name = $this->request->getVar('Name');
                 $Organizer = $this->request->getVar('Organizer');
                 $City = $this->request->getVar('City');
@@ -194,11 +196,11 @@ class Bimbingfair15 extends BaseController
                 $nilai_r = 0;
                 $stringkp = '';
                 $totarray = count($komp);
-                $i=0;
+                $i = 0;
                 foreach ($komp as $kp) :
                     $nilai_q = $nilai_q + 2;
-                    if ((substr($kp, 0, 3)=='W.2') OR (substr($kp, 0, 3)=='W.4') OR (substr($kp, 0, 1)=='P')){
-                        switch ($Length){
+                    if ((substr($kp, 0, 3) == 'W.2') or (substr($kp, 0, 3) == 'W.4') or (substr($kp, 0, 1) == 'P')) {
+                        switch ($Length) {
                             case 'sd36':
                                 $nilai_p = $nilai_p + 1;
                                 break;
@@ -212,7 +214,7 @@ class Bimbingfair15 extends BaseController
                                 $nilai_p = $nilai_p + 4;
                                 break;
                         }
-                        switch ($Level){
+                        switch ($Level) {
                             case 'Dasar':
                                 $nilai_r = $nilai_r + 2;
                                 break;
@@ -222,25 +224,25 @@ class Bimbingfair15 extends BaseController
                         }
                     }
                     $i++;
-                    if ($i!=$totarray){
-                        $stringkp = $stringkp.$kp.', ';
-                    }else{
-                        $stringkp = $stringkp.$kp;
+                    if ($i != $totarray) {
+                        $stringkp = $stringkp . $kp . ', ';
+                    } else {
+                        $stringkp = $stringkp . $kp;
                     }
                 endforeach;
                 $nilai_w2 = $nilai_p * $nilai_r;
                 $nilai_w4 = $nilai_p * $nilai_r;
                 $nilai_pil = $nilai_p * $nilai_r;
-                
+
                 $namalatih = $slug->slugify($Name);
                 $ext = $File->getClientExtension();
-                if (!empty($ext)){
-                    $filename = $user_id.'_pelatihan_'.$namalatih.'.'.$ext;
-                    $File->move('uploads/docs/',$filename,true);
-                }else{
-                    $filename="";
+                if (!empty($ext)) {
+                    $filename = $user_id . '_pelatihan_' . $namalatih . '.' . $ext;
+                    $File->move('uploads/docs/', $filename, true);
+                } else {
+                    $filename = "";
                 }
-    
+
                 $data = array(
                     'user_id' => $user_id,
                     'Jenis' => 'pelatihan',
@@ -264,23 +266,23 @@ class Bimbingfair15 extends BaseController
                     'date_created' => date('Y-m-d'),
                     'date_modified' => date('Y-m-d')
                 );
-    
+
                 $model->save($data);
                 $session->setFlashdata('msg', 'Data Pendidikan/Pelatihan berhasil ditambah.');
-    
+
                 return redirect()->to('/userfair15/docs');
-            }else{
+            } else {
                 $session = session();
 
                 $data['datakomp'] = $this->request->getVar('komp15');
-                
+
                 $model = new KompModel();
                 $where = "komp_cat LIKE 'W.2%' OR komp_cat LIKE 'W.4%' OR komp_cat LIKE 'P.10%'";
                 $data['data_komp'] = $model->where($where)->orderby('komp_id', 'ASC')->findall();
 
                 $data['title_page'] = "I.5. Pendidikan/Pelatihan Teknik/Manajemen (W2,W4,P10)";
                 $data['data_bread'] = '';
-                $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Tambah Pelatihan Teknik</li>';
+                $data['stringbread'] = '<li class="breadcrumb-item active"><a href="' . base_url() . "/userfair" . '">Dokumen FAIR</a></li><li class="breadcrumb-item active">Tambah Pelatihan Teknik</li>';
                 $data['logged_in'] = $session->get('logged_in');
                 $data['validation'] = $this->validator;
                 return view('maintemp/tambahlatihuserfairvalid', $data);
@@ -288,41 +290,43 @@ class Bimbingfair15 extends BaseController
         }
     }
 
-    public function hapuslatih($id){
+    public function hapuslatih($id)
+    {
         $session = session();
         $logged_in = $session->get('logged_in');
         $ispenilai = $session->get('ispenilai');
-        if ((!$logged_in)&&(!$ispenilai)){
+        if ((!$logged_in) && (!$ispenilai)) {
             return redirect()->to('/home');
-        }else{
+        } else {
             $session->set('role', 'peserta');
         }
         $model = new CapesSertModel();
 
         $latih = $model->find($id);
-        $path = './uploads/docs/'.$latih['File'];
-        if (is_file($path)){
+        $path = './uploads/docs/' . $latih['File'];
+        if (is_file($path)) {
             unlink($path);
         }
         $model->delete($id);
         $session->setFlashdata('msg', 'Data Pendidikan/Pelatihan berhasil dihapus.');
 
-        return redirect()->to('/userfair15/docs');   
+        return redirect()->to('/userfair15/docs');
     }
 
-    public function ubahlatih($id){
+    public function ubahlatih($id)
+    {
         $session = session();
         $logged_in = $session->get('logged_in');
         $ispenilai = $session->get('ispenilai');
-        if ((!$logged_in)&&(!$ispenilai)){
+        if ((!$logged_in) && (!$ispenilai)) {
             return redirect()->to('/home');
-        }else{
+        } else {
             $session->set('role', 'peserta');
         }
         helper(['tanggal']);
         $model = new CapesSertModel();
         $latih = $model->where('Num', $id)->first();
-        if ($latih){
+        if ($latih) {
             $data = [
                 'Num' => $latih['Num'],
                 'user_id' => $latih['user_id'],
@@ -346,31 +350,32 @@ class Bimbingfair15 extends BaseController
 
         $data['title_page'] = "I.5. Pendidikan/Pelatihan Teknik/Manajemen (W2,W4,P10)";
         $data['data_bread'] = '';
-        $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Ubah Pelatihan Teknik</li>';
+        $data['stringbread'] = '<li class="breadcrumb-item active"><a href="' . base_url() . "/userfair" . '">Dokumen FAIR</a></li><li class="breadcrumb-item active">Ubah Pelatihan Teknik</li>';
         $data['logged_in'] = $session->get('logged_in');
         return view('maintemp/ubahlatihuserfair', $data);
     }
 
-    public function ubahlatihproses(){
+    public function ubahlatihproses()
+    {
         $session = session();
         $slug = new Slug();
         $model = new CapesSertModel();
         $logged_in = $session->get('logged_in');
         $ispenilai = $session->get('ispenilai');
-        if ((!$logged_in)&&(!$ispenilai)){
+        if ((!$logged_in) && (!$ispenilai)) {
             return redirect()->to('/home');
-        }else{
+        } else {
             $session->set('role', 'peserta');
         }
         helper(['tanggal']);
         $Num = $this->request->getVar('Num');
         $user_id = $session->get('user_id');
 
-        $button=$this->request->getVar('submit');
-        
-        if ($button=="batal"){
+        $button = $this->request->getVar('submit');
+
+        if ($button == "batal") {
             return redirect()->to('/userfair15/docs');
-        }else{
+        } else {
             helper(['form', 'url']);
 
             $formvalid = $this->validate([
@@ -446,7 +451,7 @@ class Bimbingfair15 extends BaseController
                 ]
             ]);
 
-            if ($formvalid){
+            if ($formvalid) {
                 $filename = $this->request->getVar('filename');
                 $Name = $this->request->getVar('Name');
                 $Organizer = $this->request->getVar('Organizer');
@@ -465,11 +470,11 @@ class Bimbingfair15 extends BaseController
                 $nilai_r = 0;
                 $stringkp = '';
                 $totarray = count($komp);
-                $i=0;
+                $i = 0;
                 foreach ($komp as $kp) :
                     $nilai_q = $nilai_q + 2;
-                    if ((substr($kp, 0, 3)=='W.2') OR (substr($kp, 0, 3)=='W.4') OR (substr($kp, 0, 1)=='P')){
-                        switch ($Length){
+                    if ((substr($kp, 0, 3) == 'W.2') or (substr($kp, 0, 3) == 'W.4') or (substr($kp, 0, 1) == 'P')) {
+                        switch ($Length) {
                             case 'sd36':
                                 $nilai_p = $nilai_p + 1;
                                 break;
@@ -483,7 +488,7 @@ class Bimbingfair15 extends BaseController
                                 $nilai_p = $nilai_p + 4;
                                 break;
                         }
-                        switch ($Level){
+                        switch ($Level) {
                             case 'Dasar':
                                 $nilai_r = $nilai_r + 2;
                                 break;
@@ -493,10 +498,10 @@ class Bimbingfair15 extends BaseController
                         }
                     }
                     $i++;
-                    if ($i!=$totarray){
-                        $stringkp = $stringkp.$kp.', ';
-                    }else{
-                        $stringkp = $stringkp.$kp;
+                    if ($i != $totarray) {
+                        $stringkp = $stringkp . $kp . ', ';
+                    } else {
+                        $stringkp = $stringkp . $kp;
                     }
                 endforeach;
                 $nilai_w2 = $nilai_p * $nilai_r;
@@ -505,22 +510,22 @@ class Bimbingfair15 extends BaseController
 
                 $namalatih = $slug->slugify($Name);
                 $ext = $File->getClientExtension();
-                if ((empty($filename))&&(!empty($ext))){
-                    $filenamenew = $user_id.'_pelatihan_'.$namalatih.'.'.$ext;
-                    $File->move('uploads/docs/',$filenamenew,true);
-                } elseif ((!empty($filename))&&(!empty($ext))){
-                    $oldext = substr($filename,-4);
-                    if ($oldext == $ext){
-                        $File->move('uploads/docs/',$filename,true);
+                if ((empty($filename)) && (!empty($ext))) {
+                    $filenamenew = $user_id . '_pelatihan_' . $namalatih . '.' . $ext;
+                    $File->move('uploads/docs/', $filenamenew, true);
+                } elseif ((!empty($filename)) && (!empty($ext))) {
+                    $oldext = substr($filename, -4);
+                    if ($oldext == $ext) {
+                        $File->move('uploads/docs/', $filename, true);
                         $filenamenew = $filename;
-                    }else{
-                        $filenamenew = $user_id.'_pelatihan_'.$namalatih.'.'.$ext;
-                        $File->move('uploads/docs/',$filenamenew,true);
+                    } else {
+                        $filenamenew = $user_id . '_pelatihan_' . $namalatih . '.' . $ext;
+                        $File->move('uploads/docs/', $filenamenew, true);
                     }
-                }else{
-                    $filenamenew=$filename;
+                } else {
+                    $filenamenew = $filename;
                 }
-    
+
                 $data = array(
                     'Name' => $Name,
                     'Jenis' => 'pelatihan',
@@ -546,11 +551,11 @@ class Bimbingfair15 extends BaseController
 
                 $model->update($Num, $data);
                 $session->setFlashdata('msg', 'Data Pendidikan/Pelatihan berhasil diubah.');
-    
+
                 return redirect()->to('/userfair15/docs');
-            }else{
+            } else {
                 $latih = $model->where('Num', $Num)->first();
-                if ($latih){
+                if ($latih) {
                     $data = [
                         'Num' => $latih['Num'],
                         'user_id' => $latih['user_id'],
@@ -567,18 +572,18 @@ class Bimbingfair15 extends BaseController
                         'datakomp' => explode(", ", $latih['kompetensi'])
                     ];
                 }
-        
+
                 $model1 = new KompModel();
                 $where = "komp_cat LIKE 'W.2%' OR komp_cat LIKE 'W.4%' OR komp_cat LIKE 'P.10%'";
                 $data['data_komp'] = $model1->where($where)->orderby('komp_id', 'ASC')->findall();
 
                 $data['title_page'] = "I.5. Pendidikan/Pelatihan Teknik/Manajemen (W2,W4,P10)";
                 $data['data_bread'] = '';
-                $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Ubah Pelatihan Teknik</li>';
+                $data['stringbread'] = '<li class="breadcrumb-item active"><a href="' . base_url() . "/userfair" . '">Dokumen FAIR</a></li><li class="breadcrumb-item active">Ubah Pelatihan Teknik</li>';
                 $data['logged_in'] = $session->get('logged_in');
                 $data['validation'] = $this->validator;
                 return view('maintemp/ubahlatihuserfair', $data);
             }
-        }        
+        }
     }
 }

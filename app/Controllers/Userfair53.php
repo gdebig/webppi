@@ -13,41 +13,42 @@ class Userfair53 extends BaseController
         $session = session();
         $logged_in = $session->get('logged_in');
         $ispeserta = $session->get('ispeserta');
-        if ((!$logged_in)&&(!$ispeserta)){
+        if ((!$logged_in) && (!$ispeserta)) {
             return redirect()->to('/home');
-        }else{
+        } else {
             $session->set('role', 'peserta');
         }
 
-        if (!empty($id)){
+        if (!empty($id)) {
             $user_id = $id;
-        }else{
+        } else {
             $user_id = $session->get('user_id');
         }
         helper(['tanggal']);
         $model = new CapesSemModel();
         $data['capeslogged_in'] = $session->get('capeslogged_in');
         $sem = $model->where('user_id', $user_id)->where('Type', 'Sem')->orderby('Year', 'DESC')->findall();
-        if (!empty($sem)){
+        if (!empty($sem)) {
             $data['data_sem'] = $sem;
-        }else{
+        } else {
             $data['data_sem'] = 'kosong';
         }
 
         $data['title_page'] = "V.3 Seminar/Lokakarya Keinsinyuran Yang Diikuti (W2)";
         $data['data_bread'] = '';
-        $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Seminar</li>';
+        $data['stringbread'] = '<li class="breadcrumb-item active"><a href="' . base_url() . "/userfair" . '">Dokumen FAIR</a></li><li class="breadcrumb-item active">Seminar</li>';
         $data['logged_in'] = $session->get('logged_in');
         return view('maintemp/fairdok53', $data);
     }
 
-    public function tambahseminar(){
+    public function tambahseminar()
+    {
         $session = session();
         $logged_in = $session->get('logged_in');
         $ispeserta = $session->get('ispeserta');
-        if ((!$logged_in)&&(!$ispeserta)){
+        if ((!$logged_in) && (!$ispeserta)) {
             return redirect()->to('/home');
-        }else{
+        } else {
             $session->set('role', 'peserta');
         }
 
@@ -57,29 +58,30 @@ class Userfair53 extends BaseController
 
         $data['title_page'] = "V.3 Seminar/Lokakarya Keinsinyuran Yang Diikuti (W2)";
         $data['data_bread'] = '';
-        $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Tambah Seminar</li>';
+        $data['stringbread'] = '<li class="breadcrumb-item active"><a href="' . base_url() . "/userfair" . '">Dokumen FAIR</a></li><li class="breadcrumb-item active">Tambah Seminar</li>';
         $data['logged_in'] = $session->get('logged_in');
         return view('maintemp/tambahseminar', $data);
     }
 
-    public function tambahsemproses(){
+    public function tambahsemproses()
+    {
         $session = session();
         $slug = new Slug();
         $logged_in = $session->get('logged_in');
         $ispeserta = $session->get('ispeserta');
-        if ((!$logged_in)&&(!$ispeserta)){
+        if ((!$logged_in) && (!$ispeserta)) {
             return redirect()->to('/home');
-        }else{
+        } else {
             $session->set('role', 'peserta');
         }
         $model = new CapesSemModel();
         $user_id = $session->get('user_id');
 
-        $button=$this->request->getVar('submit');
-        
-        if ($button=="batal"){
+        $button = $this->request->getVar('submit');
+
+        if ($button == "batal") {
             return redirect()->to('/userfair53/docs');
-        }else{
+        } else {
             helper(['form', 'url']);
 
             $formvalid = $this->validate([
@@ -155,7 +157,7 @@ class Userfair53 extends BaseController
                 ]
             ]);
 
-            if ($formvalid){
+            if ($formvalid) {
                 $Name = $this->request->getVar('Name');
                 $Organizer = $this->request->getVar('Organizer');
                 $LocCity = $this->request->getVar('LocCity');
@@ -173,10 +175,10 @@ class Userfair53 extends BaseController
                 $nilai_r = 0;
                 $stringkp = '';
                 $totarray = count($komp);
-                $i=0;
+                $i = 0;
                 foreach ($komp as $kp) :
                     $nilai_p = $nilai_p + 1;
-                    switch ($Level){
+                    switch ($Level) {
                         case "Lok":
                             $nilai_q = $nilai_q + 2;
                             break;
@@ -187,7 +189,7 @@ class Userfair53 extends BaseController
                             $nilai_q = $nilai_q + 4;
                             break;
                     }
-                    switch ($DiffBenefit){
+                    switch ($DiffBenefit) {
                         case "ren":
                             $nilai_r = $nilai_r + 1;
                             break;
@@ -202,24 +204,24 @@ class Userfair53 extends BaseController
                             break;
                     }
                     $i++;
-                    if ($i!=$totarray){
-                        $stringkp = $stringkp.$kp.', ';
-                    }else{
-                        $stringkp = $stringkp.$kp;
+                    if ($i != $totarray) {
+                        $stringkp = $stringkp . $kp . ', ';
+                    } else {
+                        $stringkp = $stringkp . $kp;
                     }
                 endforeach;
                 $nilai_w2 = $nilai_p * $nilai_q * $nilai_r;
-                
+
                 $namaseminar = $slug->slugify($Name);
                 $ext = $File->getClientExtension();
-                if (!empty($ext)){
+                if (!empty($ext)) {
                     $random = bin2hex(random_bytes(4));
-                    $filename = $user_id.'_seminar_'.$namaseminar.'_'.$random.'.'.$ext;
-                    $File->move('uploads/docs/',$filename,true);
-                }else{
-                    $filename="";
+                    $filename = $user_id . '_seminar_' . $namaseminar . '_' . $random . '.' . $ext;
+                    $File->move('uploads/docs/', $filename, true);
+                } else {
+                    $filename = "";
                 }
-    
+
                 $data = array(
                     'user_id' => $user_id,
                     'Type' => 'Sem',
@@ -241,12 +243,12 @@ class Userfair53 extends BaseController
                     'date_created' => date('Y-m-d'),
                     'date_modified' => date('Y-m-d')
                 );
-    
+
                 $model->save($data);
                 $session->setFlashdata('msg', 'Data Seminar berhasil ditambah.');
-    
+
                 return redirect()->to('/userfair53/docs');
-            }else{
+            } else {
                 $data['datakomp'] = $this->request->getVar('komp53');
 
                 $model1 = new KompModel();
@@ -255,7 +257,7 @@ class Userfair53 extends BaseController
 
                 $data['title_page'] = "V.3 Seminar/Lokakarya Keinsinyuran Yang Diikuti (W2)";
                 $data['data_bread'] = '';
-                $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Tambah Seminar</li>';
+                $data['stringbread'] = '<li class="breadcrumb-item active"><a href="' . base_url() . "/userfair" . '">Dokumen FAIR</a></li><li class="breadcrumb-item active">Tambah Seminar</li>';
                 $data['logged_in'] = $session->get('logged_in');
                 $data['validation'] = $this->validator;
                 return view('maintemp/tambahsemvalid', $data);
@@ -263,40 +265,42 @@ class Userfair53 extends BaseController
         }
     }
 
-    public function hapusmak($id){
+    public function hapusmak($id)
+    {
         $session = session();
         $logged_in = $session->get('logged_in');
         $ispeserta = $session->get('ispeserta');
-        if ((!$logged_in)&&(!$ispeserta)){
+        if ((!$logged_in) && (!$ispeserta)) {
             return redirect()->to('/home');
-        }else{
+        } else {
             $session->set('role', 'peserta');
         }
         $model = new CapesSemModel();
 
         $sem = $model->find($id);
-        $path = './uploads/docs/'.$sem['File'];
-        if (is_file($path)){
+        $path = './uploads/docs/' . $sem['File'];
+        if (is_file($path)) {
             unlink($path);
         }
         $model->delete($id);
         $session->setFlashdata('msg', 'Data seminar berhasil dihapus.');
 
-        return redirect()->to('/userfair53/docs');   
+        return redirect()->to('/userfair53/docs');
     }
 
-    public function ubahsem($id){
+    public function ubahsem($id)
+    {
         $session = session();
         $logged_in = $session->get('logged_in');
         $ispeserta = $session->get('ispeserta');
-        if ((!$logged_in)&&(!$ispeserta)){
+        if ((!$logged_in) && (!$ispeserta)) {
             return redirect()->to('/home');
-        }else{
+        } else {
             $session->set('role', 'peserta');
         }
         $model = new CapesSemModel();
         $sem = $model->where('Num', $id)->first();
-        if ($sem){
+        if ($sem) {
             $data = [
                 'Num' => $sem['Num'],
                 'user_id' => $sem['user_id'],
@@ -320,30 +324,31 @@ class Userfair53 extends BaseController
 
         $data['title_page'] = "V.3 Seminar/Lokakarya Keinsinyuran Yang Diikuti (W2)";
         $data['data_bread'] = '';
-        $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Ubah Seminar</li>';
+        $data['stringbread'] = '<li class="breadcrumb-item active"><a href="' . base_url() . "/userfair" . '">Dokumen FAIR</a></li><li class="breadcrumb-item active">Ubah Seminar</li>';
         $data['logged_in'] = $session->get('logged_in');
         return view('maintemp/ubahsem', $data);
     }
 
-    public function ubahsemproses(){
+    public function ubahsemproses()
+    {
         $session = session();
         $slug = new Slug();
         $logged_in = $session->get('logged_in');
         $ispeserta = $session->get('ispeserta');
-        if ((!$logged_in)&&(!$ispeserta)){
+        if ((!$logged_in) && (!$ispeserta)) {
             return redirect()->to('/home');
-        }else{
+        } else {
             $session->set('role', 'peserta');
         }
         $model = new CapesSemModel();
         $Num = $this->request->getVar('Num');
         $user_id = $session->get('user_id');
 
-        $button=$this->request->getVar('submit');
-        
-        if ($button=="batal"){
+        $button = $this->request->getVar('submit');
+
+        if ($button == "batal") {
             return redirect()->to('/userfair53/docs');
-        }else{
+        } else {
             helper(['form', 'url']);
 
             $formvalid = $this->validate([
@@ -419,7 +424,7 @@ class Userfair53 extends BaseController
                 ]
             ]);
 
-            if ($formvalid){
+            if ($formvalid) {
                 $filename = $this->request->getVar('filename');
                 $Name = $this->request->getVar('Name');
                 $Organizer = $this->request->getVar('Organizer');
@@ -438,10 +443,10 @@ class Userfair53 extends BaseController
                 $nilai_r = 0;
                 $stringkp = '';
                 $totarray = count($komp);
-                $i=0;
+                $i = 0;
                 foreach ($komp as $kp) :
                     $nilai_p = $nilai_p + 1;
-                    switch ($Level){
+                    switch ($Level) {
                         case "Lok":
                             $nilai_q = $nilai_q + 2;
                             break;
@@ -452,7 +457,7 @@ class Userfair53 extends BaseController
                             $nilai_q = $nilai_q + 4;
                             break;
                     }
-                    switch ($DiffBenefit){
+                    switch ($DiffBenefit) {
                         case "ren":
                             $nilai_r = $nilai_r + 1;
                             break;
@@ -467,34 +472,34 @@ class Userfair53 extends BaseController
                             break;
                     }
                     $i++;
-                    if ($i!=$totarray){
-                        $stringkp = $stringkp.$kp.', ';
-                    }else{
-                        $stringkp = $stringkp.$kp;
+                    if ($i != $totarray) {
+                        $stringkp = $stringkp . $kp . ', ';
+                    } else {
+                        $stringkp = $stringkp . $kp;
                     }
                 endforeach;
                 $nilai_w2 = $nilai_p * $nilai_q * $nilai_r;
 
                 $namaseminar = $slug->slugify($Name);
                 $ext = $File->getClientExtension();
-                if ((empty($filename))&&(!empty($ext))){
+                if ((empty($filename)) && (!empty($ext))) {
                     $random = bin2hex(random_bytes(4));
-                    $filenamenew = $user_id.'_seminar_'.$namaseminar.'_'.$random.'.'.$ext;
-                    $File->move('uploads/docs/',$filenamenew,true);
-                } elseif ((!empty($filename))&&(!empty($ext))){
-                    $oldext = substr($filename,-4);
-                    if ($oldext == $ext){
-                        $File->move('uploads/docs/',$filename,true);
+                    $filenamenew = $user_id . '_seminar_' . $namaseminar . '_' . $random . '.' . $ext;
+                    $File->move('uploads/docs/', $filenamenew, true);
+                } elseif ((!empty($filename)) && (!empty($ext))) {
+                    $oldext = substr($filename, -4);
+                    if ($oldext == $ext) {
+                        $File->move('uploads/docs/', $filename, true);
                         $filenamenew = $filename;
-                    }else{
+                    } else {
                         $random = bin2hex(random_bytes(4));
-                        $filenamenew = $user_id.'_seminar_'.$namaseminar.'_'.$random.'.'.$ext;
-                        $File->move('uploads/docs/',$filenamenew,true);
+                        $filenamenew = $user_id . '_seminar_' . $namaseminar . '_' . $random . '.' . $ext;
+                        $File->move('uploads/docs/', $filenamenew, true);
                     }
-                }else{
-                    $filenamenew=$filename;
+                } else {
+                    $filenamenew = $filename;
                 }
-    
+
                 $data = array(
                     'Type' => 'Sem',
                     'Name' => $Name,
@@ -517,11 +522,11 @@ class Userfair53 extends BaseController
 
                 $model->update($Num, $data);
                 $session->setFlashdata('msg', 'Data makalah berhasil diubah.');
-    
+
                 return redirect()->to('/userfair53/docs');
-            }else{
+            } else {
                 $sem = $model->where('Num', $Num)->first();
-                if ($sem){
+                if ($sem) {
                     $data = [
                         'Num' => $sem['Num'],
                         'user_id' => $sem['user_id'],
@@ -538,18 +543,18 @@ class Userfair53 extends BaseController
                         'datakomp' => explode(", ", $sem['kompetensi'])
                     ];
                 }
-        
+
                 $model1 = new KompModel();
                 $where = "komp_cat LIKE 'W.2%'";
                 $data['data_komp'] = $model1->where($where)->orderby('komp_id', 'ASC')->findall();
 
                 $data['title_page'] = "V.3 Seminar/Lokakarya Keinsinyuran Yang Diikuti (W2)";
                 $data['data_bread'] = '';
-                $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Ubah Seminar</li>';
+                $data['stringbread'] = '<li class="breadcrumb-item active"><a href="' . base_url() . "/userfair" . '">Dokumen FAIR</a></li><li class="breadcrumb-item active">Ubah Seminar</li>';
                 $data['logged_in'] = $session->get('logged_in');
                 $data['validation'] = $this->validator;
                 return view('maintemp/ubahsem', $data);
             }
-        }        
+        }
     }
 }

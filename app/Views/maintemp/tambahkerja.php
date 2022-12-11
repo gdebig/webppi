@@ -1,6 +1,6 @@
-<?= $this->extend('maintemp/template');?>
+<?= $this->extend('maintemp/template'); ?>
 
-<?= $this->section('content');?>
+<?= $this->section('content'); ?>
 
 <div class="card card-primary" style="width: auto; margin: 30px;">
     <div class="col-sm-13" style="width: auto; margin: 30px;">
@@ -25,8 +25,7 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body" style="width: auto; margin: 30px;">
-            <form action="<?php echo base_url();?>/userfair3/tambahkerjaproses" method="post"
-                enctype="multipart/form-data">
+            <form action="<?php echo base_url(); ?>/userfair3/tambahkerjaproses" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="startdate" class="element">Tanggal Mulai Kerja <span class="required"> *</span>&nbsp;
                     </label>
@@ -36,12 +35,10 @@
                                 <i class="far fa-calendar-alt"></i>
                             </span>
                         </div>
-                        <input type="text" class="form-control float-right data-datepicker" id="startdate"
-                            name="startdate" placeholder="Tanggal Mulai Kerja..." />
+                        <input type="text" class="form-control float-right data-datepicker" id="startdate" name="startdate" placeholder="Tanggal Mulai Kerja..." />
                     </div><br />
                     <div class="element">
-                        <input type="checkbox" id="masihkerja" name="masihkerja" value="masihkerja"> <label
-                            for="masihkerja">Saya masih bekerja</label>
+                        <input type="checkbox" id="masihkerja" name="masihkerja" value="masihkerja"> <label for="masihkerja">Saya masih bekerja</label>
                     </div><br />
                     <label for="enddate" class="element">Tanggal Berakhir Kerja (Kosongkan kalau masih dijalani)</label>
                     <div class="input-group">
@@ -50,31 +47,26 @@
                                 <i class="far fa-calendar-alt"></i>
                             </span>
                         </div>
-                        <input type="text" class="form-control float-right data-datepicker" id="enddate" name="enddate"
-                            placeholder="Tanggal Berakhir Kerja..." />
+                        <input type="text" class="form-control float-right data-datepicker" id="enddate" name="enddate" placeholder="Tanggal Berakhir Kerja..." />
                     </div><br />
                     <label for="NameInstance" class="element">Nama Instansi / Perusahaan
                         <span class="required"> *</span>&nbsp; </label>
                     <div class="element">
-                        <input class="form-control" id="NameInstance" name="NameInstance" type="text"
-                            placeholder="Nama Instansi / Perusahaan..." />
+                        <input class="form-control" id="NameInstance" name="NameInstance" type="text" placeholder="Nama Instansi / Perusahaan..." />
                     </div><br />
                     <label for="Position" class="element">Jabatan/Tugas <span class="required"> *</span>&nbsp; </label>
                     <div class="element">
-                        <input class="form-control" id="Position" name="Position" type="text"
-                            placeholder="Jabatan/Tugas..." />
+                        <input class="form-control" id="Position" name="Position" type="text" placeholder="Jabatan/Tugas..." />
                     </div>
                     <br />
                     <label for="Name" class="element">Nama Aktifitas/Kegiatan/Proyek</label>
                     <div class="element">
-                        <input class="form-control" id="Name" name="Name" type="text"
-                            placeholder="Nama Aktifitas/Kegiatan/Proyek..." />
+                        <input class="form-control" id="Name" name="Name" type="text" placeholder="Nama Aktifitas/Kegiatan/Proyek..." />
                     </div>
                     <br />
                     <label for="Giver" class="element">Pemberi Tugas</label>
                     <div class="element">
-                        <input class="form-control" id="Giver" name="Giver" type="text"
-                            placeholder="Pemberi Tugas..." />
+                        <input class="form-control" id="Giver" name="Giver" type="text" placeholder="Pemberi Tugas..." />
                     </div>
                     <br />
                     <label for="LocCity" class="element">Kota <span class="required"> *</span>&nbsp; </label>
@@ -89,8 +81,7 @@
                     <br />
                     <label for="LogCountry" class="element">Negara <span class="required"> *</span>&nbsp; </label>
                     <div class="element">
-                        <input class="form-control" id="LocCountry" name="LocCountry" type="text"
-                            placeholder="Negara..." />
+                        <input class="form-control" id="LocCountry" name="LocCountry" type="text" placeholder="Negara..." />
                     </div>
                     <br />
                     <label for="Duration" class="element">Durasi</label>
@@ -117,14 +108,12 @@
                     <br />
                     <label for="RspnValue" class="element">Nilai Tanggung Jawab (Detail posisi dalam proyek)</label>
                     <div class="element">
-                        <input class="form-control" id="RspnValue" name="RspnValue" type="text"
-                            placeholder="Nilai Tanggung Jawab..." />
+                        <input class="form-control" id="RspnValue" name="RspnValue" type="text" placeholder="Nilai Tanggung Jawab..." />
                     </div>
                     <br />
                     <label for="ProjValue" class="element">Nilai Proyek (Angka dalam rupiah)</label>
                     <div class="element">
-                        <input class="form-control" id="ProjValue" name="ProjValue" type="text"
-                            placeholder="Nilai Proyek..." />
+                        <input class="form-control" id="ProjValue" name="ProjValue" type="text" placeholder="Nilai Proyek..." />
                     </div>
                     <br />
                     <label for="Hresource" class="element">SDM yang terlibat</label>
@@ -160,8 +149,7 @@
                     <label for="Desc" class="element">Uraian Singkat Tugas dan Tanggung Jawab Profesional sesuai
                         NSPK</label>
                     <div class="element">
-                        <textarea class="form-control" id="Desc" name="Desc" placeholder="Deskripsi"
-                            placeholder="Uraian Singkat..."></textarea>
+                        <textarea class="form-control" id="Desc" name="Desc" placeholder="Deskripsi" placeholder="Uraian Singkat..."></textarea>
                     </div>
                     <br />
                     <label for="komp3" class="element">Kompetensi (Gunakan tombol ctrl + klik kiri mouse untuk memilih
@@ -169,23 +157,23 @@
                     <div class="element">
                         <select multiple class="form-control" name="komp3[]" id="komp3" size="10">
                             <?php
-                            $i=1;
+                            $i = 1;
                             $prev_cat = array();
 
                             foreach ($data_komp as $komp) :
-                                $j = $i-1;
+                                $j = $i - 1;
                                 $prev_cat[$i] = $komp['komp_cat'];
-                                if (!empty($prev_cat)&&($j!=0)){
-                                    if ($prev_cat[$i]!=$prev_cat[$j]){
+                                if (!empty($prev_cat) && ($j != 0)) {
+                                    if ($prev_cat[$i] != $prev_cat[$j]) {
                                         echo "</optgroup>";
                                     }
                                 }
-                                if ($komp['komp_parent']=='y'){
-                                    echo "<optgroup label='".$komp['komp_code']." ".$komp['komp_desc']."'>";
-                                }else{
-                                    if ($i==1){
-                                    }else{
-                                        echo "<option value='".$komp['komp_code']."' title='".$komp['komp_desc']."'>".$komp['komp_code']." ".$komp['komp_desc']."</option>";
+                                if ($komp['komp_parent'] == 'y') {
+                                    echo "<optgroup label='" . $komp['komp_code'] . " " . $komp['komp_desc'] . "'>";
+                                } else {
+                                    if ($i == 1) {
+                                    } else {
+                                        echo "<option value='" . $komp['komp_code'] . "' title='" . $komp['komp_desc'] . "'>" . $komp['komp_code'] . " " . $komp['komp_desc'] . "</option>";
                                     }
                                 }
                                 $i++;
@@ -208,8 +196,7 @@
                                 Kualifikasi Profesional</button>
                         </div>
                         <div class="col">
-                            <button type="submit" name="submit" value="batal"
-                                class="btn btn-block btn-danger col">Batal</button>
+                            <button type="submit" name="submit" value="batal" class="btn btn-block btn-danger col">Batal</button>
                         </div>
                     </div>
                 </div>
@@ -220,4 +207,4 @@
 <!-- /.content-wrapper -->
 <!-- Control Sidebar -->
 
-<?= $this->endSection();?>
+<?= $this->endSection(); ?>

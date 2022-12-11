@@ -13,40 +13,41 @@ class Bimbingfair13 extends BaseController
         $session = session();
         $logged_in = $session->get('logged_in');
         $ispeserta = $session->get('ispeserta');
-        if ((!$logged_in)&&(!$ispeserta)){
+        if ((!$logged_in) && (!$ispeserta)) {
             return redirect()->to('/home');
-        }else{
+        } else {
             $session->set('role', 'peserta');
         }
 
-        if (!empty($id)){
+        if (!empty($id)) {
             $user_id = $id;
-        }else{
+        } else {
             $user_id = $session->get('user_id');
         }
         helper(['tanggal']);
         $model = new CapesOrgModel();
-        $org = $model->where('user_id', $user_id)->orderby('StartPeriodYear','DESC')->findall();
-        if (!empty($org)){
+        $org = $model->where('user_id', $user_id)->orderby('StartPeriodYear', 'DESC')->findall();
+        if (!empty($org)) {
             $data['data_org'] = $org;
-        }else{
+        } else {
             $data['data_org'] = 'kosong';
         }
         $data['user_id'] = $user_id;
         $data['title_page'] = "I.3. Organisasi Profesi & Organisasi Lainnya Yang Dimasuki (W1)";
         $data['data_bread'] = '';
-        $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/bimbingfair/docs/".$id.'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Organisasi</li>';
+        $data['stringbread'] = '<li class="breadcrumb-item active"><a href="' . base_url() . "/bimbingfair/docs/" . $id . '">Dokumen FAIR</a></li><li class="breadcrumb-item active">Organisasi</li>';
         $data['logged_in'] = $session->get('logged_in');
         return view('maintemp/bimbingdok13', $data);
     }
 
-    public function tambahorganisasi(){
+    public function tambahorganisasi()
+    {
         $session = session();
         $logged_in = $session->get('logged_in');
         $ispeserta = $session->get('ispeserta');
-        if ((!$logged_in)&&(!$ispeserta)){
+        if ((!$logged_in) && (!$ispeserta)) {
             return redirect()->to('/home');
-        }else{
+        } else {
             $session->set('role', 'peserta');
         }
         helper(['tanggal']);
@@ -57,30 +58,31 @@ class Bimbingfair13 extends BaseController
 
         $data['title_page'] = "I.3. Organisasi Profesi & Organisasi Lainnya Yang Dimasuki (W1)";
         $data['data_bread'] = '';
-        $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Tambah Organisasi</li>';
+        $data['stringbread'] = '<li class="breadcrumb-item active"><a href="' . base_url() . "/userfair" . '">Dokumen FAIR</a></li><li class="breadcrumb-item active">Tambah Organisasi</li>';
         $data['logged_in'] = $session->get('logged_in');;
         return view('maintemp/tambahorguserfair', $data);
     }
 
-    public function tambahorgproses(){
+    public function tambahorgproses()
+    {
         $session = session();
         $model = new CapesOrgModel();
         $slug = new Slug();
         $logged_in = $session->get('logged_in');
         $ispeserta = $session->get('ispeserta');
-        if ((!$logged_in)&&(!$ispeserta)){
+        if ((!$logged_in) && (!$ispeserta)) {
             return redirect()->to('/home');
-        }else{
+        } else {
             $session->set('role', 'peserta');
         }
         $user_id = $session->get('user_id');
         helper(['tanggal']);
 
-        $button=$this->request->getVar('submit');
-        
-        if ($button=="batal"){
+        $button = $this->request->getVar('submit');
+
+        if ($button == "batal") {
             return redirect()->to('/userfair13/docs');
-        }else{
+        } else {
             helper(['form', 'url']);
 
             $formvalid = $this->validate([
@@ -184,7 +186,7 @@ class Bimbingfair13 extends BaseController
                 ]
             ]);
 
-            if ($formvalid){
+            if ($formvalid) {
                 $Name = $this->request->getVar('Name');
                 $Type = $this->request->getVar('Type');
                 $City = $this->request->getVar('City');
@@ -206,13 +208,13 @@ class Bimbingfair13 extends BaseController
                 $nilai_r = 0;
                 $stringkp = '';
                 $totarray = count($komp);
-                $i=0;
+                $i = 0;
                 foreach ($komp as $kp) :
                     $i++;
-                    if ($Type == "PII"){
+                    if ($Type == "PII") {
                         $nilai_p = $nilai_p + 4;
-                    }else{
-                        switch ($nilai_period){
+                    } else {
+                        switch ($nilai_period) {
                             case "sd5":
                                 $nilai_p = $nilai_p + 1;
                                 break;
@@ -227,7 +229,7 @@ class Bimbingfair13 extends BaseController
                                 break;
                         }
                     }
-                    switch ($nilai_position){
+                    switch ($nilai_position) {
                         case "Bias":
                             $nilai_q = $nilai_q + 2;
                             break;
@@ -238,38 +240,38 @@ class Bimbingfair13 extends BaseController
                             $nilai_q = $nilai_q + 4;
                             break;
                     }
-                    switch ($OrgLevel){
+                    switch ($OrgLevel) {
                         case "Loc":
-                            $nilai_r = $nilai_r+1;
+                            $nilai_r = $nilai_r + 1;
                             break;
                         case "Nas":
-                            $nilai_r = $nilai_r+2;
+                            $nilai_r = $nilai_r + 2;
                             break;
                         case "Reg":
-                            $nilai_r = $nilai_r+3;
+                            $nilai_r = $nilai_r + 3;
                             break;
                         case "Int":
-                            $nilai_r = $nilai_r+4;
+                            $nilai_r = $nilai_r + 4;
                             break;
                     }
-                    if ($i!=$totarray){
-                        $stringkp = $stringkp.$kp.', ';
-                    }else{
-                        $stringkp = $stringkp.$kp;
+                    if ($i != $totarray) {
+                        $stringkp = $stringkp . $kp . ', ';
+                    } else {
+                        $stringkp = $stringkp . $kp;
                     }
                 endforeach;
                 $nilai_w1 = $nilai_p * $nilai_r;
-                
+
                 $namaorganisasi = $slug->slugify($Name);
                 $nilai_posisi = $slug->slugify($nilai_position);
                 $ext = $File->getClientExtension();
-                if (!empty($ext)){
-                    $filename = $user_id.'_organisasi_'.$namaorganisasi.'_'.$nilai_posisi.'.'.$ext;
-                    $File->move('uploads/docs/',$filename,true);
-                }else{
-                    $filename="";
+                if (!empty($ext)) {
+                    $filename = $user_id . '_organisasi_' . $namaorganisasi . '_' . $nilai_posisi . '.' . $ext;
+                    $File->move('uploads/docs/', $filename, true);
+                } else {
+                    $filename = "";
                 }
-    
+
                 $data = array(
                     'user_id' => $user_id,
                     'Name' => $Name,
@@ -294,12 +296,12 @@ class Bimbingfair13 extends BaseController
                     'date_created' => date('Y-m-d'),
                     'date_modified' => date('Y-m-d')
                 );
-    
+
                 $model->save($data);
                 $session->setFlashdata('msg', 'Data Organisasi berhasil ditambah.');
-    
+
                 return redirect()->to('/userfair13/docs');
-            }else{
+            } else {
                 $session = session();
 
                 $data['datakomp'] = $this->request->getVar('komp13');
@@ -307,10 +309,10 @@ class Bimbingfair13 extends BaseController
                 $model1 = new KompModel();
                 $where = "komp_cat LIKE 'W.1%'";
                 $data['data_komp'] = $model1->where($where)->orderby('komp_id', 'ASC')->findall();
-        
+
                 $data['title_page'] = "I.3. Organisasi Profesi & Organisasi Lainnya Yang Dimasuki (W1)";
                 $data['data_bread'] = '';
-                $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Tambah Organisasi</li>';
+                $data['stringbread'] = '<li class="breadcrumb-item active"><a href="' . base_url() . "/userfair" . '">Dokumen FAIR</a></li><li class="breadcrumb-item active">Tambah Organisasi</li>';
                 $data['logged_in'] = $session->get('logged_in');
                 $data['validation'] = $this->validator;
                 return view('maintemp/tambahorguserfairvalid', $data);
@@ -318,43 +320,45 @@ class Bimbingfair13 extends BaseController
         }
     }
 
-    public function hapusorg($id){
+    public function hapusorg($id)
+    {
         $session = session();
         $model = new CapesOrgModel();
         $logged_in = $session->get('logged_in');
         $ispeserta = $session->get('ispeserta');
-        if ((!$logged_in)&&(!$ispeserta)){
+        if ((!$logged_in) && (!$ispeserta)) {
             return redirect()->to('/home');
-        }else{
+        } else {
             $session->set('role', 'peserta');
         }
         helper(['tanggal']);
 
         $org = $model->find($id);
-        $nilai_path = './uploads/docs/'.$org['File'];
-        if (is_file($nilai_path)){
+        $nilai_path = './uploads/docs/' . $org['File'];
+        if (is_file($nilai_path)) {
             unlink($nilai_path);
         }
         $model->delete($id);
         $session->setFlashdata('msg', 'Data Organisasi berhasil dihapus.');
 
-        return redirect()->to('/userfair13/docs');   
+        return redirect()->to('/userfair13/docs');
     }
 
-    public function ubahorg($id){
+    public function ubahorg($id)
+    {
         $session = session();
         $model = new CapesOrgModel();
         $logged_in = $session->get('logged_in');
         $ispeserta = $session->get('ispeserta');
-        if ((!$logged_in)&&(!$ispeserta)){
+        if ((!$logged_in) && (!$ispeserta)) {
             return redirect()->to('/home');
-        }else{
+        } else {
             $session->set('role', 'peserta');
         }
         helper(['tanggal']);
 
         $org = $model->where('Num', $id)->first();
-        if ($org){
+        if ($org) {
             $data = [
                 'Num' => $org['Num'],
                 'user_id' => $org['user_id'],
@@ -382,30 +386,33 @@ class Bimbingfair13 extends BaseController
 
         $data['title_page'] = "I.3. Organisasi Profesi & Organisasi Lainnya Yang Dimasuki (W1)";
         $data['data_bread'] = '';
-        $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Ubah Organisasi</li>';
+        $data['stringbread'] = '<li class="breadcrumb-item active"><a href="' . base_url() . "/userfair" . '">Dokumen FAIR</a></li><li class="breadcrumb-item active">Ubah Organisasi</li>';
         $data['logged_in'] = $session->get('logged_in');
         return view('maintemp/ubahorguserfair', $data);
     }
 
-    public function ubahorgproses(){
+    public function ubahorgproses()
+    {
         $session = session();
+
         $slug = new Slug();
         $model = new CapesOrgModel();
+        $user_id = $session->get('user_id');
         $logged_in = $session->get('logged_in');
         $ispeserta = $session->get('ispeserta');
-        if ((!$logged_in)&&(!$ispeserta)){
+        if ((!$logged_in) && (!$ispeserta)) {
             return redirect()->to('/home');
-        }else{
+        } else {
             $session->set('role', 'peserta');
         }
         helper(['tanggal']);
         $Num = $this->request->getVar('Num');
 
-        $button=$this->request->getVar('submit');
-        
-        if ($button=="batal"){
+        $button = $this->request->getVar('submit');
+
+        if ($button == "batal") {
             return redirect()->to('/userfair13/docs');
-        }else{
+        } else {
             helper(['form', 'url']);
 
             $formvalid = $this->validate([
@@ -509,7 +516,7 @@ class Bimbingfair13 extends BaseController
                 ]
             ]);
 
-            if ($formvalid){
+            if ($formvalid) {
                 $filename = $this->request->getVar('filename');
                 $Name = $this->request->getVar('Name');
                 $Type = $this->request->getVar('Type');
@@ -532,13 +539,13 @@ class Bimbingfair13 extends BaseController
                 $nilai_r = 0;
                 $stringkp = '';
                 $totarray = count($komp);
-                $i=0;
+                $i = 0;
                 foreach ($komp as $kp) :
                     $i++;
-                    if ($Type == "PII"){
+                    if ($Type == "PII") {
                         $nilai_p = $nilai_p + 4;
-                    }else{
-                        switch ($nilai_period){
+                    } else {
+                        switch ($nilai_period) {
                             case "sd5":
                                 $nilai_p = $nilai_p + 1;
                                 break;
@@ -553,7 +560,7 @@ class Bimbingfair13 extends BaseController
                                 break;
                         }
                     }
-                    switch ($nilai_position){
+                    switch ($nilai_position) {
                         case "Bias":
                             $nilai_q = $nilai_q + 2;
                             break;
@@ -564,24 +571,24 @@ class Bimbingfair13 extends BaseController
                             $nilai_q = $nilai_q + 4;
                             break;
                     }
-                    switch ($OrgLevel){
+                    switch ($OrgLevel) {
                         case "Loc":
-                            $nilai_r = $nilai_r+1;
+                            $nilai_r = $nilai_r + 1;
                             break;
                         case "Nas":
-                            $nilai_r = $nilai_r+2;
+                            $nilai_r = $nilai_r + 2;
                             break;
                         case "Reg":
-                            $nilai_r = $nilai_r+3;
+                            $nilai_r = $nilai_r + 3;
                             break;
                         case "Int":
-                            $nilai_r = $nilai_r+4;
+                            $nilai_r = $nilai_r + 4;
                             break;
                     }
-                    if ($i!=$totarray){
-                        $stringkp = $stringkp.$kp.', ';
-                    }else{
-                        $stringkp = $stringkp.$kp;
+                    if ($i != $totarray) {
+                        $stringkp = $stringkp . $kp . ', ';
+                    } else {
+                        $stringkp = $stringkp . $kp;
                     }
                 endforeach;
                 $nilai_w1 = $nilai_p * $nilai_r;
@@ -589,22 +596,22 @@ class Bimbingfair13 extends BaseController
                 $namaorganisasi = $slug->slugify($Name);
                 $nilai_posisi = $slug->slugify($nilai_position);
                 $ext = $File->getClientExtension();
-                if ((empty($filename))&&(!empty($ext))){
-                    $filenamenew = $user_id.'_organisasi_'.$namaorganisasi.'_'.$nilai_posisi.'.'.$ext;
-                    $File->move('uploads/docs/',$filenamenew,true);
-                } elseif ((!empty($filename))&&(!empty($ext))){
-                    $oldext = substr($filename,-4);
-                    if ($oldext == $ext){
-                        $File->move('uploads/docs/',$filename,true);
+                if ((empty($filename)) && (!empty($ext))) {
+                    $filenamenew = $user_id . '_organisasi_' . $namaorganisasi . '_' . $nilai_posisi . '.' . $ext;
+                    $File->move('uploads/docs/', $filenamenew, true);
+                } elseif ((!empty($filename)) && (!empty($ext))) {
+                    $oldext = substr($filename, -4);
+                    if ($oldext == $ext) {
+                        $File->move('uploads/docs/', $filename, true);
                         $filenamenew = $filename;
-                    }else{
-                        $filenamenew = $user_id.'_organisasi_'.$namaorganisasi.'_'.$nilai_posisi.'.'.$ext;
-                        $File->move('uploads/docs/',$filenamenew,true);
+                    } else {
+                        $filenamenew = $user_id . '_organisasi_' . $namaorganisasi . '_' . $nilai_posisi . '.' . $ext;
+                        $File->move('uploads/docs/', $filenamenew, true);
                     }
-                }else{
-                    $filenamenew=$filename;
+                } else {
+                    $filenamenew = $filename;
                 }
-    
+
                 $data = array(
                     'Name' => $Name,
                     'Type' => $Type,
@@ -630,13 +637,13 @@ class Bimbingfair13 extends BaseController
 
                 $model->update($Num, $data);
                 $session->setFlashdata('msg', 'Data Organisasi berhasil diubah.');
-    
+
                 return redirect()->to('/userfair13/docs');
-            }else{
+            } else {
                 $session = session();
                 $model = new CapesOrgModel();
                 $org = $model->where('Num', $Num)->first();
-                if ($org){
+                if ($org) {
                     $data = [
                         'Num' => $org['Num'],
                         'user_id' => $org['user_id'],
@@ -652,8 +659,8 @@ class Bimbingfair13 extends BaseController
                         'Position' => $org['Position'],
                         'OrgLevel' => $org['OrgLevel'],
                         'OrgScp' => $org['OrgScp'],
-                        'Desc' => $kerja['Desc'],
-                        'File' => $kerja['File'],
+                        'Desc' => $org['Desc'],
+                        'File' => $org['File'],
                         'datakomp' => explode(", ", $org['kompetensi'])
                     ];
                 }
@@ -661,14 +668,14 @@ class Bimbingfair13 extends BaseController
                 $model1 = new KompModel();
                 $where = "komp_cat LIKE 'W.1%'";
                 $data['data_komp'] = $model1->where($where)->orderby('komp_id', 'ASC')->findall();
-        
+
                 $data['title_page'] = "I.3. Organisasi Profesi & Organisasi Lainnya Yang Dimasuki (W1)";
                 $data['data_bread'] = '';
-                $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Ubah Organisasi</li>';
+                $data['stringbread'] = '<li class="breadcrumb-item active"><a href="' . base_url() . "/userfair" . '">Dokumen FAIR</a></li><li class="breadcrumb-item active">Ubah Organisasi</li>';
                 $data['logged_in'] = $session->get('logged_in');
                 $data['validation'] = $this->validator;
                 return view('maintemp/ubahorguserfair', $data);
             }
-        }        
+        }
     }
 }

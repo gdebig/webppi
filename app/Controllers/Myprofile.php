@@ -11,15 +11,15 @@ class Myprofile extends BaseController
     {
         $session = session();
         $logged_in = $session->get('logged_in');
-        if (!$logged_in){
+        if (!$logged_in) {
             return redirect()->to('/home');
         }
         helper(['tanggal']);
-        
+
         $user_id = $session->get('user_id');
         $model = new ProfileModel();
         $user = $model->where('user_id', $user_id)->first();
-        if ($user){
+        if ($user) {
             $data = [
                 'ID' => $user['ID'],
                 'user_id' => $user['user_id'],
@@ -50,7 +50,7 @@ class Myprofile extends BaseController
                 'Photo' => $user['Photo'],
                 'pindahregular' => $user['pindahregular']
             ];
-        }else{
+        } else {
             $data['kosong'] = "kosong";
         }
         $data['logged_in'] = $logged_in;
@@ -59,12 +59,13 @@ class Myprofile extends BaseController
         return view('maintemp/profile', $data);
     }
 
-    public function buatprofile(){
+    public function buatprofile()
+    {
         $session = session();
         $user_id = $session->get('user_id');
         $logged_in = $session->get('logged_in');
         $confirmcapes = $session->get('confirmcapes');
-        if (!$logged_in){
+        if (!$logged_in) {
             return redirect()->to('/home');
         }
         $data['user_id'] = $user_id;
@@ -74,24 +75,25 @@ class Myprofile extends BaseController
         return view('maintemp/buatprofile', $data);
     }
 
-    public function buatprofileproses(){
+    public function buatprofileproses()
+    {
         $session = session();
         $model = new ProfileModel();
         $user_id = $session->get('user_id');
         $logged_in = $session->get('logged_in');
-        if (!$logged_in){
+        if (!$logged_in) {
             return redirect()->to('/home');
         }
 
-        $button=$this->request->getVar('submit');
-        
-        if ($button=="batal"){
+        $button = $this->request->getVar('submit');
+
+        if ($button == "batal") {
             return redirect()->to('/myprofile');
-        }else{
+        } else {
             helper(['form', 'url']);
 
             $formvalid = $this->validate([
-                'user_id' =>[
+                'user_id' => [
                     'rules' => 'is_unique[tbl_profile.user_id]',
                     'errors' => [
                         'is_unique' => 'User sudah memiliki profile. Silahkan kembali ke Beranda.',
@@ -220,7 +222,7 @@ class Myprofile extends BaseController
                 ]
             ]);
 
-            if ($formvalid){
+            if ($formvalid) {
                 $user_id = $this->request->getVar('user_id');
                 $fullname = $this->request->getVar('fullname');
                 $birthplace = $this->request->getVar('birthplace');
@@ -243,16 +245,16 @@ class Myprofile extends BaseController
                 $wnum = $this->request->getVar('wnum');
                 $wfaks = $this->request->getVar('wfaks');
                 $wtelex = $this->request->getVar('wtelex');
-                $wemail1 = $this->request->getVar('wemail1');                
+                $wemail1 = $this->request->getVar('wemail1');
                 $wemail2 = $this->request->getVar('wemail2');
                 $sip = $this->request->getFile('sip');
                 $photo = $this->request->getFile('photo');
                 $pindahregular = $this->request->getVar('pindahregular');
 
                 $ext = $photo->getClientExtension();
-                $photoname = $user_id.'_profilpic.'.$ext;
-                $photo->move('uploads/profilpic/',$photoname,true);
-    
+                $photoname = $user_id . '_profilpic.' . $ext;
+                $photo->move('uploads/profilpic/', $photoname, true);
+
                 $dataprofile = array(
                     'user_id' => $user_id,
                     'FullName' => $fullname,
@@ -283,11 +285,11 @@ class Myprofile extends BaseController
                     'date_created' => date('Y-m-d'),
                     'date_modified' => date('Y-m-d')
                 );
-    
+
                 $model->save($dataprofile);
-    
+
                 return redirect()->to('/myprofile');
-            }else{
+            } else {
                 $session = session();
                 $data['user_id'] = $user_id;
                 $data['title_page'] = "Buat Profile Saya";
@@ -297,19 +299,20 @@ class Myprofile extends BaseController
                 return view('maintemp/buatprofilevalid', $data);
             }
         }
-    }    
+    }
 
-    public function ubah($id){
+    public function ubah($id)
+    {
         $session = session();
         $logged_in = $session->get('logged_in');
-        if (!$logged_in){
+        if (!$logged_in) {
             return redirect()->to('/home');
         }
         helper(['tanggal']);
 
         $model = new ProfileModel();
         $user = $model->where('user_id', $id)->first();
-        if ($user){
+        if ($user) {
             $data = [
                 'ID' => $user['ID'],
                 'user_id' => $user['user_id'],
@@ -347,10 +350,11 @@ class Myprofile extends BaseController
         return view('maintemp/ubahprofile', $data);
     }
 
-    public function ubahproses(){
+    public function ubahproses()
+    {
         $session = session();
         $logged_in = $session->get('logged_in');
-        if (!$logged_in){
+        if (!$logged_in) {
             return redirect()->to('/home');
         }
         helper(['tanggal']);
@@ -358,11 +362,11 @@ class Myprofile extends BaseController
 
         $model = new ProfileModel();
 
-        $button=$this->request->getVar('submit');
-        
-        if ($button=="batal"){
+        $button = $this->request->getVar('submit');
+
+        if ($button == "batal") {
             return redirect()->to('/myprofile');
-        }else{
+        } else {
             helper(['form', 'url']);
 
             $formvalid = $this->validate([
@@ -495,7 +499,7 @@ class Myprofile extends BaseController
                 ]
             ]);
 
-            if ($formvalid){
+            if ($formvalid) {
                 $profile_id = $this->request->getVar('profile_id');
                 $photoname = $this->request->getVar('photoname');
                 $sipname = $this->request->getVar('sipname');
@@ -520,43 +524,43 @@ class Myprofile extends BaseController
                 $wnum = $this->request->getVar('wnum');
                 $wfaks = $this->request->getVar('wfaks');
                 $wtelex = $this->request->getVar('wtelex');
-                $wemail1 = $this->request->getVar('wemail1');                
+                $wemail1 = $this->request->getVar('wemail1');
                 $wemail2 = $this->request->getVar('wemail2');
                 $sip = $this->request->getFile('sip');
                 $photo = $this->request->getFile('photo');
 
                 $ext1 = $sip->getClientExtension();
-                if ((empty($sipname))&&(!empty($ext1))){
-                    $sipnamenew = $user_id.'_sip_'.$ext1;
-                    $sip->move('uploads/docs/',$sipnamenew,true);
-                } elseif ((!empty($sipname))&&(!empty($ext1))){
+                if ((empty($sipname)) && (!empty($ext1))) {
+                    $sipnamenew = $user_id . '_sip_' . $ext1;
+                    $sip->move('uploads/docs/', $sipnamenew, true);
+                } elseif ((!empty($sipname)) && (!empty($ext1))) {
                     $oldext = substr($sipname, -4);
-                    if ($oldext==$ext1){
-                        $sip->move('uploads/docs/',$sipname,true);
+                    if ($oldext == $ext1) {
+                        $sip->move('uploads/docs/', $sipname, true);
                         $sipnamenew = $sipname;
-                    }else{
-                        $sipnamenew = $user_id.'_sip_'.$ext1;
-                        $sip->move('uploads/docs/',$sipnamenew,true);
+                    } else {
+                        $sipnamenew = $user_id . '_sip_' . $ext1;
+                        $sip->move('uploads/docs/', $sipnamenew, true);
                     }
-                }else{
-                    $sipnamenew=$sipname;
+                } else {
+                    $sipnamenew = $sipname;
                 }
 
                 $ext = $photo->getClientExtension();
-                if ((empty($photoname))&&(!empty($ext))){
-                    $photonamenew = $user_id.'_profilpic_'.$ext;
-                    $photo->move('uploads/profilpic/',$photonamenew,true);
-                } elseif ((!empty($photoname))&&(!empty($ext))){
+                if ((empty($photoname)) && (!empty($ext))) {
+                    $photonamenew = $user_id . '_profilpic_' . $ext;
+                    $photo->move('uploads/profilpic/', $photonamenew, true);
+                } elseif ((!empty($photoname)) && (!empty($ext))) {
                     $oldext = substr($photoname, -4);
-                    if ($oldext==$ext){
-                        $photo->move('uploads/profilpic/',$photoname,true);
+                    if ($oldext == $ext) {
+                        $photo->move('uploads/profilpic/', $photoname, true);
                         $photonamenew = $photoname;
-                    }else{
-                        $photonamenew = $user_id.'_profilpic_'.$ext;
-                        $photo->move('uploads/profilpic/',$photonamenew,true);
+                    } else {
+                        $photonamenew = $user_id . '_profilpic_' . $ext;
+                        $photo->move('uploads/profilpic/', $photonamenew, true);
                     }
-                }else{
-                    $photonamenew=$photoname;
+                } else {
+                    $photonamenew = $photoname;
                 }
 
                 $dataprofile = array(
@@ -589,13 +593,13 @@ class Myprofile extends BaseController
                 );
 
                 print_r($dataprofile);
-    
+
                 $model->update($profile_id, $dataprofile);
-    
-                 return redirect()->to('/myprofile');
-            }else{
+
+                return redirect()->to('/myprofile');
+            } else {
                 $user = $model->where('user_id', $user_id)->first();
-                if ($user){
+                if ($user) {
                     $data = [
                         'ID' => $user['ID'],
                         'user_id' => $user['user_id'],
@@ -635,18 +639,19 @@ class Myprofile extends BaseController
         }
     }
 
-    public function ubahpass(){
+    public function ubahpass()
+    {
         $session = session();
         $id = $session->get('user_id');
         $logged_in = $session->get('logged_in');
-        if (!$logged_in){
+        if (!$logged_in) {
             return redirect()->to('/home');
         }
         helper(['tanggal']);
 
         $model = new ProfileModel();
         $user = $model->where('user_id', $id)->first();
-        if ($user){
+        if ($user) {
             $data = [
                 'ID' => $user['ID'],
                 'user_id' => $user['user_id'],
@@ -655,7 +660,7 @@ class Myprofile extends BaseController
         }
         $model1 = new AkunModel();
         $user1 = $model1->where('user_id', $id)->first();
-        if ($user1){
+        if ($user1) {
             $data = [
                 'username' => $user1['username']
             ];
@@ -666,37 +671,38 @@ class Myprofile extends BaseController
         return view('maintemp/ubahpass', $data);
     }
 
-    public function ubahpassproses(){
+    public function ubahpassproses()
+    {
         $session = session();
         $logged_in = $session->get('logged_in');
-        if (!$logged_in){
+        if (!$logged_in) {
             return redirect()->to('/home');
         }
         helper(['tanggal']);
         $user_id = $session->get('user_id');
 
-        $button=$this->request->getVar('submit');
-        
-        if ($button=="batal"){
+        $button = $this->request->getVar('submit');
+
+        if ($button == "batal") {
             return redirect()->to('/');
-        }else{
+        } else {
             helper(['form']);
             $rules = [
                 'oldpass'     => 'required',
                 'newpass'     => 'required|min_length[6]',
                 'confirmpass' => 'required|min_length[6]|matches[newpass]'
             ];
-            
-            if($this->validate($rules)){
+
+            if ($this->validate($rules)) {
                 $session = session();
                 $model = new AkunModel();
                 $user_id = $session->get('user_id');
                 $oldpass = $this->request->getVar('oldpass');
                 $data = $model->where('user_id', $user_id)->first();
-                if($data){
+                if ($data) {
                     $pass = $data['password'];
                     $verify_pass = password_verify($oldpass, $pass);
-                    if($verify_pass){
+                    if ($verify_pass) {
                         $newpass = $this->request->getVar('newpass');
                         $datauser = array(
                             'password' => password_hash($newpass, PASSWORD_DEFAULT),
@@ -705,18 +711,18 @@ class Myprofile extends BaseController
                         $model->update($user_id, $datauser);
                         $session->setFlashdata('msg1', 'Password berhasil diubah.');
                         return redirect()->to('/myprofile/ubahpass');
-                    }else{
+                    } else {
                         $session->setFlashdata('msg', 'Password lama salah');
                         return redirect()->to('/myprofile/ubahpass');
                     }
-                }else{
+                } else {
                     $session->setFlashdata('msg', 'Username tidak ditemukan');
                     return redirect()->to('/myprofile/ubahpass');
                 }
-            }else{
+            } else {
                 $model = new ProfileModel();
                 $user = $model->where('user_id', $user_id)->first();
-                if ($user){
+                if ($user) {
                     $data = [
                         'ID' => $user['ID'],
                         'user_id' => $user['user_id'],
@@ -725,7 +731,7 @@ class Myprofile extends BaseController
                 }
                 $model1 = new AkunModel();
                 $user1 = $model1->where('user_id', $user_id)->first();
-                if ($user1){
+                if ($user1) {
                     $data = [
                         'username' => $user1['username']
                     ];

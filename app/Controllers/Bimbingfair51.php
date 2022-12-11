@@ -13,42 +13,43 @@ class Bimbingfair51 extends BaseController
         $session = session();
         $logged_in = $session->get('logged_in');
         $ispenilai = $session->get('ispenilai');
-        if ((!$logged_in)&&(!$ispenilai)){
+        if ((!$logged_in) && (!$ispenilai)) {
             return redirect()->to('/home');
-        }else{
+        } else {
             $session->set('role', 'penilai');
         }
 
-        if (!empty($id)){
+        if (!empty($id)) {
             $user_id = $id;
-        }else{
+        } else {
             $user_id = $session->get('user_id');
         }
         helper(['tanggal']);
         $model = new CapesKartulModel();
         $data['capeslogged_in'] = $session->get('capeslogged_in');
-        $kartul = $model->where('user_id', $user_id)->orderby('Year','DESC')->findall();
-        if (!empty($kartul)){
+        $kartul = $model->where('user_id', $user_id)->orderby('Year', 'DESC')->findall();
+        if (!empty($kartul)) {
             $data['data_kartul'] = $kartul;
-        }else{
+        } else {
             $data['data_kartul'] = 'kosong';
         }
 
         $data['user_id'] = $user_id;
         $data['title_page'] = "V.5.1. Karya Tulis di Bidang Keinsinyuran yang Dipublikasikan (W4)";
         $data['data_bread'] = '';
-        $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/bimbingfair/docs/".$id.'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Karya Tulis</li>';
+        $data['stringbread'] = '<li class="breadcrumb-item active"><a href="' . base_url() . "/bimbingfair/docs/" . $id . '">Dokumen FAIR</a></li><li class="breadcrumb-item active">Karya Tulis</li>';
         $data['logged_in'] = $session->get('logged_in');
         return view('maintemp/bimbingdok51', $data);
     }
 
-    public function tambahkartul(){
+    public function tambahkartul()
+    {
         $session = session();
         $logged_in = $session->get('logged_in');
         $ispenilai = $session->get('ispenilai');
-        if ((!$logged_in)&&(!$ispenilai)){
+        if ((!$logged_in) && (!$ispenilai)) {
             return redirect()->to('/home');
-        }else{
+        } else {
             $session->set('role', 'peserta');
         }
 
@@ -58,29 +59,30 @@ class Bimbingfair51 extends BaseController
 
         $data['title_page'] = "V.5.1. Karya Tulis di Bidang Keinsinyuran yang Dipublikasikan (W4)";
         $data['data_bread'] = '';
-        $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Tambah Karya Tulis</li>';
+        $data['stringbread'] = '<li class="breadcrumb-item active"><a href="' . base_url() . "/userfair" . '">Dokumen FAIR</a></li><li class="breadcrumb-item active">Tambah Karya Tulis</li>';
         $data['logged_in'] = $session->get('logged_in');
         return view('maintemp/tambahkartul', $data);
     }
 
-    public function tambahkartulproses(){
+    public function tambahkartulproses()
+    {
         $session = session();
         $slug = new Slug();
         $logged_in = $session->get('logged_in');
         $ispenilai = $session->get('ispenilai');
-        if ((!$logged_in)&&(!$ispenilai)){
+        if ((!$logged_in) && (!$ispenilai)) {
             return redirect()->to('/home');
-        }else{
+        } else {
             $session->set('role', 'peserta');
         }
         $model = new CapesKartulModel();
         $user_id = $session->get('user_id');
 
-        $button=$this->request->getVar('submit');
-        
-        if ($button=="batal"){
+        $button = $this->request->getVar('submit');
+
+        if ($button == "batal") {
             return redirect()->to('/userfair51/docs');
-        }else{
+        } else {
             helper(['form', 'url']);
 
             $formvalid = $this->validate([
@@ -156,7 +158,7 @@ class Bimbingfair51 extends BaseController
                 ]
             ]);
 
-            if ($formvalid){
+            if ($formvalid) {
                 $Name = $this->request->getVar('Name');
                 $Media = $this->request->getVar('Media');
                 $LocCity = $this->request->getVar('LocCity');
@@ -174,10 +176,10 @@ class Bimbingfair51 extends BaseController
                 $nilai_r = 0;
                 $stringkp = '';
                 $totarray = count($komp);
-                $i=0;
+                $i = 0;
                 foreach ($komp as $kp) :
                     $nilai_p = $nilai_p + 1;
-                    switch ($Mediatype){
+                    switch ($Mediatype) {
                         case "Lok":
                             $nilai_q = $nilai_q + 1;
                             break;
@@ -188,7 +190,7 @@ class Bimbingfair51 extends BaseController
                             $nilai_q = $nilai_q + 4;
                             break;
                     }
-                    switch ($Diffbenefit){
+                    switch ($Diffbenefit) {
                         case "ren":
                             $nilai_r = $nilai_r + 1;
                             break;
@@ -203,24 +205,24 @@ class Bimbingfair51 extends BaseController
                             break;
                     }
                     $i++;
-                    if ($i!=$totarray){
-                        $stringkp = $stringkp.$kp.', ';
-                    }else{
-                        $stringkp = $stringkp.$kp;
+                    if ($i != $totarray) {
+                        $stringkp = $stringkp . $kp . ', ';
+                    } else {
+                        $stringkp = $stringkp . $kp;
                     }
                 endforeach;
                 $nilai_w4 = $nilai_p * $nilai_q * $nilai_r;
-                
+
                 $mediakartul = $slug->slugify($Media);
                 $ext = $File->getClientExtension();
-                if (!empty($ext)){
+                if (!empty($ext)) {
                     $random = bin2hex(random_bytes(4));
-                    $filename = $user_id.'_karyatulis_'.$mediakartul.'_'.$random.'.'.$ext;
-                    $File->move('uploads/docs/',$filename,true);
-                }else{
-                    $filename="";
+                    $filename = $user_id . '_karyatulis_' . $mediakartul . '_' . $random . '.' . $ext;
+                    $File->move('uploads/docs/', $filename, true);
+                } else {
+                    $filename = "";
                 }
-    
+
                 $data = array(
                     'user_id' => $user_id,
                     'Name' => $Name,
@@ -241,12 +243,12 @@ class Bimbingfair51 extends BaseController
                     'date_created' => date('Y-m-d'),
                     'date_modified' => date('Y-m-d')
                 );
-    
+
                 $model->save($data);
                 $session->setFlashdata('msg', 'Data Karya Tulis berhasil ditambah.');
-    
+
                 return redirect()->to('/userfair51/docs');
-            }else{
+            } else {
                 $data['datakomp'] = $this->request->getVar('komp51');
 
                 $model1 = new KompModel();
@@ -255,7 +257,7 @@ class Bimbingfair51 extends BaseController
 
                 $data['title_page'] = "V.5.1. Karya Tulis di Bidang Keinsinyuran yang Dipublikasikan (W4)";
                 $data['data_bread'] = '';
-                $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Tambah Karya Tulis</li>';
+                $data['stringbread'] = '<li class="breadcrumb-item active"><a href="' . base_url() . "/userfair" . '">Dokumen FAIR</a></li><li class="breadcrumb-item active">Tambah Karya Tulis</li>';
                 $data['logged_in'] = $session->get('logged_in');
                 $data['validation'] = $this->validator;
                 return view('maintemp/tambahkartulvalid', $data);
@@ -263,40 +265,42 @@ class Bimbingfair51 extends BaseController
         }
     }
 
-    public function hapuskartul($id){
+    public function hapuskartul($id)
+    {
         $session = session();
         $logged_in = $session->get('logged_in');
         $ispenilai = $session->get('ispenilai');
-        if ((!$logged_in)&&(!$ispenilai)){
+        if ((!$logged_in) && (!$ispenilai)) {
             return redirect()->to('/home');
-        }else{
+        } else {
             $session->set('role', 'peserta');
         }
         $model = new CapesKartulModel();
 
         $kartul = $model->find($id);
-        $path = './uploads/docs/'.$kartul['File'];
-        if (is_file($path)){
+        $path = './uploads/docs/' . $kartul['File'];
+        if (is_file($path)) {
             unlink($path);
         }
         $model->delete($id);
         $session->setFlashdata('msg', 'Data Karya Tulis berhasil dihapus.');
 
-        return redirect()->to('/userfair51/docs');   
+        return redirect()->to('/userfair51/docs');
     }
 
-    public function ubahkartul($id){
+    public function ubahkartul($id)
+    {
         $session = session();
         $logged_in = $session->get('logged_in');
         $ispenilai = $session->get('ispenilai');
-        if ((!$logged_in)&&(!$ispenilai)){
+        if ((!$logged_in) && (!$ispenilai)) {
             return redirect()->to('/home');
-        }else{
+        } else {
             $session->set('role', 'peserta');
         }
         $model = new CapesKartulModel();
         $kartul = $model->where('Num', $id)->first();
-        if ($kartul){
+        if ($kartul) {
             $data = [
                 'Num' => $kartul['Num'],
                 'user_id' => $kartul['user_id'],
@@ -320,30 +324,31 @@ class Bimbingfair51 extends BaseController
 
         $data['title_page'] = "V.5.1. Karya Tulis di Bidang Keinsinyuran yang Dipublikasikan (W4)";
         $data['data_bread'] = '';
-        $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Ubah Karya Tulis</li>';
+        $data['stringbread'] = '<li class="breadcrumb-item active"><a href="' . base_url() . "/userfair" . '">Dokumen FAIR</a></li><li class="breadcrumb-item active">Ubah Karya Tulis</li>';
         $data['logged_in'] = $session->get('logged_in');
         return view('maintemp/ubahkartul', $data);
     }
 
-    public function ubahkartulproses(){
+    public function ubahkartulproses()
+    {
         $session = session();
         $slug = new Slug();
         $logged_in = $session->get('logged_in');
         $ispenilai = $session->get('ispenilai');
-        if ((!$logged_in)&&(!$ispenilai)){
+        if ((!$logged_in) && (!$ispenilai)) {
             return redirect()->to('/home');
-        }else{
+        } else {
             $session->set('role', 'peserta');
         }
         $model = new CapesKartulModel();
         $Num = $this->request->getVar('Num');
         $user_id = $session->get('user_id');
 
-        $button=$this->request->getVar('submit');
-        
-        if ($button=="batal"){
+        $button = $this->request->getVar('submit');
+
+        if ($button == "batal") {
             return redirect()->to('/userfair51/docs');
-        }else{
+        } else {
             helper(['form', 'url']);
 
             $formvalid = $this->validate([
@@ -419,7 +424,7 @@ class Bimbingfair51 extends BaseController
                 ]
             ]);
 
-            if ($formvalid){
+            if ($formvalid) {
                 $filename = $this->request->getVar('filename');
                 $Name = $this->request->getVar('Name');
                 $Media = $this->request->getVar('Media');
@@ -438,10 +443,10 @@ class Bimbingfair51 extends BaseController
                 $nilai_r = 0;
                 $stringkp = '';
                 $totarray = count($komp);
-                $i=0;
+                $i = 0;
                 foreach ($komp as $kp) :
                     $nilai_p = $nilai_p + 1;
-                    switch ($Mediatype){
+                    switch ($Mediatype) {
                         case "Lok":
                             $nilai_q = $nilai_q + 1;
                             break;
@@ -452,7 +457,7 @@ class Bimbingfair51 extends BaseController
                             $nilai_q = $nilai_q + 4;
                             break;
                     }
-                    switch ($Diffbenefit){
+                    switch ($Diffbenefit) {
                         case "ren":
                             $nilai_r = $nilai_r + 1;
                             break;
@@ -467,34 +472,34 @@ class Bimbingfair51 extends BaseController
                             break;
                     }
                     $i++;
-                    if ($i!=$totarray){
-                        $stringkp = $stringkp.$kp.', ';
-                    }else{
-                        $stringkp = $stringkp.$kp;
+                    if ($i != $totarray) {
+                        $stringkp = $stringkp . $kp . ', ';
+                    } else {
+                        $stringkp = $stringkp . $kp;
                     }
                 endforeach;
                 $nilai_w4 = $nilai_p * $nilai_q * $nilai_r;
 
                 $mediakartul = $slug->slugify($Media);
                 $ext = $File->getClientExtension();
-                if ((empty($filename))&&(!empty($ext))){
+                if ((empty($filename)) && (!empty($ext))) {
                     $random = bin2hex(random_bytes(4));
-                    $filenamenew = $user_id.'_karyatulis_'.$mediakartul.'_'.$random.'.'.$ext;
-                    $File->move('uploads/docs/',$filenamenew,true);
-                } elseif ((!empty($filename))&&(!empty($ext))){
-                    $oldext = substr($filename,-4);
-                    if ($oldext == $ext){
-                        $File->move('uploads/docs/',$filename,true);
+                    $filenamenew = $user_id . '_karyatulis_' . $mediakartul . '_' . $random . '.' . $ext;
+                    $File->move('uploads/docs/', $filenamenew, true);
+                } elseif ((!empty($filename)) && (!empty($ext))) {
+                    $oldext = substr($filename, -4);
+                    if ($oldext == $ext) {
+                        $File->move('uploads/docs/', $filename, true);
                         $filenamenew = $filename;
-                    }else{
+                    } else {
                         $random = bin2hex(random_bytes(4));
-                        $filenamenew = $user_id.'_karyatulis_'.str_replace(' ','',$Media).'_'.$random.'.'.$ext;
-                        $File->move('uploads/docs/',$filenamenew,true);
+                        $filenamenew = $user_id . '_karyatulis_' . str_replace(' ', '', $Media) . '_' . $random . '.' . $ext;
+                        $File->move('uploads/docs/', $filenamenew, true);
                     }
-                }else{
-                    $filenamenew=$filename;
+                } else {
+                    $filenamenew = $filename;
                 }
-    
+
                 $data = array(
                     'Name' => $Name,
                     'Media' => $Media,
@@ -516,11 +521,11 @@ class Bimbingfair51 extends BaseController
 
                 $model->update($Num, $data);
                 $session->setFlashdata('msg', 'Data Karya Tulis berhasil diubah.');
-    
+
                 return redirect()->to('/userfair51/docs');
-            }else{
+            } else {
                 $kartul = $model->where('Num', $Num)->first();
-                if ($kartul){
+                if ($kartul) {
                     $data = [
                         'Num' => $kartul['Num'],
                         'Name' => $kartul['Name'],
@@ -536,18 +541,18 @@ class Bimbingfair51 extends BaseController
                         'datakomp' => explode(", ", $kartul['kompetensi'])
                     ];
                 }
-        
+
                 $model1 = new KompModel();
                 $where = "komp_cat LIKE 'W.4%'";
                 $data['data_komp'] = $model1->where($where)->orderby('komp_id', 'ASC')->findall();
 
                 $data['title_page'] = "V.5.1. Karya Tulis di Bidang Keinsinyuran yang Dipublikasikan (W4)";
                 $data['data_bread'] = '';
-                $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Ubah Karya Tulis</li>';
+                $data['stringbread'] = '<li class="breadcrumb-item active"><a href="' . base_url() . "/userfair" . '">Dokumen FAIR</a></li><li class="breadcrumb-item active">Ubah Karya Tulis</li>';
                 $data['logged_in'] = $session->get('logged_in');
                 $data['validation'] = $this->validator;
                 return view('maintemp/ubahkartul', $data);
             }
-        }        
+        }
     }
 }

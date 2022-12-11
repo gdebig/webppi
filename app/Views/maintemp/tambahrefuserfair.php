@@ -1,6 +1,6 @@
-<?= $this->extend('maintemp/template');?>
+<?= $this->extend('maintemp/template'); ?>
 
-<?= $this->section('content');?>
+<?= $this->section('content'); ?>
 
 <div class="card card-primary" style="width: auto; margin: 30px;">
     <div class="col-sm-13" style="width: auto; margin: 30px;">
@@ -9,8 +9,7 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body" style="width: auto; margin: 30px;">
-            <form action="<?php echo base_url();?>/userfair21/tambahrefproses" method="post"
-                enctype="multipart/form-data">
+            <form action="<?php echo base_url(); ?>/userfair21/tambahrefproses" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="Name" class="element">Nama Lengkap <span class="required"> *</span>&nbsp;
                     </label>
@@ -33,15 +32,13 @@
                     <label for="Prov" class="element">Lokasi Provinsi <span class="required"> *</span>&nbsp;
                     </label>
                     <div class="element">
-                        <input id="Prov" name="Prov" class="form-control" type="text"
-                            placeholder="Lokasi Provinsi..." />
+                        <input id="Prov" name="Prov" class="form-control" type="text" placeholder="Lokasi Provinsi..." />
                     </div>
                     <br />
                     <label for="Country" class="element">Lokasi Negara <span class="required"> *</span>&nbsp;
                     </label>
                     <div class="element">
-                        <input id="Country" name="Country" class="form-control" type="text"
-                            placeholder="Lokasi Negara..." />
+                        <input id="Country" name="Country" class="form-control" type="text" placeholder="Lokasi Negara..." />
                     </div>
                     <br />
                     <label for="Pnum" class="element">Nomor Telepon <span class="required"> *</span>&nbsp;
@@ -59,8 +56,7 @@
                     <label for="Relation" class="element">Hubungan <span class="required"> *</span>&nbsp;
                     </label>
                     <div class="element">
-                        <input id="Relation" name="Relation" class="form-control" type="text"
-                            placeholder="Hubungan..." />
+                        <input id="Relation" name="Relation" class="form-control" type="text" placeholder="Hubungan..." />
                     </div>
                     <br />
                     <div class="form-group">
@@ -73,8 +69,7 @@
                                 Referensi</button>
                         </div>
                         <div class="col">
-                            <button type="submit" name="submit" value="batal"
-                                class="btn btn-block btn-danger col">Batal</button>
+                            <button type="submit" name="submit" value="batal" class="btn btn-block btn-danger col">Batal</button>
                         </div>
                     </div>
                 </div>
@@ -85,4 +80,4 @@
 <!-- /.content-wrapper -->
 <!-- Control Sidebar -->
 
-<?= $this->endSection();?>
+<?= $this->endSection(); ?>

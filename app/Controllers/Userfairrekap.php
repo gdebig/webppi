@@ -23,38 +23,38 @@ class Userfairrekap extends BaseController
         $session = session();
         $logged_in = $session->get('logged_in');
         $ispeserta = $session->get('ispeserta');
-        if ((!$logged_in)&&(!$ispeserta)){
+        if ((!$logged_in) && (!$ispeserta)) {
             return redirect()->to('/home');
-        }else{
+        } else {
             $session->set('role', 'peserta');
         }
 
-        if (!empty($id)){
+        if (!empty($id)) {
             $user_id = $id;
-        }else{
+        } else {
             $user_id = $session->get('user_id');
         }
         helper(['tanggal']);
 
         $model = new UserModel();
         $user = $model->where('user_id', $user_id)->first();
-        if ($user){
+        if ($user) {
             $data = [
                 'user_id' => $user['user_id'],
                 'confirmfair' => $user['confirmfair']
             ];
-        }else{
+        } else {
             $data['kosong'] = "kosong";
         }
 
         $model1 = new ProfileModel();
         $profile = $model1->where('user_id', $user_id)->first();
-        if ($profile){
+        if ($profile) {
             $data = [
                 'FullName' => $profile['FullName'],
                 'Vocational' => $profile['Vocational']
             ];
-        }else{
+        } else {
             $data['kosong'] = "kosong";
         }
 
@@ -84,54 +84,56 @@ class Userfairrekap extends BaseController
         $data['nilai_pil'] = $org['nilai_pil'] + $peng['nilai_pil'] + $sert['nilai_pil'] + $kualifikasi['nilai_pil'] + $ajar['nilai_pil'] + $kartul['nilai_pil'] + $sem['nilai_pil'] + $inov['nilai_pil'] + $bhs['nilai_pil'];
         $data['total'] = $data['nilai_w1'] + $data['nilai_w2'] + $data['nilai_w3'] + $data['nilai_w4'] + $data['nilai_pil'];
 
-        if ($data['total']>=6000){
+        if ($data['total'] >= 6000) {
             $data['estimasi'] = "Anda memenuhi syarat untuk IPU";
-        }elseif ($data['total'] >= 3000){
+        } elseif ($data['total'] >= 3000) {
             $data['estimasi'] = "Anda memenuhi syarat untuk IPM";
-        }elseif ($data['total'] >= 600){
+        } elseif ($data['total'] >= 600) {
             $data['estimasi'] = "Anda memenuhi syarat untuk IPP";
-        }else{
+        } else {
             $data['estimasi'] = "Anda belum memenuhi syarat";
         }
 
         $data['title_page'] = "Rekapitulasi";
         $data['data_bread'] = '';
-        $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Rekapitulasi</li>';
+        $data['stringbread'] = '<li class="breadcrumb-item active"><a href="' . base_url() . "/userfair" . '">Dokumen FAIR</a></li><li class="breadcrumb-item active">Rekapitulasi</li>';
         $data['logged_in'] = $session->get('logged_in');
         return view('maintemp/fairrekap', $data);
     }
 
-    public function pernyataanproses(){
+    public function pernyataanproses()
+    {
         $session = session();
         $logged_in = $session->get('logged_in');
         $ispeserta = $session->get('ispeserta');
-        if ((!$logged_in)&&(!$ispeserta)){
+        if ((!$logged_in) && (!$ispeserta)) {
             return redirect()->to('/home');
-        }else{
+        } else {
             $session->set('role', 'peserta');
-        }        
-    
+        }
+
         return redirect()->to('/userfair');
     }
 
-    public function tambahbahasaproses(){
+    public function tambahbahasaproses()
+    {
         $session = session();
         $slug = new Slug();
         $logged_in = $session->get('logged_in');
         $ispeserta = $session->get('ispeserta');
-        if ((!$logged_in)&&(!$ispeserta)){
+        if ((!$logged_in) && (!$ispeserta)) {
             return redirect()->to('/home');
-        }else{
+        } else {
             $session->set('role', 'peserta');
         }
         $model = new BahasaModel();
         $user_id = $session->get('user_id');
 
-        $button=$this->request->getVar('submit');
-        
-        if ($button=="batal"){
+        $button = $this->request->getVar('submit');
+
+        if ($button == "batal") {
             return redirect()->to('/userfair6/docs');
-        }else{
+        } else {
             helper(['form', 'url']);
 
             $formvalid = $this->validate([
@@ -172,7 +174,7 @@ class Userfairrekap extends BaseController
                 ]
             ]);
 
-            if ($formvalid){
+            if ($formvalid) {
                 $Name = $this->request->getVar('Name');
                 $LangType = $this->request->getVar('LangType');
                 $VerbSkill = $this->request->getVar('VerbSkill');
@@ -186,10 +188,10 @@ class Userfairrekap extends BaseController
                 $nilai_r = 0;
                 $stringkp = '';
                 $totarray = count($komp);
-                $i=0;
+                $i = 0;
                 foreach ($komp as $kp) :
                     $nilai_p = $nilai_p + 2;
-                    switch ($LangType){
+                    switch ($LangType) {
                         case "Da":
                             $nilai_q = $nilai_q + 1;
                             break;
@@ -200,7 +202,7 @@ class Userfairrekap extends BaseController
                             $nilai_q = $nilai_q + 3;
                             break;
                     }
-                    switch ($VerbSkill){
+                    switch ($VerbSkill) {
                         case "Pasif":
                             $nilai_r = $nilai_r + 2;
                             break;
@@ -209,24 +211,24 @@ class Userfairrekap extends BaseController
                             break;
                     }
                     $i++;
-                    if ($i!=$totarray){
-                        $stringkp = $stringkp.$kp.', ';
-                    }else{
-                        $stringkp = $stringkp.$kp;
+                    if ($i != $totarray) {
+                        $stringkp = $stringkp . $kp . ', ';
+                    } else {
+                        $stringkp = $stringkp . $kp;
                     }
                 endforeach;
                 $nilai_w4 = $nilai_p * $nilai_q * $nilai_r;
-                
+
                 $namabahasa = $slug->slugify($Name);
                 $ext = $File->getClientExtension();
-                if (!empty($ext)){
+                if (!empty($ext)) {
                     $random = bin2hex(random_bytes(4));
-                    $filename = $user_id.'_bahasa_'.$namabahasa.'_'.$random.'.'.$ext;
-                    $File->move('uploads/docs/',$filename,true);
-                }else{
-                    $filename="";
+                    $filename = $user_id . '_bahasa_' . $namabahasa . '_' . $random . '.' . $ext;
+                    $File->move('uploads/docs/', $filename, true);
+                } else {
+                    $filename = "";
                 }
-    
+
                 $data = array(
                     'user_id' => $user_id,
                     'Name' => $Name,
@@ -243,12 +245,12 @@ class Userfairrekap extends BaseController
                     'date_created' => date('Y-m-d'),
                     'date_modified' => date('Y-m-d')
                 );
-    
+
                 $model->save($data);
                 $session->setFlashdata('msg', 'Data bahasa berhasil ditambah.');
-    
+
                 return redirect()->to('/userfair6/docs');
-            }else{
+            } else {
                 $data['datakomp'] = $this->request->getVar('komp6');
 
                 $model1 = new KompModel();
@@ -257,7 +259,7 @@ class Userfairrekap extends BaseController
 
                 $data['title_page'] = "VI. Bahasa yang Dikuasai (W4)";
                 $data['data_bread'] = '';
-                $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Tambah Bahasa</li>';
+                $data['stringbread'] = '<li class="breadcrumb-item active"><a href="' . base_url() . "/userfair" . '">Dokumen FAIR</a></li><li class="breadcrumb-item active">Tambah Bahasa</li>';
                 $data['logged_in'] = $session->get('logged_in');
                 $data['validation'] = $this->validator;
                 return view('maintemp/tambahbahasavalid', $data);
@@ -265,40 +267,42 @@ class Userfairrekap extends BaseController
         }
     }
 
-    public function hapusbahasa($id){
+    public function hapusbahasa($id)
+    {
         $session = session();
         $logged_in = $session->get('logged_in');
         $ispeserta = $session->get('ispeserta');
-        if ((!$logged_in)&&(!$ispeserta)){
+        if ((!$logged_in) && (!$ispeserta)) {
             return redirect()->to('/home');
-        }else{
+        } else {
             $session->set('role', 'peserta');
         }
         $model = new BahasaModel();
 
         $bahasa = $model->find($id);
-        $path = './uploads/docs/'.$bahasa['File'];
-        if (is_file($path)){
+        $path = './uploads/docs/' . $bahasa['File'];
+        if (is_file($path)) {
             unlink($path);
         }
         $model->delete($id);
         $session->setFlashdata('msg', 'Data bahasa berhasil dihapus.');
 
-        return redirect()->to('/userfair6/docs');   
+        return redirect()->to('/userfair6/docs');
     }
 
-    public function ubahbahasa($id){
+    public function ubahbahasa($id)
+    {
         $session = session();
         $logged_in = $session->get('logged_in');
         $ispeserta = $session->get('ispeserta');
-        if ((!$logged_in)&&(!$ispeserta)){
+        if ((!$logged_in) && (!$ispeserta)) {
             return redirect()->to('/home');
-        }else{
+        } else {
             $session->set('role', 'peserta');
         }
         $model = new BahasaModel();
         $bahasa = $model->where('Num', $id)->first();
-        if ($bahasa){
+        if ($bahasa) {
             $data = [
                 'Num' => $bahasa['Num'],
                 'user_id' => $bahasa['user_id'],
@@ -318,30 +322,31 @@ class Userfairrekap extends BaseController
 
         $data['title_page'] = "VI. Bahasa yang Dikuasai (W4)";
         $data['data_bread'] = '';
-        $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Ubah Bahasa</li>';
+        $data['stringbread'] = '<li class="breadcrumb-item active"><a href="' . base_url() . "/userfair" . '">Dokumen FAIR</a></li><li class="breadcrumb-item active">Ubah Bahasa</li>';
         $data['logged_in'] = $session->get('logged_in');
         return view('maintemp/ubahbahasa', $data);
     }
 
-    public function ubahbahasaproses(){
+    public function ubahbahasaproses()
+    {
         $session = session();
         $slug = new Slug();
         $logged_in = $session->get('logged_in');
         $ispeserta = $session->get('ispeserta');
-        if ((!$logged_in)&&(!$ispeserta)){
+        if ((!$logged_in) && (!$ispeserta)) {
             return redirect()->to('/home');
-        }else{
+        } else {
             $session->set('role', 'peserta');
         }
         $model = new BahasaModel();
         $Num = $this->request->getVar('Num');
         $user_id = $session->get('user_id');
 
-        $button=$this->request->getVar('submit');
-        
-        if ($button=="batal"){
+        $button = $this->request->getVar('submit');
+
+        if ($button == "batal") {
             return redirect()->to('/userfair6/docs');
-        }else{
+        } else {
             helper(['form', 'url']);
 
             $formvalid = $this->validate([
@@ -382,7 +387,7 @@ class Userfairrekap extends BaseController
                 ]
             ]);
 
-            if ($formvalid){
+            if ($formvalid) {
                 $filename = $this->request->getVar('filename');
                 $Name = $this->request->getVar('Name');
                 $LangType = $this->request->getVar('LangType');
@@ -397,10 +402,10 @@ class Userfairrekap extends BaseController
                 $nilai_r = 0;
                 $stringkp = '';
                 $totarray = count($komp);
-                $i=0;
+                $i = 0;
                 foreach ($komp as $kp) :
                     $nilai_p = $nilai_p + 2;
-                    switch ($LangType){
+                    switch ($LangType) {
                         case "Da":
                             $nilai_q = $nilai_q + 1;
                             break;
@@ -411,7 +416,7 @@ class Userfairrekap extends BaseController
                             $nilai_q = $nilai_q + 3;
                             break;
                     }
-                    switch ($VerbSkill){
+                    switch ($VerbSkill) {
                         case "Pasif":
                             $nilai_r = $nilai_r + 2;
                             break;
@@ -420,34 +425,34 @@ class Userfairrekap extends BaseController
                             break;
                     }
                     $i++;
-                    if ($i!=$totarray){
-                        $stringkp = $stringkp.$kp.', ';
-                    }else{
-                        $stringkp = $stringkp.$kp;
+                    if ($i != $totarray) {
+                        $stringkp = $stringkp . $kp . ', ';
+                    } else {
+                        $stringkp = $stringkp . $kp;
                     }
                 endforeach;
                 $nilai_w4 = $nilai_p * $nilai_q * $nilai_r;
 
                 $namabahasa = $slug->slugify($Name);
                 $ext = $File->getClientExtension();
-                if ((empty($filename))&&(!empty($ext))){
+                if ((empty($filename)) && (!empty($ext))) {
                     $random = bin2hex(random_bytes(4));
-                    $filenamenew = $user_id.'_bahasa_'.$namabahasa.'_'.$random.'.'.$ext;
-                    $File->move('uploads/docs/',$filenamenew,true);
-                } elseif ((!empty($filename))&&(!empty($ext))){
-                    $oldext = substr($filename,-4);
-                    if ($oldext == $ext){
-                        $File->move('uploads/docs/',$filename,true);
+                    $filenamenew = $user_id . '_bahasa_' . $namabahasa . '_' . $random . '.' . $ext;
+                    $File->move('uploads/docs/', $filenamenew, true);
+                } elseif ((!empty($filename)) && (!empty($ext))) {
+                    $oldext = substr($filename, -4);
+                    if ($oldext == $ext) {
+                        $File->move('uploads/docs/', $filename, true);
                         $filenamenew = $filename;
-                    }else{
+                    } else {
                         $random = bin2hex(random_bytes(4));
-                        $filenamenew = $user_id.'_bahasa_'.$namabahasa.'_'.$random.'.'.$ext;
-                        $File->move('uploads/docs/',$filenamenew,true);
+                        $filenamenew = $user_id . '_bahasa_' . $namabahasa . '_' . $random . '.' . $ext;
+                        $File->move('uploads/docs/', $filenamenew, true);
                     }
-                }else{
-                    $filenamenew=$filename;
+                } else {
+                    $filenamenew = $filename;
                 }
-    
+
                 $data = array(
                     'Name' => $Name,
                     'LangType' => $LangType,
@@ -465,11 +470,11 @@ class Userfairrekap extends BaseController
 
                 $model->update($Num, $data);
                 $session->setFlashdata('msg', 'Data bahasa berhasil diubah.');
-    
+
                 return redirect()->to('/userfair6/docs');
-            }else{
+            } else {
                 $bahasa = $model->where('Num', $Num)->first();
-                if ($bahasa){
+                if ($bahasa) {
                     $data = [
                         'Num' => $bahasa['Num'],
                         'user_id' => $bahasa['user_id'],
@@ -484,18 +489,18 @@ class Userfairrekap extends BaseController
                         'datakomp' => explode(", ", $bahasa['kompetensi'])
                     ];
                 }
-        
+
                 $model1 = new KompModel();
                 $where = "komp_cat LIKE 'W.4%'";
                 $data['data_komp'] = $model1->where($where)->orderby('komp_id', 'ASC')->findall();
 
                 $data['title_page'] = "VI. Bahasa yang Dikuasai (W4)";
                 $data['data_bread'] = '';
-                $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Ubah Bahasa</li>';
+                $data['stringbread'] = '<li class="breadcrumb-item active"><a href="' . base_url() . "/userfair" . '">Dokumen FAIR</a></li><li class="breadcrumb-item active">Ubah Bahasa</li>';
                 $data['logged_in'] = $session->get('logged_in');
                 $data['validation'] = $this->validator;
                 return view('maintemp/ubahbahasa', $data);
             }
-        }        
+        }
     }
 }

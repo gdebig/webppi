@@ -1,6 +1,6 @@
-<?= $this->extend('maintemp/template');?>
+<?= $this->extend('maintemp/template'); ?>
 
-<?= $this->section('content');?>
+<?= $this->section('content'); ?>
 
 <div class="card card-primary" style="width: auto; margin: 30px;">
     <div class="col-sm-13" style="width: auto; margin: 30px;">
@@ -42,4 +42,4 @@
 <!-- /.content-wrapper -->
 <!-- Control Sidebar -->
 
-<?= $this->endSection();?>
+<?= $this->endSection(); ?>

@@ -20,28 +20,28 @@ class Manpeserta extends BaseController
         $logged_in = $session->get('logged_in');
         $issadmin = $session->get('issadmin');
         $isadmin = $session->get('isadmin');
-        if ((!$logged_in)&&((!$issadmin)||(!$isadmin))){
+        if ((!$logged_in) && ((!$issadmin) || (!$isadmin))) {
             return redirect()->to('/home');
         }
         helper(['tanggal']);
-        
+
         $user_id = $session->get('user_id');
         $model = new UserModel();
         $data['logged_in'] = $logged_in;
         $where = "tipe_user LIKE '___y'";
         $where1 = "status IN ('diterima', 'regular')";
         $user = $model->join('tbl_profile', 'tbl_user.user_id = tbl_profile.user_id', 'left')->join('tbl_bimbing', 'tbl_user.user_id = tbl_bimbing.mhs_id', 'left')->where($where1)->where($where)->where('tbl_user.softdelete', 'no')->orderby('tbl_user.user_id', 'DESC')->findall();
-        if (!empty($user)){
+        if (!empty($user)) {
             $data['data_user'] = $user;
-        }else{
+        } else {
             $data['data_user'] = 'kosong';
         }
-        
+
         $where2 = "tipe_user LIKE '__y_'";
         $dosbing = $model->join('tbl_profile', 'tbl_user.user_id = tbl_profile.user_id', 'left')->where($where2)->where('tbl_user.softdelete', 'no')->orderby('tbl_user.user_id', 'DESC')->findall();
-        if (!empty($dosbing)){
+        if (!empty($dosbing)) {
             $data['data_dosbing'] = $dosbing;
-        }else{
+        } else {
             $data['data_dosbing'] = 'kosong';
         }
 
@@ -50,19 +50,20 @@ class Manpeserta extends BaseController
         return view('maintemp/peserta', $data);
     }
 
-    public function profile($id){
+    public function profile($id)
+    {
         $session = session();
         $logged_in = $session->get('logged_in');
         $issadmin = $session->get('issadmin');
         $isadmin = $session->get('isadmin');
-        if ((!$logged_in)&&((!$issadmin)||(!$isadmin))){
+        if ((!$logged_in) && ((!$issadmin) || (!$isadmin))) {
             return redirect()->to('/home');
         }
         helper(['tanggal']);
 
         $model = new CapesProfileModel();
         $user = $model->where('user_id', $id)->first();
-        if ($user){
+        if ($user) {
             $data = [
                 'ID' => $user['ID'],
                 'user_id' => $user['user_id'],
@@ -93,7 +94,7 @@ class Manpeserta extends BaseController
                 'Photo' => $user['Photo'],
                 'pindahregular' => $user['pindahregular']
             ];
-        }else{
+        } else {
             $data['kosong'] = "kosong";
         }
         $data['logged_in'] = $logged_in;
@@ -102,19 +103,20 @@ class Manpeserta extends BaseController
         return view('maintemp/capesprofile', $data);
     }
 
-    public function doklengkap($id){
+    public function doklengkap($id)
+    {
         $session = session();
         $logged_in = $session->get('logged_in');
         $issadmin = $session->get('issadmin');
         $isadmin = $session->get('isadmin');
-        if ((!$logged_in)&&((!$issadmin)||(!$isadmin))){
+        if ((!$logged_in) && ((!$issadmin) || (!$isadmin))) {
             return redirect()->to('/home');
         }
         helper(['tanggal']);
 
         $model = new CapesProfileModel();
         $user = $model->where('user_id', $id)->first();
-        if ($user){
+        if ($user) {
             $data = [
                 'ID' => $user['ID'],
                 'user_id' => $user['user_id'],
@@ -145,69 +147,69 @@ class Manpeserta extends BaseController
                 'Photo' => $user['Photo'],
                 'pindahregular' => $user['pindahregular']
             ];
-        }else{
+        } else {
             $data['kosong'] = "kosong";
         }
-        
+
         $model = new CapesPendModel();
         $data['capeslogged_in'] = $session->get('capeslogged_in');
-        $pend = $model->where('user_id', $id)->orderby('GradYear','DESC')->findall();
-        if (!empty($pend)){
+        $pend = $model->where('user_id', $id)->orderby('GradYear', 'DESC')->findall();
+        if (!empty($pend)) {
             $data['data_pend'] = $pend;
-        }else{
+        } else {
             $data['data_pend'] = 'kosong';
         }
-        
+
         $model = new CapesKualifikasiModel();
         $data['capeslogged_in'] = $session->get('capeslogged_in');
-        $kerja = $model->where('user_id', $id)->orderby('ProjValue','DESC')->findall();
-        if (!empty($kerja)){
+        $kerja = $model->where('user_id', $id)->orderby('ProjValue', 'DESC')->findall();
+        if (!empty($kerja)) {
             $data['data_kerja'] = $kerja;
-        }else{
+        } else {
             $data['data_kerja'] = 'kosong';
         }
-        
+
         $model = new CapesOrgModel();
         $data['capeslogged_in'] = $session->get('capeslogged_in');
-        $org = $model->where('user_id', $id)->orderby('StartPeriodYear','DESC')->findall();
-        if (!empty($org)){
+        $org = $model->where('user_id', $id)->orderby('StartPeriodYear', 'DESC')->findall();
+        if (!empty($org)) {
             $data['data_org'] = $org;
-        }else{
+        } else {
             $data['data_org'] = 'kosong';
         }
-        
+
         $model = new CapesSertModel();
         $data['capeslogged_in'] = $session->get('capeslogged_in');
-        $latih = $model->where('user_id', $id)->where('Jenis', 'pelatihan')->orderby('StartYear','DESC')->findall();
-        if (!empty($latih)){
+        $latih = $model->where('user_id', $id)->where('Jenis', 'pelatihan')->orderby('StartYear', 'DESC')->findall();
+        if (!empty($latih)) {
             $data['data_latih'] = $latih;
-        }else{
+        } else {
             $data['data_latih'] = 'kosong';
         }
-        
+
         $data['capeslogged_in'] = $session->get('capeslogged_in');
-        $latih = $model->where('user_id', $id)->where('Jenis', 'sertifikat')->orderby('StartYear','DESC')->findall();
-        if (!empty($latih)){
+        $latih = $model->where('user_id', $id)->where('Jenis', 'sertifikat')->orderby('StartYear', 'DESC')->findall();
+        if (!empty($latih)) {
             $data['data_latih'] = $latih;
-        }else{
+        } else {
             $data['data_latih'] = 'kosong';
         }
 
         $model = new CapesKartulModel();
         $data['capeslogged_in'] = $session->get('capeslogged_in');
-        $kartul = $model->where('user_id', $id)->orderby('Year','DESC')->findall();
-        if (!empty($kartul)){
+        $kartul = $model->where('user_id', $id)->orderby('Year', 'DESC')->findall();
+        if (!empty($kartul)) {
             $data['data_kartul'] = $kartul;
-        }else{
+        } else {
             $data['data_kartul'] = 'kosong';
         }
-        
+
         $model = new CapesSemModel();
         $data['capeslogged_in'] = $session->get('capeslogged_in');
         $sem = $model->where('user_id', $id)->where('Type', 'Sem')->orderby('Year', 'DESC')->findall();
-        if (!empty($sem)){
+        if (!empty($sem)) {
             $data['data_sem'] = $sem;
-        }else{
+        } else {
             $data['data_sem'] = 'kosong';
         }
 
@@ -217,21 +219,22 @@ class Manpeserta extends BaseController
         return view('maintemp/doklengkap', $data);
     }
 
-    public function pendidikan($id){
+    public function pendidikan($id)
+    {
         $session = session();
         $logged_in = $session->get('logged_in');
         $issadmin = $session->get('issadmin');
         $isadmin = $session->get('isadmin');
-        if ((!$logged_in)&&((!$issadmin)||(!$isadmin))){
+        if ((!$logged_in) && ((!$issadmin) || (!$isadmin))) {
             return redirect()->to('/home');
         }
         helper(['tanggal']);
         $model = new CapesPendModel();
         $data['capeslogged_in'] = $session->get('capeslogged_in');
-        $pend = $model->where('user_id', $id)->orderby('GradYear','DESC')->findall();
-        if (!empty($pend)){
+        $pend = $model->where('user_id', $id)->orderby('GradYear', 'DESC')->findall();
+        if (!empty($pend)) {
             $data['data_pend'] = $pend;
-        }else{
+        } else {
             $data['data_pend'] = 'kosong';
         }
         $data['title_page'] = "Data Pendidikan Calon Peserta PPI RPL";
@@ -239,21 +242,22 @@ class Manpeserta extends BaseController
         return view('maintemp/capespend', $data);
     }
 
-    public function kerja($id){
+    public function kerja($id)
+    {
         $session = session();
         $logged_in = $session->get('logged_in');
         $issadmin = $session->get('issadmin');
         $isadmin = $session->get('isadmin');
-        if ((!$logged_in)&&((!$issadmin)||(!$isadmin))){
+        if ((!$logged_in) && ((!$issadmin) || (!$isadmin))) {
             return redirect()->to('/home');
         }
         helper(['tanggal']);
         $model = new CapesKualifikasiModel();
         $data['capeslogged_in'] = $session->get('capeslogged_in');
-        $kerja = $model->where('user_id', $id)->orderby('ProjValue','DESC')->findall();
-        if (!empty($kerja)){
+        $kerja = $model->where('user_id', $id)->orderby('ProjValue', 'DESC')->findall();
+        if (!empty($kerja)) {
             $data['data_kerja'] = $kerja;
-        }else{
+        } else {
             $data['data_kerja'] = 'kosong';
         }
         $data['title_page'] = "Data Pengalaman Kerja Calon Peserta PPI RPL";
@@ -261,21 +265,22 @@ class Manpeserta extends BaseController
         return view('maintemp/capeskerja', $data);
     }
 
-    public function organ($id){
+    public function organ($id)
+    {
         $session = session();
         $logged_in = $session->get('logged_in');
         $issadmin = $session->get('issadmin');
         $isadmin = $session->get('isadmin');
-        if ((!$logged_in)&&((!$issadmin)||(!$isadmin))){
+        if ((!$logged_in) && ((!$issadmin) || (!$isadmin))) {
             return redirect()->to('/home');
         }
         helper(['tanggal']);
         $model = new CapesOrgModel();
         $data['capeslogged_in'] = $session->get('capeslogged_in');
-        $org = $model->where('user_id', $id)->orderby('StartPeriodYear','DESC')->findall();
-        if (!empty($org)){
+        $org = $model->where('user_id', $id)->orderby('StartPeriodYear', 'DESC')->findall();
+        if (!empty($org)) {
             $data['data_org'] = $org;
-        }else{
+        } else {
             $data['data_org'] = 'kosong';
         }
         $data['title_page'] = "Data Organisasi Calon Peserta PPI RPL";
@@ -283,21 +288,22 @@ class Manpeserta extends BaseController
         return view('maintemp/capesorg', $data);
     }
 
-    public function latih($id){
+    public function latih($id)
+    {
         $session = session();
         $logged_in = $session->get('logged_in');
         $issadmin = $session->get('issadmin');
         $isadmin = $session->get('isadmin');
-        if ((!$logged_in)&&((!$issadmin)||(!$isadmin))){
+        if ((!$logged_in) && ((!$issadmin) || (!$isadmin))) {
             return redirect()->to('/home');
         }
         helper(['tanggal']);
         $model = new CapesSertModel();
         $data['capeslogged_in'] = $session->get('capeslogged_in');
-        $latih = $model->where('user_id', $id)->where('Jenis', 'pelatihan')->orderby('StartYear','DESC')->findall();
-        if (!empty($latih)){
+        $latih = $model->where('user_id', $id)->where('Jenis', 'pelatihan')->orderby('StartYear', 'DESC')->findall();
+        if (!empty($latih)) {
             $data['data_latih'] = $latih;
-        }else{
+        } else {
             $data['data_latih'] = 'kosong';
         }
         $data['title_page'] = "Data Pelatihan Teknik Calon Peserta PPI RPL";
@@ -305,65 +311,68 @@ class Manpeserta extends BaseController
         return view('maintemp/capeslatih', $data);
     }
 
-    public function sert($id){
+    public function sert($id)
+    {
         $session = session();
         $logged_in = $session->get('logged_in');
         $issadmin = $session->get('issadmin');
         $isadmin = $session->get('isadmin');
-        if ((!$logged_in)&&((!$issadmin)||(!$isadmin))){
+        if ((!$logged_in) && ((!$issadmin) || (!$isadmin))) {
             return redirect()->to('/home');
         }
         helper(['tanggal']);
         $model = new CapesSertModel();
         $data['capeslogged_in'] = $session->get('capeslogged_in');
-        $latih = $model->where('user_id', $id)->where('Jenis', 'sertifikat')->orderby('StartYear','DESC')->findall();
-        if (!empty($latih)){
+        $latih = $model->where('user_id', $id)->where('Jenis', 'sertifikat')->orderby('StartYear', 'DESC')->findall();
+        if (!empty($latih)) {
             $data['data_latih'] = $latih;
-        }else{
+        } else {
             $data['data_latih'] = 'kosong';
         }
         $data['title_page'] = "Data Sertifikat Kompetensi Calon Peserta PPI RPL";
         $data['data_bread'] = "Sertifikat";
         return view('maintemp/capessert', $data);
     }
-    
-    public function kartul($id){
+
+    public function kartul($id)
+    {
         $session = session();
         $logged_in = $session->get('logged_in');
         $issadmin = $session->get('issadmin');
         $isadmin = $session->get('isadmin');
-        if ((!$logged_in)&&((!$issadmin)||(!$isadmin))){
+        if ((!$logged_in) && ((!$issadmin) || (!$isadmin))) {
             return redirect()->to('/home');
         }
         helper(['tanggal']);
         $model = new CapesKartulModel();
         $data['capeslogged_in'] = $session->get('capeslogged_in');
-        $kartul = $model->where('user_id', $id)->orderby('Year','DESC')->findall();
-        if (!empty($kartul)){
+        $kartul = $model->where('user_id', $id)->orderby('Year', 'DESC')->findall();
+        if (!empty($kartul)) {
             $data['data_kartul'] = $kartul;
-        }else{
+        } else {
             $data['data_kartul'] = 'kosong';
         }
         $data['title_page'] = "Data Karya Tulis di Bidang Keinsinyuran Calon Peserta PPI RPL";
         $data['data_bread'] = "Karya Tulis";
         return view('maintemp/capeskartul', $data);
-    }    
+    }
 
     //Fungsi untuk link Seminar
-    public function sem($id){
+    public function sem($id)
+    {
         $session = session();
         $logged_in = $session->get('logged_in');
         $issadmin = $session->get('issadmin');
         $isadmin = $session->get('isadmin');
-        if ((!$logged_in)&&((!$issadmin)||(!$isadmin))){
+        if ((!$logged_in) && ((!$issadmin) || (!$isadmin))) {
             return redirect()->to('/home');
         }
         $model = new CapesSemModel();
         $data['capeslogged_in'] = $session->get('capeslogged_in');
         $sem = $model->where('user_id', $id)->where('Type', 'Sem')->orderby('Year', 'DESC')->findall();
-        if (!empty($sem)){
+        if (!empty($sem)) {
             $data['data_sem'] = $sem;
-        }else{
+        } else {
             $data['data_sem'] = 'kosong';
         }
         $data['title_page'] = "Data Seminar/Lokakarya Calon Peserta PPI RPL";
@@ -371,71 +380,74 @@ class Manpeserta extends BaseController
         return view('maintemp/capessem', $data);
     }
 
-    public function prosesdosbing(){
+    public function prosesdosbing()
+    {
         $session = session();
         $model = new BimbingModel();
         $user_id = $session->get('user_id');
         $logged_in = $session->get('logged_in');
-        if ((!$logged_in)&&((!$issadmin)||(!$isadmin))){
+        $issadmin = $session->get('issadmin');
+        $isadmin = $session->get('isadmin');
+        if ((!$logged_in) && ((!$issadmin) || (!$isadmin))) {
             return redirect()->to('/home');
         }
 
-        $button=$this->request->getVar('submit');
+        $button = $this->request->getVar('submit');
 
-        if ($button == "set"){
+        if ($button == "set") {
             $userid = $this->request->getVar('user_id');
             $dosbing = $this->request->getVar('dosbing');
-            if (!empty($userid)){
-                foreach ($userid as $id){                   
+            if (!empty($userid)) {
+                foreach ($userid as $id) {
                     $mhs = $model->where('mhs_id', $id)->countAllResults();
-                    if ($mhs>=2){
+                    if ($mhs >= 2) {
                         $session->setFlashdata('errmsg', 'Mahasiswa yang sama, hanya boleh memiliki dua pembimbing.');
                         return redirect()->to('/manpeserta');
-                    }else{
+                    } else {
                         $data = array(
                             'mhs_id' => $userid,
                             'dosen_id' => $dosbing,
                             'date_created' => date('Y-m-d'),
                             'date_modified' => date('Y-m-d')
                         );
-        
+
                         $model->save($data);
                     }
                 }
 
                 $session->setFlashdata('msg', 'Dosen pembimbing berhasil ditetapkan.');
-    
+
                 return redirect()->to('/manpeserta');
-            }else{
+            } else {
 
                 $session->setFlashdata('errmsg', 'Tidak ada peserta yang dicentang.');
-    
+
                 return redirect()->to('/manpeserta');
             }
-        }elseif ($button == "ganti"){
+        } elseif ($button == "ganti") {
             $user_id = $this->request->getVar('user_id');
             $dosbing = $this->request->getVar('dosbing');
-            if (!empty($user_id)){
-                foreach ($user_id as $userid){
+            if (!empty($user_id)) {
+                foreach ($user_id as $userid) {
                     $bimbing = $model->where('mhs_id', $userid)->first();
                     $data = array(
                         'dosen_id' => $dosbing,
                         'date_modified' => date('Y-m-d')
                     );
-    
+
                     $model->update($bimbing['bimbing_id'], $data);
                 }
 
                 $session->setFlashdata('msg', 'Dosen pembimbing berhasil diubah.');
-    
+
                 return redirect()->to('/manpeserta');
-            }else{
+            } else {
 
                 $session->setFlashdata('errmsg', 'Tidak ada peserta yang dicentang.');
-    
+
                 return redirect()->to('/manpeserta');
             }
-        }else{
+        } else {
             return redirect()->to('/manpeserta');
         }
     }

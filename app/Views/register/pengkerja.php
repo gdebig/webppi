@@ -1,6 +1,6 @@
-<?= $this->extend('register/template');?>
+<?= $this->extend('register/template'); ?>
 
-<?= $this->section('content');?>
+<?= $this->section('content'); ?>
 
 <div class="card card-primary" style="width: auto; margin: 30px;">
     <div class="col-sm-13" style="width: auto; margin: 30px;">
@@ -11,13 +11,13 @@
         <div class="card">
             <div class="card-body">
 
-                <?php if(session()->getFlashdata('msg')):?>
-                <div class="alert alert-success"><?= session()->getFlashdata('msg') ?></div>
-                <?php endif;?>
+                <?php if (session()->getFlashdata('msg')) : ?>
+                    <div class="alert alert-success"><?= session()->getFlashdata('msg') ?></div>
+                <?php endif; ?>
 
                 <div class="col">
                     <div class="row">
-                        <a href="<?php echo base_url();?>/register/tambahkerja" class="btn btn-primary">Tambah
+                        <a href="<?php echo base_url(); ?>/register/tambahkerja" class="btn btn-primary">Tambah
                             Data Pengalaman Kerja</a>
                     </div>
                 </div>
@@ -28,159 +28,155 @@
                     </div>
                 </div>
 
-                <?php if(isset($data_kerja)&&($data_kerja=="kosong")){
-                    ?>
+                <?php if (isset($data_kerja) && ($data_kerja == "kosong")) {
+                ?>
 
-                <div class="alert alert-danger">Data pengalaman kerja belum ada. <a
-                        href="<?= base_url();?>/register/tambahkerja">Klik
-                        di sini untuk menambah data pengalaman kerja</a></div>
-                <?php }else{ ?>
+                    <div class="alert alert-danger">Data pengalaman kerja belum ada. <a href="<?= base_url(); ?>/register/tambahkerja">Klik
+                            di sini untuk menambah data pengalaman kerja</a></div>
+                <?php } else { ?>
 
-                <table id="tabledata" class="table table-bordered table-hover">
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>Periode</th>
-                            <th>Nama Instansi/Perusahaan</th>
-                            <th>Jabatan/tugas</th>
-                            <th>Nama Aktifitas/Kegiatan/Proyek</th>
-                            <th>Pemberi Tugas</th>
-                            <th>Lokasi</th>
-                            <th>Durasi</th>
-                            <th>Posisi Tugas, Jabatan</th>
-                            <th>Nilai Proyek</th>
-                            <th>Nilai Tanggung Jawab</th>
-                            <th>SDM yang terlibat</th>
-                            <th>Tingkat Kesulitan</th>
-                            <th>Skala Proyek</th>
-                            <th>Uraian Singkat Tugas dan Tanggung Jawab Prof sesuai NSPK</th>
-                            <th>Bukti Pengalaman Kerja</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                                    $i=1; 
-                                   foreach ($data_kerja as $kerja) : 
-                                    ?>
-                        <tr>
-                            <td><?php echo $i;$i++;?></td>
-                            <td><?php
-                                if (!empty($kerja['EndDate'])&&($kerja['EndDate']!='0000-00-00')){
-                                    echo format_indo($kerja['StartDate'])." hingga ".format_indo($kerja['EndDate']);
-                                }else{
-                                    echo format_indo($kerja['StartDate'])." hingga sekarang.";
-                                }
-                            ?></td>
-                            <td><?= $kerja['NameInstance'];?></td>
-                            <td><?= $kerja['Position'];?></td>
-                            <td><?= $kerja['Name'];?></td>
-                            <td><?= $kerja['Giver']; ?></td>
-                            <td><?= $kerja['LocCity'].', '.$kerja['LocProv'].', '.$kerja['LocCountry'];?></td>
-                            <td><?php
-                                switch ($kerja['Duration']){
-                                    case 'smp3':
-                                        echo "1 - 3 tahun";
-                                        break;
-                                    case 'smp7':
-                                        echo "4 - 7 tahun";
-                                        break;
-                                    case 'smpe10':
-                                        echo "8 - 10 tahun";
-                                        break;
-                                    case 'lbh10':
-                                        echo "> dari 10 tahun";
-                                        break;
-                                }
-                            ?></td>
-                            <td><?php
-                                switch ($kerja['Jabatan']){
-                                    case 'anggota':
-                                        echo "Anggota / Staff / Dosen";
-                                        break;
-                                    case 'supervisor':
-                                        echo "Supervisor / Site Engineer / Site Manager / KaLab / Sekretaris Jurusan / Ketua Jurusan / PD";
-                                        break;
-                                    case 'direktur':
-                                        echo "Direktur / Ketua Tim / Dekan / PR / Rektor";
-                                        break;
-                                    case 'pengarah':
-                                        echo "Pengarah / Adviser / Narasumber Ahli";
-                                        break;
-                                }
-                            ?></td>
-                            <td><?= $kerja['ProjValue'];?></td>
-                            <td><?= $kerja['RspnValue'];?></td>
-                            <td><?php
-                                switch ($kerja['Hresource']){
-                                    case 'dik':
-                                        echo "Sedikit";
-                                        break;
-                                    case 'sed':
-                                        echo "Sedang";
-                                        break;
-                                    case 'bny':
-                                        echo "Banyak";
-                                        break;
-                                    case 'sbny':
-                                        echo "Sangat Banyak";
-                                        break;
-                                }
-                            ?></td>
-                            <td><?php
-                                switch ($kerja['Diff']){
-                                    case 'ren':
-                                        echo "Rendah";
-                                        break;
-                                    case 'sed':
-                                        echo "Sedang";
-                                        break;
-                                    case 'tin':
-                                        echo "Tinggi";
-                                        break;
-                                    case 'stin':
-                                        echo "Sangat Tinggi";
-                                        break;
-                                }
-                            ?></td>
-                            <td><?php
-                                switch ($kerja['Scale']){
-                                    case 'ren':
-                                        echo "Rendah";
-                                        break;
-                                    case 'sed':
-                                        echo "Sedang";
-                                        break;
-                                    case 'tin':
-                                        echo "Tinggi";
-                                        break;
-                                    case 'stin':
-                                        echo "Sangat Tinggi";
-                                        break;
-                                }
-                            ?></td>
-                            <td><?= $kerja['Desc'];?></td>
-                            <td><?php
-                            if (!empty($kerja['File'])){
-                                echo "<a href='".base_url('uploads/docs/'.$kerja['File'])."' target='_blank'>".$kerja['File']."</a>";
-                            }else{
-                                echo "";
-                            }
-                            ?></td>
-                            <td style="text-align: center"><a
-                                    href="<?php echo base_url();?>/register/ubahpengkerja/<?=$kerja['Num'];?>"
-                                    class="btn btn-warning"> <i class="fas fa-file-signature"></i> Ubah</a>
-                                <a href="<?php echo base_url();?>/register/hapuspengkerja/<?=$kerja['Num'];?>"
-                                    onclick="return confirm('Apakah anda yakin akan menghapus data pengalaman kerja?')"
-                                    class="btn btn-danger"> <i class="fas fa-trash"></i>
-                                    Hapus</a>
-                            </td>
-                        </tr>
-                        <?php 
-                            endforeach 
-                        ?>
-                    </tbody>
-                </table>
+                    <table id="tabledata" class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Periode</th>
+                                <th>Nama Instansi/Perusahaan</th>
+                                <th>Jabatan/tugas</th>
+                                <th>Nama Aktifitas/Kegiatan/Proyek</th>
+                                <th>Pemberi Tugas</th>
+                                <th>Lokasi</th>
+                                <th>Durasi</th>
+                                <th>Posisi Tugas, Jabatan</th>
+                                <th>Nilai Proyek</th>
+                                <th>Nilai Tanggung Jawab</th>
+                                <th>SDM yang terlibat</th>
+                                <th>Tingkat Kesulitan</th>
+                                <th>Skala Proyek</th>
+                                <th>Uraian Singkat Tugas dan Tanggung Jawab Prof sesuai NSPK</th>
+                                <th>Bukti Pengalaman Kerja</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $i = 1;
+                            foreach ($data_kerja as $kerja) :
+                            ?>
+                                <tr>
+                                    <td><?php echo $i;
+                                        $i++; ?></td>
+                                    <td><?php
+                                        if (!empty($kerja['EndDate']) && ($kerja['EndDate'] != '0000-00-00')) {
+                                            echo format_indo($kerja['StartDate']) . " hingga " . format_indo($kerja['EndDate']);
+                                        } else {
+                                            echo format_indo($kerja['StartDate']) . " hingga sekarang.";
+                                        }
+                                        ?></td>
+                                    <td><?= $kerja['NameInstance']; ?></td>
+                                    <td><?= $kerja['Position']; ?></td>
+                                    <td><?= $kerja['Name']; ?></td>
+                                    <td><?= $kerja['Giver']; ?></td>
+                                    <td><?= $kerja['LocCity'] . ', ' . $kerja['LocProv'] . ', ' . $kerja['LocCountry']; ?></td>
+                                    <td><?php
+                                        switch ($kerja['Duration']) {
+                                            case 'smp3':
+                                                echo "1 - 3 tahun";
+                                                break;
+                                            case 'smp7':
+                                                echo "4 - 7 tahun";
+                                                break;
+                                            case 'smpe10':
+                                                echo "8 - 10 tahun";
+                                                break;
+                                            case 'lbh10':
+                                                echo "> dari 10 tahun";
+                                                break;
+                                        }
+                                        ?></td>
+                                    <td><?php
+                                        switch ($kerja['Jabatan']) {
+                                            case 'anggota':
+                                                echo "Anggota / Staff / Dosen";
+                                                break;
+                                            case 'supervisor':
+                                                echo "Supervisor / Site Engineer / Site Manager / KaLab / Sekretaris Jurusan / Ketua Jurusan / PD";
+                                                break;
+                                            case 'direktur':
+                                                echo "Direktur / Ketua Tim / Dekan / PR / Rektor";
+                                                break;
+                                            case 'pengarah':
+                                                echo "Pengarah / Adviser / Narasumber Ahli";
+                                                break;
+                                        }
+                                        ?></td>
+                                    <td><?= $kerja['ProjValue']; ?></td>
+                                    <td><?= $kerja['RspnValue']; ?></td>
+                                    <td><?php
+                                        switch ($kerja['Hresource']) {
+                                            case 'dik':
+                                                echo "Sedikit";
+                                                break;
+                                            case 'sed':
+                                                echo "Sedang";
+                                                break;
+                                            case 'bny':
+                                                echo "Banyak";
+                                                break;
+                                            case 'sbny':
+                                                echo "Sangat Banyak";
+                                                break;
+                                        }
+                                        ?></td>
+                                    <td><?php
+                                        switch ($kerja['Diff']) {
+                                            case 'ren':
+                                                echo "Rendah";
+                                                break;
+                                            case 'sed':
+                                                echo "Sedang";
+                                                break;
+                                            case 'tin':
+                                                echo "Tinggi";
+                                                break;
+                                            case 'stin':
+                                                echo "Sangat Tinggi";
+                                                break;
+                                        }
+                                        ?></td>
+                                    <td><?php
+                                        switch ($kerja['Scale']) {
+                                            case 'ren':
+                                                echo "Rendah";
+                                                break;
+                                            case 'sed':
+                                                echo "Sedang";
+                                                break;
+                                            case 'tin':
+                                                echo "Tinggi";
+                                                break;
+                                            case 'stin':
+                                                echo "Sangat Tinggi";
+                                                break;
+                                        }
+                                        ?></td>
+                                    <td><?= $kerja['Desc']; ?></td>
+                                    <td><?php
+                                        if (!empty($kerja['File'])) {
+                                            echo "<a href='" . base_url('uploads/docs/' . $kerja['File']) . "' target='_blank'>" . $kerja['File'] . "</a>";
+                                        } else {
+                                            echo "";
+                                        }
+                                        ?></td>
+                                    <td style="text-align: center"><a href="<?php echo base_url(); ?>/register/ubahpengkerja/<?= $kerja['Num']; ?>" class="btn btn-warning"> <i class="fas fa-file-signature"></i> Ubah</a>
+                                        <a href="<?php echo base_url(); ?>/register/hapuspengkerja/<?= $kerja['Num']; ?>" onclick="return confirm('Apakah anda yakin akan menghapus data pengalaman kerja?')" class="btn btn-danger"> <i class="fas fa-trash"></i>
+                                            Hapus</a>
+                                    </td>
+                                </tr>
+                            <?php
+                            endforeach
+                            ?>
+                        </tbody>
+                    </table>
                 <?php } ?>
             </div>
         </div>
@@ -189,4 +185,4 @@
 <!-- /.content-wrapper -->
 <!-- Control Sidebar -->
 
-<?= $this->endSection();?>
+<?= $this->endSection(); ?>

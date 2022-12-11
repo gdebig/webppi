@@ -1,6 +1,6 @@
-<?= $this->extend('maintemp/template');?>
+<?= $this->extend('maintemp/template'); ?>
 
-<?= $this->section('content');?>
+<?= $this->section('content'); ?>
 
 <div class="card card-primary" style="width: auto; margin: 30px;">
     <div class="col-sm-13" style="width: auto; margin: 30px;">
@@ -9,14 +9,14 @@
             <div class="card-body">
 
                 <div class="col">
-                    <?php if(session()->getFlashdata('msg')):?>
-                    <div class="alert alert-success"><?= session()->getFlashdata('msg') ?></div>
-                    <?php endif;?>
+                    <?php if (session()->getFlashdata('msg')) : ?>
+                        <div class="alert alert-success"><?= session()->getFlashdata('msg') ?></div>
+                    <?php endif; ?>
                 </div>
 
                 <div class="col">
                     <div class="row">
-                        <a href="<?php echo base_url();?>/mantugasakhir" class="btn btn-primary">Kembali ke Daftar
+                        <a href="<?php echo base_url(); ?>/mantugasakhir" class="btn btn-primary">Kembali ke Daftar
                             Praktek Keinsinyuran.</a>
                     </div>
                 </div>
@@ -60,4 +60,4 @@
 <!-- /.content-wrapper -->
 <!-- Control Sidebar -->
 
-<?= $this->endSection();?>
+<?= $this->endSection(); ?>

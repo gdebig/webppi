@@ -1,6 +1,6 @@
-<?= $this->extend('maintemp/template');?>
+<?= $this->extend('maintemp/template'); ?>
 
-<?= $this->section('content');?>
+<?= $this->section('content'); ?>
 
 <div class="card card-primary" style="width: auto; margin: 30px;">
     <div class="col-sm-13" style="width: auto; margin: 30px;">
@@ -8,69 +8,57 @@
             <h3>Tambah Data Pendidikan/Pelatihan Teknik/Manajemen</h3>
         </div>
 
-        <?php if(isset($validation)):?>
-        <div class="alert alert-danger"><?= $validation->listErrors()?></div>
-        <?php endif;?>
+        <?php if (isset($validation)) : ?>
+            <div class="alert alert-danger"><?= $validation->listErrors() ?></div>
+        <?php endif; ?>
 
         <!-- /.card-header -->
         <div class="card-body" style="width: auto; margin: 30px;">
-            <form action="<?php echo base_url();?>/userfair15/tambahlatihproses" method="post"
-                enctype="multipart/form-data">
+            <form action="<?php echo base_url(); ?>/userfair15/tambahlatihproses" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="Name" class="element">Nama Pendidikan/Pelatihan
                         <span class="required"> *</span>&nbsp; </label>
                     <div class="element">
-                        <input class="form-control" id="Name" name="Name" type="text"
-                            placeholder="Nama Pendidikan/Pelatihan..." value="<?= set_value('Name');?>" />
+                        <input class="form-control" id="Name" name="Name" type="text" placeholder="Nama Pendidikan/Pelatihan..." value="<?= set_value('Name'); ?>" />
                     </div><br />
                     <label for="Organizer" class="element">Penyelenggara <span class="required"> *</span>&nbsp; </label>
                     <div class="element">
-                        <input class="form-control" id="Organizer" name="Organizer" type="text"
-                            placeholder="Penyelenggara..." value="<?= set_value('Organizer');?>" />
+                        <input class="form-control" id="Organizer" name="Organizer" type="text" placeholder="Penyelenggara..." value="<?= set_value('Organizer'); ?>" />
                     </div>
                     <br />
                     <label for="City" class="element">Kota Lokasi Pelatihan <span class="required">
                             *</span>&nbsp;</label>
                     <div class="element">
-                        <input class="form-control" id="City" name="City" type="text"
-                            placeholder="Kota Lokasi Pelatihan..." value="<?= set_value('City');?>" />
+                        <input class="form-control" id="City" name="City" type="text" placeholder="Kota Lokasi Pelatihan..." value="<?= set_value('City'); ?>" />
                     </div>
                     <br />
                     <label for="Country" class="element">Negara Lokasi Pelatihan <span class="required">
                             *</span>&nbsp;</label>
                     <div class="element">
-                        <input class="form-control" id="Country" name="Country" type="text"
-                            placeholder="Negara Lokasi Pelatihan..." value="<?= set_value('Country');?>" />
+                        <input class="form-control" id="Country" name="Country" type="text" placeholder="Negara Lokasi Pelatihan..." value="<?= set_value('Country'); ?>" />
                     </div>
                     <br />
                     <label for="StartMonth" class="element">Bulan <span class="required"> *</span>&nbsp; </label>
                     <div class="element">
                         <select name="StartMonth" id="StartMonth" class="form-control">
-                            <option value="Januari"
-                                <?php echo set_value('StartMonth') == "Januari" ? "selected" : "";?>>Januari</option>
-                            <option value="Februari"
-                                <?php echo set_value('StartMonth') == "Februari" ? "selected" : "";?>>Februari</option>
-                            <option value="Maret" <?php echo set_value('StartMonth') == "Maret" ? "selected" : "";?>>
+                            <option value="Januari" <?php echo set_value('StartMonth') == "Januari" ? "selected" : ""; ?>>Januari</option>
+                            <option value="Februari" <?php echo set_value('StartMonth') == "Februari" ? "selected" : ""; ?>>Februari</option>
+                            <option value="Maret" <?php echo set_value('StartMonth') == "Maret" ? "selected" : ""; ?>>
                                 Maret</option>
-                            <option value="April" <?php echo set_value('StartMonth') == "April" ? "selected" : "";?>>
+                            <option value="April" <?php echo set_value('StartMonth') == "April" ? "selected" : ""; ?>>
                                 April</option>
-                            <option value="Mei" <?php echo set_value('StartMonth') == "Mei" ? "selected" : "";?>>Mei
+                            <option value="Mei" <?php echo set_value('StartMonth') == "Mei" ? "selected" : ""; ?>>Mei
                             </option>
-                            <option value="Juni" <?php echo set_value('StartMonth') == "Juni" ? "selected" : "";?>>Juni
+                            <option value="Juni" <?php echo set_value('StartMonth') == "Juni" ? "selected" : ""; ?>>Juni
                             </option>
-                            <option value="Juli" <?php echo set_value('StartMonth') == "Juli" ? "selected" : "";?>>Juli
+                            <option value="Juli" <?php echo set_value('StartMonth') == "Juli" ? "selected" : ""; ?>>Juli
                             </option>
-                            <option value="Agustus"
-                                <?php echo set_value('StartMonth') == "Agustus" ? "selected" : "";?>>Agustus</option>
-                            <option value="September"
-                                <?php echo set_value('StartMonth') == "September" ? "selected" : "";?>>September
+                            <option value="Agustus" <?php echo set_value('StartMonth') == "Agustus" ? "selected" : ""; ?>>Agustus</option>
+                            <option value="September" <?php echo set_value('StartMonth') == "September" ? "selected" : ""; ?>>September
                             </option>
-                            <option value="Oktober"
-                                <?php echo set_value('StartMonth') == "Oktober" ? "selected" : "";?>>Oktober</option>
-                            <option value="November"
-                                <?php echo set_value('StartMonth') == "November" ? "selected" : "";?>>November</option>
-                            <option value="Desember"
-                                <?php echo set_value('StartMonth') == "Desember" ? "selected" : "";?>>Desember</option>
+                            <option value="Oktober" <?php echo set_value('StartMonth') == "Oktober" ? "selected" : ""; ?>>Oktober</option>
+                            <option value="November" <?php echo set_value('StartMonth') == "November" ? "selected" : ""; ?>>November</option>
+                            <option value="Desember" <?php echo set_value('StartMonth') == "Desember" ? "selected" : ""; ?>>Desember</option>
                         </select>
                     </div>
                     <br />
@@ -78,26 +66,26 @@
                     <div class="element">
                         <select name="StartYear" id="StartYear" class="form-control">
                             <?php
-                                    $lastyear = date("Y")+10;
-                                    $now = date("Y");
-                                    for ($tahun1 = 1901;$tahun1<=$lastyear;$tahun1++){
-                                        if ($tahun1 == set_value('StartYear')){
-                                            $selected = "selected";
-                                        }else{
-                                            $selected ="";
-                                        }
-                                        echo "<option value='".$tahun1."' ".$selected.">".$tahun1."</option>";
-                                    }
-                                ?>
+                            $lastyear = date("Y") + 10;
+                            $now = date("Y");
+                            for ($tahun1 = 1901; $tahun1 <= $lastyear; $tahun1++) {
+                                if ($tahun1 == set_value('StartYear')) {
+                                    $selected = "selected";
+                                } else {
+                                    $selected = "";
+                                }
+                                echo "<option value='" . $tahun1 . "' " . $selected . ">" . $tahun1 . "</option>";
+                            }
+                            ?>
                         </select>
                     </div>
                     <br />
                     <label for="Level" class="element">Tingkat Materi</label>
                     <div class="element">
                         <select id="Level" name="Level" class="form-control">
-                            <option value="Dasar" <?php echo set_value('Level') == "Dasar" ? "selected" : "";?>>Tingkat
+                            <option value="Dasar" <?php echo set_value('Level') == "Dasar" ? "selected" : ""; ?>>Tingkat
                                 Dasar (Fundamental)</option>
-                            <option value="Lanjut" <?php echo set_value('Level') == "Lanjut" ? "selected" : "";?>>
+                            <option value="Lanjut" <?php echo set_value('Level') == "Lanjut" ? "selected" : ""; ?>>
                                 Tingkat Lanjut (Advanced)</option>
                         </select>
                     </div>
@@ -105,13 +93,13 @@
                     <label for="Length" class="element">Jumlah Jam</label>
                     <div class="element">
                         <select id="Length" name="Length" class="form-control">
-                            <option value="sd36" <?php echo set_value('Length') == "sd36" ? "selected" : "";?>>Lama
+                            <option value="sd36" <?php echo set_value('Length') == "sd36" ? "selected" : ""; ?>>Lama
                                 pendidikan s/d 36 Jam</option>
-                            <option value="smp100" <?php echo set_value('Length') == "smp100" ? "selected" : "";?>>Lama
+                            <option value="smp100" <?php echo set_value('Length') == "smp100" ? "selected" : ""; ?>>Lama
                                 pendidikan 36 - 100 Jam</option>
-                            <option value="smp240" <?php echo set_value('Length') == "smp240" ? "selected" : "";?>>Lama
+                            <option value="smp240" <?php echo set_value('Length') == "smp240" ? "selected" : ""; ?>>Lama
                                 pendidikan 100 - 240 Jam</option>
-                            <option value="lbih240" <?php echo set_value('Length') == "lbih240" ? "selected" : "";?>>
+                            <option value="lbih240" <?php echo set_value('Length') == "lbih240" ? "selected" : ""; ?>>
                                 Lebih dari 240 Jam</option>
                         </select>
                     </div>
@@ -119,8 +107,7 @@
                     <label for="Description" class="element">Uraian Singkat Materi Pendidikan/Pelatihan, Tingkat
                         Pendidikan, Sertifikat</label>
                     <div class="element">
-                        <textarea class="form-control" id="Description" name="Description" placeholder="Deskripsi"
-                            placeholder="Uraian Singkat..."><?= set_value('Description');?></textarea>
+                        <textarea class="form-control" id="Description" name="Description" placeholder="Deskripsi" placeholder="Uraian Singkat..."><?= set_value('Description'); ?></textarea>
                     </div>
                     <br />
                     <label for="komp15" class="element">Kompetensi (Gunakan tombol ctrl + klik kiri mouse untuk memilih
@@ -128,28 +115,28 @@
                     <div class="element">
                         <select multiple class="form-control" name="komp15[]" id="komp15" size="10">
                             <?php
-                            $i=1;
+                            $i = 1;
                             $prev_cat = array();
 
                             foreach ($data_komp as $komp) :
-                                $j = $i-1;
+                                $j = $i - 1;
                                 $prev_cat[$i] = $komp['komp_cat'];
-                                if (!empty($prev_cat)&&($j!=0)){
-                                    if ($prev_cat[$i]!=$prev_cat[$j]){
+                                if (!empty($prev_cat) && ($j != 0)) {
+                                    if ($prev_cat[$i] != $prev_cat[$j]) {
                                         echo "</optgroup>";
                                     }
                                 }
-                                if ($komp['komp_parent']=='y'){
-                                    echo "<optgroup label='".$komp['komp_code']." ".$komp['komp_desc']."'>";
-                                }else{
-                                    if ($i==1){
-                                    }else{
-                                        if (!empty(set_value("komp15"))){
+                                if ($komp['komp_parent'] == 'y') {
+                                    echo "<optgroup label='" . $komp['komp_code'] . " " . $komp['komp_desc'] . "'>";
+                                } else {
+                                    if ($i == 1) {
+                                    } else {
+                                        if (!empty(set_value("komp15"))) {
                                             $kompselected = array_search($komp['komp_code'], set_value("komp15")) !== false ? 'selected' : '';
-                                        }else{
+                                        } else {
                                             $kompselected = '';
                                         }
-                                        echo "<option value='".$komp['komp_code']."' title='".$komp['komp_desc']."' ".$kompselected.">".$komp['komp_code']." ".$komp['komp_desc']."</option>";
+                                        echo "<option value='" . $komp['komp_code'] . "' title='" . $komp['komp_desc'] . "' " . $kompselected . ">" . $komp['komp_code'] . " " . $komp['komp_desc'] . "</option>";
                                     }
                                 }
                                 $i++;
@@ -172,8 +159,7 @@
                                 Pelatihan</button>
                         </div>
                         <div class="col">
-                            <button type="submit" name="submit" value="batal"
-                                class="btn btn-block btn-danger col">Batal</button>
+                            <button type="submit" name="submit" value="batal" class="btn btn-block btn-danger col">Batal</button>
                         </div>
                     </div>
                 </div>
@@ -184,4 +170,4 @@
 <!-- /.content-wrapper -->
 <!-- Control Sidebar -->
 
-<?= $this->endSection();?>
+<?= $this->endSection(); ?>

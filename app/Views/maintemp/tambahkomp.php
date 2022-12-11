@@ -1,6 +1,6 @@
-<?= $this->extend('maintemp/template');?>
+<?= $this->extend('maintemp/template'); ?>
 
-<?= $this->section('content');?>
+<?= $this->section('content'); ?>
 
 <div class="card card-primary" style="width: auto; margin: 30px;">
     <div class="col-sm-13" style="width: auto; margin: 30px;">
@@ -8,14 +8,13 @@
             <h3>Form Tambah Kompetensi</h3>
         </div>
 
-        <?php if(isset($validation)):?>
-        <div class="alert alert-danger"><?= $validation->listErrors()?></div>
-        <?php endif;?>
+        <?php if (isset($validation)) : ?>
+            <div class="alert alert-danger"><?= $validation->listErrors() ?></div>
+        <?php endif; ?>
 
         <!-- /.card-header -->
         <div class="card-body" style="width: auto; margin: 30px;">
-            <form action="<?php echo base_url();?>/mankomp/tambahkompproses" method="post"
-                enctype="multipart/form-data">
+            <form action="<?php echo base_url(); ?>/mankomp/tambahkompproses" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="code" class="element">Kode <span class="required"> *</span>&nbsp;
                     </label>
@@ -49,8 +48,7 @@
                                 Kompetensi</button>
                         </div>
                         <div class="col">
-                            <button type="submit" name="submit" value="batal"
-                                class="btn btn-block btn-danger col">Batal</button>
+                            <button type="submit" name="submit" value="batal" class="btn btn-block btn-danger col">Batal</button>
                         </div>
                     </div>
                 </div>
@@ -61,4 +59,4 @@
 <!-- /.content-wrapper -->
 <!-- Control Sidebar -->
 
-<?= $this->endSection();?>
+<?= $this->endSection(); ?>

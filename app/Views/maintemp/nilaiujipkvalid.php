@@ -1,6 +1,6 @@
-<?= $this->extend('maintemp/template');?>
+<?= $this->extend('maintemp/template'); ?>
 
-<?= $this->section('content');?>
+<?= $this->section('content'); ?>
 
 <div class="card card-primary" style="width: auto; margin: 30px;">
     <div class="col-sm-13" style="width: auto; margin: 30px;">
@@ -8,37 +8,33 @@
             <h3>Penilaian Tugas Akhir oleh Penguji</h3>
         </div>
 
-        <?php if(isset($validation)):?>
-        <div class="alert alert-danger"><?= $validation->listErrors()?></div>
-        <?php endif;?>
+        <?php if (isset($validation)) : ?>
+            <div class="alert alert-danger"><?= $validation->listErrors() ?></div>
+        <?php endif; ?>
 
         <!-- /.card-header -->
         <div class="card-body" style="width: auto; margin: 30px;">
-            <form action="<?php echo base_url();?>/manujip/nilaiujipkproses" method="post"
-                enctype="multipart/form-data">
-                <input type="hidden" name="mhs_id" id="mhs_id" value="<?= $mhs_id;?>" />
-                <input type="hidden" id="dosen_id" name="dosen_id" value="<?= $dosen_id?>">
-                <input type="hidden" id="ta_id" name="ta_id" value="<?= $ta_id?>">
+            <form action="<?php echo base_url(); ?>/manujip/nilaiujipkproses" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="mhs_id" id="mhs_id" value="<?= $mhs_id; ?>" />
+                <input type="hidden" id="dosen_id" name="dosen_id" value="<?= $dosen_id ?>">
+                <input type="hidden" id="ta_id" name="ta_id" value="<?= $ta_id ?>">
                 <div class="form-group">
                     <label for="penulisan" class="element">Penulisan Laporan (30%) <span class="required">
                             *</span>&nbsp;
                     </label>
                     <div class="element">
-                        <input class="form-control" id="penulisan" name="penulisan" type="text"
-                            placeholder="Nilai Penulisan Laporan..." value="<?= set_value('penulisan');?>" />
+                        <input class="form-control" id="penulisan" name="penulisan" type="text" placeholder="Nilai Penulisan Laporan..." value="<?= set_value('penulisan'); ?>" />
                     </div><br />
                     <label for="presentasi" class="element">Presentasi / Seminar Laporan (30%) <span class="required">
                             *</span>&nbsp;
                     </label>
                     <div class="element">
-                        <input class="form-control" id="presentasi" name="presentasi" type="text"
-                            placeholder="Nilai Presentasi..." value="<?= set_value('presentasi');?>" />
+                        <input class="form-control" id="presentasi" name="presentasi" type="text" placeholder="Nilai Presentasi..." value="<?= set_value('presentasi'); ?>" />
                     </div><br />
                     <label for="materi" class="element">Penguasaan Materi (40%)
                         <span class="required"> *</span>&nbsp; </label>
                     <div class="element">
-                        <input class="form-control" id="materi" name="materi" type="text"
-                            placeholder="Nilai Penguasaan Materi..." value="<?= set_value('materi');?>" />
+                        <input class="form-control" id="materi" name="materi" type="text" placeholder="Nilai Penguasaan Materi..." value="<?= set_value('materi'); ?>" />
                     </div><br />
                     <label class="element" for="signature">Tanda Tangan: <span class="required">
                             *</span>&nbsp;</label>
@@ -57,8 +53,7 @@
                                 Nilai</button>
                         </div>
                         <div class="col">
-                            <button type="submit" name="submit" value="batal"
-                                class="btn btn-block btn-danger col">Batal</button>
+                            <button type="submit" name="submit" value="batal" class="btn btn-block btn-danger col">Batal</button>
                         </div>
                     </div>
                 </div>
@@ -69,4 +64,4 @@
 <!-- /.content-wrapper -->
 <!-- Control Sidebar -->
 
-<?= $this->endSection();?>
+<?= $this->endSection(); ?>

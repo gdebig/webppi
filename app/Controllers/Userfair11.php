@@ -11,22 +11,22 @@ class Userfair11 extends BaseController
         $session = session();
         $logged_in = $session->get('logged_in');
         $ispeserta = $session->get('ispeserta');
-        if ((!$logged_in)&&(!$ispeserta)){
+        if ((!$logged_in) && (!$ispeserta)) {
             return redirect()->to('/home');
-        }else{
+        } else {
             $session->set('role', 'peserta');
         }
-        
-        if (!empty($id)){
+
+        if (!empty($id)) {
             $user_id = $id;
-        }else{
+        } else {
             $user_id = $session->get('user_id');
         }
         helper(['tanggal']);
 
         $model = new ProfileModel();
         $user = $model->where('user_id', $user_id)->first();
-        if ($user){
+        if ($user) {
             $data = [
                 'ID' => $user['ID'],
                 'user_id' => $user['user_id'],
@@ -57,38 +57,39 @@ class Userfair11 extends BaseController
                 'Photo' => $user['Photo'],
                 'pindahregular' => $user['pindahregular']
             ];
-        }else{
+        } else {
             $data['kosong'] = "kosong";
         }
 
         $data['title_page'] = "I.1. Data Pribadi";
         $data['data_bread'] = '';
-        $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Data Pribadi</li>';
+        $data['stringbread'] = '<li class="breadcrumb-item active"><a href="' . base_url() . "/userfair" . '">Dokumen FAIR</a></li><li class="breadcrumb-item active">Data Pribadi</li>';
         $data['logged_in'] = $session->get('logged_in');
         return view('maintemp/fairdok11', $data);
     }
-    
 
-    public function ubahprofilefair(){
+
+    public function ubahprofilefair()
+    {
         $session = session();
         $logged_in = $session->get('logged_in');
         $ispeserta = $session->get('ispeserta');
-        if ((!$logged_in)&&(!$ispeserta)){
+        if ((!$logged_in) && (!$ispeserta)) {
             return redirect()->to('/home');
-        }else{
+        } else {
             $session->set('role', 'peserta');
         }
 
-        if (!empty($id)){
+        if (!empty($id)) {
             $user_id = $id;
-        }else{
+        } else {
             $user_id = $session->get('user_id');
         }
         helper(['tanggal']);
 
         $model = new ProfileModel();
         $user = $model->where('user_id', $user_id)->first();
-        if ($user){
+        if ($user) {
             $data = [
                 'ID' => $user['ID'],
                 'user_id' => $user['user_id'],
@@ -122,35 +123,36 @@ class Userfair11 extends BaseController
         }
         $data['title_page'] = "I.1. Data Pribadi";
         $data['data_bread'] = '';
-        $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Ubah Data Pribadi</li>';
+        $data['stringbread'] = '<li class="breadcrumb-item active"><a href="' . base_url() . "/userfair" . '">Dokumen FAIR</a></li><li class="breadcrumb-item active">Ubah Data Pribadi</li>';
         $data['logged_in'] = $session->get('logged_in');
         return view('maintemp/ubahprofilefair', $data);
     }
 
-    public function ubahprofilefairproses(){
+    public function ubahprofilefairproses()
+    {
         $session = session();
         $logged_in = $session->get('logged_in');
         $ispeserta = $session->get('ispeserta');
-        if ((!$logged_in)&&(!$ispeserta)){
+        if ((!$logged_in) && (!$ispeserta)) {
             return redirect()->to('/home');
-        }else{
+        } else {
             $session->set('role', 'peserta');
         }
 
-        if (!empty($id)){
+        if (!empty($id)) {
             $user_id = $id;
-        }else{
+        } else {
             $user_id = $session->get('user_id');
         }
         helper(['tanggal']);
 
         $model = new ProfileModel();
 
-        $button=$this->request->getVar('submit');
-        
-        if ($button=="batal"){
+        $button = $this->request->getVar('submit');
+
+        if ($button == "batal") {
             return redirect()->to('/userfair11/docs');
-        }else{
+        } else {
             helper(['form', 'url']);
 
             $formvalid = $this->validate([
@@ -283,7 +285,7 @@ class Userfair11 extends BaseController
                 ]
             ]);
 
-            if ($formvalid){
+            if ($formvalid) {
                 $profile_id = $this->request->getVar('profile_id');
                 $photoname = $this->request->getVar('photoname');
                 $sipname = $this->request->getVar('sipname');
@@ -308,43 +310,43 @@ class Userfair11 extends BaseController
                 $wnum = $this->request->getVar('wnum');
                 $wfaks = $this->request->getVar('wfaks');
                 $wtelex = $this->request->getVar('wtelex');
-                $wemail1 = $this->request->getVar('wemail1');                
+                $wemail1 = $this->request->getVar('wemail1');
                 $wemail2 = $this->request->getVar('wemail2');
                 $sip = $this->request->getFile('sip');
                 $photo = $this->request->getFile('photo');
 
                 $ext1 = $sip->getClientExtension();
-                if ((empty($sipname))&&(!empty($ext1))){
-                    $sipnamenew = $user_id.'_sip_'.$ext1;
-                    $sip->move('uploads/docs/',$sipnamenew,true);
-                } elseif ((!empty($sipname))&&(!empty($ext1))){
+                if ((empty($sipname)) && (!empty($ext1))) {
+                    $sipnamenew = $user_id . '_sip_' . $ext1;
+                    $sip->move('uploads/docs/', $sipnamenew, true);
+                } elseif ((!empty($sipname)) && (!empty($ext1))) {
                     $oldext = substr($sipname, -4);
-                    if ($oldext==$ext1){
-                        $sip->move('uploads/docs/',$sipname,true);
+                    if ($oldext == $ext1) {
+                        $sip->move('uploads/docs/', $sipname, true);
                         $sipnamenew = $sipname;
-                    }else{
-                        $sipnamenew = $user_id.'_sip_'.$ext1;
-                        $sip->move('uploads/docs/',$sipnamenew,true);
+                    } else {
+                        $sipnamenew = $user_id . '_sip_' . $ext1;
+                        $sip->move('uploads/docs/', $sipnamenew, true);
                     }
-                }else{
-                    $sipnamenew=$sipname;
+                } else {
+                    $sipnamenew = $sipname;
                 }
 
                 $ext = $photo->getClientExtension();
-                if ((empty($photoname))&&(!empty($ext))){
-                    $photonamenew = $user_id.'_profilpic_'.$ext;
-                    $photo->move('uploads/profilpic/',$photonamenew,true);
-                } elseif ((!empty($photoname))&&(!empty($ext))){
+                if ((empty($photoname)) && (!empty($ext))) {
+                    $photonamenew = $user_id . '_profilpic_' . $ext;
+                    $photo->move('uploads/profilpic/', $photonamenew, true);
+                } elseif ((!empty($photoname)) && (!empty($ext))) {
                     $oldext = substr($photoname, -4);
-                    if ($oldext==$ext){
-                        $photo->move('uploads/profilpic/',$photoname,true);
+                    if ($oldext == $ext) {
+                        $photo->move('uploads/profilpic/', $photoname, true);
                         $photonamenew = $photoname;
-                    }else{
-                        $photonamenew = $user_id.'_profilpic_'.$ext;
-                        $photo->move('uploads/profilpic/',$photonamenew,true);
+                    } else {
+                        $photonamenew = $user_id . '_profilpic_' . $ext;
+                        $photo->move('uploads/profilpic/', $photonamenew, true);
                     }
-                }else{
-                    $photonamenew=$photoname;
+                } else {
+                    $photonamenew = $photoname;
                 }
 
                 $dataprofile = array(
@@ -377,13 +379,13 @@ class Userfair11 extends BaseController
                 );
 
                 print_r($dataprofile);
-    
+
                 $model->update($profile_id, $dataprofile);
-    
-                 return redirect()->to('/userfair11/docs');
-            }else{
+
+                return redirect()->to('/userfair11/docs');
+            } else {
                 $user = $model->where('user_id', $user_id)->first();
-                if ($user){
+                if ($user) {
                     $data = [
                         'ID' => $user['ID'],
                         'user_id' => $user['user_id'],
@@ -416,7 +418,7 @@ class Userfair11 extends BaseController
                 }
                 $data['title_page'] = "I.1. Data Pribadi";
                 $data['data_bread'] = '';
-                $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Ubah Data Pribadi</li>';
+                $data['stringbread'] = '<li class="breadcrumb-item active"><a href="' . base_url() . "/userfair" . '">Dokumen FAIR</a></li><li class="breadcrumb-item active">Ubah Data Pribadi</li>';
                 $data['logged_in'] = $session->get('logged_in');
                 return view('maintemp/ubahprofilefair', $data);
             }

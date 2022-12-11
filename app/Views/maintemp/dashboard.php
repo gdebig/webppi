@@ -1,6 +1,6 @@
-<?= $this->extend('maintemp/template');?>
+<?= $this->extend('maintemp/template'); ?>
 
-<?= $this->section('content');?>
+<?= $this->section('content'); ?>
 
 <div class="content">
     <div class="container-fluid">
@@ -8,9 +8,9 @@
             <div class="col">
                 <div>
 
-                    <?php if(session()->getFlashdata('msg')):?>
-                    <div class="alert alert-success"><?= session()->getFlashdata('msg') ?></div>
-                    <?php endif;?>
+                    <?php if (session()->getFlashdata('msg')) : ?>
+                        <div class="alert alert-success"><?= session()->getFlashdata('msg') ?></div>
+                    <?php endif; ?>
                     <!-- /.card -->
                     <div class="card card-primary">
                         <div class="card-header">
@@ -33,4 +33,4 @@
     <!-- /.container-fluid -->
 </div>
 
-<?= $this->endSection();?>
+<?= $this->endSection(); ?>

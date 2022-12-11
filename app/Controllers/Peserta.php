@@ -11,9 +11,9 @@ class Peserta extends BaseController
         $session = session();
         $logged_in = $session->get('logged_in');
         $ispeserta = $session->get('ispeserta');
-        if ((!$logged_in)&&(!$ispeserta)){
+        if ((!$logged_in) && (!$ispeserta)) {
             return redirect()->to('/home');
-        }else{
+        } else {
             $session->set('role', 'peserta');
         }
         $data['title_page'] = "Dashboard PPI RPL";

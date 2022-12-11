@@ -13,42 +13,43 @@ class Bimbingfair3 extends BaseController
         $session = session();
         $logged_in = $session->get('logged_in');
         $ispenilai = $session->get('ispenilai');
-        if ((!$logged_in)&&(!$ispenilai)){
+        if ((!$logged_in) && (!$ispenilai)) {
             return redirect()->to('/home');
-        }else{
+        } else {
             $session->set('role', 'penilai');
         }
 
-        if (!empty($id)){
+        if (!empty($id)) {
             $user_id = $id;
-        }else{
+        } else {
             $user_id = $session->get('user_id');
         }
         helper(['tanggal']);
         $model = new CapesKualifikasiModel();
         $data['capeslogged_in'] = $session->get('capeslogged_in');
-        $kerja = $model->where('user_id', $user_id)->orderby('ProjValue','DESC')->findall();
-        if (!empty($kerja)){
+        $kerja = $model->where('user_id', $user_id)->orderby('ProjValue', 'DESC')->findall();
+        if (!empty($kerja)) {
             $data['data_kerja'] = $kerja;
-        }else{
+        } else {
             $data['data_kerja'] = 'kosong';
         }
 
         $data['user_id'] = $user_id;
         $data['title_page'] = "III. KUALIFIKASI PROFESIONAL (W2,W3,W4,P6,P7,P8,P9,P10,P11)";
         $data['data_bread'] = '';
-        $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/bimbingfair/docs/".$id.'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Kualifikasi Profesional</li>';
+        $data['stringbread'] = '<li class="breadcrumb-item active"><a href="' . base_url() . "/bimbingfair/docs/" . $id . '">Dokumen FAIR</a></li><li class="breadcrumb-item active">Kualifikasi Profesional</li>';
         $data['logged_in'] = $session->get('logged_in');
         return view('maintemp/bimbingdok3', $data);
     }
 
-    public function tambahkerja(){
+    public function tambahkerja()
+    {
         $session = session();
         $logged_in = $session->get('logged_in');
         $ispenilai = $session->get('ispenilai');
-        if ((!$logged_in)&&(!$ispenilai)){
+        if ((!$logged_in) && (!$ispenilai)) {
             return redirect()->to('/home');
-        }else{
+        } else {
             $session->set('role', 'peserta');
         }
 
@@ -58,29 +59,30 @@ class Bimbingfair3 extends BaseController
 
         $data['title_page'] = "III. KUALIFIKASI PROFESIONAL (W2,W3,W4,P6,P7,P8,P9,P10,P11)";
         $data['data_bread'] = '';
-        $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Tambah Kualifikasi Profesional</li>';
+        $data['stringbread'] = '<li class="breadcrumb-item active"><a href="' . base_url() . "/userfair" . '">Dokumen FAIR</a></li><li class="breadcrumb-item active">Tambah Kualifikasi Profesional</li>';
         $data['logged_in'] = $session->get('logged_in');
         return view('maintemp/tambahkerja', $data);
     }
 
-    public function tambahkerjaproses(){
+    public function tambahkerjaproses()
+    {
         $slug = new Slug();
         $session = session();
         $logged_in = $session->get('logged_in');
         $ispenilai = $session->get('ispenilai');
-        if ((!$logged_in)&&(!$ispenilai)){
+        if ((!$logged_in) && (!$ispenilai)) {
             return redirect()->to('/home');
-        }else{
+        } else {
             $session->set('role', 'peserta');
         }
         $model = new CapesKualifikasiModel();
         $user_id = $session->get('user_id');
 
-        $button=$this->request->getVar('submit');
-        
-        if ($button=="batal"){
+        $button = $this->request->getVar('submit');
+
+        if ($button == "batal") {
             return redirect()->to('/userfair3/docs');
-        }else{
+        } else {
             helper(['form', 'url']);
 
             $formvalid = $this->validate([
@@ -135,12 +137,12 @@ class Bimbingfair3 extends BaseController
                 ]
             ]);
 
-            if ($formvalid){
+            if ($formvalid) {
                 $startdate = $this->request->getVar('startdate');
                 $masihkerja = $this->request->getVar('masihkerja');
-                if ((isset($masihkerja))&&$masihkerja=="masihkerja"){
-                    $enddate="";
-                }else{
+                if ((isset($masihkerja)) && $masihkerja == "masihkerja") {
+                    $enddate = "";
+                } else {
                     $enddate = $this->request->getVar('enddate');
                 }
                 $NameInstance = $this->request->getVar('NameInstance');
@@ -166,11 +168,11 @@ class Bimbingfair3 extends BaseController
                 $nilai_r = 0;
                 $stringkp = '';
                 $totarray = count($komp);
-                $i=0;
+                $i = 0;
                 foreach ($komp as $kp) :
                     $nilai_q = $nilai_q + 2;
-                    if ((substr($kp, 0, 3)=='W.2') OR (substr($kp, 0, 3)=='W.3') OR (substr($kp, 0, 3)=='W.4') OR (substr($kp, 0, 1)=='P')){
-                        switch ($Duration){
+                    if ((substr($kp, 0, 3) == 'W.2') or (substr($kp, 0, 3) == 'W.3') or (substr($kp, 0, 3) == 'W.4') or (substr($kp, 0, 1) == 'P')) {
+                        switch ($Duration) {
                             case 'smp3':
                                 $nilai_p = $nilai_p + 1;
                                 break;
@@ -184,7 +186,7 @@ class Bimbingfair3 extends BaseController
                                 $nilai_p = $nilai_p + 4;
                                 break;
                         }
-                        switch ($Jabatan){
+                        switch ($Jabatan) {
                             case 'anggota':
                                 $nilai_q = $nilai_q + 1;
                                 break;
@@ -193,35 +195,35 @@ class Bimbingfair3 extends BaseController
                                 break;
                             case 'direktur':
                                 $nilai_q = $nilai_q + 3;
-                                break;                            
+                                break;
                             case 'pengarah':
                                 $nilai_q = $nilai_q + 4;
                                 break;
                         }
                     }
                     $i++;
-                    if ($i!=$totarray){
-                        $stringkp = $stringkp.$kp.', ';
-                    }else{
-                        $stringkp = $stringkp.$kp;
+                    if ($i != $totarray) {
+                        $stringkp = $stringkp . $kp . ', ';
+                    } else {
+                        $stringkp = $stringkp . $kp;
                     }
                 endforeach;
                 $nilai_w2 = $nilai_p * $nilai_q;
                 $nilai_w3 = $nilai_p * $nilai_q;
                 $nilai_w4 = $nilai_p * $nilai_q;
                 $nilai_pil = $nilai_p * $nilai_q;
-                
+
                 $ext = $File->getClientExtension();
-                if (!empty($ext)){
+                if (!empty($ext)) {
                     $namainstansi = $slug->slugify($NameInstance);
                     $posisi = $slug->slugify($Position);
-                    $filename = $user_id.'_pengkerja_'.$namainstansi.'_'.$posisi.'.'.$ext;
+                    $filename = $user_id . '_pengkerja_' . $namainstansi . '_' . $posisi . '.' . $ext;
                     echo $filename;
-                    $File->move('uploads/docs/',$filename,true);
-                }else{
-                    $filename="";
+                    $File->move('uploads/docs/', $filename, true);
+                } else {
+                    $filename = "";
                 }
-    
+
                 $data = array(
                     'user_id' => $user_id,
                     'StartDate' => $startdate,
@@ -253,12 +255,12 @@ class Bimbingfair3 extends BaseController
                     'date_created' => date('Y-m-d'),
                     'date_modified' => date('Y-m-d')
                 );
-    
+
                 $model->save($data);
                 $session->setFlashdata('msg', 'Data kualifikasi profesional berhasil ditambah.');
-    
+
                 return redirect()->to('/userfair3/docs');
-            }else{
+            } else {
 
                 $data['datakomp'] = $this->request->getVar('komp3');
 
@@ -268,7 +270,7 @@ class Bimbingfair3 extends BaseController
 
                 $data['title_page'] = "III. KUALIFIKASI PROFESIONAL (W2,W3,W4,P6,P7,P8,P9,P10,P11)";
                 $data['data_bread'] = '';
-                $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Tambah Kualifikasi Profesional</li>';
+                $data['stringbread'] = '<li class="breadcrumb-item active"><a href="' . base_url() . "/userfair" . '">Dokumen FAIR</a></li><li class="breadcrumb-item active">Tambah Kualifikasi Profesional</li>';
                 $data['logged_in'] = $session->get('logged_in');
                 $data['validation'] = $this->validator;
                 return view('maintemp/tambahkerjavalid', $data);
@@ -276,44 +278,46 @@ class Bimbingfair3 extends BaseController
         }
     }
 
-    public function hapuskerja($id){
+    public function hapuskerja($id)
+    {
         $session = session();
         $logged_in = $session->get('logged_in');
         $ispenilai = $session->get('ispenilai');
-        if ((!$logged_in)&&(!$ispenilai)){
+        if ((!$logged_in) && (!$ispenilai)) {
             return redirect()->to('/home');
-        }else{
+        } else {
             $session->set('role', 'peserta');
         }
         $model = new CapesKualifikasiModel();
 
         $pengkerja = $model->find($id);
-        $path = './uploads/docs/'.$pengkerja['File'];
-        if (is_file($path)){
+        $path = './uploads/docs/' . $pengkerja['File'];
+        if (is_file($path)) {
             unlink($path);
         }
         $model->delete($id);
         $session->setFlashdata('msg', 'Data kualifikasi profesional berhasil dihapus.');
 
-        return redirect()->to('/userfair3/docs');   
+        return redirect()->to('/userfair3/docs');
     }
 
-    public function ubahkerja($id){
+    public function ubahkerja($id)
+    {
         $session = session();
         $logged_in = $session->get('logged_in');
         $ispenilai = $session->get('ispenilai');
-        if ((!$logged_in)&&(!$ispenilai)){
+        if ((!$logged_in) && (!$ispenilai)) {
             return redirect()->to('/home');
-        }else{
+        } else {
             $session->set('role', 'peserta');
         }
         $model = new CapesKualifikasiModel();
         $kerja = $model->where('Num', $id)->first();
-        if ($kerja){
-            if ($kerja['EndDate']=="0000-00-00"){
+        if ($kerja) {
+            if ($kerja['EndDate'] == "0000-00-00") {
                 $masihkerja = "checked";
                 $enddate = "";
-            }else{
+            } else {
                 $masihkerja = "";
                 $enddate = $kerja['EndDate'];
             }
@@ -351,30 +355,31 @@ class Bimbingfair3 extends BaseController
 
         $data['title_page'] = "III. KUALIFIKASI PROFESIONAL (W2,W3,W4,P6,P7,P8,P9,P10,P11)";
         $data['data_bread'] = '';
-        $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Ubah Kualifikasi Profesional</li>';
+        $data['stringbread'] = '<li class="breadcrumb-item active"><a href="' . base_url() . "/userfair" . '">Dokumen FAIR</a></li><li class="breadcrumb-item active">Ubah Kualifikasi Profesional</li>';
         $data['logged_in'] = $session->get('logged_in');
         return view('maintemp/ubahkerja', $data);
     }
 
-    public function ubahkerjaproses(){
+    public function ubahkerjaproses()
+    {
         $session = session();
         $slug = new Slug();
         $logged_in = $session->get('logged_in');
         $ispenilai = $session->get('ispenilai');
-        if ((!$logged_in)&&(!$ispenilai)){
+        if ((!$logged_in) && (!$ispenilai)) {
             return redirect()->to('/home');
-        }else{
+        } else {
             $session->set('role', 'peserta');
         }
         $model = new CapesKualifikasiModel();
         $Num = $this->request->getVar('Num');
         $user_id = $session->get('user_id');
 
-        $button=$this->request->getVar('submit');
-        
-        if ($button=="batal"){
+        $button = $this->request->getVar('submit');
+
+        if ($button == "batal") {
             return redirect()->to('/userfair3/docs');
-        }else{
+        } else {
             helper(['form', 'url']);
 
             $formvalid = $this->validate([
@@ -429,13 +434,13 @@ class Bimbingfair3 extends BaseController
                 ]
             ]);
 
-            if ($formvalid){
+            if ($formvalid) {
                 $filename = $this->request->getVar('filename');
                 $startdate = $this->request->getVar('startdate');
                 $masihkerja = $this->request->getVar('masihkerja');
-                if ((isset($masihkerja))&&$masihkerja=="masihkerja"){
-                    $enddate="";
-                }else{
+                if ((isset($masihkerja)) && $masihkerja == "masihkerja") {
+                    $enddate = "";
+                } else {
                     $enddate = $this->request->getVar('enddate');
                 }
                 $NameInstance = $this->request->getVar('NameInstance');
@@ -461,11 +466,11 @@ class Bimbingfair3 extends BaseController
                 $nilai_r = 0;
                 $stringkp = '';
                 $totarray = count($komp);
-                $i=0;
+                $i = 0;
                 foreach ($komp as $kp) :
                     $nilai_q = $nilai_q + 2;
-                    if ((substr($kp, 0, 3)=='W.2') OR (substr($kp, 0, 3)=='W.3') OR (substr($kp, 0, 3)=='W.4') OR (substr($kp, 0, 1)=='P')){
-                        switch ($Duration){
+                    if ((substr($kp, 0, 3) == 'W.2') or (substr($kp, 0, 3) == 'W.3') or (substr($kp, 0, 3) == 'W.4') or (substr($kp, 0, 1) == 'P')) {
+                        switch ($Duration) {
                             case 'smp3':
                                 $nilai_p = $nilai_p + 1;
                                 break;
@@ -479,7 +484,7 @@ class Bimbingfair3 extends BaseController
                                 $nilai_p = $nilai_p + 4;
                                 break;
                         }
-                        switch ($Jabatan){
+                        switch ($Jabatan) {
                             case 'anggota':
                                 $nilai_q = $nilai_q + 1;
                                 break;
@@ -488,17 +493,17 @@ class Bimbingfair3 extends BaseController
                                 break;
                             case 'direktur':
                                 $nilai_q = $nilai_q + 3;
-                                break;                            
+                                break;
                             case 'pengarah':
                                 $nilai_q = $nilai_q + 4;
                                 break;
                         }
                     }
                     $i++;
-                    if ($i!=$totarray){
-                        $stringkp = $stringkp.$kp.', ';
-                    }else{
-                        $stringkp = $stringkp.$kp;
+                    if ($i != $totarray) {
+                        $stringkp = $stringkp . $kp . ', ';
+                    } else {
+                        $stringkp = $stringkp . $kp;
                     }
                 endforeach;
                 $nilai_w2 = $nilai_p * $nilai_q;
@@ -509,22 +514,22 @@ class Bimbingfair3 extends BaseController
                 $namainstansi = $slug->slugify($NameInstance);
                 $posisi = $slug->slugify($Position);
                 $ext = $File->getClientExtension();
-                if ((empty($filename))&&(!empty($ext))){
-                    $filenamenew = $user_id.'_pengkerja_'.$namainstansi.'_'.$posisi.'.'.$ext;
-                    $File->move('uploads/docs/',$filenamenew,true);
-                } elseif ((!empty($filename))&&(!empty($ext))){
-                    $oldext = substr($filename,-4);
-                    if ($oldext == $ext){
-                        $File->move('uploads/docs/',$filename,true);
+                if ((empty($filename)) && (!empty($ext))) {
+                    $filenamenew = $user_id . '_pengkerja_' . $namainstansi . '_' . $posisi . '.' . $ext;
+                    $File->move('uploads/docs/', $filenamenew, true);
+                } elseif ((!empty($filename)) && (!empty($ext))) {
+                    $oldext = substr($filename, -4);
+                    if ($oldext == $ext) {
+                        $File->move('uploads/docs/', $filename, true);
                         $filenamenew = $filename;
-                    }else{
-                        $filenamenew = $user_id.'_pengkerja_'.$namainstansi.'_'.$posisi.'.'.$ext;
-                        $File->move('uploads/docs/',$filenamenew,true);
+                    } else {
+                        $filenamenew = $user_id . '_pengkerja_' . $namainstansi . '_' . $posisi . '.' . $ext;
+                        $File->move('uploads/docs/', $filenamenew, true);
                     }
-                }else{
-                    $filenamenew=$filename;
+                } else {
+                    $filenamenew = $filename;
                 }
-    
+
                 $data = array(
                     'StartDate' => $startdate,
                     'masihkerja' => $masihkerja,
@@ -558,17 +563,17 @@ class Bimbingfair3 extends BaseController
 
                 $model->update($Num, $data);
                 $session->setFlashdata('msg', 'Data kualifikasi profesional berhasil diubah.');
-    
+
                 return redirect()->to('/userfair3/docs');
-            }else{
+            } else {
                 $session = session();
                 $model = new CapesKualifikasiModel();
                 $kerja = $model->where('Num', $Num)->first();
-                if ($kerja){
-                    if ($kerja['EndDate']=="0000-00-00"){
+                if ($kerja) {
+                    if ($kerja['EndDate'] == "0000-00-00") {
                         $masihkerja = "checked";
                         $enddate = "";
-                    }else{
+                    } else {
                         $masihkerja = "";
                         $enddate = $kerja['EndDate'];
                     }
@@ -604,11 +609,11 @@ class Bimbingfair3 extends BaseController
 
                 $data['title_page'] = "III. KUALIFIKASI PROFESIONAL (W2,W3,W4,P6,P7,P8,P9,P10,P11)";
                 $data['data_bread'] = '';
-                $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Ubah Kualifikasi Profesional</li>';
+                $data['stringbread'] = '<li class="breadcrumb-item active"><a href="' . base_url() . "/userfair" . '">Dokumen FAIR</a></li><li class="breadcrumb-item active">Ubah Kualifikasi Profesional</li>';
                 $data['logged_in'] = $session->get('logged_in');
                 $data['validation'] = $this->validator;
                 return view('maintemp/ubahkerja', $data);
             }
-        }        
+        }
     }
 }

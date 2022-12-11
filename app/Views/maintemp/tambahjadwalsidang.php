@@ -1,6 +1,6 @@
-<?= $this->extend('maintemp/template');?>
+<?= $this->extend('maintemp/template'); ?>
 
-<?= $this->section('content');?>
+<?= $this->section('content'); ?>
 
 <div class="card card-primary" style="width: auto; margin: 30px;">
     <div class="col-sm-13" style="width: auto; margin: 30px;">
@@ -9,15 +9,14 @@
         </div>
         <!-- /.card-header -->
 
-        <?php if(isset($validation)):?>
-        <div class="alert alert-danger"><?= $validation->listErrors()?></div>
-        <?php endif;?>
+        <?php if (isset($validation)) : ?>
+            <div class="alert alert-danger"><?= $validation->listErrors() ?></div>
+        <?php endif; ?>
 
         <div class="card-body" style="width: auto; margin: 30px;">
-            <form action="<?php echo base_url();?>/mantugasakhir/tambahjsproses" method="post"
-                enctype="multipart/form-data">
-                <input type="hidden" id="user_id" name="user_id" value="<?= $user_id;?>">
-                <input type="hidden" id="ta_id" name="ta_id" value="<?= $ta_id;?>">
+            <form action="<?php echo base_url(); ?>/mantugasakhir/tambahjsproses" method="post" enctype="multipart/form-data">
+                <input type="hidden" id="user_id" name="user_id" value="<?= $user_id; ?>">
+                <input type="hidden" id="ta_id" name="ta_id" value="<?= $ta_id; ?>">
                 <div class="card card-success">
                     <div class="card-header">
                         <h3 class="card-title">Informasi Jadwal Sidang</h3>
@@ -28,8 +27,7 @@
                                     *</span>&nbsp;
                             </label>
                             <div class="element">
-                                <input id="sidang_ruang" name="sidang_ruang" type="text" class="form-control"
-                                    placeholder="Ruang Sidang..." />
+                                <input id="sidang_ruang" name="sidang_ruang" type="text" class="form-control" placeholder="Ruang Sidang..." />
                             </div>
                         </div>
                         <div class="form-group">
@@ -42,8 +40,7 @@
                                         <i class="far fa-calendar-alt"></i>
                                     </span>
                                 </div>
-                                <input type="text" class="form-control float-right data-datepicker1" id="sidang_tanggal"
-                                    name="sidang_tanggal" placeholder="Tanggal Sidang..." />
+                                <input type="text" class="form-control float-right data-datepicker1" id="sidang_tanggal" name="sidang_tanggal" placeholder="Tanggal Sidang..." />
                             </div>
                         </div>
                     </div>
@@ -61,8 +58,7 @@
                             Jadwal Sidang</button>
                     </div>
                     <div class="col">
-                        <button type="submit" name="submit" value="batal"
-                            class="btn btn-block btn-danger col">Batal</button>
+                        <button type="submit" name="submit" value="batal" class="btn btn-block btn-danger col">Batal</button>
                     </div>
                 </div>
             </form>
@@ -71,4 +67,4 @@
     </div>
 </div>
 
-<?= $this->endSection();?>
+<?= $this->endSection(); ?>

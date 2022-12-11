@@ -1,6 +1,6 @@
-<?= $this->extend('maintemp/template');?>
+<?= $this->extend('maintemp/template'); ?>
 
-<?= $this->section('content');?>
+<?= $this->section('content'); ?>
 
 <div class="content">
     <div class="container-fluid">
@@ -8,38 +8,33 @@
             <div class="col">
                 <div>
 
-                    <?php if(session()->getFlashdata('msg')):?>
-                    <div class="alert alert-success"><?= session()->getFlashdata('msg') ?></div>
-                    <?php endif;?>
+                    <?php if (session()->getFlashdata('msg')) : ?>
+                        <div class="alert alert-success"><?= session()->getFlashdata('msg') ?></div>
+                    <?php endif; ?>
                     <!-- /.card -->
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Mata Kuliah RPL <?= $FullName;?></h3>
+                            <h3 class="card-title">Mata Kuliah RPL <?= $FullName; ?></h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
                             <div class="row">
                                 <div class="col">
-                                    <a href="<?php echo base_url();?>/nilairpl/kodeetik/<?=$mhs_id;?>/<?=$dosen_id;?>"
-                                        class="btn btn-block btn-success btn-sm">Kode Etik dan Etika Profesi
+                                    <a href="<?php echo base_url(); ?>/nilairpl/kodeetik/<?= $mhs_id; ?>/<?= $dosen_id; ?>" class="btn btn-block btn-success btn-sm">Kode Etik dan Etika Profesi
                                         Insinyur</a>
                                 </div>
                                 <div class="col">
-                                    <a href="<?php echo base_url();?>/nilairpl/profesi/<?=$mhs_id;?>/<?=$dosen_id;?>"
-                                        class="btn btn-block btn-success btn-sm">Profesionalisme</a>
+                                    <a href="<?php echo base_url(); ?>/nilairpl/profesi/<?= $mhs_id; ?>/<?= $dosen_id; ?>" class="btn btn-block btn-success btn-sm">Profesionalisme</a>
                                 </div>
                                 <div class="col">
-                                    <a href="<?php echo base_url();?>/nilairpl/k3l/<?=$mhs_id;?>/<?=$dosen_id;?>"
-                                        class="btn btn-block btn-success btn-sm">Keselamatan,Kesehatan,Keamanan
+                                    <a href="<?php echo base_url(); ?>/nilairpl/k3l/<?= $mhs_id; ?>/<?= $dosen_id; ?>" class="btn btn-block btn-success btn-sm">Keselamatan,Kesehatan,Keamanan
                                         kerja&Lingk</a>
                                 </div>
                                 <div class="col">
-                                    <a href="<?php echo base_url();?>/nilairpl/studikasus/<?=$mhs_id;?>/<?=$dosen_id;?>"
-                                        class="btn btn-block btn-success btn-sm">Studi Kasus</a>
+                                    <a href="<?php echo base_url(); ?>/nilairpl/studikasus/<?= $mhs_id; ?>/<?= $dosen_id; ?>" class="btn btn-block btn-success btn-sm">Studi Kasus</a>
                                 </div>
                                 <div class="col">
-                                    <a href="<?php echo base_url();?>/nilairpl/seminar/<?=$mhs_id;?>/<?=$dosen_id;?>"
-                                        class="btn btn-block btn-success btn-sm">Seminar</a>
+                                    <a href="<?php echo base_url(); ?>/nilairpl/seminar/<?= $mhs_id; ?>/<?= $dosen_id; ?>" class="btn btn-block btn-success btn-sm">Seminar</a>
                                 </div>
                             </div>
                         </div>
@@ -53,4 +48,4 @@
     <!-- /.container-fluid -->
 </div>
 
-<?= $this->endSection();?>
+<?= $this->endSection(); ?>

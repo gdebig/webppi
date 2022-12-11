@@ -1,6 +1,6 @@
-<?= $this->extend('maintemp/template');?>
+<?= $this->extend('maintemp/template'); ?>
 
-<?= $this->section('content');?>
+<?= $this->section('content'); ?>
 
 <div class="card card-primary" style="width: auto; margin: 30px;">
     <div class="col-sm-13" style="width: auto; margin: 30px;">
@@ -8,20 +8,18 @@
             <h3>Form Tambah Anggota</h3>
         </div>
 
-        <?php if(isset($validation)):?>
-        <div class="alert alert-danger"><?= $validation->listErrors()?></div>
-        <?php endif;?>
+        <?php if (isset($validation)) : ?>
+            <div class="alert alert-danger"><?= $validation->listErrors() ?></div>
+        <?php endif; ?>
 
         <!-- /.card-header -->
         <div class="card-body" style="width: auto; margin: 30px;">
-            <form action="<?php echo base_url();?>/manuser/tambahanggotaproses" method="post"
-                enctype="multipart/form-data">
+            <form action="<?php echo base_url(); ?>/manuser/tambahanggotaproses" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="username" class="element">Username <span class="required"> *</span>&nbsp;
                     </label>
                     <div class="element">
-                        <input id="username" name="username" class="form-control" type="text"
-                            placeholder="Username..." />
+                        <input id="username" name="username" class="form-control" type="text" placeholder="Username..." />
                     </div>
                     <br />
                     <label for="pass1" class="element">Password <span class="required"> *</span>&nbsp;
@@ -33,8 +31,7 @@
                     <label for="confpass" class="element">Konfirmasi Password <span class="required"> *</span>&nbsp;
                     </label>
                     <div class="element">
-                        <input id="confpass" name="confpass" class="form-control" type="password"
-                            placeholder="Konfirmasi Password..." />
+                        <input id="confpass" name="confpass" class="form-control" type="password" placeholder="Konfirmasi Password..." />
                     </div>
                     <br />
                     <label for="aktif" class="element">
@@ -48,8 +45,7 @@
                     <br>
                     <label for="nodaftar" class="element">Nomor Pendaftaran (Diisi Jika Calon Peserta)</label>
                     <div class="element">
-                        <input id="nodaftar" name="nodaftar" class="form-control" type="text"
-                            placeholder="Nomor Pendaftaran..." />
+                        <input id="nodaftar" name="nodaftar" class="form-control" type="text" placeholder="Nomor Pendaftaran..." />
                     </div>
                     <br />
                     <label for="npm" class="element">NPM (Diisi Jika Peserta)</label>
@@ -80,16 +76,16 @@
                     <div class="element">
                         <select name="thnajaran" id="thnajaran" class="form-control">
                             <?php
-                                $lastyear = date("Y")+10;
-                                $now = date("Y");
-                                for ($tahun1 = 1901;$tahun1<=$lastyear;$tahun1++){
-                                    if ($tahun1 == $now){
-                                        $selected = "selected";
-                                    }else{
-                                        $selected ="";
-                                    }
-                                    echo "<option value='".$tahun1."' ".$selected.">".$tahun1."</option>";
+                            $lastyear = date("Y") + 10;
+                            $now = date("Y");
+                            for ($tahun1 = 1901; $tahun1 <= $lastyear; $tahun1++) {
+                                if ($tahun1 == $now) {
+                                    $selected = "selected";
+                                } else {
+                                    $selected = "";
                                 }
+                                echo "<option value='" . $tahun1 . "' " . $selected . ">" . $tahun1 . "</option>";
+                            }
                             ?>
                         </select>
                     </div>
@@ -106,8 +102,7 @@
                     <label for="tipeuser" class="element">Tipe User</label>
                     <div class="element">
                         <div class="custom-control custom-checkbox">
-                            <input class="custom-control-input" type="checkbox" id="superadmin" name="superadmin"
-                                value="yes">
+                            <input class="custom-control-input" type="checkbox" id="superadmin" name="superadmin" value="yes">
                             <label for="superadmin" class="custom-control-label">Super Admin</label>
                         </div>
                         <div class="custom-control custom-checkbox">
@@ -132,8 +127,7 @@
                                 Anggota</button>
                         </div>
                         <div class="col">
-                            <button type="submit" name="submit" value="batal"
-                                class="btn btn-block btn-danger col">Batal</button>
+                            <button type="submit" name="submit" value="batal" class="btn btn-block btn-danger col">Batal</button>
                         </div>
                     </div>
                 </div>
@@ -144,4 +138,4 @@
 <!-- /.content-wrapper -->
 <!-- Control Sidebar -->
 
-<?= $this->endSection();?>
+<?= $this->endSection(); ?>

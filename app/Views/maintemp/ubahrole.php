@@ -1,6 +1,6 @@
-<?= $this->extend('maintemp/template');?>
+<?= $this->extend('maintemp/template'); ?>
 
-<?= $this->section('content');?>
+<?= $this->section('content'); ?>
 
 <?php
 $session = session();
@@ -12,9 +12,9 @@ $session = session();
             <div class="col">
                 <div>
 
-                    <?php if(session()->getFlashdata('msg')):?>
-                    <div class="alert alert-success"><?= session()->getFlashdata('msg') ?></div>
-                    <?php endif;?>
+                    <?php if (session()->getFlashdata('msg')) : ?>
+                        <div class="alert alert-success"><?= session()->getFlashdata('msg') ?></div>
+                    <?php endif; ?>
                     <!-- /.card -->
                     <div class="card card-primary">
                         <div class="card-header">
@@ -23,24 +23,24 @@ $session = session();
                         <!-- /.card-header -->
                         <ul>
                             <?php
-                            if ($session->get('issadmin')){
+                            if ($session->get('issadmin')) {
                             ?>
-                            <li><a href="<?php echo base_url();?>/superadmin">Super Admin</a></li>
+                                <li><a href="<?php echo base_url(); ?>/superadmin">Super Admin</a></li>
                             <?php
                             }
-                            if ($session->get('isadmin')){
+                            if ($session->get('isadmin')) {
                             ?>
-                            <li><a href="<?php echo base_url();?>/admin">Admin</a></li>
+                                <li><a href="<?php echo base_url(); ?>/admin">Admin</a></li>
                             <?php
                             }
-                            if ($session->get('ispenilai')){
+                            if ($session->get('ispenilai')) {
                             ?>
-                            <li><a href="<?php echo base_url();?>/penilai">Penilai</a></li>
+                                <li><a href="<?php echo base_url(); ?>/penilai">Penilai</a></li>
                             <?php
                             }
-                            if ($session->get('ispeserta')){
+                            if ($session->get('ispeserta')) {
                             ?>
-                            <li><a href="<?php echo base_url();?>/peserta">Peserta</a></li>
+                                <li><a href="<?php echo base_url(); ?>/peserta">Peserta</a></li>
                             <?php
                             }
                             ?>
@@ -55,4 +55,4 @@ $session = session();
     <!-- /.container-fluid -->
 </div>
 
-<?= $this->endSection();?>
+<?= $this->endSection(); ?>

@@ -1,6 +1,6 @@
-<?= $this->extend('register/template');?>
+<?= $this->extend('register/template'); ?>
 
-<?= $this->section('content');?>
+<?= $this->section('content'); ?>
 
 <div class="content">
     <div class="container-fluid">
@@ -24,4 +24,4 @@
     <!-- /.container-fluid -->
 </div>
 
-<?= $this->endSection();?>
+<?= $this->endSection(); ?>

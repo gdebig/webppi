@@ -1,6 +1,6 @@
-<?= $this->extend('maintemp/template');?>
+<?= $this->extend('maintemp/template'); ?>
 
-<?= $this->section('content');?>
+<?= $this->section('content'); ?>
 
 <div class="card card-primary" style="width: auto; margin: 30px;">
     <div class="col-sm-13" style="width: auto; margin: 30px;">
@@ -9,25 +9,24 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body" style="width: auto; margin: 30px;">
-            <form action="<?php echo base_url();?>/userfair4/tambahajarproses" method="post"
-                enctype="multipart/form-data">
+            <form action="<?php echo base_url(); ?>/userfair4/tambahajarproses" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="StartPeriod" class="element">Tahun Mulai <span class="required"> *</span>&nbsp;
                     </label>
                     <div class="element">
                         <select name="StartPeriod" id="StartPeriod" class="form-control">
                             <?php
-                                    $lastyear = date("Y")+10;
-                                    $now = date("Y");
-                                    for ($tahun1 = 1901;$tahun1<=$lastyear;$tahun1++){
-                                        if ($tahun1 == $now){
-                                            $selected = "selected";
-                                        }else{
-                                            $selected ="";
-                                        }
-                                        echo "<option value='".$tahun1."' ".$selected.">".$tahun1."</option>";
-                                    }
-                                ?>
+                            $lastyear = date("Y") + 10;
+                            $now = date("Y");
+                            for ($tahun1 = 1901; $tahun1 <= $lastyear; $tahun1++) {
+                                if ($tahun1 == $now) {
+                                    $selected = "selected";
+                                } else {
+                                    $selected = "";
+                                }
+                                echo "<option value='" . $tahun1 . "' " . $selected . ">" . $tahun1 . "</option>";
+                            }
+                            ?>
                         </select>
                     </div><br />
                     <label for="EndPeriod" class="element">Tahun Selesai <span class="required"> *</span>&nbsp;
@@ -35,29 +34,27 @@
                     <div class="element">
                         <select name="EndPeriod" id="EndPeriod" class="form-control">
                             <?php
-                                    $lastyear = date("Y")+10;
-                                    $now = date("Y");
-                                    for ($tahun1 = 1901;$tahun1<=$lastyear;$tahun1++){
-                                        if ($tahun1 == $now){
-                                            $selected = "selected";
-                                        }else{
-                                            $selected ="";
-                                        }
-                                        echo "<option value='".$tahun1."' ".$selected.">".$tahun1."</option>";
-                                    }
-                                ?>
+                            $lastyear = date("Y") + 10;
+                            $now = date("Y");
+                            for ($tahun1 = 1901; $tahun1 <= $lastyear; $tahun1++) {
+                                if ($tahun1 == $now) {
+                                    $selected = "selected";
+                                } else {
+                                    $selected = "";
+                                }
+                                echo "<option value='" . $tahun1 . "' " . $selected . ">" . $tahun1 . "</option>";
+                            }
+                            ?>
                         </select>
                     </div><br />
                     <label for="Institution" class="element">Nama Perguruan Tinggi/Lembaga
                         <span class="required"> *</span>&nbsp; </label>
                     <div class="element">
-                        <input class="form-control" id="Institution" name="Institution" type="text"
-                            placeholder="Nama Perguruan Tinggi/Lembaga..." />
+                        <input class="form-control" id="Institution" name="Institution" type="text" placeholder="Nama Perguruan Tinggi/Lembaga..." />
                     </div><br />
                     <label for="Name" class="element">Nama Mata Ajaran <span class="required"> *</span>&nbsp; </label>
                     <div class="element">
-                        <input class="form-control" id="Name" name="Name" type="text"
-                            placeholder="Nama Mata Ajaran..." />
+                        <input class="form-control" id="Name" name="Name" type="text" placeholder="Nama Mata Ajaran..." />
                     </div>
                     <br />
                     <label for="LocCity" class="element">Kota <span class="required"> *</span>&nbsp; </label>
@@ -72,8 +69,7 @@
                     <br />
                     <label for="LocCountry" class="element">Negara <span class="required"> *</span>&nbsp; </label>
                     <div class="element">
-                        <input class="form-control" id="LocCountry" name="LocCountry" type="text"
-                            placeholder="Negara..." />
+                        <input class="form-control" id="LocCountry" name="LocCountry" type="text" placeholder="Negara..." />
                     </div>
                     <br />
                     <label for="Period" class="element">Perioda</label>
@@ -103,11 +99,9 @@
                         </select>
                     </div>
                     <br />
-                    <label for="Desc" class="element">Uraian Singkat Yang Diajarkan / Dikembangkan <span
-                            class="required"> *</span>&nbsp; </label>
+                    <label for="Desc" class="element">Uraian Singkat Yang Diajarkan / Dikembangkan <span class="required"> *</span>&nbsp; </label>
                     <div class="element">
-                        <textarea class="form-control" id="Desc" name="Desc" placeholder="Deskripsi"
-                            placeholder="Uraian Singkat..."></textarea>
+                        <textarea class="form-control" id="Desc" name="Desc" placeholder="Deskripsi" placeholder="Uraian Singkat..."></textarea>
                     </div>
                     <br />
                     <label for="komp4" class="element">Kompetensi (Gunakan tombol ctrl + klik kiri mouse untuk memilih
@@ -115,23 +109,23 @@
                     <div class="element">
                         <select multiple class="form-control" name="komp4[]" id="komp4" size="10">
                             <?php
-                            $i=1;
+                            $i = 1;
                             $prev_cat = array();
 
                             foreach ($data_komp as $komp) :
-                                $j = $i-1;
+                                $j = $i - 1;
                                 $prev_cat[$i] = $komp['komp_cat'];
-                                if (!empty($prev_cat)&&($j!=0)){
-                                    if ($prev_cat[$i]!=$prev_cat[$j]){
+                                if (!empty($prev_cat) && ($j != 0)) {
+                                    if ($prev_cat[$i] != $prev_cat[$j]) {
                                         echo "</optgroup>";
                                     }
                                 }
-                                if ($komp['komp_parent']=='y'){
-                                    echo "<optgroup label='".$komp['komp_code']." ".$komp['komp_desc']."'>";
-                                }else{
-                                    if ($i==1){
-                                    }else{
-                                        echo "<option value='".$komp['komp_code']."' title='".$komp['komp_desc']."'>".$komp['komp_code']." ".$komp['komp_desc']."</option>";
+                                if ($komp['komp_parent'] == 'y') {
+                                    echo "<optgroup label='" . $komp['komp_code'] . " " . $komp['komp_desc'] . "'>";
+                                } else {
+                                    if ($i == 1) {
+                                    } else {
+                                        echo "<option value='" . $komp['komp_code'] . "' title='" . $komp['komp_desc'] . "'>" . $komp['komp_code'] . " " . $komp['komp_desc'] . "</option>";
                                     }
                                 }
                                 $i++;
@@ -154,8 +148,7 @@
                                 Pengalaman Mengajar</button>
                         </div>
                         <div class="col">
-                            <button type="submit" name="submit" value="batal"
-                                class="btn btn-block btn-danger col">Batal</button>
+                            <button type="submit" name="submit" value="batal" class="btn btn-block btn-danger col">Batal</button>
                         </div>
                     </div>
                 </div>
@@ -166,4 +159,4 @@
 <!-- /.content-wrapper -->
 <!-- Control Sidebar -->
 
-<?= $this->endSection();?>
+<?= $this->endSection(); ?>

@@ -1,6 +1,6 @@
-<?= $this->extend('maintemp/template');?>
+<?= $this->extend('maintemp/template'); ?>
 
-<?= $this->section('content');?>
+<?= $this->section('content'); ?>
 
 <div class="card card-primary" style="width: auto; margin: 30px;">
     <div class="col-sm-13" style="width: auto; margin: 30px;">
@@ -9,15 +9,14 @@
         </div>
         <!-- /.card-header -->
 
-        <?php if(isset($validation)):?>
-        <div class="alert alert-danger"><?= $validation->listErrors()?></div>
-        <?php endif;?>
+        <?php if (isset($validation)) : ?>
+            <div class="alert alert-danger"><?= $validation->listErrors() ?></div>
+        <?php endif; ?>
 
         <div class="card-body" style="width: auto; margin: 30px;">
-            <form action="<?php echo base_url();?>/mantugasakhir/tambahujiproses" method="post"
-                enctype="multipart/form-data">
-                <input type="hidden" id="user_id" name="user_id" value="<?= $user_id;?>">
-                <input type="hidden" id="ta_id" name="ta_id" value="<?= $ta_id;?>">
+            <form action="<?php echo base_url(); ?>/mantugasakhir/tambahujiproses" method="post" enctype="multipart/form-data">
+                <input type="hidden" id="user_id" name="user_id" value="<?= $user_id; ?>">
+                <input type="hidden" id="ta_id" name="ta_id" value="<?= $ta_id; ?>">
                 <div class="card card-success">
                     <div class="card-header">
                         <h3 class="card-title">Informasi Penguji</h3>
@@ -30,11 +29,11 @@
                             <div class="element">
                                 <select id="penguji" name="penguji" class="form-control">
                                     <?php
-                                    foreach ($data_user as $penguji):
+                                    foreach ($data_user as $penguji) :
                                     ?>
-                                    <option value="<?= $penguji['user_id'];?>"><?= $penguji['FullName'];?></option>
-                                    <?php 
-                                    endforeach 
+                                        <option value="<?= $penguji['user_id']; ?>"><?= $penguji['FullName']; ?></option>
+                                    <?php
+                                    endforeach
                                     ?>
                                 </select>
                             </div>
@@ -54,8 +53,7 @@
                             Penguji</button>
                     </div>
                     <div class="col">
-                        <button type="submit" name="submit" value="batal"
-                            class="btn btn-block btn-danger col">Batal</button>
+                        <button type="submit" name="submit" value="batal" class="btn btn-block btn-danger col">Batal</button>
                     </div>
                 </div>
             </form>
@@ -64,4 +62,4 @@
     </div>
 </div>
 
-<?= $this->endSection();?>
+<?= $this->endSection(); ?>

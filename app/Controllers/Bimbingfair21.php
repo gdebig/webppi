@@ -11,41 +11,42 @@ class Bimbingfair21 extends BaseController
         $session = session();
         $logged_in = $session->get('logged_in');
         $ispenilai = $session->get('ispenilai');
-        if ((!$logged_in)&&(!$ispenilai)){
+        if ((!$logged_in) && (!$ispenilai)) {
             return redirect()->to('/home');
-        }else{
+        } else {
             $session->set('role', 'penilai');
         }
 
-        if (!empty($id)){
+        if (!empty($id)) {
             $user_id = $id;
-        }else{
+        } else {
             $user_id = $session->get('user_id');
         }
         helper(['tanggal']);
         $model = new EtikRefModel();
         $data['capeslogged_in'] = $session->get('capeslogged_in');
-        $etik = $model->where('user_id', $user_id)->orderby('Name','ASC')->findall();
-        if (!empty($etik)){
+        $etik = $model->where('user_id', $user_id)->orderby('Name', 'ASC')->findall();
+        if (!empty($etik)) {
             $data['data_etik'] = $etik;
-        }else{
+        } else {
             $data['data_etik'] = 'kosong';
         }
         $data['user_id'] = $user_id;
         $data['title_page'] = "II.1. Referensi Kode Etik dan Etika Profesi (#) (W1)";
         $data['data_bread'] = '';
-        $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/bimbingfair/docs/".$id.'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Referensi</li>';
+        $data['stringbread'] = '<li class="breadcrumb-item active"><a href="' . base_url() . "/bimbingfair/docs/" . $id . '">Dokumen FAIR</a></li><li class="breadcrumb-item active">Referensi</li>';
         $data['logged_in'] = $session->get('logged_in');
         return view('maintemp/bimbingdok21', $data);
     }
 
-    public function tambahref(){
+    public function tambahref()
+    {
         $session = session();
         $logged_in = $session->get('logged_in');
         $ispenilai = $session->get('ispenilai');
-        if ((!$logged_in)&&(!$ispenilai)){
+        if ((!$logged_in) && (!$ispenilai)) {
             return redirect()->to('/home');
-        }else{
+        } else {
             $session->set('role', 'peserta');
         }
         $model = new EtikRefModel();
@@ -53,28 +54,29 @@ class Bimbingfair21 extends BaseController
         $user_id = $session->get('user_id');
         $data['title_page'] = "II.1. Referensi Kode Etik dan Etika Profesi (#) (W1)";
         $data['data_bread'] = '';
-        $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Tambah Referensi</li>';
+        $data['stringbread'] = '<li class="breadcrumb-item active"><a href="' . base_url() . "/userfair" . '">Dokumen FAIR</a></li><li class="breadcrumb-item active">Tambah Referensi</li>';
         $data['logged_in'] = $session->get('logged_in');
         return view('maintemp/tambahrefuserfair', $data);
     }
 
-    public function tambahrefproses(){
+    public function tambahrefproses()
+    {
         $session = session();
         $logged_in = $session->get('logged_in');
         $ispenilai = $session->get('ispenilai');
-        if ((!$logged_in)&&(!$ispenilai)){
+        if ((!$logged_in) && (!$ispenilai)) {
             return redirect()->to('/home');
-        }else{
+        } else {
             $session->set('role', 'peserta');
         }
         $model = new EtikRefModel();
         $user_id = $session->get('user_id');
 
-        $button=$this->request->getVar('submit');
-        
-        if ($button=="batal"){
+        $button = $this->request->getVar('submit');
+
+        if ($button == "batal") {
             return redirect()->to('/userfair21/docs');
-        }else{
+        } else {
             helper(['form', 'url']);
 
             $formvalid = $this->validate([
@@ -137,7 +139,7 @@ class Bimbingfair21 extends BaseController
                 ]
             ]);
 
-            if ($formvalid){
+            if ($formvalid) {
                 $Name = $this->request->getVar('Name');
                 $Addr = $this->request->getVar('Addr');
                 $City = $this->request->getVar('City');
@@ -146,7 +148,7 @@ class Bimbingfair21 extends BaseController
                 $Pnum = $this->request->getVar('Pnum');
                 $Email = $this->request->getVar('Email');
                 $Relation = $this->request->getVar('Relation');
-    
+
                 $data = array(
                     'user_id' => $user_id,
                     'Name' => $Name,
@@ -160,16 +162,16 @@ class Bimbingfair21 extends BaseController
                     'date_created' => date('Y-m-d'),
                     'date_modified' => date('Y-m-d')
                 );
-    
+
                 $model->save($data);
                 $session->setFlashdata('msg', 'Data Referensi Kode Etik berhasil ditambah.');
-    
+
                 return redirect()->to('/userfair21/docs');
-            }else{
+            } else {
                 $session = session();
                 $data['title_page'] = "II.1. Referensi Kode Etik dan Etika Profesi (#) (W1)";
                 $data['data_bread'] = '';
-                $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Tambah Referensi</li>';
+                $data['stringbread'] = '<li class="breadcrumb-item active"><a href="' . base_url() . "/userfair" . '">Dokumen FAIR</a></li><li class="breadcrumb-item active">Tambah Referensi</li>';
                 $data['logged_in'] = $session->get('logged_in');
                 $data['validation'] = $this->validator;
                 return view('maintemp/tambahrefuserfairvalid', $data);
@@ -177,13 +179,14 @@ class Bimbingfair21 extends BaseController
         }
     }
 
-    public function hapusetik($id){
+    public function hapusetik($id)
+    {
         $session = session();
         $logged_in = $session->get('logged_in');
         $ispenilai = $session->get('ispenilai');
-        if ((!$logged_in)&&(!$ispenilai)){
+        if ((!$logged_in) && (!$ispenilai)) {
             return redirect()->to('/home');
-        }else{
+        } else {
             $session->set('role', 'peserta');
         }
         $model = new EtikRefModel();
@@ -191,21 +194,22 @@ class Bimbingfair21 extends BaseController
         $model->delete($id);
         $session->setFlashdata('msg', 'Data referensi kode etik berhasil dihapus.');
 
-        return redirect()->to('/userfair21/docs');   
+        return redirect()->to('/userfair21/docs');
     }
 
-    public function ubahetik($id){
+    public function ubahetik($id)
+    {
         $session = session();
         $logged_in = $session->get('logged_in');
         $ispenilai = $session->get('ispenilai');
-        if ((!$logged_in)&&(!$ispenilai)){
+        if ((!$logged_in) && (!$ispenilai)) {
             return redirect()->to('/home');
-        }else{
+        } else {
             $session->set('role', 'peserta');
         }
         $model = new EtikRefModel();
         $etik = $model->where('Num', $id)->first();
-        if ($etik){
+        if ($etik) {
             $data = [
                 'Num' => $etik['Num'],
                 'user_id' => $etik['user_id'],
@@ -221,29 +225,30 @@ class Bimbingfair21 extends BaseController
         }
         $data['title_page'] = "II.1. Referensi Kode Etik dan Etika Profesi (#) (W1)";
         $data['data_bread'] = '';
-        $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Ubah Referensi</li>';
+        $data['stringbread'] = '<li class="breadcrumb-item active"><a href="' . base_url() . "/userfair" . '">Dokumen FAIR</a></li><li class="breadcrumb-item active">Ubah Referensi</li>';
         $data['logged_in'] = $session->get('logged_in');
         return view('maintemp/ubahrefuserfair', $data);
     }
 
-    public function ubahrefproses(){
+    public function ubahrefproses()
+    {
         $session = session();
         $logged_in = $session->get('logged_in');
         $ispenilai = $session->get('ispenilai');
-        if ((!$logged_in)&&(!$ispenilai)){
+        if ((!$logged_in) && (!$ispenilai)) {
             return redirect()->to('/home');
-        }else{
+        } else {
             $session->set('role', 'peserta');
         }
         $model = new EtikRefModel();
         $Num = $this->request->getVar('Num');
         $user_id = $session->get('user_id');
 
-        $button=$this->request->getVar('submit');
-        
-        if ($button=="batal"){
+        $button = $this->request->getVar('submit');
+
+        if ($button == "batal") {
             return redirect()->to('/userfair21/docs');
-        }else{
+        } else {
             helper(['form', 'url']);
 
             $formvalid = $this->validate([
@@ -306,7 +311,7 @@ class Bimbingfair21 extends BaseController
                 ]
             ]);
 
-            if ($formvalid){
+            if ($formvalid) {
                 $Name = $this->request->getVar('Name');
                 $Addr = $this->request->getVar('Addr');
                 $City = $this->request->getVar('City');
@@ -315,7 +320,7 @@ class Bimbingfair21 extends BaseController
                 $Pnum = $this->request->getVar('Pnum');
                 $Email = $this->request->getVar('Email');
                 $Relation = $this->request->getVar('Relation');
-    
+
                 $data = array(
                     'Name' => $Name,
                     'Addr' => $Addr,
@@ -330,11 +335,11 @@ class Bimbingfair21 extends BaseController
 
                 $model->update($Num, $data);
                 $session->setFlashdata('msg', 'Data referensi kode etik berhasil diubah.');
-    
+
                 return redirect()->to('/userfair21/docs');
-            }else{
+            } else {
                 $etik = $model->where('Num', $Num)->first();
-                if ($etik){
+                if ($etik) {
                     $data = [
                         'Num' => $etik['Num'],
                         'user_id' => $etik['user_id'],
@@ -350,11 +355,11 @@ class Bimbingfair21 extends BaseController
                 }
                 $data['title_page'] = "II.1. Referensi Kode Etik dan Etika Profesi (#) (W1)";
                 $data['data_bread'] = '';
-                $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Ubah Referensi</li>';
+                $data['stringbread'] = '<li class="breadcrumb-item active"><a href="' . base_url() . "/userfair" . '">Dokumen FAIR</a></li><li class="breadcrumb-item active">Ubah Referensi</li>';
                 $data['logged_in'] = $session->get('logged_in');
                 $data['validation'] = $this->validator;
                 return view('maintemp/ubahrefuserfair', $data);
             }
-        }        
+        }
     }
 }

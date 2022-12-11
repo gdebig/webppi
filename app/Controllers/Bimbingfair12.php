@@ -11,47 +11,48 @@ class Bimbingfair12 extends BaseController
         $session = session();
         $logged_in = $session->get('logged_in');
         $ispenilai = $session->get('ispenilai');
-        if ((!$logged_in)&&(!$ispenilai)){
+        if ((!$logged_in) && (!$ispenilai)) {
             return redirect()->to('/home');
-        }else{
+        } else {
             $session->set('role', 'penilai');
         }
 
-        if (!empty($id)){
+        if (!empty($id)) {
             $user_id = $id;
-        }else{
+        } else {
             $user_id = $session->get('user_id');
         }
         helper(['tanggal']);
         $model = new CapesPendModel();
-        
-        $pend = $model->where('user_id', $user_id)->orderby('GradYear','DESC')->findall();
-        if (!empty($pend)){
+
+        $pend = $model->where('user_id', $user_id)->orderby('GradYear', 'DESC')->findall();
+        if (!empty($pend)) {
             $data['data_pend'] = $pend;
-        }else{
+        } else {
             $data['data_pend'] = 'kosong';
         }
         $data['user_id'] = $user_id;
         $data['title_page'] = "I.2. Pendidikan Formal (W2)";
         $data['data_bread'] = '';
-        $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/bimbingfair/docs/".$id.'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Pendidikan Formal</li>';
+        $data['stringbread'] = '<li class="breadcrumb-item active"><a href="' . base_url() . "/bimbingfair/docs/" . $id . '">Dokumen FAIR</a></li><li class="breadcrumb-item active">Pendidikan Formal</li>';
         $data['logged_in'] = $session->get('logged_in');
         return view('maintemp/bimbingdok12', $data);
     }
 
-    public function tambahpendidikan(){
+    public function tambahpendidikan()
+    {
         $session = session();
         $logged_in = $session->get('logged_in');
         $ispenilai = $session->get('ispenilai');
-        if ((!$logged_in)&&(!$ispenilai)){
+        if ((!$logged_in) && (!$ispenilai)) {
             return redirect()->to('/home');
-        }else{
+        } else {
             $session->set('role', 'peserta');
         }
 
-        if (!empty($id)){
+        if (!empty($id)) {
             $user_id = $id;
-        }else{
+        } else {
             $user_id = $session->get('user_id');
         }
         helper(['tanggal']);
@@ -59,35 +60,36 @@ class Bimbingfair12 extends BaseController
 
         $data['title_page'] = "I.2. Pendidikan Formal (W2)";
         $data['data_bread'] = '';
-        $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Tambah Pendidikan Formal</li>';
+        $data['stringbread'] = '<li class="breadcrumb-item active"><a href="' . base_url() . "/userfair" . '">Dokumen FAIR</a></li><li class="breadcrumb-item active">Tambah Pendidikan Formal</li>';
         $data['logged_in'] = $session->get('logged_in');
         $data['user_id'] = $user_id;
         return view('maintemp/tambahpendfairuser', $data);
     }
 
-    public function tambahpendproses(){
+    public function tambahpendproses()
+    {
         $session = session();
         $model = new CapesPendModel();
         $logged_in = $session->get('logged_in');
         $ispenilai = $session->get('ispenilai');
-        if ((!$logged_in)&&(!$ispenilai)){
+        if ((!$logged_in) && (!$ispenilai)) {
             return redirect()->to('/home');
-        }else{
+        } else {
             $session->set('role', 'peserta');
         }
 
-        if (!empty($id)){
+        if (!empty($id)) {
             $user_id = $id;
-        }else{
+        } else {
             $user_id = $session->get('user_id');
         }
         helper(['tanggal']);
 
-        $button=$this->request->getVar('submit');
-        
-        if ($button=="batal"){
+        $button = $this->request->getVar('submit');
+
+        if ($button == "batal") {
             return redirect()->to('/userfair12/docs');
-        }else{
+        } else {
             helper(['form', 'url']);
 
             $formvalid = $this->validate([
@@ -185,7 +187,7 @@ class Bimbingfair12 extends BaseController
                 ]
             ]);
 
-            if ($formvalid){
+            if ($formvalid) {
                 $jenjang = $this->request->getVar('jenjang');
                 $Name = $this->request->getVar('Name');
                 $Faculty = $this->request->getVar('Faculty');
@@ -201,9 +203,9 @@ class Bimbingfair12 extends BaseController
                 $ijazah = $this->request->getFile('ijazah');
 
                 $ext = $ijazah->getClientExtension();
-                $filename = $user_id.'_ijazah_'.$jenjang.'.'.$ext;
-                $ijazah->move('uploads/docs/',$filename,true);
-    
+                $filename = $user_id . '_ijazah_' . $jenjang . '.' . $ext;
+                $ijazah->move('uploads/docs/', $filename, true);
+
                 $data = array(
                     'user_id' => $user_id,
                     'Rank' => $jenjang,
@@ -222,59 +224,61 @@ class Bimbingfair12 extends BaseController
                     'date_created' => date('Y-m-d'),
                     'date_modified' => date('Y-m-d')
                 );
-    
+
                 $model->save($data);
                 $session->setFlashdata('msg', 'Data Pendidikan berhasil ditambah.');
-    
+
                 return redirect()->to('/userfair12/docs');
-            }else{
+            } else {
                 $data['title_page'] = "I.2. Pendidikan Formal (W2)";
                 $data['data_bread'] = '';
-                $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Tambah Pendidikan Formal</li>';
+                $data['stringbread'] = '<li class="breadcrumb-item active"><a href="' . base_url() . "/userfair" . '">Dokumen FAIR</a></li><li class="breadcrumb-item active">Tambah Pendidikan Formal</li>';
                 $data['logged_in'] = $session->get('logged_in');
                 $data['user_id'] = $user_id;
                 $data['validation'] = $this->validator;
                 return view('maintemp/tambahpendfairuservalid', $data);
             }
-        }        
+        }
     }
 
-    public function hapuspendidikan($id){
+    public function hapuspendidikan($id)
+    {
         $session = session();
         $model = new CapesPendModel();
         $logged_in = $session->get('logged_in');
         $ispenilai = $session->get('ispenilai');
-        if ((!$logged_in)&&(!$ispenilai)){
+        if ((!$logged_in) && (!$ispenilai)) {
             return redirect()->to('/home');
-        }else{
+        } else {
             $session->set('role', 'peserta');
         }
         helper(['tanggal']);
 
         $ijazah = $model->find($id);
-        $path = './uploads/docs/'.$ijazah['File'];
-        if (is_file($path)){
+        $path = './uploads/docs/' . $ijazah['File'];
+        if (is_file($path)) {
             unlink($path);
         }
         $model->delete($id);
         $session->setFlashdata('msg', 'Data pendidikan berhasil dihapus.');
 
-        return redirect()->to('/userfair12/docs');        
+        return redirect()->to('/userfair12/docs');
     }
 
-    public function ubahpendidikan($id){
+    public function ubahpendidikan($id)
+    {
         $session = session();
         $logged_in = $session->get('logged_in');
         $ispenilai = $session->get('ispenilai');
-        if ((!$logged_in)&&(!$ispenilai)){
+        if ((!$logged_in) && (!$ispenilai)) {
             return redirect()->to('/home');
-        }else{
+        } else {
             $session->set('role', 'peserta');
         }
         helper(['tanggal']);
         $model = new CapesPendModel();
         $pend = $model->where('Num', $id)->first();
-        if ($pend){
+        if ($pend) {
             $data = [
                 'Num' => $pend['Num'],
                 'user_id' => $pend['user_id'],
@@ -295,35 +299,36 @@ class Bimbingfair12 extends BaseController
         }
         $data['title_page'] = "I.2. Pendidikan Formal (W2)";
         $data['data_bread'] = '';
-        $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Ubah Pendidikan Formal</li>';
+        $data['stringbread'] = '<li class="breadcrumb-item active"><a href="' . base_url() . "/userfair" . '">Dokumen FAIR</a></li><li class="breadcrumb-item active">Ubah Pendidikan Formal</li>';
         $data['logged_in'] = $session->get('logged_in');
         return view('maintemp/ubahpenduserfair', $data);
     }
 
-    public function ubahpendproses(){
+    public function ubahpendproses()
+    {
         $session = session();
         $logged_in = $session->get('logged_in');
         $ispenilai = $session->get('ispenilai');
-        if ((!$logged_in)&&(!$ispenilai)){
+        if ((!$logged_in) && (!$ispenilai)) {
             return redirect()->to('/home');
-        }else{
+        } else {
             $session->set('role', 'peserta');
         }
 
-        if (!empty($id)){
+        if (!empty($id)) {
             $user_id = $id;
-        }else{
+        } else {
             $user_id = $session->get('user_id');
         }
         helper(['tanggal']);
         $model = new CapesPendModel();
         $pend_id = $this->request->getVar('pend_id');
 
-        $button=$this->request->getVar('submit');
-        
-        if ($button=="batal"){
+        $button = $this->request->getVar('submit');
+
+        if ($button == "batal") {
             return redirect()->to('/userfair12/docs');
-        }else{
+        } else {
             helper(['form', 'url']);
 
             $formvalid = $this->validate([
@@ -421,7 +426,7 @@ class Bimbingfair12 extends BaseController
                 ]
             ]);
 
-            if ($formvalid){
+            if ($formvalid) {
                 $filename = $this->request->getVar('filename');
                 $jenjang = $this->request->getVar('jenjang');
                 $Name = $this->request->getVar('Name');
@@ -438,22 +443,22 @@ class Bimbingfair12 extends BaseController
                 $ijazah = $this->request->getFile('ijazah');
 
                 $ext = $ijazah->getClientExtension();
-                if ((empty($filename))&&(!empty($ext))){
-                    $filenamenew = $user_id.'_ijazah_'.$jenjang.'.'.$ext;
-                    $ijazah->move('uploads/docs/',$filenamenew,true);
-                } elseif ((!empty($filename))&&(!empty($ext))){
+                if ((empty($filename)) && (!empty($ext))) {
+                    $filenamenew = $user_id . '_ijazah_' . $jenjang . '.' . $ext;
+                    $ijazah->move('uploads/docs/', $filenamenew, true);
+                } elseif ((!empty($filename)) && (!empty($ext))) {
                     $oldext = substr($filename, -4);
-                    if ($oldext == $ext){
-                        $ijazah->move('uploads/docs/',$filename,true);
+                    if ($oldext == $ext) {
+                        $ijazah->move('uploads/docs/', $filename, true);
                         $filenamenew = $filename;
-                    }else{
-                        $filenamenew = $user_id.'_ijazah_'.$jenjang.'.'.$ext;
-                        $ijazah->move('uploads/docs/',$filenamenew,true);
+                    } else {
+                        $filenamenew = $user_id . '_ijazah_' . $jenjang . '.' . $ext;
+                        $ijazah->move('uploads/docs/', $filenamenew, true);
                     }
-                }else{
-                    $filenamenew=$filename;
+                } else {
+                    $filenamenew = $filename;
                 }
-    
+
                 $data = array(
                     'Rank' => $jenjang,
                     'Name' => $Name,
@@ -470,16 +475,16 @@ class Bimbingfair12 extends BaseController
                     'File' => $filenamenew,
                     'date_modified' => date('Y-m-d')
                 );
-    
+
                 $model->update($pend_id, $data);
                 $session->setFlashdata('msg', 'Data Pendidikan berhasil diubah.');
-    
+
                 return redirect()->to('/userfair12/docs');
-            }else{
+            } else {
                 $session = session();
                 $model = new CapesPendModel();
                 $pend = $model->where('Num', $pend_id)->first();
-                if ($pend){
+                if ($pend) {
                     $data = [
                         'Num' => $pend['Num'],
                         'user_id' => $pend['user_id'],
@@ -500,12 +505,11 @@ class Bimbingfair12 extends BaseController
                 }
                 $data['title_page'] = "I.2. Pendidikan Formal (W2)";
                 $data['data_bread'] = '';
-                $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Ubah Pendidikan Formal</li>';
+                $data['stringbread'] = '<li class="breadcrumb-item active"><a href="' . base_url() . "/userfair" . '">Dokumen FAIR</a></li><li class="breadcrumb-item active">Ubah Pendidikan Formal</li>';
                 $data['logged_in'] = $session->get('logged_in');
                 $data['validation'] = $this->validator;
                 return view('maintemp/ubahpenduserfair', $data);
             }
-        }        
+        }
     }
-
 }

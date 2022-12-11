@@ -1,6 +1,6 @@
-<?= $this->extend('maintemp/template');?>
+<?= $this->extend('maintemp/template'); ?>
 
-<?= $this->section('content');?>
+<?= $this->section('content'); ?>
 
 <div class="card card-primary" style="width: auto; margin: 30px;">
     <div class="col-sm-13" style="width: auto; margin: 30px;">
@@ -9,14 +9,13 @@
         </div>
         <!-- /.card-header -->
 
-        <?php if(isset($validation)):?>
-        <div class="alert alert-danger"><?= $validation->listErrors()?></div>
-        <?php endif;?>
+        <?php if (isset($validation)) : ?>
+            <div class="alert alert-danger"><?= $validation->listErrors() ?></div>
+        <?php endif; ?>
 
         <div class="card-body" style="width: auto; margin: 30px;">
-            <form action="<?php echo base_url();?>/myprofile/buatprofileproses" method="post"
-                enctype="multipart/form-data">
-                <input type="hidden" id="user_id" name="user_id" value="<?= $user_id;?>">
+            <form action="<?php echo base_url(); ?>/myprofile/buatprofileproses" method="post" enctype="multipart/form-data">
+                <input type="hidden" id="user_id" name="user_id" value="<?= $user_id; ?>">
                 <div class="card card-success">
                     <div class="card-header">
                         <h3 class="card-title">Data Diri</h3>
@@ -26,16 +25,14 @@
                             <label for="fullname" class="element">Nama Lengkap <span class="required"> *</span>&nbsp;
                             </label>
                             <div class="element">
-                                <input id="fullname" name="fullname" type="text" class="form-control"
-                                    placeholder="Nama Lengkap..." />
+                                <input id="fullname" name="fullname" type="text" class="form-control" placeholder="Nama Lengkap..." />
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="birthplace" class="element">Tempat Lahir <span class="required"> *</span>&nbsp;
                             </label>
                             <div class="element">
-                                <input id="birthplace" name="birthplace" type="text" class="form-control"
-                                    placeholder="Tempat Lahir..." />
+                                <input id="birthplace" name="birthplace" type="text" class="form-control" placeholder="Tempat Lahir..." />
                             </div>
                         </div>
                         <div class="form-group">
@@ -47,16 +44,14 @@
                                         <i class="far fa-calendar-alt"></i>
                                     </span>
                                 </div>
-                                <input type="text" class="form-control float-right data-datepicker" id="birthdate"
-                                    name="birthdate" placeholder="Tanggal Lahir..." />
+                                <input type="text" class="form-control float-right data-datepicker" id="birthdate" name="birthdate" placeholder="Tanggal Lahir..." />
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="kta" class="element">Nomor Kartu Tanda Anggota (KTA) <b>(Jika ada)</b>
                             </label>
                             <div class="element">
-                                <input id="kta" name="kta" type="text" class="form-control"
-                                    placeholder="Nomor Kartu Tanda Anggota (KTA)..." />
+                                <input id="kta" name="kta" type="text" class="form-control" placeholder="Nomor Kartu Tanda Anggota (KTA)..." />
                             </div>
                         </div>
                         <div class="form-group">
@@ -87,8 +82,7 @@
                             <label for="haddress" class="element">Alamat Rumah <span class="required">
                                     *</span>&nbsp;</label>
                             <div class="element">
-                                <textarea id="haddress" name="haddress" class="form-control"
-                                    placeholder="Alamat Rumah..."></textarea>
+                                <textarea id="haddress" name="haddress" class="form-control" placeholder="Alamat Rumah..."></textarea>
                             </div>
                         </div>
                         <div class="form-group">
@@ -100,44 +94,37 @@
                         <div class="form-group">
                             <label for="hpostnum" class="element">Kode Pos <span class="required">*</span>&nbsp;</label>
                             <div class="element">
-                                <input id="hpostnum" name="hpostnum" type="text" class="form-control"
-                                    placeholder="Kode Pos..." />
+                                <input id="hpostnum" name="hpostnum" type="text" class="form-control" placeholder="Kode Pos..." />
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="hnum" class="element">Telepon Rumah</label>
                             <div class="element">
-                                <input id="hnum" name="hnum" type="text" class="form-control"
-                                    placeholder="Telepon Rumah..." />
+                                <input id="hnum" name="hnum" type="text" class="form-control" placeholder="Telepon Rumah..." />
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="hpnum" class="element">Nomor Mobile <span
-                                    class="required">*</span>&nbsp;</label>
+                            <label for="hpnum" class="element">Nomor Mobile <span class="required">*</span>&nbsp;</label>
                             <div class="element">
-                                <input id="hpnum" name="hpnum" type="text" class="form-control"
-                                    placeholder="Nomor Mobile..." />
+                                <input id="hpnum" name="hpnum" type="text" class="form-control" placeholder="Nomor Mobile..." />
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="hfaks" class="element">Nomor Faks Rumah</label>
                             <div class="element">
-                                <input id="hfaks" name="hfaks" type="text" class="form-control"
-                                    placeholder="Nomor Faks Rumah..." />
+                                <input id="hfaks" name="hfaks" type="text" class="form-control" placeholder="Nomor Faks Rumah..." />
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="htelex" class="element">Nomor Telex Rumah</label>
                             <div class="element">
-                                <input id="htelex" name="htelex" type="text" class="form-control"
-                                    placeholder="Nomor Telex Rumah..." />
+                                <input id="htelex" name="htelex" type="text" class="form-control" placeholder="Nomor Telex Rumah..." />
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="hemail" class="element">Email <span class="required"> *</span>&nbsp;</label>
                             <div class="element">
-                                <input id="hemail" name="hemail" type="text" class="form-control"
-                                    placeholder="Email..." />
+                                <input id="hemail" name="hemail" type="text" class="form-control" placeholder="Email..." />
                             </div>
                         </div>
                     </div>
@@ -150,77 +137,63 @@
                         <div class="form-group">
                             <label for="work" class="element">Tempat Kerja <span class="required">*</span>&nbsp;</label>
                             <div class="element">
-                                <input id="work" name="work" type="text" class="form-control"
-                                    placeholder="Tempat Kerja..." />
+                                <input id="work" name="work" type="text" class="form-control" placeholder="Tempat Kerja..." />
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="position" class="element">Posisi/Jabatan <span
-                                    class="required">*</span>&nbsp;</label>
+                            <label for="position" class="element">Posisi/Jabatan <span class="required">*</span>&nbsp;</label>
                             <div class="element">
-                                <input id="position" name="position" type="text" class="form-control"
-                                    placeholder="Posisi/Jabatan..." />
+                                <input id="position" name="position" type="text" class="form-control" placeholder="Posisi/Jabatan..." />
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="waddr" class="element">Alamat Kantor <span class="required">*</span>&nbsp;
                             </label>
                             <div class="element">
-                                <textarea id="waddr" name="waddr" class="form-control"
-                                    placeholder="Alamat Kantor..."></textarea>
+                                <textarea id="waddr" name="waddr" class="form-control" placeholder="Alamat Kantor..."></textarea>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="wcity" class="element">Kota <span class="required">*</span>&nbsp;
                             </label>
                             <div class="element">
-                                <input id="wcity" name="wcity" type="text" class="form-control"
-                                    placeholder="Kota Alamat Kantor..." />
+                                <input id="wcity" name="wcity" type="text" class="form-control" placeholder="Kota Alamat Kantor..." />
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="wpostnum" class="element">Kode Pos Alamat Kantor <span
-                                    class="required">*</span>&nbsp;</label>
+                            <label for="wpostnum" class="element">Kode Pos Alamat Kantor <span class="required">*</span>&nbsp;</label>
                             <div class="element">
-                                <input id="wpostnum" name="wpostnum" type="text" class="form-control"
-                                    placeholder="Kode Pos Alamat Kantor..." />
+                                <input id="wpostnum" name="wpostnum" type="text" class="form-control" placeholder="Kode Pos Alamat Kantor..." />
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="wnum" class="element">Telepon Kantor <span
-                                    class="required">*</span>&nbsp;</label>
+                            <label for="wnum" class="element">Telepon Kantor <span class="required">*</span>&nbsp;</label>
                             <div class="element">
-                                <input id="wnum" name="wnum" type="text" class="form-control"
-                                    placeholder="Telepon Kantor..." />
+                                <input id="wnum" name="wnum" type="text" class="form-control" placeholder="Telepon Kantor..." />
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="wfaks" class="element">Faks Kantor</label>
                             <div class="element">
-                                <input id="wfaks" name="wfaks" type="text" class="form-control"
-                                    placeholder="Nomor Faks Kantor..." />
+                                <input id="wfaks" name="wfaks" type="text" class="form-control" placeholder="Nomor Faks Kantor..." />
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="wtelex" class="element">Telex Kantor</label>
                             <div class="element">
-                                <input id="wtelex" name="wtelex" type="text" class="form-control"
-                                    placeholder="Nomor Telex Kantor..." />
+                                <input id="wtelex" name="wtelex" type="text" class="form-control" placeholder="Nomor Telex Kantor..." />
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="wemail1" class="element">Email Kantor 1 <span
-                                    class="required">*</span>&nbsp;</label>
+                            <label for="wemail1" class="element">Email Kantor 1 <span class="required">*</span>&nbsp;</label>
                             <div class="element">
-                                <input id="wemail1" name="wemail1" type="text" class="form-control"
-                                    placeholder="Email Kantor 1..." />
+                                <input id="wemail1" name="wemail1" type="text" class="form-control" placeholder="Email Kantor 1..." />
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="wemail2" class="element">Email Kantor 2</label>
                             <div class="element">
-                                <input id="wemail2" name="wemail2" type="text" class="form-control"
-                                    placeholder="Email Kantor 2..." />
+                                <input id="wemail2" name="wemail2" type="text" class="form-control" placeholder="Email Kantor 2..." />
                             </div>
                         </div>
                     </div>
@@ -252,8 +225,7 @@
                             Profile</button>
                     </div>
                     <div class="col">
-                        <button type="submit" name="submit" value="batal"
-                            class="btn btn-block btn-danger col">Batal</button>
+                        <button type="submit" name="submit" value="batal" class="btn btn-block btn-danger col">Batal</button>
                     </div>
                 </div>
             </form>
@@ -262,4 +234,4 @@
     </div>
 </div>
 
-<?= $this->endSection();?>
+<?= $this->endSection(); ?>

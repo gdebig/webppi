@@ -1,6 +1,6 @@
-<?= $this->extend('maintemp/template');?>
+<?= $this->extend('maintemp/template'); ?>
 
-<?= $this->section('content');?>
+<?= $this->section('content'); ?>
 
 <div class="card card-primary" style="width: auto; margin: 30px;">
     <div class="col-sm-13" style="width: auto; margin: 30px;">
@@ -8,15 +8,14 @@
             <h3>Tambah Pendidikan Formal</h3>
         </div>
 
-        <?php if(isset($validation)):?>
-        <div class="alert alert-danger"><?= $validation->listErrors()?></div>
-        <?php endif;?>
+        <?php if (isset($validation)) : ?>
+            <div class="alert alert-danger"><?= $validation->listErrors() ?></div>
+        <?php endif; ?>
 
         <!-- /.card-header -->
         <div class="card-body" style="width: auto; margin: 30px;">
-            <form action="<?php echo base_url();?>/userfair12/tambahpendproses" method="post"
-                enctype="multipart/form-data">
-                <input type="hidden" id="user_id" name="user_id" value="<?= $user_id;?>" />
+            <form action="<?php echo base_url(); ?>/userfair12/tambahpendproses" method="post" enctype="multipart/form-data">
+                <input type="hidden" id="user_id" name="user_id" value="<?= $user_id; ?>" />
                 <div class="form-group">
                     <label for="jenjang" class="element">
                         <span class="required">Jenjang Pendidikan *</span>&nbsp; </label>
@@ -32,8 +31,7 @@
                     <label for="Name" class="element">Nama Perguruan Tinggi <span class="required"> *</span>&nbsp;
                     </label>
                     <div class="element">
-                        <input id="Name" name="Name" class="form-control" type="text"
-                            placeholder="Nama Perguruan Tinggi..." />
+                        <input id="Name" name="Name" class="form-control" type="text" placeholder="Nama Perguruan Tinggi..." />
                     </div>
                     <br />
                     <label for="Faculty" class="element">Fakultas <span class="required"> *</span>&nbsp; </label>
@@ -49,22 +47,19 @@
                     <label for="City" class="element">Kota Perguruan Tinggi <span class="required"> *</span>&nbsp;
                     </label>
                     <div class="element">
-                        <input id="City" name="City" class="form-control" placeholder="Kota Lokasi Perguruan Tinggi..."
-                            type="text" />
+                        <input id="City" name="City" class="form-control" placeholder="Kota Lokasi Perguruan Tinggi..." type="text" />
                     </div>
                     <br />
                     <label for="Country" class="element">Negara Perguruan Tinggi <span class="required"> *</span>&nbsp;
                     </label>
                     <div class="element">
-                        <input id="Country" name="Country" class="form-control"
-                            placeholder="Negara Lokasi Perguruan Tinggi..." type="text" />
+                        <input id="Country" name="Country" class="form-control" placeholder="Negara Lokasi Perguruan Tinggi..." type="text" />
                     </div>
                     <br />
                     <label for="GradYear" class="element">Tahun Kelulusan <span class="required"> *</span>&nbsp;
                     </label>
                     <div class="element">
-                        <input id="GradYear" name="GradYear" class="form-control" placeholder="Tahun Kelulusan..."
-                            type="text" />
+                        <input id="GradYear" name="GradYear" class="form-control" placeholder="Tahun Kelulusan..." type="text" />
                     </div>
                     <br />
                     <label for="Degree" class="element">Gelar <span class="required"> *</span>&nbsp; </label>
@@ -75,36 +70,31 @@
                     <label for="Title" class="element">Judul Tugas Akhir/Skripsi/Tesis/Disertasi <span class="required">
                             *</span>&nbsp; </label>
                     <div class="element">
-                        <textarea id="Title" name="Title" class="form-control"
-                            placeholder="Judul Tugas Akhir..."></textarea>
+                        <textarea id="Title" name="Title" class="form-control" placeholder="Judul Tugas Akhir..."></textarea>
                     </div>
                     <br />
                     <label for="Desc" class="element">Uraian Singkat Tentang Materi Tugas
                         Akhir/Skripsi/Disertasi <span class="required"> *</span>&nbsp; </label>
                     <div class="element">
-                        <textarea id="Desc" name="Desc" class="form-control"
-                            placeholder="Uraian Singkat Tugas Akhir..."></textarea>
+                        <textarea id="Desc" name="Desc" class="form-control" placeholder="Uraian Singkat Tugas Akhir..."></textarea>
                     </div>
                     <br />
                     <label for="Mark" class="element">Nilai Akademik Rata-rata <span class="required"> *</span>&nbsp;
                     </label>
                     <div class="element">
-                        <input id="Mark" name="Mark" class="form-control" placeholder="Nilai Akademik Rata-rata..."
-                            type="text" />
+                        <input id="Mark" name="Mark" class="form-control" placeholder="Nilai Akademik Rata-rata..." type="text" />
                     </div>
                     <br />
                     <label for="Judicium" class="element">Yudisium <span class="required"> *</span>&nbsp; </label>
                     <div class="element">
-                        <input id="Judicium" name="Judicium" class="form-control" placeholder="Yudisium..."
-                            type="text" />
+                        <input id="Judicium" name="Judicium" class="form-control" placeholder="Yudisium..." type="text" />
                     </div>
                     <br />
                     <div class="form-group">
                         <label for="ijazah" class="element">Unggah Scan Ijazah (Format: .jpeg, .jpg, .png dan .pdf |
                             Ukuran Maksimum: 700KB) <span class="required">*</span>&nbsp;</label>
                         <div class="element">
-                            <input id="ijazah" name="ijazah" type="file" class="form-control"
-                                placeholder="Scan Ijazah..." />
+                            <input id="ijazah" name="ijazah" type="file" class="form-control" placeholder="Scan Ijazah..." />
                         </div>
                     </div>
                     <div class="form-group">
@@ -116,8 +106,7 @@
                                 Pendidikan</button>
                         </div>
                         <div class="col">
-                            <button type="submit" name="submit" value="batal"
-                                class="btn btn-block btn-danger col">Batal</button>
+                            <button type="submit" name="submit" value="batal" class="btn btn-block btn-danger col">Batal</button>
                         </div>
                     </div>
                 </div>
@@ -128,4 +117,4 @@
 <!-- /.content-wrapper -->
 <!-- Control Sidebar -->
 
-<?= $this->endSection();?>
+<?= $this->endSection(); ?>

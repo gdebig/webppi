@@ -11,18 +11,18 @@ class Mankomp extends BaseController
         $session = session();
         $logged_in = $session->get('logged_in');
         $issadmin = $session->get('issadmin');
-        if ((!$logged_in)&&(!$issadmin)){
+        if ((!$logged_in) && (!$issadmin)) {
             return redirect()->to('/home');
         }
         helper(['tanggal']);
-        
+
         $komp_id = $session->get('komp_id');
         $model = new KompModel();
         $data['logged_in'] = $logged_in;
         $komp = $model->orderBy('komp_id', 'ASC')->findall();
-        if (!empty($komp)){
+        if (!empty($komp)) {
             $data['data_komp'] = $komp;
-        }else{
+        } else {
             $data['data_komp'] = 'kosong';
         }
         $data['title_page'] = "Data komp PPI";
@@ -30,12 +30,13 @@ class Mankomp extends BaseController
         return view('maintemp/kompetensi', $data);
     }
 
-    public function tambahkomp(){
+    public function tambahkomp()
+    {
         $session = session();
         $komp_id = $session->get('komp_id');
         $logged_in = $session->get('logged_in');
         $issadmin = $session->get('issadmin');
-        if ((!$logged_in)&&(!$issadmin)){
+        if ((!$logged_in) && (!$issadmin)) {
             return redirect()->to('/home');
         }
         $data['logged_in'] = $logged_in;
@@ -45,20 +46,21 @@ class Mankomp extends BaseController
         return view('maintemp/tambahkomp', $data);
     }
 
-    public function tambahkompproses(){
-        
+    public function tambahkompproses()
+    {
+
         $model = new KompModel();
         $session = session();
         $issadmin = $session->get('issadmin');
         $logged_in = $session->get('logged_in');
-        if ((!$logged_in)&&(!$issadmin)){
+        if ((!$logged_in) && (!$issadmin)) {
             return redirect()->to('/home');
         }
 
         $button = $this->request->getVar('submit');
-        if ($button=="batal"){
+        if ($button == "batal") {
             return redirect()->to('/mankomp');
-        }else{
+        } else {
             helper(['form', 'url']);
 
             $formvalid = $this->validate([
@@ -86,7 +88,7 @@ class Mankomp extends BaseController
                 ]
             ]);
 
-            if ($formvalid){
+            if ($formvalid) {
 
                 $code = $this->request->getVar('code');
                 $desc = $this->request->getVar('desc');
@@ -105,10 +107,9 @@ class Mankomp extends BaseController
                 $model->save($datakomp);
 
                 $session->setFlashdata('msg', 'Data komp berhasil ditambahkan.');
-    
+
                 return redirect()->to('/mankomp');
-                
-            }else{
+            } else {
                 $komp_id = $session->get('komp_id');
                 $data['logged_in'] = $logged_in;
                 $data['title_page'] = "Tambah Data komp";
@@ -120,29 +121,31 @@ class Mankomp extends BaseController
         }
     }
 
-    public function hapuskomp($id){
+    public function hapuskomp($id)
+    {
         $model = new KompModel();
         $session = session();
         $komp_id = $session->get('komp_id');
         $logged_in = $session->get('logged_in');
         $issadmin = $session->get('issadmin');
-        if ((!$logged_in)&&(!$issadmin)){
+        if ((!$logged_in) && (!$issadmin)) {
             return redirect()->to('/home');
         }
         $model->delete($id);
         return redirect()->to('/mankomp');
     }
 
-    public function ubahkomp($id){
+    public function ubahkomp($id)
+    {
         $model = new KompModel();
         $session = session();
         $logged_in = $session->get('logged_in');
         $issadmin = $session->get('issadmin');
-        if ((!$logged_in)&&(!$issadmin)){
+        if ((!$logged_in) && (!$issadmin)) {
             return redirect()->to('/home');
         }
         $komp = $model->where('komp_id', $id)->first();
-        if ($komp){
+        if ($komp) {
             $data = [
                 'komp_id' => $komp['komp_id'],
                 'komp_code' => $komp['komp_code'],
@@ -157,21 +160,22 @@ class Mankomp extends BaseController
         return view('maintemp/ubahkomp', $data);
     }
 
-    public function ubahkompproses(){
+    public function ubahkompproses()
+    {
         $model = new KompModel();
         $session = session();
         $komp_id = $this->request->getVar('komp_id');
         $logged_in = $session->get('logged_in');
         $issadmin = $session->get('issadmin');
-        if ((!$logged_in)&&(!$issadmin)){
+        if ((!$logged_in) && (!$issadmin)) {
             return redirect()->to('/home');
         }
 
-        $button=$this->request->getVar('submit');
-        
-        if ($button=="batal"){
+        $button = $this->request->getVar('submit');
+
+        if ($button == "batal") {
             return redirect()->to('/mankomp');
-        }else{
+        } else {
             helper(['form', 'url']);
 
             $formvalid = $this->validate([
@@ -199,7 +203,7 @@ class Mankomp extends BaseController
                 ],
             ]);
 
-            if ($formvalid){
+            if ($formvalid) {
 
                 $komp_id = $this->request->getVar('komp_id');
                 $code = $this->request->getVar('code');
@@ -216,14 +220,14 @@ class Mankomp extends BaseController
                     'date_modified' => date('Y-m-d H:i:s')
                 );
 
-                $model->update($komp_id,$datakomp);
+                $model->update($komp_id, $datakomp);
 
                 $session->setFlashdata('msg', 'Data user berhasil diubah.');
-    
+
                 return redirect()->to('/mankomp');
-            }else{
+            } else {
                 $komp = $model->where('komp_id', $komp_id)->first();
-                if ($komp){
+                if ($komp) {
                     $data = [
                         'komp_id' => $komp['komp_id'],
                         'komp_code' => $komp['komp_code'],

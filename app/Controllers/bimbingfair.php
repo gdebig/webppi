@@ -15,24 +15,24 @@ class Bimbingfair extends BaseController
         $issadmin = $session->get('issadmin');
         $isadmin = $session->get('isadmin');
         $ispenilai = $session->get('ispenilai');
-        if ((!$logged_in)&&(($issadmin)||($isadmin)||($ispenilai))){
+        if ((!$logged_in) && (($issadmin) || ($isadmin) || ($ispenilai))) {
             return redirect()->to('/home');
-        }else{
+        } else {
             $session->set('role', 'penilai');
         }
         helper(['tanggal']);
-        if (!empty($id)){
+        if (!empty($id)) {
             $mhs_id = $id;
-        }else{
+        } else {
             $mhs_id = $session->get('user_id');
         }
         $model = new ProfileModel();
         $mhsprofile = $model->where('user_id', $mhs_id)->first();
-        if ($mhsprofile){
+        if ($mhsprofile) {
             $data = [
                 'FullName' => $mhsprofile['FullName'],
             ];
-        }else{
+        } else {
             $data['kosong'] = 'kosong';
         }
         $data['mhs_id'] = $mhs_id;

@@ -1,6 +1,6 @@
-<?= $this->extend('register/template');?>
+<?= $this->extend('register/template'); ?>
 
-<?= $this->section('content');?>
+<?= $this->section('content'); ?>
 
 <div class="card card-primary" style="width: auto; margin: 30px;">
     <div class="col-sm-13" style="width: auto; margin: 30px;">
@@ -97,11 +97,8 @@
                                 <div class="col-md-12">
                                     <div class=" d-flex align-items-center">
                                         <div class="fileupload-process w-100">
-                                            <div id="total-progress" class="progress progress-striped active"
-                                                role="progressbar" aria-valuemin="0" aria-valuemax="100"
-                                                aria-valuenow="0">
-                                                <div class="progress-bar progress-bar-success" style="width:0%;"
-                                                    data-dz-uploadprogress=""></div>
+                                            <div id="total-progress" class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                                                <div class="progress-bar progress-bar-success" style="width:0%;" data-dz-uploadprogress=""></div>
                                             </div>
                                         </div>
                                     </div>
@@ -124,4 +121,4 @@
 <!-- /.content-wrapper -->
 <!-- Control Sidebar -->
 
-<?= $this->endSection();?>
+<?= $this->endSection(); ?>

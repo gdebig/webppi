@@ -13,40 +13,41 @@ class Userfair14 extends BaseController
         $session = session();
         $logged_in = $session->get('logged_in');
         $ispeserta = $session->get('ispeserta');
-        if ((!$logged_in)&&(!$ispeserta)){
+        if ((!$logged_in) && (!$ispeserta)) {
             return redirect()->to('/home');
-        }else{
+        } else {
             $session->set('role', 'peserta');
         }
 
-        if (!empty($id)){
+        if (!empty($id)) {
             $user_id = $id;
-        }else{
+        } else {
             $user_id = $session->get('user_id');
         }
         helper(['tanggal']);
         $model = new PenghargaanModel();
-        $penghargaan = $model->where('user_id', $user_id)->orderby('Year','DESC')->orderby('Month','DESC')->findall();
-        if (!empty($penghargaan)){
+        $penghargaan = $model->where('user_id', $user_id)->orderby('Year', 'DESC')->orderby('Month', 'DESC')->findall();
+        if (!empty($penghargaan)) {
             $data['data_harga'] = $penghargaan;
-        }else{
+        } else {
             $data['data_harga'] = 'kosong';
         }
 
         $data['title_page'] = "I.4. Tanda Penghargaan Yang Diterima (W1)";
         $data['data_bread'] = '';
-        $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Penghargaan</li>';
+        $data['stringbread'] = '<li class="breadcrumb-item active"><a href="' . base_url() . "/userfair" . '">Dokumen FAIR</a></li><li class="breadcrumb-item active">Penghargaan</li>';
         $data['logged_in'] = $session->get('logged_in');
         return view('maintemp/fairdok14', $data);
     }
 
-    public function tambahpenghargaan(){
+    public function tambahpenghargaan()
+    {
         $session = session();
         $logged_in = $session->get('logged_in');
         $ispeserta = $session->get('ispeserta');
-        if ((!$logged_in)&&(!$ispeserta)){
+        if ((!$logged_in) && (!$ispeserta)) {
             return redirect()->to('/home');
-        }else{
+        } else {
             $session->set('role', 'peserta');
         }
         helper(['tanggal']);
@@ -57,35 +58,36 @@ class Userfair14 extends BaseController
 
         $data['title_page'] = "I.4. Tanda Penghargaan Yang Diterima (W1)";
         $data['data_bread'] = '';
-        $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Tambah Penghargaan</li>';
+        $data['stringbread'] = '<li class="breadcrumb-item active"><a href="' . base_url() . "/userfair" . '">Dokumen FAIR</a></li><li class="breadcrumb-item active">Tambah Penghargaan</li>';
         $data['logged_in'] = $session->get('logged_in');
         return view('maintemp/tambahpenghargaanuserfair', $data);
     }
 
-    public function tambahpenghargaanproses(){
+    public function tambahpenghargaanproses()
+    {
         $session = session();
         $model = new PenghargaanModel();
         $slug = new Slug();
         $logged_in = $session->get('logged_in');
         $ispeserta = $session->get('ispeserta');
-        if ((!$logged_in)&&(!$ispeserta)){
+        if ((!$logged_in) && (!$ispeserta)) {
             return redirect()->to('/home');
-        }else{
+        } else {
             $session->set('role', 'peserta');
         }
 
-        if (!empty($id)){
+        if (!empty($id)) {
             $user_id = $id;
-        }else{
+        } else {
             $user_id = $session->get('user_id');
         }
         helper(['tanggal']);
 
-        $button=$this->request->getVar('submit');
-        
-        if ($button=="batal"){
+        $button = $this->request->getVar('submit');
+
+        if ($button == "batal") {
             return redirect()->to('/userfair14/docs');
-        }else{
+        } else {
             helper(['form', 'url']);
 
             $formvalid = $this->validate([
@@ -147,7 +149,7 @@ class Userfair14 extends BaseController
                 ]
             ]);
 
-            if ($formvalid){
+            if ($formvalid) {
                 $Year = $this->request->getVar('Year');
                 $Month = $this->request->getVar('Month');
                 $Name = $this->request->getVar('Name');
@@ -166,11 +168,11 @@ class Userfair14 extends BaseController
                 $nilai_r = 0;
                 $stringkp = '';
                 $totarray = count($komp);
-                $i=0;
+                $i = 0;
                 foreach ($komp as $kp) :
                     $i++;
                     $nilai_p = $nilai_p + 1;
-                    switch ($Level){
+                    switch ($Level) {
                         case "Mud":
                             $nilai_q = $nilai_q + 2;
                             break;
@@ -181,37 +183,37 @@ class Userfair14 extends BaseController
                             $nilai_q = $nilai_q + 4;
                             break;
                     }
-                    switch ($InstituteType){
+                    switch ($InstituteType) {
                         case "Lok":
-                            $nilai_r = $nilai_r+1;
+                            $nilai_r = $nilai_r + 1;
                             break;
                         case "Nas":
-                            $nilai_r = $nilai_r+2;
+                            $nilai_r = $nilai_r + 2;
                             break;
                         case "Reg":
-                            $nilai_r = $nilai_r+3;
+                            $nilai_r = $nilai_r + 3;
                             break;
                         case "Int":
-                            $nilai_r = $nilai_r+4;
+                            $nilai_r = $nilai_r + 4;
                             break;
                     }
-                    if ($i!=$totarray){
-                        $stringkp = $stringkp.$kp.', ';
-                    }else{
-                        $stringkp = $stringkp.$kp;
+                    if ($i != $totarray) {
+                        $stringkp = $stringkp . $kp . ', ';
+                    } else {
+                        $stringkp = $stringkp . $kp;
                     }
                 endforeach;
                 $nilai_w1 = $nilai_q * $nilai_r;
-                
+
                 $namapenghargaan = $slug->slugify($Name);
                 $ext = $File->getClientExtension();
-                if (!empty($ext)){
-                    $filename = $user_id.'_penghargaan_'.$namapenghargaan.'.'.$ext;
-                    $File->move('uploads/docs/',$filename,true);
-                }else{
-                    $filename="";
+                if (!empty($ext)) {
+                    $filename = $user_id . '_penghargaan_' . $namapenghargaan . '.' . $ext;
+                    $File->move('uploads/docs/', $filename, true);
+                } else {
+                    $filename = "";
                 }
-    
+
                 $data = array(
                     'user_id' => $user_id,
                     'Year' => $Year,
@@ -233,22 +235,22 @@ class Userfair14 extends BaseController
                     'date_created' => date('Y-m-d'),
                     'date_modified' => date('Y-m-d')
                 );
-    
+
                 $model->save($data);
                 $session->setFlashdata('msg', 'Data Penghargaan berhasil ditambah.');
-    
+
                 return redirect()->to('/userfair14/docs');
-            }else{
+            } else {
 
                 $data['datakomp'] = $this->request->getVar('komp14');
 
                 $model1 = new KompModel();
                 $where = "komp_cat LIKE 'W.1%'";
                 $data['data_komp'] = $model1->where($where)->orderby('komp_id', 'ASC')->findall();
-        
+
                 $data['title_page'] = "I.4. Tanda Penghargaan Yang Diterima (W1)";
                 $data['data_bread'] = '';
-                $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Tambah Penghargaan</li>';
+                $data['stringbread'] = '<li class="breadcrumb-item active"><a href="' . base_url() . "/userfair" . '">Dokumen FAIR</a></li><li class="breadcrumb-item active">Tambah Penghargaan</li>';
                 $data['logged_in'] = $session->get('logged_in');
                 $data['validation'] = $this->validator;
                 return view('maintemp/tambahpenghargaanuserfairvalid', $data);
@@ -256,43 +258,45 @@ class Userfair14 extends BaseController
         }
     }
 
-    public function hapuspenghargaan($id){
+    public function hapuspenghargaan($id)
+    {
         $session = session();
         $model = new PenghargaanModel();
         $logged_in = $session->get('logged_in');
         $ispeserta = $session->get('ispeserta');
-        if ((!$logged_in)&&(!$ispeserta)){
+        if ((!$logged_in) && (!$ispeserta)) {
             return redirect()->to('/home');
-        }else{
+        } else {
             $session->set('role', 'peserta');
         }
         helper(['tanggal']);
 
         $penghargaan = $model->find($id);
-        $path = './uploads/docs/'.$penghargaan['File'];
-        if (is_file($path)){
+        $path = './uploads/docs/' . $penghargaan['File'];
+        if (is_file($path)) {
             unlink($path);
         }
         $model->delete($id);
         $session->setFlashdata('msg', 'Data Penghargaan berhasil dihapus.');
 
-        return redirect()->to('/userfair14/docs');   
+        return redirect()->to('/userfair14/docs');
     }
 
-    public function ubahpenghargaan($id){
+    public function ubahpenghargaan($id)
+    {
         $session = session();
         $model = new PenghargaanModel();
         $logged_in = $session->get('logged_in');
         $ispeserta = $session->get('ispeserta');
-        if ((!$logged_in)&&(!$ispeserta)){
+        if ((!$logged_in) && (!$ispeserta)) {
             return redirect()->to('/home');
-        }else{
+        } else {
             $session->set('role', 'peserta');
         }
         helper(['tanggal']);
 
         $penghargaan = $model->where('Num', $id)->first();
-        if ($penghargaan){
+        if ($penghargaan) {
             $data = [
                 'Num' => $penghargaan['Num'],
                 'user_id' => $penghargaan['user_id'],
@@ -317,31 +321,32 @@ class Userfair14 extends BaseController
 
         $data['title_page'] = "I.4. Tanda Penghargaan Yang Diterima (W1)";
         $data['data_bread'] = '';
-        $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Ubah Penghargaan</li>';
+        $data['stringbread'] = '<li class="breadcrumb-item active"><a href="' . base_url() . "/userfair" . '">Dokumen FAIR</a></li><li class="breadcrumb-item active">Ubah Penghargaan</li>';
         $data['logged_in'] = $session->get('logged_in');
         return view('maintemp/ubahpenghargaanuserfair', $data);
     }
 
-    public function ubahpenghargaanproses(){
+    public function ubahpenghargaanproses()
+    {
         $session = session();
         $user_id = $session->get('user_id');
         $slug = new Slug();
         $model = new PenghargaanModel();
         $logged_in = $session->get('logged_in');
         $ispeserta = $session->get('ispeserta');
-        if ((!$logged_in)&&(!$ispeserta)){
+        if ((!$logged_in) && (!$ispeserta)) {
             return redirect()->to('/home');
-        }else{
+        } else {
             $session->set('role', 'peserta');
         }
         helper(['tanggal']);
         $Num = $this->request->getVar('Num');
 
-        $button=$this->request->getVar('submit');
-        
-        if ($button=="batal"){
+        $button = $this->request->getVar('submit');
+
+        if ($button == "batal") {
             return redirect()->to('/userfair14/docs');
-        }else{
+        } else {
             helper(['form', 'url']);
 
             $formvalid = $this->validate([
@@ -403,7 +408,7 @@ class Userfair14 extends BaseController
                 ]
             ]);
 
-            if ($formvalid){
+            if ($formvalid) {
                 $filename = $this->request->getVar('filename');
                 $Year = $this->request->getVar('Year');
                 $Month = $this->request->getVar('Month');
@@ -423,11 +428,11 @@ class Userfair14 extends BaseController
                 $nilai_r = 0;
                 $stringkp = '';
                 $totarray = count($komp);
-                $i=0;
+                $i = 0;
                 foreach ($komp as $kp) :
                     $i++;
                     $nilai_p = $nilai_p + 1;
-                    switch ($Level){
+                    switch ($Level) {
                         case "Mud":
                             $nilai_q = $nilai_q + 2;
                             break;
@@ -438,46 +443,46 @@ class Userfair14 extends BaseController
                             $nilai_q = $nilai_q + 4;
                             break;
                     }
-                    switch ($InstituteType){
+                    switch ($InstituteType) {
                         case "Lok":
-                            $nilai_r = $nilai_r+1;
+                            $nilai_r = $nilai_r + 1;
                             break;
                         case "Nas":
-                            $nilai_r = $nilai_r+2;
+                            $nilai_r = $nilai_r + 2;
                             break;
                         case "Reg":
-                            $nilai_r = $nilai_r+3;
+                            $nilai_r = $nilai_r + 3;
                             break;
                         case "Int":
-                            $nilai_r = $nilai_r+4;
+                            $nilai_r = $nilai_r + 4;
                             break;
                     }
-                    if ($i!=$totarray){
-                        $stringkp = $stringkp.$kp.', ';
-                    }else{
-                        $stringkp = $stringkp.$kp;
+                    if ($i != $totarray) {
+                        $stringkp = $stringkp . $kp . ', ';
+                    } else {
+                        $stringkp = $stringkp . $kp;
                     }
                 endforeach;
                 $nilai_w1 = $nilai_q * $nilai_r;
 
                 $namapenghargaan = $slug->slugify($Name);
                 $ext = $File->getClientExtension();
-                if ((empty($filename))&&(!empty($ext))){
-                    $filenamenew = $user_id.'_penghargaan_'.$namapenghargaan.'.'.$ext;
-                    $File->move('uploads/docs/',$filenamenew,true);
-                } elseif ((!empty($filename))&&(!empty($ext))){
-                    $oldext = substr($filename,-4);
-                    if ($oldext == $ext){
-                        $File->move('uploads/docs/',$filename,true);
+                if ((empty($filename)) && (!empty($ext))) {
+                    $filenamenew = $user_id . '_penghargaan_' . $namapenghargaan . '.' . $ext;
+                    $File->move('uploads/docs/', $filenamenew, true);
+                } elseif ((!empty($filename)) && (!empty($ext))) {
+                    $oldext = substr($filename, -4);
+                    if ($oldext == $ext) {
+                        $File->move('uploads/docs/', $filename, true);
                         $filenamenew = $filename;
-                    }else{
-                        $filenamenew = $user_id.'_penghargaan_'.$namapenghargaan.'.'.$ext;
-                        $File->move('uploads/docs/',$filenamenew,true);
+                    } else {
+                        $filenamenew = $user_id . '_penghargaan_' . $namapenghargaan . '.' . $ext;
+                        $File->move('uploads/docs/', $filenamenew, true);
                     }
-                }else{
-                    $filenamenew=$filename;
+                } else {
+                    $filenamenew = $filename;
                 }
-    
+
                 $data = array(
                     'Year' => $Year,
                     'Month' => $Month,
@@ -500,13 +505,13 @@ class Userfair14 extends BaseController
 
                 $model->update($Num, $data);
                 $session->setFlashdata('msg', 'Data penghargaan berhasil diubah.');
-    
+
                 return redirect()->to('/userfair14/docs');
-            }else{
+            } else {
                 $session = session();
                 $model = new PenghargaanModel();
                 $penghargaan = $model->where('Num', $Num)->first();
-                if ($penghargaan){
+                if ($penghargaan) {
                     $data = [
                         'Num' => $penghargaan['Num'],
                         'user_id' => $penghargaan['user_id'],
@@ -528,14 +533,14 @@ class Userfair14 extends BaseController
                 $model1 = new KompModel();
                 $where = "komp_cat LIKE 'W.1%'";
                 $data['data_komp'] = $model1->where($where)->orderby('komp_id', 'ASC')->findall();
-        
+
                 $data['title_page'] = "I.4. Tanda Penghargaan Yang Diterima (W1)";
                 $data['data_bread'] = '';
-                $data['stringbread'] = '<li class="breadcrumb-item active"><a href="'.base_url()."/userfair".'">Dokumen FAIR</a></li><li class="breadcrumb-item active">Ubah Penghargaan</li>';
+                $data['stringbread'] = '<li class="breadcrumb-item active"><a href="' . base_url() . "/userfair" . '">Dokumen FAIR</a></li><li class="breadcrumb-item active">Ubah Penghargaan</li>';
                 $data['logged_in'] = $session->get('logged_in');
                 $data['validation'] = $this->validator;
                 return view('maintemp/ubahpenghargaanuserfair', $data);
             }
-        }        
+        }
     }
 }

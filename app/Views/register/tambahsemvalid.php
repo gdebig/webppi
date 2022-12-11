@@ -1,6 +1,6 @@
-<?= $this->extend('register/template');?>
+<?= $this->extend('register/template'); ?>
 
-<?= $this->section('content');?>
+<?= $this->section('content'); ?>
 
 <div class="card card-primary" style="width: auto; margin: 30px;">
     <div class="col-sm-13" style="width: auto; margin: 30px;">
@@ -8,81 +8,75 @@
             <h3>Makalah/Tulisan Yang Disajikan Dalam Seminar/Lokakarya Keinsinyuran</h3>
         </div>
 
-        <?php if(isset($validation)):?>
-        <div class="alert alert-danger"><?= $validation->listErrors()?></div>
-        <?php endif;?>
+        <?php if (isset($validation)) : ?>
+            <div class="alert alert-danger"><?= $validation->listErrors() ?></div>
+        <?php endif; ?>
 
         <!-- /.card-header -->
         <div class="card-body" style="width: auto; margin: 30px;">
-            <form action="<?php echo base_url();?>/register/tambahsemproses" method="post"
-                enctype="multipart/form-data">
+            <form action="<?php echo base_url(); ?>/register/tambahsemproses" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="PaperName" class="element">Judul Makalah/Tulisan
                         <span class="required"> *</span>&nbsp; </label>
                     <div class="element">
-                        <input class="form-control" id="PaperName" name="PaperName" type="text"
-                            placeholder="Judul Makalah/Tulisan..." value="<?= set_value('PaperName');?>" />
+                        <input class="form-control" id="PaperName" name="PaperName" type="text" placeholder="Judul Makalah/Tulisan..." value="<?= set_value('PaperName'); ?>" />
                     </div><br />
                     <label for="Name" class="element">Nama Seminar/Lokakarya <span class="required"> *</span>&nbsp;
                     </label>
                     <div class="element">
-                        <input class="form-control" id="Name" name="Name" type="text"
-                            placeholder="Nama Seminar/Lokakarya..." value="<?= set_value('Name');?>" />
+                        <input class="form-control" id="Name" name="Name" type="text" placeholder="Nama Seminar/Lokakarya..." value="<?= set_value('Name'); ?>" />
                     </div>
                     <br />
                     <label for="Organizer" class="element">Penyelenggara <span class="required"> *</span>&nbsp;
                     </label>
                     <div class="element">
-                        <input class="form-control" id="Organizer" name="Organizer" type="text"
-                            placeholder="Penyelenggara..." value="<?= set_value('Organizer');?>" />
+                        <input class="form-control" id="Organizer" name="Organizer" type="text" placeholder="Penyelenggara..." value="<?= set_value('Organizer'); ?>" />
                     </div>
                     <br />
                     <label for="LocCity" class="element">Kota <span class="required">
                             *</span>&nbsp;</label>
                     <div class="element">
-                        <input class="form-control" id="LocCity" name="LocCity" type="text" placeholder="Kota..."
-                            value="<?= set_value('LocCity');?>" />
+                        <input class="form-control" id="LocCity" name="LocCity" type="text" placeholder="Kota..." value="<?= set_value('LocCity'); ?>" />
                     </div>
                     <br />
                     <label for="LocCountry" class="element">Negara<span class="required">
                             *</span>&nbsp;</label>
                     <div class="element">
-                        <input class="form-control" id="LocCountry" name="LocCountry" type="text"
-                            placeholder="Negara..." value="<?= set_value('LocCountry');?>" />
+                        <input class="form-control" id="LocCountry" name="LocCountry" type="text" placeholder="Negara..." value="<?= set_value('LocCountry'); ?>" />
                     </div>
                     <br />
                     <label for="Month" class="element">Bulan <span class="required"> *</span>&nbsp; </label>
                     <div class="element">
                         <select name="Month" id="Month" class="form-control">
-                            <option value="Januari" <?php echo set_value('Month') == 'Januari' ? 'selected' : '';?>>
+                            <option value="Januari" <?php echo set_value('Month') == 'Januari' ? 'selected' : ''; ?>>
                                 Januari
                             </option>
-                            <option value="Februari" <?php echo set_value('Month') == 'Februari' ? 'selected' : '';?>>
+                            <option value="Februari" <?php echo set_value('Month') == 'Februari' ? 'selected' : ''; ?>>
                                 Februari
                             </option>
-                            <option value="Maret" <?php echo set_value('Month') == 'Maret' ? 'selected' : '';?>>Maret
+                            <option value="Maret" <?php echo set_value('Month') == 'Maret' ? 'selected' : ''; ?>>Maret
                             </option>
-                            <option value="April" <?php echo set_value('Month') == 'April' ? 'selected' : '';?>>April
+                            <option value="April" <?php echo set_value('Month') == 'April' ? 'selected' : ''; ?>>April
                             </option>
-                            <option value="Mei" <?php echo set_value('Month') == 'Mei' ? 'selected' : '';?>>
+                            <option value="Mei" <?php echo set_value('Month') == 'Mei' ? 'selected' : ''; ?>>
                                 Mei</option>
-                            <option value="Juni" <?php echo set_value('Month') == 'Juni' ? 'selected' : '';?>>Juni
+                            <option value="Juni" <?php echo set_value('Month') == 'Juni' ? 'selected' : ''; ?>>Juni
                             </option>
-                            <option value="Juli" <?php echo set_value('Month') == 'Juli' ? 'selected' : '';?>>Juli
+                            <option value="Juli" <?php echo set_value('Month') == 'Juli' ? 'selected' : ''; ?>>Juli
                             </option>
-                            <option value="Agustus" <?php echo set_value('Month') == 'Agustus' ? 'selected' : '';?>>
+                            <option value="Agustus" <?php echo set_value('Month') == 'Agustus' ? 'selected' : ''; ?>>
                                 Agustus
                             </option>
-                            <option value="September" <?php echo set_value('Month') == 'September' ? 'selected' : '';?>>
+                            <option value="September" <?php echo set_value('Month') == 'September' ? 'selected' : ''; ?>>
                                 September
                             </option>
-                            <option value="Oktober" <?php echo set_value('Month') == 'Oktober' ? 'selected' : '';?>>
+                            <option value="Oktober" <?php echo set_value('Month') == 'Oktober' ? 'selected' : ''; ?>>
                                 Oktober
                             </option>
-                            <option value="November" <?php echo set_value('Month') == 'November' ? 'selected' : '';?>>
+                            <option value="November" <?php echo set_value('Month') == 'November' ? 'selected' : ''; ?>>
                                 November
                             </option>
-                            <option value="Desember" <?php echo set_value('Month') == 'Desember' ? 'selected' : '';?>>
+                            <option value="Desember" <?php echo set_value('Month') == 'Desember' ? 'selected' : ''; ?>>
                                 Desember
                             </option>
                         </select>
@@ -92,28 +86,28 @@
                     <div class="element">
                         <select name="Year" id="Year" class="form-control">
                             <?php
-                                    $lastyear = date("Y")+10;
-                                    $now = date("Y");
-                                    for ($tahun1 = 1901;$tahun1<=$lastyear;$tahun1++){
-                                        if ($tahun1 == set_value('Year')){
-                                            $selected = "selected";
-                                        }else{
-                                            $selected ="";
-                                        }
-                                        echo "<option value='".$tahun1."' ".$selected.">".$tahun1."</option>";
-                                    }
-                                ?>
+                            $lastyear = date("Y") + 10;
+                            $now = date("Y");
+                            for ($tahun1 = 1901; $tahun1 <= $lastyear; $tahun1++) {
+                                if ($tahun1 == set_value('Year')) {
+                                    $selected = "selected";
+                                } else {
+                                    $selected = "";
+                                }
+                                echo "<option value='" . $tahun1 . "' " . $selected . ">" . $tahun1 . "</option>";
+                            }
+                            ?>
                         </select>
                     </div>
                     <br />
                     <label for="Level" class="element">Seminar/Lokakarya Tingkat</label>
                     <div class="element">
                         <select id="Level" name="Level" class="form-control">
-                            <option value="Lok" <?php echo set_value('Level') == 'Lok' ? 'selected' : '';?>>Pada Seminar
+                            <option value="Lok" <?php echo set_value('Level') == 'Lok' ? 'selected' : ''; ?>>Pada Seminar
                                 Lokal</option>
-                            <option value="Nas" <?php echo set_value('Level') == 'Nas' ? 'selected' : '';?>>Pada Seminar
+                            <option value="Nas" <?php echo set_value('Level') == 'Nas' ? 'selected' : ''; ?>>Pada Seminar
                                 Nasional</option>
-                            <option value="Int" <?php echo set_value('Level') == 'Int' ? 'selected' : '';?>>Pada Seminar
+                            <option value="Int" <?php echo set_value('Level') == 'Int' ? 'selected' : ''; ?>>Pada Seminar
                                 Internasional</option>
                         </select>
                     </div>
@@ -121,13 +115,13 @@
                     <label for="DiffBenefit" class="element">Tingkat Kesulitan dan Manfaat</label>
                     <div class="element">
                         <select id="DiffBenefit" name="DiffBenefit" class="form-control">
-                            <option value="ren" <?php echo set_value('DiffBenefit') == 'ren' ? 'selected' : '';?>>Rendah
+                            <option value="ren" <?php echo set_value('DiffBenefit') == 'ren' ? 'selected' : ''; ?>>Rendah
                             </option>
-                            <option value="sed" <?php echo set_value('DiffBenefit') == 'sed' ? 'selected' : '';?>>Sedang
+                            <option value="sed" <?php echo set_value('DiffBenefit') == 'sed' ? 'selected' : ''; ?>>Sedang
                             </option>
-                            <option value="tin" <?php echo set_value('DiffBenefit') == 'tin' ? 'selected' : '';?>>Tinggi
+                            <option value="tin" <?php echo set_value('DiffBenefit') == 'tin' ? 'selected' : ''; ?>>Tinggi
                             </option>
-                            <option value="stin" <?php echo set_value('DiffBenefit') == 'stin' ? 'selected' : '';?>>
+                            <option value="stin" <?php echo set_value('DiffBenefit') == 'stin' ? 'selected' : ''; ?>>
                                 Sangat
                                 Tinggi</option>
                         </select>
@@ -136,8 +130,7 @@
                     <label for="Desc" class="element">Uraian Singkat Materi Makalah/Tulisan<span class="required">
                             *</span>&nbsp;</label>
                     <div class="element">
-                        <textarea class="form-control" id="Desc" name="Desc" placeholder="Deskripsi"
-                            placeholder="Uraian Singkat..."><?= set_value('Desc');?></textarea>
+                        <textarea class="form-control" id="Desc" name="Desc" placeholder="Deskripsi" placeholder="Uraian Singkat..."><?= set_value('Desc'); ?></textarea>
                     </div>
                     <br />
                     <label for="File" class="element">Bukti Seminar</label>
@@ -154,8 +147,7 @@
                                 Seminar</button>
                         </div>
                         <div class="col">
-                            <button type="submit" name="submit" value="batal"
-                                class="btn btn-block btn-danger col">Batal</button>
+                            <button type="submit" name="submit" value="batal" class="btn btn-block btn-danger col">Batal</button>
                         </div>
                     </div>
                 </div>
@@ -166,4 +158,4 @@
 <!-- /.content-wrapper -->
 <!-- Control Sidebar -->
 
-<?= $this->endSection();?>
+<?= $this->endSection(); ?>

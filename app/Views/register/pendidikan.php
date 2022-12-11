@@ -1,6 +1,6 @@
-<?= $this->extend('register/template');?>
+<?= $this->extend('register/template'); ?>
 
-<?= $this->section('content');?>
+<?= $this->section('content'); ?>
 
 <div class="card card-primary" style="width: auto; margin: 30px;">
     <div class="col-sm-13" style="width: auto; margin: 30px;">
@@ -12,14 +12,14 @@
             <div class="card-body">
 
                 <div class="col">
-                    <?php if(session()->getFlashdata('msg')):?>
-                    <div class="alert alert-success"><?= session()->getFlashdata('msg') ?></div>
-                    <?php endif;?>
+                    <?php if (session()->getFlashdata('msg')) : ?>
+                        <div class="alert alert-success"><?= session()->getFlashdata('msg') ?></div>
+                    <?php endif; ?>
                 </div>
 
                 <div class="col">
                     <div class="row">
-                        <a href="<?php echo base_url();?>/register/tambahpendidikan" class="btn btn-primary">Tambah
+                        <a href="<?php echo base_url(); ?>/register/tambahpendidikan" class="btn btn-primary">Tambah
                             Data Pendidikan</a>
                     </div>
                 </div>
@@ -30,65 +30,60 @@
                     </div>
                 </div>
 
-                <?php if(isset($data_pend)&&($data_pend=="kosong")){
-                    ?>
+                <?php if (isset($data_pend) && ($data_pend == "kosong")) {
+                ?>
 
-                <div class="alert alert-danger">Data pendidikan belum ada. <a
-                        href="<?= base_url();?>/register/tambahpendidikan">Klik
-                        di sini untuk menambah data pendidikan</a></div>
-                <?php }else{ ?>
+                    <div class="alert alert-danger">Data pendidikan belum ada. <a href="<?= base_url(); ?>/register/tambahpendidikan">Klik
+                            di sini untuk menambah data pendidikan</a></div>
+                <?php } else { ?>
 
-                <table id="tabledata" class="table table-bordered table-hover">
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>Jenjang</th>
-                            <th>Universitas</th>
-                            <th>Fakultas</th>
-                            <th>Program Studi</th>
-                            <th>Alamat</th>
-                            <th>Tahun Lulus</th>
-                            <th>Gelar</th>
-                            <th>Judul Tugas Akhir</th>
-                            <th>Uraian Tugas Akhir</th>
-                            <th>Nilai</th>
-                            <th>Scan Ijazah</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                                    $i=1; 
-                                    foreach ($data_pend as $pend) : 
-                                    ?>
-                        <tr>
-                            <td><?php echo $i;$i++;?></td>
-                            <td><?= $pend['Rank'];?></td>
-                            <td><?= $pend['Name'];?></td>
-                            <td><?= $pend['Faculty'];?></td>
-                            <td><?= $pend['Major'];?></td>
-                            <td><?= $pend['City'].", ".$pend['Country'] ?></td>
-                            <td><?= $pend['GradYear'];?></td>
-                            <td><?= $pend['Degree'];?></td>
-                            <td><?= $pend['Title'];?></td>
-                            <td><?= $pend['Desc'];?></td>
-                            <td><?= $pend['Mark'];?></td>
-                            <td><a href="<?=base_url();?>/uploads/docs/<?=$pend['File'];?>"
-                                    target="_blank"><?= $pend['File'];?></a></td>
-                            <td style="text-align: center"><a
-                                    href="<?php echo base_url();?>/register/ubahpendidikan/<?=$pend['Num'];?>"
-                                    class="btn btn-warning"> <i class="fas fa-file-signature"></i> Ubah</a>
-                                <a href="<?php echo base_url();?>/register/hapuspendidikan/<?=$pend['Num'];?>"
-                                    onclick="return confirm('Apakah anda yakin akan menghapus data pendidikan?')"
-                                    class="btn btn-danger"> <i class="fas fa-trash"></i>
-                                    Hapus</a>
-                            </td>
-                        </tr>
-                        <?php 
-                                    endforeach 
-                                    ?>
-                    </tbody>
-                </table>
+                    <table id="tabledata" class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Jenjang</th>
+                                <th>Universitas</th>
+                                <th>Fakultas</th>
+                                <th>Program Studi</th>
+                                <th>Alamat</th>
+                                <th>Tahun Lulus</th>
+                                <th>Gelar</th>
+                                <th>Judul Tugas Akhir</th>
+                                <th>Uraian Tugas Akhir</th>
+                                <th>Nilai</th>
+                                <th>Scan Ijazah</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $i = 1;
+                            foreach ($data_pend as $pend) :
+                            ?>
+                                <tr>
+                                    <td><?php echo $i;
+                                        $i++; ?></td>
+                                    <td><?= $pend['Rank']; ?></td>
+                                    <td><?= $pend['Name']; ?></td>
+                                    <td><?= $pend['Faculty']; ?></td>
+                                    <td><?= $pend['Major']; ?></td>
+                                    <td><?= $pend['City'] . ", " . $pend['Country'] ?></td>
+                                    <td><?= $pend['GradYear']; ?></td>
+                                    <td><?= $pend['Degree']; ?></td>
+                                    <td><?= $pend['Title']; ?></td>
+                                    <td><?= $pend['Desc']; ?></td>
+                                    <td><?= $pend['Mark']; ?></td>
+                                    <td><a href="<?= base_url(); ?>/uploads/docs/<?= $pend['File']; ?>" target="_blank"><?= $pend['File']; ?></a></td>
+                                    <td style="text-align: center"><a href="<?php echo base_url(); ?>/register/ubahpendidikan/<?= $pend['Num']; ?>" class="btn btn-warning"> <i class="fas fa-file-signature"></i> Ubah</a>
+                                        <a href="<?php echo base_url(); ?>/register/hapuspendidikan/<?= $pend['Num']; ?>" onclick="return confirm('Apakah anda yakin akan menghapus data pendidikan?')" class="btn btn-danger"> <i class="fas fa-trash"></i>
+                                            Hapus</a>
+                                    </td>
+                                </tr>
+                            <?php
+                            endforeach
+                            ?>
+                        </tbody>
+                    </table>
                 <?php } ?>
             </div>
         </div>
@@ -97,4 +92,4 @@
 <!-- /.content-wrapper -->
 <!-- Control Sidebar -->
 
-<?= $this->endSection();?>
+<?= $this->endSection(); ?>

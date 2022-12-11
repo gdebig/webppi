@@ -1,6 +1,6 @@
-<?= $this->extend('maintemp/template');?>
+<?= $this->extend('maintemp/template'); ?>
 
-<?= $this->section('content');?>
+<?= $this->section('content'); ?>
 
 <div class="card card-primary" style="width: auto; margin: 30px;">
     <div class="col-sm-13" style="width: auto; margin: 30px;">
@@ -9,13 +9,11 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body" style="width: auto; margin: 30px;">
-            <form action="<?php echo base_url();?>/userfair13/tambahorgproses" method="post"
-                enctype="multipart/form-data">
+            <form action="<?php echo base_url(); ?>/userfair13/tambahorgproses" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="Name" class="element">Nama Organisasi <span class="required"> *</span>&nbsp; </label>
                     <div class="element">
-                        <input id="Name" name="Name" class="form-control" type="text"
-                            placeholder="Nama Organisasi..." />
+                        <input id="Name" name="Name" class="form-control" type="text" placeholder="Nama Organisasi..." />
                     </div>
                     <br>
                     <label for="Type" class="element">
@@ -32,15 +30,13 @@
                         <label for="City" class="element">Kota Organisasi <span class="required"> *</span>&nbsp;
                         </label>
                         <div class="element">
-                            <input id="City" name="City" class="form-control" type="text"
-                                placeholder="Kota Organisasi..." />
+                            <input id="City" name="City" class="form-control" type="text" placeholder="Kota Organisasi..." />
                         </div>
                         <br />
                         <label for="Country" class="element">Negara Organisasi <span class="required"> *</span>&nbsp;
                         </label>
                         <div class="element">
-                            <input id="Country" name="Country" class="form-control" type="text"
-                                placeholder="Negara Organisasi..." />
+                            <input id="Country" name="Country" class="form-control" type="text" placeholder="Negara Organisasi..." />
                         </div>
                     </div>
                     <div class="form-group">
@@ -68,16 +64,16 @@
                         <div class="element">
                             <select name="StartPeriodYear" id="StartPeriodYear" class="form-control">
                                 <?php
-                                    $lastyear = date("Y")+10;
-                                    $now = date("Y");
-                                    for ($tahun1 = 1901;$tahun1<=$lastyear;$tahun1++){
-                                        if ($tahun1 == $now){
-                                            $selected = "selected";
-                                        }else{
-                                            $selected ="";
-                                        }
-                                        echo "<option value='".$tahun1."' ".$selected.">".$tahun1."</option>";
+                                $lastyear = date("Y") + 10;
+                                $now = date("Y");
+                                for ($tahun1 = 1901; $tahun1 <= $lastyear; $tahun1++) {
+                                    if ($tahun1 == $now) {
+                                        $selected = "selected";
+                                    } else {
+                                        $selected = "";
                                     }
+                                    echo "<option value='" . $tahun1 . "' " . $selected . ">" . $tahun1 . "</option>";
+                                }
                                 ?>
                             </select>
                         </div>
@@ -106,16 +102,16 @@
                         <div class="element">
                             <select name="EndPeriodYear" id="EndPeriodYear" class="form-control">
                                 <?php
-                                    $lastyear = date("Y")+10;
-                                    $now = date("Y");
-                                    for ($tahun1 = 1901;$tahun1<=$lastyear;$tahun1++){
-                                        if ($tahun1 == $now){
-                                            $selected = "selected";
-                                        }else{
-                                            $selected ="";
-                                        }
-                                        echo "<option value='".$tahun1."' ".$selected.">".$tahun1."</option>";
+                                $lastyear = date("Y") + 10;
+                                $now = date("Y");
+                                for ($tahun1 = 1901; $tahun1 <= $lastyear; $tahun1++) {
+                                    if ($tahun1 == $now) {
+                                        $selected = "selected";
+                                    } else {
+                                        $selected = "";
                                     }
+                                    echo "<option value='" . $tahun1 . "' " . $selected . ">" . $tahun1 . "</option>";
+                                }
                                 ?>
                             </select>
                         </div>
@@ -170,8 +166,7 @@
                         <label for="Desc" class="element">Uraian Aktifitas Dalam Organisasi<span class="required">
                                 *</span>&nbsp;</label>
                         <div class="element">
-                            <textarea id="Desc" name="Desc" class="form-control"
-                                placeholder="Uraian Aktifitas Dalam Organisasi..."></textarea>
+                            <textarea id="Desc" name="Desc" class="form-control" placeholder="Uraian Aktifitas Dalam Organisasi..."></textarea>
                         </div>
                     </div>
                     <br />
@@ -181,23 +176,23 @@
                     <div class="element">
                         <select multiple class="form-control" name="komp13[]" id="komp13" size="10">
                             <?php
-                            $i=1;
+                            $i = 1;
                             $prev_cat = array();
 
                             foreach ($data_komp as $komp) :
-                                $j = $i-1;
+                                $j = $i - 1;
                                 $prev_cat[$i] = $komp['komp_cat'];
-                                if (!empty($prev_cat)&&($j!=0)){
-                                    if ($prev_cat[$i]!=$prev_cat[$j]){
+                                if (!empty($prev_cat) && ($j != 0)) {
+                                    if ($prev_cat[$i] != $prev_cat[$j]) {
                                         echo "</optgroup>";
                                     }
                                 }
-                                if ($komp['komp_parent']=='y'){
-                                    echo "<optgroup label='".$komp['komp_code']." ".$komp['komp_desc']."'>";
-                                }else{
-                                    if ($i==1){
-                                    }else{
-                                        echo "<option value='".$komp['komp_code']."' title='".$komp['komp_desc']."'>".$komp['komp_code']." ".$komp['komp_desc']."</option>";
+                                if ($komp['komp_parent'] == 'y') {
+                                    echo "<optgroup label='" . $komp['komp_code'] . " " . $komp['komp_desc'] . "'>";
+                                } else {
+                                    if ($i == 1) {
+                                    } else {
+                                        echo "<option value='" . $komp['komp_code'] . "' title='" . $komp['komp_desc'] . "'>" . $komp['komp_code'] . " " . $komp['komp_desc'] . "</option>";
                                     }
                                 }
                                 $i++;
@@ -221,8 +216,7 @@
                                 Organisasi</button>
                         </div>
                         <div class="col">
-                            <button type="submit" name="submit" value="batal"
-                                class="btn btn-block btn-danger col">Batal</button>
+                            <button type="submit" name="submit" value="batal" class="btn btn-block btn-danger col">Batal</button>
                         </div>
                     </div>
                 </div>
@@ -233,4 +227,4 @@
 <!-- /.content-wrapper -->
 <!-- Control Sidebar -->
 
-<?= $this->endSection();?>
+<?= $this->endSection(); ?>

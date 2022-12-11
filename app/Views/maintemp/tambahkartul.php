@@ -1,6 +1,6 @@
-<?= $this->extend('maintemp/template');?>
+<?= $this->extend('maintemp/template'); ?>
 
-<?= $this->section('content');?>
+<?= $this->section('content'); ?>
 
 <div class="card card-primary" style="width: auto; margin: 30px;">
     <div class="col-sm-13" style="width: auto; margin: 30px;">
@@ -9,34 +9,29 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body" style="width: auto; margin: 30px;">
-            <form action="<?php echo base_url();?>/userfair51/tambahkartulproses" method="post"
-                enctype="multipart/form-data">
+            <form action="<?php echo base_url(); ?>/userfair51/tambahkartulproses" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="Name" class="element">Judul Karya Tulis
                         <span class="required"> *</span>&nbsp; </label>
                     <div class="element">
-                        <input class="form-control" id="Name" name="Name" type="text"
-                            placeholder="Judul Karya Tulis..." />
+                        <input class="form-control" id="Name" name="Name" type="text" placeholder="Judul Karya Tulis..." />
                     </div><br />
                     <label for="Media" class="element">Nama Media Publikasi <span class="required"> *</span>&nbsp;
                     </label>
                     <div class="element">
-                        <input class="form-control" id="Media" name="Media" type="text"
-                            placeholder="Nama Media Publikasi..." />
+                        <input class="form-control" id="Media" name="Media" type="text" placeholder="Nama Media Publikasi..." />
                     </div>
                     <br />
                     <label for="LocCity" class="element">Kota Media <span class="required">
                             *</span>&nbsp;</label>
                     <div class="element">
-                        <input class="form-control" id="LocCity" name="LocCity" type="text"
-                            placeholder="Kota Media..." />
+                        <input class="form-control" id="LocCity" name="LocCity" type="text" placeholder="Kota Media..." />
                     </div>
                     <br />
                     <label for="LocCountry" class="element">Negara Media <span class="required">
                             *</span>&nbsp;</label>
                     <div class="element">
-                        <input class="form-control" id="LocCountry" name="LocCountry" type="text"
-                            placeholder="Negara Media..." />
+                        <input class="form-control" id="LocCountry" name="LocCountry" type="text" placeholder="Negara Media..." />
                     </div>
                     <br />
                     <label for="Month" class="element">Bulan <span class="required"> *</span>&nbsp; </label>
@@ -61,17 +56,17 @@
                     <div class="element">
                         <select name="Year" id="Year" class="form-control">
                             <?php
-                                    $lastyear = date("Y")+10;
-                                    $now = date("Y");
-                                    for ($tahun1 = 1901;$tahun1<=$lastyear;$tahun1++){
-                                        if ($tahun1 == $now){
-                                            $selected = "selected";
-                                        }else{
-                                            $selected ="";
-                                        }
-                                        echo "<option value='".$tahun1."' ".$selected.">".$tahun1."</option>";
-                                    }
-                                ?>
+                            $lastyear = date("Y") + 10;
+                            $now = date("Y");
+                            for ($tahun1 = 1901; $tahun1 <= $lastyear; $tahun1++) {
+                                if ($tahun1 == $now) {
+                                    $selected = "selected";
+                                } else {
+                                    $selected = "";
+                                }
+                                echo "<option value='" . $tahun1 . "' " . $selected . ">" . $tahun1 . "</option>";
+                            }
+                            ?>
                         </select>
                     </div>
                     <br />
@@ -97,8 +92,7 @@
                     <label for="Desc" class="element">Uraian Singkat Materi yang Dipublikasikan<span class="required">
                             *</span>&nbsp;</label>
                     <div class="element">
-                        <textarea class="form-control" id="Desc" name="Desc" placeholder="Deskripsi"
-                            placeholder="Uraian Singkat..."></textarea>
+                        <textarea class="form-control" id="Desc" name="Desc" placeholder="Deskripsi" placeholder="Uraian Singkat..."></textarea>
                     </div>
                     <br />
                     <label for="komp51" class="element">Kompetensi (Gunakan tombol ctrl + klik kiri mouse untuk memilih
@@ -106,23 +100,23 @@
                     <div class="element">
                         <select multiple class="form-control" name="komp51[]" id="komp51" size="10">
                             <?php
-                            $i=1;
+                            $i = 1;
                             $prev_cat = array();
 
                             foreach ($data_komp as $komp) :
-                                $j = $i-1;
+                                $j = $i - 1;
                                 $prev_cat[$i] = $komp['komp_cat'];
-                                if (!empty($prev_cat)&&($j!=0)){
-                                    if ($prev_cat[$i]!=$prev_cat[$j]){
+                                if (!empty($prev_cat) && ($j != 0)) {
+                                    if ($prev_cat[$i] != $prev_cat[$j]) {
                                         echo "</optgroup>";
                                     }
                                 }
-                                if ($komp['komp_parent']=='y'){
-                                    echo "<optgroup label='".$komp['komp_code']." ".$komp['komp_desc']."'>";
-                                }else{
-                                    if ($i==1){
-                                    }else{
-                                        echo "<option value='".$komp['komp_code']."' title='".$komp['komp_desc']."'>".$komp['komp_code']." ".$komp['komp_desc']."</option>";
+                                if ($komp['komp_parent'] == 'y') {
+                                    echo "<optgroup label='" . $komp['komp_code'] . " " . $komp['komp_desc'] . "'>";
+                                } else {
+                                    if ($i == 1) {
+                                    } else {
+                                        echo "<option value='" . $komp['komp_code'] . "' title='" . $komp['komp_desc'] . "'>" . $komp['komp_code'] . " " . $komp['komp_desc'] . "</option>";
                                     }
                                 }
                                 $i++;
@@ -145,8 +139,7 @@
                                 Karya Tulis</button>
                         </div>
                         <div class="col">
-                            <button type="submit" name="submit" value="batal"
-                                class="btn btn-block btn-danger col">Batal</button>
+                            <button type="submit" name="submit" value="batal" class="btn btn-block btn-danger col">Batal</button>
                         </div>
                     </div>
                 </div>
@@ -157,4 +150,4 @@
 <!-- /.content-wrapper -->
 <!-- Control Sidebar -->
 
-<?= $this->endSection();?>
+<?= $this->endSection(); ?>

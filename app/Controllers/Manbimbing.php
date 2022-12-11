@@ -18,18 +18,18 @@ class Manbimbing extends BaseController
         $issadmin = $session->get('issadmin');
         $isadmin = $session->get('isadmin');
         $ispenilai = $session->get('ispenilai');
-        if ((!$logged_in)&&((!$issadmin)||(!$isadmin)||(!$ispenilai))){
+        if ((!$logged_in) && ((!$issadmin) || (!$isadmin) || (!$ispenilai))) {
             return redirect()->to('/home');
         }
         helper(['tanggal']);
-        
+
         $user_id = $session->get('user_id');
         $model = new BimbingModel();
         $data['logged_in'] = $logged_in;
         $user = $model->where('tbl_bimbing.dosen_id', $user_id)->join('tbl_profile', 'tbl_bimbing.mhs_id = tbl_profile.user_id', 'left')->join('tbl_tugasakhir', 'tbl_bimbing.mhs_id = tbl_tugasakhir.user_id', 'left')->orderby('tbl_tugasakhir.ta_tahun', 'DESC')->orderby('tbl_profile.FullName', 'ASC')->findall();
-        if (!empty($user)){
+        if (!empty($user)) {
             $data['data_user'] = $user;
-        }else{
+        } else {
             $data['data_user'] = 'kosong';
         }
         $data['title_page'] = "Data Mahasiswa Bimbingan PPI RPL";
@@ -37,13 +37,14 @@ class Manbimbing extends BaseController
         return view('maintemp/bimbing', $data);
     }
 
-    public function lihatnilai($mhs_id, $dosen_id, $ta_id){
+    public function lihatnilai($mhs_id, $dosen_id, $ta_id)
+    {
         $session = session();
         $logged_in = $session->get('logged_in');
         $issadmin = $session->get('issadmin');
         $isadmin = $session->get('isadmin');
         $ispenilai = $session->get('ispenilai');
-        if ((!$logged_in)&&((!$issadmin)||(!$isadmin)||(!$ispenilai))){
+        if ((!$logged_in) && ((!$issadmin) || (!$isadmin) || (!$ispenilai))) {
             return redirect()->to('/home');
         }
         helper(['tanggal']);
@@ -53,9 +54,9 @@ class Manbimbing extends BaseController
 
         $model = new NilaitaModel();
         $nilaita = $model->where('ta_id', $ta_id)->where('dosen_id', $user_id)->join('tbl_profile', 'tbl_nilaita.dosen_id = tbl_profile.user_id')->orderby('nilaita_id', 'ASC')->findall();
-        if(!empty($nilaita)){
+        if (!empty($nilaita)) {
             $data['nilai_ta'] = $nilaita;
-        }else{
+        } else {
             $data['nilai_ta'] = 'kosong';
         }
         $data['logged_in'] = $logged_in;
@@ -67,7 +68,7 @@ class Manbimbing extends BaseController
         $data['data_bread'] = "Nilai PK";
         return view('maintemp/lihatnilaipk', $data);
     }
-    
+
     public function berinilai($mhs_id, $dosen_id, $ta_id)
     {
         $session = session();
@@ -75,11 +76,11 @@ class Manbimbing extends BaseController
         $issadmin = $session->get('issadmin');
         $isadmin = $session->get('isadmin');
         $ispenilai = $session->get('ispenilai');
-        if ((!$logged_in)&&((!$issadmin)||(!$isadmin)||(!$ispenilai))){
+        if ((!$logged_in) && ((!$issadmin) || (!$isadmin) || (!$ispenilai))) {
             return redirect()->to('/home');
         }
         helper(['tanggal']);
-        
+
         $data['logged_in'] = $logged_in;
         $data['mhs_id'] = $mhs_id;
         $data['dosen_id'] = $dosen_id;
@@ -89,26 +90,27 @@ class Manbimbing extends BaseController
         return view('maintemp/nilaita', $data);
     }
 
-    public function nilaitaproses(){
+    public function nilaitaproses()
+    {
         $session = session();
         $logged_in = $session->get('logged_in');
         $issadmin = $session->get('issadmin');
         $isadmin = $session->get('isadmin');
         $ispenilai = $session->get('ispenilai');
-        if ((!$logged_in)&&((!$issadmin)||(!$isadmin)||(!$ispenilai))){
+        if ((!$logged_in) && ((!$issadmin) || (!$isadmin) || (!$ispenilai))) {
             return redirect()->to('/home');
         }
         helper(['tanggal']);
-        
+
         $user_id = $session->get('user_id');
         $mhs_id = $this->request->getVar('mhs_id');
         $dosen_id = $this->request->getVar('dosen_id');
         $ta_id = $this->request->getVar('ta_id');
 
         $submit = $this->request->getVar('submit');
-        if ($submit == "batal"){
-            return redirect()->to('/manbimbing/lihatnilai/'.$mhs_id.'/'.$dosen_id.'/'.$ta_id);
-        }else{
+        if ($submit == "batal") {
+            return redirect()->to('/manbimbing/lihatnilai/' . $mhs_id . '/' . $dosen_id . '/' . $ta_id);
+        } else {
             $model = new NilaitaModel();
             helper(['form', 'url']);
 
@@ -143,10 +145,10 @@ class Manbimbing extends BaseController
                 ]
             ]);
         }
-        if ($formvalid){
+        if ($formvalid) {
             $penulisan = $this->request->getVar('penulisan');
             $presentasi = $this->request->getVar('presentasi');
-            $materi = $this->request->getVar('materi');            
+            $materi = $this->request->getVar('materi');
 
             $file_string = $this->request->getVar('signed');
             $image = explode(";base64,", $file_string);
@@ -170,11 +172,11 @@ class Manbimbing extends BaseController
                 'date_created' => date('Y-m-d'),
                 'date_modified' => date('Y-m-d')
             );
-    
+
             $model->save($data);
-    
-             return redirect()->to('/manbimbing/lihatnilai/'.$mhs_id.'/'.$dosen_id.'/'.$ta_id);
-        }else{        
+
+            return redirect()->to('/manbimbing/lihatnilai/' . $mhs_id . '/' . $dosen_id . '/' . $ta_id);
+        } else {
             $data['logged_in'] = $logged_in;
             $data['mhs_id'] = $mhs_id;
             $data['dosen_id'] = $dosen_id;
@@ -185,7 +187,7 @@ class Manbimbing extends BaseController
             return view('maintemp/nilaitavalid', $data);
         }
     }
-    
+
     public function lihatformevaluasi($mhs_id, $dosen_id, $ta_id)
     {
         $session = session();
@@ -193,7 +195,7 @@ class Manbimbing extends BaseController
         $issadmin = $session->get('issadmin');
         $isadmin = $session->get('isadmin');
         $ispenilai = $session->get('ispenilai');
-        if ((!$logged_in)&&((!$issadmin)||(!$isadmin)||(!$ispenilai))){
+        if ((!$logged_in) && ((!$issadmin) || (!$isadmin) || (!$ispenilai))) {
             return redirect()->to('/home');
         }
         helper(['tanggal']);
@@ -201,61 +203,61 @@ class Manbimbing extends BaseController
 
         $model = new BimbingModel();
         $bimbing = $model->where('mhs_id', $mhs_id)->first();
-        if ($bimbing){
+        if ($bimbing) {
             $bimbing_id = $bimbing['dosen_id'];
         }
 
         $model = new ProfileModel();
         $dosen = $model->where('user_id', $bimbing_id)->first();
-        if ($dosen){
+        if ($dosen) {
             $data['namapembimbing'] = $dosen['FullName'];
         }
 
         $dosenttd = $model->where('user_id', $dosen_id)->first();
-        if ($dosen){
+        if ($dosen) {
             $data['namattd'] = $dosenttd['FullName'];
         }
 
         $model = new UserModel();
         $dosennip = $model->where('user_id', $bimbing_id)->first();
-        if ($dosennip){
+        if ($dosennip) {
             $data['bimbingnip'] = $dosennip['NIP'];
         }
 
         $model = new UserModel();
         $dosennipttd = $model->where('user_id', $dosen_id)->first();
-        if ($dosennip){
+        if ($dosennip) {
             $data['nipttd'] = $dosennipttd['NIP'];
         }
 
         $model = new TugasAkhirModel();
         $tugasakhir = $model->where('ta_id', $ta_id)->join('tbl_profile', 'tbl_tugasakhir.user_id = tbl_profile.user_id', 'left')->join('tbl_user', 'tbl_tugasakhir.user_id = tbl_user.user_id', 'left')->first();
-        if ($tugasakhir){
+        if ($tugasakhir) {
             $data['namamahasiswa'] = $tugasakhir['FullName'];
             $data['npm'] = $tugasakhir['NPM'];
             $data['instansi'] = $tugasakhir['instansi'];
             $data['divisi'] = $tugasakhir['divisi'];
-            $data['periode'] = format_indo($tugasakhir['startdate']).' - '.format_indo($tugasakhir['enddate']);
-            $data['lapjudul'] = $tugasakhir['ta_usuljudul']; 
+            $data['periode'] = format_indo($tugasakhir['startdate']) . ' - ' . format_indo($tugasakhir['enddate']);
+            $data['lapjudul'] = $tugasakhir['ta_usuljudul'];
         }
 
         $model = new NilaitaModel();
         $nilaita = $model->where('ta_id', $ta_id)->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->first();
-        if($nilaita){
+        if ($nilaita) {
             $data['penulisan'] = $nilaita['penulisan'];
             $data['presentasi'] = $nilaita['presentasi'];
             $data['materi'] = $nilaita['materi'];
             $data['tipedosen'] = $nilaita['tipedosen'];
             $data['signed'] = $nilaita['signed'];
-            $data['rerata'] = (0.3*$nilaita['penulisan'])+(0.3*$nilaita['presentasi'])+(0.4*$nilaita['materi']);
+            $data['rerata'] = (0.3 * $nilaita['penulisan']) + (0.3 * $nilaita['presentasi']) + (0.4 * $nilaita['materi']);
             $data['nilaihuruf'] = nilai_huruf($data['rerata']);
         }
 
         $data['tglsekarang'] = format_indo(date("Y-m-d"));
-        $data['title'] = 'Form Evaluasi - '.$data['namamahasiswa'];
+        $data['title'] = 'Form Evaluasi - ' . $data['namamahasiswa'];
         return view('maintemp/formevaluasi', $data);
     }
-    
+
     public function lihatadm($mhs_id, $dosen_id, $ta_id)
     {
         $session = session();
@@ -263,7 +265,7 @@ class Manbimbing extends BaseController
         $issadmin = $session->get('issadmin');
         $isadmin = $session->get('isadmin');
         $ispenilai = $session->get('ispenilai');
-        if ((!$logged_in)&&((!$issadmin)||(!$isadmin)||(!$ispenilai))){
+        if ((!$logged_in) && ((!$issadmin) || (!$isadmin) || (!$ispenilai))) {
             return redirect()->to('/home');
         }
         helper(['tanggal']);
@@ -271,58 +273,58 @@ class Manbimbing extends BaseController
 
         $model = new BimbingModel();
         $bimbing = $model->where('mhs_id', $mhs_id)->first();
-        if ($bimbing){
+        if ($bimbing) {
             $bimbing_id = $bimbing['dosen_id'];
         }
 
         $model = new ProfileModel();
         $dosen = $model->where('user_id', $bimbing_id)->first();
-        if ($dosen){
+        if ($dosen) {
             $data['namapembimbing'] = $dosen['FullName'];
         }
 
         $dosenttd = $model->where('user_id', $dosen_id)->first();
-        if ($dosen){
+        if ($dosen) {
             $data['namattd'] = $dosenttd['FullName'];
         }
 
         $model = new UserModel();
         $dosennip = $model->where('user_id', $bimbing_id)->first();
-        if ($dosennip){
+        if ($dosennip) {
             $data['bimbingnip'] = $dosennip['NIP'];
         }
 
         $model = new UserModel();
         $dosennipttd = $model->where('user_id', $dosen_id)->first();
-        if ($dosennip){
+        if ($dosennip) {
             $data['nipttd'] = $dosennipttd['NIP'];
         }
 
         $model = new TugasAkhirModel();
         $tugasakhir = $model->where('ta_id', $ta_id)->join('tbl_profile', 'tbl_tugasakhir.user_id = tbl_profile.user_id', 'left')->join('tbl_user', 'tbl_tugasakhir.user_id = tbl_user.user_id', 'left')->first();
-        if ($tugasakhir){
+        if ($tugasakhir) {
             $data['namamahasiswa'] = $tugasakhir['FullName'];
             $data['npm'] = $tugasakhir['NPM'];
             $data['instansi'] = $tugasakhir['instansi'];
             $data['divisi'] = $tugasakhir['divisi'];
-            $data['periode'] = format_indo($tugasakhir['startdate']).' - '.format_indo($tugasakhir['enddate']);
-            $data['lapjudul'] = $tugasakhir['ta_usuljudul']; 
+            $data['periode'] = format_indo($tugasakhir['startdate']) . ' - ' . format_indo($tugasakhir['enddate']);
+            $data['lapjudul'] = $tugasakhir['ta_usuljudul'];
         }
 
         $model = new NilaitaModel();
         $nilaita = $model->where('ta_id', $ta_id)->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->first();
-        if($nilaita){
+        if ($nilaita) {
             $data['penulisan'] = $nilaita['penulisan'];
             $data['presentasi'] = $nilaita['presentasi'];
             $data['materi'] = $nilaita['materi'];
             $data['tipedosen'] = $nilaita['tipedosen'];
             $data['signed'] = $nilaita['signed'];
-            $data['rerata'] = (0.3*$nilaita['penulisan'])+(0.3*$nilaita['presentasi'])+(0.4*$nilaita['materi']);
+            $data['rerata'] = (0.3 * $nilaita['penulisan']) + (0.3 * $nilaita['presentasi']) + (0.4 * $nilaita['materi']);
             $data['nilaihuruf'] = nilai_huruf($data['rerata']);
         }
 
         $data['tglsekarang'] = format_indo(date("Y-m-d"));
-        $data['title'] = 'Form Evaluasi - '.$data['namamahasiswa'];
+        $data['title'] = 'Form Evaluasi - ' . $data['namamahasiswa'];
         return view('maintemp/formdaftarhadir', $data);
     }
 }

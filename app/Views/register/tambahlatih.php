@@ -1,6 +1,6 @@
-<?= $this->extend('register/template');?>
+<?= $this->extend('register/template'); ?>
 
-<?= $this->section('content');?>
+<?= $this->section('content'); ?>
 
 <div class="card card-primary" style="width: auto; margin: 30px;">
     <div class="col-sm-13" style="width: auto; margin: 30px;">
@@ -9,33 +9,28 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body" style="width: auto; margin: 30px;">
-            <form action="<?php echo base_url();?>/register/tambahlatihproses" method="post"
-                enctype="multipart/form-data">
+            <form action="<?php echo base_url(); ?>/register/tambahlatihproses" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="Name" class="element">Nama Pendidikan/Pelatihan
                         <span class="required"> *</span>&nbsp; </label>
                     <div class="element">
-                        <input class="form-control" id="Name" name="Name" type="text"
-                            placeholder="Nama Pendidikan/Pelatihan..." />
+                        <input class="form-control" id="Name" name="Name" type="text" placeholder="Nama Pendidikan/Pelatihan..." />
                     </div><br />
                     <label for="Organizer" class="element">Penyelenggara <span class="required"> *</span>&nbsp; </label>
                     <div class="element">
-                        <input class="form-control" id="Organizer" name="Organizer" type="text"
-                            placeholder="Penyelenggara..." />
+                        <input class="form-control" id="Organizer" name="Organizer" type="text" placeholder="Penyelenggara..." />
                     </div>
                     <br />
                     <label for="City" class="element">Kota Lokasi Pelatihan <span class="required">
                             *</span>&nbsp;</label>
                     <div class="element">
-                        <input class="form-control" id="City" name="City" type="text"
-                            placeholder="Kota Lokasi Pelatihan..." />
+                        <input class="form-control" id="City" name="City" type="text" placeholder="Kota Lokasi Pelatihan..." />
                     </div>
                     <br />
                     <label for="Country" class="element">Negara Lokasi Pelatihan <span class="required">
                             *</span>&nbsp;</label>
                     <div class="element">
-                        <input class="form-control" id="Country" name="Country" type="text"
-                            placeholder="Negara Lokasi Pelatihan..." />
+                        <input class="form-control" id="Country" name="Country" type="text" placeholder="Negara Lokasi Pelatihan..." />
                     </div>
                     <br />
                     <label for="StartMonth" class="element">Bulan <span class="required"> *</span>&nbsp; </label>
@@ -60,17 +55,17 @@
                     <div class="element">
                         <select name="StartYear" id="StartYear" class="form-control">
                             <?php
-                                    $lastyear = date("Y")+10;
-                                    $now = date("Y");
-                                    for ($tahun1 = 1901;$tahun1<=$lastyear;$tahun1++){
-                                        if ($tahun1 == $now){
-                                            $selected = "selected";
-                                        }else{
-                                            $selected ="";
-                                        }
-                                        echo "<option value='".$tahun1."' ".$selected.">".$tahun1."</option>";
-                                    }
-                                ?>
+                            $lastyear = date("Y") + 10;
+                            $now = date("Y");
+                            for ($tahun1 = 1901; $tahun1 <= $lastyear; $tahun1++) {
+                                if ($tahun1 == $now) {
+                                    $selected = "selected";
+                                } else {
+                                    $selected = "";
+                                }
+                                echo "<option value='" . $tahun1 . "' " . $selected . ">" . $tahun1 . "</option>";
+                            }
+                            ?>
                         </select>
                     </div>
                     <br />
@@ -95,8 +90,7 @@
                     <label for="Description" class="element">Uraian Singkat Materi Pendidikan/Pelatihan, Tingkat
                         Pendidikan, Sertifikat</label>
                     <div class="element">
-                        <textarea class="form-control" id="Description" name="Description" placeholder="Deskripsi"
-                            placeholder="Uraian Singkat..."></textarea>
+                        <textarea class="form-control" id="Description" name="Description" placeholder="Deskripsi" placeholder="Uraian Singkat..."></textarea>
                     </div>
                     <br />
                     <label for="File" class="element">Bukti Pendidikan/Pelatihan</label>
@@ -113,8 +107,7 @@
                                 Pelatihan</button>
                         </div>
                         <div class="col">
-                            <button type="submit" name="submit" value="batal"
-                                class="btn btn-block btn-danger col">Batal</button>
+                            <button type="submit" name="submit" value="batal" class="btn btn-block btn-danger col">Batal</button>
                         </div>
                     </div>
                 </div>
@@ -125,4 +118,4 @@
 <!-- /.content-wrapper -->
 <!-- Control Sidebar -->
 
-<?= $this->endSection();?>
+<?= $this->endSection(); ?>

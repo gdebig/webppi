@@ -1,6 +1,6 @@
-<?= $this->extend('maintemp/template');?>
+<?= $this->extend('maintemp/template'); ?>
 
-<?= $this->section('content');?>
+<?= $this->section('content'); ?>
 
 <div class="card card-primary" style="width: auto; margin: 30px;">
     <div class="col-sm-13" style="width: auto; margin: 30px;">
@@ -9,24 +9,23 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body" style="width: auto; margin: 30px;">
-            <form action="<?php echo base_url();?>/userfair14/tambahpenghargaanproses" method="post"
-                enctype="multipart/form-data">
+            <form action="<?php echo base_url(); ?>/userfair14/tambahpenghargaanproses" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="Year" class="element">Tahun Penghargaan <span class="required"> *</span>&nbsp;
                     </label>
                     <div class="element">
                         <select name="Year" id="Year" class="form-control">
                             <?php
-                                $lastyear = date("Y")+10;
-                                $now = date("Y");
-                                for ($tahun1 = 1901;$tahun1<=$lastyear;$tahun1++){
-                                    if ($tahun1 == $now){
-                                        $selected = "selected";
-                                    }else{
-                                        $selected ="";
-                                    }
-                                    echo "<option value='".$tahun1."' ".$selected.">".$tahun1."</option>";
+                            $lastyear = date("Y") + 10;
+                            $now = date("Y");
+                            for ($tahun1 = 1901; $tahun1 <= $lastyear; $tahun1++) {
+                                if ($tahun1 == $now) {
+                                    $selected = "selected";
+                                } else {
+                                    $selected = "";
                                 }
+                                echo "<option value='" . $tahun1 . "' " . $selected . ">" . $tahun1 . "</option>";
+                            }
                             ?>
                         </select>
                     </div>
@@ -53,16 +52,14 @@
                     <label for="Name" class="element">Nama Tanda Penghargaan <span class="required"> *</span>&nbsp;
                     </label>
                     <div class="element">
-                        <input id="Name" name="Name" class="form-control" type="text"
-                            placeholder="Nama Tanda Penghargaan..." />
+                        <input id="Name" name="Name" class="form-control" type="text" placeholder="Nama Tanda Penghargaan..." />
                     </div>
                     <br>
                     <label for="Institute" class="element">Nama Lembaga yang Memberikan <span class="required">
                             *</span>&nbsp;
                     </label>
                     <div class="element">
-                        <input id="Institute" name="Institute" class="form-control" type="text"
-                            placeholder="Nama Lembaga yang Memberikan..." />
+                        <input id="Institute" name="Institute" class="form-control" type="text" placeholder="Nama Lembaga yang Memberikan..." />
                     </div>
                     <br>
                     <label for="City" class="element">Lokasi Kota <span class="required"> *</span>&nbsp;
@@ -74,15 +71,13 @@
                     <label for="Prov" class="element">Lokasi Provinsi <span class="required"> *</span>&nbsp;
                     </label>
                     <div class="element">
-                        <input id="Prov" name="Prov" class="form-control" type="text"
-                            placeholder="Lokasi Provinsi..." />
+                        <input id="Prov" name="Prov" class="form-control" type="text" placeholder="Lokasi Provinsi..." />
                     </div>
                     <br>
                     <label for="Country" class="element">Lokasi Negara <span class="required"> *</span>&nbsp;
                     </label>
                     <div class="element">
-                        <input id="Country" name="Country" class="form-control" type="text"
-                            placeholder="Lokasi Negara..." />
+                        <input id="Country" name="Country" class="form-control" type="text" placeholder="Lokasi Negara..." />
                     </div>
                     <br>
                     <label for="Level" class="element">
@@ -110,8 +105,7 @@
                         <label for="Desc" class="element">Uraian Singkat Tanda Penghargaan<span class="required">
                                 *</span>&nbsp;</label>
                         <div class="element">
-                            <textarea id="Desc" name="Desc" class="form-control"
-                                placeholder="Uraian Singkat Tanda Penghargaan..."></textarea>
+                            <textarea id="Desc" name="Desc" class="form-control" placeholder="Uraian Singkat Tanda Penghargaan..."></textarea>
                         </div>
                     </div>
                     <br />
@@ -121,23 +115,23 @@
                     <div class="element">
                         <select multiple class="form-control" name="komp14[]" id="komp14" size="10">
                             <?php
-                            $i=1;
+                            $i = 1;
                             $prev_cat = array();
 
                             foreach ($data_komp as $komp) :
-                                $j = $i-1;
+                                $j = $i - 1;
                                 $prev_cat[$i] = $komp['komp_cat'];
-                                if (!empty($prev_cat)&&($j!=0)){
-                                    if ($prev_cat[$i]!=$prev_cat[$j]){
+                                if (!empty($prev_cat) && ($j != 0)) {
+                                    if ($prev_cat[$i] != $prev_cat[$j]) {
                                         echo "</optgroup>";
                                     }
                                 }
-                                if ($komp['komp_parent']=='y'){
-                                    echo "<optgroup label='".$komp['komp_code']." ".$komp['komp_desc']."'>";
-                                }else{
-                                    if ($i==1){
-                                    }else{
-                                        echo "<option value='".$komp['komp_code']."' title='".$komp['komp_desc']."'>".$komp['komp_code']." ".$komp['komp_desc']."</option>";
+                                if ($komp['komp_parent'] == 'y') {
+                                    echo "<optgroup label='" . $komp['komp_code'] . " " . $komp['komp_desc'] . "'>";
+                                } else {
+                                    if ($i == 1) {
+                                    } else {
+                                        echo "<option value='" . $komp['komp_code'] . "' title='" . $komp['komp_desc'] . "'>" . $komp['komp_code'] . " " . $komp['komp_desc'] . "</option>";
                                     }
                                 }
                                 $i++;
@@ -161,8 +155,7 @@
                                 Tanda Penghargaan</button>
                         </div>
                         <div class="col">
-                            <button type="submit" name="submit" value="batal"
-                                class="btn btn-block btn-danger col">Batal</button>
+                            <button type="submit" name="submit" value="batal" class="btn btn-block btn-danger col">Batal</button>
                         </div>
                     </div>
                 </div>
@@ -173,4 +166,4 @@
 <!-- /.content-wrapper -->
 <!-- Control Sidebar -->
 
-<?= $this->endSection();?>
+<?= $this->endSection(); ?>

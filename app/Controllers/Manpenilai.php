@@ -12,19 +12,19 @@ class Manpenilai extends BaseController
         $logged_in = $session->get('logged_in');
         $issadmin = $session->get('issadmin');
         $isadmin = $session->get('isadmin');
-        if ((!$logged_in)&&((!$issadmin)||(!$isadmin))){
+        if ((!$logged_in) && ((!$issadmin) || (!$isadmin))) {
             return redirect()->to('/home');
         }
         helper(['tanggal']);
-        
+
         $user_id = $session->get('user_id');
         $model = new UserModel();
         $data['logged_in'] = $logged_in;
         $where = "tipe_user LIKE '__y_'";
         $user = $model->join('tbl_profile', 'tbl_user.user_id = tbl_profile.user_id', 'left')->where($where)->orderby('tbl_user.user_id', 'DESC')->findall();
-        if (!empty($user)){
+        if (!empty($user)) {
             $data['data_user'] = $user;
-        }else{
+        } else {
             $data['data_user'] = 'kosong';
         }
         $data['title_page'] = "Data Penilai PPI RPL";

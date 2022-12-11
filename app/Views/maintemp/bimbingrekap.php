@@ -1,11 +1,11 @@
-<?= $this->extend('maintemp/template');?>
+<?= $this->extend('maintemp/template'); ?>
 
-<?= $this->section('content');?>
+<?= $this->section('content'); ?>
 
 <div class="card card-primary" style="width: auto; margin: 30px;">
     <div class="col-sm-13" style="width: auto; margin: 30px;">
         <div class="">
-            <a href="<?= base_url();?>/bimbingfair/docs/<?= $user_id;?>">Kembali ke daftar dokumen FAIR</a>
+            <a href="<?= base_url(); ?>/bimbingfair/docs/<?= $user_id; ?>">Kembali ke daftar dokumen FAIR</a>
         </div>
         <!-- /.card-header -->
         <div class="card">
@@ -16,13 +16,14 @@
                     <tr>
                         <td width="25%">Nama Peserta</td>
                         <td width="5%" style="text-align: center;">:</td>
-                        <td width="70%"><?= $FullName;?></td>
+                        <td width="70%"><?= $FullName; ?></td>
                     </tr>
                     <tr>
                         <td width="25%">Badan Kejuruan</td>
                         <td width="5%" style="text-align: center;">:</td>
-                        <td width="70%"><?php
-                            switch($Vocational){
+                        <td width="70%">
+                            <?php
+                            switch ($Vocational) {
                                 case 'Ars':
                                     echo "Arsitektur";
                                     break;
@@ -69,7 +70,8 @@
                                     echo "Teknik Biomedik";
                                     break;
                             }
-                        ?></td>
+                            ?>
+                        </td>
                     </tr>
                     <tr>
                         <td width="25%">Rekapitulasi Nilai Kegiatan</td>
@@ -88,42 +90,42 @@
                     </tr>
                     <tr style="border-bottom: 1pt solid black">
                         <td width="20%">Wajib 1</td>
-                        <td width="20%" style="background-color: #D6EEEE"><?= $nilai_w1;?></td>
+                        <td width="20%" style="background-color: #D6EEEE"><?= $nilai_w1; ?></td>
                         <td width="20%">60</td>
                         <td width="20%">300</td>
                         <td width="20%">600</td>
                     </tr>
                     <tr style="border-bottom: 1pt solid black">
                         <td width="20%">Wajib 2</td>
-                        <td width="20%" style="background-color: #D6EEEE"><?= $nilai_w2;?></td>
+                        <td width="20%" style="background-color: #D6EEEE"><?= $nilai_w2; ?></td>
                         <td width="20%">180</td>
                         <td width="20%">900</td>
                         <td width="20%">1800</td>
                     </tr>
                     <tr style="border-bottom: 1pt solid black">
                         <td width="20%">Wajib 3</td>
-                        <td width="20%" style="background-color: #D6EEEE"><?= $nilai_w3;?></td>
+                        <td width="20%" style="background-color: #D6EEEE"><?= $nilai_w3; ?></td>
                         <td width="20%">120</td>
                         <td width="20%">600</td>
                         <td width="20%">1200</td>
                     </tr>
                     <tr style="border-bottom: 1pt solid black">
                         <td width="20%">Wajib 4</td>
-                        <td width="20%" style="background-color: #D6EEEE"><?= $nilai_w4;?></td>
+                        <td width="20%" style="background-color: #D6EEEE"><?= $nilai_w4; ?></td>
                         <td width="20%">60</td>
                         <td width="20%">300</td>
                         <td width="20%">600</td>
                     </tr>
                     <tr style="border-bottom: 1pt solid black">
                         <td width="20%">Pilihan</td>
-                        <td width="20%" style="background-color: #D6EEEE"><?= $nilai_pil;?></td>
+                        <td width="20%" style="background-color: #D6EEEE"><?= $nilai_pil; ?></td>
                         <td width="20%">180</td>
                         <td width="20%">900</td>
                         <td width="20%">1800</td>
                     </tr>
                     <tr style="border-bottom: 1pt solid black">
                         <td width="20%">Jumlah</td>
-                        <td width="20%" style="background-color: #D6EEEE"><?= $total;?></td>
+                        <td width="20%" style="background-color: #D6EEEE"><?= $total; ?></td>
                         <td width="20%">600</td>
                         <td width="20%">3000</td>
                         <td width="20%">6000</td>
@@ -138,7 +140,7 @@
                 <p>
                     <b>Estimasi :</b>
                 </p>
-                <p><?= $estimasi;?></p>
+                <p><?= $estimasi; ?></p>
             </div>
         </div>
     </div>
@@ -146,4 +148,4 @@
 <!-- /.content-wrapper -->
 <!-- Control Sidebar -->
 
-<?= $this->endSection();?>
+<?= $this->endSection(); ?>
