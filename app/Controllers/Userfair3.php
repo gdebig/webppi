@@ -320,8 +320,12 @@ class Userfair3 extends BaseController
                 $masihkerja = "";
                 $enddate = $kerja['EndDate'];
             }
-            $Project = explode(".", $kerja['ProjValue']);
-            $str = preg_replace('/[^0-9.]+/', '', $Project[1]);
+            if (!empty($kerja['ProjValue'])) {
+                $Project = explode(".", $kerja['ProjValue']);
+                $str = preg_replace('/[^0-9.]+/', '', $Project[1]);
+            } else {
+                $str = '';
+            }
             $data = [
                 'Num' => $kerja['Num'],
                 'user_id' => $kerja['user_id'],
