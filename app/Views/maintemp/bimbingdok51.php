@@ -86,7 +86,7 @@
                                         }
                                         ?></td>
                                     <td><?= $kartul['Desc']; ?></td>
-                                    <td><a href="<?= base_url(); ?>/uploads/docs/<?= $kartul['File']; ?>" target="_blank"><?= $kartul['File']; ?></a></td>
+                                    <td><a href="<?= base_url(); ?>/uploads/docs/<?= $kartul['File']; ?>" target="_blank">Lihat Bukti</a></td>
                                     <td><?= $kartul['kompetensi']; ?></td>
                                 </tr>
                             <?php

@@ -51,7 +51,7 @@
                                     <td><?= $etik['Email']; ?></td>
                                     <td><?= $etik['Relation']; ?></td>
                                     <td>
-                                        <select name="nilai_q" id="nilai_q" class="form-control">
+                                        <select name="nilai_q" id="nilai_q">
                                             <option value="4">4</option>
                                             <option value="3">3</option>
                                             <option value="2">2</option>
@@ -59,7 +59,7 @@
                                         </select>
                                     </td>
                                     <td>
-                                        <select name="nilai_r" id="nilai_r" class="form-control">
+                                        <select name="nilai_r" id="nilai_r">
                                             <option value="4">4</option>
                                             <option value="3">3</option>
                                             <option value="2">2</option>
@@ -75,12 +75,14 @@
                     <table>
                         <tr>
                             <th>Jumlah Referensi</th>
+                            <th width="30px">&nbsp;</th>
                             <th>Nilai P</th>
                         </tr>
                         <tr>
                             <td><?= $jumlah_etik; ?></td>
+                            <td>&nbsp;</td>
                             <td>
-                                <select name="nilai_p" id="nilai_p" class="form-control">
+                                <select name="nilai_p" id="nilai_p">
                                     <option value="4" <?= $jumlah_etik >= 4 ? 'selected' : ''; ?>>4</option>
                                     <option value="3" <?= $jumlah_etik == 3 ? 'selected' : ''; ?>>3</option>
                                     <option value="2" <?= $jumlah_etik == 2 ? 'selected' : ''; ?>>2</option>
@@ -116,7 +118,7 @@
                                     <td><input type="checkbox" name="dapat_id[]" value="<?= $dapat['Num']; ?>" /></td>
                                     <td><?= $dapat['Desc']; ?></td>
                                     <td>
-                                        <select name="nilai_p" id="nilai_p" class="form-control">
+                                        <select name="nilai_p" id="nilai_p">
                                             <option value="4">4</option>
                                             <option value="3">3</option>
                                             <option value="2">2</option>
@@ -124,7 +126,7 @@
                                         </select>
                                     </td>
                                     <td>
-                                        <select name="nilai_q" id="nilai_q" class="form-control">
+                                        <select name="nilai_q" id="nilai_q">
                                             <option value="4">4</option>
                                             <option value="3">3</option>
                                             <option value="2">2</option>
@@ -132,7 +134,7 @@
                                         </select>
                                     </td>
                                     <td>
-                                        <select name="nilai_r" id="nilai_r" class="form-control">
+                                        <select name="nilai_r" id="nilai_r">
                                             <option value="4">4</option>
                                             <option value="3">3</option>
                                             <option value="2">2</option>
@@ -154,6 +156,7 @@
                         <thead>
                             <tr>
                                 <th>No</th>
+                                <th>Check</th>
                                 <th>Nama Organisasi</th>
                                 <th>Jenis Organisasi</th>
                                 <th>Kota</th>
@@ -166,8 +169,8 @@
                                 <th>Aktifitas Dalam Organisasi</th>
                                 <th>Bukti Menjadi Pengurus</th>
                                 <th>Klaim Kompetensi</th>
-                                <th>Nilai Q</th>
-                                <th>Nilai R</th>
+                                <th width="5%">Nilai Q</th>
+                                <th width="5%">Nilai R</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -178,6 +181,7 @@
                                 <tr>
                                     <td><?php echo $i;
                                         $i++; ?></td>
+                                    <td><input type="checkbox" name="org_id[]" value="<?= $org['Num']; ?>" /></td>
                                     <td><?= $org['Name']; ?></td>
                                     <td><?php
                                         switch ($org['Type']) {
@@ -267,9 +271,9 @@
                                         }
                                         ?></td>
                                     <td><?= $org['Desc']; ?></td>
-                                    <td><a href="<?= base_url(); ?>/uploads/docs/<?= $org['File']; ?>" target="_blank"><?= $org['File']; ?></a></td>
+                                    <td><a href="<?= base_url(); ?>/uploads/docs/<?= $org['File']; ?>" target="_blank">Lihat Bukti</a></td>
                                     <td><?= $org['kompetensi']; ?></td>
-                                    <td>
+                                    <td width="5%">
                                         <?php
                                         if ($org['Position'] == "Bias") {
                                             $posscore = 2;
@@ -279,14 +283,14 @@
                                             $posscore = 4;
                                         }
                                         ?>
-                                        <select name="nilai_q" id="nilai_q" class="form-control">
+                                        <select name="nilai_q" id="nilai_q">
                                             <option value="4" <?= $posscore == 4 ? 'selected' : ''; ?>>4</option>
                                             <option value="3" <?= $posscore == 3 ? 'selected' : ''; ?>>3</option>
                                             <option value="2" <?= $posscore == 2 ? 'selected' : ''; ?>>2</option>
                                             <option value="1" <?= $posscore == 1 ? 'selected' : ''; ?>>1</option>
                                         </select>
                                     </td>
-                                    <td>
+                                    <td width="5%">
                                         <?php
                                         if ($org['OrgLevel'] == "Lok") {
                                             $orgscore = 1;
@@ -298,7 +302,7 @@
                                             $orgscore = 4;
                                         }
                                         ?>
-                                        <select name="nilai_r" id="nilai_r" class="form-control">
+                                        <select name="nilai_r" id="nilai_r">
                                             <option value="4" <?= $orgscore == 4 ? 'selected' : ''; ?>>4</option>
                                             <option value="3" <?= $orgscore == 3 ? 'selected' : ''; ?>>3</option>
                                             <option value="2" <?= $orgscore == 2 ? 'selected' : ''; ?>>2</option>
@@ -314,12 +318,14 @@
                     <table>
                         <tr>
                             <th>Informasi jenis dan jumlah organisasi</th>
+                            <th width="30px">&nbsp;</th>
                             <th>Nilai P</th>
                         </tr>
                         <tr>
                             <td>Terdapat organisasi PII :
                                 <?= !empty($org_pii) ? "Ya, ada." : "Tidak ada"; ?><br />Jumlah organisasi:
                                 <?= $jumlah_org; ?></td>
+                            <td>&nbsp;</td>
                             <td>
                                 <?php
                                 if (!empty($org_pii)) {
@@ -336,7 +342,7 @@
                                     }
                                 }
                                 ?>
-                                <select name="nilai_p" id="nilai_p" class="form-control">
+                                <select name="nilai_p" id="nilai_p">
                                     <option value="4" <?= $score == 4 ? 'selected' : ''; ?>>4</option>
                                     <option value="3" <?= $score == 3 ? 'selected' : ''; ?>>3</option>
                                     <option value="2" <?= $score == 2 ? 'selected' : ''; ?>>2</option>
@@ -354,6 +360,7 @@
                         <thead>
                             <tr>
                                 <th>No</th>
+                                <th>Check</th>
                                 <th>Tahun</th>
                                 <th>Nama Tanda Penghargaan</th>
                                 <th>Nama Lembaga yang Memberikan</th>
@@ -362,6 +369,7 @@
                                 <th>Penghargaan yang diterima tingkat</th>
                                 <th>Penghargaan diberikan oleh lembaga</th>
                                 <th>Uraian Singkat Tanda Penghargaan</th>
+                                <th>Bukti Penghargaan</th>
                                 <th>Klaim Kompetensi</th>
                                 <th>Nilai P</th>
                                 <th>Nilai Q</th>
@@ -376,6 +384,7 @@
                                 <tr>
                                     <td><?php echo $i;
                                         $i++; ?></td>
+                                    <td><input type="checkbox" name="penghargaan_id[]" value="<?= $penghargaan['Num']; ?>" /></td>
                                     <td><?php
                                         switch ($penghargaan['Month']) {
                                             case '1':
@@ -455,9 +464,10 @@
                                         ?>
                                     </td>
                                     <td><?= $penghargaan['Desc']; ?></td>
+                                    <td><a href="<?= base_url(); ?>/uploads/docs/<?= $penghargaan['File']; ?>" target="_blank">Lihat Bukti</a></td>
                                     <td><?= $penghargaan['kompetensi']; ?></td>
                                     <td>
-                                        <select name="nilai_p" id="nilai_p" class="form-control">
+                                        <select name="nilai_p" id="nilai_p">
                                             <option value="4">4</option>
                                             <option value="3">3</option>
                                             <option value="2">2</option>
@@ -474,7 +484,7 @@
                                             $levelscore = 4;
                                         }
                                         ?>
-                                        <select name="nilai_q" id="nilai_q" class="form-control">
+                                        <select name="nilai_q" id="nilai_q">
                                             <option value="4" <?= $levelscore == 4 ? 'selected' : ''; ?>>4</option>
                                             <option value="3" <?= $levelscore == 3 ? 'selected' : ''; ?>>3</option>
                                             <option value="2" <?= $levelscore == 2 ? 'selected' : ''; ?>>2</option>
@@ -493,7 +503,7 @@
                                             $ypescore = 4;
                                         }
                                         ?>
-                                        <select name="nilai_r" id="nilai_r" class="form-control">
+                                        <select name="nilai_r" id="nilai_r">
                                             <option value="4" <?= $typescore == 4 ? 'selected' : ''; ?>>4</option>
                                             <option value="3" <?= $typescore == 3 ? 'selected' : ''; ?>>3</option>
                                             <option value="2" <?= $typescore == 2 ? 'selected' : ''; ?>>2</option>
@@ -515,6 +525,7 @@
                         <thead>
                             <tr>
                                 <th>No</th>
+                                <th>Check</th>
                                 <th>Nama Sertifikat</th>
                                 <th>Penyelenggara</th>
                                 <th>Lokasi</th>
@@ -539,6 +550,7 @@
                                 <tr>
                                     <td><?php echo $i;
                                         $i++; ?></td>
+                                    <td><input type="checkbox" name="latih_id[]" value="<?= $latih['Num']; ?>" /></td>
                                     <td><?= $latih['Name']; ?></td>
                                     <td><?= $latih['Organizer']; ?></td>
                                     <td><?= $latih['Kota']; ?></td>
@@ -575,7 +587,7 @@
                                     <td><?= $latih['Description']; ?></td>
                                     <td><?php
                                         if (!empty($latih['File'])) {
-                                            echo "<a href='" . base_url('uploads/docs/' . $latih['File']) . "' target='_blank'>" . $latih['File'] . "</a>";
+                                            echo "<a href='" . base_url('uploads/docs/' . $latih['File']) . "' target='_blank'>" . "Lihat Bukti" . "</a>";
                                         } else {
                                             echo "";
                                         }
@@ -593,7 +605,7 @@
                                             $lengthscore = 4;
                                         }
                                         ?>
-                                        <select name="nilai_p" id="nilai_p" class="form-control">
+                                        <select name="nilai_p" id="nilai_p">
                                             <option value="4" <?= $lengthscore == 4 ? 'selected' : ''; ?>>4</option>
                                             <option value="3" <?= $lengthscore == 3 ? 'selected' : ''; ?>>3</option>
                                             <option value="2" <?= $lengthscore == 2 ? 'selected' : ''; ?>>2</option>
@@ -601,7 +613,7 @@
                                         </select>
                                     </td>
                                     <td>
-                                        <select name="nilai_q" id="nilai_q" class="form-control">
+                                        <select name="nilai_q" id="nilai_q">
                                             <option value="4">4</option>
                                             <option value="3">3</option>
                                             <option value="2" selected>2</option>
@@ -616,7 +628,7 @@
                                             $levscore = 3;
                                         }
                                         ?>
-                                        <select name="nilai_r" id="nilai_r" class="form-control">
+                                        <select name="nilai_r" id="nilai_r">
                                             <option value="4" <?= $levscore == 4 ? 'selected' : ''; ?>>4</option>
                                             <option value="3" <?= $levscore == 3 ? 'selected' : ''; ?>>3</option>
                                             <option value="2" <?= $levscore == 2 ? 'selected' : ''; ?>>2</option>

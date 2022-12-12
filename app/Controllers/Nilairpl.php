@@ -136,7 +136,7 @@ class Nilairpl extends BaseController
 
         $model = new CapesKualifikasiModel();
         $data['capeslogged_in'] = $session->get('capeslogged_in');
-        $kerja = $model->where('user_id', $mhs_id)->like('kompetensi', 'W.2.2.')->orderby('ProjValue', 'DESC')->findall();
+        $kerja = $model->where('user_id', $mhs_id)->like('kompetensi', 'W.2.2')->orderby('ProjValue', 'DESC')->findall();
         if (!empty($kerja)) {
             $data['data_kerja'] = $kerja;
         } else {

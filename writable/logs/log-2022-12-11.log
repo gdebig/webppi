@@ -1,0 +1,11 @@
+CRITICAL - 2022-12-11 22:45:26 --> Array to string conversion
+#0 D:\wamp64\www\webppi\app\Views\maintemp\kodeetik.php(184): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Array to string...', 'D:\\wamp64\\www\\w...', 184, Array)
+#1 D:\wamp64\www\webppi\system\View\View.php(210): include('D:\\wamp64\\www\\w...')
+#2 D:\wamp64\www\webppi\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 D:\wamp64\www\webppi\system\Common.php(1089): CodeIgniter\View\View->render('maintemp/kodeet...', Array, true)
+#4 D:\wamp64\www\webppi\app\Controllers\Nilairpl.php(120): view('maintemp/kodeet...', Array)
+#5 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Nilairpl->kodeetik('17', '1')
+#6 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nilairpl))
+#7 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}

@@ -67,7 +67,7 @@
                                     <td><?= $pend['Title']; ?></td>
                                     <td><?= $pend['Desc']; ?></td>
                                     <td><?= $pend['Mark']; ?></td>
-                                    <td><a href="<?= base_url(); ?>/uploads/docs/<?= $pend['File']; ?>" target="_blank"><?= $pend['File']; ?></a></td>
+                                    <td><a href="<?= base_url(); ?>/uploads/docs/<?= $pend['File']; ?>" target="_blank">Lihat Bukti</a></td>
                                     <td style="text-align: center"><a href="<?php echo base_url(); ?>/userfair12/ubahpendidikan/<?= $pend['Num']; ?>" class="btn btn-warning"> <i class="fas fa-file-signature"></i> Ubah</a>
                                         <a href="<?php echo base_url(); ?>/userfair12/hapuspendidikan/<?= $pend['Num']; ?>" onclick="return confirm('Apakah anda yakin akan menghapus data pendidikan?')" class="btn btn-danger"> <i class="fas fa-trash"></i>
                                             Hapus</a>

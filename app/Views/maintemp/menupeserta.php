@@ -7,7 +7,7 @@
 <li class="nav-item">
     <a href="<?php echo base_url(); ?>/tugasakhir" class="nav-link">
         <i class="fas fa-graduation-cap nav-icon"></i>
-        <p>Tugas Akhir</p>
+        <p>Tugas Akhir Praktik Keinsinyuran</p>
     </a>
 </li>
 <li class="nav-item">

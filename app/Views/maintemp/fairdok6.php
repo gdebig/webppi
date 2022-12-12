@@ -80,7 +80,7 @@
                                         ?></td>
                                     <td><?= $bahasa['WriteType']; ?></td>
                                     <td><?= $bahasa['LangMark']; ?></td>
-                                    <td><a href="<?= base_url(); ?>/uploads/docs/<?= $bahasa['File']; ?>" target="_blank"><?= $bahasa['File']; ?></a></td>
+                                    <td><a href="<?= base_url(); ?>/uploads/docs/<?= $bahasa['File']; ?>" target="_blank">Lihat Bukti</a></td>
                                     <td><?= $bahasa['kompetensi']; ?></td>
                                     <td style="text-align: center"><a href="<?php echo base_url(); ?>/userfair6/ubahbahasa/<?= $bahasa['Num']; ?>" class="btn btn-warning"> <i class="fas fa-file-signature"></i> Ubah</a>
                                         <a href="<?php echo base_url(); ?>/userfair6/hapusbahasa/<?= $bahasa['Num']; ?>" onclick="return confirm('Apakah anda yakin akan menghapus data bahasa?')" class="btn btn-danger"> <i class="fas fa-trash"></i>

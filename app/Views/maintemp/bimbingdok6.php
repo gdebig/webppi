@@ -74,7 +74,7 @@
                                         ?></td>
                                     <td><?= $bahasa['WriteType']; ?></td>
                                     <td><?= $bahasa['LangMark']; ?></td>
-                                    <td><a href="<?= base_url(); ?>/uploads/docs/<?= $bahasa['File']; ?>" target="_blank"><?= $bahasa['File']; ?></a></td>
+                                    <td><a href="<?= base_url(); ?>/uploads/docs/<?= $bahasa['File']; ?>" target="_blank">Lihat Bukti</a></td>
                                     <td><?= $bahasa['kompetensi']; ?></td>
                                 </tr>
                             <?php

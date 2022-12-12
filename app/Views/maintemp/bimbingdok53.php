@@ -84,7 +84,7 @@
                                         }
                                         ?></td>
                                     <td><?= $sem['Desc']; ?></td>
-                                    <td><a href="<?= base_url(); ?>/uploads/docs/<?= $sem['File']; ?>" target="_blank"><?= $sem['File']; ?></a></td>
+                                    <td><a href="<?= base_url(); ?>/uploads/docs/<?= $sem['File']; ?>" target="_blank">Lihat Bukti</a></td>
                                     <td><?= $sem['kompetensi']; ?></td>
                                 </tr>
                             <?php

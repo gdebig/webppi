@@ -142,7 +142,7 @@
                                         }
                                         ?></td>
                                     <td><?= $org['Desc']; ?></td>
-                                    <td><a href="<?= base_url(); ?>/uploads/docs/<?= $org['File']; ?>" target="_blank"><?= $org['File']; ?></a></td>
+                                    <td><a href="<?= base_url(); ?>/uploads/docs/<?= $org['File']; ?>" target="_blank">Lihat Bukti</td>
                                     <td><?= $org['kompetensi']; ?></td>
                                 </tr>
                             <?php

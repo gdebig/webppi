@@ -294,7 +294,7 @@
                                                     <td><?= $pend['Title']; ?></td>
                                                     <td><?= $pend['Desc']; ?></td>
                                                     <td><?= $pend['Mark']; ?></td>
-                                                    <td><a href="<?= base_url(); ?>/uploads/docs/<?= $pend['File']; ?>" target="_blank"><?= $pend['File']; ?></a></td>
+                                                    <td><a href="<?= base_url(); ?>/uploads/docs/<?= $pend['File']; ?>" target="_blank">Lihat Ijazah</a></td>
                                                     <td style="text-align: center"><a href="<?php echo base_url(); ?>/register/ubahpendidikan/<?= $pend['Num']; ?>" class="btn btn-warning"> <i class="fas fa-file-signature"></i>
                                                             Ubah</a>
                                                         <a href="<?php echo base_url(); ?>/register/hapuspendidikan/<?= $pend['Num']; ?>" onclick="return confirm('Apakah anda yakin akan menghapus data pendidikan?')" class="btn btn-danger"> <i class="fas fa-trash"></i>
@@ -443,7 +443,7 @@
                                                     <td><?= $kerja['Desc']; ?></td>
                                                     <td><?php
                                                         if (!empty($kerja['File'])) {
-                                                            echo "<a href='" . base_url('uploads/docs/' . $kerja['File']) . "' target='_blank'>" . $kerja['File'] . "</a>";
+                                                            echo "<a href='" . base_url('uploads/docs/' . $kerja['File']) . "' target='_blank'>" . "Lihat Bukti" . "</a>";
                                                         } else {
                                                             echo "";
                                                         }
@@ -578,7 +578,7 @@
                                                         }
                                                         ?></td>
                                                     <td><?= $org['Desc']; ?></td>
-                                                    <td><a href="<?= base_url(); ?>/uploads/docs/<?= $org['File']; ?>" target="_blank"><?= $org['File']; ?></a></td>
+                                                    <td><a href="<?= base_url(); ?>/uploads/docs/<?= $org['File']; ?>" target="_blank">Lihat Bukti</a></td>
                                                 </tr>
                                             <?php
                                             endforeach
@@ -656,7 +656,7 @@
                                                     <td><?= $latih['Description']; ?></td>
                                                     <td><?php
                                                         if (!empty($latih['File'])) {
-                                                            echo "<a href='" . base_url('uploads/docs/' . $latih['File']) . "' target='_blank'>" . $latih['File'] . "</a>";
+                                                            echo "<a href='" . base_url('uploads/docs/' . $latih['File']) . "' target='_blank'>" . "Lihat Bukti" . "</a>";
                                                         } else {
                                                             echo "";
                                                         }
@@ -739,7 +739,7 @@
                                                     <td><?= $latih['Description']; ?></td>
                                                     <td><?php
                                                         if (!empty($latih['File'])) {
-                                                            echo "<a href='" . base_url('uploads/docs/' . $latih['File']) . "' target='_blank'>" . $latih['File'] . "</a>";
+                                                            echo "<a href='" . base_url('uploads/docs/' . $latih['File']) . "' target='_blank'>" . "Lihat Bukti" . "</a>";
                                                         } else {
                                                             echo "";
                                                         }
@@ -815,7 +815,7 @@
                                                         }
                                                         ?></td>
                                                     <td><?= $kartul['Desc']; ?></td>
-                                                    <td><a href="<?= base_url(); ?>/uploads/docs/<?= $kartul['File']; ?>" target="_blank"><?= $kartul['File']; ?></a></td>
+                                                    <td><a href="<?= base_url(); ?>/uploads/docs/<?= $kartul['File']; ?>" target="_blank">Lihat Bukti</a></td>
                                                 </tr>
                                             <?php
                                             endforeach
@@ -889,7 +889,7 @@
                                                         }
                                                         ?></td>
                                                     <td><?= $sem['Desc']; ?></td>
-                                                    <td><a href="<?= base_url(); ?>/uploads/docs/<?= $sem['File']; ?>" target="_blank"><?= $sem['File']; ?></a></td>
+                                                    <td><a href="<?= base_url(); ?>/uploads/docs/<?= $sem['File']; ?>" target="_blank">Lihat Bukti</a></td>
                                                 </tr>
                                             <?php
                                             endforeach

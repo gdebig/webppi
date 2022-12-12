@@ -62,7 +62,7 @@
                                     <td><?= $pend['Title']; ?></td>
                                     <td><?= $pend['Desc']; ?></td>
                                     <td><?= $pend['Mark']; ?></td>
-                                    <td><a href="<?= base_url(); ?>/uploads/docs/<?= $pend['File']; ?>" target="_blank"><?= $pend['File']; ?></a></td>
+                                    <td><a href="<?= base_url(); ?>/uploads/docs/<?= $pend['File']; ?>" target="_blank">Lihat Ijazah</a></td>
                                 </tr>
                             <?php
                             endforeach

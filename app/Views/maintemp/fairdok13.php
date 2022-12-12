@@ -148,7 +148,7 @@
                                         }
                                         ?></td>
                                     <td><?= $org['Desc']; ?></td>
-                                    <td><a href="<?= base_url(); ?>/uploads/docs/<?= $org['File']; ?>" target="_blank"><?= $org['File']; ?></a></td>
+                                    <td><a href="<?= base_url(); ?>/uploads/docs/<?= $org['File']; ?>" target="_blank">Lihat Bukti</a></td>
                                     <td><?= $org['kompetensi']; ?></td>
                                     <td style="text-align: center"><a href="<?php echo base_url(); ?>/userfair13/ubahorg/<?= $org['Num']; ?>" class="btn btn-warning"> <i class="fas fa-file-signature"></i> Ubah</a>
                                         <a href="<?php echo base_url(); ?>/userfair13/hapusorg/<?= $org['Num']; ?>" onclick="return confirm('Apakah anda yakin akan menghapus data organisasi?')" class="btn btn-danger"> <i class="fas fa-trash"></i>

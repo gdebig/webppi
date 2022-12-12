@@ -15,6 +15,7 @@
                         <thead>
                             <tr>
                                 <th>No</th>
+                                <th>Check</th>
                                 <th>Periode</th>
                                 <th>Nama Instansi/Perusahaan</th>
                                 <th>Jabatan/tugas</th>
@@ -44,6 +45,7 @@
                                 <tr>
                                     <td><?php echo $i;
                                         $i++; ?></td>
+                                    <td><input type="checkbox" name="kerja_id[]" value="<?= $kerja['Num']; ?>" /></td>
                                     <td><?php
                                         if (!empty($kerja['EndDate']) && ($kerja['EndDate'] != '0000-00-00')) {
                                             echo format_indo($kerja['StartDate']) . " hingga " . format_indo($kerja['EndDate']);
@@ -141,7 +143,7 @@
                                     <td><?= $kerja['Desc']; ?></td>
                                     <td><?php
                                         if (!empty($kerja['File'])) {
-                                            echo "<a href='" . base_url('uploads/docs/' . $kerja['File']) . "' target='_blank'>" . $kerja['File'] . "</a>";
+                                            echo "<a href='" . base_url('uploads/docs/' . $kerja['File']) . "' target='_blank'>" . "Lihat Bukti" . "</a>";
                                         } else {
                                             echo "";
                                         }
@@ -157,9 +159,11 @@
                                             $durscore = 3;
                                         } elseif ($kerja['Duration'] == 'lbih10') {
                                             $durscore = 4;
+                                        } else {
+                                            $durscore = 4;
                                         }
                                         ?>
-                                        <select name="nilai_p" id="nilai_p" class="form-control">
+                                        <select name="nilai_p" id="nilai_p">
                                             <option value="4" <?= $durscore == 4 ? 'selected' : ''; ?>>4</option>
                                             <option value="3" <?= $durscore == 3 ? 'selected' : ''; ?>>3</option>
                                             <option value="2" <?= $durscore == 2 ? 'selected' : ''; ?>>2</option>
@@ -178,7 +182,7 @@
                                             $jabscore = 4;
                                         }
                                         ?>
-                                        <select name="nilai_q" id="nilai_q" class="form-control">
+                                        <select name="nilai_q" id="nilai_q">
                                             <option value="4" <?= $jabscore == 4 ? 'selected' : ''; ?>>4</option>
                                             <option value="3" <?= $jabscore == 4 ? 'selected' : ''; ?>>3</option>
                                             <option value="2" <?= $jabscore == 4 ? 'selected' : ''; ?>>2</option>
@@ -186,7 +190,7 @@
                                         </select>
                                     </td>
                                     <td>
-                                        <select name="nilai_r" id="nilai_r" class="form-control">
+                                        <select name="nilai_r" id="nilai_r">
                                             <option value="4">4</option>
                                             <option value="3">3</option>
                                             <option value="2">2</option>
@@ -203,7 +207,9 @@
                 <br />
                 <?php if (isset($data_pend) && ($data_pend != "kosong")) {
                 ?>
-
+                    <br />
+                    <h3>I.2. Pendidikan Formal (W2)</h3>
+                    <br />
                     <table id="tabledata" class="display table table-bordered table-hover">
                         <thead>
                             <tr>
@@ -239,7 +245,7 @@
                                     <td><?= $pend['Title']; ?></td>
                                     <td><?= $pend['Desc']; ?></td>
                                     <td><?= $pend['Mark']; ?></td>
-                                    <td><a href="<?= base_url(); ?>/uploads/docs/<?= $pend['File']; ?>" target="_blank"><?= $pend['File']; ?></a></td>
+                                    <td><a href="<?= base_url(); ?>/uploads/docs/<?= $pend['File']; ?>" target="_blank">Lihat Ijazah</a></td>
                                 </tr>
                             <?php
                             endforeach

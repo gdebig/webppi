@@ -99,7 +99,7 @@
                                     <td><?= $latih['Description']; ?></td>
                                     <td><?php
                                         if (!empty($latih['File'])) {
-                                            echo "<a href='" . base_url('uploads/docs/' . $latih['File']) . "' target='_blank'>" . $latih['File'] . "</a>";
+                                            echo "<a href='" . base_url('uploads/docs/' . $latih['File']) . "' target='_blank'>" . "Lihat Bukti" . "</a>";
                                         } else {
                                             echo "";
                                         }

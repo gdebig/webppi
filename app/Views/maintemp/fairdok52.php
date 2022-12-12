@@ -92,7 +92,7 @@
                                         }
                                         ?></td>
                                     <td><?= $sem['Desc']; ?></td>
-                                    <td><a href="<?= base_url(); ?>/uploads/docs/<?= $sem['File']; ?>" target="_blank"><?= $sem['File']; ?></a></td>
+                                    <td><a href="<?= base_url(); ?>/uploads/docs/<?= $sem['File']; ?>" target="_blank">Lihat Bukti</a></td>
                                     <td><?= $sem['kompetensi']; ?></td>
                                     <td style="text-align: center"><a href="<?php echo base_url(); ?>/userfair52/ubahmak/<?= $sem['Num']; ?>" class="btn btn-warning"> <i class="fas fa-file-signature"></i> Ubah</a>
                                         <a href="<?php echo base_url(); ?>/userfair52/hapusmak/<?= $sem['Num']; ?>" onclick="return confirm('Apakah anda yakin akan menghapus data makalah?')" class="btn btn-danger"> <i class="fas fa-trash"></i>

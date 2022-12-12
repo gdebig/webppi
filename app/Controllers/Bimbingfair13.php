@@ -12,11 +12,11 @@ class Bimbingfair13 extends BaseController
     {
         $session = session();
         $logged_in = $session->get('logged_in');
-        $ispeserta = $session->get('ispeserta');
-        if ((!$logged_in) && (!$ispeserta)) {
+        $ispenilai = $session->get('ispenilai');
+        if ((!$logged_in) && (!$ispenilai)) {
             return redirect()->to('/home');
         } else {
-            $session->set('role', 'peserta');
+            $session->set('role', 'penilai');
         }
 
         if (!empty($id)) {
@@ -44,11 +44,11 @@ class Bimbingfair13 extends BaseController
     {
         $session = session();
         $logged_in = $session->get('logged_in');
-        $ispeserta = $session->get('ispeserta');
-        if ((!$logged_in) && (!$ispeserta)) {
+        $ispenilai = $session->get('ispenilai');
+        if ((!$logged_in) && (!$ispenilai)) {
             return redirect()->to('/home');
         } else {
-            $session->set('role', 'peserta');
+            $session->set('role', 'penilai');
         }
         helper(['tanggal']);
 
@@ -69,11 +69,11 @@ class Bimbingfair13 extends BaseController
         $model = new CapesOrgModel();
         $slug = new Slug();
         $logged_in = $session->get('logged_in');
-        $ispeserta = $session->get('ispeserta');
-        if ((!$logged_in) && (!$ispeserta)) {
+        $ispenilai = $session->get('ispenilai');
+        if ((!$logged_in) && (!$ispenilai)) {
             return redirect()->to('/home');
         } else {
-            $session->set('role', 'peserta');
+            $session->set('role', 'penilai');
         }
         $user_id = $session->get('user_id');
         helper(['tanggal']);
@@ -325,11 +325,11 @@ class Bimbingfair13 extends BaseController
         $session = session();
         $model = new CapesOrgModel();
         $logged_in = $session->get('logged_in');
-        $ispeserta = $session->get('ispeserta');
-        if ((!$logged_in) && (!$ispeserta)) {
+        $ispenilai = $session->get('ispenilai');
+        if ((!$logged_in) && (!$ispenilai)) {
             return redirect()->to('/home');
         } else {
-            $session->set('role', 'peserta');
+            $session->set('role', 'penilai');
         }
         helper(['tanggal']);
 
@@ -349,11 +349,11 @@ class Bimbingfair13 extends BaseController
         $session = session();
         $model = new CapesOrgModel();
         $logged_in = $session->get('logged_in');
-        $ispeserta = $session->get('ispeserta');
-        if ((!$logged_in) && (!$ispeserta)) {
+        $ispenilai = $session->get('ispenilai');
+        if ((!$logged_in) && (!$ispenilai)) {
             return redirect()->to('/home');
         } else {
-            $session->set('role', 'peserta');
+            $session->set('role', 'penilai');
         }
         helper(['tanggal']);
 
@@ -399,11 +399,11 @@ class Bimbingfair13 extends BaseController
         $model = new CapesOrgModel();
         $user_id = $session->get('user_id');
         $logged_in = $session->get('logged_in');
-        $ispeserta = $session->get('ispeserta');
-        if ((!$logged_in) && (!$ispeserta)) {
+        $ispenilai = $session->get('ispenilai');
+        if ((!$logged_in) && (!$ispenilai)) {
             return redirect()->to('/home');
         } else {
-            $session->set('role', 'peserta');
+            $session->set('role', 'penilai');
         }
         helper(['tanggal']);
         $Num = $this->request->getVar('Num');

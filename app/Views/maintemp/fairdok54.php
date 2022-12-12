@@ -128,7 +128,7 @@
                                                 break;
                                         }
                                         ?></td>
-                                    <td><a href="<?= base_url(); ?>/uploads/docs/<?= $inov['File']; ?>" target="_blank"><?= $inov['File']; ?></a></td>
+                                    <td><a href="<?= base_url(); ?>/uploads/docs/<?= $inov['File']; ?>" target="_blank">Lihat Bukti</a></td>
                                     <td><?= $inov['kompetensi']; ?></td>
                                     <td style="text-align: center"><a href="<?php echo base_url(); ?>/userfair54/ubahinov/<?= $inov['Num']; ?>" class="btn btn-warning"> <i class="fas fa-file-signature"></i> Ubah</a>
                                         <a href="<?php echo base_url(); ?>/userfair54/hapusinov/<?= $inov['Num']; ?>" onclick="return confirm('Apakah anda yakin akan menghapus data temuan/inovasi/paten?')" class="btn btn-danger"> <i class="fas fa-trash"></i>

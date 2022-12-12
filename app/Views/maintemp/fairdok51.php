@@ -92,7 +92,7 @@
                                         }
                                         ?></td>
                                     <td><?= $kartul['Desc']; ?></td>
-                                    <td><a href="<?= base_url(); ?>/uploads/docs/<?= $kartul['File']; ?>" target="_blank"><?= $kartul['File']; ?></a></td>
+                                    <td><a href="<?= base_url(); ?>/uploads/docs/<?= $kartul['File']; ?>" target="_blank">Lihat Bukti</a></td>
                                     <td><?= $kartul['kompetensi']; ?></td>
                                     <td style="text-align: center"><a href="<?php echo base_url(); ?>/userfair51/ubahkartul/<?= $kartul['Num']; ?>" class="btn btn-warning"> <i class="fas fa-file-signature"></i> Ubah</a>
                                         <a href="<?php echo base_url(); ?>/userfair51/hapuskartul/<?= $kartul['Num']; ?>" onclick="return confirm('Apakah anda yakin akan menghapus data karya tulis?')" class="btn btn-danger"> <i class="fas fa-trash"></i>

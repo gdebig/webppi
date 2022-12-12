@@ -160,7 +160,7 @@
                                     <td><?= $kerja['Desc']; ?></td>
                                     <td><?php
                                         if (!empty($kerja['File'])) {
-                                            echo "<a href='" . base_url('uploads/docs/' . $kerja['File']) . "' target='_blank'>" . $kerja['File'] . "</a>";
+                                            echo "<a href='" . base_url('uploads/docs/' . $kerja['File']) . "' target='_blank'>" . "Lihat Bukti" . "</a>";
                                         } else {
                                             echo "";
                                         }

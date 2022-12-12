@@ -34,7 +34,7 @@ class Userfair51 extends BaseController
             $data['data_kartul'] = 'kosong';
         }
 
-        $data['title_page'] = "V.5.1. Karya Tulis di Bidang Keinsinyuran yang Dipublikasikan (W4)";
+        $data['title_page'] = "V.1. Karya Tulis di Bidang Keinsinyuran yang Dipublikasikan (W4)";
         $data['data_bread'] = '';
         $data['stringbread'] = '<li class="breadcrumb-item active"><a href="' . base_url() . "/userfair" . '">Dokumen FAIR</a></li><li class="breadcrumb-item active">Karya Tulis</li>';
         $data['logged_in'] = $session->get('logged_in');
@@ -56,7 +56,7 @@ class Userfair51 extends BaseController
         $where = "komp_cat LIKE 'W.4%'";
         $data['data_komp'] = $model1->where($where)->orderby('komp_id', 'ASC')->findall();
 
-        $data['title_page'] = "V.5.1. Karya Tulis di Bidang Keinsinyuran yang Dipublikasikan (W4)";
+        $data['title_page'] = "V.1. Karya Tulis di Bidang Keinsinyuran yang Dipublikasikan (W4)";
         $data['data_bread'] = '';
         $data['stringbread'] = '<li class="breadcrumb-item active"><a href="' . base_url() . "/userfair" . '">Dokumen FAIR</a></li><li class="breadcrumb-item active">Tambah Karya Tulis</li>';
         $data['logged_in'] = $session->get('logged_in');
@@ -254,7 +254,7 @@ class Userfair51 extends BaseController
                 $where = "komp_cat LIKE 'W.4%'";
                 $data['data_komp'] = $model1->where($where)->orderby('komp_id', 'ASC')->findall();
 
-                $data['title_page'] = "V.5.1. Karya Tulis di Bidang Keinsinyuran yang Dipublikasikan (W4)";
+                $data['title_page'] = "V.1. Karya Tulis di Bidang Keinsinyuran yang Dipublikasikan (W4)";
                 $data['data_bread'] = '';
                 $data['stringbread'] = '<li class="breadcrumb-item active"><a href="' . base_url() . "/userfair" . '">Dokumen FAIR</a></li><li class="breadcrumb-item active">Tambah Karya Tulis</li>';
                 $data['logged_in'] = $session->get('logged_in');
@@ -321,7 +321,7 @@ class Userfair51 extends BaseController
         $where = "komp_cat LIKE 'W.4%'";
         $data['data_komp'] = $model1->where($where)->orderby('komp_id', 'ASC')->findall();
 
-        $data['title_page'] = "V.5.1. Karya Tulis di Bidang Keinsinyuran yang Dipublikasikan (W4)";
+        $data['title_page'] = "V.1. Karya Tulis di Bidang Keinsinyuran yang Dipublikasikan (W4)";
         $data['data_bread'] = '';
         $data['stringbread'] = '<li class="breadcrumb-item active"><a href="' . base_url() . "/userfair" . '">Dokumen FAIR</a></li><li class="breadcrumb-item active">Ubah Karya Tulis</li>';
         $data['logged_in'] = $session->get('logged_in');
@@ -545,7 +545,7 @@ class Userfair51 extends BaseController
                 $where = "komp_cat LIKE 'W.4%'";
                 $data['data_komp'] = $model1->where($where)->orderby('komp_id', 'ASC')->findall();
 
-                $data['title_page'] = "V.5.1. Karya Tulis di Bidang Keinsinyuran yang Dipublikasikan (W4)";
+                $data['title_page'] = "V.1. Karya Tulis di Bidang Keinsinyuran yang Dipublikasikan (W4)";
                 $data['data_bread'] = '';
                 $data['stringbread'] = '<li class="breadcrumb-item active"><a href="' . base_url() . "/userfair" . '">Dokumen FAIR</a></li><li class="breadcrumb-item active">Ubah Karya Tulis</li>';
                 $data['logged_in'] = $session->get('logged_in');

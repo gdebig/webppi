@@ -122,7 +122,7 @@
                                                 break;
                                         }
                                         ?></td>
-                                    <td><a href="<?= base_url(); ?>/uploads/docs/<?= $inov['File']; ?>" target="_blank"><?= $inov['File']; ?></a></td>
+                                    <td><a href="<?= base_url(); ?>/uploads/docs/<?= $inov['File']; ?>" target="_blank">Lihat Bukti</a></td>
                                     <td><?= $inov['kompetensi']; ?></td>
                                 </tr>
                             <?php
