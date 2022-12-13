@@ -287,12 +287,15 @@ class Mantugasakhir extends BaseController
             $data['bimbing_id'] = $bimbing['dosen_id'];
             $data['mhs_id'] = $bimbing['mhs_id'];
         } else {
-            return redirect()->to('/mantugasakhir');
+            $data['bimbing_id'] = "kosong";
         }
 
         $uji = $model->where('ta_id', $ta_id)->where('tipedosen', 'Penguji')->first();
         if ($uji) {
             $data['uji_id'] = $uji['dosen_id'];
+            $data['mhs_id'] = $uji['mhs_id'];
+        } else {
+            $data['uji_id'] = "kosong";
         }
 
         $data['ta_id'] = $ta_id;
@@ -451,5 +454,87 @@ class Mantugasakhir extends BaseController
         $data['tglsekarang'] = format_indo(date("Y-m-d"));
         $data['title'] = 'Daftar Hadir';
         return view('maintemp/formdaftarhadirall', $data);
+    }
+
+    public function beritaacara($mhs_id, $ta_id)
+    {
+        $session = session();
+        $logged_in = $session->get('logged_in');
+        $issadmin = $session->get('issadmin');
+        $isadmin = $session->get('isadmin');
+        $ispenilai = $session->get('ispenilai');
+        if ((!$logged_in) && ((!$issadmin) || (!$isadmin) || (!$ispenilai))) {
+            return redirect()->to('/home');
+        }
+        helper(['tanggal']);
+        helper(['nilai']);
+
+        $model = new JadwalSidangModel();
+        $jadwalsidang = $model->where('ta_id', $ta_id)->first();
+        if ($jadwalsidang) {
+            $data['tanggal_sidang'] = format_indo($jadwalsidang['sidang_tanggal']);
+            $data['jam_sidang'] = substr($jadwalsidang['sidang_tanggal'], 11, 8);
+            $data['tempat_sidang'] = $jadwalsidang['sidang_ruang'];
+        }
+
+        $model = new TugasAkhirModel();
+        $tugasakhir = $model->where('ta_id', $ta_id)->join('tbl_profile', 'tbl_tugasakhir.user_id = tbl_profile.user_id', 'left')->join('tbl_user', 'tbl_tugasakhir.user_id = tbl_user.user_id', 'left')->first();
+        if ($tugasakhir) {
+            $data['namamahasiswa'] = $tugasakhir['FullName'];
+            $data['npm'] = $tugasakhir['NPM'];
+            $data['instansi'] = $tugasakhir['instansi'];
+            $data['divisi'] = $tugasakhir['divisi'];
+            $data['periode'] = format_indo($tugasakhir['startdate']) . ' - ' . format_indo($tugasakhir['enddate']);
+            $data['lapjudul'] = $tugasakhir['ta_usuljudul'];
+        }
+
+        $model = new NilaitaModel();
+        $nilaita = $model->where('ta_id', $ta_id)->join('tbl_profile', 'tbl_nilaita.dosen_id = tbl_profile.user_id', 'left')->findall();
+        if ($nilaita) {
+            $data['nilaita'] = $nilaita;
+        } else {
+            return redirect()->to('/mantugasakhir');
+        }
+
+        $data['tglsekarang'] = format_indo(date("Y-m-d"));
+        $data['title'] = 'Berita Acara';
+        return view('maintemp/beritaacara', $data);
+    }
+
+    function prosesconfirmta()
+    {
+        $session = session();
+        $logged_in = $session->get('logged_in');
+        $issadmin = $session->get('issadmin');
+        $isadmin = $session->get('isadmin');
+        $ispenilai = $session->get('ispenilai');
+        if ((!$logged_in) && ((!$issadmin) || (!$isadmin) || (!$ispenilai))) {
+            return redirect()->to('/home');
+        }
+        $model = new TugasAkhirModel();
+        $button = $this->request->getVar('submit');
+        if ($button == "set") {
+            $taid = $this->request->getVar('ta_id');
+            $confirmta = $this->request->getVar('confirmta');
+            if (!empty($taid)) {
+                foreach ($taid as $id) {
+                    $data = array(
+                        'ta_confirm' => $confirmta,
+                        'date_modified' => date('Y-m-d')
+                    );
+
+                    $model->update($taid, $data);
+                }
+
+                $session->setFlashdata('msg', 'Konfirmasi PK berhasil dilakukan.');
+
+                return redirect()->to('/mantugasakhir');
+            } else {
+
+                $session->setFlashdata('errmsg', 'Tidak ada PK yang dicentang.');
+
+                return redirect()->to('/mantugasakhir');
+            }
+        }
     }
 }

@@ -14,84 +14,124 @@
                     <?php endif; ?>
                 </div>
 
+                <div class="col">
+                    <?php if (session()->getFlashdata('errmsg')) : ?>
+                        <div class="alert alert-danger"><?= session()->getFlashdata('errmsg') ?></div>
+                    <?php endif; ?>
+                </div>
+
                 <?php if (isset($data_ta) && ($data_ta == "kosong")) {
                 ?>
 
                     <div class="alert alert-danger">Data praktek keinsinyuran belum ada.</div>
                 <?php } else { ?>
+                    <form action="<?php echo base_url(); ?>/mantugasakhir/prosesconfirmta" method="post" enctype="multipart/form-data">
 
-                    <table id="tabledata" class="display table table-bordered table-hover">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Nama Peserta RPL</th>
-                                <th>NPM</th>
-                                <th>Judul TA</th>
-                                <th>Term</th>
-                                <th>Periode</th>
-                                <th>Instansi</th>
-                                <th>Divisi</th>
-                                <th>Buku TA</th>
-                                <th>Log</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            $i = 1;
-                            foreach ($data_ta as $ta) :
-                            ?>
+                        <table id="tabledata" class="display table table-bordered table-hover">
+                            <thead>
                                 <tr>
-                                    <td><?php echo $i;
-                                        $i++; ?></td>
-                                    <td><?= $ta['FullName']; ?></td>
-                                    <td><?= $ta['NPM']; ?></td>
-                                    <td><?= $ta['ta_usuljudul']; ?></td>
-                                    <td><?= $ta['ta_tahun'] . ' - ' . $ta['ta_semester']; ?></td>
-                                    <td><?php
-                                        if (!empty($ta['startdate'])) {
-                                            echo format_indo($ta['startdate']) . ' - ' . format_indo($ta['enddate']);
-                                        } else {
-                                            echo "Belum ada periode";
-                                        }
-                                        ?></td>
-                                    <td><?= $ta['instansi']; ?></td>
-                                    <td><?= $ta['divisi']; ?></td>
-                                    <td><?php
-                                        if (!empty($ta['ta_buku'])) {
-                                            echo "<a href='" . base_url() . "/uploads/docs/" . $ta['ta_buku'] . "' target='_blank'>Buku TA</a>";
-                                        } else {
-                                            echo "Belum ada buku";
-                                        }
-                                        ?></td>
-                                    <td><?php
-                                        if (!empty($ta['ta_log'])) {
-                                            echo "<a href='" . base_url() . "/uploads/docs/" . $ta['ta_log'] . "' target='_blank'>LOG</a>";
-                                        } else {
-                                            echo "Belum ada LOG";
-                                        }
-                                        ?></td>
-                                    <td style="text-align: center">
-                                        <?php
-                                        if (!empty($ta['ta_buku'])) {
-                                        ?>
-                                            <a href="<?php echo base_url(); ?>/mantugasakhir/setjadwal/<?= $ta['ta_id']; ?>/<?= $ta['user_id']; ?>" class="btn btn-warning"> <i class="fas fa-calendar-alt"></i> Atur Jadwal
-                                                Sidang</a><br /><a href="<?php echo base_url(); ?>/mantugasakhir/setpenguji/<?= $ta['ta_id']; ?>/<?= $ta['user_id']; ?>" class="btn btn-secondary"> <i class="fas fa-user-tie"></i> Atur Penguji
-                                                TA</a><br /><a href="<?php echo base_url(); ?>/mantugasakhir/lihatnilai/<?= $ta['ta_id']; ?>/<?= $ta['user_id']; ?>" class="btn btn-primary"> <i class="fas fa-clipboard-check"></i> Lihat
-                                                Nilai</a><br /><a href="<?php echo base_url(); ?>/mantugasakhir/admta/<?= $ta['ta_id']; ?>/<?= $ta['user_id']; ?>" class="btn btn-info"> <i class="fas fa-file-signature"></i> Lihat Administrasi
-                                                TA</a>
-                                        <?php
-                                        } else {
-                                            echo "Tidak ada aksi. Softcopy buku belum diunggah oleh peserta.";
-                                        }
-                                        ?>
-                                    </td>
+                                    <th>No</th>
+                                    <th width="5%">Check</th>
+                                    <th>Nama Peserta RPL</th>
+                                    <th>NPM</th>
+                                    <th>Judul TA</th>
+                                    <th>Term</th>
+                                    <th>Periode</th>
+                                    <th>Instansi</th>
+                                    <th>Divisi</th>
+                                    <th>Buku TA</th>
+                                    <th>Log</th>
+                                    <th>Konfirmasi</th>
+                                    <th>Aksi</th>
                                 </tr>
-                            <?php
-                            endforeach
-                            ?>
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $i = 1;
+                                foreach ($data_ta as $ta) :
+                                ?>
+                                    <tr>
+                                        <td><?php echo $i;
+                                            $i++; ?></td>
+                                        <td style="text-align:center"><input type="checkbox" name="ta_id[]" value="<?= $ta['ta_id']; ?>" class="form-check-input" /></td>
+                                        <td><?= $ta['FullName']; ?></td>
+                                        <td><?= $ta['NPM']; ?></td>
+                                        <td><?= $ta['ta_usuljudul']; ?></td>
+                                        <td><?= $ta['ta_tahun'] . ' - ' . $ta['ta_semester']; ?></td>
+                                        <td><?php
+                                            if (!empty($ta['startdate'])) {
+                                                echo format_indo($ta['startdate']) . ' - ' . format_indo($ta['enddate']);
+                                            } else {
+                                                echo "Belum ada periode";
+                                            }
+                                            ?></td>
+                                        <td><?= $ta['instansi']; ?></td>
+                                        <td><?= $ta['divisi']; ?></td>
+                                        <td><?php
+                                            if (!empty($ta['ta_buku'])) {
+                                                echo "<a href='" . base_url() . "/uploads/docs/" . $ta['ta_buku'] . "' target='_blank'>Buku TA</a>";
+                                            } else {
+                                                echo "Belum ada buku";
+                                            }
+                                            ?></td>
+                                        <td><?php
+                                            if (!empty($ta['ta_log'])) {
+                                                echo "<a href='" . base_url() . "/uploads/docs/" . $ta['ta_log'] . "' target='_blank'>LOG</a>";
+                                            } else {
+                                                echo "Belum ada LOG";
+                                            }
+                                            ?></td>
+                                        <td><?= $ta['ta_confirm']; ?></td>
+                                        <td style="text-align: center">
+                                            <?php
+                                            if (!empty($ta['ta_buku'])) {
+                                            ?>
+                                                <a href="<?php echo base_url(); ?>/mantugasakhir/setjadwal/<?= $ta['ta_id']; ?>/<?= $ta['user_id']; ?>" class="btn btn-warning"> <i class="fas fa-calendar-alt"></i> Atur Jadwal
+                                                    Sidang</a><br /><a href="<?php echo base_url(); ?>/mantugasakhir/setpenguji/<?= $ta['ta_id']; ?>/<?= $ta['user_id']; ?>" class="btn btn-secondary"> <i class="fas fa-user-tie"></i> Atur Penguji
+                                                    TA</a><br /><a href="<?php echo base_url(); ?>/mantugasakhir/lihatnilai/<?= $ta['ta_id']; ?>/<?= $ta['user_id']; ?>" class="btn btn-primary"> <i class="fas fa-clipboard-check"></i> Lihat
+                                                    Nilai</a><br />
+                                                <?php
+                                                if ($ta['ta_confirm'] == "Ya") {
+                                                ?>
+                                                    <a href="<?php echo base_url(); ?>/mantugasakhir/admta/<?= $ta['ta_id']; ?>/<?= $ta['user_id']; ?>" class="btn btn-info"> <i class="fas fa-file-signature"></i> Lihat Administrasi
+                                                        TA</a>
+                                                <?php
+                                                }
+                                                ?>
+                                            <?php
+                                            } else {
+                                                echo "Tidak ada aksi. Softcopy buku belum diunggah oleh peserta.";
+                                            }
+                                            ?>
+                                        </td>
+                                    </tr>
+                                <?php
+                                endforeach
+                                ?>
+                            </tbody>
+                        </table><br /><br />
+                        <div class="card card-success">
+                            <div class="card-header">
+                                <h3 class="card-title">Konfirmasi Pelaksanaan Praktik Keinsinyuran</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="confirmta" class="element">Telah dilaksanakan?</label>
+                                    <div class="element">
+                                        <select name="confirmta" id="confirmta" class="form-control">
+                                            <option value="Tidak">Tidak</option>
+                                            <option value="Ya">Ya</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><br />
+                        <div class="row">
+                            <div class="col">
+                                <button type="submit" name="submit" value="set" class="btn btn-primary col">Confirm PK</button>
+                            </div>
+                        </div>
+                    </form>
                 <?php } ?>
             </div>
         </div>

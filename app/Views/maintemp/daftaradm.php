@@ -39,17 +39,37 @@
                         <tr>
                             <td>1.</td>
                             <td>Berita Acara Sidang Praktek Keinsinyuran</td>
-                            <td><a href="<?= base_url(); ?>/mantugasakhir/beritaacara/<?= $ta_id; ?>" target='_blank'>Lihat Berita Acara</a></td>
+                            <td><a href="<?= base_url(); ?>/mantugasakhir/beritaacara/<?= $mhs_id; ?>/<?= $ta_id; ?>" target='_blank'>Lihat Berita Acara</a></td>
                         </tr>
                         <tr>
                             <td>2.</td>
                             <td>Form Evaluasi Pembimbing</td>
-                            <td><a href="<?= base_url(); ?>/mantugasakhir/lihatformevaluasi/<?= $mhs_id; ?>/<?= $bimbing_id; ?>/<?= $ta_id; ?>" target='_blank'>Lihat Form</a></td>
+                            <td>
+                                <?php
+                                if ($bimbing_id == "kosong") {
+                                    echo "Pembimbing belum memberi nilai";
+                                } else {
+                                ?>
+                                    <a href="<?= base_url(); ?>/mantugasakhir/lihatformevaluasi/<?= $mhs_id; ?>/<?= $bimbing_id; ?>/<?= $ta_id; ?>" target='_blank'>Lihat Form</a>
+                                <?php
+                                }
+                                ?>
+                            </td>
                         </tr>
                         <tr>
                             <td>3.</td>
                             <td>Form Evaluasi Penguji</td>
-                            <td><a href="<?= base_url(); ?>/mantugasakhir/lihatformevaluasi/<?= $mhs_id; ?>/<?= $uji_id; ?>/<?= $ta_id; ?>" target='_blank'>Lihat Form</a></td>
+                            <td>
+                                <?php
+                                if ($uji_id == "kosong") {
+                                    echo "Penguji belum memberi nilai";
+                                } else {
+                                ?>
+                                    <a href="<?= base_url(); ?>/mantugasakhir/lihatformevaluasi/<?= $mhs_id; ?>/<?= $uji_id; ?>/<?= $ta_id; ?>" target='_blank'>Lihat Form</a>
+                                <?php
+                                }
+                                ?>
+                            </td>
                         </tr>
                         <tr>
                             <td>4.</td>

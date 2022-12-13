@@ -267,3 +267,31 @@ CRITICAL - 2022-12-12 19:14:19 --> Undefined variable: mhs_id
 #7 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
 #8 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
 #9 {main}
+CRITICAL - 2022-12-12 20:36:28 --> Undefined variable: uji_id
+#0 D:\wamp64\www\webppi\app\Views\maintemp\daftaradm.php(52): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'D:\\wamp64\\www\\w...', 52, Array)
+#1 D:\wamp64\www\webppi\system\View\View.php(210): include('D:\\wamp64\\www\\w...')
+#2 D:\wamp64\www\webppi\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 D:\wamp64\www\webppi\system\Common.php(1089): CodeIgniter\View\View->render('maintemp/daftar...', Array, true)
+#4 D:\wamp64\www\webppi\app\Controllers\Mantugasakhir.php(303): view('maintemp/daftar...', Array)
+#5 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Mantugasakhir->admta('4', '4')
+#6 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Mantugasakhir))
+#7 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2022-12-12 20:43:29 --> Undefined variable: mhs_id
+#0 D:\wamp64\www\webppi\app\Views\maintemp\daftaradm.php(68): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'D:\\wamp64\\www\\w...', 68, Array)
+#1 D:\wamp64\www\webppi\system\View\View.php(210): include('D:\\wamp64\\www\\w...')
+#2 D:\wamp64\www\webppi\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 D:\wamp64\www\webppi\system\Common.php(1089): CodeIgniter\View\View->render('maintemp/daftar...', Array, true)
+#4 D:\wamp64\www\webppi\app\Controllers\Mantugasakhir.php(305): view('maintemp/daftar...', Array)
+#5 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Mantugasakhir->admta('1', '15')
+#6 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Mantugasakhir))
+#7 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2022-12-12 20:45:49 --> Too few arguments to function App\Controllers\Mantugasakhir::lihatformevaluasi(), 2 passed in D:\wamp64\www\webppi\system\CodeIgniter.php on line 832 and exactly 3 expected
+#0 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Mantugasakhir->lihatformevaluasi('1', '1')
+#1 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Mantugasakhir))
+#2 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
