@@ -286,13 +286,14 @@ class Mantugasakhir extends BaseController
         if ($bimbing) {
             $data['bimbing_id'] = $bimbing['dosen_id'];
             $data['mhs_id'] = $bimbing['mhs_id'];
+        } else {
+            return redirect()->to('/mantugasakhir');
         }
+
         $uji = $model->where('ta_id', $ta_id)->where('tipedosen', 'Penguji')->first();
         if ($uji) {
             $data['uji_id'] = $uji['dosen_id'];
         }
-
-        echo $data['bimbing_id'] . "<br />" . $data['uji_id'];
 
         $data['ta_id'] = $ta_id;
         $data['user_id'] = $user_id;
