@@ -235,9 +235,10 @@ class Userfair4 extends BaseController
 
                 $ext = $File->getClientExtension();
                 if (!empty($ext)) {
+                    $random = bin2hex(random_bytes(4));
                     $namainstansi = $slug->slugify($Institution);
                     $namamk = $slug->slugify($Name);
-                    $filename = $user_id . '_pengajar_' . $namainstansi . '_' . $namamk . '.' . $ext;
+                    $filename = $user_id . '_pengajar_' . $namainstansi . '_' . $namamk . '_' . $random . '.' . $ext;
                     $File->move('uploads/docs/', $filename, true);
                 } else {
                     $filename = "";
@@ -532,8 +533,9 @@ class Userfair4 extends BaseController
                 $namainstansi = $slug->slugify($Institution);
                 $namamk = $slug->slugify($Name);
                 $ext = $File->getClientExtension();
+                $random = bin2hex(random_bytes(4));
                 if ((empty($filename)) && (!empty($ext))) {
-                    $filenamenew = $user_id . '_pengajar_' . $namainstansi . '_' . $namamk . '.' . $ext;
+                    $filenamenew = $user_id . '_pengajar_' . $namainstansi . '_' . $namamk . '_' . $random . '.' . $ext;
                     $File->move('uploads/docs/', $filenamenew, true);
                 } elseif ((!empty($filename)) && (!empty($ext))) {
                     $oldext = substr($filename, -4);
@@ -541,7 +543,7 @@ class Userfair4 extends BaseController
                         $File->move('uploads/docs/', $filename, true);
                         $filenamenew = $filename;
                     } else {
-                        $filenamenew = $user_id . '_pengajar_' . $namainstansi . '_' . $namamk . '.' . $ext;
+                        $filenamenew = $user_id . '_pengajar_' . $namainstansi . '_' . $namamk . '_' . $random . '.' . $ext;
                         $File->move('uploads/docs/', $filenamenew, true);
                     }
                 } else {
