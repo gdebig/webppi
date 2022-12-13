@@ -27,7 +27,7 @@
                                     <a href="<?php echo base_url(); ?>/nilairpl/profesi/<?= $mhs_id; ?>/<?= $dosen_id; ?>" class="btn btn-block btn-success btn-sm">Profesionalisme</a>
                                 </div>
                                 <div class="col">
-                                    <a href="<?php echo base_url(); ?>/nilairpl/k3l/<?= $mhs_id; ?>/<?= $dosen_id; ?>" class="btn btn-block btn-success btn-sm">Keselamatan,Kesehatan,Keamanan
+                                    <a href="<?php echo base_url(); ?>/nilairpl/k3lh/<?= $mhs_id; ?>/<?= $dosen_id; ?>" class="btn btn-block btn-success btn-sm">Keselamatan,Kesehatan,Keamanan
                                         kerja&Lingk</a>
                                 </div>
                                 <div class="col">
