@@ -43,6 +43,9 @@
                                 } else {
                                     $berinilai = 'ya';
                                 }
+                                $mhs_id = $nilai['mhs_id'];
+                                $dosen_id = $nilai['dosen_id'];
+                                $ta_id = $nilai['ta_id'];
                             ?>
                                 <tr>
                                     <td><?php echo $i;

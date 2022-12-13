@@ -52,7 +52,7 @@ class Manujipk extends BaseController
         $user_id = $session->get('user_id');
 
         $model = new NilaitaModel();
-        $nilaita = $model->where('ta_id', $ta_id)->where('dosen_id', $user_id)->join('tbl_profile', 'tbl_nilaita.dosen_id = tbl_profile.user_id')->orderby('nilaita_id', 'ASC')->findall();
+        $nilaita = $model->where('ta_id', $ta_id)->join('tbl_profile', 'tbl_nilaita.dosen_id = tbl_profile.user_id')->orderby('nilaita_id', 'ASC')->findall();
         if (!empty($nilaita)) {
             $data['nilai_ta'] = $nilaita;
         } else {
@@ -320,10 +320,12 @@ class Manujipk extends BaseController
             $data['signed'] = $nilaita['signed'];
             $data['rerata'] = (0.3 * $nilaita['penulisan']) + (0.3 * $nilaita['presentasi']) + (0.4 * $nilaita['materi']);
             $data['nilaihuruf'] = nilai_huruf($data['rerata']);
+        } else {
+            return redirect()->to('/manujipk');
         }
 
         $data['tglsekarang'] = format_indo(date("Y-m-d"));
-        $data['title'] = 'Form Evaluasi - ' . $data['namamahasiswa'];
+        $data['title'] = 'Daftar Hadir';
         return view('maintemp/formdaftarhadir', $data);
     }
 }

@@ -32,24 +32,29 @@
                         <tr>
                             <th>No</th>
                             <th>Nama Dokumen</th>
+                            <th>Link</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>1.</td>
                             <td>Berita Acara Sidang Praktek Keinsinyuran</td>
+                            <td><a href="<?= base_url(); ?>/mantugasakhir/beritaacara/<?= $ta_id; ?>" target='_blank'>Lihat Berita Acara</a></td>
                         </tr>
                         <tr>
                             <td>2.</td>
                             <td>Form Evaluasi Pembimbing</td>
+                            <td><a href="<?= base_url(); ?>/mantugasakhir/lihatformevaluasi/<?= $mhs_id; ?>/<?= $bimbing_id; ?>/<?= $ta_id; ?>" target='_blank'>Lihat Form</a></td>
                         </tr>
                         <tr>
                             <td>3.</td>
                             <td>Form Evaluasi Penguji</td>
+                            <td><a href="<?= base_url(); ?>/mantugasakhir/lihatformevaluasi/<?= $mhs_id; ?>/<?= $uji_id; ?>/<?= $ta_id; ?>" target='_blank'>Lihat Form</a></td>
                         </tr>
                         <tr>
                             <td>4.</td>
                             <td>Daftar Hadir</td>
+                            <td><a href="<?= base_url(); ?>/mantugasakhir/daftarhadir/<?= $mhs_id; ?>/<?= $ta_id; ?>" target='_blank'>Lihat Daftar Hadir</a></td>
                         </tr>
                     </tbody>
                 </table>
