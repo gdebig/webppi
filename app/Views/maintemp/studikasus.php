@@ -1193,7 +1193,7 @@
                         </tbody>
                     </table>
                 <?php } ?>
-                <?php if (isset($data_sem) && ($data_sem == "kosong")) {
+                <?php if (isset($data_sem) && ($data_sem != "kosong")) {
                 ?>
                     <h3>V.3 Seminar/Lokakarya Keinsinyuran Yang Diikuti (W2) </h3>
                     <table id="tabledata" class="display table table-bordered table-hover">

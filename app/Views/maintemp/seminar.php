@@ -205,500 +205,7 @@
                     </table>
                 <?php } ?>
                 <br />
-                <?php if (isset($data_pend) && ($data_pend != "kosong")) {
-                ?>
-                    <br />
-                    <h3>I.2. Pendidikan Formal (W2)</h3>
-                    <br />
-                    <table id="tabledata" class="display table table-bordered table-hover">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Jenjang</th>
-                                <th>Universitas</th>
-                                <th>Fakultas</th>
-                                <th>Program Studi</th>
-                                <th>Alamat</th>
-                                <th>Tahun Lulus</th>
-                                <th>Gelar</th>
-                                <th>Judul Tugas Akhir</th>
-                                <th>Uraian Tugas Akhir</th>
-                                <th>Nilai</th>
-                                <th>Scan Ijazah</th>
-                                <th>Nilai P</th>
-                                <th>Nilai Q</th>
-                                <th>Nilai R</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            $i = 1;
-                            foreach ($data_pend as $pend) :
-                            ?>
-                                <tr>
-                                    <td><?php echo $i;
-                                        $i++; ?></td>
-                                    <td><?= $pend['Rank']; ?></td>
-                                    <td><?= $pend['Name']; ?></td>
-                                    <td><?= $pend['Faculty']; ?></td>
-                                    <td><?= $pend['Major']; ?></td>
-                                    <td><?= $pend['City'] . ", " . $pend['Country'] ?></td>
-                                    <td><?= $pend['GradYear']; ?></td>
-                                    <td><?= $pend['Degree']; ?></td>
-                                    <td><?= $pend['Title']; ?></td>
-                                    <td><?= $pend['Desc']; ?></td>
-                                    <td><?= $pend['Mark']; ?></td>
-                                    <td><a href="<?= base_url(); ?>/uploads/docs/<?= $pend['File']; ?>" target="_blank">Lihat Ijazah</a></td>
-                                    <td>
-                                        <?php
-                                        $tahunini = date('Y');
-                                        $lama = $tahunini - $pend['GradYear'];
-                                        if ($pend['Rank'] == 'S1') {
-                                            if ($lama < 10) {
-                                                $rankscore = 1;
-                                            } elseif ($lama <= 15) {
-                                                $rankscore = 2;
-                                            } elseif ($lama <= 20) {
-                                                $rankscore = 3;
-                                            } elseif ($lama > 25) {
-                                                $rankscore = 4;
-                                            }
-                                        } elseif ($pend['Rank'] == 'S2') {
-                                            if ($lama < 5) {
-                                                $rankscore = 1;
-                                            } elseif ($lama <= 15) {
-                                                $rankscore = 2;
-                                            } elseif ($lama <= 20) {
-                                                $rankscore = 3;
-                                            } elseif ($lama > 20) {
-                                                $rankscore = 4;
-                                            }
-                                        } elseif ($pend['Rank'] == 'S3') {
-                                            if ($lama < 5) {
-                                                $rankscore = 2;
-                                            } elseif ($lama <= 10) {
-                                                $rankscore = 3;
-                                            } elseif ($lama > 10) {
-                                                $rankscore = 4;
-                                            }
-                                        }
-                                        ?>
-                                        <select name="nilai_p" id="nilai_p">
-                                            <option value="4" <?= $rankscore == 4 ? 'selected' : ''; ?>>4</option>
-                                            <option value="3" <?= $rankscore == 3 ? 'selected' : ''; ?>>3</option>
-                                            <option value="2" <?= $rankscore == 2 ? 'selected' : ''; ?>>2</option>
-                                            <option value="1" <?= $rankscore == 1 ? 'selected' : ''; ?>>1</option>
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <?php
-                                        if ($pend['Mark'] < 3) {
-                                            $markscore = 2;
-                                        } elseif ($pend['Mark'] < 3.5) {
-                                            $markscore = 3;
-                                        } else {
-                                            if (($pend['Rank'] == 'S1') && ($pend['Mark'] > 3.5)) {
-                                                $markscore = 4;
-                                            } elseif (($pend['Rank'] == 'S2') && ($pend['Mark'] > 3.75)) {
-                                                $markscore = 4;
-                                            } elseif (($pend['Rank'] == 'S3') && ($pend['Mark'] > 3.76)) {
-                                                $markscore = 4;
-                                            } else {
-                                                $markscore = 3;
-                                            }
-                                        }
-                                        ?>
-                                        <select name="nilai_q" id="nilai_q">
-                                            <option value="4" <?= $markscore == 4 ? 'selected' : ''; ?>>4</option>
-                                            <option value="3" <?= $markscore == 4 ? 'selected' : ''; ?>>3</option>
-                                            <option value="2" <?= $markscore == 4 ? 'selected' : ''; ?>>2</option>
-                                            <option value="1" <?= $markscore == 4 ? 'selected' : ''; ?>>1</option>
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <select name="nilai_r" id="nilai_r">
-                                            <option value="4" <?= $markscore == 4 ? 'selected' : ''; ?>>4</option>
-                                            <option value="3" <?= $markscore == 4 ? 'selected' : ''; ?>>3</option>
-                                            <option value="2" <?= $markscore == 4 ? 'selected' : ''; ?>>2</option>
-                                            <option value="1" <?= $markscore == 4 ? 'selected' : ''; ?>>1</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                            <?php
-                            endforeach
-                            ?>
-                        </tbody>
-                    </table>
-                <?php } ?>
-                <?php if (isset($data_org) && ($data_org != "kosong")) {
-                ?>
-                    <br />
-                    <h3>I.3. Organisasi Profesi & Organisasi Lainnya Yang Dimasuki (W1)</h3>
-                    <table id="tabledata" class="display table table-bordered table-hover">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Check</th>
-                                <th>Nama Organisasi</th>
-                                <th>Jenis Organisasi</th>
-                                <th>Kota</th>
-                                <th>Negara</th>
-                                <th>Perioda</th>
-                                <th>Sudah Berapa Lama Menjadi Anggota</th>
-                                <th>Jabatan Dalam Organisasi</th>
-                                <th>Tingkatan Organisasi</th>
-                                <th>Lingkup Kegiatan Organisasi</th>
-                                <th>Aktifitas Dalam Organisasi</th>
-                                <th>Bukti Menjadi Pengurus</th>
-                                <th>Klaim Kompetensi</th>
-                                <th width="5%">Nilai Q</th>
-                                <th width="5%">Nilai R</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            $i = 1;
-                            foreach ($data_org as $org) :
-                            ?>
-                                <tr>
-                                    <td><?php echo $i;
-                                        $i++; ?></td>
-                                    <td><input type="checkbox" name="org_id[]" value="<?= $org['Num']; ?>" /></td>
-                                    <td><?= $org['Name']; ?></td>
-                                    <td><?php
-                                        switch ($org['Type']) {
-                                            case "PII":
-                                                echo "Organisasi PII";
-                                                break;
-                                            case "Ins":
-                                                echo "Organisasi Keinsinyuran Non PII";
-                                                break;
-                                            case "Non":
-                                                echo "Organisasi Non Keinsinyuran";
-                                                break;
-                                        }
-                                        ?></td>
-                                    <td><?= $org['City']; ?></td>
-                                    <td><?= $org['Country']; ?></td>
-                                    <td><?= $org['StartPeriodBulan'] . " " . $org['StartPeriodYear'] . " hingga " . $org['EndPeriodBulan'] . " " . $org['EndPeriodYear']; ?>
-                                    </td>
-                                    <td><?php
-                                        switch ($org['Period']) {
-                                            case "sd5":
-                                                echo "1 - 5 tahun";
-                                                break;
-                                            case "smp10":
-                                                echo "6 - 10 tahun";
-                                                break;
-                                            case "smp15":
-                                                echo "11 - 15 tahun";
-                                                break;
-                                            case "lbih15":
-                                                echo "Lebih dari 15 tahun";
-                                                break;
-                                        }
-                                        ?></td>
-                                    <td><?php
-                                        switch ($org['Position']) {
-                                            case "Bias":
-                                                echo "Anggota Biasa";
-                                                break;
-                                            case "Peng":
-                                                echo "Anggota Pengurus";
-                                                break;
-                                            case "Pimp":
-                                                echo "Pimpinan";
-                                                break;
-                                        }
-                                        ?></td>
-                                    <td><?php
-                                        switch ($org['OrgLevel']) {
-                                            case "Lok":
-                                                echo "Organisasi Lokal (Bukan Nasional)";
-                                                break;
-                                            case "Nas":
-                                                echo "Organisasi Nasional";
-                                                break;
-                                            case "Reg":
-                                                echo "Organisasi Regional";
-                                                break;
-                                            case "Int":
-                                                echo "Organisasi Internasional";
-                                                break;
-                                        }
-                                        ?></td>
-                                    <td><?php
-                                        switch ($org['OrgScp']) {
-                                            case "Aso":
-                                                echo "Asosiasi Profesi";
-                                                break;
-                                            case "Pem":
-                                                echo "Lembaga Pemerintahan";
-                                                break;
-                                            case "Pen":
-                                                echo "Lembaga Pendidikan";
-                                                break;
-                                            case "Neg":
-                                                echo "Badan Usaha Milik Negara";
-                                                break;
-                                            case "Swa":
-                                                echo "Badan Usaha Milik Swasta";
-                                                break;
-                                            case "Mas":
-                                                echo "Organisasi Kemasyarakatan";
-                                                break;
-                                            case "Lai":
-                                                echo "Lain-lain";
-                                                break;
-                                        }
-                                        ?></td>
-                                    <td><?= $org['Desc']; ?></td>
-                                    <td><a href="<?= base_url(); ?>/uploads/docs/<?= $org['File']; ?>" target="_blank">Lihat Bukti</a></td>
-                                    <td><?= $org['kompetensi']; ?></td>
-                                    <td width="5%">
-                                        <?php
-                                        if ($org['Position'] == "Bias") {
-                                            $posscore = 2;
-                                        } elseif ($org['Position'] == "Peng") {
-                                            $posscore = 3;
-                                        } elseif ($org['Position'] == "Pimp") {
-                                            $posscore = 4;
-                                        }
-                                        ?>
-                                        <select name="nilai_q" id="nilai_q">
-                                            <option value="4" <?= $posscore == 4 ? 'selected' : ''; ?>>4</option>
-                                            <option value="3" <?= $posscore == 3 ? 'selected' : ''; ?>>3</option>
-                                            <option value="2" <?= $posscore == 2 ? 'selected' : ''; ?>>2</option>
-                                            <option value="1" <?= $posscore == 1 ? 'selected' : ''; ?>>1</option>
-                                        </select>
-                                    </td>
-                                    <td width="5%">
-                                        <?php
-                                        if ($org['OrgLevel'] == "Lok") {
-                                            $orgscore = 1;
-                                        } elseif ($org['OrgLevel'] == "Nas") {
-                                            $orgscore = 2;
-                                        } elseif ($org['OrgLevel'] == "Reg") {
-                                            $orgscore = 3;
-                                        } elseif ($org['OrgLevel'] == "Int") {
-                                            $orgscore = 4;
-                                        }
-                                        ?>
-                                        <select name="nilai_r" id="nilai_r">
-                                            <option value="4" <?= $orgscore == 4 ? 'selected' : ''; ?>>4</option>
-                                            <option value="3" <?= $orgscore == 3 ? 'selected' : ''; ?>>3</option>
-                                            <option value="2" <?= $orgscore == 2 ? 'selected' : ''; ?>>2</option>
-                                            <option value="1" <?= $orgscore == 1 ? 'selected' : ''; ?>>1</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                            <?php
-                            endforeach
-                            ?>
-                        </tbody>
-                    </table>
-                    <table>
-                        <tr>
-                            <th>Informasi jenis dan jumlah organisasi</th>
-                            <th width="30px">&nbsp;</th>
-                            <th>Nilai P</th>
-                        </tr>
-                        <tr>
-                            <td>Terdapat organisasi PII :
-                                <?= !empty($org_pii) ? "Ya, ada." : "Tidak ada"; ?><br />Jumlah organisasi:
-                                <?= $jumlah_org; ?></td>
-                            <td>&nbsp;</td>
-                            <td>
-                                <?php
-                                if (!empty($org_pii)) {
-                                    $score = 4;
-                                } else {
-                                    if ($jumlah_org < 6) {
-                                        $score = 1;
-                                    } elseif ($jumlah_org < 16) {
-                                        $score = 2;
-                                    } elseif ($jumlah_org <= 20) {
-                                        $score = 3;
-                                    } else {
-                                        $score = 4;
-                                    }
-                                }
-                                ?>
-                                <select name="nilai_p" id="nilai_p">
-                                    <option value="4" <?= $score == 4 ? 'selected' : ''; ?>>4</option>
-                                    <option value="3" <?= $score == 3 ? 'selected' : ''; ?>>3</option>
-                                    <option value="2" <?= $score == 2 ? 'selected' : ''; ?>>2</option>
-                                    <option value="1" <?= $score == 1 ? 'selected' : ''; ?>>1</option>
-                                </select>
-                            </td>
-                        </tr>
-                    </table>
-                <?php } ?>
-                <?php if (isset($data_harga) && ($data_harga != "kosong")) {
-                ?>
-                    <br />
-                    <h3>I.4. Tanda Penghargaan Yang Diterima (W1)</h3>
-                    <table id="tabledata" class="display table table-bordered table-hover">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Check</th>
-                                <th>Tahun</th>
-                                <th>Nama Tanda Penghargaan</th>
-                                <th>Nama Lembaga yang Memberikan</th>
-                                <th>Lokasi</th>
-                                <th>Negara</th>
-                                <th>Penghargaan yang diterima tingkat</th>
-                                <th>Penghargaan diberikan oleh lembaga</th>
-                                <th>Uraian Singkat Tanda Penghargaan</th>
-                                <th>Bukti Penghargaan</th>
-                                <th>Klaim Kompetensi</th>
-                                <th>Nilai P</th>
-                                <th>Nilai Q</th>
-                                <th>Nilai R</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            $i = 1;
-                            foreach ($data_harga as $penghargaan) :
-                            ?>
-                                <tr>
-                                    <td><?php echo $i;
-                                        $i++; ?></td>
-                                    <td><input type="checkbox" name="penghargaan_id[]" value="<?= $penghargaan['Num']; ?>" /></td>
-                                    <td><?php
-                                        switch ($penghargaan['Month']) {
-                                            case '1':
-                                                $bulan = "Jan";
-                                                break;
-                                            case '2':
-                                                $bulan = "Feb";
-                                                break;
-                                            case '3':
-                                                $bulan = "Mar";
-                                                break;
-                                            case '4':
-                                                $bulan = "Apr";
-                                                break;
-                                            case '5':
-                                                $bulan = "Mei";
-                                                break;
-                                            case '6':
-                                                $bulan = "Jun";
-                                                break;
-                                            case '7':
-                                                $bulan = "Jul";
-                                                break;
-                                            case '8':
-                                                $bulan = "Agus";
-                                                break;
-                                            case '9':
-                                                $bulan = "Sep";
-                                                break;
-                                            case '10':
-                                                $bulan = "Okt";
-                                                break;
-                                            case '11':
-                                                $bulan = "Nov";
-                                                break;
-                                            case '12':
-                                                $bulan = "Des";
-                                                break;
-                                        }
-                                        echo $bulan . ' - ' . $penghargaan['Year'];
-                                        ?></td>
-                                    <td><?= $penghargaan['Name']; ?></td>
-                                    <td><?= $penghargaan['Institute']; ?></td>
-                                    <td><?= $penghargaan['City'] . ', ' . $penghargaan['Prov']; ?></td>
-                                    <td><?= $penghargaan['Country']; ?></td>
-                                    <td>
-                                        <?php
-                                        switch ($penghargaan['Level']) {
-                                            case 'Mud':
-                                                echo "Tingkatan Muda/Pemula";
-                                                break;
-                                            case 'Mad':
-                                                echo "Tingkatan Madya";
-                                                break;
-                                            case 'Uta':
-                                                echo "Tingkatan Utama";
-                                                break;
-                                        }
-                                        ?>
-                                    </td>
-                                    <td>
-                                        <?php
-                                        switch ($penghargaan['InstituteType']) {
-                                            case 'Lok':
-                                                echo "Penghargaan Lokal";
-                                                break;
-                                            case 'Nas':
-                                                echo "Penghargaan Nasional";
-                                                break;
-                                            case 'Reg':
-                                                echo "Penghargaan Regional";
-                                                break;
-                                            case 'Int':
-                                                echo "Penghargaan Internasional";
-                                                break;
-                                        }
-                                        ?>
-                                    </td>
-                                    <td><?= $penghargaan['Desc']; ?></td>
-                                    <td><a href="<?= base_url(); ?>/uploads/docs/<?= $penghargaan['File']; ?>" target="_blank">Lihat Bukti</a></td>
-                                    <td><?= $penghargaan['kompetensi']; ?></td>
-                                    <td>
-                                        <select name="nilai_p" id="nilai_p">
-                                            <option value="4">4</option>
-                                            <option value="3">3</option>
-                                            <option value="2">2</option>
-                                            <option value="1" selected>1</option>
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <?php
-                                        if ($penghargaan['Level'] == 'Mud') {
-                                            $levelscore = 2;
-                                        } elseif ($penghargaan['Level'] == 'Mad') {
-                                            $levelscore = 3;
-                                        } elseif ($penghargaan['Level'] == 'Uta') {
-                                            $levelscore = 4;
-                                        }
-                                        ?>
-                                        <select name="nilai_q" id="nilai_q">
-                                            <option value="4" <?= $levelscore == 4 ? 'selected' : ''; ?>>4</option>
-                                            <option value="3" <?= $levelscore == 3 ? 'selected' : ''; ?>>3</option>
-                                            <option value="2" <?= $levelscore == 2 ? 'selected' : ''; ?>>2</option>
-                                            <option value="1" <?= $levelscore == 1 ? 'selected' : ''; ?>>1</option>
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <?php
-                                        if ($penghargaan['InstituteType'] == 'Lok') {
-                                            $typescore = 1;
-                                        } elseif ($penghargaan['InstituteType'] == 'Nas') {
-                                            $typescore = 2;
-                                        } elseif ($penghargaan['InstituteType'] == 'Reg') {
-                                            $typescore = 3;
-                                        } elseif ($penghargaan['InstituteType'] == 'Int') {
-                                            $ypescore = 4;
-                                        }
-                                        ?>
-                                        <select name="nilai_r" id="nilai_r">
-                                            <option value="4" <?= $typescore == 4 ? 'selected' : ''; ?>>4</option>
-                                            <option value="3" <?= $typescore == 3 ? 'selected' : ''; ?>>3</option>
-                                            <option value="2" <?= $typescore == 2 ? 'selected' : ''; ?>>2</option>
-                                            <option value="1" <?= $typescore == 1 ? 'selected' : ''; ?>>1</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                            <?php
-                            endforeach
-                            ?>
-                        </tbody>
-                    </table>
-                <?php } ?>
+
                 <?php if (isset($data_latih) && ($data_latih != "kosong")) {
                 ?>
                     <br />
@@ -948,136 +455,7 @@
                         </tbody>
                     </table>
                 <?php } ?>
-                <?php if (isset($data_etik) && ($data_etik != "kosong")) {
-                ?>
-                    <h3>II.1. Referensi Kode Etik dan Etika Profesi (#) (W1)</h3>
-                    <table id="tabledata" class="display table table-bordered table-hover">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Check</th>
-                                <th>Nama</th>
-                                <th>Alamat</th>
-                                <th>No. Telepon</th>
-                                <th>Email</th>
-                                <th>Hubungan</th>
-                                <th>Nilai Q</th>
-                                <th>Nilai R</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            $i = 1;
-                            foreach ($data_etik as $etik) :
-                            ?>
-                                <tr>
-                                    <td><?php echo $i;
-                                        $i++; ?></td>
-                                    <td><input type="checkbox" name="etik_id[]" value="<?= $etik['Num']; ?>" /></td>
-                                    <td><?= $etik['Name']; ?></td>
-                                    <td><?= $etik['Addr'] . "<br />" . $etik['City'] . ', ' . $etik['Prov'] . ', ' . $etik['Country']; ?>
-                                    </td>
-                                    <td><?= $etik['Pnum']; ?></td>
-                                    <td><?= $etik['Email']; ?></td>
-                                    <td><?= $etik['Relation']; ?></td>
-                                    <td>
-                                        <select name="nilai_q" id="nilai_q">
-                                            <option value="4">4</option>
-                                            <option value="3">3</option>
-                                            <option value="2">2</option>
-                                            <option value="1">1</option>
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <select name="nilai_r" id="nilai_r">
-                                            <option value="4">4</option>
-                                            <option value="3">3</option>
-                                            <option value="2">2</option>
-                                            <option value="1">1</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                            <?php
-                            endforeach
-                            ?>
-                        </tbody>
-                    </table>
-                    <table>
-                        <tr>
-                            <th>Jumlah Referensi</th>
-                            <th width="30px">&nbsp;</th>
-                            <th>Nilai P</th>
-                        </tr>
-                        <tr>
-                            <td><?= $jumlah_etik; ?></td>
-                            <td>&nbsp;</td>
-                            <td>
-                                <select name="nilai_p" id="nilai_p">
-                                    <option value="4" <?= $jumlah_etik >= 4 ? 'selected' : ''; ?>>4</option>
-                                    <option value="3" <?= $jumlah_etik == 3 ? 'selected' : ''; ?>>3</option>
-                                    <option value="2" <?= $jumlah_etik == 2 ? 'selected' : ''; ?>>2</option>
-                                    <option value="1" <?= $jumlah_etik == 1 ? 'selected' : ''; ?>>1</option>
-                                </select>
-                            </td>
-                        </tr>
-                    </table>
-                <?php } ?>
-                <br />
-                <?php if (isset($data_pendapat) && ($data_pendapat != "kosong")) {
-                ?>
-                    <h3>II.2. Pengertian, Pendapat dan Pengalaman Sendiri (W1)</h3>
-                    <table id="tabledata" class="display table table-bordered table-hover">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Check</th>
-                                <th>Pendapat</th>
-                                <th>Nilai P</th>
-                                <th>Nilai Q</th>
-                                <th>Nilai R</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            $i = 1;
-                            foreach ($data_pendapat as $dapat) :
-                            ?>
-                                <tr>
-                                    <td><?php echo $i;
-                                        $i++; ?></td>
-                                    <td><input type="checkbox" name="dapat_id[]" value="<?= $dapat['Num']; ?>" /></td>
-                                    <td><?= $dapat['Desc']; ?></td>
-                                    <td>
-                                        <select name="nilai_p" id="nilai_p">
-                                            <option value="4">4</option>
-                                            <option value="3">3</option>
-                                            <option value="2">2</option>
-                                            <option value="1">1</option>
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <select name="nilai_q" id="nilai_q">
-                                            <option value="4">4</option>
-                                            <option value="3">3</option>
-                                            <option value="2">2</option>
-                                            <option value="1">1</option>
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <select name="nilai_r" id="nilai_r">
-                                            <option value="4">4</option>
-                                            <option value="3">3</option>
-                                            <option value="2">2</option>
-                                            <option value="1">1</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                            <?php
-                            endforeach
-                            ?>
-                        </tbody>
-                    </table>
-                <?php } ?>
+
                 <?php if (isset($data_kerja) && ($data_kerja != "kosong")) {
                 ?>
                     <h3>IV. Pengalaman Mengajar Pelajaran Keinsinyuran dan/atau Manajemen dan/atau Pengalaman Mengembangkan Pendidikan/Pelatihan Keinsinyuran dan/atau Manajemen (W2,W3,W4,P5)</h3>
@@ -1193,14 +571,116 @@
                         </tbody>
                     </table>
                 <?php } ?>
-                <?php if (isset($data_sem) && ($data_sem == "kosong")) {
+                <br />
+                <?php if (isset($data_kartul) && ($data_kartul != "kosong")) {
                 ?>
-                    <h3>V.3 Seminar/Lokakarya Keinsinyuran Yang Diikuti (W2) </h3>
+                    <h3>V.1. Karya Tulis di Bidang Keinsinyuran yang Dipublikasikan (W4)</h3>
                     <table id="tabledata" class="display table table-bordered table-hover">
                         <thead>
                             <tr>
                                 <th>No</th>
+                                <th>Check</th>
                                 <th>Bulan-Tahun</th>
+                                <th>Judul Karya Tulis</th>
+                                <th>Nama Media Publikasi</th>
+                                <th>Lokasi</th>
+                                <th>Media Publikasi Tingkat</th>
+                                <th>Tingkat Kesulitan dan Manfaatnya</th>
+                                <th>Uraian Singkat Materi yang Dipublikasikan</th>
+                                <th>Bukti Karya Tulis</th>
+                                <th>Klaim Kompetensi</th>
+                                <th>Nilai P</th>
+                                <th>Nilai Q</th>
+                                <th>Nilai R</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $i = 1;
+                            foreach ($data_kartul as $kartul) :
+                            ?>
+                                <tr>
+                                    <td><?php echo $i;
+                                        $i++; ?></td>
+                                    <td><input type="checkbox" name="kartul_id[]" value="<?= $kartul['Num']; ?>" /></td>
+                                    <td><?= $kartul['Month'] . ' - ' . $kartul['Year']; ?></td>
+                                    <td><?= $kartul['Name']; ?></td>
+                                    <td><?= $kartul['Media']; ?></td>
+                                    <td><?= $kartul['LocCity'] . ", " . $kartul['LocCountry'] ?></td>
+                                    <td><?php
+                                        switch ($kartul['Mediatype']) {
+                                            case "Lok":
+                                                echo "Dimuat di Media Lokal";
+                                                break;
+                                            case "Nas":
+                                                echo "Dimuat di Media Nasional";
+                                                break;
+                                            case "Int":
+                                                echo "Dimuat di Media Internasional";
+                                                break;
+                                        }
+                                        ?></td>
+                                    <td><?php
+                                        switch ($kartul['Diffbenefit']) {
+                                            case "ren":
+                                                echo "Rendah";
+                                                break;
+                                            case "sed":
+                                                echo "Sedang";
+                                                break;
+                                            case "tin":
+                                                echo "Tinggi";
+                                                break;
+                                            case "stin":
+                                                echo "Sangat Tinggi";
+                                                break;
+                                        }
+                                        ?></td>
+                                    <td><?= $kartul['Desc']; ?></td>
+                                    <td><a href="<?= base_url(); ?>/uploads/docs/<?= $kartul['File']; ?>" target="_blank">Lihat Bukti</a></td>
+                                    <td><?= $kartul['kompetensi']; ?></td>
+                                    <td>
+                                        <select name="nilai_p" id="nilai_p">
+                                            <option value="4">4</option>
+                                            <option value="3">3</option>
+                                            <option value="2">2</option>
+                                            <option value="1">1</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select name="nilai_q" id="nilai_q">
+                                            <option value="4">4</option>
+                                            <option value="3">3</option>
+                                            <option value="2">2</option>
+                                            <option value="1">1</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select name="nilai_r" id="nilai_r">
+                                            <option value="4">4</option>
+                                            <option value="3">3</option>
+                                            <option value="2">2</option>
+                                            <option value="1">1</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                            <?php
+                            endforeach
+                            ?>
+                        </tbody>
+                    </table>
+                <?php } ?>
+                <br /><?php if (isset($data_sem) && ($data_sem != "kosong")) {
+                        ?>
+                    <h3>V.2. Makalah/Tulisan Yang Disajikan Dalam Seminar/Lokakarya Keinsinyuran (W4)</h3>
+
+                    <table id="tabledata" class="display table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Check</th>
+                                <th>Bulan-Tahun</th>
+                                <th>Judul Makalah/Tulisan</th>
                                 <th>Nama Seminar/Lokakarya</th>
                                 <th>Penyelenggara</th>
                                 <th>Lokasi</th>
@@ -1222,7 +702,9 @@
                                 <tr>
                                     <td><?php echo $i;
                                         $i++; ?></td>
+                                    <td><input type="checkbox" name="sem_id[]" value="<?= $sem['Num']; ?>" /></td>
                                     <td><?= $sem['Month'] . '-' . $sem['Year']; ?></td>
+                                    <td><?= $sem['PaperName']; ?></td>
                                     <td><?= $sem['Name']; ?></td>
                                     <td><?= $sem['Organizer']; ?></td>
                                     <td><?= $sem['LocCity'] . ", " . $sem['LocCountry'] ?></td>
@@ -1258,6 +740,95 @@
                                     <td><?= $sem['Desc']; ?></td>
                                     <td><a href="<?= base_url(); ?>/uploads/docs/<?= $sem['File']; ?>" target="_blank">Lihat Bukti</a></td>
                                     <td><?= $sem['kompetensi']; ?></td>
+                                    <td>
+                                        <select name="nilai_p" id="nilai_p">
+                                            <option value="4">4</option>
+                                            <option value="3">3</option>
+                                            <option value="2">2</option>
+                                            <option value="1">1</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select name="nilai_q" id="nilai_q">
+                                            <option value="4">4</option>
+                                            <option value="3">3</option>
+                                            <option value="2">2</option>
+                                            <option value="1">1</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select name="nilai_r" id="nilai_r">
+                                            <option value="4">4</option>
+                                            <option value="3">3</option>
+                                            <option value="2">2</option>
+                                            <option value="1">1</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                            <?php
+                            endforeach
+                            ?>
+                        </tbody>
+                    </table>
+                <?php } ?>
+                <br /><?php if (isset($data_bahasa) && ($data_bahasa != "kosong")) {
+                        ?>
+                    <h3>VI. Bahasa yang Dikuasai (W4)</h3>
+
+                    <table id="tabledata" class="display table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Check</th>
+                                <th>Nama Bahasa</th>
+                                <th>Jenis Bahasa</th>
+                                <th>Kemampuan Verbal Aktif/Pasif</th>
+                                <th>Jenis Tulisan yang Mampu Disusun</th>
+                                <th>Nilai TOEFL atau yang Sejenisnya</th>
+                                <th>Bukti Dokumen</th>
+                                <th>Kompetensi</th>
+                                <th>Nilai P</th>
+                                <th>Nilai Q</th>
+                                <th>Nilai R</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $i = 1;
+                            foreach ($data_bahasa as $bahasa) :
+                            ?>
+                                <tr>
+                                    <td><?php echo $i;
+                                        $i++; ?></td>
+                                    <td><input type="checkbox" name="bahasa_id[]" value="<?= $bahasa['Num']; ?>" /></td>
+                                    <td><?= $bahasa['Name']; ?></td>
+                                    <td><?php
+                                        switch ($bahasa['LangType']) {
+                                            case 'Da':
+                                                echo "Bahasa Daerah";
+                                                break;
+                                            case 'Na':
+                                                echo "Bahasa Nasional";
+                                                break;
+                                            case 'In':
+                                                echo "Bahasa Asing / International";
+                                                break;
+                                        }
+                                        ?></td>
+                                    <td><?php
+                                        switch ($bahasa['VerbSkill']) {
+                                            case 'Pasif':
+                                                echo "Pasif, tertulis";
+                                                break;
+                                            case 'Aktif':
+                                                echo "Aktif, Tertulis/Lisan";
+                                                break;
+                                        }
+                                        ?></td>
+                                    <td><?= $bahasa['WriteType']; ?></td>
+                                    <td><?= $bahasa['LangMark']; ?></td>
+                                    <td><a href="<?= base_url(); ?>/uploads/docs/<?= $bahasa['File']; ?>" target="_blank">Lihat Bukti</a></td>
+                                    <td><?= $bahasa['kompetensi']; ?></td>
                                     <td>
                                         <select name="nilai_p" id="nilai_p">
                                             <option value="4">4</option>
