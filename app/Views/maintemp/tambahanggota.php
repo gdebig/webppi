@@ -117,6 +117,10 @@
                             <input class="custom-control-input" type="checkbox" id="peserta" name="peserta" value="yes">
                             <label for="peserta" class="custom-control-label">Peserta</label>
                         </div>
+                    </div><br />
+                    <label for="filesigned" class="element">Scan tanda tangan</label>
+                    <div class="element">
+                        <input id="filesigned" name="filesigned" type="file" class="form-control" placeholder="Scan tanda tangan..." />
                     </div><br /><br />
                     <div class="form-group">
                         <label>Field bertanda * harus diisi.</label>

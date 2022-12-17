@@ -16,6 +16,7 @@
         <div class="card-body" style="width: auto; margin: 30px;">
             <form action="<?php echo base_url(); ?>/manuser/ubahanggotaproses" method="post" enctype="multipart/form-data">
                 <input type="hidden" id="user_id" name="user_id" value="<?= $user_id; ?>" />
+                <input type="hidden" id="signed" name="signed" value="<?= $signed; ?>>" />
                 <div class="form-group">
                     <label for="username" class="element">Username <span class="required"> *</span>&nbsp;
                     </label>
@@ -124,6 +125,11 @@
                             <input class="custom-control-input" type="checkbox" id="peserta" name="peserta" value="yes" <?php echo $tipe_user[3] == "y" ? "checked" : ""; ?>>
                             <label for="peserta" class="custom-control-label">Peserta</label>
                         </div>
+                    </div>
+                    <br />
+                    <label for="filesigned" class="element">Scan tanda tangan</label>
+                    <div class="element">
+                        <input id="filesigned" name="filesigned" type="file" class="form-control" placeholder="Scan tanda tangan..." />
                     </div>
                     <br />
                     <label for="confirmcapes" class="element">Konfirmasi Calon Peserta PPI RPL</label>

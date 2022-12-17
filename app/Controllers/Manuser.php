@@ -96,6 +96,12 @@ class Manuser extends BaseController
                         'required' => "Field Tahun Ajaran harus diisi",
                     ]
                 ],
+                'filesigned' => [
+                    'rules'  => 'ext_in[filesigned,jpg,jpeg,png]',
+                    'errors' => [
+                        'ext_in' => "Hanya menerima file JPG, JPEG atau PNG",
+                    ],
+                ],
             ]);
 
             if ($formvalid) {
@@ -114,19 +120,30 @@ class Manuser extends BaseController
                 $penilai = $this->request->getVar('penilai') == "yes" ? "y" : "n";
                 $peserta = $this->request->getVar('peserta') == "yes" ? "y" : "n";
                 $tipe_user = $superadmin . $admin . $penilai . $peserta;
+                $filesigned = $this->request->getFile('filesigned');
+
+                $ext = $filesigned->getClientExtension();
+                if (!empty($ext)) {
+                    $signedname = $nip . '_ttd.' . $ext;
+                    $filesigned->move('uploads/ttd/', $signedname, true);
+                } else {
+                    $signedname = '';
+                }
 
                 $datauser = array(
                     'username' => $username,
                     'password' => password_hash($pass1, PASSWORD_DEFAULT),
+                    'active' => $aktif,
                     'nodaftar' => $nodaftar,
                     'NPM' => $npm,
                     'NIP' => $nip,
                     'status' => $status,
                     'thnajaran' => $thnajaran,
-                    'semester' => 'Ganjil',
+                    'semester' => $semester,
                     'tipe_user' => $tipe_user,
                     'confirmcapes' => 'Ya',
                     'softdelete' => 'no',
+                    'signed' => $signedname,
                     'date_created' => date('Y-m-d H:i:s'),
                     'date_modified' => date('Y-m-d H:i:s')
                 );
@@ -187,6 +204,7 @@ class Manuser extends BaseController
                 'thnajaran' => $anggota['thnajaran'],
                 'semester' => $anggota['semester'],
                 'tipe_user' => $anggota['tipe_user'],
+                'signed' => $anggota['signed'],
                 'confirmcapes' => $anggota['confirmcapes'],
                 'confirmfair' => $anggota['confirmfair']
             ];
@@ -230,10 +248,17 @@ class Manuser extends BaseController
                         'required' => "Field Tahun Ajaran harus diisi",
                     ]
                 ],
+                'filesigned' => [
+                    'rules'  => 'ext_in[filesigned,jpg,jpeg,png]',
+                    'errors' => [
+                        'ext_in' => "Hanya menerima file JPG, JPEG atau PNG",
+                    ],
+                ],
             ]);
 
             if ($formvalid) {
                 $username = $this->request->getVar('username');
+                $signed = $this->request->getVar('signed');
                 $pass1 = $this->request->getVar('pass1');
                 $aktif = $this->request->getVar('aktif');
                 $nodaftar = $this->request->getVar('nodaftar');
@@ -247,34 +272,51 @@ class Manuser extends BaseController
                 $penilai = $this->request->getVar('penilai') == "yes" ? "y" : "n";
                 $peserta = $this->request->getVar('peserta') == "yes" ? "y" : "n";
                 $tipe_user = $superadmin . $admin . $penilai . $peserta;
+                $filesigned = $this->request->getFile('filesigned');
                 $confirmcapes = $this->request->getVar('confirmcapes');
                 $confirmfair = $this->request->getVar('confirmfair');
+
+                $ext1 = $filesigned->getClientExtension();
+                if (!empty($ext1)) {
+                    $oldfile = base_url() . '/uploads/ttd/' . $signed;
+                    if (is_file($oldfile)) {
+                        unlink($oldfile);
+                    }
+                    $signedname = $nip . '_ttd.' . $ext1;
+                    $filesigned->move('uploads/ttd/', $signedname, true);
+                } else {
+                    $signedname = $signed;
+                }
 
                 if (!empty($pass1)) {
                     $datauser = array(
                         'password' => password_hash($pass1, PASSWORD_DEFAULT),
+                        'active' => $aktif,
                         'nodaftar' => $nodaftar,
                         'NPM' => $npm,
                         'NIP' => $nip,
                         'status' => $status,
                         'thnajaran' => $thnajaran,
-                        'semester' => 'Ganjil',
+                        'semester' => $semester,
                         'tipe_user' => $tipe_user,
                         'confirmcapes' => $confirmcapes,
                         'confirmfair' => $confirmfair,
+                        'signed' => $signedname,
                         'date_modified' => date('Y-m-d H:i:s')
                     );
                 } else {
                     $datauser = array(
+                        'active' => $aktif,
                         'nodaftar' => $nodaftar,
                         'NPM' => $npm,
                         'NIP' => $nip,
                         'status' => $status,
                         'thnajaran' => $thnajaran,
-                        'semester' => 'Ganjil',
+                        'semester' => $semester,
                         'tipe_user' => $tipe_user,
                         'confirmcapes' => $confirmcapes,
                         'confirmfair' => $confirmfair,
+                        'signed' => $signedname,
                         'date_modified' => date('Y-m-d H:i:s')
                     );
                 }

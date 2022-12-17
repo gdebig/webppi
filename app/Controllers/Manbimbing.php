@@ -5,7 +5,6 @@ namespace App\Controllers;
 use App\Models\UserModel;
 use App\Models\BimbingModel;
 use App\Models\NilaitaModel;
-use App\Models\CustomModel;
 use App\Models\TugasAkhirModel;
 use App\Models\ProfileModel;
 
@@ -80,6 +79,12 @@ class Manbimbing extends BaseController
             return redirect()->to('/home');
         }
         helper(['tanggal']);
+
+        $model = new UserModel();
+        $user = $model->where('user_id', $dosen_id)->first();
+        if ($user) {
+            $data['signed'] = $user['signed'];
+        }
 
         $data['logged_in'] = $logged_in;
         $data['mhs_id'] = $mhs_id;

@@ -13,6 +13,13 @@
                 <input type="hidden" name="mhs_id" id="mhs_id" value="<?= $mhs_id; ?>" />
                 <input type="hidden" id="dosen_id" name="dosen_id" value="<?= $dosen_id ?>">
                 <input type="hidden" id="ta_id" name="ta_id" value="<?= $ta_id ?>">
+                <?php
+                if (!empty($signed)) {
+                ?>
+                    <input type="hidden" id="dbsigned" name="dbsigned" value="<?= $signed ?>">
+                <?php
+                }
+                ?>
                 <div class="form-group">
                     <label for="penulisan" class="element">Penulisan Laporan (30%) <span class="required">
                             *</span>&nbsp;
@@ -38,7 +45,11 @@
                         <br><br>
                         <button id="clear" class="btn btn-danger">Bersihkan Tanda Tangan</button>
                         <textarea id="signature" name="signed" style="display: none"></textarea>
-                    </div><br /><br />
+                    </div>
+                    <br />
+                    <p><b>Atau</b></p>
+                    <input type="checkbox" id='checksigned' name='checksigned' value='dbsigned'> Gunakan TTD dari Database
+                    <br /><br />
                     <div class="form-group">
                         <label>Field bertanda * harus diisi.</label>
                     </div>
