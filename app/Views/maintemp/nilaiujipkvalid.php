@@ -43,7 +43,11 @@
                         <br><br>
                         <button id="clear" class="btn btn-danger">Bersihkan Tanda Tangan</button>
                         <textarea id="signature" name="signed" style="display: none"></textarea>
-                    </div><br /><br />
+                    </div>
+                    <br />
+                    <p><b>Atau</b></p>
+                    <input type="checkbox" id='checksigned' name='checksigned' value='dbsigned'> Gunakan TTD dari Database
+                    <br /><br />
                     <div class="form-group">
                         <label>Field bertanda * harus diisi.</label>
                     </div>

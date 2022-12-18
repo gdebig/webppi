@@ -36,13 +36,16 @@
                         </thead>
                         <tbody>
                             <?php
-                            $i = 1;
                             foreach ($nilai_ta as $nilai) :
                                 if ($nilai['dosen_id'] == $user_id) {
                                     $berinilai = 'tidak';
+                                    break;
                                 } else {
                                     $berinilai = 'ya';
                                 }
+                            endforeach;
+                            $i = 1;
+                            foreach ($nilai_ta as $nilai) :
                                 $mhs_id = $nilai['mhs_id'];
                                 $dosen_id = $nilai['dosen_id'];
                                 $ta_id = $nilai['ta_id'];
@@ -76,7 +79,7 @@
         ?>
             <div class="card">
                 <div class="card-body">
-                    <a href="<?= base_url(); ?>/manbimbing/berinilai/<?= $mhs_id; ?>/<?= $dosen_id; ?>/<?= $ta_id; ?>" class="btn btn-block btn-primary">Beri Nilai</a>
+                    <a href="<?= base_url(); ?>/manbimbing/berinilai/<?= $mhs_id; ?>/<?= $user_id; ?>/<?= $ta_id; ?>" class="btn btn-block btn-primary">Beri Nilai</a>
                 </div>
             </div>
         <?php

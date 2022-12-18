@@ -5,7 +5,6 @@ namespace App\Controllers;
 use App\Models\UserModel;
 use App\Models\BimbingModel;
 use App\Models\NilaitaModel;
-use App\Models\CustomModel;
 use App\Models\TugasAkhirModel;
 use App\Models\ProfileModel;
 
@@ -134,13 +133,6 @@ class Manujipk extends BaseController
                     'errors' => [
                         'required' => 'Field Penguasaan Materi harus diisi.',
                     ],
-                ],
-                'signed' => [
-                    'label'  => 'Tanda Tangan',
-                    'rules'  => 'required',
-                    'errors' => [
-                        'required' => 'Field Tanda Tangan harus diisi.',
-                    ],
                 ]
             ]);
         }
@@ -150,14 +142,34 @@ class Manujipk extends BaseController
             $materi = $this->request->getVar('materi');
 
             $file_string = $this->request->getVar('signed');
-            $image = explode(";base64,", $file_string);
-            $image_type = explode("image/", $image[0]);
-            $image_type_png = $image_type[1];
-            $image_base64 = base64_decode($image[1]);
-            $folderPath = ROOTPATH . 'public/uploads/ttd/';
-            $signedname = uniqid() . '.' . $image_type_png;
-            $file = $folderPath . $signedname;
-            file_put_contents($file, $image_base64);
+            $checksigned = $this->request->getVar('checksigned');
+            if (empty($file_string) && empty($checksigned)) {
+                $data['logged_in'] = $logged_in;
+                $data['mhs_id'] = $mhs_id;
+                $data['dosen_id'] = $dosen_id;
+                $data['ta_id'] = $ta_id;
+                $data['title_page'] = "Nilai Praktek Keinsinyuran Mahasiswa Bimbingan PPI RPL";
+                $data['data_bread'] = "Nilai PK";
+                $data['error'] = "Belum memberikan tanda tangan.";
+                return view('maintemp/nilaitavalid', $data);
+            } else {
+                if (!empty($checksigned)) {
+                    $model1 = new UserModel();
+                    $dosen = $model1->where('user_id', $dosen_id)->first();
+                    if ($dosen) {
+                        $signedname = $dosen['signed'];
+                    }
+                } elseif (!empty($file_string)) {
+                    $image = explode(";base64,", $file_string);
+                    $image_type = explode("image/", $image[0]);
+                    $image_type_png = $image_type[1];
+                    $image_base64 = base64_decode($image[1]);
+                    $folderPath = ROOTPATH . 'public/uploads/ttd/';
+                    $signedname = uniqid() . '.' . $image_type_png;
+                    $file = $folderPath . $signedname;
+                    file_put_contents($file, $image_base64);
+                }
+            }
 
             $data = array(
                 'ta_id' => $ta_id,

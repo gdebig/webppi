@@ -13,13 +13,6 @@
                 <input type="hidden" name="mhs_id" id="mhs_id" value="<?= $mhs_id; ?>" />
                 <input type="hidden" id="dosen_id" name="dosen_id" value="<?= $dosen_id ?>">
                 <input type="hidden" id="ta_id" name="ta_id" value="<?= $ta_id ?>">
-                <?php
-                if (!empty($signed)) {
-                ?>
-                    <input type="hidden" id="dbsigned" name="dbsigned" value="<?= $signed ?>">
-                <?php
-                }
-                ?>
                 <div class="form-group">
                     <label for="penulisan" class="element">Penulisan Laporan (30%) <span class="required">
                             *</span>&nbsp;

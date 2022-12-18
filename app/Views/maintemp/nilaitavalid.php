@@ -12,6 +12,10 @@
             <div class="alert alert-danger"><?= $validation->listErrors() ?></div>
         <?php endif; ?>
 
+        <?php if (isset($error)) : ?>
+            <div class="alert alert-danger"><?= $error; ?></div>
+        <?php endif; ?>
+
         <!-- /.card-header -->
         <div class="card-body" style="width: auto; margin: 30px;">
             <form action="<?php echo base_url(); ?>/manbimbing/nilaitaproses" method="post" enctype="multipart/form-data">
@@ -43,7 +47,11 @@
                         <br><br>
                         <button id="clear" class="btn btn-danger">Bersihkan Tanda Tangan</button>
                         <textarea id="signature" name="signed" style="display: none"></textarea>
-                    </div><br /><br />
+                    </div>
+                    <br />
+                    <p><b>Atau</b></p>
+                    <input type="checkbox" id='checksigned' name='checksigned' value='dbsigned'> Gunakan TTD dari Database
+                    <br /><br />
                     <div class="form-group">
                         <label>Field bertanda * harus diisi.</label>
                     </div>
