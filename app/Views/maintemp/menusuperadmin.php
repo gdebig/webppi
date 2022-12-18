@@ -34,3 +34,9 @@
         <p>Manajemen Kompetensi</p>
     </a>
 </li>
+<li class="nav-item">
+    <a href="<?php echo base_url(); ?>/manconfig" class="nav-link">
+        <i class="fas fa-cogs nav-icon"></i>
+        <p>Konfigurasi Web</p>
+    </a>
+</li>

@@ -72,7 +72,6 @@
                                     <option value="Met">Teknik Metalurgi</option>
                                     <option value="Inf">Teknik Informatika</option>
                                     <option value="Kap">Teknik Perkapalan</option>
-                                    <option value="Tra">Transportasi</option>
                                     <option value="Kom">Teknik Komputer</option>
                                     <option value="Bio">Teknik Biomedik</option>
                                 </select>
@@ -204,12 +203,46 @@
                     </div>
                     <div class="card-body">
                         <div class="form-group">
+                            <label for="sip" class="element">Apakah anda memiliki SIP?Jika iya, unggah softcopy SIP anda
+                                di sini (Format: .pdf, .jpeg, .png | Ukuran Maksimum: 700KB).</label>
+                            <div class="element">
+                                <input id="sip" name="sip" type="file" class="form-control" placeholder="Nomor SIP..." />
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label for="photo" class="element">Foto (Format: .jpg, .jpeg, .png | Ukuran Maksimum:
                                 700KB)<span class="required">*</span>&nbsp;</label>
                             <div class="element">
                                 <input id="photo" name="photo" type="file" class="form-control" placeholder="Foto..." />
                             </div>
                         </div>
+                        <?php
+                        if ($role != 'peserta') {
+                        ?>
+                            <div class="form-group">
+                                <label for="NIP" class="element">NIP/NUP</label>
+                                <div class="element">
+                                    <input id="nip" name="nip" type="text" class="form-control" placeholder="NIP/NUP..." />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="filettd" class="element">TTD Digital</label>
+                                <div class="element">
+                                    <input id="filettd" name="filettd" type="file" class="form-control" placeholder="TTD Digital..." />
+                                </div>
+                            </div>
+                        <?php
+                        } elseif ($role == 'peserta') {
+                        ?>
+                            <div class="form-group">
+                                <label for="NPM" class="element">NPM</label>
+                                <div class="element">
+                                    <input id="NPM" name="NPM" type="text" class="form-control" placeholder="NPM..." />
+                                </div>
+                            </div>
+                        <?php
+                        }
+                        ?>
                     </div>
                 </div>
                 <div class="row">

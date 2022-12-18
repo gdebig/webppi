@@ -84,8 +84,6 @@
                                         Informatika</option>
                                     <option value="Kap" <?php echo set_value('vocational') == "Kap" ? "selected" : ""; ?>>Teknik
                                         Perkapalan</option>
-                                    <option value="Tra" <?php echo set_value('vocational') == "Tra" ? "selected" : ""; ?>>Transportasi
-                                    </option>
                                     <option value="Kom" <?php echo set_value('vocational') == "Kom" ? "selected" : ""; ?>>Teknik Komputer
                                     </option>
                                     <option value="Bio" <?php echo set_value('vocational') == "Bio" ? "selected" : ""; ?>>Teknik Biomedik
@@ -219,12 +217,46 @@
                     </div>
                     <div class="card-body">
                         <div class="form-group">
+                            <label for="sip" class="element">Apakah anda memiliki SIP?Jika iya, unggah softcopy SIP anda
+                                di sini (Format: .pdf, .jpeg, .png | Ukuran Maksimum: 700KB).</label>
+                            <div class="element">
+                                <input id="sip" name="sip" type="file" class="form-control" placeholder="Nomor SIP..." />
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label for="photo" class="element">Foto (Format: .jpg, .jpeg, .png | Ukuran Maksimum:
                                 700KB)<span class="required">*</span>&nbsp;</label>
                             <div class="element">
                                 <input id="photo" name="photo" type="file" class="form-control" placeholder="Foto..." />
                             </div>
                         </div>
+                        <?php
+                        if ($role != 'peserta') {
+                        ?>
+                            <div class="form-group">
+                                <label for="NIP" class="element">NIP/NUP</label>
+                                <div class="element">
+                                    <input id="NIP" name="NIP" type="text" class="form-control" placeholder="NIP/NUP..." value="<?php echo set_value('NIP'); ?>" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="filettd" class="element">TTD Digital</label>
+                                <div class="element">
+                                    <input id="filettd" name="filettd" type="file" class="form-control" placeholder="TTD Digital..." />
+                                </div>
+                            </div>
+                        <?php
+                        } elseif ($role == 'peserta') {
+                        ?>
+                            <div class="form-group">
+                                <label for="NPM" class="element">NPM</label>
+                                <div class="element">
+                                    <input id="NPM" name="NPM" type="text" class="form-control" placeholder="NPM..." value="<?php echo set_value('NPM'); ?>" />
+                                </div>
+                            </div>
+                        <?php
+                        }
+                        ?>
                     </div>
                 </div>
                 <div class="row">

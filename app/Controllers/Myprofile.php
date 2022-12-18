@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\ProfileModel;
 use App\Models\AkunModel;
+use App\Models\UserModel;
 
 class Myprofile extends BaseController
 {
@@ -17,8 +18,9 @@ class Myprofile extends BaseController
         helper(['tanggal']);
 
         $user_id = $session->get('user_id');
+        $role = $session->get('role');
         $model = new ProfileModel();
-        $user = $model->where('user_id', $user_id)->first();
+        $user = $model->where('tbl_profile.user_id', $user_id)->join('tbl_user', 'tbl_profile.user_id = tbl_user.user_id', 'left')->first();
         if ($user) {
             $data = [
                 'ID' => $user['ID'],
@@ -48,11 +50,15 @@ class Myprofile extends BaseController
                 'Wemail1' => $user['Wemail1'],
                 'Wemail2' => $user['Wemail2'],
                 'Photo' => $user['Photo'],
-                'pindahregular' => $user['pindahregular']
+                'pindahregular' => $user['pindahregular'],
+                'NIP' => $user['NIP'],
+                'NPM' => $user['NPM'],
+                'signed' => $user['signed']
             ];
         } else {
             $data['kosong'] = "kosong";
         }
+        $data['role'] = $role;
         $data['logged_in'] = $logged_in;
         $data['title_page'] = "Profile Saya";
         $data['data_bread'] = "Profile Saya";
@@ -64,11 +70,12 @@ class Myprofile extends BaseController
         $session = session();
         $user_id = $session->get('user_id');
         $logged_in = $session->get('logged_in');
-        $confirmcapes = $session->get('confirmcapes');
+        $role = $session->get('role');
         if (!$logged_in) {
             return redirect()->to('/home');
         }
         $data['user_id'] = $user_id;
+        $data['role'] = $role;
         $data['title_page'] = "Buat Profile Saya";
         $data['data_bread'] = "Buat Profile Saya";
         $data['logged_in'] = $logged_in;
@@ -79,8 +86,10 @@ class Myprofile extends BaseController
     {
         $session = session();
         $model = new ProfileModel();
+        $model1 = new UserModel();
         $user_id = $session->get('user_id');
         $logged_in = $session->get('logged_in');
+        $role = $session->get('role');
         if (!$logged_in) {
             return redirect()->to('/home');
         }
@@ -219,6 +228,13 @@ class Myprofile extends BaseController
                         'ext_in' => "Hanya menerima file JPG, JPEG atau PNG",
                         'max_size' => "Ukuran File Maksimal 700KB"
                     ],
+                ],
+                'sip' => [
+                    'rules'  => 'ext_in[photo,jpg,jpeg,png]|max_size[photo, 700]',
+                    'errors' => [
+                        'ext_in' => "Hanya menerima file JPG, JPEG atau PNG",
+                        'max_size' => "Ukuran File Maksimal 700KB"
+                    ],
                 ]
             ]);
 
@@ -255,12 +271,21 @@ class Myprofile extends BaseController
                 $photoname = $user_id . '_profilpic.' . $ext;
                 $photo->move('uploads/profilpic/', $photoname, true);
 
+                $ext1 = $sip->getClientExtension();
+                if (!empty($ext1)) {
+                    $sipname = $user_id . '_sip.' . $ext1;
+                    $sip->move('uploads/docs/', $sipname, true);
+                } else {
+                    $sipname = '';
+                }
+
                 $dataprofile = array(
                     'user_id' => $user_id,
                     'FullName' => $fullname,
                     'BirthPlace' => $birthplace,
                     'Birthdate' => $birthdate,
                     'KTA' => $kta,
+                    'SIP' => $sip,
                     'Vocational' => $vocational,
                     'HAddr' => $haddress,
                     'HCity' => $hcity,
@@ -288,6 +313,37 @@ class Myprofile extends BaseController
 
                 $model->save($dataprofile);
 
+                if ($role == 'peserta') {
+                    $NPM = $this->request->getVar('NPM');
+                    $datauser = array(
+                        'NPM' => $NPM,
+                        'date_modified' => date('Y-m-d')
+                    );
+                } else {
+                    $NIP = $this->request->getVar('NIP');
+                    $filettd = $this->request->getFile('filettd');
+
+                    if (@is_array(getimagesize($filettd))) {
+                        $ext2 = $filettd->getClientExtension();
+                        if (!empty($ext2)) {
+                            $ttdname = $user_id . '_ttd.' . $ext2;
+                            $filettd->move('uploads/ttd/', $ttdname, true);
+                        } else {
+                            $ttdname = '';
+                        }
+                    } else {
+                        $ttdname = '';
+                    }
+
+                    $datauser = array(
+                        'NIP' => $NIP,
+                        'signed' => $ttdname,
+                        'date_modified' => date('Y-m-d')
+                    );
+                }
+
+                $model1->update($user_id, $datauser);
+
                 return redirect()->to('/myprofile');
             } else {
                 $session = session();
@@ -295,6 +351,7 @@ class Myprofile extends BaseController
                 $data['title_page'] = "Buat Profile Saya";
                 $data['data_bread'] = "Buat Profile Saya";
                 $data['logged_in'] = $session->get('logged_in');
+                $data['role'] = $session->get('role');
                 $data['validation'] = $this->validator;
                 return view('maintemp/buatprofilevalid', $data);
             }
@@ -311,7 +368,7 @@ class Myprofile extends BaseController
         helper(['tanggal']);
 
         $model = new ProfileModel();
-        $user = $model->where('user_id', $id)->first();
+        $user = $model->where('tbl_profile.user_id', $id)->join('tbl_user', 'tbl_profile.user_id = tbl_user.user_id', 'left')->first();
         if ($user) {
             $data = [
                 'ID' => $user['ID'],
@@ -341,9 +398,13 @@ class Myprofile extends BaseController
                 'Wemail1' => $user['Wemail1'],
                 'Wemail2' => $user['Wemail2'],
                 'Photo' => $user['Photo'],
-                'pindahregular' => $user['pindahregular']
+                'pindahregular' => $user['pindahregular'],
+                'NIP' => $user['NIP'],
+                'NPM' => $user['NPM'],
+                'signed' => $user['signed']
             ];
         }
+        $data['role'] = $session->get('role');
         $data['title_page'] = "Ubah Profile Peserta PPI RPL";
         $data['data_bread'] = "Ubah Profile";
         $data['logged_in'] = $session->get('logged_in');
@@ -359,8 +420,10 @@ class Myprofile extends BaseController
         }
         helper(['tanggal']);
         $user_id = $session->get('user_id');
+        $role = $session->get('role');
 
         $model = new ProfileModel();
+        $model1 = new UserModel();
 
         $button = $this->request->getVar('submit');
 
@@ -486,14 +549,14 @@ class Myprofile extends BaseController
                 'photo' => [
                     'rules'  => 'ext_in[photo,jpg,jpeg,png]|max_size[photo, 700]',
                     'errors' => [
-                        'ext_in' => "Hanya menerima file JPG, JPEG atau PNG",
+                        'ext_in' => "Field Photo Hanya menerima file JPG, JPEG atau PNG",
                         'max_size' => "Ukuran File Maksimal 700KB"
                     ],
                 ],
                 'sip' => [
                     'rules'  => 'ext_in[sip,pdf,jpg,jpeg,png]|max_size[sip, 700]',
                     'errors' => [
-                        'ext_in' => "Hanya menerima file PDF, JPG, JPEG atau PNG",
+                        'ext_in' => "Field SIP Hanya menerima file PDF, JPG, JPEG atau PNG",
                         'max_size' => "Ukuran File Maksimal 700KB"
                     ],
                 ]
@@ -592,13 +655,48 @@ class Myprofile extends BaseController
                     'date_modified' => date('Y-m-d')
                 );
 
-                print_r($dataprofile);
-
                 $model->update($profile_id, $dataprofile);
+
+                if ($role == 'peserta') {
+                    $NPM = $this->request->getVar('NPM');
+                    echo $NPM;
+                    $datauser = array(
+                        'NPM' => $NPM,
+                        'date_modified' => date('Y-m-d')
+                    );
+                } else {
+                    $NIP = $this->request->getVar('NIP');
+                    $oldsigned = $this->request->getVar('oldsigned');
+                    $filettd = $this->request->getFile('filettd');
+
+                    if (@is_array(getimagesize($filettd))) {
+                        $ext2 = $filettd->getClientExtension();
+                        if (!empty($ext2)) {
+                            $path = base_url() . '/uploads/ttd/' . $oldsigned;
+                            if (is_file($path)) {
+                                unlink($path);
+                            }
+                            $ttdname = $user_id . '_ttd.' . $ext2;
+                            $filettd->move('uploads/ttd/', $ttdname, true);
+                        } else {
+                            $ttdname = $oldsigned;
+                        }
+                    } else {
+                        $ttdname = $oldsigned;
+                    }
+
+                    $datauser = array(
+                        'NIP' => $NIP,
+                        'signed' => $ttdname,
+                        'date_modified' => date('Y-m-d')
+                    );
+                }
+
+                $model1->update($user_id, $datauser);
 
                 return redirect()->to('/myprofile');
             } else {
-                $user = $model->where('user_id', $user_id)->first();
+                $user = $model->where('tbl_profile.user_id', $user_id)->join('tbl_user', 'tbl_profile.user_id = tbl_user.user_id')->first();
                 if ($user) {
                     $data = [
                         'ID' => $user['ID'],
@@ -627,9 +725,13 @@ class Myprofile extends BaseController
                         'Wtelex' => $user['Wtelex'],
                         'Wemail1' => $user['Wemail1'],
                         'Wemail2' => $user['Wemail2'],
-                        'Photo' => $user['Photo']
+                        'Photo' => $user['Photo'],
+                        'NIP' => $user['NIP'],
+                        'NPM' => $user['NPM'],
+                        'signed' => $user['signed']
                     ];
                 }
+                $data['role'] = $session->get('role');
                 $data['title_page'] = "Ubah Profile Peserta PPI RPL";
                 $data['data_bread'] = "Ubah Profile";
                 $data['logged_in'] = $session->get('logged_in');

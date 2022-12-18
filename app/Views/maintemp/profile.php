@@ -79,9 +79,6 @@
                                                 case 'Kap':
                                                     echo "Teknik Perkapalan";
                                                     break;
-                                                case 'Tra':
-                                                    echo "Transportasi";
-                                                    break;
                                                 case "Kom":
                                                     echo "Teknik Komputer";
                                                     break;
@@ -91,6 +88,17 @@
                                             }
                                             ?></td>
                         </tr>
+                        <?php
+                        if ($role == 'peserta') {
+                        ?>
+                            <tr>
+                                <td width="30%">NPM</td>
+                                <td width="5%" style="text-align:center">:</td>
+                                <td width="65%"><?= $NPM; ?></td>
+                            </tr>
+                        <?php
+                        }
+                        ?>
                         <tr>
                             <td width="30%">Alamat Rumah</td>
                             <td width="5%" style="text-align:center">:</td>
@@ -142,6 +150,23 @@
                                             }
                                             ?></td>
                         </tr>
+                        <?php
+                        if (($role != 'peserta') && (!empty($signed))) {
+                        ?>
+                            <tr>
+                                <td width="30%">TTD Digital</td>
+                                <td width="5%" style="text-align:center">:</td>
+                                <td width="65%"><?php
+                                                if (!empty($signed)) {
+                                                    echo "<img src='" . base_url('uploads/ttd/' . $signed) . "' width='30%' height='30%' />";
+                                                } else {
+                                                    echo "";
+                                                }
+                                                ?></td>
+                            </tr>
+                        <?php
+                        }
+                        ?>
                     </table>
                 </div>
                 <!-- /.card-body -->
@@ -164,6 +189,17 @@
                             <td width="5%" style="text-align:center">:</td>
                             <td width="65%"><?= $Position; ?></td>
                         </tr>
+                        <?php
+                        if ($role != 'peserta') {
+                        ?>
+                            <tr>
+                                <td width="30%">NIP</td>
+                                <td width="5%" style="text-align:center">:</td>
+                                <td width="65%"><?= $NIP; ?></td>
+                            </tr>
+                        <?php
+                        }
+                        ?>
                         <tr>
                             <td width="30%">Alamat Kantor</td>
                             <td width="5%" style="text-align:center">:</td>

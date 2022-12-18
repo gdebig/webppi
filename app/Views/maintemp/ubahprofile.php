@@ -19,6 +19,7 @@
                 <input type="hidden" id="profile_id" name="profile_id" value="<?= $ID; ?>">
                 <input type="hidden" id="photoname" name="photoname" value="<?= $Photo; ?>">
                 <input type="hidden" id="sipname" name="sipname" value="<?= $SIP; ?>">
+                <input type="hidden" id="oldsigned" name="oldsigned" value="<?= $signed; ?>">
                 <div class="card card-success">
                     <div class="card-header">
                         <h3 class="card-title">Data Diri</h3>
@@ -237,6 +238,33 @@
                                 <input id="photo" name="photo" type="file" class="form-control" placeholder="Foto..." />
                             </div>
                         </div>
+                        <?php
+                        if ($role != 'peserta') {
+                        ?>
+                            <div class="form-group">
+                                <label for="NIP" class="element">NIP/NUP</label>
+                                <div class="element">
+                                    <input id="NIP" name="NIP" type="text" class="form-control" placeholder="NIP/NUP..." value="<?php echo $NIP; ?>" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="filettd" class="element">TTD Digital</label>
+                                <div class="element">
+                                    <input id="filettd" name="filettd" type="file" class="form-control" placeholder="TTD Digital..." />
+                                </div>
+                            </div>
+                        <?php
+                        } elseif ($role == 'peserta') {
+                        ?>
+                            <div class="form-group">
+                                <label for="NPM" class="element">NPM</label>
+                                <div class="element">
+                                    <input id="NPM" name="NPM" type="text" class="form-control" placeholder="NPM..." value="<?php echo $NPM; ?>" />
+                                </div>
+                            </div>
+                        <?php
+                        }
+                        ?>
                     </div>
                 </div>
                 <div class="row">
