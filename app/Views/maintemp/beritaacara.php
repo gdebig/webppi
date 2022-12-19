@@ -169,8 +169,8 @@
         <div style="clear:both"></div>
     </div>
     <br>
-    <h3 style='text-align:center;margin-top:-10px;'>BERITA ACARA SIDANG PRAKTIK KEINSINYURAN</h3>
-    <h2 style='text-align:center;margin-top:-10px;'>PROGRAM STUDI PENDIDIKAN PROFESI INSINYUR (PS-PPI)</h2>
+    <h4 style='text-align:center;margin-top:-10px;'>BERITA ACARA SIDANG PRAKTIK KEINSINYURAN</h4>
+    <h3 style='text-align:center;margin-top:-10px;'>PROGRAM STUDI PENDIDIKAN PROFESI INSINYUR (PS-PPI)</h3>
     <hr><br>
     <p>Dengan ini menyatakan bahwa pada:</p>
     <table>
@@ -190,7 +190,7 @@
             <td valign="top" width="77%"><?= $tempat_sidang; ?></td>
         </tr>
     </table>
-    <p>telah berlangsung <b>Sidang Praktik Keinsinyuran Program Studi Pendidikan Profesi Insinyur</b> Fakultas Teknik Universitas Indonesia Semester Ganjil 2021/2022, dengan peserta:</p>
+    <p>telah berlangsung <b>Sidang Praktik Keinsinyuran Program Studi Pendidikan Profesi Insinyur</b> Fakultas Teknik Universitas Indonesia Semester <?= $semaktif; ?> <?= $tahunaktif; ?>, dengan peserta:</p>
     <table>
         <tr>
             <td valign="top" width="20%">Nama Mahasiswa</td>
@@ -212,8 +212,7 @@
             <td valign="top" width="3%">&nbsp; :</td>
             <td valign="top" width="77%"><?= $lapjudul; ?></td>
         </tr>
-    </table>
-    <br><br>
+    </table><br />
     <table class="border1" width="100%">
         <tr class="border1">
             <th width="30%" style="text-align: center;" class="border1">Penilai</th>
@@ -259,53 +258,11 @@
         </tr>
     </table>
     <p><b>Catatan:</b></p>
-    <p>
     <ul>
         <li>Disparitas nilai pembimbing dan penguji <= 10</li>
         <li>Total bobot nilai pembimbing 50%</li>
         <li>Total bobot nilai penguji 50%</li>
     </ul>
-    </p>
-    <p>Surat Direktur Pendidikan UI No.: 2649/PT02.H14.1/U/TU/2009 tertanggal 21 Agustus 2009 tentang kesetaraan nilai angka dan nilai huruf pada mata ajaran kerja praktek, seminar, skripsi, tesis magister dan penilaian doktor.</p>
-    <div style="break-after:page"></div>
-    <table width="50%" style="border: 1px solid black">
-        <tr>
-            <th width="5%" style="text-align:center; border: 1px solid black"><b>No.</b></th>
-            <th width="20%" style="text-align:center; border: 1px solid black"><b>Nilai</b></th>
-            <th width="25%" style="text-align:center; border: 1px solid black"><b>Bobot</b></th>
-            <th width="50%" style="text-align:center; border: 1px solid black"><b>Kisaran Nilai</b></th>
-        </tr>
-        <tr>
-            <td style="text-align:center; border: 1px solid black">1.</td>
-            <td style="text-align:center; border: 1px solid black">A</td>
-            <td style="text-align:center; border: 1px solid black">4.0</td>
-            <td style="text-align:center; border: 1px solid black">85 - 100</td>
-        </tr>
-        <tr>
-            <td style="text-align:center; border: 1px solid black">2.</td>
-            <td style="text-align:center; border: 1px solid black">A-</td>
-            <td style="text-align:center; border: 1px solid black">3.7</td>
-            <td style="text-align:center; border: 1px solid black">80 - 84</td>
-        </tr>
-        <tr>
-            <td style="text-align:center; border: 1px solid black">3.</td>
-            <td style="text-align:center; border: 1px solid black">B+</td>
-            <td style="text-align:center; border: 1px solid black">3.3</td>
-            <td style="text-align:center; border: 1px solid black">75 - 79</td>
-        </tr>
-        <tr>
-            <td style="text-align:center; border: 1px solid black">4.</td>
-            <td style="text-align:center; border: 1px solid black">B</td>
-            <td style="text-align:center; border: 1px solid black">3</td>
-            <td style="text-align:center; border: 1px solid black">70 - 74</td>
-        </tr>
-        <tr>
-            <td style="text-align:center; border: 1px solid black">5.</td>
-            <td style="text-align:center; border: 1px solid black">B-</td>
-            <td style="text-align:center; border: 1px solid black">2.7</td>
-            <td style="text-align:center; border: 1px solid black">65 - 69</td>
-        </tr>
-    </table>
     <table width="100%">
         <tr>
             <td width="50%">
@@ -319,10 +276,18 @@
             </td>
             <td style="text-align: center" width="50%">
                 Mengetahui,<br>
-                Penanggung Jawab / Prodi PPI
-                <br><br><br><br><br>
-                <u>(Prof. Dr. Fitri Yuli Zulkifli, S.T., M.Sc., IPU)</u><br>
-                NIP: 197407191998022001
+                Penanggung Jawab / Prodi PPI<br />
+                <?php
+                if (!empty($signkaprodi)) {
+                ?>
+                    <img height="75px" src="<?= base_url(); ?>/uploads/ttd/<?= $signkaprodi; ?>"><br />
+                <?php
+                } else {
+                    echo "<br /><br /><br /><br />";
+                }
+                ?>
+                <u><?= !empty($namakaprodi) ? $namakaprodi : '( )'; ?></u><br>
+                NIP: <?= !empty($nipkaprodi) ? $nipkaprodi : '( )'; ?>
             </td>
         </tr>
     </table>

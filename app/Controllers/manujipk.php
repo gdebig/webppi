@@ -7,6 +7,7 @@ use App\Models\BimbingModel;
 use App\Models\NilaitaModel;
 use App\Models\TugasAkhirModel;
 use App\Models\ProfileModel;
+use App\Models\ConfigModel;
 
 class Manujipk extends BaseController
 {
@@ -250,6 +251,17 @@ class Manujipk extends BaseController
             $data['divisi'] = $tugasakhir['divisi'];
             $data['periode'] = format_indo($tugasakhir['startdate']) . ' - ' . format_indo($tugasakhir['enddate']);
             $data['lapjudul'] = $tugasakhir['ta_usuljudul'];
+            $data['confirm'] = $tugasakhir['ta_confirm'];
+        }
+
+        if ($data['confirm'] == 'Ya') {
+            $model = new ConfigModel();
+            $kaprodi = $model->where('config_name', 'kaprodi')->join('tbl_profile', 'tbl_config.config_value = tbl_profile.user_id', 'left')->join('tbl_user', 'tbl_config.config_value = tbl_user.user_id', 'left')->first();
+            if ($kaprodi) {
+                $data['namakaprodi'] = $kaprodi['FullName'];
+                $data['nipkaprodi'] = $kaprodi['NIP'];
+                $data['signkaprodi'] = $kaprodi['signed'];
+            }
         }
 
         $model = new NilaitaModel();
@@ -320,6 +332,17 @@ class Manujipk extends BaseController
             $data['divisi'] = $tugasakhir['divisi'];
             $data['periode'] = format_indo($tugasakhir['startdate']) . ' - ' . format_indo($tugasakhir['enddate']);
             $data['lapjudul'] = $tugasakhir['ta_usuljudul'];
+            $data['confirm'] = $tugasakhir['ta_confirm'];
+        }
+
+        if ($data['confirm'] == 'Ya') {
+            $model = new ConfigModel();
+            $kaprodi = $model->where('config_name', 'kaprodi')->join('tbl_profile', 'tbl_config.config_value = tbl_profile.user_id', 'left')->join('tbl_user', 'tbl_config.config_value = tbl_user.user_id', 'left')->first();
+            if ($kaprodi) {
+                $data['namakaprodi'] = $kaprodi['FullName'];
+                $data['nipkaprodi'] = $kaprodi['NIP'];
+                $data['signkaprodi'] = $kaprodi['signed'];
+            }
         }
 
         $model = new NilaitaModel();

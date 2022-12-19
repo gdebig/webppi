@@ -266,10 +266,18 @@
         <tr>
             <td style="text-align: center" width="50%">
                 Mengetahui,<br>
-                Penanggung Jawab / Prodi PPI
-                <br><br><br><br><br>
-                <u>(Prof. Dr. Fitri Yuli Zulkifli, S.T., M.Sc., IPU)</u><br>
-                NIP: 197407191998022001
+                Penanggung Jawab / Prodi PPI<br />
+                <?php
+                if (!empty($signkaprodi)) {
+                ?>
+                    <img height="80px" src="<?= base_url(); ?>/uploads/ttd/<?= $signkaprodi; ?>"><br />
+                <?php
+                } else {
+                    echo "<br /><br /><br /><br />";
+                }
+                ?>
+                <u><?= !empty($namakaprodi) ? $namakaprodi : '( )'; ?></u><br>
+                NIP: <?= !empty($nipkaprodi) ? $nipkaprodi : '( )'; ?>
             </td>
             <td style="text-align: center" width="50%">
                 <br>
