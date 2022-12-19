@@ -46,6 +46,51 @@
                     <div class="form-group">
                         <label>Field bertanda * harus diisi.</label>
                     </div>
+                    <br />
+                    <div class="row">
+                        <div class="col">
+                            <p>Range Penilaian:</p>
+                            <table>
+                                <tr>
+                                    <th width="5%" style="text-align: center; border: 1px solid black">No.</th>
+                                    <th width="10%" style="text-align: center; border: 1px solid black">Nilai</th>
+                                    <th width="10%" style="text-align: center; border: 1px solid black">Bobot</th>
+                                    <th width="75%" style="text-align: center; border: 1px solid black">Kisaan Nilai</th>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center; border: 1px solid black">1.</td>
+                                    <td style="text-align: center; border: 1px solid black">A</td>
+                                    <td style="text-align: center; border: 1px solid black">4.0</td>
+                                    <td style="text-align: center; border: 1px solid black">85 - 100</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center; border: 1px solid black">2.</td>
+                                    <td style="text-align: center; border: 1px solid black">A-</td>
+                                    <td style="text-align: center; border: 1px solid black">3.7</td>
+                                    <td style="text-align: center; border: 1px solid black">80 - 84</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center; border: 1px solid black">3.</td>
+                                    <td style="text-align: center; border: 1px solid black">B+</td>
+                                    <td style="text-align: center; border: 1px solid black">3.3</td>
+                                    <td style="text-align: center; border: 1px solid black">75 - 79</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center; border: 1px solid black">4.</td>
+                                    <td style="text-align: center; border: 1px solid black">B</td>
+                                    <td style="text-align: center; border: 1px solid black">3.0</td>
+                                    <td style="text-align: center; border: 1px solid black">70 - 74</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center; border: 1px solid black">5.</td>
+                                    <td style="text-align: center; border: 1px solid black">B-</td>
+                                    <td style="text-align: center; border: 1px solid black">2.7</td>
+                                    <td style="text-align: center; border: 1px solid black">65 - 69</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <br />
                     <div class="row">
                         <div class="col">
                             <button type="submit" name="submit" value="submit" class="btn btn-primary col">Beri
