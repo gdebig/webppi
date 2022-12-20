@@ -500,7 +500,7 @@
                                         } elseif ($penghargaan['InstituteType'] == 'Reg') {
                                             $typescore = 3;
                                         } elseif ($penghargaan['InstituteType'] == 'Int') {
-                                            $ypescore = 4;
+                                            $typescore = 4;
                                         }
                                         ?>
                                         <select name="nilai_r" id="nilai_r">
