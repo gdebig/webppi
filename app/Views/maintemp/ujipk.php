@@ -17,7 +17,7 @@
                 <?php if (isset($data_user) && ($data_user == "kosong")) {
                 ?>
 
-                    <div class="alert alert-danger">Data mahasiswa ujian belum ada.</div>
+                    <div class="alert alert-danger">Data peserta ujian belum ada.</div>
                 <?php } else { ?>
 
                     <table id="tabledata" class="display table table-bordered table-hover">

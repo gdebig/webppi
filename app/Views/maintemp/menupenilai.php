@@ -10,3 +10,9 @@
         <p>Pengujian Praktik Keinsinyuran</p>
     </a>
 </li>
+<li class="nav-item">
+    <a href="<?php echo base_url(); ?>/mannilairpl" class="nav-link">
+        <i class="fas fa-graduation-cap nav-icon"></i>
+        <p>Penilaian RPL</p>
+    </a>
+</li>

@@ -43,6 +43,7 @@ use App\Models\ProfileModel;
                                     <th>Badan Kejuruan</th>
                                     <th>Status</th>
                                     <th>Dosen Pembimbing</th>
+                                    <th>Dosen Penilai RPL</th>
                                     <th>Data FAIP</th>
                                 </tr>
                             </thead>
@@ -97,9 +98,6 @@ use App\Models\ProfileModel;
                                                 case 'Kap':
                                                     echo "Teknik Perkapalan";
                                                     break;
-                                                case 'Tra':
-                                                    echo "Transportasi";
-                                                    break;
                                                 case "Kom":
                                                     echo "Teknik Komputer";
                                                     break;
@@ -117,6 +115,15 @@ use App\Models\ProfileModel;
                                                 echo $dosen['FullName'];
                                             } else {
                                                 echo "Belum ada pembimbing";
+                                            }
+                                            ?></td>
+                                        <td><?php
+                                            if (!empty($user['dosenrpl_id'])) {
+                                                $model = new ProfileModel();
+                                                $dosen = $model->where('user_id', $user['dosenrpl_id'])->first();
+                                                echo $dosen['FullName'];
+                                            } else {
+                                                echo "Belum ada penilai RPL";
                                             }
                                             ?></td>
                                         <td><a href="<?= base_url(); ?>/manpeserta/dokfaip/<?= $user['user_id']; ?>">Detail</a>
@@ -153,11 +160,44 @@ use App\Models\ProfileModel;
                         </div><br />
                         <div class="row">
                             <div class="col">
-                                <button type="submit" name="submit" value="set" class="btn btn-primary col">Atur
+                                <button type="submit" name="submit" value="setbimbing" class="btn btn-primary col">Atur
                                     Pembimbing</button>
                             </div>
                             <div class="col">
-                                <button type="submit" name="submit" value="ganti" class="btn btn-block btn-warning col">Ganti Pembimbing</button>
+                                <button type="submit" name="submit" value="gantibimbing" class="btn btn-block btn-warning col">Ganti Pembimbing</button>
+                            </div>
+                        </div>
+                        <br /><br />
+                        <div class="card card-success">
+                            <div class="card-header">
+                                <h3 class="card-title">Atur Dosen Penilai RPL</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="dosbing" class="element">Nama Dosen Penilai RPL</label>
+                                    <div class="element">
+                                        <select name="dosbing" id="dosbing" class="form-control">
+                                            <?php
+                                            foreach ($data_dosbing as $dosbing) :
+                                            ?>
+                                                <option value="<?= $dosbing['user_id']; ?>">
+                                                    <?= empty($dosbing['FullName']) ? $dosbing['username'] : $dosbing['FullName']; ?>
+                                                </option>
+                                            <?php
+                                            endforeach
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><br />
+                        <div class="row">
+                            <div class="col">
+                                <button type="submit" name="submit" value="setpenilai" class="btn btn-primary col">Atur
+                                    Penilai RPL</button>
+                            </div>
+                            <div class="col">
+                                <button type="submit" name="submit" value="gantipenilai" class="btn btn-block btn-warning col">Ganti Penilai RPL</button>
                             </div>
                         </div>
                     </form>

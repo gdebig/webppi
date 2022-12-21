@@ -11,6 +11,7 @@ use App\Models\CapesSertModel;
 use App\Models\CapesKartulModel;
 use App\Models\CapesSemModel;
 use App\Models\BimbingModel;
+use App\Models\PengujiRplModel;
 
 class Manpeserta extends BaseController
 {
@@ -30,7 +31,7 @@ class Manpeserta extends BaseController
         $data['logged_in'] = $logged_in;
         $where = "tipe_user LIKE '___y'";
         $where1 = "status IN ('diterima', 'regular')";
-        $user = $model->join('tbl_profile', 'tbl_user.user_id = tbl_profile.user_id', 'left')->join('tbl_bimbing', 'tbl_user.user_id = tbl_bimbing.mhs_id', 'left')->where($where1)->where($where)->where('tbl_user.softdelete', 'no')->orderby('tbl_user.user_id', 'DESC')->findall();
+        $user = $model->join('tbl_profile', 'tbl_user.user_id = tbl_profile.user_id', 'left')->join('tbl_bimbing', 'tbl_user.user_id = tbl_bimbing.mhs_id', 'left')->join('tbl_pengujirpl', 'tbl_user.user_id = tbl_pengujirpl.mhsrpl_id', 'left')->where($where1)->where($where)->where('tbl_user.softdelete', 'no')->orderby('tbl_user.user_id', 'DESC')->findall();
         if (!empty($user)) {
             $data['data_user'] = $user;
         } else {
@@ -384,6 +385,7 @@ class Manpeserta extends BaseController
     {
         $session = session();
         $model = new BimbingModel();
+        $model1 = new PengujiRplModel();
         $user_id = $session->get('user_id');
         $logged_in = $session->get('logged_in');
         $issadmin = $session->get('issadmin');
@@ -394,7 +396,7 @@ class Manpeserta extends BaseController
 
         $button = $this->request->getVar('submit');
 
-        if ($button == "set") {
+        if ($button == "setbimbing") {
             $userid = $this->request->getVar('user_id');
             $dosbing = $this->request->getVar('dosbing');
             if (!empty($userid)) {
@@ -424,7 +426,7 @@ class Manpeserta extends BaseController
 
                 return redirect()->to('/manpeserta');
             }
-        } elseif ($button == "ganti") {
+        } elseif ($button == "gantibimbing") {
             $user_id = $this->request->getVar('user_id');
             $dosbing = $this->request->getVar('dosbing');
             if (!empty($user_id)) {
@@ -439,6 +441,59 @@ class Manpeserta extends BaseController
                 }
 
                 $session->setFlashdata('msg', 'Dosen pembimbing berhasil diubah.');
+
+                return redirect()->to('/manpeserta');
+            } else {
+
+                $session->setFlashdata('errmsg', 'Tidak ada peserta yang dicentang.');
+
+                return redirect()->to('/manpeserta');
+            }
+        } elseif ($button == "setpenilai") {
+            $userid = $this->request->getVar('user_id');
+            $dosbing = $this->request->getVar('dosbing');
+            if (!empty($userid)) {
+                foreach ($userid as $id) {
+                    $mhs = $model1->where('mhsrpl_id', $id)->countAllResults();
+                    if ($mhs >= 2) {
+                        $session->setFlashdata('errmsg', 'Mahasiswa yang sama, hanya boleh memiliki dua pembimbing.');
+                        return redirect()->to('/manpeserta');
+                    } else {
+                        $data = array(
+                            'mhsrpl_id' => $userid,
+                            'dosenrpl_id' => $dosbing,
+                            'date_created' => date('Y-m-d'),
+                            'date_modified' => date('Y-m-d')
+                        );
+
+                        $model1->save($data);
+                    }
+                }
+
+                $session->setFlashdata('msg', 'Dosen Penilai RPL berhasil ditetapkan.');
+
+                return redirect()->to('/manpeserta');
+            } else {
+
+                $session->setFlashdata('errmsg', 'Tidak ada peserta yang dicentang.');
+
+                return redirect()->to('/manpeserta');
+            }
+        } elseif ($button == "gantipenilai") {
+            $user_id = $this->request->getVar('user_id');
+            $dosbing = $this->request->getVar('dosbing');
+            if (!empty($user_id)) {
+                foreach ($user_id as $userid) {
+                    $bimbing = $model1->where('mhsrpl_id', $userid)->first();
+                    $data = array(
+                        'dosenrpl_id' => $dosbing,
+                        'date_modified' => date('Y-m-d')
+                    );
+
+                    $model1->update($bimbing['ujirpl_id'], $data);
+                }
+
+                $session->setFlashdata('msg', 'Dosen Penilai RPL berhasil diubah.');
 
                 return redirect()->to('/manpeserta');
             } else {

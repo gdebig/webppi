@@ -32,7 +32,7 @@ class Manujipk extends BaseController
         } else {
             $data['data_user'] = 'kosong';
         }
-        $data['title_page'] = "Data Mahasiswa Ujian PK";
+        $data['title_page'] = "Data Peserta Ujian PK";
         $data['data_bread'] = "Ujian";
         return view('maintemp/ujipk', $data);
     }
