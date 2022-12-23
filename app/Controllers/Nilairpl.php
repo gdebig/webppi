@@ -136,7 +136,7 @@ class Nilairpl extends BaseController
 
         $model = new CapesKualifikasiModel();
         $data['capeslogged_in'] = $session->get('capeslogged_in');
-        $kerja = $model->where('user_id', $mhs_id)->like('kompetensi', 'W.2.2')->orderby('ProjValue', 'DESC')->findall();
+        $kerja = $model->where('user_id', $mhs_id)->like('kompetensi', 'W.2.2.')->orderby('ProjValue', 'DESC')->findall();
         if (!empty($kerja)) {
             $data['data_kerja'] = $kerja;
         } else {
@@ -145,7 +145,7 @@ class Nilairpl extends BaseController
 
         $model1 = new CapesPendModel();
 
-        $pend = $model1->where('user_id', $mhs_id)->orderby('GradYear', 'DESC')->findall();
+        $pend = $model1->where('user_id', $mhs_id)->like('kompetensi', 'W.2.2.')->orderby('GradYear', 'DESC')->findall();
         if (!empty($pend)) {
             $data['data_pend'] = $pend;
         } else {
@@ -163,8 +163,8 @@ class Nilairpl extends BaseController
         }
 
         $model3 = new PenghargaanModel();
-        $penghargaan = $model3->where('user_id', $mhs_id)->like('kompetensi', 'W.1.1.')->orderby('Year', 'DESC')->orderby('Month', 'DESC')->findall();
-        $data['jumlah_harga'] = $model3->where('user_id', $mhs_id)->like('kompetensi', 'W.1.1.')->countAllResults();
+        $penghargaan = $model3->where('user_id', $mhs_id)->like('kompetensi', 'W.2.2.')->orderby('Year', 'DESC')->orderby('Month', 'DESC')->findall();
+        $data['jumlah_harga'] = $model3->where('user_id', $mhs_id)->like('kompetensi', 'W.2.2.')->countAllResults();
         if (!empty($penghargaan)) {
             $data['data_harga'] = $penghargaan;
         } else {
@@ -186,29 +186,12 @@ class Nilairpl extends BaseController
             $data['data_latih1'] = 'kosong';
         }
 
-        $model5 = new EtikRefModel();
-        $etik = $model5->where('user_id', $mhs_id)->orderby('Name', 'ASC')->findall();
-        $data['jumlah_etik'] = $model5->where('user_id', $mhs_id)->countAllResults();
-        if (!empty($etik)) {
-            $data['data_etik'] = $etik;
-        } else {
-            $data['data_etik'] = 'kosong';
-        }
-
-        $model6 = new PendapatModel();
-        $pendapat = $model6->where('user_id', $mhs_id)->orderby('Num', 'DESC')->findall();
-        if (!empty($pendapat)) {
-            $data['data_pendapat'] = $pendapat;
-        } else {
-            $data['data_pendapat'] = 'kosong';
-        }
-
         $model7 = new MengajarModel();
-        $kerja = $model7->where('user_id', $mhs_id)->like('kompetensi', 'W.2.2.')->orderby('StartPeriod', 'DESC')->findall();
-        if (!empty($kerja)) {
-            $data['data_kerja'] = $kerja;
+        $ajar = $model7->where('user_id', $mhs_id)->like('kompetensi', 'W.2.2.')->orderby('StartPeriod', 'DESC')->findall();
+        if (!empty($ajar)) {
+            $data['data_ajar'] = $ajar;
         } else {
-            $data['data_kerja'] = 'kosong';
+            $data['data_ajar'] = 'kosong';
         }
 
         $model8 = new CapesSemModel();

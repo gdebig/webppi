@@ -50,7 +50,7 @@ class Home extends BaseController
             $model = new AkunModel();
             $username = $this->request->getVar('username');
             $password = $this->request->getVar('password');
-            $data = $model->where('username', $username)->where('active', 'yes')->where('confirmcapes', 'Ya')->first();
+            $data = $model->where('username', $username)->where('active', 'yes')->where('confirmcapes', 'Ya')->where('status !=', 'ditolak')->first();
             if ($data) {
                 $pass = $data['password'];
                 $verify_pass = password_verify($password, $pass);
@@ -96,7 +96,7 @@ class Home extends BaseController
                     return redirect()->to('/home');
                 }
             } else {
-                $session->setFlashdata('msg', 'Username tidak ditemukan atau akun belum terkonfirmasi.');
+                $session->setFlashdata('msg', 'Username tidak ditemukan, akun belum terkonfirmasi, atau akun ditolak.');
                 return redirect()->to('/home');
             }
         } else {

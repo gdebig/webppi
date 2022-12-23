@@ -14,6 +14,7 @@ use App\Models\CapesSemModel;
 use App\Models\InovasiModel;
 use App\Models\BahasaModel;
 use App\Models\ProfileModel;
+use App\Models\CapesPendModel;
 use App\Libraries\Slug;
 
 class Userfairrekap extends BaseController

@@ -43,7 +43,7 @@
                                 <tr>
                                     <td><?php echo $i;
                                         $i++; ?></td>
-                                    <td><input type="checkbox" name="etik_id[]" value="<?= $etik['Num']; ?>" /></td>
+                                    <td><input type="checkbox" name="etik_id[]" id="etik_id[]" value="<?= $etik['Num']; ?>" /></td>
                                     <td><?= $etik['Name']; ?></td>
                                     <td><?= $etik['Addr'] . "<br />" . $etik['City'] . ', ' . $etik['Prov'] . ', ' . $etik['Country']; ?>
                                     </td>
@@ -51,7 +51,7 @@
                                     <td><?= $etik['Email']; ?></td>
                                     <td><?= $etik['Relation']; ?></td>
                                     <td>
-                                        <select name="nilai_q" id="nilai_q">
+                                        <select name="nilaietik_q[]" id="nilaietik_q[]">
                                             <option value="4">4</option>
                                             <option value="3">3</option>
                                             <option value="2">2</option>
@@ -59,7 +59,7 @@
                                         </select>
                                     </td>
                                     <td>
-                                        <select name="nilai_r" id="nilai_r">
+                                        <select name="nilaietik_r[]" id="nilaietik_r[]">
                                             <option value="4">4</option>
                                             <option value="3">3</option>
                                             <option value="2">2</option>
@@ -115,10 +115,10 @@
                                 <tr>
                                     <td><?php echo $i;
                                         $i++; ?></td>
-                                    <td><input type="checkbox" name="dapat_id[]" value="<?= $dapat['Num']; ?>" /></td>
+                                    <td><input type="checkbox" name="dapat_id[]" id="dapat_id[]" value="<?= $dapat['Num']; ?>" /></td>
                                     <td><?= $dapat['Desc']; ?></td>
                                     <td>
-                                        <select name="nilai_p" id="nilai_p">
+                                        <select name="nilaidapat_p[]" id="nilaidapat_p[]">
                                             <option value="4">4</option>
                                             <option value="3">3</option>
                                             <option value="2">2</option>
@@ -126,7 +126,7 @@
                                         </select>
                                     </td>
                                     <td>
-                                        <select name="nilai_q" id="nilai_q">
+                                        <select name="nilaidapat_q[]" id="nilaidapat_q[]">
                                             <option value="4">4</option>
                                             <option value="3">3</option>
                                             <option value="2">2</option>
@@ -134,7 +134,7 @@
                                         </select>
                                     </td>
                                     <td>
-                                        <select name="nilai_r" id="nilai_r">
+                                        <select name="nilaidapat_r[]" id="nilaidapat_r[]">
                                             <option value="4">4</option>
                                             <option value="3">3</option>
                                             <option value="2">2</option>
@@ -181,7 +181,7 @@
                                 <tr>
                                     <td><?php echo $i;
                                         $i++; ?></td>
-                                    <td><input type="checkbox" name="org_id[]" value="<?= $org['Num']; ?>" /></td>
+                                    <td><input type="checkbox" name="org_id[]" id="org_id[]" value="<?= $org['Num']; ?>" /></td>
                                     <td><?= $org['Name']; ?></td>
                                     <td><?php
                                         switch ($org['Type']) {
@@ -283,7 +283,7 @@
                                             $posscore = 4;
                                         }
                                         ?>
-                                        <select name="nilai_q" id="nilai_q">
+                                        <select name="nilaiorg_q[]" id="nilaiorg_q[]">
                                             <option value="4" <?= $posscore == 4 ? 'selected' : ''; ?>>4</option>
                                             <option value="3" <?= $posscore == 3 ? 'selected' : ''; ?>>3</option>
                                             <option value="2" <?= $posscore == 2 ? 'selected' : ''; ?>>2</option>
@@ -302,7 +302,7 @@
                                             $orgscore = 4;
                                         }
                                         ?>
-                                        <select name="nilai_r" id="nilai_r">
+                                        <select name="nilaiorg_r[]" id="nilaiorg_r[]">
                                             <option value="4" <?= $orgscore == 4 ? 'selected' : ''; ?>>4</option>
                                             <option value="3" <?= $orgscore == 3 ? 'selected' : ''; ?>>3</option>
                                             <option value="2" <?= $orgscore == 2 ? 'selected' : ''; ?>>2</option>
@@ -342,7 +342,7 @@
                                     }
                                 }
                                 ?>
-                                <select name="nilai_p" id="nilai_p">
+                                <select name="nilaiorg_p[]" id="nilaiorg_p[]">
                                     <option value="4" <?= $score == 4 ? 'selected' : ''; ?>>4</option>
                                     <option value="3" <?= $score == 3 ? 'selected' : ''; ?>>3</option>
                                     <option value="2" <?= $score == 2 ? 'selected' : ''; ?>>2</option>
@@ -384,7 +384,7 @@
                                 <tr>
                                     <td><?php echo $i;
                                         $i++; ?></td>
-                                    <td><input type="checkbox" name="penghargaan_id[]" value="<?= $penghargaan['Num']; ?>" /></td>
+                                    <td><input type="checkbox" name="penghargaan_id[]" id="penghargaan_id[]" value="<?= $penghargaan['Num']; ?>" /></td>
                                     <td><?php
                                         switch ($penghargaan['Month']) {
                                             case '1':
@@ -467,7 +467,7 @@
                                     <td><a href="<?= base_url(); ?>/uploads/docs/<?= $penghargaan['File']; ?>" target="_blank">Lihat Bukti</a></td>
                                     <td><?= $penghargaan['kompetensi']; ?></td>
                                     <td>
-                                        <select name="nilai_p" id="nilai_p">
+                                        <select name="nilaipenghargaan_p[]" id="nilaipenghargaan_p[]">
                                             <option value="4">4</option>
                                             <option value="3">3</option>
                                             <option value="2">2</option>
@@ -484,7 +484,7 @@
                                             $levelscore = 4;
                                         }
                                         ?>
-                                        <select name="nilai_q" id="nilai_q">
+                                        <select name="nilaipenghargaan_q[]" id="nilaipenghargaan_q[]">
                                             <option value="4" <?= $levelscore == 4 ? 'selected' : ''; ?>>4</option>
                                             <option value="3" <?= $levelscore == 3 ? 'selected' : ''; ?>>3</option>
                                             <option value="2" <?= $levelscore == 2 ? 'selected' : ''; ?>>2</option>
@@ -503,7 +503,7 @@
                                             $typescore = 4;
                                         }
                                         ?>
-                                        <select name="nilai_r" id="nilai_r">
+                                        <select name="nilaipenghargaan_r[]" id="nilaipenghargaan_r[]">
                                             <option value="4" <?= $typescore == 4 ? 'selected' : ''; ?>>4</option>
                                             <option value="3" <?= $typescore == 3 ? 'selected' : ''; ?>>3</option>
                                             <option value="2" <?= $typescore == 2 ? 'selected' : ''; ?>>2</option>
@@ -550,7 +550,7 @@
                                 <tr>
                                     <td><?php echo $i;
                                         $i++; ?></td>
-                                    <td><input type="checkbox" name="latih_id[]" value="<?= $latih['Num']; ?>" /></td>
+                                    <td><input type="checkbox" name="latih_id[]" id="latih_id[]" value="<?= $latih['Num']; ?>" /></td>
                                     <td><?= $latih['Name']; ?></td>
                                     <td><?= $latih['Organizer']; ?></td>
                                     <td><?= $latih['Kota']; ?></td>
@@ -605,7 +605,7 @@
                                             $lengthscore = 4;
                                         }
                                         ?>
-                                        <select name="nilai_p" id="nilai_p">
+                                        <select name="nilailatih_p[]" id="nilailatih_p[]">
                                             <option value="4" <?= $lengthscore == 4 ? 'selected' : ''; ?>>4</option>
                                             <option value="3" <?= $lengthscore == 3 ? 'selected' : ''; ?>>3</option>
                                             <option value="2" <?= $lengthscore == 2 ? 'selected' : ''; ?>>2</option>
@@ -613,7 +613,7 @@
                                         </select>
                                     </td>
                                     <td>
-                                        <select name="nilai_q" id="nilai_q">
+                                        <select name="nilailatih_q[]" id="nilailatih_q[]">
                                             <option value="4">4</option>
                                             <option value="3">3</option>
                                             <option value="2" selected>2</option>
@@ -628,7 +628,7 @@
                                             $levscore = 3;
                                         }
                                         ?>
-                                        <select name="nilai_r" id="nilai_r">
+                                        <select name="nilailatih_r[]" id="nilailatih_r[]">
                                             <option value="4" <?= $levscore == 4 ? 'selected' : ''; ?>>4</option>
                                             <option value="3" <?= $levscore == 3 ? 'selected' : ''; ?>>3</option>
                                             <option value="2" <?= $levscore == 2 ? 'selected' : ''; ?>>2</option>
