@@ -45,7 +45,7 @@
                                 <tr>
                                     <td><?php echo $i;
                                         $i++; ?></td>
-                                    <td><input type="checkbox" name="kerja_id[]" value="<?= $kerja['Num']; ?>" /></td>
+                                    <td><input type="checkbox" name="kerja_id[]" id="kerja_id[]" value="<?= $kerja['Num']; ?>" /></td>
                                     <td><?php
                                         if (!empty($kerja['EndDate']) && ($kerja['EndDate'] != '0000-00-00')) {
                                             echo format_indo($kerja['StartDate']) . " hingga " . format_indo($kerja['EndDate']);
@@ -163,7 +163,7 @@
                                             $durscore = 4;
                                         }
                                         ?>
-                                        <select name="nilai_p" id="nilai_p">
+                                        <select name="nilaikerja_p[]" id="nilaikerja_p[]">
                                             <option value="4" <?= $durscore == 4 ? 'selected' : ''; ?>>4</option>
                                             <option value="3" <?= $durscore == 3 ? 'selected' : ''; ?>>3</option>
                                             <option value="2" <?= $durscore == 2 ? 'selected' : ''; ?>>2</option>
@@ -182,7 +182,7 @@
                                             $jabscore = 4;
                                         }
                                         ?>
-                                        <select name="nilai_q" id="nilai_q">
+                                        <select name="nilaikerja_q[]" id="nilaikerja_q[]">
                                             <option value="4" <?= $jabscore == 4 ? 'selected' : ''; ?>>4</option>
                                             <option value="3" <?= $jabscore == 4 ? 'selected' : ''; ?>>3</option>
                                             <option value="2" <?= $jabscore == 4 ? 'selected' : ''; ?>>2</option>
@@ -190,7 +190,7 @@
                                         </select>
                                     </td>
                                     <td>
-                                        <select name="nilai_r" id="nilai_r">
+                                        <select name="nilaikerja_r[]" id="nilaikerja_r[]">
                                             <option value="4">4</option>
                                             <option value="3">3</option>
                                             <option value="2">2</option>
@@ -214,6 +214,7 @@
                         <thead>
                             <tr>
                                 <th>No</th>
+                                <th>Check</th>
                                 <th>Jenjang</th>
                                 <th>Universitas</th>
                                 <th>Fakultas</th>
@@ -238,6 +239,7 @@
                                 <tr>
                                     <td><?php echo $i;
                                         $i++; ?></td>
+                                    <td><input type="checkbox" name="pend_id[]" id="pend_id[]" value="<?= $pend['Num']; ?>" /></td>
                                     <td><?= $pend['Rank']; ?></td>
                                     <td><?= $pend['Name']; ?></td>
                                     <td><?= $pend['Faculty']; ?></td>
@@ -283,7 +285,7 @@
                                             }
                                         }
                                         ?>
-                                        <select name="nilai_p" id="nilai_p">
+                                        <select name="nilaipend_p[]" id="nilaipend_p[]">
                                             <option value="4" <?= $rankscore == 4 ? 'selected' : ''; ?>>4</option>
                                             <option value="3" <?= $rankscore == 3 ? 'selected' : ''; ?>>3</option>
                                             <option value="2" <?= $rankscore == 2 ? 'selected' : ''; ?>>2</option>
@@ -308,7 +310,7 @@
                                             }
                                         }
                                         ?>
-                                        <select name="nilai_q" id="nilai_q">
+                                        <select name="nilaipend_q[]" id="nilaipend_q[]">
                                             <option value="4" <?= $markscore == 4 ? 'selected' : ''; ?>>4</option>
                                             <option value="3" <?= $markscore == 4 ? 'selected' : ''; ?>>3</option>
                                             <option value="2" <?= $markscore == 4 ? 'selected' : ''; ?>>2</option>
@@ -316,7 +318,7 @@
                                         </select>
                                     </td>
                                     <td>
-                                        <select name="nilai_r" id="nilai_r">
+                                        <select name="nilaipend_r" id="nilaipend_r">
                                             <option value="4" <?= $markscore == 4 ? 'selected' : ''; ?>>4</option>
                                             <option value="3" <?= $markscore == 4 ? 'selected' : ''; ?>>3</option>
                                             <option value="2" <?= $markscore == 4 ? 'selected' : ''; ?>>2</option>
@@ -465,7 +467,7 @@
                                             $posscore = 4;
                                         }
                                         ?>
-                                        <select name="nilai_q" id="nilai_q">
+                                        <select name="nilaiorg_q[]" id="nilaiorg_q[]">
                                             <option value="4" <?= $posscore == 4 ? 'selected' : ''; ?>>4</option>
                                             <option value="3" <?= $posscore == 3 ? 'selected' : ''; ?>>3</option>
                                             <option value="2" <?= $posscore == 2 ? 'selected' : ''; ?>>2</option>
@@ -484,7 +486,7 @@
                                             $orgscore = 4;
                                         }
                                         ?>
-                                        <select name="nilai_r" id="nilai_r">
+                                        <select name="nilaiorg_r[]" id="nilaiorg_r[]">
                                             <option value="4" <?= $orgscore == 4 ? 'selected' : ''; ?>>4</option>
                                             <option value="3" <?= $orgscore == 3 ? 'selected' : ''; ?>>3</option>
                                             <option value="2" <?= $orgscore == 2 ? 'selected' : ''; ?>>2</option>
@@ -566,7 +568,7 @@
                                 <tr>
                                     <td><?php echo $i;
                                         $i++; ?></td>
-                                    <td><input type="checkbox" name="penghargaan_id[]" value="<?= $penghargaan['Num']; ?>" /></td>
+                                    <td><input type="checkbox" name="penghargaan_id[]" id="penghargaan_id[]" value="<?= $penghargaan['Num']; ?>" /></td>
                                     <td><?php
                                         switch ($penghargaan['Month']) {
                                             case '1':
@@ -649,7 +651,7 @@
                                     <td><a href="<?= base_url(); ?>/uploads/docs/<?= $penghargaan['File']; ?>" target="_blank">Lihat Bukti</a></td>
                                     <td><?= $penghargaan['kompetensi']; ?></td>
                                     <td>
-                                        <select name="nilai_p" id="nilai_p">
+                                        <select name="nilaipenghargaan_p[]" id="nilaipenghargaan_p[]">
                                             <option value="4">4</option>
                                             <option value="3">3</option>
                                             <option value="2">2</option>
@@ -666,7 +668,7 @@
                                             $levelscore = 4;
                                         }
                                         ?>
-                                        <select name="nilai_q" id="nilai_q">
+                                        <select name="nilaipenghargaan_q[]" id="nilaipenghargaan_q[]">
                                             <option value="4" <?= $levelscore == 4 ? 'selected' : ''; ?>>4</option>
                                             <option value="3" <?= $levelscore == 3 ? 'selected' : ''; ?>>3</option>
                                             <option value="2" <?= $levelscore == 2 ? 'selected' : ''; ?>>2</option>
@@ -685,7 +687,7 @@
                                             $typescore = 4;
                                         }
                                         ?>
-                                        <select name="nilai_r" id="nilai_r">
+                                        <select name="nilaipenghargaan_r[]" id="nilaipenghargaan_r[]">
                                             <option value="4" <?= $typescore == 4 ? 'selected' : ''; ?>>4</option>
                                             <option value="3" <?= $typescore == 3 ? 'selected' : ''; ?>>3</option>
                                             <option value="2" <?= $typescore == 2 ? 'selected' : ''; ?>>2</option>
@@ -731,7 +733,7 @@
                                 <tr>
                                     <td><?php echo $i;
                                         $i++; ?></td>
-                                    <td><input type="checkbox" name="latih_id[]" value="<?= $latih['Num']; ?>" /></td>
+                                    <td><input type="checkbox" name="latih_id[]" id="latih_id[]" value="<?= $latih['Num']; ?>" /></td>
                                     <td><?= $latih['Name']; ?></td>
                                     <td><?= $latih['Organizer']; ?></td>
                                     <td><?= $latih['Kota']; ?></td>
@@ -786,7 +788,7 @@
                                             $latihscore = 4;
                                         }
                                         ?>
-                                        <select name="nilai_p" id="nilai_p">
+                                        <select name="nilailatih_p[]" id="nilailatih_p[]">
                                             <option value="4" <?= $latihscore == 4 ? 'selected' : ''; ?>>4</option>
                                             <option value="3" <?= $latihscore == 3 ? 'selected' : ''; ?>>3</option>
                                             <option value="2" <?= $latihscore == 2 ? 'selected' : ''; ?>>2</option>
@@ -794,7 +796,7 @@
                                         </select>
                                     </td>
                                     <td>
-                                        <select name="nilai_q" id="nilai_q">
+                                        <select name="nilailatih_q[]" id="nilailatih_q[]">
                                             <option value="4">4</option>
                                             <option value="3">3</option>
                                             <option value="2" selected>2</option>
@@ -809,7 +811,7 @@
                                             $levelscore = 3;
                                         }
                                         ?>
-                                        <select name="nilai_r" id="nilai_r">
+                                        <select name="nilailatih_r[]" id="nilailatih_r[]">
                                             <option value="4" <?= $levelscore == 4 ? 'selected' : ''; ?>>4</option>
                                             <option value="3" <?= $levelscore == 3 ? 'selected' : ''; ?>>3</option>
                                             <option value="2" <?= $levelscore == 2 ? 'selected' : ''; ?>>2</option>
@@ -851,19 +853,19 @@
                         <tbody>
                             <?php
                             $i = 1;
-                            foreach ($data_latih1 as $latih) :
+                            foreach ($data_latih1 as $latih1) :
                             ?>
                                 <tr>
                                     <td><?php echo $i;
                                         $i++; ?></td>
-                                    <td><input type="checkbox" name="latih_id[]" value="<?= $latih['Num']; ?>" /></td>
-                                    <td><?= $latih['Name']; ?></td>
-                                    <td><?= $latih['Organizer']; ?></td>
-                                    <td><?= $latih['Kota']; ?></td>
-                                    <td><?= $latih['Country']; ?></td>
-                                    <td><?= $latih['StartMonth'] . '/' . $latih['StartYear']; ?></td>
+                                    <td><input type="checkbox" name="latih1_id[]" id="latih1_id[]" value="<?= $latih1['Num']; ?>" /></td>
+                                    <td><?= $latih1['Name']; ?></td>
+                                    <td><?= $latih1['Organizer']; ?></td>
+                                    <td><?= $latih1['Kota']; ?></td>
+                                    <td><?= $latih1['Country']; ?></td>
+                                    <td><?= $latih1['StartMonth'] . '/' . $latih1['StartYear']; ?></td>
                                     <td><?php
-                                        switch ($latih['Level']) {
+                                        switch ($latih1['Level']) {
                                             case 'Dasar':
                                                 echo "Tingkat Dasar (Fundamental)";
                                                 break;
@@ -873,7 +875,7 @@
                                         }
                                         ?></td>
                                     <td><?php
-                                        switch ($latih['Length']) {
+                                        switch ($latih1['Length']) {
                                             case 'sd36':
                                                 echo "Lama pendidikan s/d 36 Jam";
                                                 break;
@@ -890,28 +892,28 @@
                                                 break;
                                         }
                                         ?></td>
-                                    <td><?= $latih['Description']; ?></td>
+                                    <td><?= $latih1['Description']; ?></td>
                                     <td><?php
-                                        if (!empty($latih['File'])) {
-                                            echo "<a href='" . base_url('uploads/docs/' . $latih['File']) . "' target='_blank'>" . "Lihat Bukti" . "</a>";
+                                        if (!empty($latih1['File'])) {
+                                            echo "<a href='" . base_url('uploads/docs/' . $latih1['File']) . "' target='_blank'>" . "Lihat Bukti" . "</a>";
                                         } else {
                                             echo "";
                                         }
                                         ?></td>
-                                    <td><?= $latih['kompetensi']; ?></td>
+                                    <td><?= $latih1['kompetensi']; ?></td>
                                     <td>
                                         <?php
-                                        if ($latih['Length'] == 'sd36') {
+                                        if ($latih1['Length'] == 'sd36') {
                                             $lengthscore = 1;
-                                        } elseif ($latih['Length'] == 'smp100') {
+                                        } elseif ($latih1['Length'] == 'smp100') {
                                             $lengthscore = 2;
-                                        } elseif ($latih['Length'] == 'smp240') {
+                                        } elseif ($latih1['Length'] == 'smp240') {
                                             $lengthscore = 3;
-                                        } elseif ($latih['Length'] == 'lbih240') {
+                                        } elseif ($latih1['Length'] == 'lbih240') {
                                             $lengthscore = 4;
                                         }
                                         ?>
-                                        <select name="nilai_p" id="nilai_p">
+                                        <select name="nilailatih1_p[]" id="nilailatih1_p">
                                             <option value="4" <?= $lengthscore == 4 ? 'selected' : ''; ?>>4</option>
                                             <option value="3" <?= $lengthscore == 3 ? 'selected' : ''; ?>>3</option>
                                             <option value="2" <?= $lengthscore == 2 ? 'selected' : ''; ?>>2</option>
@@ -948,137 +950,7 @@
                         </tbody>
                     </table>
                 <?php } ?>
-                <?php if (isset($data_etik) && ($data_etik != "kosong")) {
-                ?>
-                    <h3>II.1. Referensi Kode Etik dan Etika Profesi (#) (W1)</h3>
-                    <table id="tabledata" class="display table table-bordered table-hover">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Check</th>
-                                <th>Nama</th>
-                                <th>Alamat</th>
-                                <th>No. Telepon</th>
-                                <th>Email</th>
-                                <th>Hubungan</th>
-                                <th>Nilai Q</th>
-                                <th>Nilai R</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            $i = 1;
-                            foreach ($data_etik as $etik) :
-                            ?>
-                                <tr>
-                                    <td><?php echo $i;
-                                        $i++; ?></td>
-                                    <td><input type="checkbox" name="etik_id[]" value="<?= $etik['Num']; ?>" /></td>
-                                    <td><?= $etik['Name']; ?></td>
-                                    <td><?= $etik['Addr'] . "<br />" . $etik['City'] . ', ' . $etik['Prov'] . ', ' . $etik['Country']; ?>
-                                    </td>
-                                    <td><?= $etik['Pnum']; ?></td>
-                                    <td><?= $etik['Email']; ?></td>
-                                    <td><?= $etik['Relation']; ?></td>
-                                    <td>
-                                        <select name="nilai_q" id="nilai_q">
-                                            <option value="4">4</option>
-                                            <option value="3">3</option>
-                                            <option value="2">2</option>
-                                            <option value="1">1</option>
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <select name="nilai_r" id="nilai_r">
-                                            <option value="4">4</option>
-                                            <option value="3">3</option>
-                                            <option value="2">2</option>
-                                            <option value="1">1</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                            <?php
-                            endforeach
-                            ?>
-                        </tbody>
-                    </table>
-                    <table>
-                        <tr>
-                            <th>Jumlah Referensi</th>
-                            <th width="30px">&nbsp;</th>
-                            <th>Nilai P</th>
-                        </tr>
-                        <tr>
-                            <td><?= $jumlah_etik; ?></td>
-                            <td>&nbsp;</td>
-                            <td>
-                                <select name="nilai_p" id="nilai_p">
-                                    <option value="4" <?= $jumlah_etik >= 4 ? 'selected' : ''; ?>>4</option>
-                                    <option value="3" <?= $jumlah_etik == 3 ? 'selected' : ''; ?>>3</option>
-                                    <option value="2" <?= $jumlah_etik == 2 ? 'selected' : ''; ?>>2</option>
-                                    <option value="1" <?= $jumlah_etik == 1 ? 'selected' : ''; ?>>1</option>
-                                </select>
-                            </td>
-                        </tr>
-                    </table>
-                <?php } ?>
-                <br />
-                <?php if (isset($data_pendapat) && ($data_pendapat != "kosong")) {
-                ?>
-                    <h3>II.2. Pengertian, Pendapat dan Pengalaman Sendiri (W1)</h3>
-                    <table id="tabledata" class="display table table-bordered table-hover">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Check</th>
-                                <th>Pendapat</th>
-                                <th>Nilai P</th>
-                                <th>Nilai Q</th>
-                                <th>Nilai R</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            $i = 1;
-                            foreach ($data_pendapat as $dapat) :
-                            ?>
-                                <tr>
-                                    <td><?php echo $i;
-                                        $i++; ?></td>
-                                    <td><input type="checkbox" name="dapat_id[]" value="<?= $dapat['Num']; ?>" /></td>
-                                    <td><?= $dapat['Desc']; ?></td>
-                                    <td>
-                                        <select name="nilai_p" id="nilai_p">
-                                            <option value="4">4</option>
-                                            <option value="3">3</option>
-                                            <option value="2">2</option>
-                                            <option value="1">1</option>
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <select name="nilai_q" id="nilai_q">
-                                            <option value="4">4</option>
-                                            <option value="3">3</option>
-                                            <option value="2">2</option>
-                                            <option value="1">1</option>
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <select name="nilai_r" id="nilai_r">
-                                            <option value="4">4</option>
-                                            <option value="3">3</option>
-                                            <option value="2">2</option>
-                                            <option value="1">1</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                            <?php
-                            endforeach
-                            ?>
-                        </tbody>
-                    </table>
-                <?php } ?>
-                <?php if (isset($data_kerja) && ($data_kerja != "kosong")) {
+                <?php if (isset($data_ajar) && ($data_ajar != "kosong")) {
                 ?>
                     <h3>IV. Pengalaman Mengajar Pelajaran Keinsinyuran dan/atau Manajemen dan/atau Pengalaman Mengembangkan Pendidikan/Pelatihan Keinsinyuran dan/atau Manajemen (W2,W3,W4,P5)</h3>
                     <table id="tabledata" class="display table table-bordered table-hover">
