@@ -18,6 +18,7 @@
                     </div>
                 </div>
 
+                <!--UserFair21-->
                 <?php if (isset($data_etik) && ($data_etik != "kosong")) {
                 ?>
                     <h3>II.1. Referensi Kode Etik dan Etika Profesi (#) (W1)</h3>
@@ -82,7 +83,7 @@
                             <td><?= $jumlah_etik; ?></td>
                             <td>&nbsp;</td>
                             <td>
-                                <select name="nilai_p" id="nilai_p">
+                                <select name="nilaietik_p" id="nilaietik_p">
                                     <option value="4" <?= $jumlah_etik >= 4 ? 'selected' : ''; ?>>4</option>
                                     <option value="3" <?= $jumlah_etik == 3 ? 'selected' : ''; ?>>3</option>
                                     <option value="2" <?= $jumlah_etik == 2 ? 'selected' : ''; ?>>2</option>
@@ -93,6 +94,7 @@
                     </table>
                 <?php } ?>
                 <br />
+                <!-- UserFair22 -->
                 <?php if (isset($data_pendapat) && ($data_pendapat != "kosong")) {
                 ?>
                     <h3>II.2. Pengertian, Pendapat dan Pengalaman Sendiri (W1)</h3>
@@ -148,6 +150,8 @@
                         </tbody>
                     </table>
                 <?php } ?>
+
+                <!--UserFair13-->
                 <?php if (isset($data_org) && ($data_org != "kosong")) {
                 ?>
                     <br />
@@ -352,6 +356,8 @@
                         </tr>
                     </table>
                 <?php } ?>
+
+                <!--UserFair14-->
                 <?php if (isset($data_harga) && ($data_harga != "kosong")) {
                 ?>
                     <br />
@@ -517,6 +523,7 @@
                         </tbody>
                     </table>
                 <?php } ?>
+                <!--UserFair16-->
                 <?php if (isset($data_latih) && ($data_latih != "kosong")) {
                 ?>
                     <br />

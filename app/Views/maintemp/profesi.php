@@ -7,6 +7,7 @@
         <!-- /.card-header -->
         <div class="card">
             <div class="card-body">
+                <!--UserFair3-->
                 <?php if (isset($data_kerja) && ($data_kerja != "kosong")) { ?>
                     <br />
                     <h3>III. KUALIFIKASI PROFESIONAL (W2,W3,W4,P6,P7,P8,P9,P10,P11)</h3>
@@ -205,6 +206,7 @@
                     </table>
                 <?php } ?>
                 <br />
+                <!--UserFair12-->
                 <?php if (isset($data_pend) && ($data_pend != "kosong")) {
                 ?>
                     <br />
@@ -332,6 +334,7 @@
                         </tbody>
                     </table>
                 <?php } ?>
+                <!--UserFair13-->
                 <?php if (isset($data_org) && ($data_org != "kosong")) {
                 ?>
                     <br />
@@ -536,6 +539,7 @@
                         </tr>
                     </table>
                 <?php } ?>
+                <!--UserFair14-->
                 <?php if (isset($data_harga) && ($data_harga != "kosong")) {
                 ?>
                     <br />
@@ -701,6 +705,7 @@
                         </tbody>
                     </table>
                 <?php } ?>
+                <!--UserFair15-->
                 <?php if (isset($data_latih) && ($data_latih != "kosong")) {
                 ?>
                     <br />
@@ -825,6 +830,7 @@
                         </tbody>
                     </table>
                 <?php } ?>
+                <!--UserFair16-->
                 <?php if (isset($data_latih1) && ($data_latih1 != "kosong")) {
                 ?>
                     <br />
@@ -913,7 +919,7 @@
                                             $lengthscore = 4;
                                         }
                                         ?>
-                                        <select name="nilailatih1_p[]" id="nilailatih1_p">
+                                        <select name="nilailatih1_p[]" id="nilailatih1_p[]">
                                             <option value="4" <?= $lengthscore == 4 ? 'selected' : ''; ?>>4</option>
                                             <option value="3" <?= $lengthscore == 3 ? 'selected' : ''; ?>>3</option>
                                             <option value="2" <?= $lengthscore == 2 ? 'selected' : ''; ?>>2</option>
@@ -921,7 +927,7 @@
                                         </select>
                                     </td>
                                     <td>
-                                        <select name="nilai_q" id="nilai_q">
+                                        <select name="nilailatih1_q[]" id="nilailatih1_q[]">
                                             <option value="4">4</option>
                                             <option value="3">3</option>
                                             <option value="2" selected>2</option>
@@ -936,7 +942,7 @@
                                             $levscore = 3;
                                         }
                                         ?>
-                                        <select name="nilai_r" id="nilai_r">
+                                        <select name="nilailatih1_r[]" id="nilailatih1_r[]">
                                             <option value="4" <?= $levscore == 4 ? 'selected' : ''; ?>>4</option>
                                             <option value="3" <?= $levscore == 3 ? 'selected' : ''; ?>>3</option>
                                             <option value="2" <?= $levscore == 2 ? 'selected' : ''; ?>>2</option>
@@ -950,6 +956,7 @@
                         </tbody>
                     </table>
                 <?php } ?>
+                <!--UserFair4-->
                 <?php if (isset($data_ajar) && ($data_ajar != "kosong")) {
                 ?>
                     <h3>IV. Pengalaman Mengajar Pelajaran Keinsinyuran dan/atau Manajemen dan/atau Pengalaman Mengembangkan Pendidikan/Pelatihan Keinsinyuran dan/atau Manajemen (W2,W3,W4,P5)</h3>
@@ -976,18 +983,18 @@
                         <tbody>
                             <?php
                             $i = 1;
-                            foreach ($data_kerja as $kerja) :
+                            foreach ($data_ajar as $ajar) :
                             ?>
                                 <tr>
                                     <td><?php echo $i;
                                         $i++; ?></td>
-                                    <td><input type="checkbox" name="ajar_id[]" value="<?= $kerja['Num']; ?>" /></td>
-                                    <td><?= $kerja['StartPeriod'] . ' - ' . $kerja['EndPeriod']; ?></td>
-                                    <td><?= $kerja['Institution']; ?></td>
-                                    <td><?= $kerja['Name']; ?></td>
-                                    <td><?= $kerja['LocCity'] . ', ' . $kerja['LocProv'] . ', ' . $kerja['LocCountry']; ?></td>
+                                    <td><input type="checkbox" name="ajar_id[]" id="ajar_id[]" value="<?= $ajar['Num']; ?>" /></td>
+                                    <td><?= $ajar['StartPeriod'] . ' - ' . $ajar['EndPeriod']; ?></td>
+                                    <td><?= $ajar['Institution']; ?></td>
+                                    <td><?= $ajar['Name']; ?></td>
+                                    <td><?= $ajar['LocCity'] . ', ' . $ajar['LocProv'] . ', ' . $ajar['LocCountry']; ?></td>
                                     <td><?php
-                                        switch ($kerja['Period']) {
+                                        switch ($ajar['Period']) {
                                             case 'smp9':
                                                 echo "1 - 9 tahun";
                                                 break;
@@ -1003,7 +1010,7 @@
                                         }
                                         ?></td>
                                     <td><?php
-                                        switch ($kerja['Position']) {
+                                        switch ($ajar['Position']) {
                                             case 'Stf':
                                                 echo "Staf Pengajar";
                                                 break;
@@ -1013,7 +1020,7 @@
                                         }
                                         ?></td>
                                     <td><?php
-                                        switch ($kerja['Skshour']) {
+                                        switch ($ajar['Skshour']) {
                                             case 'sks1':
                                                 echo "1 SKS / 15 Jam";
                                                 break;
@@ -1025,17 +1032,17 @@
                                                 break;
                                         }
                                         ?></td>
-                                    <td><?= $kerja['Desc']; ?></td>
+                                    <td><?= $ajar['Desc']; ?></td>
                                     <td><?php
-                                        if (!empty($kerja['File'])) {
-                                            echo "<a href='" . base_url('uploads/docs/' . $kerja['File']) . "' target='_blank'>" . "Lihat Bukti" . "</a>";
+                                        if (!empty($ajar['File'])) {
+                                            echo "<a href='" . base_url('uploads/docs/' . $ajar['File']) . "' target='_blank'>" . "Lihat Bukti" . "</a>";
                                         } else {
                                             echo "";
                                         }
                                         ?></td>
-                                    <td><?= $kerja['kompetensi']; ?></td>
+                                    <td><?= $ajar['kompetensi']; ?></td>
                                     <td>
-                                        <select name="nilai_p" id="nilai_p">
+                                        <select name="nilaiajar_p[]" id="nilaiajar_p[]">
                                             <option value="4">4</option>
                                             <option value="3">3</option>
                                             <option value="2">2</option>
@@ -1043,7 +1050,7 @@
                                         </select>
                                     </td>
                                     <td>
-                                        <select name="nilai_q" id="nilai_q">
+                                        <select name="nilaiajar_q[]" id="nilaiajar_q[]">
                                             <option value="4">4</option>
                                             <option value="3">3</option>
                                             <option value="2">2</option>
@@ -1051,7 +1058,7 @@
                                         </select>
                                     </td>
                                     <td>
-                                        <select name="nilai_r" id="nilai_r">
+                                        <select name="nilaiajar_r[]" id="nilaiajar_r[]">
                                             <option value="4">4</option>
                                             <option value="3">3</option>
                                             <option value="2">2</option>
@@ -1065,6 +1072,7 @@
                         </tbody>
                     </table>
                 <?php } ?>
+                <!--UserFair53-->
                 <?php if (isset($data_sem) && ($data_sem != "kosong")) {
                 ?>
                     <h3>V.3 Seminar/Lokakarya Keinsinyuran Yang Diikuti (W2) </h3>
@@ -1072,6 +1080,7 @@
                         <thead>
                             <tr>
                                 <th>No</th>
+                                <th>Check</th>
                                 <th>Bulan-Tahun</th>
                                 <th>Nama Seminar/Lokakarya</th>
                                 <th>Penyelenggara</th>
@@ -1094,6 +1103,7 @@
                                 <tr>
                                     <td><?php echo $i;
                                         $i++; ?></td>
+                                    <td><input type="checkbox" name="sem_id[]" id="sem_id[]" value="<?= $sem['Num']; ?>" /></td>
                                     <td><?= $sem['Month'] . '-' . $sem['Year']; ?></td>
                                     <td><?= $sem['Name']; ?></td>
                                     <td><?= $sem['Organizer']; ?></td>
@@ -1131,7 +1141,7 @@
                                     <td><a href="<?= base_url(); ?>/uploads/docs/<?= $sem['File']; ?>" target="_blank">Lihat Bukti</a></td>
                                     <td><?= $sem['kompetensi']; ?></td>
                                     <td>
-                                        <select name="nilai_p" id="nilai_p">
+                                        <select name="nilaisem_p[]" id="nilaisem_p[]">
                                             <option value="4">4</option>
                                             <option value="3">3</option>
                                             <option value="2">2</option>
@@ -1139,7 +1149,7 @@
                                         </select>
                                     </td>
                                     <td>
-                                        <select name="nilai_q" id="nilai_q">
+                                        <select name="nilaisem_q[]" id="nilaisem_q[]">
                                             <option value="4">4</option>
                                             <option value="3">3</option>
                                             <option value="2">2</option>
@@ -1147,7 +1157,7 @@
                                         </select>
                                     </td>
                                     <td>
-                                        <select name="nilai_r" id="nilai_r">
+                                        <select name="nilaisem_r[]" id="nilaisem_r[]">
                                             <option value="4">4</option>
                                             <option value="3">3</option>
                                             <option value="2">2</option>
