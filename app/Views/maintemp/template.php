@@ -37,6 +37,16 @@
             width: 400px !important;
             height: auto;
         }
+
+        div.sticky {
+            position: -webkit-sticky;
+            position: sticky;
+            top: 0;
+            background-color: white;
+            padding: 50px;
+            font-size: 20px;
+            z-index: 1;
+        }
     </style>
 </head>
 <!--
