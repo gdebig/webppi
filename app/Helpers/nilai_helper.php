@@ -27,4 +27,24 @@ if (!function_exists('nilai_huruf')) {
 
     return $result;
   }
+  
+  function nilai_huruf_rpl($nilai){
+	  if ($nilai <= 2.75){
+		  $result = "C";
+	  } elseif ($nilai <= 4.5){
+		  $result = "C+";
+	  } elseif ($nilai <= 6.25){
+		  $result = "B-";
+	  } elseif ($nilai <= 8){
+		  $result = "B";
+	  } elseif ($nilai <= 9.75){
+		  $result = "B+";
+	  } elseif ($nilai <= 11.5){
+		  $result = "A-";
+	  } elseif ($nilai <= 16){
+		  $result = "A";
+	  }
+	  
+	  return $result;
+  }
 }

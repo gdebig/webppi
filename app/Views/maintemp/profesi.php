@@ -10,6 +10,8 @@
 
                 <form action="<?php echo base_url(); ?>/nilairpl/profesisimpan" method="post" enctype="multipart/form-data">
                     <div class="sticky">
+                        <input type="hidden" id="mhs_id" name="mhs_id" value=<?= $mhs_id; ?>>
+                        <input type="hidden" id="dosen_id" name="dosen_id" value=<?= $dosen_id; ?>>
                         <a href="<?= base_url(); ?>/nilairpl/docs/<?= $mhs_id; ?>/<?= $dosen_id; ?>">Kembali</a>
                         <button type="submit" name="submit" value="submit" class="btn btn-primary col">Simpan Data Profesionalisme</button>
                     </div>
@@ -47,12 +49,23 @@
                             <tbody>
                                 <?php
                                 $i = 1;
+                                $j = 0;
                                 foreach ($data_kerja as $kerja) :
                                 ?>
                                     <tr>
                                         <td><?php echo $i;
                                             $i++; ?></td>
-                                        <td><input type="checkbox" name="kerja_id[]" id="kerja_id[]" value="<?= $kerja['Num']; ?>" /></td>
+                                        <td>
+                                            <?php
+                                            if (in_array($kerja['Num'], $id3)) {
+                                                $checked[$j] = 'checked';
+                                            } else {
+                                                $checked[$j] = '';
+                                            }
+                                            ?>
+                                            <input type="checkbox" name="kerja_index[]" id="kerja_index[]" value="<?= $j; ?>" <?= $checked[$j]; ?> />
+                                            <input type="hidden" name="kerja_id[]" id="kerja_id[]" value="<?= $kerja['Num']; ?>" />
+                                        </td>
                                         <td><?php
                                             if (!empty($kerja['EndDate']) && ($kerja['EndDate'] != '0000-00-00')) {
                                                 echo format_indo($kerja['StartDate']) . " hingga " . format_indo($kerja['EndDate']);
@@ -206,6 +219,7 @@
                                         </td>
                                     </tr>
                                 <?php
+                                    $j++;
                                 endforeach
                                 ?>
                             </tbody>
@@ -242,12 +256,23 @@
                             <tbody>
                                 <?php
                                 $i = 1;
+                                $j = 0;
                                 foreach ($data_pend as $pend) :
                                 ?>
                                     <tr>
                                         <td><?php echo $i;
                                             $i++; ?></td>
-                                        <td><input type="checkbox" name="pend_id[]" id="pend_id[]" value="<?= $pend['Num']; ?>" /></td>
+                                        <td>
+                                            <?php
+                                            if (in_array($pend['Num'], $id12)) {
+                                                $checked[$j] = 'checked';
+                                            } else {
+                                                $checked[$j] = '';
+                                            }
+                                            ?>
+                                            <input type="checkbox" name="pend_index[]" id="pend_index[]" value="<?= $j; ?>" <?= $checked[$j]; ?> />
+                                            <input type="hidden" name="pend_id[]" id="pend_id[]" value="<?= $pend['Num']; ?>" />
+                                        </td>
                                         <td><?= $pend['Rank']; ?></td>
                                         <td><?= $pend['Name']; ?></td>
                                         <td><?= $pend['Faculty']; ?></td>
@@ -335,6 +360,7 @@
                                         </td>
                                     </tr>
                                 <?php
+                                    $j++;
                                 endforeach
                                 ?>
                             </tbody>
@@ -369,12 +395,23 @@
                             <tbody>
                                 <?php
                                 $i = 1;
+                                $j = 0;
                                 foreach ($data_org as $org) :
                                 ?>
                                     <tr>
                                         <td><?php echo $i;
                                             $i++; ?></td>
-                                        <td><input type="checkbox" name="org_id[]" value="<?= $org['Num']; ?>" /></td>
+                                        <td>
+                                            <?php
+                                            if (in_array($org['Num'], $id13)) {
+                                                $checked[$j] = 'checked';
+                                            } else {
+                                                $checked[$j] = '';
+                                            }
+                                            ?>
+                                            <input type="checkbox" name="org_index[]" id="org_index[]" value="<?= $j; ?>" <?= $checked[$j]; ?> />
+                                            <input type="hidden" name="org_id[]" id="org_id[]" value="<?= $org['Num']; ?>" />
+                                        </td>
                                         <td><?= $org['Name']; ?></td>
                                         <td><?php
                                             switch ($org['Type']) {
@@ -504,6 +541,7 @@
                                         </td>
                                     </tr>
                                 <?php
+                                    $j++;
                                 endforeach
                                 ?>
                             </tbody>
@@ -535,7 +573,7 @@
                                         }
                                     }
                                     ?>
-                                    <select name="nilai_p" id="nilai_p">
+                                    <select name="nilaiorg_p" id="nilaiorg_p">
                                         <option value="4" <?= $score == 4 ? 'selected' : ''; ?>>4</option>
                                         <option value="3" <?= $score == 3 ? 'selected' : ''; ?>>3</option>
                                         <option value="2" <?= $score == 2 ? 'selected' : ''; ?>>2</option>
@@ -573,12 +611,23 @@
                             <tbody>
                                 <?php
                                 $i = 1;
+                                $j = 0;
                                 foreach ($data_harga as $penghargaan) :
                                 ?>
                                     <tr>
                                         <td><?php echo $i;
                                             $i++; ?></td>
-                                        <td><input type="checkbox" name="penghargaan_id[]" id="penghargaan_id[]" value="<?= $penghargaan['Num']; ?>" /></td>
+                                        <td>
+                                            <?php
+                                            if (in_array($penghargaan['Num'], $id14)) {
+                                                $checked[$j] = 'checked';
+                                            } else {
+                                                $checked[$j] = '';
+                                            }
+                                            ?>
+                                            <input type="checkbox" name="penghargaan_index[]" id="penghargaan_index[]" value="<?= $j; ?>" <?= $checked[$j]; ?> />
+                                            <input type="hidden" name="penghargaan_id[]" id="penghargaan_id[]" value="<?= $penghargaan['Num']; ?>" />
+                                        </td>
                                         <td><?php
                                             switch ($penghargaan['Month']) {
                                                 case '1':
@@ -706,6 +755,7 @@
                                         </td>
                                     </tr>
                                 <?php
+                                    $j++;
                                 endforeach
                                 ?>
                             </tbody>
@@ -739,12 +789,23 @@
                             <tbody>
                                 <?php
                                 $i = 1;
+                                $j = 0;
                                 foreach ($data_latih as $latih) :
                                 ?>
                                     <tr>
                                         <td><?php echo $i;
                                             $i++; ?></td>
-                                        <td><input type="checkbox" name="latih_id[]" id="latih_id[]" value="<?= $latih['Num']; ?>" /></td>
+                                        <td>
+                                            <?php
+                                            if (in_array($latih['Num'], $id15)) {
+                                                $checked[$j] = 'checked';
+                                            } else {
+                                                $checked[$j] = '';
+                                            }
+                                            ?>
+                                            <input type="checkbox" name="latih_index[]" id="latih_index[]" value="<?= $latih['Num']; ?>" <?= $checked[$j]; ?> />
+                                            <input type="hidden" name="latih_id[]" id="latih_id[]" value="<?= $latih['Num']; ?>" />
+                                        </td>
                                         <td><?= $latih['Name']; ?></td>
                                         <td><?= $latih['Organizer']; ?></td>
                                         <td><?= $latih['Kota']; ?></td>
@@ -831,6 +892,7 @@
                                         </td>
                                     </tr>
                                 <?php
+                                    $j++;
                                 endforeach
                                 ?>
                             </tbody>
@@ -865,12 +927,23 @@
                             <tbody>
                                 <?php
                                 $i = 1;
+                                $j = 0;
                                 foreach ($data_latih1 as $latih1) :
                                 ?>
                                     <tr>
                                         <td><?php echo $i;
                                             $i++; ?></td>
-                                        <td><input type="checkbox" name="latih1_id[]" id="latih1_id[]" value="<?= $latih1['Num']; ?>" /></td>
+                                        <td>
+                                            <?php
+                                            if (in_array($latih1['Num'], $id16)) {
+                                                $checked[$j] = 'checked';
+                                            } else {
+                                                $checked[$j] = '';
+                                            }
+                                            ?>
+                                            <input type="checkbox" name="latih1_index[]" id="latih1_index[]" value="<?= $j; ?>" <?= $checked[$j]; ?> />
+                                            <input type="hidden" name="latih1_id[]" id="latih1_id[]" value="<?= $latih1['Num']; ?>" />
+                                        </td>
                                         <td><?= $latih1['Name']; ?></td>
                                         <td><?= $latih1['Organizer']; ?></td>
                                         <td><?= $latih1['Kota']; ?></td>
@@ -957,6 +1030,7 @@
                                         </td>
                                     </tr>
                                 <?php
+                                    $j++;
                                 endforeach
                                 ?>
                             </tbody>
@@ -989,12 +1063,23 @@
                             <tbody>
                                 <?php
                                 $i = 1;
+                                $j = 0;
                                 foreach ($data_ajar as $ajar) :
                                 ?>
                                     <tr>
                                         <td><?php echo $i;
                                             $i++; ?></td>
-                                        <td><input type="checkbox" name="ajar_id[]" id="ajar_id[]" value="<?= $ajar['Num']; ?>" /></td>
+                                        <td>
+                                            <?php
+                                            if (in_array($ajar['Num'], $id4)) {
+                                                $checked[$j] = 'checked';
+                                            } else {
+                                                $checked[$j] = '';
+                                            }
+                                            ?>
+                                            <input type="checkbox" name="ajar_index[]" id="ajar_index[]" value="<?= $j; ?>" <?= $checked[$j]; ?> />
+                                            <input type="hidden" name="ajar_id[]" id="ajar_id[]" value="<?= $ajar['Num']; ?>" />
+                                        </td>
                                         <td><?= $ajar['StartPeriod'] . ' - ' . $ajar['EndPeriod']; ?></td>
                                         <td><?= $ajar['Institution']; ?></td>
                                         <td><?= $ajar['Name']; ?></td>
@@ -1073,6 +1158,7 @@
                                         </td>
                                     </tr>
                                 <?php
+                                    $j++;
                                 endforeach
                                 ?>
                             </tbody>
@@ -1104,12 +1190,23 @@
                             <tbody>
                                 <?php
                                 $i = 1;
+                                $j = 0;
                                 foreach ($data_sem as $sem) :
                                 ?>
                                     <tr>
                                         <td><?php echo $i;
                                             $i++; ?></td>
-                                        <td><input type="checkbox" name="sem_id[]" id="sem_id[]" value="<?= $sem['Num']; ?>" /></td>
+                                        <td>
+                                            <?php
+                                            if (in_array($sem['Num'], $id53)) {
+                                                $checked[$j] = 'checked';
+                                            } else {
+                                                $checked[$j] = '';
+                                            }
+                                            ?>
+                                            <input type="checkbox" name="sem_index[]" id="sem_index[]" value="<?= $j; ?>" <?= $checked[$j]; ?> />
+                                            <input type="hidden" name="sem_id[]" id="sem_id[]" value="<?= $sem['Num']; ?>" />
+                                        </td>
                                         <td><?= $sem['Month'] . '-' . $sem['Year']; ?></td>
                                         <td><?= $sem['Name']; ?></td>
                                         <td><?= $sem['Organizer']; ?></td>
@@ -1172,6 +1269,7 @@
                                         </td>
                                     </tr>
                                 <?php
+                                    $j++;
                                 endforeach
                                 ?>
                             </tbody>

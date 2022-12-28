@@ -8,11 +8,11 @@
         <div class="card">
             <div class="card-body">
 
-                <form action="<?php echo base_url(); ?>/nilairpl/k3lhsimpan" method="post" enctype="multipart/form-data">
+                <form action="<?php echo base_url(); ?>/mannilairpl/k3lhsimpan" method="post" enctype="multipart/form-data">
                     <div class="sticky">
                         <input type="hidden" id="mhs_id" name="mhs_id" value=<?= $mhs_id; ?>>
                         <input type="hidden" id="dosen_id" name="dosen_id" value=<?= $dosen_id; ?>>
-                        <a href="<?= base_url(); ?>/nilairpl/docs/<?= $mhs_id; ?>/<?= $dosen_id; ?>">Kembali</a>
+                        <a href="<?= base_url(); ?>/mannilairpl/penilaianrpl/<?= $mhs_id; ?>/<?= $dosen_id; ?>">Kembali</a>
                         <button type="submit" name="submit" value="submit" class="btn btn-primary col">Simpan Data K3LH</button>
                     </div>
 

@@ -8,13 +8,180 @@
         <div class="card">
             <div class="card-body">
 
-                <form action="<?php echo base_url(); ?>/nilairpl/k3lhsimpan" method="post" enctype="multipart/form-data">
+                <?php if (session()->getFlashdata('msg')) : ?>
+                    <div class="alert alert-success"><?= session()->getFlashdata('msg') ?></div>
+                <?php endif; ?>
+
+                <div class="col">
+                    <div class="row">
+                        &nbsp;
+                    </div>
+                </div>
+
+                <form action="<?php echo base_url(); ?>/mannilairpl/kodeetiksimpan" method="post" enctype="multipart/form-data">
                     <div class="sticky">
                         <input type="hidden" id="mhs_id" name="mhs_id" value=<?= $mhs_id; ?>>
                         <input type="hidden" id="dosen_id" name="dosen_id" value=<?= $dosen_id; ?>>
-                        <a href="<?= base_url(); ?>/nilairpl/docs/<?= $mhs_id; ?>/<?= $dosen_id; ?>">Kembali</a>
-                        <button type="submit" name="submit" value="submit" class="btn btn-primary col">Simpan Data K3LH</button>
+                        <a href="<?= base_url(); ?>/mannilairpl/penilaianrpl/<?= $mhs_id; ?>/<?= $dosen_id; ?>">Kembali</a>
+                        <button type="submit" name="submit" value="submit" class="btn btn-primary col">Simpan Data Kode Etik</button>
                     </div>
+
+                    <!--UserFair21-->
+                    <?php if (isset($data_etik) && ($data_etik != "kosong")) {
+                    ?>
+                        <h3>II.1. Referensi Kode Etik dan Etika Profesi (#) (W1)</h3>
+                        <table id="tabledata" class="display table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Check</th>
+                                    <th>Nama</th>
+                                    <th>Alamat</th>
+                                    <th>No. Telepon</th>
+                                    <th>Email</th>
+                                    <th>Hubungan</th>
+                                    <th>Nilai Q</th>
+                                    <th>Nilai R</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $i = 1;
+                                $j = 0;
+                                foreach ($data_etik as $etik) :
+                                ?>
+                                    <tr>
+                                        <td><?php echo $i;
+                                            $i++; ?></td>
+                                        <td>
+                                            <?php
+                                            if (in_array($etik['Num'], $id21)) {
+                                                $checked[$j] = 'checked';
+                                            } else {
+                                                $checked[$j] = '';
+                                            }
+                                            ?>
+                                            <input type="checkbox" name="etik_index[]" id="etik_index[]" value="<?= $j; ?>" <?= $checked[$j]; ?> />
+                                            <input type="hidden" name="etik_id[]" id="etik_id[]" value=<?= $etik['Num']; ?> />
+                                        </td>
+                                        <td><?= $etik['Name']; ?></td>
+                                        <td><?= $etik['Addr'] . "<br />" . $etik['City'] . ', ' . $etik['Prov'] . ', ' . $etik['Country']; ?>
+                                        </td>
+                                        <td><?= $etik['Pnum']; ?></td>
+                                        <td><?= $etik['Email']; ?></td>
+                                        <td><?= $etik['Relation']; ?></td>
+                                        <td>
+                                            <select name="nilaietik_q[]" id="nilaietik_q[]">
+                                                <option value="4">4</option>
+                                                <option value="3">3</option>
+                                                <option value="2">2</option>
+                                                <option value="1">1</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select name="nilaietik_r[]" id="nilaietik_r[]">
+                                                <option value="4">4</option>
+                                                <option value="3">3</option>
+                                                <option value="2">2</option>
+                                                <option value="1">1</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                <?php
+                                    $j++;
+                                endforeach
+                                ?>
+                            </tbody>
+                        </table>
+                        <table>
+                            <tr>
+                                <th>Jumlah Referensi</th>
+                                <th width="30px">&nbsp;</th>
+                                <th>Nilai P</th>
+                            </tr>
+                            <tr>
+                                <td><?= $jumlah_etik; ?></td>
+                                <td>&nbsp;</td>
+                                <td>
+                                    <select name="nilaietik_p" id="nilaietik_p">
+                                        <option value="4" <?= $jumlah_etik >= 4 ? 'selected' : ''; ?>>4</option>
+                                        <option value="3" <?= $jumlah_etik == 3 ? 'selected' : ''; ?>>3</option>
+                                        <option value="2" <?= $jumlah_etik == 2 ? 'selected' : ''; ?>>2</option>
+                                        <option value="1" <?= $jumlah_etik == 1 ? 'selected' : ''; ?>>1</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </table>
+                    <?php } ?>
+                    <br />
+                    <!-- UserFair22 -->
+                    <?php if (isset($data_pendapat) && ($data_pendapat != "kosong")) {
+                    ?>
+                        <h3>II.2. Pengertian, Pendapat dan Pengalaman Sendiri (W1)</h3>
+                        <table id="tabledata" class="display table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Check</th>
+                                    <th>Pendapat</th>
+                                    <th>Nilai P</th>
+                                    <th>Nilai Q</th>
+                                    <th>Nilai R</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $i = 1;
+                                $j = 0;
+                                foreach ($data_pendapat as $dapat) :
+                                ?>
+                                    <tr>
+                                        <td><?php echo $i;
+                                            $i++; ?></td>
+                                        <td>
+                                            <?php
+                                            if (in_array($dapat['Num'], $id22)) {
+                                                $checked[$j] = 'checked';
+                                            } else {
+                                                $checked[$j] = '';
+                                            }
+                                            ?>
+                                            <input type="checkbox" name="dapat_index[]" id="dapat_index[]" value="<?= $j; ?>" <?= $checked[$j]; ?> />
+                                            <input type="hidden" name="dapat_id[]" id="dapat_id[]" value="<?= $dapat['Num']; ?>" />
+                                        </td>
+                                        <td><?= $dapat['Desc']; ?></td>
+                                        <td>
+                                            <select name="nilaidapat_p[]" id="nilaidapat_p[]">
+                                                <option value="4">4</option>
+                                                <option value="3">3</option>
+                                                <option value="2">2</option>
+                                                <option value="1">1</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select name="nilaidapat_q[]" id="nilaidapat_q[]">
+                                                <option value="4">4</option>
+                                                <option value="3">3</option>
+                                                <option value="2">2</option>
+                                                <option value="1">1</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select name="nilaidapat_r[]" id="nilaidapat_r[]">
+                                                <option value="4">4</option>
+                                                <option value="3">3</option>
+                                                <option value="2">2</option>
+                                                <option value="1">1</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                <?php
+                                    $j++;
+                                endforeach
+                                ?>
+                            </tbody>
+                        </table>
+                    <?php } ?>
 
                     <!--UserFair13-->
                     <?php if (isset($data_org) && ($data_org != "kosong")) {
@@ -163,7 +330,7 @@
                                                 $posscore = 4;
                                             }
                                             ?>
-                                            <select name="nilaorg_q[]" id="nilaiorg_q[]">
+                                            <select name="nilaiorg_q[]" id="nilaiorg_q[]">
                                                 <option value="4" <?= $posscore == 4 ? 'selected' : ''; ?>>4</option>
                                                 <option value="3" <?= $posscore == 3 ? 'selected' : ''; ?>>3</option>
                                                 <option value="2" <?= $posscore == 2 ? 'selected' : ''; ?>>2</option>
@@ -233,6 +400,7 @@
                             </tr>
                         </table>
                     <?php } ?>
+
                     <!--UserFair14-->
                     <?php if (isset($data_harga) && ($data_harga != "kosong")) {
                     ?>
@@ -393,7 +561,7 @@
                                             } elseif ($penghargaan['InstituteType'] == 'Reg') {
                                                 $typescore = 3;
                                             } elseif ($penghargaan['InstituteType'] == 'Int') {
-                                                $ypescore = 4;
+                                                $typescore = 4;
                                             }
                                             ?>
                                             <select name="nilaipenghargaan_r[]" id="nilaipenghargaan_r[]">
@@ -412,7 +580,7 @@
                         </table>
                     <?php } ?>
                     <!--UserFair16-->
-                    <?php if (isset($data_latih1) && ($data_latih1 != "kosong")) {
+                    <?php if (isset($data_latih) && ($data_latih != "kosong")) {
                     ?>
                         <br />
                         <h3>I.6. Sertifikat Kompetensi dan Bidang Lainnya (yang Relevan) Yang Diikuti (#) (W1,W4)</h3>
@@ -441,7 +609,7 @@
                                 <?php
                                 $i = 1;
                                 $j = 0;
-                                foreach ($data_latih1 as $latih) :
+                                foreach ($data_latih as $latih) :
                                 ?>
                                     <tr>
                                         <td><?php echo $i;

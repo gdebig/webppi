@@ -403,11 +403,11 @@ class Manpeserta extends BaseController
                 foreach ($userid as $id) {
                     $mhs = $model->where('mhs_id', $id)->countAllResults();
                     if ($mhs >= 2) {
-                        $session->setFlashdata('errmsg', 'Mahasiswa yang sama, hanya boleh memiliki dua pembimbing.');
+                        $session->setFlashdata('errmsg', 'Mahasiswa yang sama, hanya boleh memiliki satu pembimbing.');
                         return redirect()->to('/manpeserta');
                     } else {
                         $data = array(
-                            'mhs_id' => $userid,
+                            'mhs_id' => $id,
                             'dosen_id' => $dosbing,
                             'date_created' => date('Y-m-d'),
                             'date_modified' => date('Y-m-d')
@@ -456,11 +456,11 @@ class Manpeserta extends BaseController
                 foreach ($userid as $id) {
                     $mhs = $model1->where('mhsrpl_id', $id)->countAllResults();
                     if ($mhs >= 2) {
-                        $session->setFlashdata('errmsg', 'Mahasiswa yang sama, hanya boleh memiliki dua pembimbing.');
+                        $session->setFlashdata('errmsg', 'Mahasiswa yang sama, hanya boleh memiliki satu penilai.');
                         return redirect()->to('/manpeserta');
                     } else {
                         $data = array(
-                            'mhsrpl_id' => $userid,
+                            'mhsrpl_id' => $id,
                             'dosenrpl_id' => $dosbing,
                             'date_created' => date('Y-m-d'),
                             'date_modified' => date('Y-m-d')

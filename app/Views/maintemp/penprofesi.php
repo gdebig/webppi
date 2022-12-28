@@ -8,12 +8,12 @@
         <div class="card">
             <div class="card-body">
 
-                <form action="<?php echo base_url(); ?>/nilairpl/studikasussimpan" method="post" enctype="multipart/form-data">
+                <form action="<?php echo base_url(); ?>/mannilairpl/profesisimpan" method="post" enctype="multipart/form-data">
                     <div class="sticky">
                         <input type="hidden" id="mhs_id" name="mhs_id" value=<?= $mhs_id; ?>>
                         <input type="hidden" id="dosen_id" name="dosen_id" value=<?= $dosen_id; ?>>
-                        <a href="<?= base_url(); ?>/nilairpl/docs/<?= $mhs_id; ?>/<?= $dosen_id; ?>">Kembali</a>
-                        <button type="submit" name="submit" value="submit" class="btn btn-primary col">Simpan Data Studi Kasus</button>
+                        <a href="<?= base_url(); ?>/mannilairpl/penilaianrpl/<?= $mhs_id; ?>/<?= $dosen_id; ?>">Kembali</a>
+                        <button type="submit" name="submit" value="submit" class="btn btn-primary col">Simpan Data Profesionalisme</button>
                     </div>
                     <!--UserFair3-->
                     <?php if (isset($data_kerja) && ($data_kerja != "kosong")) { ?>
@@ -225,512 +225,7 @@
                             </tbody>
                         </table>
                     <?php } ?>
-                    <!--UserFair4-->
-                    <?php if (isset($data_ajar) && ($data_ajar != "kosong")) {
-                    ?>
-                        <br />
-                        <h3>IV. Pengalaman Mengajar Pelajaran Keinsinyuran dan/atau Manajemen dan/atau Pengalaman Mengembangkan Pendidikan/Pelatihan Keinsinyuran dan/atau Manajemen (W2,W3,W4,P5)</h3>
-                        <table id="tabledata" class="display table table-bordered table-hover">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Check</th>
-                                    <th>Perioda</th>
-                                    <th>Nama Perguruan Tinggi/Lembaga</th>
-                                    <th>Nama mata ajaran</th>
-                                    <th>Lokasi</th>
-                                    <th>Perioda</th>
-                                    <th>Jabatan pada Perguruan Tinggi/Lembaga</th>
-                                    <th>Jumlah JAM atau S.K.S</th>
-                                    <th>Uraian Singkat yang Diajarkan/Dikembangkan</th>
-                                    <th>Bukti Pengalaman Mengajar</th>
-                                    <th>Klaim Kompetensi</th>
-                                    <th>Nilai P</th>
-                                    <th>Nilai Q</th>
-                                    <th>Nilai R</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                $i = 1;
-                                $j = 0;
-                                foreach ($data_ajar as $ajar) :
-                                ?>
-                                    <tr>
-                                        <td><?php echo $i;
-                                            $i++; ?></td>
-                                        <td>
-                                            <?php
-                                            if (in_array($ajar['Num'], $id4)) {
-                                                $checked[$j] = 'checked';
-                                            } else {
-                                                $checked[$j] = '';
-                                            }
-                                            ?>
-                                            <input type="checkbox" name="ajar_index[]" id="ajar_index[]" value="<?= $j; ?>" <?= $checked[$j]; ?> />
-                                            <input type="hidden" name="ajar_id[]" id="ajar_id[]" value="<?= $ajar['Num']; ?>" />
-                                        </td>
-                                        <td><?= $ajar['StartPeriod'] . ' - ' . $ajar['EndPeriod']; ?></td>
-                                        <td><?= $ajar['Institution']; ?></td>
-                                        <td><?= $ajar['Name']; ?></td>
-                                        <td><?= $ajar['LocCity'] . ', ' . $ajar['LocProv'] . ', ' . $ajar['LocCountry']; ?></td>
-                                        <td><?php
-                                            switch ($ajar['Period']) {
-                                                case 'smp9':
-                                                    echo "1 - 9 tahun";
-                                                    break;
-                                                case 'smp14':
-                                                    echo "10 - 14 tahun";
-                                                    break;
-                                                case 'smpe19':
-                                                    echo "15 - 19 tahun";
-                                                    break;
-                                                case 'lbih20':
-                                                    echo "> dari 20 tahun";
-                                                    break;
-                                            }
-                                            ?></td>
-                                        <td><?php
-                                            switch ($ajar['Position']) {
-                                                case 'Stf':
-                                                    echo "Staf Pengajar";
-                                                    break;
-                                                case 'Pim':
-                                                    echo "Pimpinan";
-                                                    break;
-                                            }
-                                            ?></td>
-                                        <td><?php
-                                            switch ($ajar['Skshour']) {
-                                                case 'sks1':
-                                                    echo "1 SKS / 15 Jam";
-                                                    break;
-                                                case 'sks2':
-                                                    echo "2 - 3 SKS / 30 - 45 Jam";
-                                                    break;
-                                                case 'sks4':
-                                                    echo "4 SKS / 60 Jam";
-                                                    break;
-                                            }
-                                            ?></td>
-                                        <td><?= $ajar['Desc']; ?></td>
-                                        <td><?php
-                                            if (!empty($ajar['File'])) {
-                                                echo "<a href='" . base_url('uploads/docs/' . $ajar['File']) . "' target='_blank'>" . "Lihat Bukti" . "</a>";
-                                            } else {
-                                                echo "";
-                                            }
-                                            ?></td>
-                                        <td><?= $ajar['kompetensi']; ?></td>
-                                        <td>
-                                            <select name="nilaiajar_p[]" id="nilaiajar_p[]">
-                                                <option value="4">4</option>
-                                                <option value="3">3</option>
-                                                <option value="2">2</option>
-                                                <option value="1">1</option>
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <select name="nilaiajar_q[]" id="nilaiajar_q[]">
-                                                <option value="4">4</option>
-                                                <option value="3">3</option>
-                                                <option value="2">2</option>
-                                                <option value="1">1</option>
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <select name="nilaiajar_r[]" id="nilaiajar_r[]">
-                                                <option value="4">4</option>
-                                                <option value="3">3</option>
-                                                <option value="2">2</option>
-                                                <option value="1">1</option>
-                                            </select>
-                                        </td>
-                                    </tr>
-                                <?php
-                                    $j++;
-                                endforeach
-                                ?>
-                            </tbody>
-                        </table>
-                    <?php } ?>
-                    <!--UserFair51-->
-                    <?php
-                    if (isset($data_kartul) && ($data_kartul != "kosong")) {
-                    ?>
-                        <br />
-                        <h3>V.1. Karya Tulis di Bidang Keinsinyuran yang Dipublikasikan (W4)</h3>
-                        <table id="tabledata" class="display table table-bordered table-hover">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Check</th>
-                                    <th>Bulan-Tahun</th>
-                                    <th>Judul Karya Tulis</th>
-                                    <th>Nama Media Publikasi</th>
-                                    <th>Lokasi</th>
-                                    <th>Media Publikasi Tingkat</th>
-                                    <th>Tingkat Kesulitan dan Manfaatnya</th>
-                                    <th>Uraian Singkat Materi yang Dipublikasikan</th>
-                                    <th>Bukti Karya Tulis</th>
-                                    <th>Klaim Kompetensi</th>
-                                    <th>Nilai P</th>
-                                    <th>Nilai Q</th>
-                                    <th>Nilai R</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                $i = 1;
-                                $j = 0;
-                                foreach ($data_kartul as $kartul) :
-                                ?>
-                                    <tr>
-                                        <td><?php echo $i;
-                                            $i++; ?></td>
-                                        <td>
-                                            <?php
-                                            if (in_array($kartul['Num'], $id51)) {
-                                                $checked[$j] = 'checked';
-                                            } else {
-                                                $checked[$j] = '';
-                                            }
-                                            ?>
-                                            <input type="checkbox" name="kartul_index[]" id="kartul_index[]" value="<?= $j; ?>" <?= $checked[$j]; ?> />
-                                            <input type="hidden" name="kartul_id[]" id="kartul_id[]" value="<?= $kartul['Num']; ?>" />
-                                        </td>
-                                        <td><?= $kartul['Month'] . ' - ' . $kartul['Year']; ?></td>
-                                        <td><?= $kartul['Name']; ?></td>
-                                        <td><?= $kartul['Media']; ?></td>
-                                        <td><?= $kartul['LocCity'] . ", " . $kartul['LocCountry'] ?></td>
-                                        <td><?php
-                                            switch ($kartul['Mediatype']) {
-                                                case "Lok":
-                                                    echo "Dimuat di Media Lokal";
-                                                    break;
-                                                case "Nas":
-                                                    echo "Dimuat di Media Nasional";
-                                                    break;
-                                                case "Int":
-                                                    echo "Dimuat di Media Internasional";
-                                                    break;
-                                            }
-                                            ?></td>
-                                        <td><?php
-                                            switch ($kartul['Diffbenefit']) {
-                                                case "ren":
-                                                    echo "Rendah";
-                                                    break;
-                                                case "sed":
-                                                    echo "Sedang";
-                                                    break;
-                                                case "tin":
-                                                    echo "Tinggi";
-                                                    break;
-                                                case "stin":
-                                                    echo "Sangat Tinggi";
-                                                    break;
-                                            }
-                                            ?></td>
-                                        <td><?= $kartul['Desc']; ?></td>
-                                        <td><a href="<?= base_url(); ?>/uploads/docs/<?= $kartul['File']; ?>" target="_blank">Lihat Bukti</a></td>
-                                        <td><?= $kartul['kompetensi']; ?></td>
-                                        <td>
-                                            <select name="nilaikartul_p[]" id="nilaikartul_p[]">
-                                                <option value="1">1</option>
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <?php
-                                            if ($kartul['Mediatype'] == "Lok") {
-                                                $typescore = 1;
-                                            } elseif ($kartul['Mediatype'] == "Nas") {
-                                                $typescore = 2;
-                                            } else {
-                                                $typescore = 3;
-                                            }
-                                            ?>
-                                            <select name="nilaikartul_q[]" id="nilaikartul_q[]">
-                                                <option value="4" <?= $typescore == 4 ? 'selected' : ''; ?>>4</option>
-                                                <option value="3" <?= $typescore == 3 ? 'selected' : ''; ?>>3</option>
-                                                <option value="2" <?= $typescore == 2 ? 'selected' : ''; ?>>2</option>
-                                                <option value="1" <?= $typescore == 1 ? 'selected' : ''; ?>>1</option>
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <?php
-                                            if ($kartul['Diffbenefit'] == 'Rendah') {
-                                                $diffscore = 1;
-                                            } elseif ($kartul['Diffbenefit'] == 'Sedang') {
-                                                $diffscore = 2;
-                                            } elseif ($kartul['Diffbenefit'] == 'Tinggi') {
-                                                $diffscore = 3;
-                                            } elseif ($kartul['Diffbenefit'] == 'Sangat Tinggi') {
-                                                $diffscore = 4;
-                                            } else {
-                                                $diffscore = '';
-                                            }
-                                            ?>
-                                            <select name="nilaikartul_r[]" id="nilaikartul_r[]">
-                                                <option value="4" <?= $diffscore == 4 ? 'selected' : ''; ?>>4</option>
-                                                <option value="3" <?= $diffscore == 3 ? 'selected' : ''; ?>>3</option>
-                                                <option value="2" <?= $diffscore == 2 ? 'selected' : ''; ?>>2</option>
-                                                <option value="1" <?= $diffscore == 1 ? 'selected' : ''; ?>>1</option>
-                                            </select>
-                                        </td>
-                                    </tr>
-                                <?php
-                                    $j++;
-                                endforeach
-                                ?>
-                            </tbody>
-                        </table>
-                    <?php } ?>
-                    <!--UserFair52-->
-                    <?php
-                    if (isset($data_sem) && ($data_sem != "kosong")) {
-                    ?>
-                        <br />
-                        <h3>V.2. Makalah/Tulisan Yang Disajikan Dalam Seminar/Lokakarya Keinsinyuran (W4)</h3>
-                        <table id="tabledata" class="display table table-bordered table-hover">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Check</th>
-                                    <th>Bulan-Tahun</th>
-                                    <th>Judul Makalah/Tulisan</th>
-                                    <th>Nama Seminar/Lokakarya</th>
-                                    <th>Penyelenggara</th>
-                                    <th>Lokasi</th>
-                                    <th>Seminar/Lokakarya Tingkat</th>
-                                    <th>Tingkat Kesulitan dan Manfaat</th>
-                                    <th>Uraian Singkat Materi Makalah/Tulisan</th>
-                                    <th>Bukti Seminar</th>
-                                    <th>Klaim Kompetensi</th>
-                                    <th>Nilai P</th>
-                                    <th>Nilai Q</th>
-                                    <th>Nilai R</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                $i = 1;
-                                $j = 0;
-                                foreach ($data_sem as $sem) :
-                                ?>
-                                    <tr>
-                                        <td><?php echo $i;
-                                            $i++; ?></td>
-                                        <td>
-                                            <?php
-                                            if (in_array($sem['Num'], $id52)) {
-                                                $checked[$j] = 'checked';
-                                            } else {
-                                                $checked[$j] = '';
-                                            }
-                                            ?>
-                                            <input type="checkbox" name="sem_index[]" id="sem_index[]" value="<?= $j; ?>" <?= $checked[$j]; ?> />
-                                            <input type="hidden" name="sem_id[]" id="sem_id[]" value="<?= $sem['Num']; ?>" />
-                                        </td>
-                                        <td><?= $sem['Month'] . '-' . $sem['Year']; ?></td>
-                                        <td><?= $sem['PaperName']; ?></td>
-                                        <td><?= $sem['Name']; ?></td>
-                                        <td><?= $sem['Organizer']; ?></td>
-                                        <td><?= $sem['LocCity'] . ", " . $sem['LocCountry'] ?></td>
-                                        <td><?php
-                                            switch ($sem['Level']) {
-                                                case "Lok":
-                                                    echo "Pada Seminar Lokal";
-                                                    break;
-                                                case "Nas":
-                                                    echo "Pada Seminar Nasional";
-                                                    break;
-                                                case "Int":
-                                                    echo "Pada Seminar Internasional";
-                                                    break;
-                                            }
-                                            ?></td>
-                                        <td><?php
-                                            switch ($sem['DiffBenefit']) {
-                                                case "ren":
-                                                    echo "Rendah";
-                                                    break;
-                                                case "sed":
-                                                    echo "Sedang";
-                                                    break;
-                                                case "tin":
-                                                    echo "Tinggi";
-                                                    break;
-                                                case "stin":
-                                                    echo "Sangat Tinggi";
-                                                    break;
-                                            }
-                                            ?></td>
-                                        <td><?= $sem['Desc']; ?></td>
-                                        <td><a href="<?= base_url(); ?>/uploads/docs/<?= $sem['File']; ?>" target="_blank">Lihat Bukti</a></td>
-                                        <td><?= $sem['kompetensi']; ?></td>
-                                        <td>
-                                            <select name="nilaisem_p[]" id="nilaisem_p[]">
-                                                <option value="1">1</option>
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <?php
-                                            if ($sem['Level'] == "Lok") {
-                                                $typescore = 1;
-                                            } elseif ($sem['Level'] == "Nas") {
-                                                $typescore = 2;
-                                            } else {
-                                                $typescore = 3;
-                                            }
-                                            ?>
-                                            <select name="nilaisem_q[]" id="nilaisem_q[]">
-                                                <option value="4" <?= $typescore == 4 ? 'selected' : ''; ?>>4</option>
-                                                <option value="3" <?= $typescore == 3 ? 'selected' : ''; ?>>3</option>
-                                                <option value="2" <?= $typescore == 2 ? 'selected' : ''; ?>>2</option>
-                                                <option value="1" <?= $typescore == 1 ? 'selected' : ''; ?>>1</option>
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <?php
-                                            if ($sem['DiffBenefit'] == 'Rendah') {
-                                                $diffscore = 1;
-                                            } elseif ($sem['DiffBenefit'] == 'Sedang') {
-                                                $diffscore = 2;
-                                            } elseif ($sem['DiffBenefit'] == 'Tinggi') {
-                                                $diffscore = 3;
-                                            } elseif ($sem['DiffBenefit'] == 'Sangat Tinggi') {
-                                                $diffscore = 4;
-                                            } else {
-                                                $diffscore = '';
-                                            }
-                                            ?>
-                                            <select name="nilaisem_r[]" id="nilaisem_r[]">
-                                                <option value="4" <?= $diffscore == 4 ? 'selected' : ''; ?>>4</option>
-                                                <option value="3" <?= $diffscore == 3 ? 'selected' : ''; ?>>3</option>
-                                                <option value="2" <?= $diffscore == 2 ? 'selected' : ''; ?>>2</option>
-                                                <option value="1" <?= $diffscore == 1 ? 'selected' : ''; ?>>1</option>
-                                            </select>
-                                        </td>
-                                    </tr>
-                                <?php
-                                    $j++;
-                                endforeach
-                                ?>
-                            </tbody>
-                        </table>
-                    <?php } ?>
-                    <!--UserFair53-->
-                    <?php if (isset($data_sem1) && ($data_sem1 != "kosong")) {
-                    ?>
-                        <h3>V.3 Seminar/Lokakarya Keinsinyuran Yang Diikuti (W2) </h3>
-                        <table id="tabledata" class="display table table-bordered table-hover">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Check</th>
-                                    <th>Bulan-Tahun</th>
-                                    <th>Nama Seminar/Lokakarya</th>
-                                    <th>Penyelenggara</th>
-                                    <th>Lokasi</th>
-                                    <th>Seminar/Lokakarya Tingkat</th>
-                                    <th>Tingkat Kesulitan dan Manfaat</th>
-                                    <th>Uraian Singkat Materi Makalah/Tulisan</th>
-                                    <th>Bukti Seminar</th>
-                                    <th>Klaim Kompetensi</th>
-                                    <th>Nilai P</th>
-                                    <th>Nilai Q</th>
-                                    <th>Nilai R</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                $i = 1;
-                                $j = 0;
-                                foreach ($data_sem1 as $sem1) :
-                                ?>
-                                    <tr>
-                                        <td><?php echo $i;
-                                            $i++; ?></td>
-                                        <td>
-                                            <?php
-                                            if (in_array($sem1['Num'], $id53)) {
-                                                $checked[$j] = 'checked';
-                                            } else {
-                                                $checked[$j] = '';
-                                            }
-                                            ?>
-                                            <input type="checkbox" name="sem1_index[]" id="sem1_index[]" value="<?= $j; ?>" <?= $checked[$j]; ?> />
-                                            <input type="hidden" name="sem1_id[]" id="sem1_id[]" value="<?= $sem1['Num']; ?>" />
-                                        </td>
-                                        <td><?= $sem1['Month'] . '-' . $sem1['Year']; ?></td>
-                                        <td><?= $sem1['Name']; ?></td>
-                                        <td><?= $sem1['Organizer']; ?></td>
-                                        <td><?= $sem1['LocCity'] . ", " . $sem1['LocCountry'] ?></td>
-                                        <td><?php
-                                            switch ($sem1['Level']) {
-                                                case "Lok":
-                                                    echo "Pada Seminar Lokal";
-                                                    break;
-                                                case "Nas":
-                                                    echo "Pada Seminar Nasional";
-                                                    break;
-                                                case "Int":
-                                                    echo "Pada Seminar Internasional";
-                                                    break;
-                                            }
-                                            ?></td>
-                                        <td><?php
-                                            switch ($sem1['DiffBenefit']) {
-                                                case "ren":
-                                                    echo "Rendah";
-                                                    break;
-                                                case "sed":
-                                                    echo "Sedang";
-                                                    break;
-                                                case "tin":
-                                                    echo "Tinggi";
-                                                    break;
-                                                case "stin":
-                                                    echo "Sangat Tinggi";
-                                                    break;
-                                            }
-                                            ?></td>
-                                        <td><?= $sem1['Desc']; ?></td>
-                                        <td><a href="<?= base_url(); ?>/uploads/docs/<?= $sem1['File']; ?>" target="_blank">Lihat Bukti</a></td>
-                                        <td><?= $sem1['kompetensi']; ?></td>
-                                        <td>
-                                            <select name="nilaisem1_p[]" id="nilaisem1_p[]">
-                                                <option value="4">4</option>
-                                                <option value="3">3</option>
-                                                <option value="2">2</option>
-                                                <option value="1">1</option>
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <select name="nilaisem1_q[]" id="nilaisem1_q[]">
-                                                <option value="4">4</option>
-                                                <option value="3">3</option>
-                                                <option value="2">2</option>
-                                                <option value="1">1</option>
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <select name="nilaisem1_r[]" id="nilaisem1_r[]">
-                                                <option value="4">4</option>
-                                                <option value="3">3</option>
-                                                <option value="2">2</option>
-                                                <option value="1">1</option>
-                                            </select>
-                                        </td>
-                                    </tr>
-                                <?php
-                                    $j++;
-                                endforeach
-                                ?>
-                            </tbody>
-                        </table>
-                    <?php } ?>
+                    <br />
                     <!--UserFair12-->
                     <?php if (isset($data_pend) && ($data_pend != "kosong")) {
                     ?>
@@ -871,6 +366,401 @@
                             </tbody>
                         </table>
                     <?php } ?>
+                    <!--UserFair13-->
+                    <?php if (isset($data_org) && ($data_org != "kosong")) {
+                    ?>
+                        <br />
+                        <h3>I.3. Organisasi Profesi & Organisasi Lainnya Yang Dimasuki (W1)</h3>
+                        <table id="tabledata" class="display table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Check</th>
+                                    <th>Nama Organisasi</th>
+                                    <th>Jenis Organisasi</th>
+                                    <th>Kota</th>
+                                    <th>Negara</th>
+                                    <th>Perioda</th>
+                                    <th>Sudah Berapa Lama Menjadi Anggota</th>
+                                    <th>Jabatan Dalam Organisasi</th>
+                                    <th>Tingkatan Organisasi</th>
+                                    <th>Lingkup Kegiatan Organisasi</th>
+                                    <th>Aktifitas Dalam Organisasi</th>
+                                    <th>Bukti Menjadi Pengurus</th>
+                                    <th>Klaim Kompetensi</th>
+                                    <th width="5%">Nilai Q</th>
+                                    <th width="5%">Nilai R</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $i = 1;
+                                $j = 0;
+                                foreach ($data_org as $org) :
+                                ?>
+                                    <tr>
+                                        <td><?php echo $i;
+                                            $i++; ?></td>
+                                        <td>
+                                            <?php
+                                            if (in_array($org['Num'], $id13)) {
+                                                $checked[$j] = 'checked';
+                                            } else {
+                                                $checked[$j] = '';
+                                            }
+                                            ?>
+                                            <input type="checkbox" name="org_index[]" id="org_index[]" value="<?= $j; ?>" <?= $checked[$j]; ?> />
+                                            <input type="hidden" name="org_id[]" id="org_id[]" value="<?= $org['Num']; ?>" />
+                                        </td>
+                                        <td><?= $org['Name']; ?></td>
+                                        <td><?php
+                                            switch ($org['Type']) {
+                                                case "PII":
+                                                    echo "Organisasi PII";
+                                                    break;
+                                                case "Ins":
+                                                    echo "Organisasi Keinsinyuran Non PII";
+                                                    break;
+                                                case "Non":
+                                                    echo "Organisasi Non Keinsinyuran";
+                                                    break;
+                                            }
+                                            ?></td>
+                                        <td><?= $org['City']; ?></td>
+                                        <td><?= $org['Country']; ?></td>
+                                        <td><?= $org['StartPeriodBulan'] . " " . $org['StartPeriodYear'] . " hingga " . $org['EndPeriodBulan'] . " " . $org['EndPeriodYear']; ?>
+                                        </td>
+                                        <td><?php
+                                            switch ($org['Period']) {
+                                                case "sd5":
+                                                    echo "1 - 5 tahun";
+                                                    break;
+                                                case "smp10":
+                                                    echo "6 - 10 tahun";
+                                                    break;
+                                                case "smp15":
+                                                    echo "11 - 15 tahun";
+                                                    break;
+                                                case "lbih15":
+                                                    echo "Lebih dari 15 tahun";
+                                                    break;
+                                            }
+                                            ?></td>
+                                        <td><?php
+                                            switch ($org['Position']) {
+                                                case "Bias":
+                                                    echo "Anggota Biasa";
+                                                    break;
+                                                case "Peng":
+                                                    echo "Anggota Pengurus";
+                                                    break;
+                                                case "Pimp":
+                                                    echo "Pimpinan";
+                                                    break;
+                                            }
+                                            ?></td>
+                                        <td><?php
+                                            switch ($org['OrgLevel']) {
+                                                case "Lok":
+                                                    echo "Organisasi Lokal (Bukan Nasional)";
+                                                    break;
+                                                case "Nas":
+                                                    echo "Organisasi Nasional";
+                                                    break;
+                                                case "Reg":
+                                                    echo "Organisasi Regional";
+                                                    break;
+                                                case "Int":
+                                                    echo "Organisasi Internasional";
+                                                    break;
+                                            }
+                                            ?></td>
+                                        <td><?php
+                                            switch ($org['OrgScp']) {
+                                                case "Aso":
+                                                    echo "Asosiasi Profesi";
+                                                    break;
+                                                case "Pem":
+                                                    echo "Lembaga Pemerintahan";
+                                                    break;
+                                                case "Pen":
+                                                    echo "Lembaga Pendidikan";
+                                                    break;
+                                                case "Neg":
+                                                    echo "Badan Usaha Milik Negara";
+                                                    break;
+                                                case "Swa":
+                                                    echo "Badan Usaha Milik Swasta";
+                                                    break;
+                                                case "Mas":
+                                                    echo "Organisasi Kemasyarakatan";
+                                                    break;
+                                                case "Lai":
+                                                    echo "Lain-lain";
+                                                    break;
+                                            }
+                                            ?></td>
+                                        <td><?= $org['Desc']; ?></td>
+                                        <td><a href="<?= base_url(); ?>/uploads/docs/<?= $org['File']; ?>" target="_blank">Lihat Bukti</a></td>
+                                        <td><?= $org['kompetensi']; ?></td>
+                                        <td width="5%">
+                                            <?php
+                                            if ($org['Position'] == "Bias") {
+                                                $posscore = 2;
+                                            } elseif ($org['Position'] == "Peng") {
+                                                $posscore = 3;
+                                            } elseif ($org['Position'] == "Pimp") {
+                                                $posscore = 4;
+                                            }
+                                            ?>
+                                            <select name="nilaiorg_q[]" id="nilaiorg_q[]">
+                                                <option value="4" <?= $posscore == 4 ? 'selected' : ''; ?>>4</option>
+                                                <option value="3" <?= $posscore == 3 ? 'selected' : ''; ?>>3</option>
+                                                <option value="2" <?= $posscore == 2 ? 'selected' : ''; ?>>2</option>
+                                                <option value="1" <?= $posscore == 1 ? 'selected' : ''; ?>>1</option>
+                                            </select>
+                                        </td>
+                                        <td width="5%">
+                                            <?php
+                                            if ($org['OrgLevel'] == "Lok") {
+                                                $orgscore = 1;
+                                            } elseif ($org['OrgLevel'] == "Nas") {
+                                                $orgscore = 2;
+                                            } elseif ($org['OrgLevel'] == "Reg") {
+                                                $orgscore = 3;
+                                            } elseif ($org['OrgLevel'] == "Int") {
+                                                $orgscore = 4;
+                                            }
+                                            ?>
+                                            <select name="nilaiorg_r[]" id="nilaiorg_r[]">
+                                                <option value="4" <?= $orgscore == 4 ? 'selected' : ''; ?>>4</option>
+                                                <option value="3" <?= $orgscore == 3 ? 'selected' : ''; ?>>3</option>
+                                                <option value="2" <?= $orgscore == 2 ? 'selected' : ''; ?>>2</option>
+                                                <option value="1" <?= $orgscore == 1 ? 'selected' : ''; ?>>1</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                <?php
+                                    $j++;
+                                endforeach
+                                ?>
+                            </tbody>
+                        </table>
+                        <table>
+                            <tr>
+                                <th>Informasi jenis dan jumlah organisasi</th>
+                                <th width="30px">&nbsp;</th>
+                                <th>Nilai P</th>
+                            </tr>
+                            <tr>
+                                <td>Terdapat organisasi PII :
+                                    <?= !empty($org_pii) ? "Ya, ada." : "Tidak ada"; ?><br />Jumlah organisasi:
+                                    <?= $jumlah_org; ?></td>
+                                <td>&nbsp;</td>
+                                <td>
+                                    <?php
+                                    if (!empty($org_pii)) {
+                                        $score = 4;
+                                    } else {
+                                        if ($jumlah_org < 6) {
+                                            $score = 1;
+                                        } elseif ($jumlah_org < 16) {
+                                            $score = 2;
+                                        } elseif ($jumlah_org <= 20) {
+                                            $score = 3;
+                                        } else {
+                                            $score = 4;
+                                        }
+                                    }
+                                    ?>
+                                    <select name="nilaiorg_p" id="nilaiorg_p">
+                                        <option value="4" <?= $score == 4 ? 'selected' : ''; ?>>4</option>
+                                        <option value="3" <?= $score == 3 ? 'selected' : ''; ?>>3</option>
+                                        <option value="2" <?= $score == 2 ? 'selected' : ''; ?>>2</option>
+                                        <option value="1" <?= $score == 1 ? 'selected' : ''; ?>>1</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </table>
+                    <?php } ?>
+                    <!--UserFair14-->
+                    <?php if (isset($data_harga) && ($data_harga != "kosong")) {
+                    ?>
+                        <br />
+                        <h3>I.4. Tanda Penghargaan Yang Diterima (W1)</h3>
+                        <table id="tabledata" class="display table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Check</th>
+                                    <th>Tahun</th>
+                                    <th>Nama Tanda Penghargaan</th>
+                                    <th>Nama Lembaga yang Memberikan</th>
+                                    <th>Lokasi</th>
+                                    <th>Negara</th>
+                                    <th>Penghargaan yang diterima tingkat</th>
+                                    <th>Penghargaan diberikan oleh lembaga</th>
+                                    <th>Uraian Singkat Tanda Penghargaan</th>
+                                    <th>Bukti Penghargaan</th>
+                                    <th>Klaim Kompetensi</th>
+                                    <th>Nilai P</th>
+                                    <th>Nilai Q</th>
+                                    <th>Nilai R</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $i = 1;
+                                $j = 0;
+                                foreach ($data_harga as $penghargaan) :
+                                ?>
+                                    <tr>
+                                        <td><?php echo $i;
+                                            $i++; ?></td>
+                                        <td>
+                                            <?php
+                                            if (in_array($penghargaan['Num'], $id14)) {
+                                                $checked[$j] = 'checked';
+                                            } else {
+                                                $checked[$j] = '';
+                                            }
+                                            ?>
+                                            <input type="checkbox" name="penghargaan_index[]" id="penghargaan_index[]" value="<?= $j; ?>" <?= $checked[$j]; ?> />
+                                            <input type="hidden" name="penghargaan_id[]" id="penghargaan_id[]" value="<?= $penghargaan['Num']; ?>" />
+                                        </td>
+                                        <td><?php
+                                            switch ($penghargaan['Month']) {
+                                                case '1':
+                                                    $bulan = "Jan";
+                                                    break;
+                                                case '2':
+                                                    $bulan = "Feb";
+                                                    break;
+                                                case '3':
+                                                    $bulan = "Mar";
+                                                    break;
+                                                case '4':
+                                                    $bulan = "Apr";
+                                                    break;
+                                                case '5':
+                                                    $bulan = "Mei";
+                                                    break;
+                                                case '6':
+                                                    $bulan = "Jun";
+                                                    break;
+                                                case '7':
+                                                    $bulan = "Jul";
+                                                    break;
+                                                case '8':
+                                                    $bulan = "Agus";
+                                                    break;
+                                                case '9':
+                                                    $bulan = "Sep";
+                                                    break;
+                                                case '10':
+                                                    $bulan = "Okt";
+                                                    break;
+                                                case '11':
+                                                    $bulan = "Nov";
+                                                    break;
+                                                case '12':
+                                                    $bulan = "Des";
+                                                    break;
+                                            }
+                                            echo $bulan . ' - ' . $penghargaan['Year'];
+                                            ?></td>
+                                        <td><?= $penghargaan['Name']; ?></td>
+                                        <td><?= $penghargaan['Institute']; ?></td>
+                                        <td><?= $penghargaan['City'] . ', ' . $penghargaan['Prov']; ?></td>
+                                        <td><?= $penghargaan['Country']; ?></td>
+                                        <td>
+                                            <?php
+                                            switch ($penghargaan['Level']) {
+                                                case 'Mud':
+                                                    echo "Tingkatan Muda/Pemula";
+                                                    break;
+                                                case 'Mad':
+                                                    echo "Tingkatan Madya";
+                                                    break;
+                                                case 'Uta':
+                                                    echo "Tingkatan Utama";
+                                                    break;
+                                            }
+                                            ?>
+                                        </td>
+                                        <td>
+                                            <?php
+                                            switch ($penghargaan['InstituteType']) {
+                                                case 'Lok':
+                                                    echo "Penghargaan Lokal";
+                                                    break;
+                                                case 'Nas':
+                                                    echo "Penghargaan Nasional";
+                                                    break;
+                                                case 'Reg':
+                                                    echo "Penghargaan Regional";
+                                                    break;
+                                                case 'Int':
+                                                    echo "Penghargaan Internasional";
+                                                    break;
+                                            }
+                                            ?>
+                                        </td>
+                                        <td><?= $penghargaan['Desc']; ?></td>
+                                        <td><a href="<?= base_url(); ?>/uploads/docs/<?= $penghargaan['File']; ?>" target="_blank">Lihat Bukti</a></td>
+                                        <td><?= $penghargaan['kompetensi']; ?></td>
+                                        <td>
+                                            <select name="nilaipenghargaan_p[]" id="nilaipenghargaan_p[]">
+                                                <option value="4">4</option>
+                                                <option value="3">3</option>
+                                                <option value="2">2</option>
+                                                <option value="1" selected>1</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <?php
+                                            if ($penghargaan['Level'] == 'Mud') {
+                                                $levelscore = 2;
+                                            } elseif ($penghargaan['Level'] == 'Mad') {
+                                                $levelscore = 3;
+                                            } elseif ($penghargaan['Level'] == 'Uta') {
+                                                $levelscore = 4;
+                                            }
+                                            ?>
+                                            <select name="nilaipenghargaan_q[]" id="nilaipenghargaan_q[]">
+                                                <option value="4" <?= $levelscore == 4 ? 'selected' : ''; ?>>4</option>
+                                                <option value="3" <?= $levelscore == 3 ? 'selected' : ''; ?>>3</option>
+                                                <option value="2" <?= $levelscore == 2 ? 'selected' : ''; ?>>2</option>
+                                                <option value="1" <?= $levelscore == 1 ? 'selected' : ''; ?>>1</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <?php
+                                            if ($penghargaan['InstituteType'] == 'Lok') {
+                                                $typescore = 1;
+                                            } elseif ($penghargaan['InstituteType'] == 'Nas') {
+                                                $typescore = 2;
+                                            } elseif ($penghargaan['InstituteType'] == 'Reg') {
+                                                $typescore = 3;
+                                            } elseif ($penghargaan['InstituteType'] == 'Int') {
+                                                $typescore = 4;
+                                            }
+                                            ?>
+                                            <select name="nilaipenghargaan_r[]" id="nilaipenghargaan_r[]">
+                                                <option value="4" <?= $typescore == 4 ? 'selected' : ''; ?>>4</option>
+                                                <option value="3" <?= $typescore == 3 ? 'selected' : ''; ?>>3</option>
+                                                <option value="2" <?= $typescore == 2 ? 'selected' : ''; ?>>2</option>
+                                                <option value="1" <?= $typescore == 1 ? 'selected' : ''; ?>>1</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                <?php
+                                    $j++;
+                                endforeach
+                                ?>
+                            </tbody>
+                        </table>
+                    <?php } ?>
                     <!--UserFair15-->
                     <?php if (isset($data_latih) && ($data_latih != "kosong")) {
                     ?>
@@ -913,7 +803,7 @@
                                                 $checked[$j] = '';
                                             }
                                             ?>
-                                            <input type="checkbox" name="latih_index[]" id="latih_index[]" value="<?= $j; ?>" <?= $checked[$j]; ?> />
+                                            <input type="checkbox" name="latih_index[]" id="latih_index[]" value="<?= $latih['Num']; ?>" <?= $checked[$j]; ?> />
                                             <input type="hidden" name="latih_id[]" id="latih_id[]" value="<?= $latih['Num']; ?>" />
                                         </td>
                                         <td><?= $latih['Name']; ?></td>
@@ -1146,23 +1036,26 @@
                             </tbody>
                         </table>
                     <?php } ?>
-                    <!--UserFair6-->
-                    <?php if (isset($data_bahasa) && ($data_bahasa != "kosong")) {
+                    <!--UserFair4-->
+                    <?php if (isset($data_ajar) && ($data_ajar != "kosong")) {
                     ?>
-                        <br />
-                        <h3>VI. Bahasa yang Dikuasai (W4)</h3>
+                        <h3>IV. Pengalaman Mengajar Pelajaran Keinsinyuran dan/atau Manajemen dan/atau Pengalaman Mengembangkan Pendidikan/Pelatihan Keinsinyuran dan/atau Manajemen (W2,W3,W4,P5)</h3>
                         <table id="tabledata" class="display table table-bordered table-hover">
                             <thead>
                                 <tr>
                                     <th>No</th>
                                     <th>Check</th>
-                                    <th>Nama Bahasa</th>
-                                    <th>Jenis Bahasa</th>
-                                    <th>Kemampuan Verbal Aktif/Pasif</th>
-                                    <th>Jenis Tulisan yang Mampu Disusun</th>
-                                    <th>Nilai TOEFL atau yang Sejenisnya</th>
-                                    <th>Bukti Dokumen</th>
-                                    <th>Kompetensi</th>
+                                    <th>Perioda</th>
+                                    <th>Nama Perguruan Tinggi/Lembaga</th>
+                                    <th>Nama mata ajaran</th>
+                                    <th>Lokasi</th>
+                                    <th>Perioda</th>
+                                    <th>Jabatan pada Perguruan Tinggi/Lembaga</th>
+                                    <th>Jumlah JAM atau S.K.S</th>
+                                    <th>Uraian Singkat yang Diajarkan/Dikembangkan</th>
+                                    <th>Bukti Pengalaman Mengajar</th>
+                                    <th>Klaim Kompetensi</th>
+                                    <th>Nilai P</th>
                                     <th>Nilai Q</th>
                                     <th>Nilai R</th>
                                 </tr>
@@ -1171,84 +1064,96 @@
                                 <?php
                                 $i = 1;
                                 $j = 0;
-                                foreach ($data_bahasa as $bahasa) :
+                                foreach ($data_ajar as $ajar) :
                                 ?>
                                     <tr>
                                         <td><?php echo $i;
                                             $i++; ?></td>
                                         <td>
                                             <?php
-                                            if (in_array($bahasa['Num'], $id6)) {
+                                            if (in_array($ajar['Num'], $id4)) {
                                                 $checked[$j] = 'checked';
                                             } else {
                                                 $checked[$j] = '';
                                             }
                                             ?>
-                                            <input type="checkbox" name="bahasa_index[]" id="bahasa_index[]" value="<?= $j; ?>" <?= $checked[$j]; ?> />
-                                            <input type="hidden" name="bahasa_id[]" id="bahasa_id[]" value="<?= $bahasa['Num']; ?>" />
+                                            <input type="checkbox" name="ajar_index[]" id="ajar_index[]" value="<?= $j; ?>" <?= $checked[$j]; ?> />
+                                            <input type="hidden" name="ajar_id[]" id="ajar_id[]" value="<?= $ajar['Num']; ?>" />
                                         </td>
-                                        <td><?= $bahasa['Name']; ?></td>
+                                        <td><?= $ajar['StartPeriod'] . ' - ' . $ajar['EndPeriod']; ?></td>
+                                        <td><?= $ajar['Institution']; ?></td>
+                                        <td><?= $ajar['Name']; ?></td>
+                                        <td><?= $ajar['LocCity'] . ', ' . $ajar['LocProv'] . ', ' . $ajar['LocCountry']; ?></td>
                                         <td><?php
-                                            switch ($bahasa['LangType']) {
-                                                case 'Da':
-                                                    echo "Bahasa Daerah";
+                                            switch ($ajar['Period']) {
+                                                case 'smp9':
+                                                    echo "1 - 9 tahun";
                                                     break;
-                                                case 'Na':
-                                                    echo "Bahasa Nasional";
+                                                case 'smp14':
+                                                    echo "10 - 14 tahun";
                                                     break;
-                                                case 'In':
-                                                    echo "Bahasa Asing / International";
+                                                case 'smpe19':
+                                                    echo "15 - 19 tahun";
+                                                    break;
+                                                case 'lbih20':
+                                                    echo "> dari 20 tahun";
                                                     break;
                                             }
                                             ?></td>
                                         <td><?php
-                                            switch ($bahasa['VerbSkill']) {
-                                                case 'Pasif':
-                                                    echo "Pasif, tertulis";
+                                            switch ($ajar['Position']) {
+                                                case 'Stf':
+                                                    echo "Staf Pengajar";
                                                     break;
-                                                case 'Aktif':
-                                                    echo "Aktif, Tertulis/Lisan";
+                                                case 'Pim':
+                                                    echo "Pimpinan";
                                                     break;
                                             }
                                             ?></td>
-                                        <td><?= $bahasa['WriteType']; ?></td>
-                                        <td><?= $bahasa['LangMark']; ?></td>
-                                        <td><a href="<?= base_url(); ?>/uploads/docs/<?= $bahasa['File']; ?>" target="_blank">Lihat Bukti</a></td>
-                                        <td><?= $bahasa['kompetensi']; ?></td>
-                                        <td>
-                                            <?php
-                                            if ($bahasa['LangType'] == "Da") {
-                                                $typescore = 1;
-                                            } elseif ($bahasa['LangType'] == "Na") {
-                                                $typescore = 2;
-                                            } elseif ($bahasa['LangType'] == "In") {
-                                                $typescore = 3;
+                                        <td><?php
+                                            switch ($ajar['Skshour']) {
+                                                case 'sks1':
+                                                    echo "1 SKS / 15 Jam";
+                                                    break;
+                                                case 'sks2':
+                                                    echo "2 - 3 SKS / 30 - 45 Jam";
+                                                    break;
+                                                case 'sks4':
+                                                    echo "4 SKS / 60 Jam";
+                                                    break;
+                                            }
+                                            ?></td>
+                                        <td><?= $ajar['Desc']; ?></td>
+                                        <td><?php
+                                            if (!empty($ajar['File'])) {
+                                                echo "<a href='" . base_url('uploads/docs/' . $ajar['File']) . "' target='_blank'>" . "Lihat Bukti" . "</a>";
                                             } else {
-                                                $typescore = 3;
+                                                echo "";
                                             }
-                                            ?>
-                                            <select name="nilaibahasa_q[]" id="nilaibahasa_q[]">
-                                                <option value="4" <?= $typescore == 4 ? 'selected' : ''; ?>>4</option>
-                                                <option value="3" <?= $typescore == 3 ? 'selected' : ''; ?>>3</option>
-                                                <option value="2" <?= $typescore == 2 ? 'selected' : ''; ?>>2</option>
-                                                <option value="1" <?= $typescore == 1 ? 'selected' : ''; ?>>1</option>
+                                            ?></td>
+                                        <td><?= $ajar['kompetensi']; ?></td>
+                                        <td>
+                                            <select name="nilaiajar_p[]" id="nilaiajar_p[]">
+                                                <option value="4">4</option>
+                                                <option value="3">3</option>
+                                                <option value="2">2</option>
+                                                <option value="1">1</option>
                                             </select>
                                         </td>
                                         <td>
-                                            <?php
-                                            if ($bahasa['VerbSkill'] == "Pasif") {
-                                                $skillscore = 2;
-                                            } elseif ($bahasa['VerbSkill'] == "Aktif") {
-                                                $skillscore = 3;
-                                            } else {
-                                                $skillscore = 1;
-                                            }
-                                            ?>
-                                            <select name="nilaibahasa_r[]" id="nilaibahasa_r[]">
-                                                <option value="4" <?= $skillscore == 4 ? 'selected' : ''; ?>>4</option>
-                                                <option value="3" <?= $skillscore == 3 ? 'selected' : ''; ?>>3</option>
-                                                <option value="2" <?= $skillscore == 2 ? 'selected' : ''; ?>>2</option>
-                                                <option value="1" <?= $skillscore == 1 ? 'selected' : ''; ?>>1</option>
+                                            <select name="nilaiajar_q[]" id="nilaiajar_q[]">
+                                                <option value="4">4</option>
+                                                <option value="3">3</option>
+                                                <option value="2">2</option>
+                                                <option value="1">1</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select name="nilaiajar_r[]" id="nilaiajar_r[]">
+                                                <option value="4">4</option>
+                                                <option value="3">3</option>
+                                                <option value="2">2</option>
+                                                <option value="1">1</option>
                                             </select>
                                         </td>
                                     </tr>
@@ -1258,24 +1163,116 @@
                                 ?>
                             </tbody>
                         </table>
-                        <table>
-                            <tr>
-                                <th>Jumlah Bahasa</th>
-                                <th width="30px">&nbsp;</th>
-                                <th>Nilai P</th>
-                            </tr>
-                            <tr>
-                                <td><?= $jml_bahasa; ?></td>
-                                <td>&nbsp;</td>
-                                <td>
-                                    <select name="nilaibahasa_p" id="nilaibahasa_p">
-                                        <option value="4" <?= $jml_bahasa >= 4 ? 'selected' : ''; ?>>4</option>
-                                        <option value="3" <?= $jml_bahasa == 3 ? 'selected' : ''; ?>>3</option>
-                                        <option value="2" <?= $jml_bahasa <= 2 ? 'selected' : ''; ?>>2</option>
-                                        <option value="1">1</option>
-                                    </select>
-                                </td>
-                            </tr>
+                    <?php } ?>
+                    <!--UserFair53-->
+                    <?php if (isset($data_sem) && ($data_sem != "kosong")) {
+                    ?>
+                        <h3>V.3 Seminar/Lokakarya Keinsinyuran Yang Diikuti (W2) </h3>
+                        <table id="tabledata" class="display table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Check</th>
+                                    <th>Bulan-Tahun</th>
+                                    <th>Nama Seminar/Lokakarya</th>
+                                    <th>Penyelenggara</th>
+                                    <th>Lokasi</th>
+                                    <th>Seminar/Lokakarya Tingkat</th>
+                                    <th>Tingkat Kesulitan dan Manfaat</th>
+                                    <th>Uraian Singkat Materi Makalah/Tulisan</th>
+                                    <th>Bukti Seminar</th>
+                                    <th>Klaim Kompetensi</th>
+                                    <th>Nilai P</th>
+                                    <th>Nilai Q</th>
+                                    <th>Nilai R</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $i = 1;
+                                $j = 0;
+                                foreach ($data_sem as $sem) :
+                                ?>
+                                    <tr>
+                                        <td><?php echo $i;
+                                            $i++; ?></td>
+                                        <td>
+                                            <?php
+                                            if (in_array($sem['Num'], $id53)) {
+                                                $checked[$j] = 'checked';
+                                            } else {
+                                                $checked[$j] = '';
+                                            }
+                                            ?>
+                                            <input type="checkbox" name="sem_index[]" id="sem_index[]" value="<?= $j; ?>" <?= $checked[$j]; ?> />
+                                            <input type="hidden" name="sem_id[]" id="sem_id[]" value="<?= $sem['Num']; ?>" />
+                                        </td>
+                                        <td><?= $sem['Month'] . '-' . $sem['Year']; ?></td>
+                                        <td><?= $sem['Name']; ?></td>
+                                        <td><?= $sem['Organizer']; ?></td>
+                                        <td><?= $sem['LocCity'] . ", " . $sem['LocCountry'] ?></td>
+                                        <td><?php
+                                            switch ($sem['Level']) {
+                                                case "Lok":
+                                                    echo "Pada Seminar Lokal";
+                                                    break;
+                                                case "Nas":
+                                                    echo "Pada Seminar Nasional";
+                                                    break;
+                                                case "Int":
+                                                    echo "Pada Seminar Internasional";
+                                                    break;
+                                            }
+                                            ?></td>
+                                        <td><?php
+                                            switch ($sem['DiffBenefit']) {
+                                                case "ren":
+                                                    echo "Rendah";
+                                                    break;
+                                                case "sed":
+                                                    echo "Sedang";
+                                                    break;
+                                                case "tin":
+                                                    echo "Tinggi";
+                                                    break;
+                                                case "stin":
+                                                    echo "Sangat Tinggi";
+                                                    break;
+                                            }
+                                            ?></td>
+                                        <td><?= $sem['Desc']; ?></td>
+                                        <td><a href="<?= base_url(); ?>/uploads/docs/<?= $sem['File']; ?>" target="_blank">Lihat Bukti</a></td>
+                                        <td><?= $sem['kompetensi']; ?></td>
+                                        <td>
+                                            <select name="nilaisem_p[]" id="nilaisem_p[]">
+                                                <option value="4">4</option>
+                                                <option value="3">3</option>
+                                                <option value="2">2</option>
+                                                <option value="1">1</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select name="nilaisem_q[]" id="nilaisem_q[]">
+                                                <option value="4">4</option>
+                                                <option value="3">3</option>
+                                                <option value="2">2</option>
+                                                <option value="1">1</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select name="nilaisem_r[]" id="nilaisem_r[]">
+                                                <option value="4">4</option>
+                                                <option value="3">3</option>
+                                                <option value="2">2</option>
+                                                <option value="1">1</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                <?php
+                                    $j++;
+                                endforeach
+                                ?>
+                            </tbody>
                         </table>
                     <?php } ?>
                 </form>

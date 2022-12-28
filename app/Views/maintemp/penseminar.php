@@ -8,11 +8,11 @@
         <div class="card">
             <div class="card-body">
 
-                <form action="<?php echo base_url(); ?>/nilairpl/seminarsimpan" method="post" enctype="multipart/form-data">
+                <form action="<?php echo base_url(); ?>/mannilairpl/seminarsimpan" method="post" enctype="multipart/form-data">
                     <div class="sticky">
                         <input type="hidden" id="mhs_id" name="mhs_id" value=<?= $mhs_id; ?>>
                         <input type="hidden" id="dosen_id" name="dosen_id" value=<?= $dosen_id; ?>>
-                        <a href="<?= base_url(); ?>/nilairpl/docs/<?= $mhs_id; ?>/<?= $dosen_id; ?>">Kembali</a>
+                        <a href="<?= base_url(); ?>/mannilairpl/penilaianrpl/<?= $mhs_id; ?>/<?= $dosen_id; ?>">Kembali</a>
                         <button type="submit" name="submit" value="submit" class="btn btn-primary col">Simpan Data Seminar</button>
                     </div>
                     <!--UserFair51-->
@@ -190,7 +190,7 @@
                                                 $checked[$j] = '';
                                             }
                                             ?>
-                                            <input type="checkbox" name="sem_index[]" id="sem_index[]" value="<?= $j; ?>" <?= $checked[$j]; ?> />
+                                            <input type="checkbox" name="sem_index[]" id="sem_index[]" value="<?= $j; ?>" <?= $checked; ?> />
                                             <input type="hidden" name="sem_id[]" id="sem_id[]" value="<?= $sem['Num']; ?>" />
                                         </td>
                                         <td><?= $sem['Month'] . '-' . $sem['Year']; ?></td>
@@ -322,7 +322,7 @@
                                                 $checked[$j] = '';
                                             }
                                             ?>
-                                            <input type="checkbox" name="ajar_index[]" id="ajar_index[]" value="<?= $j; ?>" <?= $checked[$j]; ?> />
+                                            <input type="checkbox" name="ajar_index[]" id="ajar_index[]" value="<?= $j; ?>" <?= $checked; ?> />
                                             <input type="hidden" name="ajar_id[]" id="ajar_id[]" value="<?= $ajar['Num']; ?>" />
                                         </td>
                                         <td><?= $ajar['StartPeriod'] . ' - ' . $ajar['EndPeriod']; ?></td>
@@ -457,7 +457,7 @@
                                                 $checked[$j] = '';
                                             }
                                             ?>
-                                            <input type="checkbox" name="kerja_index[]" id="kerja_index[]" value="<?= $j; ?>" <?= $checked[$j]; ?> />
+                                            <input type="checkbox" name="kerja_index[]" id="kerja_index[]" value="<?= $j; ?>" <?= $checked; ?> />
                                             <input type="hidden" name="kerja_id[]" id="kerja_id[]" value="<?= $kerja['Num']; ?>" />
                                         </td>
                                         <td><?php
@@ -661,7 +661,7 @@
                                                 $checked[$j] = '';
                                             }
                                             ?>
-                                            <input type="checkbox" name="latih_index[]" id="latih_index[]" value="<?= $j; ?>" <?= $checked[$j]; ?> />
+                                            <input type="checkbox" name="latih_index[]" id="latih_index[]" value="<?= $j; ?>" <?= $checked; ?> />
                                             <input type="hidden" name="latih_id[]" id="latih_id[]" value="<?= $latih['Num']; ?>" />
                                         </td>
                                         <td><?= $latih['Name']; ?></td>
@@ -799,7 +799,7 @@
                                                 $checked[$j] = '';
                                             }
                                             ?>
-                                            <input type="checkbox" name="latih1_index[]" id="latih1_index[]" value="<?= $j; ?>" <?= $checked[$j]; ?> />
+                                            <input type="checkbox" name="latih1_index[]" id="latih1_index[]" value="<?= $j; ?>" <?= $checked; ?> />
                                             <input type="hidden" name="latih1_id[]" id="latih1_id[]" value="<?= $latih1['Num']; ?>" />
                                         </td>
                                         <td><?= $latih1['Name']; ?></td>
@@ -932,7 +932,7 @@
                                                 $checked[$j] = '';
                                             }
                                             ?>
-                                            <input type="checkbox" name="bahasa_index[]" id="bahasa_index[]" value="<?= $j; ?>" <?= $checked[$j]; ?> />
+                                            <input type="checkbox" name="bahasa_index[]" id="bahasa_index[]" value="<?= $j; ?>" <?= $checked; ?> />
                                             <input type="hidden" name="bahasa_id[]" id="bahasa_id[]" value="<?= $bahasa['Num']; ?>" />
                                         </td>
                                         <td><?= $bahasa['Name']; ?></td>
