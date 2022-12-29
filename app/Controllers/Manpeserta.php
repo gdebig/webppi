@@ -12,6 +12,8 @@ use App\Models\CapesKartulModel;
 use App\Models\CapesSemModel;
 use App\Models\BimbingModel;
 use App\Models\PengujiRplModel;
+use App\Models\NilairplModel;
+use App\Models\ProfileModel;
 
 class Manpeserta extends BaseController
 {
@@ -358,7 +360,7 @@ class Manpeserta extends BaseController
         return view('maintemp/capeskartul', $data);
     }
 
-    //Fungsi untuk link Seminar
+    //Fungsi untuk link Seminarpenilaibimbing
     public function sem($id)
     {
         $session = session();
@@ -376,8 +378,8 @@ class Manpeserta extends BaseController
         } else {
             $data['data_sem'] = 'kosong';
         }
-        $data['title_page'] = "Data Seminar/Lokakarya Calon Peserta PPI RPL";
-        $data['data_bread'] = "Seminar";
+        $data['title_page'] = "Data Seminarpenilaibimbing/Lokakarya Calon Peserta PPI RPL";
+        $data['data_bread'] = "Seminarpenilaibimbing";
         return view('maintemp/capessem', $data);
     }
 
@@ -505,5 +507,185 @@ class Manpeserta extends BaseController
         } else {
             return redirect()->to('/manpeserta');
         }
+    }
+
+    public function lihatnilairpl($id)
+    {
+        $session = session();
+        $logged_in = $session->get('logged_in');
+        $issadmin = $session->get('issadmin');
+        $isadmin = $session->get('isadmin');
+        if ((!$logged_in) && ((!$issadmin) || (!$isadmin))) {
+            return redirect()->to('/home');
+        }
+        helper(['tanggal']);
+
+        $model = new ProfileModel();
+        $mhsprofile = $model->where('user_id', $id)->first();
+        if ($mhsprofile) {
+            $data = [
+                'FullName' => $mhsprofile['FullName'],
+            ];
+        } else {
+            $data['kosong'] = 'kosong';
+        }
+
+        $model2 = new NilairplModel();
+
+        //Nilai Kode Etik Pembimbing
+        $kodeetikpenilaibimbing = $model2->where('mhs_id', $id)->where('tipedosen', 'Pembimbing')->where('namamk', 'kodeetikpenilai')->where('nilairpl_save', 'Ya')->findall();
+        $jmlkodeetikpenilaibimbing = $model2->where('mhs_id', $id)->where('tipedosen', 'Pembimbing')->where('namamk', 'kodeetikpenilai')->where('nilairpl_save', 'Ya')->countAllResults();
+        if (!empty($kodeetikpenilaibimbing)) {
+            $nilaikodeetikpenilaibimbing = 0;
+            foreach ($kodeetikpenilaibimbing as $nilaike) :
+                $nilai = $nilaike['nilaiq'] * $nilaike['nilair'];
+                $nilaikodeetikpenilaibimbing = $nilaikodeetikpenilaibimbing + $nilai;
+            endforeach;
+        } else {
+            $nilaikodeetikpenilaibimbing = 0;
+        }
+        $data['nilaikodeetikpenilaibimbing'] = $nilaikodeetikpenilaibimbing;
+        $data['jmlkodeetikpenilaibimbing'] = $jmlkodeetikpenilaibimbing;
+
+        //Nilai Profesipenilaionalisme Pembimbing
+        $profesipenilaibimbing = $model2->where('mhs_id', $id)->where('tipedosen', 'Pembimbing')->where('namamk', 'profesipenilai')->where('nilairpl_save', 'Ya')->findall();
+        $jmlprofesipenilaibimbing = $model2->where('mhs_id', $id)->where('tipedosen', 'Pembimbing')->where('namamk', 'profesipenilai')->where('nilairpl_save', 'Ya')->countAllResults();
+        if (!empty($profesipenilaibimbing)) {
+            $nilaiprofesipenilaibimbing = 0;
+            foreach ($profesipenilaibimbing as $nilaipro) :
+                $nilai = $nilaipro['nilaiq'] * $nilaipro['nilair'];
+                $nilaiprofesipenilaibimbing = $nilaiprofesipenilaibimbing + $nilai;
+            endforeach;
+        } else {
+            $nilaiprofesipenilaibimbing = 0;
+        }
+        $data['nilaiprofesipenilaibimbing'] = $nilaiprofesipenilaibimbing;
+        $data['jmlprofesipenilaibimbing'] = $jmlprofesipenilaibimbing;
+
+        //Nilai k3lhpenilai Pembimbing
+        $k3lhpenilaibimbing = $model2->where('mhs_id', $id)->where('tipedosen', 'Pembimbing')->where('namamk', 'k3lhpenilai')->where('nilairpl_save', 'Ya')->findall();
+        $jmlk3lhpenilaibimbing = $model2->where('mhs_id', $id)->where('tipedosen', 'Pembimbing')->where('namamk', 'k3lhpenilai')->where('nilairpl_save', 'Ya')->countAllResults();
+        if (!empty($k3lhpenilaibimbing)) {
+            $nilaik3lhpenilaibimbing = 0;
+            foreach ($k3lhpenilaibimbing as $nilaik3) :
+                $nilai = $nilaik3['nilaiq'] * $nilaik3['nilair'];
+                $nilaik3lhpenilaibimbing = $nilaik3lhpenilaibimbing + $nilai;
+            endforeach;
+        } else {
+            $nilaik3lhpenilaibimbing = 0;
+        }
+        $data['nilaik3lhpenilaibimbing'] = $nilaik3lhpenilaibimbing;
+        $data['jmlk3lhpenilaibimbing'] = $jmlk3lhpenilaibimbing;
+
+        //Nilai Studi Kasus Pembimbing
+        $studikasuspenilaibimbing = $model2->where('mhs_id', $id)->where('tipedosen', 'Pembimbing')->where('namamk', 'studikasuspenilai')->where('nilairpl_save', 'Ya')->findall();
+        $jmlstudikasuspenilaibimbing = $model2->where('mhs_id', $id)->where('tipedosen', 'Pembimbing')->where('namamk', 'studikasuspenilai')->where('nilairpl_save', 'Ya')->countAllResults();
+        if (!empty($studikasuspenilaibimbing)) {
+            $nilaistudikasuspenilaibimbing = 0;
+            foreach ($studikasuspenilaibimbing as $nilaisk) :
+                $nilai = $nilaisk['nilaiq'] * $nilaisk['nilair'];
+                $nilaistudikasuspenilaibimbing = $nilaistudikasuspenilaibimbing + $nilai;
+            endforeach;
+        } else {
+            $nilaistudikasuspenilaibimbing = 0;
+        }
+        $data['nilaistudikasuspenilaibimbing'] = $nilaistudikasuspenilaibimbing;
+        $data['jmlstudikasuspenilaibimbing'] = $jmlstudikasuspenilaibimbing;
+
+        //Nilai Seminarpenilaibimbing Pembimbing
+        $seminarpenilaibimbing = $model2->where('mhs_id', $id)->where('tipedosen', 'Pembimbing')->where('namamk', 'seminarpenilai')->where('nilairpl_save', 'Ya')->findall();
+        $jmlseminarpenilaibimbing = $model2->where('mhs_id', $id)->where('tipedosen', 'Pembimbing')->where('namamk', 'seminarpenilai')->where('nilairpl_save', 'Ya')->countAllResults();
+        if (!empty($seminarpenilaibimbing)) {
+            $nilaiseminarpenilaibimbing = 0;
+            foreach ($seminarpenilaibimbing as $nilaisem) :
+                $nilai = $nilaisem['nilaiq'] * $nilaisem['nilair'];
+                $nilaiseminarpenilaibimbing = $nilaiseminarpenilaibimbing + $nilai;
+            endforeach;
+        } else {
+            $nilaiseminarpenilaibimbing = 0;
+        }
+        $data['nilaiseminarpenilaibimbing'] = $nilaiseminarpenilaibimbing;
+        $data['jmlseminarpenilaibimbing'] = $jmlseminarpenilaibimbing;
+
+        //Nilai Kode Etik Penilai
+        $kodeetikpenilai = $model2->where('mhs_id', $id)->where('tipedosen', 'Penilai')->where('namamk', 'kodeetik')->where('nilairpl_save', 'Ya')->findall();
+        $jmlkodeetikpenilai = $model2->where('mhs_id', $id)->where('tipedosen', 'Penilai')->where('namamk', 'kodeetik')->where('nilairpl_save', 'Ya')->countAllResults();
+        if (!empty($kodeetikpenilai)) {
+            $nilaikodeetikpenilai = 0;
+            foreach ($kodeetikpenilai as $nilaike) :
+                $nilai = $nilaike['nilaiq'] * $nilaike['nilair'];
+                $nilaikodeetikpenilai = $nilaikodeetikpenilai + $nilai;
+            endforeach;
+        } else {
+            $nilaikodeetikpenilai = 0;
+        }
+        $data['nilaikodeetikpenilai'] = $nilaikodeetikpenilai;
+        $data['jmlkodeetikpenilai'] = $jmlkodeetikpenilai;
+
+        //Nilai Profesionalisme Penilai
+        $profesipenilai = $model2->where('mhs_id', $id)->where('tipedosen', 'Penilai')->where('namamk', 'profesi')->where('nilairpl_save', 'Ya')->findall();
+        $jmlprofesipenilai = $model2->where('mhs_id', $id)->where('tipedosen', 'Penilai')->where('namamk', 'profesi')->where('nilairpl_save', 'Ya')->countAllResults();
+        if (!empty($profesipenilai)) {
+            $nilaiprofesipenilai = 0;
+            foreach ($profesipenilai as $nilaipro) :
+                $nilai = $nilaipro['nilaiq'] * $nilaipro['nilair'];
+                $nilaiprofesipenilai = $nilaiprofesipenilai + $nilai;
+            endforeach;
+        } else {
+            $nilaiprofesipenilai = 0;
+        }
+        $data['nilaiprofesipenilai'] = $nilaiprofesipenilai;
+        $data['jmlprofesipenilai'] = $jmlprofesipenilai;
+
+        //Nilai k3lh Penilai
+        $k3lhpenilai = $model2->where('mhs_id', $id)->where('tipedosen', 'Penilai')->where('namamk', 'k3lh')->where('nilairpl_save', 'Ya')->findall();
+        $jmlk3lhpenilai = $model2->where('mhs_id', $id)->where('tipedosen', 'Penilai')->where('namamk', 'k3lh')->where('nilairpl_save', 'Ya')->countAllResults();
+        if (!empty($k3lhpenilai)) {
+            $nilaik3lhpenilai = 0;
+            foreach ($k3lhpenilai as $nilaik3) :
+                $nilai = $nilaik3['nilaiq'] * $nilaik3['nilair'];
+                $nilaik3lhpenilai = $nilaik3lhpenilai + $nilai;
+            endforeach;
+        } else {
+            $nilaik3lhpenilai = 0;
+        }
+        $data['nilaik3lhpenilai'] = $nilaik3lhpenilai;
+        $data['jmlk3lhpenilai'] = $jmlk3lhpenilai;
+
+        //Nilai Studi Kasus Penilai
+        $studikasuspenilai = $model2->where('mhs_id', $id)->where('tipedosen', 'Penilai')->where('namamk', 'studikasus')->where('nilairpl_save', 'Ya')->findall();
+        $jmlstudikasuspenilai = $model2->where('mhs_id', $id)->where('tipedosen', 'Penilai')->where('namamk', 'studikasus')->where('nilairpl_save', 'Ya')->countAllResults();
+        if (!empty($studikasuspenilai)) {
+            $nilaistudikasuspenilai = 0;
+            foreach ($studikasuspenilai as $nilaisk) :
+                $nilai = $nilaisk['nilaiq'] * $nilaisk['nilair'];
+                $nilaistudikasuspenilai = $nilaistudikasuspenilai + $nilai;
+            endforeach;
+        } else {
+            $nilaistudikasuspenilai = 0;
+        }
+        $data['nilaistudikasuspenilai'] = $nilaistudikasuspenilai;
+        $data['jmlstudikasuspenilai'] = $jmlstudikasuspenilai;
+
+        //Nilai Seminar Penilai
+        $seminarpenilai = $model2->where('mhs_id', $id)->where('tipedosen', 'Penilai')->where('namamk', 'seminar')->where('nilairpl_save', 'Ya')->findall();
+        $jmlseminarpenilai = $model2->where('mhs_id', $id)->where('tipedosen', 'Penilai')->where('namamk', 'seminar')->where('nilairpl_save', 'Ya')->countAllResults();
+        if (!empty($seminarpenilai)) {
+            $nilaiseminarpenilai = 0;
+            foreach ($seminarpenilai as $nilaisem) :
+                $nilai = $nilaisem['nilaiq'] * $nilaisem['nilair'];
+                $nilaiseminarpenilai = $nilaiseminarpenilai + $nilai;
+            endforeach;
+        } else {
+            $nilaiseminarpenilai = 0;
+        }
+        $data['nilaiseminarpenilai'] = $nilaiseminarpenilai;
+        $data['jmlseminarpenilai'] = $jmlseminarpenilai;
+
+        $data['mhs_id'] = $id;
+        $data['logged_in'] = $logged_in;
+        $data['title_page'] = "Nilai RPL Peserta";
+        $data['data_bread'] = "Nilai RPL Peserta";
+        return view('maintemp/nilairplpeserta', $data);
     }
 }

@@ -44,7 +44,7 @@ use App\Models\ProfileModel;
                                     <th>Status</th>
                                     <th>Dosen Pembimbing</th>
                                     <th>Dosen Penilai RPL</th>
-                                    <th>Data FAIP</th>
+                                    <th>Lihat Nilai RPL</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -126,7 +126,7 @@ use App\Models\ProfileModel;
                                                 echo "Belum ada penilai RPL";
                                             }
                                             ?></td>
-                                        <td><a href="<?= base_url(); ?>/manpeserta/dokfaip/<?= $user['user_id']; ?>">Detail</a>
+                                        <td><a href="<?= base_url(); ?>/manpeserta/lihatnilairpl/<?= $user['user_id']; ?>">Lihat</a>
                                         </td>
                                     </tr>
                                 <?php
