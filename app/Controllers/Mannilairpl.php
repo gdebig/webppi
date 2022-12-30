@@ -169,21 +169,39 @@ class Mannilairpl extends BaseController
         }
         helper(['tanggal']);
 
+        $modelprof = new ProfileModel();
+        $mhsprofile = $modelprof->where('user_id', $mhs_id)->first();
+        if ($mhsprofile) {
+            $data['FullName'] = $mhsprofile['FullName'];
+        } else {
+            $data['FullName'] = 'kosong';
+        }
+
         $modelnilai = new NilairplModel();
 
         //Userfair21
         $model = new EtikRefModel();
         $etik = $model->where('user_id', $mhs_id)->orderby('Name', 'ASC')->findall();
         $data['jumlah_etik'] = $model->where('user_id', $mhs_id)->countAllResults();
-        $dataid21 = $modelnilai->select('id_tbl')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Penilai')->where('namatbl', '21')->where('namamk', 'kodeetik')->findall();
+        $dataid21 = $modelnilai->select('id_tbl, nilaip, nilaiq, nilair')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Penilai')->where('namatbl', '21')->where('namamk', 'kodeetik')->findall();
         if (!empty($dataid21)) {
             foreach ($dataid21 as $dataid) :
                 $id21[] = $dataid['id_tbl'];
+                $nilaip21[] = $dataid['nilaip'];
+                $nilaiq21[] = $dataid['nilaiq'];
+                $nilair21[] = $dataid['nilair'];
             endforeach;
         } else {
             $id21[] = '';
+            $nilaip21[] = '';
+            $nilaiq21[] = '';
+            $nilair21[] = '';
         }
         $data['id21'] = $id21;
+        $data['nilaip21'] = $nilaip21;
+        $data['nilaiq21'] = $nilaiq21;
+        $data['nilair21'] = $nilair21;
+
         if (!empty($etik)) {
             $data['data_etik'] = $etik;
         } else {
@@ -193,15 +211,25 @@ class Mannilairpl extends BaseController
         //Userfair22
         $model1 = new PendapatModel();
         $pendapat = $model1->where('user_id', $mhs_id)->orderby('Num', 'DESC')->findall();
-        $dataid22 = $modelnilai->select('id_tbl')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Penilai')->where('namatbl', '22')->where('namamk', 'kodeetik')->findall();
+        $dataid22 = $modelnilai->select('id_tbl, nilaip, nilaiq, nilair')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Penilai')->where('namatbl', '22')->where('namamk', 'kodeetik')->findall();
         if (!empty($dataid22)) {
             foreach ($dataid22 as $dataid) :
                 $id22[] = $dataid['id_tbl'];
+                $nilaip22[] = $dataid['nilaip'];
+                $nilaiq22[] = $dataid['nilaiq'];
+                $nilair22[] = $dataid['nilair'];
             endforeach;
         } else {
             $id22[] = '';
+            $nilaip22[] = '';
+            $nilaiq22[] = '';
+            $nilair22[] = '';
         }
         $data['id22'] = $id22;
+        $data['nilaip22'] = $nilaip22;
+        $data['nilaiq22'] = $nilaiq22;
+        $data['nilair22'] = $nilair22;
+
         if (!empty($pendapat)) {
             $data['data_pendapat'] = $pendapat;
         } else {
@@ -213,15 +241,25 @@ class Mannilairpl extends BaseController
         $org = $model2->where('user_id', $mhs_id)->like('kompetensi', 'W.1.2.')->orderby('StartPeriodYear', 'DESC')->findall();
         $data['jumlah_org'] = $model2->where('user_id', $mhs_id)->like('kompetensi', 'W.1.2.')->countAllResults();
         $data['org_pii'] = $model2->where('Type', 'PII')->findall();
-        $dataid13 = $modelnilai->select('id_tbl')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Penilai')->where('namatbl', '13')->where('namamk', 'kodeetik')->findall();
+        $dataid13 = $modelnilai->select('id_tbl, nilaip, nilaiq, nilair')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Penilai')->where('namatbl', '13')->where('namamk', 'kodeetik')->findall();
         if (!empty($dataid13)) {
             foreach ($dataid13 as $dataid) :
                 $id13[] = $dataid['id_tbl'];
+                $nilaip13[] = $dataid['nilaip'];
+                $nilaiq13[] = $dataid['nilaiq'];
+                $nilair13[] = $dataid['nilair'];
             endforeach;
         } else {
             $id13[] = '';
+            $nilaip13[] = '';
+            $nilaiq13[] = '';
+            $nilair13[] = '';
         }
         $data['id13'] = $id13;
+        $data['nilaip13'] = $nilaip13;
+        $data['nilaiq13'] = $nilaiq13;
+        $data['nilair13'] = $nilair13;
+
         if (!empty($org)) {
             $data['data_org'] = $org;
         } else {
@@ -232,15 +270,25 @@ class Mannilairpl extends BaseController
         $model3 = new PenghargaanModel();
         $penghargaan = $model3->where('user_id', $mhs_id)->like('kompetensi', 'W.1.2.')->orderby('Year', 'DESC')->orderby('Month', 'DESC')->findall();
         $data['jumlah_harga'] = $model3->where('user_id', $mhs_id)->like('kompetensi', 'W.1.2.')->countAllResults();
-        $dataid14 = $modelnilai->select('id_tbl')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Penilai')->where('namatbl', '14')->where('namamk', 'kodeetik')->findall();
+        $dataid14 = $modelnilai->select('id_tbl, nilaip, nilaiq, nilair')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Penilai')->where('namatbl', '14')->where('namamk', 'kodeetik')->findall();
         if (!empty($dataid14)) {
             foreach ($dataid14 as $dataid) :
                 $id14[] = $dataid['id_tbl'];
+                $nilaip14[] = $dataid['nilaip'];
+                $nilaiq14[] = $dataid['nilaiq'];
+                $nilair14[] = $dataid['nilair'];
             endforeach;
         } else {
             $id14[] = '';
+            $nilaip14[] = '';
+            $nilaiq14[] = '';
+            $nilair14[] = '';
         }
         $data['id14'] = $id14;
+        $data['nilaip14'] = $nilaip14;
+        $data['nilaiq14'] = $nilaiq14;
+        $data['nilair14'] = $nilair14;
+
         if (!empty($penghargaan)) {
             $data['data_harga'] = $penghargaan;
         } else {
@@ -250,15 +298,25 @@ class Mannilairpl extends BaseController
         //Userfair16
         $model4 = new CapesSertModel();
         $latih = $model4->where('user_id', $mhs_id)->where('Jenis', 'sertifikat')->like('kompetensi', 'W.1.2.')->findall();
-        $dataid16 = $modelnilai->select('id_tbl')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Penilai')->where('namatbl', '16')->where('namamk', 'kodeetik')->findall();
+        $dataid16 = $modelnilai->select('id_tbl, nilaip, nilaiq, nilair')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Penilai')->where('namatbl', '16')->where('namamk', 'kodeetik')->findall();
         if (!empty($dataid16)) {
             foreach ($dataid16 as $dataid) :
                 $id16[] = $dataid['id_tbl'];
+                $nilaip16[] = $dataid['nilaip'];
+                $nilaiq16[] = $dataid['nilaiq'];
+                $nilair16[] = $dataid['nilair'];
             endforeach;
         } else {
             $id16[] = '';
+            $nilaip16[] = '';
+            $nilaiq16[] = '';
+            $nilair16[] = '';
         }
         $data['id16'] = $id16;
+        $data['nilaip16'] = $nilaip16;
+        $data['nilaiq16'] = $nilaiq16;
+        $data['nilair16'] = $nilair16;
+
         if (!empty($latih)) {
             $data['data_latih'] = $latih;
         } else {
@@ -455,21 +513,39 @@ class Mannilairpl extends BaseController
         }
         helper(['tanggal']);
 
+        $modelprof = new ProfileModel();
+        $mhsprofile = $modelprof->where('user_id', $mhs_id)->first();
+        if ($mhsprofile) {
+            $data['FullName'] = $mhsprofile['FullName'];
+        } else {
+            $data['FullName'] = 'kosong';
+        }
+
         $modelnilai = new NilairplModel();
 
         //UserFair3
         $model = new CapesKualifikasiModel();
         $data['capeslogged_in'] = $session->get('capeslogged_in');
         $kerja = $model->where('user_id', $mhs_id)->like('kompetensi', 'W.2.2.')->orderby('ProjValue', 'DESC')->findall();
-        $dataid3 = $modelnilai->select('id_tbl')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Penilai')->where('namatbl', '3')->where('namamk', 'profesi')->findall();
+        $dataid3 = $modelnilai->select('id_tbl, nilaip, nilaiq, nilair')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Penilai')->where('namatbl', '3')->where('namamk', 'profesi')->findall();
         if (!empty($dataid3)) {
             foreach ($dataid3 as $dataid) :
                 $id3[] = $dataid['id_tbl'];
+                $nilaip3[] = $dataid['nilaip'];
+                $nilaiq3[] = $dataid['nilaiq'];
+                $nilair3[] = $dataid['nilair'];
             endforeach;
         } else {
             $id3[] = '';
+            $nilaip3[] = '';
+            $nilaiq3[] = '';
+            $nilair3[] = '';
         }
         $data['id3'] = $id3;
+        $data['nilaip3'] = $nilaip3;
+        $data['nilaiq3'] = $nilaiq3;
+        $data['nilair3'] = $nilair3;
+
         if (!empty($kerja)) {
             $data['data_kerja'] = $kerja;
         } else {
@@ -479,15 +555,25 @@ class Mannilairpl extends BaseController
         //UserFair12
         $model1 = new CapesPendModel();
         $pend = $model1->where('user_id', $mhs_id)->like('kompetensi', 'W.2.2.')->orderby('GradYear', 'DESC')->findall();
-        $dataid12 = $modelnilai->select('id_tbl')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Penilai')->where('namatbl', '12')->where('namamk', 'profesi')->findall();
+        $dataid12 = $modelnilai->select('id_tbl, nilaip, nilaiq, nilair')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Penilai')->where('namatbl', '12')->where('namamk', 'profesi')->findall();
         if (!empty($dataid12)) {
             foreach ($dataid12 as $dataid) :
                 $id12[] = $dataid['id_tbl'];
+                $nilaip12[] = $dataid['nilaip'];
+                $nilaiq12[] = $dataid['nilaiq'];
+                $nilair12[] = $dataid['nilair'];
             endforeach;
         } else {
             $id12[] = '';
+            $nilaip12[] = '';
+            $nilaiq12[] = '';
+            $nilair12[] = '';
         }
         $data['id12'] = $id12;
+        $data['nilaip12'] = $nilaip12;
+        $data['nilaiq12'] = $nilaiq12;
+        $data['nilair12'] = $nilair12;
+
         if (!empty($pend)) {
             $data['data_pend'] = $pend;
         } else {
@@ -499,15 +585,25 @@ class Mannilairpl extends BaseController
         $org = $model2->where('user_id', $mhs_id)->like('kompetensi', 'W.1.1.')->orderby('StartPeriodYear', 'DESC')->findall();
         $data['jumlah_org'] = $model2->where('user_id', $mhs_id)->like('kompetensi', 'W.1.1.')->countAllResults();
         $data['org_pii'] = $model2->where('Type', 'PII')->findall();
-        $dataid13 = $modelnilai->select('id_tbl')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Penilai')->where('namatbl', '13')->where('namamk', 'profesi')->findall();
+        $dataid13 = $modelnilai->select('id_tbl, nilaip, nilaiq, nilair')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Penilai')->where('namatbl', '13')->where('namamk', 'profesi')->findall();
         if (!empty($dataid13)) {
             foreach ($dataid13 as $dataid) :
                 $id13[] = $dataid['id_tbl'];
+                $nilaip13[] = $dataid['nilaip'];
+                $nilaiq13[] = $dataid['nilaiq'];
+                $nilair13[] = $dataid['nilair'];
             endforeach;
         } else {
             $id13[] = '';
+            $nilaip13[] = '';
+            $nilaiq13[] = '';
+            $nilair13[] = '';
         }
         $data['id13'] = $id13;
+        $data['nilaip13'] = $nilaip13;
+        $data['nilaiq13'] = $nilaiq13;
+        $data['nilair13'] = $nilair13;
+
         if (!empty($org)) {
             $data['data_org'] = $org;
         } else {
@@ -518,15 +614,25 @@ class Mannilairpl extends BaseController
         $model3 = new PenghargaanModel();
         $penghargaan = $model3->where('user_id', $mhs_id)->like('kompetensi', 'W.1.1.')->orderby('Year', 'DESC')->orderby('Month', 'DESC')->findall();
         $data['jumlah_harga'] = $model3->where('user_id', $mhs_id)->like('kompetensi', 'W.1.1.')->countAllResults();
-        $dataid14 = $modelnilai->select('id_tbl')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Penilai')->where('namatbl', '14')->where('namamk', 'profesi')->findall();
+        $dataid14 = $modelnilai->select('id_tbl, nilaip, nilaiq, nilair')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Penilai')->where('namatbl', '14')->where('namamk', 'profesi')->findall();
         if (!empty($dataid14)) {
             foreach ($dataid14 as $dataid) :
                 $id14[] = $dataid['id_tbl'];
+                $nilaip14[] = $dataid['nilaip'];
+                $nilaiq14[] = $dataid['nilaiq'];
+                $nilair14[] = $dataid['nilair'];
             endforeach;
         } else {
             $id14[] = '';
+            $nilaip14[] = '';
+            $nilaiq14[] = '';
+            $nilair14[] = '';
         }
         $data['id14'] = $id14;
+        $data['nilaip14'] = $nilaip14;
+        $data['nilaiq14'] = $nilaiq14;
+        $data['nilair14'] = $nilair14;
+
         if (!empty($penghargaan)) {
             $data['data_harga'] = $penghargaan;
         } else {
@@ -536,15 +642,25 @@ class Mannilairpl extends BaseController
         //UserFair15
         $model4 = new CapesSertModel();
         $latih = $model4->where('user_id', $mhs_id)->where('Jenis', 'pelatihan')->like('kompetensi', 'W.2.2.')->orderby('StartYear', 'DESC')->findall();
-        $dataid15 = $modelnilai->select('id_tbl')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Penilai')->where('namatbl', '15')->where('namamk', 'profesi')->findall();
+        $dataid15 = $modelnilai->select('id_tbl, nilaip, nilaiq, nilair')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Penilai')->where('namatbl', '15')->where('namamk', 'profesi')->findall();
         if (!empty($dataid15)) {
-            foreach ($dataid3 as $dataid) :
+            foreach ($dataid15 as $dataid) :
                 $id15[] = $dataid['id_tbl'];
+                $nilaip15[] = $dataid['nilaip'];
+                $nilaiq15[] = $dataid['nilaiq'];
+                $nilair15[] = $dataid['nilair'];
             endforeach;
         } else {
             $id15[] = '';
+            $nilaip15[] = '';
+            $nilaiq15[] = '';
+            $nilair15[] = '';
         }
         $data['id15'] = $id15;
+        $data['nilaip15'] = $nilaip15;
+        $data['nilaiq15'] = $nilaiq15;
+        $data['nilair15'] = $nilair15;
+
         if (!empty($latih)) {
             $data['data_latih'] = $latih;
         } else {
@@ -553,15 +669,25 @@ class Mannilairpl extends BaseController
 
         //UserFair16
         $latih1 = $model4->where('user_id', $mhs_id)->where('Jenis', 'sertifikat')->like('kompetensi', 'W.1.1.')->findall();
-        $dataid16 = $modelnilai->select('id_tbl')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Penilai')->where('namatbl', '16')->where('namamk', 'profesi')->findall();
+        $dataid16 = $modelnilai->select('id_tbl, nilaip, nilaiq, nilair')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Penilai')->where('namatbl', '16')->where('namamk', 'profesi')->findall();
         if (!empty($dataid16)) {
             foreach ($dataid16 as $dataid) :
                 $id16[] = $dataid['id_tbl'];
+                $nilaip16[] = $dataid['nilaip'];
+                $nilaiq16[] = $dataid['nilaiq'];
+                $nilair16[] = $dataid['nilair'];
             endforeach;
         } else {
             $id16[] = '';
+            $nilaip16[] = '';
+            $nilaiq16[] = '';
+            $nilair16[] = '';
         }
         $data['id16'] = $id16;
+        $data['nilaip16'] = $nilaip16;
+        $data['nilaiq16'] = $nilaiq16;
+        $data['nilair16'] = $nilair16;
+
         if (!empty($latih)) {
             $data['data_latih1'] = $latih1;
         } else {
@@ -571,15 +697,25 @@ class Mannilairpl extends BaseController
         //UserFair4
         $model7 = new MengajarModel();
         $ajar = $model7->where('user_id', $mhs_id)->like('kompetensi', 'W.2.2.')->orderby('StartPeriod', 'DESC')->findall();
-        $dataid4 = $modelnilai->select('id_tbl')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Penilai')->where('namatbl', '4')->where('namamk', 'profesi')->findall();
+        $dataid4 = $modelnilai->select('id_tbl, nilaip, nilaiq, nilair')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Penilai')->where('namatbl', '4')->where('namamk', 'profesi')->findall();
         if (!empty($dataid4)) {
             foreach ($dataid4 as $dataid) :
                 $id4[] = $dataid['id_tbl'];
+                $nilaip4[] = $dataid['nilaip'];
+                $nilaiq4[] = $dataid['nilaiq'];
+                $nilair4[] = $dataid['nilair'];
             endforeach;
         } else {
             $id4[] = '';
+            $nilaip4[] = '';
+            $nilaiq4[] = '';
+            $nilair4[] = '';
         }
         $data['id4'] = $id4;
+        $data['nilaip4'] = $nilaip4;
+        $data['nilaiq4'] = $nilaiq4;
+        $data['nilair4'] = $nilair4;
+
         if (!empty($ajar)) {
             $data['data_ajar'] = $ajar;
         } else {
@@ -589,15 +725,25 @@ class Mannilairpl extends BaseController
         //UserFair53
         $model8 = new CapesSemModel();
         $sem = $model8->where('user_id', $mhs_id)->where('Type', 'Sem')->like('kompetensi', 'W.2.2.')->orderby('Year', 'DESC')->findall();
-        $dataid53 = $modelnilai->select('id_tbl')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Penilai')->where('namatbl', '53')->where('namamk', 'profesi')->findall();
+        $dataid53 = $modelnilai->select('id_tbl, nilaip, nilaiq, nilair')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Penilai')->where('namatbl', '53')->where('namamk', 'profesi')->findall();
         if (!empty($dataid53)) {
             foreach ($dataid53 as $dataid) :
                 $id53[] = $dataid['id_tbl'];
+                $nilaip53[] = $dataid['nilaip'];
+                $nilaiq53[] = $dataid['nilaiq'];
+                $nilair53[] = $dataid['nilair'];
             endforeach;
         } else {
             $id53[] = '';
+            $nilaip53[] = '';
+            $nilaiq53[] = '';
+            $nilair53[] = '';
         }
         $data['id53'] = $id53;
+        $data['nilaip53'] = $nilaip53;
+        $data['nilaiq53'] = $nilaiq53;
+        $data['nilair53'] = $nilair53;
+
         if (!empty($sem)) {
             $data['data_sem'] = $sem;
         } else {
@@ -878,6 +1024,14 @@ class Mannilairpl extends BaseController
         }
         helper(['tanggal']);
 
+        $modelprof = new ProfileModel();
+        $mhsprofile = $modelprof->where('user_id', $mhs_id)->first();
+        if ($mhsprofile) {
+            $data['FullName'] = $mhsprofile['FullName'];
+        } else {
+            $data['FullName'] = 'kosong';
+        }
+
         $modelnilai = new NilairplModel();
 
         //UserFair13
@@ -885,15 +1039,25 @@ class Mannilairpl extends BaseController
         $org = $model2->where('user_id', $mhs_id)->like('kompetensi', 'W.1.3.')->orderby('StartPeriodYear', 'DESC')->findall();
         $data['jumlah_org'] = $model2->where('user_id', $mhs_id)->like('kompetensi', 'W.1.3.')->countAllResults();
         $data['org_pii'] = $model2->where('Type', 'PII')->findall();
-        $dataid13 = $modelnilai->select('id_tbl')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Penilai')->where('namatbl', '13')->where('namamk', 'k3lh')->findall();
+        $dataid13 = $modelnilai->select('id_tbl, nilaip, nilaiq, nilair')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Penilai')->where('namatbl', '13')->where('namamk', 'k3lh')->findall();
         if (!empty($dataid13)) {
             foreach ($dataid13 as $dataid) :
                 $id13[] = $dataid['id_tbl'];
+                $nilaip13[] = $dataid['nilaip'];
+                $nilaiq13[] = $dataid['nilaiq'];
+                $nilair13[] = $dataid['nilair'];
             endforeach;
         } else {
             $id13[] = '';
+            $nilaip13[] = '';
+            $nilaiq13[] = '';
+            $nilair13[] = '';
         }
         $data['id13'] = $id13;
+        $data['nilaip13'] = $nilaip13;
+        $data['nilaiq13'] = $nilaiq13;
+        $data['nilair13'] = $nilair13;
+
         if (!empty($org)) {
             $data['data_org'] = $org;
         } else {
@@ -904,15 +1068,25 @@ class Mannilairpl extends BaseController
         $model3 = new PenghargaanModel();
         $penghargaan = $model3->where('user_id', $mhs_id)->like('kompetensi', 'W.1.3.')->orderby('Year', 'DESC')->orderby('Month', 'DESC')->findall();
         $data['jumlah_harga'] = $model3->where('user_id', $mhs_id)->like('kompetensi', 'W.1.3.')->countAllResults();
-        $dataid14 = $modelnilai->select('id_tbl')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Penilai')->where('namatbl', '14')->where('namamk', 'k3lh')->findall();
+        $dataid14 = $modelnilai->select('id_tbl, nilaip, nilaiq, nilair')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Penilai')->where('namatbl', '14')->where('namamk', 'k3lh')->findall();
         if (!empty($dataid14)) {
             foreach ($dataid14 as $dataid) :
                 $id14[] = $dataid['id_tbl'];
+                $nilaip14[] = $dataid['nilaip'];
+                $nilaiq14[] = $dataid['nilaiq'];
+                $nilair14[] = $dataid['nilair'];
             endforeach;
         } else {
             $id14[] = '';
+            $nilaip14[] = '';
+            $nilaiq14[] = '';
+            $nilair14[] = '';
         }
         $data['id14'] = $id14;
+        $data['nilaip14'] = $nilaip14;
+        $data['nilaiq14'] = $nilaiq14;
+        $data['nilair14'] = $nilair14;
+
         if (!empty($penghargaan)) {
             $data['data_harga'] = $penghargaan;
         } else {
@@ -922,15 +1096,25 @@ class Mannilairpl extends BaseController
         //UserFair16
         $model4 = new CapesSertModel();
         $latih1 = $model4->where('user_id', $mhs_id)->where('Jenis', 'sertifikat')->like('kompetensi', 'W.1.3.')->findall();
-        $dataid16 = $modelnilai->select('id_tbl')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Penilai')->where('namatbl', '16')->where('namamk', 'k3lh')->findall();
+        $dataid16 = $modelnilai->select('id_tbl, nilaip, nilaiq, nilair')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Penilai')->where('namatbl', '16')->where('namamk', 'k3lh')->findall();
         if (!empty($dataid16)) {
             foreach ($dataid16 as $dataid) :
                 $id16[] = $dataid['id_tbl'];
+                $nilaip16[] = $dataid['nilaip'];
+                $nilaiq16[] = $dataid['nilaiq'];
+                $nilair16[] = $dataid['nilair'];
             endforeach;
         } else {
             $id16[] = '';
+            $nilaip16[] = '';
+            $nilaiq16[] = '';
+            $nilair16[] = '';
         }
         $data['id16'] = $id16;
+        $data['nilaip16'] = $nilaip16;
+        $data['nilaiq16'] = $nilaiq16;
+        $data['nilair16'] = $nilair16;
+
         if (!empty($latih)) {
             $data['data_latih1'] = $latih1;
         } else {
@@ -1071,20 +1255,38 @@ class Mannilairpl extends BaseController
         }
         helper(['tanggal']);
 
+        $modelprof = new ProfileModel();
+        $mhsprofile = $modelprof->where('user_id', $mhs_id)->first();
+        if ($mhsprofile) {
+            $data['FullName'] = $mhsprofile['FullName'];
+        } else {
+            $data['FullName'] = 'kosong';
+        }
+
         $modelnilai = new NilairplModel();
 
         //USerFair51
         $model = new CapesKartulModel();
         $kartul = $model->where('user_id', $mhs_id)->like('kompetensi', 'W.4.4.')->orderby('Year', 'DESC')->findall();
-        $dataid51 = $modelnilai->select('id_tbl')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Penilai')->where('namatbl', '51')->where('namamk', 'seminar')->findall();
+        $dataid51 = $modelnilai->select('id_tbl, nilaip, nilaiq, nilair')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Penilai')->where('namatbl', '51')->where('namamk', 'seminar')->findall();
         if (!empty($dataid51)) {
             foreach ($dataid51 as $dataid) :
                 $id51[] = $dataid['id_tbl'];
+                $nilaip51[] = $dataid['nilaip'];
+                $nilaiq51[] = $dataid['nilaiq'];
+                $nilair51[] = $dataid['nilair'];
             endforeach;
         } else {
             $id51[] = '';
+            $nilaip51[] = '';
+            $nilaiq51[] = '';
+            $nilair51[] = '';
         }
         $data['id51'] = $id51;
+        $data['nilaip51'] = $nilaip51;
+        $data['nilaiq51'] = $nilaiq51;
+        $data['nilair51'] = $nilair51;
+
         if (!empty($kartul)) {
             $data['data_kartul'] = $kartul;
         } else {
@@ -1094,15 +1296,25 @@ class Mannilairpl extends BaseController
         //UserFair52
         $model1 = new CapesSemModel();
         $sem = $model1->where('user_id', $mhs_id)->where('Type', 'Mak')->like('kompetensi', 'W.4.4.')->orderby('Year', 'DESC')->findall();
-        $dataid52 = $modelnilai->select('id_tbl')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Penilai')->where('namatbl', '52')->where('namamk', 'seminar')->findall();
+        $dataid52 = $modelnilai->select('id_tbl, nilaip, nilaiq, nilair')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Penilai')->where('namatbl', '52')->where('namamk', 'seminar')->findall();
         if (!empty($dataid52)) {
             foreach ($dataid52 as $dataid) :
                 $id52[] = $dataid['id_tbl'];
+                $nilaip52[] = $dataid['nilaip'];
+                $nilaiq52[] = $dataid['nilaiq'];
+                $nilair52[] = $dataid['nilair'];
             endforeach;
         } else {
             $id52[] = '';
+            $nilaip52[] = '';
+            $nilaiq52[] = '';
+            $nilair52[] = '';
         }
         $data['id52'] = $id52;
+        $data['nilaip52'] = $nilaip52;
+        $data['nilaiq52'] = $nilaiq52;
+        $data['nilair52'] = $nilair52;
+
         if (!empty($sem)) {
             $data['data_sem'] = $sem;
         } else {
@@ -1112,15 +1324,25 @@ class Mannilairpl extends BaseController
         //UserFair4
         $model2 = new MengajarModel();
         $ajar = $model2->where('user_id', $mhs_id)->like('kompetensi', 'W.4.4.')->orderby('StartPeriod', 'DESC')->findall();
-        $dataid4 = $modelnilai->select('id_tbl')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Penilai')->where('namatbl', '4')->where('namamk', 'seminar')->findall();
+        $dataid4 = $modelnilai->select('id_tbl, nilaip, nilaiq, nilair')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Penilai')->where('namatbl', '4')->where('namamk', 'seminar')->findall();
         if (!empty($dataid4)) {
             foreach ($dataid4 as $dataid) :
                 $id4[] = $dataid['id_tbl'];
+                $nilaip4[] = $dataid['nilaip'];
+                $nilaiq4[] = $dataid['nilaiq'];
+                $nilair4[] = $dataid['nilair'];
             endforeach;
         } else {
             $id4[] = '';
+            $nilaip4[] = '';
+            $nilaiq4[] = '';
+            $nilair4[] = '';
         }
         $data['id4'] = $id4;
+        $data['nilaip4'] = $nilaip4;
+        $data['nilaiq4'] = $nilaiq4;
+        $data['nilair4'] = $nilair4;
+
         if (!empty($ajar)) {
             $data['data_ajar'] = $ajar;
         } else {
@@ -1130,15 +1352,25 @@ class Mannilairpl extends BaseController
         //UserFair3
         $model3 = new CapesKualifikasiModel();
         $kerja = $model3->where('user_id', $mhs_id)->like('kompetensi', 'W.4.4.')->orderby('ProjValue', 'DESC')->findall();
-        $dataid3 = $modelnilai->select('id_tbl')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Penilai')->where('namatbl', '3')->where('namamk', 'seminar')->findall();
+        $dataid3 = $modelnilai->select('id_tbl, nilaip, nilaiq, nilair')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Penilai')->where('namatbl', '3')->where('namamk', 'seminar')->findall();
         if (!empty($dataid3)) {
             foreach ($dataid51 as $dataid) :
                 $id3[] = $dataid['id_tbl'];
+                $nilaip3[] = $dataid['nilaip'];
+                $nilaiq3[] = $dataid['nilaiq'];
+                $nilair3[] = $dataid['nilair'];
             endforeach;
         } else {
             $id3[] = '';
+            $nilaip3[] = '';
+            $nilaiq3[] = '';
+            $nilair3[] = '';
         }
         $data['id3'] = $id3;
+        $data['nilaip3'] = $nilaip3;
+        $data['nilaiq3'] = $nilaiq3;
+        $data['nilair3'] = $nilair3;
+
         if (!empty($kerja)) {
             $data['data_kerja'] = $kerja;
         } else {
@@ -1148,15 +1380,25 @@ class Mannilairpl extends BaseController
         //UserFair15
         $model4 = new CapesSertModel();
         $latih = $model4->where('user_id', $mhs_id)->where('Jenis', 'pelatihan')->like('kompetensi', 'W.4.4.')->orderby('StartYear', 'DESC')->findall();
-        $dataid15 = $modelnilai->select('id_tbl')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Penilai')->where('namatbl', '15')->where('namamk', 'seminar')->findall();
+        $dataid15 = $modelnilai->select('id_tbl, nilaip, nilaiq, nilair')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Penilai')->where('namatbl', '15')->where('namamk', 'seminar')->findall();
         if (!empty($dataid15)) {
             foreach ($dataid15 as $dataid) :
                 $id15[] = $dataid['id_tbl'];
+                $nilaip15[] = $dataid['nilaip'];
+                $nilaiq15[] = $dataid['nilaiq'];
+                $nilair15[] = $dataid['nilair'];
             endforeach;
         } else {
             $id15[] = '';
+            $nilaip15[] = '';
+            $nilaiq15[] = '';
+            $nilair15[] = '';
         }
         $data['id15'] = $id15;
+        $data['nilaip15'] = $nilaip15;
+        $data['nilaiq15'] = $nilaiq15;
+        $data['nilair15'] = $nilair15;
+
         if (!empty($latih)) {
             $data['data_latih'] = $latih;
         } else {
@@ -1165,15 +1407,25 @@ class Mannilairpl extends BaseController
 
         //UserFair16
         $latih1 = $model4->where('user_id', $mhs_id)->where('Jenis', 'sertifikat')->like('kompetensi', 'W.4.4.')->findall();
-        $dataid16 = $modelnilai->select('id_tbl')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Penilai')->where('namatbl', '16')->where('namamk', 'seminar')->findall();
+        $dataid16 = $modelnilai->select('id_tbl, nilaip, nilaiq, nilair')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Penilai')->where('namatbl', '16')->where('namamk', 'seminar')->findall();
         if (!empty($dataid16)) {
             foreach ($dataid16 as $dataid) :
                 $id16[] = $dataid['id_tbl'];
+                $nilaip16[] = $dataid['nilaip'];
+                $nilaiq16[] = $dataid['nilaiq'];
+                $nilair16[] = $dataid['nilair'];
             endforeach;
         } else {
             $id16[] = '';
+            $nilaip16[] = '';
+            $nilaiq16[] = '';
+            $nilair16[] = '';
         }
         $data['id16'] = $id16;
+        $data['nilaip16'] = $nilaip16;
+        $data['nilaiq16'] = $nilaiq16;
+        $data['nilair16'] = $nilair16;
+
         if (!empty($latih1)) {
             $data['data_latih1'] = $latih1;
         } else {
@@ -1184,15 +1436,25 @@ class Mannilairpl extends BaseController
         $model5 = new BahasaModel();
         $bahasa = $model5->where('user_id', $mhs_id)->like('kompetensi', 'W.4.4.')->orderby('Num', 'DESC')->findall();
         $data['jml_bahasa'] = $model5->where('user_id', $mhs_id)->like('kompetensi', 'W.4.4.')->countAllResults();
-        $dataid6 = $modelnilai->select('id_tbl')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Penilai')->where('namatbl', '6')->where('namamk', 'seminar')->findall();
+        $dataid6 = $modelnilai->select('id_tbl, nilaip, nilaiq, nilair')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Penilai')->where('namatbl', '6')->where('namamk', 'seminar')->findall();
         if (!empty($dataid6)) {
             foreach ($dataid6 as $dataid) :
                 $id6[] = $dataid['id_tbl'];
+                $nilaip6[] = $dataid['nilaip'];
+                $nilaiq6[] = $dataid['nilaiq'];
+                $nilair6[] = $dataid['nilair'];
             endforeach;
         } else {
             $id6[] = '';
+            $nilaip6[] = '';
+            $nilaiq6[] = '';
+            $nilair6[] = '';
         }
         $data['id6'] = $id6;
+        $data['nilaip6'] = $nilaip6;
+        $data['nilaiq6'] = $nilaiq6;
+        $data['nilair6'] = $nilair6;
+
         if (!empty($bahasa)) {
             $data['data_bahasa'] = $bahasa;
         } else {
@@ -1445,21 +1707,39 @@ class Mannilairpl extends BaseController
         }
         helper(['tanggal']);
 
+        $modelprof = new ProfileModel();
+        $mhsprofile = $modelprof->where('user_id', $mhs_id)->first();
+        if ($mhsprofile) {
+            $data['FullName'] = $mhsprofile['FullName'];
+        } else {
+            $data['FullName'] = 'kosong';
+        }
+
         $modelnilai = new NilairplModel();
 
         //UserFair3
         $model = new CapesKualifikasiModel();
         $data['capeslogged_in'] = $session->get('capeslogged_in');
         $kerja = $model->where('user_id', $mhs_id)->like('kompetensi', 'W.2.1.')->orderby('ProjValue', 'DESC')->findall();
-        $dataid3 = $modelnilai->select('id_tbl')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Penilai')->where('namatbl', '3')->where('namamk', 'studikasus')->findall();
+        $dataid3 = $modelnilai->select('id_tbl, nilaip, nilaiq, nilair')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Penilai')->where('namatbl', '3')->where('namamk', 'studikasus')->findall();
         if (!empty($dataid3)) {
             foreach ($dataid3 as $dataid) :
                 $id3[] = $dataid['id_tbl'];
+                $nilaip3[] = $dataid['nilaip'];
+                $nilaiq3[] = $dataid['nilaiq'];
+                $nilair3[] = $dataid['nilair'];
             endforeach;
         } else {
             $id3[] = '';
+            $nilaip3[] = '';
+            $nilaiq3[] = '';
+            $nilair3[] = '';
         }
         $data['id3'] = $id3;
+        $data['nilaip3'] = $nilaip3;
+        $data['nilaiq3'] = $nilaiq3;
+        $data['nilair3'] = $nilair3;
+
         if (!empty($kerja)) {
             $data['data_kerja'] = $kerja;
         } else {
@@ -1469,15 +1749,25 @@ class Mannilairpl extends BaseController
         //UserFair4
         $model2 = new MengajarModel();
         $ajar = $model2->where('user_id', $mhs_id)->like('kompetensi', 'W.2.1.')->orderby('StartPeriod', 'DESC')->findall();
-        $dataid4 = $modelnilai->select('id_tbl')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Penilai')->where('namatbl', '4')->where('namamk', 'studikasus')->findall();
+        $dataid4 = $modelnilai->select('id_tbl, nilaip, nilaiq, nilair')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Penilai')->where('namatbl', '4')->where('namamk', 'studikasus')->findall();
         if (!empty($dataid4)) {
             foreach ($dataid4 as $dataid) :
                 $id4[] = $dataid['id_tbl'];
+                $nilaip4[] = $dataid['nilaip'];
+                $nilaiq4[] = $dataid['nilaiq'];
+                $nilair4[] = $dataid['nilair'];
             endforeach;
         } else {
             $id4[] = '';
+            $nilaip4[] = '';
+            $nilaiq4[] = '';
+            $nilair4[] = '';
         }
         $data['id4'] = $id4;
+        $data['nilaip4'] = $nilaip4;
+        $data['nilaiq4'] = $nilaiq4;
+        $data['nilair4'] = $nilair4;
+
         if (!empty($ajar)) {
             $data['data_ajar'] = $ajar;
         } else {
@@ -1487,15 +1777,25 @@ class Mannilairpl extends BaseController
         //USerFair51
         $model3 = new CapesKartulModel();
         $kartul = $model3->where('user_id', $mhs_id)->like('kompetensi', 'W.4.')->orderby('Year', 'DESC')->findall();
-        $dataid51 = $modelnilai->select('id_tbl')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Penilai')->where('namatbl', '51')->where('namamk', 'studikasus')->findall();
+        $dataid51 = $modelnilai->select('id_tbl, nilaip, nilaiq, nilair')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Penilai')->where('namatbl', '51')->where('namamk', 'studikasus')->findall();
         if (!empty($dataid51)) {
             foreach ($dataid51 as $dataid) :
                 $id51[] = $dataid['id_tbl'];
+                $nilaip51[] = $dataid['nilaip'];
+                $nilaiq51[] = $dataid['nilaiq'];
+                $nilair51[] = $dataid['nilair'];
             endforeach;
         } else {
             $id51[] = '';
+            $nilaip51[] = '';
+            $nilaiq51[] = '';
+            $nilair51[] = '';
         }
         $data['id51'] = $id51;
+        $data['nilaip51'] = $nilaip51;
+        $data['nilaiq51'] = $nilaiq51;
+        $data['nilair51'] = $nilair51;
+
         if (!empty($kartul)) {
             $data['data_kartul'] = $kartul;
         } else {
@@ -1505,15 +1805,25 @@ class Mannilairpl extends BaseController
         //UserFair52
         $model4 = new CapesSemModel();
         $sem = $model4->where('user_id', $mhs_id)->where('Type', 'Mak')->like('kompetensi', 'W.4.')->orderby('Year', 'DESC')->findall();
-        $dataid52 = $modelnilai->select('id_tbl')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Penilai')->where('namatbl', '52')->where('namamk', 'studikasus')->findall();
+        $dataid52 = $modelnilai->select('id_tbl, nilaip, nilaiq, nilair')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Penilai')->where('namatbl', '52')->where('namamk', 'studikasus')->findall();
         if (!empty($dataid52)) {
             foreach ($dataid3 as $dataid) :
                 $id52[] = $dataid['id_tbl'];
+                $nilaip52[] = $dataid['nilaip'];
+                $nilaiq52[] = $dataid['nilaiq'];
+                $nilair52[] = $dataid['nilair'];
             endforeach;
         } else {
             $id52[] = '';
+            $nilaip52[] = '';
+            $nilaiq52[] = '';
+            $nilair52[] = '';
         }
         $data['id52'] = $id52;
+        $data['nilaip52'] = $nilaip52;
+        $data['nilaiq52'] = $nilaiq52;
+        $data['nilair52'] = $nilair52;
+
         if (!empty($sem)) {
             $data['data_sem'] = $sem;
         } else {
@@ -1522,15 +1832,25 @@ class Mannilairpl extends BaseController
 
         //UserFair53
         $sem1 = $model4->where('user_id', $mhs_id)->where('Type', 'Sem')->like('kompetensi', 'W.2.1.')->orderby('Year', 'DESC')->findall();
-        $dataid53 = $modelnilai->select('id_tbl')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Penilai')->where('namatbl', '53')->where('namamk', 'studikasus')->findall();
+        $dataid53 = $modelnilai->select('id_tbl, nilaip, nilaiq, nilair')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Penilai')->where('namatbl', '53')->where('namamk', 'studikasus')->findall();
         if (!empty($dataid53)) {
             foreach ($dataid53 as $dataid) :
                 $id53[] = $dataid['id_tbl'];
+                $nilaip53[] = $dataid['nilaip'];
+                $nilaiq53[] = $dataid['nilaiq'];
+                $nilair53[] = $dataid['nilair'];
             endforeach;
         } else {
             $id53[] = '';
+            $nilaip53[] = '';
+            $nilaiq53[] = '';
+            $nilair53[] = '';
         }
         $data['id53'] = $id53;
+        $data['nilaip53'] = $nilaip53;
+        $data['nilaiq53'] = $nilaiq53;
+        $data['nilair53'] = $nilair53;
+
         if (!empty($sem1)) {
             $data['data_sem1'] = $sem1;
         } else {
@@ -1540,15 +1860,25 @@ class Mannilairpl extends BaseController
         //UserFair12
         $model5 = new CapesPendModel();
         $pend = $model5->where('user_id', $mhs_id)->like('kompetensi', 'W.2.1.')->orderby('GradYear', 'DESC')->findall();
-        $dataid12 = $modelnilai->select('id_tbl')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Penilai')->where('namatbl', '12')->where('namamk', 'studikasus')->findall();
+        $dataid12 = $modelnilai->select('id_tbl, nilaip, nilaiq, nilair')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Penilai')->where('namatbl', '12')->where('namamk', 'studikasus')->findall();
         if (!empty($dataid12)) {
             foreach ($dataid12 as $dataid) :
                 $id12[] = $dataid['id_tbl'];
+                $nilaip12[] = $dataid['nilaip'];
+                $nilaiq12[] = $dataid['nilaiq'];
+                $nilair12[] = $dataid['nilair'];
             endforeach;
         } else {
             $id12[] = '';
+            $nilaip12[] = '';
+            $nilaiq12[] = '';
+            $nilair12[] = '';
         }
         $data['id12'] = $id12;
+        $data['nilaip12'] = $nilaip12;
+        $data['nilaiq12'] = $nilaiq12;
+        $data['nilair12'] = $nilair12;
+
         if (!empty($pend)) {
             $data['data_pend'] = $pend;
         } else {
@@ -1558,15 +1888,25 @@ class Mannilairpl extends BaseController
         //UserFair15
         $model6 = new CapesSertModel();
         $latih = $model6->where('user_id', $mhs_id)->where('Jenis', 'pelatihan')->like('kompetensi', 'W.2.1.')->orderby('StartYear', 'DESC')->findall();
-        $dataid15 = $modelnilai->select('id_tbl')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Penilai')->where('namatbl', '15')->where('namamk', 'studikasus')->findall();
+        $dataid15 = $modelnilai->select('id_tbl, nilaip, nilaiq, nilair')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Penilai')->where('namatbl', '15')->where('namamk', 'studikasus')->findall();
         if (!empty($dataid15)) {
             foreach ($dataid15 as $dataid) :
                 $id15[] = $dataid['id_tbl'];
+                $nilaip15[] = $dataid['nilaip'];
+                $nilaiq15[] = $dataid['nilaiq'];
+                $nilair15[] = $dataid['nilair'];
             endforeach;
         } else {
             $id15[] = '';
+            $nilaip15[] = '';
+            $nilaiq15[] = '';
+            $nilair15[] = '';
         }
         $data['id15'] = $id15;
+        $data['nilaip15'] = $nilaip15;
+        $data['nilaiq15'] = $nilaiq15;
+        $data['nilair15'] = $nilair15;
+
         if (!empty($latih)) {
             $data['data_latih'] = $latih;
         } else {
@@ -1575,15 +1915,25 @@ class Mannilairpl extends BaseController
 
         //UserFair16
         $latih1 = $model6->where('user_id', $mhs_id)->where('Jenis', 'sertifikat')->like('kompetensi', 'W.4.')->findall();
-        $dataid16 = $modelnilai->select('id_tbl')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Penilai')->where('namatbl', '16')->where('namamk', 'studikasus')->findall();
+        $dataid16 = $modelnilai->select('id_tbl, nilaip, nilaiq, nilair')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Penilai')->where('namatbl', '16')->where('namamk', 'studikasus')->findall();
         if (!empty($dataid16)) {
             foreach ($dataid16 as $dataid) :
                 $id16[] = $dataid['id_tbl'];
+                $nilaip16[] = $dataid['nilaip'];
+                $nilaiq16[] = $dataid['nilaiq'];
+                $nilair16[] = $dataid['nilair'];
             endforeach;
         } else {
             $id16[] = '';
+            $nilaip16[] = '';
+            $nilaiq16[] = '';
+            $nilair16[] = '';
         }
         $data['id16'] = $id16;
+        $data['nilaip16'] = $nilaip16;
+        $data['nilaiq16'] = $nilaiq16;
+        $data['nilair16'] = $nilair16;
+
         if (!empty($latih)) {
             $data['data_latih1'] = $latih1;
         } else {
@@ -1594,15 +1944,25 @@ class Mannilairpl extends BaseController
         $model7 = new BahasaModel();
         $bahasa = $model7->where('user_id', $mhs_id)->like('kompetensi', 'W.4.')->orderby('Num', 'DESC')->findall();
         $data['jml_bahasa'] = $model5->where('user_id', $mhs_id)->like('kompetensi', 'W.4.4.')->countAllResults();
-        $dataid6 = $modelnilai->select('id_tbl')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Penilai')->where('namatbl', '6')->where('namamk', 'studikasus')->findall();
+        $dataid6 = $modelnilai->select('id_tbl, nilaip, nilaiq, nilair')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Penilai')->where('namatbl', '6')->where('namamk', 'studikasus')->findall();
         if (!empty($dataid6)) {
             foreach ($dataid6 as $dataid) :
                 $id6[] = $dataid['id_tbl'];
+                $nilaip6[] = $dataid['nilaip'];
+                $nilaiq6[] = $dataid['nilaiq'];
+                $nilair6[] = $dataid['nilair'];
             endforeach;
         } else {
             $id6[] = '';
+            $nilaip6[] = '';
+            $nilaiq6[] = '';
+            $nilair6[] = '';
         }
         $data['id6'] = $id6;
+        $data['nilaip6'] = $nilaip6;
+        $data['nilaiq6'] = $nilaiq6;
+        $data['nilair6'] = $nilair6;
+
         if (!empty($bahasa)) {
             $data['data_bahasa'] = $bahasa;
         } else {
@@ -1893,8 +2253,6 @@ class Mannilairpl extends BaseController
         $session->setFlashdata('msg', 'Data MK Studi Kasus berhasil disimpan.');
         return redirect()->to('mannilairpl/penilaianrpl/' . $mhs_id . '/' . $dosen_id);
     }
-
-
 
     public function submitnilairpl()
     {

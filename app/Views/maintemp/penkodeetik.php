@@ -5,7 +5,10 @@
 <div class="card card-primary" style="width: auto; margin: 30px;">
     <div class="col-sm-13" style="width: auto; margin: 30px;">
         <!-- /.card-header -->
-        <div class="card">
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title"><?= $FullName; ?>, Mata Kuliah Kode Etik</h3>
+            </div>
             <div class="card-body">
 
                 <?php if (session()->getFlashdata('msg')) : ?>
@@ -56,8 +59,15 @@
                                         <td>
                                             <?php
                                             if (in_array($etik['Num'], $id21)) {
+                                                $idx = array_search($etik['Num'], $id21);
+                                                $nilaietikp[$j] = $nilaip21[$idx];
+                                                $nilaietikq[$j] = $nilaiq21[$idx];
+                                                $nilaietikr[$j] = $nilair21[$idx];
                                                 $checked[$j] = 'checked';
                                             } else {
+                                                $nilaietikp[$j] = '';
+                                                $nilaietikq[$j] = '';
+                                                $nilaietikr[$j] = '';
                                                 $checked[$j] = '';
                                             }
                                             ?>
@@ -72,18 +82,18 @@
                                         <td><?= $etik['Relation']; ?></td>
                                         <td>
                                             <select name="nilaietik_q[]" id="nilaietik_q[]">
-                                                <option value="4">4</option>
-                                                <option value="3">3</option>
-                                                <option value="2">2</option>
-                                                <option value="1">1</option>
+                                                <option value="4" <?= ((isset($nilaietikq[$j])) && ($nilaietikq[$j] == 4)) ? 'selected' : ''; ?>>4</option>
+                                                <option value="3" <?= ((isset($nilaietikq[$j])) && ($nilaietikq[$j] == 3)) ? 'selected' : ''; ?>>3</option>
+                                                <option value="2" <?= ((isset($nilaietikq[$j])) && ($nilaietikq[$j] == 2)) ? 'selected' : ''; ?>>2</option>
+                                                <option value="1" <?= ((isset($nilaietikq[$j])) && ($nilaietikq[$j] == 1)) ? 'selected' : ''; ?>>1</option>
                                             </select>
                                         </td>
                                         <td>
                                             <select name="nilaietik_r[]" id="nilaietik_r[]">
-                                                <option value="4">4</option>
-                                                <option value="3">3</option>
-                                                <option value="2">2</option>
-                                                <option value="1">1</option>
+                                                <option value="4" <?= ((isset($nilaietikr[$j])) && ($nilaietikr[$j] == 4)) ? 'selected' : ''; ?>>4</option>
+                                                <option value="3" <?= ((isset($nilaietikr[$j])) && ($nilaietikr[$j] == 3)) ? 'selected' : ''; ?>>3</option>
+                                                <option value="2" <?= ((isset($nilaietikr[$j])) && ($nilaietikr[$j] == 2)) ? 'selected' : ''; ?>>2</option>
+                                                <option value="1" <?= ((isset($nilaietikr[$j])) && ($nilaietikr[$j] == 1)) ? 'selected' : ''; ?>>1</option>
                                             </select>
                                         </td>
                                     </tr>
@@ -141,8 +151,15 @@
                                         <td>
                                             <?php
                                             if (in_array($dapat['Num'], $id22)) {
+                                                $idx = array_search($dapat['Num'], $id22);
+                                                $nilaidapatp[$j] = $nilaip22[$idx];
+                                                $nilaidapatq[$j] = $nilaiq22[$idx];
+                                                $nilaidapatr[$j] = $nilair22[$idx];
                                                 $checked[$j] = 'checked';
                                             } else {
+                                                $nilaidapatp[$j] = '';
+                                                $nilaidapatq[$j] = '';
+                                                $nilaidapatr[$j] = '';
                                                 $checked[$j] = '';
                                             }
                                             ?>
@@ -152,26 +169,26 @@
                                         <td><?= $dapat['Desc']; ?></td>
                                         <td>
                                             <select name="nilaidapat_p[]" id="nilaidapat_p[]">
-                                                <option value="4">4</option>
-                                                <option value="3">3</option>
-                                                <option value="2">2</option>
-                                                <option value="1">1</option>
+                                                <option value="4" <?= ((isset($nilaidapatp[$j])) && ($nilaidapatp[$j] == 4)) ? 'selected' : ''; ?>>4</option>
+                                                <option value="3" <?= ((isset($nilaidapatp[$j])) && ($nilaidapatp[$j] == 3)) ? 'selected' : ''; ?>>3</option>
+                                                <option value="2" <?= ((isset($nilaidapatp[$j])) && ($nilaidapatp[$j] == 2)) ? 'selected' : ''; ?>>2</option>
+                                                <option value="1" <?= ((isset($nilaidapatp[$j])) && ($nilaidapatp[$j] == 1)) ? 'selected' : ''; ?>>1</option>
                                             </select>
                                         </td>
                                         <td>
                                             <select name="nilaidapat_q[]" id="nilaidapat_q[]">
-                                                <option value="4">4</option>
-                                                <option value="3">3</option>
-                                                <option value="2">2</option>
-                                                <option value="1">1</option>
+                                                <option value="4" <?= ((isset($nilaidapatq[$j])) && ($nilaidapatq[$j] == 4)) ? 'selected' : ''; ?>>4</option>
+                                                <option value="3" <?= ((isset($nilaidapatq[$j])) && ($nilaidapatq[$j] == 3)) ? 'selected' : ''; ?>>3</option>
+                                                <option value="2" <?= ((isset($nilaidapatq[$j])) && ($nilaidapatq[$j] == 2)) ? 'selected' : ''; ?>>2</option>
+                                                <option value="1" <?= ((isset($nilaidapatq[$j])) && ($nilaidapatq[$j] == 1)) ? 'selected' : ''; ?>>1</option>
                                             </select>
                                         </td>
                                         <td>
                                             <select name="nilaidapat_r[]" id="nilaidapat_r[]">
-                                                <option value="4">4</option>
-                                                <option value="3">3</option>
-                                                <option value="2">2</option>
-                                                <option value="1">1</option>
+                                                <option value="4" <?= ((isset($nilaidapatr[$j])) && ($nilaidapatr[$j] == 4)) ? 'selected' : ''; ?>>4</option>
+                                                <option value="3" <?= ((isset($nilaidapatr[$j])) && ($nilaidapatr[$j] == 3)) ? 'selected' : ''; ?>>3</option>
+                                                <option value="2" <?= ((isset($nilaidapatr[$j])) && ($nilaidapatr[$j] == 2)) ? 'selected' : ''; ?>>2</option>
+                                                <option value="1" <?= ((isset($nilaidapatr[$j])) && ($nilaidapatr[$j] == 1)) ? 'selected' : ''; ?>>1</option>
                                             </select>
                                         </td>
                                     </tr>
@@ -221,8 +238,15 @@
                                         <td>
                                             <?php
                                             if (in_array($org['Num'], $id13)) {
+                                                $idx = array_search($org['Num'], $id13);
+                                                $nilaiorgp[$j] = $nilaip13[$idx];
+                                                $nilaiorgq[$j] = $nilaiq13[$idx];
+                                                $nilaiorgr[$j] = $nilair13[$idx];
                                                 $checked[$j] = 'checked';
                                             } else {
+                                                $nilaiorgp[$j] = '';
+                                                $nilaiorgq[$j] = '';
+                                                $nilaiorgr[$j] = '';
                                                 $checked[$j] = '';
                                             }
                                             ?>
@@ -322,12 +346,18 @@
                                         <td><?= $org['kompetensi']; ?></td>
                                         <td width="5%">
                                             <?php
-                                            if ($org['Position'] == "Bias") {
-                                                $posscore = 2;
-                                            } elseif ($org['Position'] == "Peng") {
-                                                $posscore = 3;
-                                            } elseif ($org['Position'] == "Pimp") {
-                                                $posscore = 4;
+                                            if ((isset($nilaiorgq[$j])) && !empty($nilaiorgq[$j])) {
+                                                $posscore = $nilaiorgq[$j];
+                                            } else {
+                                                if ($org['Position'] == "Bias") {
+                                                    $posscore = 2;
+                                                } elseif ($org['Position'] == "Peng") {
+                                                    $posscore = 3;
+                                                } elseif ($org['Position'] == "Pimp") {
+                                                    $posscore = 4;
+                                                } else {
+                                                    $posscore = '';
+                                                }
                                             }
                                             ?>
                                             <select name="nilaiorg_q[]" id="nilaiorg_q[]">
@@ -339,14 +369,20 @@
                                         </td>
                                         <td width="5%">
                                             <?php
-                                            if ($org['OrgLevel'] == "Lok") {
-                                                $orgscore = 1;
-                                            } elseif ($org['OrgLevel'] == "Nas") {
-                                                $orgscore = 2;
-                                            } elseif ($org['OrgLevel'] == "Reg") {
-                                                $orgscore = 3;
-                                            } elseif ($org['OrgLevel'] == "Int") {
-                                                $orgscore = 4;
+                                            if ((isset($nilaiorgr[$j])) && (!empty($nilaiorgr[$j]))) {
+                                                $orgscore = $nilaiorgr[$j];
+                                            } else {
+                                                if ($org['OrgLevel'] == "Lok") {
+                                                    $orgscore = 1;
+                                                } elseif ($org['OrgLevel'] == "Nas") {
+                                                    $orgscore = 2;
+                                                } elseif ($org['OrgLevel'] == "Reg") {
+                                                    $orgscore = 3;
+                                                } elseif ($org['OrgLevel'] == "Int") {
+                                                    $orgscore = 4;
+                                                } else {
+                                                    $orgscore = '';
+                                                }
                                             }
                                             ?>
                                             <select name="nilaiorg_r[]" id="nilaiorg_r[]">
@@ -438,8 +474,15 @@
                                         <td>
                                             <?php
                                             if (in_array($penghargaan['Num'], $id14)) {
+                                                $idx = array_search($penghargaan['Num'], $id14);
+                                                $nilaihargap[$j] = $nilaip14[$idx];
+                                                $nilaihargaq[$j] = $nilaiq14[$idx];
+                                                $nilaihargar[$j] = $nilair14[$idx];
                                                 $checked[$j] = 'checked';
                                             } else {
+                                                $nilaihargap[$j] = '';
+                                                $nilaihargaq[$j] = '';
+                                                $nilaihargar[$j] = '';
                                                 $checked[$j] = '';
                                             }
                                             ?>
@@ -537,12 +580,18 @@
                                         </td>
                                         <td>
                                             <?php
-                                            if ($penghargaan['Level'] == 'Mud') {
-                                                $levelscore = 2;
-                                            } elseif ($penghargaan['Level'] == 'Mad') {
-                                                $levelscore = 3;
-                                            } elseif ($penghargaan['Level'] == 'Uta') {
-                                                $levelscore = 4;
+                                            if ((isset($nilaihargaq[$j])) && (!empty($nilaihargaq[$j]))) {
+                                                $levelscore = $nilaihargaq[$j];
+                                            } else {
+                                                if ($penghargaan['Level'] == 'Mud') {
+                                                    $levelscore = 2;
+                                                } elseif ($penghargaan['Level'] == 'Mad') {
+                                                    $levelscore = 3;
+                                                } elseif ($penghargaan['Level'] == 'Uta') {
+                                                    $levelscore = 4;
+                                                } else {
+                                                    $levelscore = '';
+                                                }
                                             }
                                             ?>
                                             <select name="nilaipenghargaan_q[]" id="nilaipenghargaan_q[]">
@@ -554,14 +603,20 @@
                                         </td>
                                         <td>
                                             <?php
-                                            if ($penghargaan['InstituteType'] == 'Lok') {
-                                                $typescore = 1;
-                                            } elseif ($penghargaan['InstituteType'] == 'Nas') {
-                                                $typescore = 2;
-                                            } elseif ($penghargaan['InstituteType'] == 'Reg') {
-                                                $typescore = 3;
-                                            } elseif ($penghargaan['InstituteType'] == 'Int') {
-                                                $typescore = 4;
+                                            if ((isset($nilaihargar[$j])) && (!empty($nilaihargar[$j]))) {
+                                                $typescore = $nilaihargar[$j];
+                                            } else {
+                                                if ($penghargaan['InstituteType'] == 'Lok') {
+                                                    $typescore = 1;
+                                                } elseif ($penghargaan['InstituteType'] == 'Nas') {
+                                                    $typescore = 2;
+                                                } elseif ($penghargaan['InstituteType'] == 'Reg') {
+                                                    $typescore = 3;
+                                                } elseif ($penghargaan['InstituteType'] == 'Int') {
+                                                    $typescore = 4;
+                                                } else {
+                                                    $typescore = '';
+                                                }
                                             }
                                             ?>
                                             <select name="nilaipenghargaan_r[]" id="nilaipenghargaan_r[]">
@@ -617,8 +672,15 @@
                                         <td>
                                             <?php
                                             if (in_array($latih['Num'], $id16)) {
+                                                $idx = array_search($latih['Num'], $id16);
+                                                $nilailatihp[$j] = $nilaip16[$idx];
+                                                $nilailatihq[$j] = $nilaiq16[$idx];
+                                                $nilailatihr[$j] = $nilair16[$idx];
                                                 $checked[$j] = 'checked';
                                             } else {
+                                                $nilailatihp[$j] = '';
+                                                $nilailatihq[$j] = '';
+                                                $nilailatihr[$j] = '';
                                                 $checked[$j] = '';
                                             }
                                             ?>
@@ -653,8 +715,8 @@
                                                     break;
                                                 case 'lbih240':
                                                     echo "Lebih dari 240 Jam
-                                        
-                                        ";
+                    
+                    ";
                                                     break;
                                             }
                                             ?></td>
@@ -669,14 +731,20 @@
                                         <td><?= $latih['kompetensi']; ?></td>
                                         <td>
                                             <?php
-                                            if ($latih['Length'] == 'sd36') {
-                                                $lengthscore = 1;
-                                            } elseif ($latih['Length'] == 'smp100') {
-                                                $lengthscore = 2;
-                                            } elseif ($latih['Length'] == 'smp240') {
-                                                $lengthscore = 3;
-                                            } elseif ($latih['Length'] == 'lbih240') {
-                                                $lengthscore = 4;
+                                            if ((isset($nilailatihp[$j])) && (!empty($nilailatihp[$j]))) {
+                                                $lengthscore = $nilailatihp[$j];
+                                            } else {
+                                                if ($latih['Length'] == 'sd36') {
+                                                    $lengthscore = 1;
+                                                } elseif ($latih['Length'] == 'smp100') {
+                                                    $lengthscore = 2;
+                                                } elseif ($latih['Length'] == 'smp240') {
+                                                    $lengthscore = 3;
+                                                } elseif ($latih['Length'] == 'lbih240') {
+                                                    $lengthscore = 4;
+                                                } else {
+                                                    $lengthscore = '';
+                                                }
                                             }
                                             ?>
                                             <select name="nilailatih_p[]" id="nilailatih_p[]">
@@ -696,10 +764,16 @@
                                         </td>
                                         <td>
                                             <?php
-                                            if ($latih['Level'] == 'Dasar') {
-                                                $levscore = 2;
-                                            } elseif ($latih['Level'] == 'Lanjut') {
-                                                $levscore = 3;
+                                            if ((isset($nilailatihr[$j])) && (!empty($nilailatihr[$j]))) {
+                                                $levscore = $nilailatihr[$j];
+                                            } else {
+                                                if ($latih['Level'] == 'Dasar') {
+                                                    $levscore = 2;
+                                                } elseif ($latih['Level'] == 'Lanjut') {
+                                                    $levscore = 3;
+                                                } else {
+                                                    $levscore = '';
+                                                }
                                             }
                                             ?>
                                             <select name="nilailatih_r[]" id="nilailatih_r[]">

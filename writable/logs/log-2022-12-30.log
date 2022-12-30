@@ -1,0 +1,64 @@
+CRITICAL - 2022-12-30 17:22:26 --> Undefined variable: empty
+#0 D:\wamp64\www\webppi\app\Views\maintemp\seminar.php(1095): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'D:\\wamp64\\www\\w...', 1095, Array)
+#1 D:\wamp64\www\webppi\system\View\View.php(210): include('D:\\wamp64\\www\\w...')
+#2 D:\wamp64\www\webppi\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 D:\wamp64\www\webppi\system\Common.php(1089): CodeIgniter\View\View->render('maintemp/semina...', Array, true)
+#4 D:\wamp64\www\webppi\app\Controllers\Nilairpl.php(1442): view('maintemp/semina...', Array)
+#5 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Nilairpl->seminar('9', '73')
+#6 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nilairpl))
+#7 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2022-12-30 04:23:04 --> Undefined index: nilaip
+#0 D:\wamp64\www\webppi\app\Controllers\Nilairpl.php(1867): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'D:\\wamp64\\www\\w...', 1867, Array)
+#1 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Nilairpl->studikasus('9', '73')
+#2 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nilairpl))
+#3 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2022-12-30 04:23:34 --> Undefined index: nilaip
+#0 D:\wamp64\www\webppi\app\Controllers\Nilairpl.php(1894): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'D:\\wamp64\\www\\w...', 1894, Array)
+#1 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Nilairpl->studikasus('9', '73')
+#2 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nilairpl))
+#3 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2022-12-30 04:23:45 --> Undefined index: nilaip
+#0 D:\wamp64\www\webppi\app\Controllers\Nilairpl.php(1923): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'D:\\wamp64\\www\\w...', 1923, Array)
+#1 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Nilairpl->studikasus('9', '73')
+#2 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nilairpl))
+#3 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2022-12-30 17:24:00 --> Undefined variable: empty
+#0 D:\wamp64\www\webppi\app\Views\maintemp\studikasus.php(1388): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'D:\\wamp64\\www\\w...', 1388, Array)
+#1 D:\wamp64\www\webppi\system\View\View.php(210): include('D:\\wamp64\\www\\w...')
+#2 D:\wamp64\www\webppi\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 D:\wamp64\www\webppi\system\Common.php(1089): CodeIgniter\View\View->render('maintemp/studik...', Array, true)
+#4 D:\wamp64\www\webppi\app\Controllers\Nilairpl.php(1950): view('maintemp/studik...', Array)
+#5 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Nilairpl->studikasus('9', '73')
+#6 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nilairpl))
+#7 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2022-12-30 11:20:10 --> Call to undefined function nilai_huruf_rpl()
+#0 D:\wamp64\www\webppi\system\View\View.php(210): include()
+#1 D:\wamp64\www\webppi\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#2 D:\wamp64\www\webppi\system\Common.php(1089): CodeIgniter\View\View->render('maintemp/nilair...', Array, true)
+#3 D:\wamp64\www\webppi\app\Controllers\Manpeserta.php(689): view('maintemp/nilair...', Array)
+#4 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Manpeserta->lihatnilairpl('17')
+#5 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Manpeserta))
+#6 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2022-12-30 11:40:49 --> Undefined variable: rataratabimbing1
+#0 D:\wamp64\www\webppi\app\Views\maintemp\nilairplpeserta.php(58): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'D:\\wamp64\\www\\w...', 58, Array)
+#1 D:\wamp64\www\webppi\system\View\View.php(210): include('D:\\wamp64\\www\\w...')
+#2 D:\wamp64\www\webppi\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 D:\wamp64\www\webppi\system\Common.php(1089): CodeIgniter\View\View->render('maintemp/nilair...', Array, true)
+#4 D:\wamp64\www\webppi\app\Controllers\Manpeserta.php(690): view('maintemp/nilair...', Array)
+#5 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Manpeserta->lihatnilairpl('17')
+#6 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Manpeserta))
+#7 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}

@@ -5,7 +5,10 @@
 <div class="card card-primary" style="width: auto; margin: 30px;">
     <div class="col-sm-13" style="width: auto; margin: 30px;">
         <!-- /.card-header -->
-        <div class="card">
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title"><?= $FullName; ?>, Mata Kuliah Studi Kasus</h3>
+            </div>
             <div class="card-body">
 
                 <form action="<?php echo base_url(); ?>/nilairpl/studikasussimpan" method="post" enctype="multipart/form-data">
@@ -58,8 +61,15 @@
                                         <td>
                                             <?php
                                             if (in_array($kerja['Num'], $id3)) {
+                                                $idx = array_search($kerja['Num'], $id3);
+                                                $nilaikerjap[$j] = $nilaip3[$idx];
+                                                $nilaikerjaq[$j] = $nilaiq3[$idx];
+                                                $nilaikerjar[$j] = $nilair3[$idx];
                                                 $checked[$j] = 'checked';
                                             } else {
+                                                $nilaikerjap[$j] = '';
+                                                $nilaikerjaq[$j] = '';
+                                                $nilaikerjar[$j] = '';
                                                 $checked[$j] = '';
                                             }
                                             ?>
@@ -171,16 +181,20 @@
                                         <td><?= $kerja['kompetensi']; ?></td>
                                         <td>
                                             <?php
-                                            if ($kerja['Duration'] == 'smp3') {
-                                                $durscore = 1;
-                                            } elseif ($kerja['Duration'] == 'smp7') {
-                                                $durscore = 2;
-                                            } elseif ($kerja['Duration'] == 'smp10') {
-                                                $durscore = 3;
-                                            } elseif ($kerja['Duration'] == 'lbih10') {
-                                                $durscore = 4;
+                                            if ((isset($nilaikerjap[$j])) && (!empty($nilaikerjap[$j]))) {
+                                                $durscore = $nilaikerjap[$j];
                                             } else {
-                                                $durscore = 4;
+                                                if ($kerja['Duration'] == 'smp3') {
+                                                    $durscore = 1;
+                                                } elseif ($kerja['Duration'] == 'smp7') {
+                                                    $durscore = 2;
+                                                } elseif ($kerja['Duration'] == 'smp10') {
+                                                    $durscore = 3;
+                                                } elseif ($kerja['Duration'] == 'lbih10') {
+                                                    $durscore = 4;
+                                                } else {
+                                                    $durscore = '';
+                                                }
                                             }
                                             ?>
                                             <select name="nilaikerja_p[]" id="nilaikerja_p[]">
@@ -192,14 +206,20 @@
                                         </td>
                                         <td>
                                             <?php
-                                            if ($kerja['Jabatan'] == 'anggota') {
-                                                $jabscore = 1;
-                                            } elseif ($kerja['Jabatan'] == 'supervisor') {
-                                                $jabscore = 2;
-                                            } elseif ($kerja['Jabatan'] == 'direktur') {
-                                                $jabscore = 3;
-                                            } elseif ($kerja['Jabatan'] == 'pengarah') {
-                                                $jabscore = 4;
+                                            if ((isset($nilaikerjaq[$j])) && (!empty($nilaikerjaq[$j]))) {
+                                                $jabscore = $nilaikerjaq[$j];
+                                            } else {
+                                                if ($kerja['Jabatan'] == 'anggota') {
+                                                    $jabscore = 1;
+                                                } elseif ($kerja['Jabatan'] == 'supervisor') {
+                                                    $jabscore = 2;
+                                                } elseif ($kerja['Jabatan'] == 'direktur') {
+                                                    $jabscore = 3;
+                                                } elseif ($kerja['Jabatan'] == 'pengarah') {
+                                                    $jabscore = 4;
+                                                } else {
+                                                    $jabscore = '';
+                                                }
                                             }
                                             ?>
                                             <select name="nilaikerja_q[]" id="nilaikerja_q[]">
@@ -211,10 +231,10 @@
                                         </td>
                                         <td>
                                             <select name="nilaikerja_r[]" id="nilaikerja_r[]">
-                                                <option value="4">4</option>
-                                                <option value="3">3</option>
-                                                <option value="2">2</option>
-                                                <option value="1">1</option>
+                                                <option value="4" <?= ((isset($nilaikerjar[$j])) && ($nilaikerjar[$j] == 4)) ? 'selected' : ''; ?>>4</option>
+                                                <option value="3" <?= ((isset($nilaikerjar[$j])) && ($nilaikerjar[$j] == 3)) ? 'selected' : ''; ?>>3</option>
+                                                <option value="2" <?= ((isset($nilaikerjar[$j])) && ($nilaikerjar[$j] == 2)) ? 'selected' : ''; ?>>2</option>
+                                                <option value="1" <?= ((isset($nilaikerjar[$j])) && ($nilaikerjar[$j] == 1)) ? 'selected' : ''; ?>>1</option>
                                             </select>
                                         </td>
                                     </tr>
@@ -262,8 +282,15 @@
                                         <td>
                                             <?php
                                             if (in_array($ajar['Num'], $id4)) {
+                                                $idx = array_search($ajar['Num'], $id4);
+                                                $nilaiajarp[$j] = $nilaip4[$idx];
+                                                $nilaiajarq[$j] = $nilaiq4[$idx];
+                                                $nilaiajarr[$j] = $nilair4[$idx];
                                                 $checked[$j] = 'checked';
                                             } else {
+                                                $nilaiajarp[$j] = '';
+                                                $nilaiajarq[$j] = '';
+                                                $nilaiajarr[$j] = '';
                                                 $checked[$j] = '';
                                             }
                                             ?>
@@ -324,26 +351,26 @@
                                         <td><?= $ajar['kompetensi']; ?></td>
                                         <td>
                                             <select name="nilaiajar_p[]" id="nilaiajar_p[]">
-                                                <option value="4">4</option>
-                                                <option value="3">3</option>
-                                                <option value="2">2</option>
-                                                <option value="1">1</option>
+                                                <option value="4" <?= ((isset($nilaiajarp[$j])) && ($nilaiajarp[$j] == 4)) ? 'selected' : ''; ?>>4</option>
+                                                <option value="3" <?= ((isset($nilaiajarp[$j])) && ($nilaiajarp[$j] == 3)) ? 'selected' : ''; ?>>3</option>
+                                                <option value="2" <?= ((isset($nilaiajarp[$j])) && ($nilaiajarp[$j] == 2)) ? 'selected' : ''; ?>>2</option>
+                                                <option value="1" <?= ((isset($nilaiajarp[$j])) && ($nilaiajarp[$j] == 1)) ? 'selected' : ''; ?>>1</option>
                                             </select>
                                         </td>
                                         <td>
                                             <select name="nilaiajar_q[]" id="nilaiajar_q[]">
-                                                <option value="4">4</option>
-                                                <option value="3">3</option>
-                                                <option value="2">2</option>
-                                                <option value="1">1</option>
+                                                <option value="4" <?= ((isset($nilaiajarq[$j])) && ($nilaiajarq[$j] == 4)) ? 'selected' : ''; ?>>4</option>
+                                                <option value="3" <?= ((isset($nilaiajarq[$j])) && ($nilaiajarq[$j] == 3)) ? 'selected' : ''; ?>>3</option>
+                                                <option value="2" <?= ((isset($nilaiajarq[$j])) && ($nilaiajarq[$j] == 2)) ? 'selected' : ''; ?>>2</option>
+                                                <option value="1" <?= ((isset($nilaiajarq[$j])) && ($nilaiajarq[$j] == 1)) ? 'selected' : ''; ?>>1</option>
                                             </select>
                                         </td>
                                         <td>
                                             <select name="nilaiajar_r[]" id="nilaiajar_r[]">
-                                                <option value="4">4</option>
-                                                <option value="3">3</option>
-                                                <option value="2">2</option>
-                                                <option value="1">1</option>
+                                                <option value="4" <?= ((isset($nilaiajarr[$j])) && ($nilaiajarr[$j] == 4)) ? 'selected' : ''; ?>>4</option>
+                                                <option value="3" <?= ((isset($nilaiajarr[$j])) && ($nilaiajarr[$j] == 3)) ? 'selected' : ''; ?>>3</option>
+                                                <option value="2" <?= ((isset($nilaiajarr[$j])) && ($nilaiajarr[$j] == 2)) ? 'selected' : ''; ?>>2</option>
+                                                <option value="1" <?= ((isset($nilaiajarr[$j])) && ($nilaiajarr[$j] == 1)) ? 'selected' : ''; ?>>1</option>
                                             </select>
                                         </td>
                                     </tr>
@@ -391,8 +418,15 @@
                                         <td>
                                             <?php
                                             if (in_array($kartul['Num'], $id51)) {
+                                                $idx = array_search($kartul['Num'], $id51);
+                                                $nilaikartulp[$j] = $nilaip51[$idx];
+                                                $nilaikartulq[$j] = $nilaiq51[$idx];
+                                                $nilaikartulr[$j] = $nilair51[$idx];
                                                 $checked[$j] = 'checked';
                                             } else {
+                                                $nilaikartulp[$j] = '';
+                                                $nilaikartulq[$j] = '';
+                                                $nilaikartulr[$j] = '';
                                                 $checked[$j] = '';
                                             }
                                             ?>
@@ -442,12 +476,16 @@
                                         </td>
                                         <td>
                                             <?php
-                                            if ($kartul['Mediatype'] == "Lok") {
-                                                $typescore = 1;
-                                            } elseif ($kartul['Mediatype'] == "Nas") {
-                                                $typescore = 2;
+                                            if ((isset($nilaikartulq[$j])) && (!empty($nilaikartul[$j]))) {
+                                                $typescore = $nilaikartulq[$j];
                                             } else {
-                                                $typescore = 3;
+                                                if ($kartul['Mediatype'] == "Lok") {
+                                                    $typescore = 1;
+                                                } elseif ($kartul['Mediatype'] == "Nas") {
+                                                    $typescore = 2;
+                                                } else {
+                                                    $typescore = 3;
+                                                }
                                             }
                                             ?>
                                             <select name="nilaikartul_q[]" id="nilaikartul_q[]">
@@ -459,16 +497,20 @@
                                         </td>
                                         <td>
                                             <?php
-                                            if ($kartul['Diffbenefit'] == 'Rendah') {
-                                                $diffscore = 1;
-                                            } elseif ($kartul['Diffbenefit'] == 'Sedang') {
-                                                $diffscore = 2;
-                                            } elseif ($kartul['Diffbenefit'] == 'Tinggi') {
-                                                $diffscore = 3;
-                                            } elseif ($kartul['Diffbenefit'] == 'Sangat Tinggi') {
-                                                $diffscore = 4;
+                                            if ((isset($nilaikartulr[$j])) && (!empty($nilaikartulr[$j]))) {
+                                                $diffscore = $nilaikartulr[$j];
                                             } else {
-                                                $diffscore = '';
+                                                if ($kartul['Diffbenefit'] == 'Rendah') {
+                                                    $diffscore = 1;
+                                                } elseif ($kartul['Diffbenefit'] == 'Sedang') {
+                                                    $diffscore = 2;
+                                                } elseif ($kartul['Diffbenefit'] == 'Tinggi') {
+                                                    $diffscore = 3;
+                                                } elseif ($kartul['Diffbenefit'] == 'Sangat Tinggi') {
+                                                    $diffscore = 4;
+                                                } else {
+                                                    $diffscore = '';
+                                                }
                                             }
                                             ?>
                                             <select name="nilaikartul_r[]" id="nilaikartul_r[]">
@@ -524,8 +566,15 @@
                                         <td>
                                             <?php
                                             if (in_array($sem['Num'], $id52)) {
+                                                $idx = array_search($sem['Num'], $id52);
+                                                $nilaisemp[$j] = $nilaip52[$idx];
+                                                $nilaisemq[$j] = $nilaiq52[$idx];
+                                                $nilaisemr[$j] = $nilair52[$idx];
                                                 $checked[$j] = 'checked';
                                             } else {
+                                                $nilaisemp[$j] = '';
+                                                $nilaisemq[$j] = '';
+                                                $nilaisemr[$j] = '';
                                                 $checked[$j] = '';
                                             }
                                             ?>
@@ -576,12 +625,16 @@
                                         </td>
                                         <td>
                                             <?php
-                                            if ($sem['Level'] == "Lok") {
-                                                $typescore = 1;
-                                            } elseif ($sem['Level'] == "Nas") {
-                                                $typescore = 2;
+                                            if ((isset($nilaisemq[$j])) && (!empty($nilaisemq[$j]))) {
+                                                $typescore = $nilaisemq[$j];
                                             } else {
-                                                $typescore = 3;
+                                                if ($sem['Level'] == "Lok") {
+                                                    $typescore = 1;
+                                                } elseif ($sem['Level'] == "Nas") {
+                                                    $typescore = 2;
+                                                } else {
+                                                    $typescore = 3;
+                                                }
                                             }
                                             ?>
                                             <select name="nilaisem_q[]" id="nilaisem_q[]">
@@ -593,16 +646,20 @@
                                         </td>
                                         <td>
                                             <?php
-                                            if ($sem['DiffBenefit'] == 'Rendah') {
-                                                $diffscore = 1;
-                                            } elseif ($sem['DiffBenefit'] == 'Sedang') {
-                                                $diffscore = 2;
-                                            } elseif ($sem['DiffBenefit'] == 'Tinggi') {
-                                                $diffscore = 3;
-                                            } elseif ($sem['DiffBenefit'] == 'Sangat Tinggi') {
-                                                $diffscore = 4;
+                                            if ((isset($nilaisemr[$j])) && (!empty($nilaisemr[$j]))) {
+                                                $diffscore = $nilaisemr[$j];
                                             } else {
-                                                $diffscore = '';
+                                                if ($sem['DiffBenefit'] == 'Rendah') {
+                                                    $diffscore = 1;
+                                                } elseif ($sem['DiffBenefit'] == 'Sedang') {
+                                                    $diffscore = 2;
+                                                } elseif ($sem['DiffBenefit'] == 'Tinggi') {
+                                                    $diffscore = 3;
+                                                } elseif ($sem['DiffBenefit'] == 'Sangat Tinggi') {
+                                                    $diffscore = 4;
+                                                } else {
+                                                    $diffscore = '';
+                                                }
                                             }
                                             ?>
                                             <select name="nilaisem_r[]" id="nilaisem_r[]">
@@ -655,8 +712,15 @@
                                         <td>
                                             <?php
                                             if (in_array($sem1['Num'], $id53)) {
+                                                $idx = array_search($sem1['Num'], $id53);
+                                                $nilaisem1p[$j] = $nilaip53[$idx];
+                                                $nilaisem1q[$j] = $nilaiq53[$idx];
+                                                $nilaisem1r[$j] = $nilair53[$idx];
                                                 $checked[$j] = 'checked';
                                             } else {
+                                                $nilaisem1p[$j] = '';
+                                                $nilaisem1q[$j] = '';
+                                                $nilaisem1r[$j] = '';
                                                 $checked[$j] = '';
                                             }
                                             ?>
@@ -701,26 +765,26 @@
                                         <td><?= $sem1['kompetensi']; ?></td>
                                         <td>
                                             <select name="nilaisem1_p[]" id="nilaisem1_p[]">
-                                                <option value="4">4</option>
-                                                <option value="3">3</option>
-                                                <option value="2">2</option>
-                                                <option value="1">1</option>
+                                                <option value="4" <?= ((isset($nilaisem1p[$j])) && ($nilaisem1p[$j] == 4)) ? 'selected' : ''; ?>>4</option>
+                                                <option value="3" <?= ((isset($nilaisem1p[$j])) && ($nilaisem1p[$j] == 3)) ? 'selected' : ''; ?>>3</option>
+                                                <option value="2" <?= ((isset($nilaisem1p[$j])) && ($nilaisem1p[$j] == 2)) ? 'selected' : ''; ?>>2</option>
+                                                <option value="1" <?= ((isset($nilaisem1p[$j])) && ($nilaisem1p[$j] == 1)) ? 'selected' : ''; ?>>1</option>
                                             </select>
                                         </td>
                                         <td>
                                             <select name="nilaisem1_q[]" id="nilaisem1_q[]">
-                                                <option value="4">4</option>
-                                                <option value="3">3</option>
-                                                <option value="2">2</option>
-                                                <option value="1">1</option>
+                                                <option value="4" <?= ((isset($nilaisem1q[$j])) && ($nilaisem1q[$j] == 4)) ? 'selected' : ''; ?>>4</option>
+                                                <option value="3" <?= ((isset($nilaisem1q[$j])) && ($nilaisem1q[$j] == 3)) ? 'selected' : ''; ?>>3</option>
+                                                <option value="2" <?= ((isset($nilaisem1q[$j])) && ($nilaisem1q[$j] == 2)) ? 'selected' : ''; ?>>2</option>
+                                                <option value="1" <?= ((isset($nilaisem1q[$j])) && ($nilaisem1q[$j] == 1)) ? 'selected' : ''; ?>>1</option>
                                             </select>
                                         </td>
                                         <td>
                                             <select name="nilaisem1_r[]" id="nilaisem1_r[]">
-                                                <option value="4">4</option>
-                                                <option value="3">3</option>
-                                                <option value="2">2</option>
-                                                <option value="1">1</option>
+                                                <option value="4" <?= ((isset($nilaisem1r[$j])) && ($nilaisem1r[$j] == 4)) ? 'selected' : ''; ?>>4</option>
+                                                <option value="3" <?= ((isset($nilaisem1r[$j])) && ($nilaisem1r[$j] == 3)) ? 'selected' : ''; ?>>3</option>
+                                                <option value="2" <?= ((isset($nilaisem1r[$j])) && ($nilaisem1r[$j] == 2)) ? 'selected' : ''; ?>>2</option>
+                                                <option value="1" <?= ((isset($nilaisem1r[$j])) && ($nilaisem1r[$j] == 1)) ? 'selected' : ''; ?>>1</option>
                                             </select>
                                         </td>
                                     </tr>
@@ -770,8 +834,15 @@
                                         <td>
                                             <?php
                                             if (in_array($pend['Num'], $id12)) {
+                                                $idx = array_search($pend['Num'], $id12);
+                                                $nilaipendp[$j] = $nilaip12[$idx];
+                                                $nilaipendq[$j] = $nilaiq12[$idx];
+                                                $nilaipendr[$j] = $nilair12[$idx];
                                                 $checked[$j] = 'checked';
                                             } else {
+                                                $nilaipendp[$j] = '';
+                                                $nilaipendq[$j] = '';
+                                                $nilaipendr[$j] = '';
                                                 $checked[$j] = '';
                                             }
                                             ?>
@@ -791,35 +862,39 @@
                                         <td><a href="<?= base_url(); ?>/uploads/docs/<?= $pend['File']; ?>" target="_blank">Lihat Ijazah</a></td>
                                         <td>
                                             <?php
-                                            $tahunini = date('Y');
-                                            $lama = $tahunini - $pend['GradYear'];
-                                            if ($pend['Rank'] == 'S1') {
-                                                if ($lama < 10) {
-                                                    $rankscore = 1;
-                                                } elseif ($lama <= 15) {
-                                                    $rankscore = 2;
-                                                } elseif ($lama <= 20) {
-                                                    $rankscore = 3;
-                                                } elseif ($lama > 25) {
-                                                    $rankscore = 4;
-                                                }
-                                            } elseif ($pend['Rank'] == 'S2') {
-                                                if ($lama < 5) {
-                                                    $rankscore = 1;
-                                                } elseif ($lama <= 15) {
-                                                    $rankscore = 2;
-                                                } elseif ($lama <= 20) {
-                                                    $rankscore = 3;
-                                                } elseif ($lama > 20) {
-                                                    $rankscore = 4;
-                                                }
-                                            } elseif ($pend['Rank'] == 'S3') {
-                                                if ($lama < 5) {
-                                                    $rankscore = 2;
-                                                } elseif ($lama <= 10) {
-                                                    $rankscore = 3;
-                                                } elseif ($lama > 10) {
-                                                    $rankscore = 4;
+                                            if ((isset($nilaipendp[$j])) && (!empty($nilaipendp[$j]))) {
+                                                $rankscore = $nilaipendp[$j];
+                                            } else {
+                                                $tahunini = date('Y');
+                                                $lama = $tahunini - $pend['GradYear'];
+                                                if ($pend['Rank'] == 'S1') {
+                                                    if ($lama < 10) {
+                                                        $rankscore = 1;
+                                                    } elseif ($lama <= 15) {
+                                                        $rankscore = 2;
+                                                    } elseif ($lama <= 20) {
+                                                        $rankscore = 3;
+                                                    } elseif ($lama > 25) {
+                                                        $rankscore = 4;
+                                                    }
+                                                } elseif ($pend['Rank'] == 'S2') {
+                                                    if ($lama < 5) {
+                                                        $rankscore = 1;
+                                                    } elseif ($lama <= 15) {
+                                                        $rankscore = 2;
+                                                    } elseif ($lama <= 20) {
+                                                        $rankscore = 3;
+                                                    } elseif ($lama > 20) {
+                                                        $rankscore = 4;
+                                                    }
+                                                } elseif ($pend['Rank'] == 'S3') {
+                                                    if ($lama < 5) {
+                                                        $rankscore = 2;
+                                                    } elseif ($lama <= 10) {
+                                                        $rankscore = 3;
+                                                    } elseif ($lama > 10) {
+                                                        $rankscore = 4;
+                                                    }
                                                 }
                                             }
                                             ?>
@@ -832,19 +907,23 @@
                                         </td>
                                         <td>
                                             <?php
-                                            if ($pend['Mark'] < 3) {
-                                                $markscore = 2;
-                                            } elseif ($pend['Mark'] < 3.5) {
-                                                $markscore = 3;
+                                            if ((isset($nilaipendq[$j])) && (!empty($nilaipendq[$j]))) {
+                                                $markscore = $nilaipendq[$j];
                                             } else {
-                                                if (($pend['Rank'] == 'S1') && ($pend['Mark'] > 3.5)) {
-                                                    $markscore = 4;
-                                                } elseif (($pend['Rank'] == 'S2') && ($pend['Mark'] > 3.75)) {
-                                                    $markscore = 4;
-                                                } elseif (($pend['Rank'] == 'S3') && ($pend['Mark'] > 3.76)) {
-                                                    $markscore = 4;
-                                                } else {
+                                                if ($pend['Mark'] < 3) {
+                                                    $markscore = 2;
+                                                } elseif ($pend['Mark'] < 3.5) {
                                                     $markscore = 3;
+                                                } else {
+                                                    if (($pend['Rank'] == 'S1') && ($pend['Mark'] > 3.5)) {
+                                                        $markscore = 4;
+                                                    } elseif (($pend['Rank'] == 'S2') && ($pend['Mark'] > 3.75)) {
+                                                        $markscore = 4;
+                                                    } elseif (($pend['Rank'] == 'S3') && ($pend['Mark'] > 3.76)) {
+                                                        $markscore = 4;
+                                                    } else {
+                                                        $markscore = '';
+                                                    }
                                                 }
                                             }
                                             ?>
@@ -856,11 +935,32 @@
                                             </select>
                                         </td>
                                         <td>
+                                            <?php
+                                            if ((isset($nilaipendr[$j])) && (!empty($nilaipendr[$j]))) {
+                                                $markscore1 = $nilaipendr[$j];
+                                            } else {
+                                                if ($pend['Mark'] < 3) {
+                                                    $markscore1 = 2;
+                                                } elseif ($pend['Mark'] < 3.5) {
+                                                    $markscore1 = 3;
+                                                } else {
+                                                    if (($pend['Rank'] == 'S1') && ($pend['Mark'] > 3.5)) {
+                                                        $markscore1 = 4;
+                                                    } elseif (($pend['Rank'] == 'S2') && ($pend['Mark'] > 3.75)) {
+                                                        $markscore1 = 4;
+                                                    } elseif (($pend['Rank'] == 'S3') && ($pend['Mark'] > 3.76)) {
+                                                        $markscore1 = 4;
+                                                    } else {
+                                                        $markscore1 = '';
+                                                    }
+                                                }
+                                            }
+                                            ?>
                                             <select name="nilaipend_r" id="nilaipend_r">
-                                                <option value="4" <?= $markscore == 4 ? 'selected' : ''; ?>>4</option>
-                                                <option value="3" <?= $markscore == 4 ? 'selected' : ''; ?>>3</option>
-                                                <option value="2" <?= $markscore == 4 ? 'selected' : ''; ?>>2</option>
-                                                <option value="1" <?= $markscore == 4 ? 'selected' : ''; ?>>1</option>
+                                                <option value="4" <?= $markscore1 == 4 ? 'selected' : ''; ?>>4</option>
+                                                <option value="3" <?= $markscore1 == 4 ? 'selected' : ''; ?>>3</option>
+                                                <option value="2" <?= $markscore1 == 4 ? 'selected' : ''; ?>>2</option>
+                                                <option value="1" <?= $markscore1 == 4 ? 'selected' : ''; ?>>1</option>
                                             </select>
                                         </td>
                                     </tr>
@@ -908,8 +1008,15 @@
                                         <td>
                                             <?php
                                             if (in_array($latih['Num'], $id15)) {
+                                                $idx = array_search($latih['Num'], $id15);
+                                                $nilailatihp[$j] = $nilaip15[$idx];
+                                                $nilailatihq[$j] = $nilaiq15[$idx];
+                                                $nilailatihr[$j] = $nilair15[$idx];
                                                 $checked[$j] = 'checked';
                                             } else {
+                                                $nilailatihp[$j] = '';
+                                                $nilailatihq[$j] = '';
+                                                $nilailatihr[$j] = '';
                                                 $checked[$j] = '';
                                             }
                                             ?>
@@ -960,14 +1067,20 @@
                                         <td><?= $latih['kompetensi']; ?></td>
                                         <td>
                                             <?php
-                                            if ($latih['Length'] == 'sd36') {
-                                                $latihscore = 1;
-                                            } elseif ($latih['Length'] == 'smp100') {
-                                                $latihscore = 2;
-                                            } elseif ($latih['Length'] == 'smp240') {
-                                                $latihscore = 3;
-                                            } elseif ($latih['Length'] == 'lbh240') {
-                                                $latihscore = 4;
+                                            if ((isset($nilailatihp[$j])) && (!empty($nilailatihp[$j]))) {
+                                                $latihscore = $nilailatihp[$j];
+                                            } else {
+                                                if ($latih['Length'] == 'sd36') {
+                                                    $latihscore = 1;
+                                                } elseif ($latih['Length'] == 'smp100') {
+                                                    $latihscore = 2;
+                                                } elseif ($latih['Length'] == 'smp240') {
+                                                    $latihscore = 3;
+                                                } elseif ($latih['Length'] == 'lbh240') {
+                                                    $latihscore = 4;
+                                                } else {
+                                                    $latihscore = 1;
+                                                }
                                             }
                                             ?>
                                             <select name="nilailatih_p[]" id="nilailatih_p[]">
@@ -987,10 +1100,16 @@
                                         </td>
                                         <td>
                                             <?php
-                                            if ($latih['Level'] == 'Dasar') {
-                                                $levelscore = 2;
-                                            } elseif ($latih['Level'] == 'Lanjut') {
-                                                $levelscore = 3;
+                                            if ((isset($nilailatihr[$j])) && (!empty($nilailatihr[$j]))) {
+                                                $levelscore = $nilailatihr[$j];
+                                            } else {
+                                                if ($latih['Level'] == 'Dasar') {
+                                                    $levelscore = 2;
+                                                } elseif ($latih['Level'] == 'Lanjut') {
+                                                    $levelscore = 3;
+                                                } else {
+                                                    $levelscore = '';
+                                                }
                                             }
                                             ?>
                                             <select name="nilailatih_r[]" id="nilailatih_r[]">
@@ -1046,8 +1165,15 @@
                                         <td>
                                             <?php
                                             if (in_array($latih1['Num'], $id16)) {
+                                                $idx = array_search($latih1['Num'], $id16);
+                                                $nilailatih1p[$j] = $nilaip16[$idx];
+                                                $nilailatih1q[$j] = $nilaiq16[$idx];
+                                                $nilailatih1r[$j] = $nilair16[$idx];
                                                 $checked[$j] = 'checked';
                                             } else {
+                                                $nilailatih1p[$j] = '';
+                                                $nilailatih1q[$j] = '';
+                                                $nilailatih1r[$j] = '';
                                                 $checked[$j] = '';
                                             }
                                             ?>
@@ -1098,14 +1224,20 @@
                                         <td><?= $latih1['kompetensi']; ?></td>
                                         <td>
                                             <?php
-                                            if ($latih1['Length'] == 'sd36') {
-                                                $lengthscore = 1;
-                                            } elseif ($latih1['Length'] == 'smp100') {
-                                                $lengthscore = 2;
-                                            } elseif ($latih1['Length'] == 'smp240') {
-                                                $lengthscore = 3;
-                                            } elseif ($latih1['Length'] == 'lbih240') {
-                                                $lengthscore = 4;
+                                            if ((isset($nilailatih1p[$j])) && (!empty($nilailatih1p[$j]))) {
+                                                $lengthscore = $nilailatih1p[$j];
+                                            } else {
+                                                if ($latih1['Length'] == 'sd36') {
+                                                    $lengthscore = 1;
+                                                } elseif ($latih1['Length'] == 'smp100') {
+                                                    $lengthscore = 2;
+                                                } elseif ($latih1['Length'] == 'smp240') {
+                                                    $lengthscore = 3;
+                                                } elseif ($latih1['Length'] == 'lbih240') {
+                                                    $lengthscore = 4;
+                                                } else {
+                                                    $lengthscore = '';
+                                                }
                                             }
                                             ?>
                                             <select name="nilailatih1_p[]" id="nilailatih1_p[]">
@@ -1125,10 +1257,16 @@
                                         </td>
                                         <td>
                                             <?php
-                                            if ($latih['Level'] == 'Dasar') {
-                                                $levscore = 2;
-                                            } elseif ($latih['Level'] == 'Lanjut') {
-                                                $levscore = 3;
+                                            if ((isset($nilailatih1r[$j])) && (!empty($nilailatih1r[$j]))) {
+                                                $levscore = $nilailatih1r[$j];
+                                            } else {
+                                                if ($latih1['Level'] == 'Dasar') {
+                                                    $levscore = 2;
+                                                } elseif ($latih1['Level'] == 'Lanjut') {
+                                                    $levscore = 3;
+                                                } else {
+                                                    $levscore = '';
+                                                }
                                             }
                                             ?>
                                             <select name="nilailatih1_r[]" id="nilailatih1_r[]">
@@ -1179,8 +1317,15 @@
                                         <td>
                                             <?php
                                             if (in_array($bahasa['Num'], $id6)) {
+                                                $idx = array_search($bahasa['Num'], $id6);
+                                                $nilaibahasap[$j] = $nilaip6[$idx];
+                                                $nilaibahasaq[$j] = $nilaiq6[$idx];
+                                                $nilaibahasar[$j] = $nilair6[$idx];
                                                 $checked[$j] = 'checked';
                                             } else {
+                                                $nilaibahasap[$j] = '';
+                                                $nilaibahasaq[$j] = '';
+                                                $nilaibahasar[$j] = '';
                                                 $checked[$j] = '';
                                             }
                                             ?>
@@ -1217,14 +1362,18 @@
                                         <td><?= $bahasa['kompetensi']; ?></td>
                                         <td>
                                             <?php
-                                            if ($bahasa['LangType'] == "Da") {
-                                                $typescore = 1;
-                                            } elseif ($bahasa['LangType'] == "Na") {
-                                                $typescore = 2;
-                                            } elseif ($bahasa['LangType'] == "In") {
-                                                $typescore = 3;
+                                            if ((isset($nilaibahasaq[$j])) && (!empty($nilaibahasaq[$j]))) {
+                                                $typescore = $nilaibahasaq[$j];
                                             } else {
-                                                $typescore = 3;
+                                                if ($bahasa['LangType'] == "Da") {
+                                                    $typescore = 1;
+                                                } elseif ($bahasa['LangType'] == "Na") {
+                                                    $typescore = 2;
+                                                } elseif ($bahasa['LangType'] == "In") {
+                                                    $typescore = 3;
+                                                } else {
+                                                    $typescore = 3;
+                                                }
                                             }
                                             ?>
                                             <select name="nilaibahasa_q[]" id="nilaibahasa_q[]">
@@ -1236,12 +1385,16 @@
                                         </td>
                                         <td>
                                             <?php
-                                            if ($bahasa['VerbSkill'] == "Pasif") {
-                                                $skillscore = 2;
-                                            } elseif ($bahasa['VerbSkill'] == "Aktif") {
-                                                $skillscore = 3;
+                                            if ((isset($nilaibahasar[$j])) && (!empty($nilaibahasar[$j]))) {
+                                                $skillscore = $nilaibahasar[$j];
                                             } else {
-                                                $skillscore = 1;
+                                                if ($bahasa['VerbSkill'] == "Pasif") {
+                                                    $skillscore = 2;
+                                                } elseif ($bahasa['VerbSkill'] == "Aktif") {
+                                                    $skillscore = 3;
+                                                } else {
+                                                    $skillscore = 1;
+                                                }
                                             }
                                             ?>
                                             <select name="nilaibahasa_r[]" id="nilaibahasa_r[]">

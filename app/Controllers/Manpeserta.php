@@ -519,6 +519,7 @@ class Manpeserta extends BaseController
             return redirect()->to('/home');
         }
         helper(['tanggal']);
+        helper(['nilai']);
 
         $model = new ProfileModel();
         $mhsprofile = $model->where('user_id', $id)->first();
@@ -687,5 +688,37 @@ class Manpeserta extends BaseController
         $data['title_page'] = "Nilai RPL Peserta";
         $data['data_bread'] = "Nilai RPL Peserta";
         return view('maintemp/nilairplpeserta', $data);
+    }
+
+    public function confirmnilairpl()
+    {
+        $session = session();
+        $logged_in = $session->get('logged_in');
+        $issadmin = $session->get('issadmin');
+        $isadmin = $session->get('isadmin');
+        $ispenilai = $session->get('ispenilai');
+        if ((!$logged_in) && ((!$issadmin) || (!$isadmin) || (!$ispenilai))) {
+            return redirect()->to('/home');
+        } else {
+            $session->set('role', 'penilai');
+        }
+        helper(['tanggal']);
+
+        $mhs_id = $this->request->getVar('mhs_id');
+
+        $model = new NilairplModel();
+
+        $model->set('nilairpl_confirm', 'Ya');
+        $model->where('mhs_id', $mhs_id);
+        $model->where('tipedosen', 'Pembimbing');
+        $model->update();
+
+        $model->set('nilairpl_confirm', 'Ya');
+        $model->where('mhs_id', $mhs_id);
+        $model->where('tipedosen', 'Penilai');
+        $model->update();
+
+        $session->setFlashdata('msg', 'Data Nilai berhasil di submit.');
+        return redirect()->to('manpeserta/lihatnilairpl/' . $mhs_id);
     }
 }

@@ -27,156 +27,209 @@
                                                 <tr>
                                                     <th>No.</th>
                                                     <th>Nama MK</th>
-                                                    <th>Bobot Pembimbing</th>
-                                                    <th>Jumlah Item Pembimbing</th>
-                                                    <th>Rata/rata (Nilai Huruf) Pembimbing</th>
-                                                    <th>Bobot Penilai</th>
-                                                    <th>Jumlah Item Penilai</th>
-                                                    <th>Rata/rata (Nilai Huruf) Penilai</th>
+                                                    <th>Rata/rata (Nilai Huruf) Penilai 1</th>
+                                                    <th>Rata/rata (Nilai Huruf) Penilai 2</th>
+                                                    <th>Selisih</th>
                                                 </tr>
                                                 <tr>
                                                     <td>1.</td>
                                                     <td>Kode Etik dan Etika Profesi Insinyur</td>
-                                                    <td><?= (!empty($nilaikodeetikbimbing) ? $nilaikodeetikbimbing : '0'); ?></td>
-                                                    <td><?= (!empty($jmlkodeetikbimbing) ? $jmlkodeetikbimbing : '0'); ?></td>
                                                     <td>
                                                         <?php
                                                         if (!empty($jmlkodeetikbimbing)) {
-                                                            $ratarata = $nilaikodeetikbimbing / $jmlkodeetikbimbing;
-                                                            $nilaihuruf = nilai_huruf_rpl($ratarata);
+                                                            $rataratabimbing1 = $nilaikodeetikbimbing / $jmlkodeetikbimbing;
+                                                            $nilaihurufbimbing1 = nilai_huruf_rpl($rataratabimbing1);
+                                                        } else {
+                                                            $rataratabimbing1 = 0;
+                                                            $nilaihurufbimbing1 = nilai_huruf_rpl($rataratabimbing1);
                                                         }
 
-                                                        echo (!empty($ratarata) ? $ratarata . ' (' . $nilaihuruf . ')' : '0');
+                                                        echo (!empty($rataratabimbing1) ? $rataratabimbing1 . ' (' . $nilaihurufbimbing1 . ')' : '0');
                                                         ?>
                                                     </td>
-                                                    <td><?= (!empty($nilaikodeetikpenilai) ? $nilaikodeetikpenilai : '0'); ?></td>
-                                                    <td><?= (!empty($jmlkodeetikpenilai) ? $jmlkodeetikpenilai : '0'); ?></td>
                                                     <td>
                                                         <?php
                                                         if (!empty($jmlkodeetikpenilai)) {
-                                                            $ratarata1 = $nilaikodeetikpenilai / $jmlkodeetikpenilai;
-                                                            $nilaihuruf1 = nilai_huruf_rpl($ratarata1);
+                                                            $rataratanilai1 = $nilaikodeetikpenilai / $jmlkodeetikpenilai;
+                                                            $nilaihurufnilai1 = nilai_huruf_rpl($rataratanilai1);
+                                                        } else {
+                                                            $rataratanilai1 = 0;
+                                                            $nilaihurufnilai1 = nilai_huruf_rpl($rataratanilai1);
                                                         }
 
-                                                        echo (!empty($ratarata1) ? $ratarata1 . ' (' . $nilaihuruf1 . ')' : '0');
+                                                        echo (!empty($rataratanilai1) ? $rataratanilai1 . ' (' . $nilaihurufnilai1 . ')' : '0');
                                                         ?>
                                                     </td>
+                                                    <?php
+                                                    $kurang1 = $rataratabimbing1 - $rataratanilai1;
+                                                    if (abs($kurang1) >= 2) {
+                                                        $bgcolor = 'bgcolor = "red"';
+                                                    } else {
+                                                        $bgcolor = '';
+                                                    }
+                                                    ?>
+                                                    <td <?= $bgcolor; ?>><?= $kurang1; ?></td>
                                                 </tr>
                                                 <tr>
                                                     <td>2.</td>
                                                     <td>Profesionalisme</td>
-                                                    <td><?= (!empty($nilaiprofesibimbing) ? $nilaiprofesibimbing : '0'); ?></td>
-                                                    <td><?= (!empty($jmlprofesibimbing) ? $jmlprofesibimbing : '0'); ?></td>
                                                     <td>
                                                         <?php
                                                         if (!empty($jmlprofesibimbing)) {
-                                                            $ratarata = $nilaiprofesibimbing / $jmlprofesibimbing;
-                                                            $nilaihuruf = nilai_huruf_rpl($ratarata);
+                                                            $rataratabimbing2 = $nilaiprofesibimbing / $jmlprofesibimbing;
+                                                            $nilaihurufbimbing2 = nilai_huruf_rpl($rataratabimbing2);
+                                                        } else {
+                                                            $rataratabimbing2 = 0;
+                                                            $nilaihurufbimbing2 = nilai_huruf_rpl($rataratabimbing2);
                                                         }
 
-                                                        echo (!empty($ratarata) ? $ratarata . ' (' . $nilaihuruf . ')' : '0');
+                                                        echo (!empty($rataratabimbing2) ? $rataratabimbing2 . ' (' . $nilaihurufbimbing2 . ')' : '0');
                                                         ?>
                                                     </td>
-                                                    <td><?= (!empty($nilaiprofesipenilai) ? $nilaiprofesipenilai : '0'); ?></td>
-                                                    <td><?= (!empty($jmlprofesipenilai) ? $jmlprofesipenilai : '0'); ?></td>
                                                     <td>
                                                         <?php
                                                         if (!empty($jmlprofesipenilai)) {
-                                                            $ratarata1 = $nilaiprofesipenilai / $jmlprofesipenilai;
-                                                            $nilaihuruf1 = nilai_huruf_rpl($ratarata1);
+                                                            $rataratanilai2 = $nilaiprofesipenilai / $jmlprofesipenilai;
+                                                            $nilaihurufnilai2 = nilai_huruf_rpl($rataratanilai2);
+                                                        } else {
+                                                            $rataratanilai2 = 0;
+                                                            $nilaihurufnilai2 = nilai_huruf_rpl($rataratanilai2);
                                                         }
 
-                                                        echo (!empty($ratarata1) ? $ratarata1 . ' (' . $nilaihuruf1 . ')' : '0');
+                                                        echo (!empty($rataratanilai2) ? $rataratanilai2 . ' (' . $nilaihurufnilai2 . ')' : '0');
                                                         ?>
                                                     </td>
+                                                    <?php
+                                                    $kurang2 = $rataratabimbing2 - $rataratanilai2;
+                                                    if (abs($kurang2) >= 2) {
+                                                        $bgcolor = 'bgcolor = "red"';
+                                                    } else {
+                                                        $bgcolor = '';
+                                                    }
+                                                    ?>
+                                                    <td <?= $bgcolor; ?>><?= $kurang2; ?></td>
                                                 </tr>
                                                 <tr>
                                                     <td>3.</td>
                                                     <td>Keselamatan, Kesehatan, Keamanan Kerja dan Lingkungan Hidup</td>
-                                                    <td><?= (!empty($nilaik3lhbimbing) ? $nilaik3lhbimbing : '0'); ?></td>
-                                                    <td><?= (!empty($jmlk3lhbimbing) ? $jmlk3lhbimbing : '0'); ?></td>
                                                     <td>
                                                         <?php
                                                         if (!empty($jmlk3lhbimbing)) {
-                                                            $ratarata = $nilaik3lhbimbing / $jmlk3lhbimbing;
-                                                            $nilaihuruf = nilai_huruf_rpl($ratarata);
+                                                            $rataratabimbing3 = $nilaik3lhbimbing / $jmlk3lhbimbing;
+                                                            $nilaihurufbimbing3 = nilai_huruf_rpl($rataratabimbing3);
+                                                        } else {
+                                                            $rataratabimbing3 = 0;
+                                                            $nilaihurufbimbing3 = nilai_huruf_rpl($rataratabimbing3);
                                                         }
 
-                                                        echo (!empty($ratarata) ? $ratarata . ' (' . $nilaihuruf . ')' : '0');
+                                                        echo (!empty($rataratabimbing3) ? $rataratabimbing3 . ' (' . $nilaihurufbimbing3 . ')' : '0');
                                                         ?>
                                                     </td>
-                                                    <td><?= (!empty($nilaik3lhpenilai) ? $nilaik3lhpenilai : '0'); ?></td>
-                                                    <td><?= (!empty($jmlk3lhpenilai) ? $jmlk3lhpenilai : '0'); ?></td>
                                                     <td>
                                                         <?php
                                                         if (!empty($jmlk3lhpenilai)) {
-                                                            $ratarata1 = $nilaik3lhpenilai / $jmlk3lhpenilai;
-                                                            $nilaihuruf1 = nilai_huruf_rpl($ratarata1);
+                                                            $rataratanilai3 = $nilaik3lhpenilai / $jmlk3lhpenilai;
+                                                            $nilaihurufnilai3 = nilai_huruf_rpl($rataratanilai3);
+                                                        } else {
+                                                            $rataratanilai3 = 0;
+                                                            $nilaihurufnilai3 = nilai_huruf_rpl($rataratanilai3);
                                                         }
 
-                                                        echo (!empty($ratarata1) ? $ratarata1 . ' (' . $nilaihuruf1 . ')' : '0');
+                                                        echo (!empty($rataratanilai3) ? $rataratanilai3 . ' (' . $nilaihurufnilai3 . ')' : '0');
                                                         ?>
                                                     </td>
+                                                    <?php
+                                                    $kurang3 = $rataratabimbing3 - $rataratanilai3;
+                                                    if (abs($kurang3) >= 2) {
+                                                        $bgcolor = 'bgcolor = "red"';
+                                                    } else {
+                                                        $bgcolor = '';
+                                                    }
+                                                    ?>
+                                                    <td <?= $bgcolor; ?>><?= $kurang3; ?></td>
                                                 </tr>
                                                 <tr>
                                                     <td>4.</td>
                                                     <td>Studi Kasus</td>
-                                                    <td><?= (!empty($nilaistudikasusbimbing) ? $nilaistudikasusbimbing : '0'); ?></td>
-                                                    <td><?= (!empty($jmlstudikasusbimbing) ? $jmlstudikasusbimbing : '0'); ?></td>
                                                     <td>
                                                         <?php
                                                         if (!empty($jmlstudikasusbimbing)) {
-                                                            $ratarata = $nilaistudikasusbimbing / $jmlstudikasusbimbing;
-                                                            $nilaihuruf = nilai_huruf_rpl($ratarata);
+                                                            $rataratabimbing4 = $nilaistudikasusbimbing / $jmlstudikasusbimbing;
+                                                            $nilaihurufbimbing4 = nilai_huruf_rpl($rataratabimbing4);
+                                                        } else {
+                                                            $rataratabimbing4 = 0;
+                                                            $nilaihurufbimbing4 = nilai_huruf_rpl($rataratabimbing4);
                                                         }
 
-                                                        echo (!empty($ratarata) ? $ratarata . ' (' . $nilaihuruf . ')' : '0');
+                                                        echo (!empty($rataratabimbing4) ? $rataratabimbing4 . ' (' . $nilaihurufbimbing4 . ')' : '0');
                                                         ?>
                                                     </td>
-                                                    <td><?= (!empty($nilaistudikasuspenilai) ? $nilaistudikasuspenilai : '0'); ?></td>
-                                                    <td><?= (!empty($jmlstudikasuspenilai) ? $jmlstudikasuspenilai : '0'); ?></td>
                                                     <td>
                                                         <?php
                                                         if (!empty($jmlstudikasuspenilai)) {
-                                                            $ratarata1 = $nilaistudikasuspenilai / $jmlstudikasuspenilai;
-                                                            $nilaihuruf1 = nilai_huruf_rpl($ratarata1);
+                                                            $rataratanilai4 = $nilaistudikasuspenilai / $jmlstudikasuspenilai;
+                                                            $nilaihurufnilai4 = nilai_huruf_rpl($rataratanilai4);
+                                                        } else {
+                                                            $rataratanilai4 = 0;
+                                                            $nilaihurufnilai4 = nilai_huruf_rpl($rataratanilai4);
                                                         }
 
-                                                        echo (!empty($ratarata1) ? $ratarata1 . ' (' . $nilaihuruf1 . ')' : '0');
+                                                        echo (!empty($rataratanilai4) ? $rataratanilai4 . ' (' . $nilaihurufnilai4 . ')' : '0');
                                                         ?>
                                                     </td>
+                                                    <?php
+                                                    $kurang4 = $rataratabimbing4 - $rataratanilai4;
+                                                    if (abs($kurang4) >= 2) {
+                                                        $bgcolor = 'bgcolor = "red"';
+                                                    } else {
+                                                        $bgcolor = '';
+                                                    }
+                                                    ?>
+                                                    <td <?= $bgcolor; ?>><?= $kurang4; ?></td>
                                                 </tr>
                                                 <tr>
                                                     <td>5.</td>
                                                     <td>Seminar</td>
-                                                    <td><?= (!empty($nilaiseminarbimbing) ? $nilaiseminarbimbing : '0'); ?></td>
-                                                    <td><?= (!empty($jmlseminarbimbing) ? $jmlseminarbimbing : '0'); ?></td>
                                                     <td>
                                                         <?php
                                                         if (!empty($jmlseminarbimbing)) {
-                                                            $ratarata = $nilaiseminarbimbing / $jmlseminarbimbing;
-                                                            $nilaihuruf = nilai_huruf_rpl($ratarata);
+                                                            $rataratabimbing5 = $nilaiseminarbimbing / $jmlseminarbimbing;
+                                                            $nilaihurufbimbing5 = nilai_huruf_rpl($rataratabimbing5);
+                                                        } else {
+                                                            $rataratabimbing5 = 0;
+                                                            $nilaihurufbimbing5 = nilai_huruf_rpl($rataratabimbing5);
                                                         }
 
-                                                        echo (!empty($ratarata) ? $ratarata . ' (' . $nilaihuruf . ')' : '0');
+                                                        echo (!empty($rataratabimbing5) ? $rataratabimbing5 . ' (' . $nilaihurufbimbing5 . ')' : '0');
                                                         ?>
                                                     </td>
-                                                    <td><?= (!empty($nilaiseminarpenilai) ? $nilaiseminarpenilai : '0'); ?></td>
-                                                    <td><?= (!empty($jmlseminarpenilai) ? $jmlseminarpenilai : '0'); ?></td>
                                                     <td>
                                                         <?php
                                                         if (!empty($jmlseminarpenilai)) {
-                                                            $ratarata1 = $nilaiseminarpenilai / $jmlseminarpenilai;
-                                                            $nilaihuruf1 = nilai_huruf_rpl($ratarata1);
+                                                            $rataratanilai5 = $nilaiseminarpenilai / $jmlseminarpenilai;
+                                                            $nilaihurufnilai5 = nilai_huruf_rpl($rataratanilai5);
+                                                        } else {
+                                                            $rataratanilai5 = 0;
+                                                            $nilaihurufnilai5 = nilai_huruf_rpl($rataratanilai5);
                                                         }
 
-                                                        echo (!empty($ratarata1) ? $ratarata1 . ' (' . $nilaihuruf1 . ')' : '0');
+                                                        echo (!empty($rataratanilai5) ? $rataratanilai5 . ' (' . $nilaihurufnilai5 . ')' : '0');
                                                         ?>
                                                     </td>
+                                                    <?php
+                                                    $kurang5 = $rataratabimbing5 - $rataratanilai5;
+                                                    if (abs($kurang5) >= 2) {
+                                                        $bgcolor = 'bgcolor = "red"';
+                                                    } else {
+                                                        $bgcolor = '';
+                                                    }
+                                                    ?>
+                                                    <td <?= $bgcolor; ?>><?= $kurang5; ?></td>
                                                 </tr>
                                             </table>
                                         </div>
                                         <button type="submit" name="submit" value="submit" class="btn btn-primary col">Konfirmasi Nilai RPL</button>
+                                        <a href="<?= base_url(); ?>/manpeserta">Kembali</a>
                                     </form>
                                 </div>
                             </div>

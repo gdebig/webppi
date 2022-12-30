@@ -1,0 +1,42 @@
+CRITICAL - 2022-12-29 20:37:09 --> Trying to access array offset on value of type null
+#0 D:\wamp64\www\webppi\app\Controllers\Nilairpl.php(984): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to acces...', 'D:\\wamp64\\www\\w...', 984, Array)
+#1 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Nilairpl->k3lhsimpan()
+#2 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nilairpl))
+#3 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2022-12-29 20:39:09 --> Trying to access array offset on value of type null
+#0 D:\wamp64\www\webppi\app\Controllers\Nilairpl.php(984): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to acces...', 'D:\\wamp64\\www\\w...', 984, Array)
+#1 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Nilairpl->k3lhsimpan()
+#2 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nilairpl))
+#3 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2022-12-29 20:40:37 --> Undefined offset: 109
+#0 D:\wamp64\www\webppi\app\Controllers\Nilairpl.php(751): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined offse...', 'D:\\wamp64\\www\\w...', 751, Array)
+#1 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Nilairpl->profesisimpan()
+#2 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nilairpl))
+#3 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2022-12-29 20:44:51 --> Undefined offset: 109
+#0 D:\wamp64\www\webppi\app\Controllers\Nilairpl.php(754): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined offse...', 'D:\\wamp64\\www\\w...', 754, Array)
+#1 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Nilairpl->profesisimpan()
+#2 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nilairpl))
+#3 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2022-12-29 20:45:54 --> Undefined offset: 109
+#0 D:\wamp64\www\webppi\app\Controllers\Nilairpl.php(756): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined offse...', 'D:\\wamp64\\www\\w...', 756, Array)
+#1 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Nilairpl->profesisimpan()
+#2 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nilairpl))
+#3 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2022-12-29 23:26:13 --> Undefined index: nilaip
+#0 D:\wamp64\www\webppi\app\Controllers\Nilairpl.php(220): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'D:\\wamp64\\www\\w...', 220, Array)
+#1 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Nilairpl->kodeetik('9', '73')
+#2 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Nilairpl))
+#3 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}

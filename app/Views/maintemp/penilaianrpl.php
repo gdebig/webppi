@@ -60,11 +60,11 @@
                                                     <td>
                                                         <?php
                                                         if (!empty($jmlkodeetik)) {
-                                                            $ratarata = $nilaikodeetik / $jmlkodeetik;
-                                                            $nilaihuruf = nilai_huruf_rpl($ratarata);
+                                                            $ratarata1 = $nilaikodeetik / $jmlkodeetik;
+                                                            $nilaihuruf1 = nilai_huruf_rpl($ratarata1);
                                                         }
 
-                                                        echo (!empty($ratarata) ? $ratarata . ' (' . $nilaihuruf . ')' : '0');
+                                                        echo (!empty($ratarata1) ? $ratarata1 . ' (' . $nilaihuruf1 . ')' : '0');
                                                         ?>
                                                     </td>
                                                 </tr>
@@ -76,11 +76,11 @@
                                                     <td>
                                                         <?php
                                                         if (!empty($jmlprofesi)) {
-                                                            $ratarata = $nilaiprofesi / $jmlprofesi;
-                                                            $nilaihuruf = nilai_huruf_rpl($ratarata);
+                                                            $ratarata2 = $nilaiprofesi / $jmlprofesi;
+                                                            $nilaihuruf2 = nilai_huruf_rpl($ratarata2);
                                                         }
 
-                                                        echo (!empty($ratarata) ? $ratarata . ' (' . $nilaihuruf . ')' : '0');
+                                                        echo (!empty($ratarata2) ? $ratarata2 . ' (' . $nilaihuruf2 . ')' : '0');
                                                         ?>
                                                     </td>
                                                 </tr>
@@ -92,11 +92,11 @@
                                                     <td>
                                                         <?php
                                                         if (!empty($jmlk3lh)) {
-                                                            $ratarata = $nilaik3lh / $jmlk3lh;
-                                                            $nilaihuruf = nilai_huruf_rpl($ratarata);
+                                                            $ratarata3 = $nilaik3lh / $jmlk3lh;
+                                                            $nilaihuruf3 = nilai_huruf_rpl($ratarata3);
                                                         }
 
-                                                        echo (!empty($ratarata) ? $ratarata . ' (' . $nilaihuruf . ')' : '0');
+                                                        echo (!empty($ratarata3) ? $ratarata3 . ' (' . $nilaihuruf3 . ')' : '0');
                                                         ?>
                                                     </td>
                                                 </tr>
@@ -108,11 +108,11 @@
                                                     <td>
                                                         <?php
                                                         if (!empty($jmlstudikasus)) {
-                                                            $ratarata = $nilaistudikasus / $jmlstudikasus;
-                                                            $nilaihuruf = nilai_huruf_rpl($ratarata);
+                                                            $ratarata4 = $nilaistudikasus / $jmlstudikasus;
+                                                            $nilaihuruf4 = nilai_huruf_rpl($ratarata4);
                                                         }
 
-                                                        echo (!empty($ratarata) ? $ratarata . ' (' . $nilaihuruf . ')' : '0');
+                                                        echo (!empty($ratarata4) ? $ratarata4 . ' (' . $nilaihuruf4 . ')' : '0');
                                                         ?>
                                                     </td>
                                                 </tr>
@@ -124,11 +124,11 @@
                                                     <td>
                                                         <?php
                                                         if (!empty($jmlseminar)) {
-                                                            $ratarata = $nilaiseminar / $jmlseminar;
-                                                            $nilaihuruf = nilai_huruf_rpl($ratarata);
+                                                            $ratarata5 = $nilaiseminar / $jmlseminar;
+                                                            $nilaihuruf5 = nilai_huruf_rpl($ratarata5);
                                                         }
 
-                                                        echo (!empty($ratarata) ? $ratarata . ' (' . $nilaihuruf . ')' : '0');
+                                                        echo (!empty($ratarata5) ? $ratarata5 . ' (' . $nilaihuruf5 . ')' : '0');
                                                         ?>
                                                     </td>
                                                 </tr>
