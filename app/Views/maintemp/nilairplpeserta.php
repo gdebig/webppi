@@ -27,8 +27,9 @@
                                                 <tr>
                                                     <th>No.</th>
                                                     <th>Nama MK</th>
-                                                    <th>Rata/rata (Nilai Huruf) Penilai 1</th>
-                                                    <th>Rata/rata (Nilai Huruf) Penilai 2</th>
+                                                    <th>Rata-rata (Nilai Huruf) Penilai 1</th>
+                                                    <th>Rata-rata (Nilai Huruf) Penilai 2</th>
+                                                    <th>Rata-rata (Nilai Huruf) Total</th>
                                                     <th>Selisih</th>
                                                 </tr>
                                                 <tr>
@@ -58,6 +59,19 @@
                                                         }
 
                                                         echo (!empty($rataratanilai1) ? $rataratanilai1 . ' (' . $nilaihurufnilai1 . ')' : '0');
+                                                        ?>
+                                                    </td>
+                                                    <td>
+                                                        <?php
+                                                        if (!empty($rataratabimbing1) && (!empty($rataratanilai1))) {
+                                                            $rataratatot1 = ($rataratabimbing1 + $rataratanilai1) / 2;
+                                                            $nilaihurufrataratatot1 = nilai_huruf_rpl($rataratatot1);
+                                                        } else {
+                                                            $rataratatot1 = 0;
+                                                            $nilaihurufrataratatot1 = nilai_huruf_rpl($rataratatot1);
+                                                        }
+
+                                                        echo (!empty($rataratatot1) ? $rataratatot1 . ' (' . $nilaihurufrataratatot1 . ')' : '0');
                                                         ?>
                                                     </td>
                                                     <?php
@@ -99,6 +113,19 @@
                                                         echo (!empty($rataratanilai2) ? $rataratanilai2 . ' (' . $nilaihurufnilai2 . ')' : '0');
                                                         ?>
                                                     </td>
+                                                    <td>
+                                                        <?php
+                                                        if (!empty($rataratabimbing2) && (!empty($rataratanilai2))) {
+                                                            $rataratatot2 = ($rataratabimbing2 + $rataratanilai2) / 2;
+                                                            $nilaihurufrataratatot2 = nilai_huruf_rpl($rataratatot2);
+                                                        } else {
+                                                            $rataratatot2 = 0;
+                                                            $nilaihurufrataratatot2 = nilai_huruf_rpl($rataratatot2);
+                                                        }
+
+                                                        echo (!empty($rataratatot2) ? $rataratatot2 . ' (' . $nilaihurufrataratatot2 . ')' : '0');
+                                                        ?>
+                                                    </td>
                                                     <?php
                                                     $kurang2 = $rataratabimbing2 - $rataratanilai2;
                                                     if (abs($kurang2) >= 2) {
@@ -136,6 +163,19 @@
                                                         }
 
                                                         echo (!empty($rataratanilai3) ? $rataratanilai3 . ' (' . $nilaihurufnilai3 . ')' : '0');
+                                                        ?>
+                                                    </td>
+                                                    <td>
+                                                        <?php
+                                                        if (!empty($rataratabimbing3) && (!empty($rataratanilai3))) {
+                                                            $rataratatot3 = ($rataratabimbing3 + $rataratanilai3) / 2;
+                                                            $nilaihurufrataratatot3 = nilai_huruf_rpl($rataratatot3);
+                                                        } else {
+                                                            $rataratatot3 = 0;
+                                                            $nilaihurufrataratatot3 = nilai_huruf_rpl($rataratatot3);
+                                                        }
+
+                                                        echo (!empty($rataratatot3) ? $rataratatot3 . ' (' . $nilaihurufrataratatot3 . ')' : '0');
                                                         ?>
                                                     </td>
                                                     <?php
@@ -177,6 +217,19 @@
                                                         echo (!empty($rataratanilai4) ? $rataratanilai4 . ' (' . $nilaihurufnilai4 . ')' : '0');
                                                         ?>
                                                     </td>
+                                                    <td>
+                                                        <?php
+                                                        if (!empty($rataratabimbing4) && (!empty($rataratanilai4))) {
+                                                            $rataratatot4 = ($rataratabimbing4 + $rataratanilai4) / 2;
+                                                            $nilaihurufrataratatot4 = nilai_huruf_rpl($rataratatot4);
+                                                        } else {
+                                                            $rataratatot4 = 0;
+                                                            $nilaihurufrataratatot4 = nilai_huruf_rpl($rataratatot4);
+                                                        }
+
+                                                        echo (!empty($rataratatot4) ? $rataratatot4 . ' (' . $nilaihurufrataratatot4 . ')' : '0');
+                                                        ?>
+                                                    </td>
                                                     <?php
                                                     $kurang4 = $rataratabimbing4 - $rataratanilai4;
                                                     if (abs($kurang4) >= 2) {
@@ -214,6 +267,19 @@
                                                         }
 
                                                         echo (!empty($rataratanilai5) ? $rataratanilai5 . ' (' . $nilaihurufnilai5 . ')' : '0');
+                                                        ?>
+                                                    </td>
+                                                    <td>
+                                                        <?php
+                                                        if (!empty($rataratabimbing5) && (!empty($rataratanilai5))) {
+                                                            $rataratatot5 = ($rataratabimbing5 + $rataratanilai5) / 2;
+                                                            $nilaihurufrataratatot5 = nilai_huruf_rpl($rataratatot5);
+                                                        } else {
+                                                            $rataratatot5 = 0;
+                                                            $nilaihurufrataratatot5 = nilai_huruf_rpl($rataratatot5);
+                                                        }
+
+                                                        echo (!empty($rataratatot5) ? $rataratatot5 . ' (' . $nilaihurufrataratatot5 . ')' : '0');
                                                         ?>
                                                     </td>
                                                     <?php

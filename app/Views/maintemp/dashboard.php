@@ -18,11 +18,54 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <p>Selamat datang kepada Calon Peserta program RPL PPI FT UI. Di dalam website ini, anda
-                                diharuskan melengkapi dokumen-dokumen yang diperlukan sebagai bahan evaluasi tim
-                                penilai. Evaluasi dilakukan untuk menilai kelayakan dokumen yang diunggah sehingga anda
-                                dapat diterima sebagai Peserta Program RPL PPI FT UI.</p>
+                            <p><?= $informasi; ?></p>
                         </div>
+                        <div class="card-body">
+                            <?php
+                            if (isset($data_umum) && ($data_umum == "kosong")) {
+                            ?>
+                                <div class="alert alert-danger">Belum ada pengumuman</div>
+                            <?php
+                            } else {
+                            ?>
+
+                                <table id="tabledata" class="displayumum table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Pengumuman</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        foreach ($data_umum as $umum) :
+                                        ?>
+                                            <tr>
+                                                <td>
+                                                    <p><b><u><?= $umum['umum_name']; ?></u></b></p>
+                                                    <p>Target Pengumuman:
+                                                    <ul>
+                                                        <?= $umum['umum_tujuan'][0] == 'y' ? "<li>Calon Peserta</li>" : ''; ?>
+                                                        <?= $umum['umum_tujuan'][1] == 'y' ? "<li>Peserta</li>" : ''; ?>
+                                                        <?= $umum['umum_tujuan'][2] == 'y' ? "<li>Penilai</li>" : ''; ?>
+                                                    </ul>
+                                                    </p>
+                                                    <p><?= $umum['umum_desc'] ?></p>
+                                                    <?= !empty($umum['umum_file']) ? "<a href='" . base_url() . "/uploads/umum/" . $umum['umum_file'] . "' target='_blank'>Lihat File</a>" : ''; ?>
+                                                </td>
+                                            </tr>
+                                        <?php
+                                        endforeach;
+                                        ?>
+                                    </tbody>
+                                </table>
+                            <?php
+                            }
+                            ?>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                    <div class="card">
                         <!-- /.card-body -->
                     </div>
                 </div>

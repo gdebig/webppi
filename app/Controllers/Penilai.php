@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\AkunModel;
+use App\Models\UmumModel;
 
 class Penilai extends BaseController
 {
@@ -16,6 +17,16 @@ class Penilai extends BaseController
         } else {
             $session->set('role', 'penilai');
         }
+
+        $model = new UmumModel();
+        $umum = $model->like('umum_tujuan', '__y')->orderby('umum_id', 'DESC')->findall();
+        if (!empty($umum)) {
+            $data['data_umum'] = $umum;
+        } else {
+            $data['data_umum'] = 'kosong';
+        }
+
+        $data['informasi'] = 'Selamat datang sebagai role Penilai. Pada modul ini, tersedia menu yang diperlukan penilai untuk melakukan penilaian Peserta RPL.';
         $data['title_page'] = "Dashboard PPI RPL";
         $data['data_bread'] = "dashboard";
         $data['logged_in'] = $session->get('logged_in');

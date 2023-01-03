@@ -16,7 +16,6 @@ class Mankomp extends BaseController
         }
         helper(['tanggal']);
 
-        $komp_id = $session->get('komp_id');
         $model = new KompModel();
         $data['logged_in'] = $logged_in;
         $komp = $model->orderBy('komp_id', 'ASC')->findall();

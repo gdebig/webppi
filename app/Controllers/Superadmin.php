@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\AkunModel;
+use App\Models\UmumModel;
 
 class Superadmin extends BaseController
 {
@@ -16,6 +17,16 @@ class Superadmin extends BaseController
         } else {
             $session->set('role', 'superadmin');
         }
+
+        $model = new UmumModel();
+        $umum = $model->orderby('umum_id', 'DESC')->findall();
+        if (!empty($umum)) {
+            $data['data_umum'] = $umum;
+        } else {
+            $data['data_umum'] = 'kosong';
+        }
+
+        $data['informasi'] = 'Selamat datang Super Admin. Pada modul ini, tersedia menu yang diperlukan admin untuk mengelola Calon Peserta, Peserta, Majelis Penilai dan Konfigurasi Web.';
         $data['title_page'] = "Dashboard PPI RPL";
         $data['data_bread'] = "dashboard";
         $data['logged_in'] = $session->get('logged_in');

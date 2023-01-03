@@ -2118,7 +2118,7 @@ class Mannilairpl extends BaseController
             $nilaisem1_p = $this->request->getVar('nilaisem1_p');
             $nilaisem1_q = $this->request->getVar('nilaisem1_q');
             $nilaisem1_r = $this->request->getVar('nilaisem1_r');
-            foreach ($sem_index as $index) :
+            foreach ($sem1_index as $index) :
                 $data = array(
                     'mhs_id' => $mhs_id,
                     'dosen_id' => $dosen_id,

@@ -24,6 +24,9 @@
     <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/plugins/datatables-scrollX/css/scrollX.bootstrap4.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 
+    <!-- Summernote -->
+    <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/plugins/summernote/summernote-bs4.min.css">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
     <link rel="stylesheet" type="text/css" href="<?= base_url(); ?>/assets/sigpad/jquery.signature.css">
 
@@ -346,6 +349,7 @@ $session = session();
     <script src="<?php echo base_url(); ?>/assets/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
     <script src="<?php echo base_url(); ?>/assets/plugins/datatables-buttons/js/buttons.print.min.js"></script>
     <script src="<?php echo base_url(); ?>/assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+    <script src="<?php echo base_url(); ?>/assets/plugins/summernote/summernote-bs4.min.js"></script>
     <script>
         $(function() {
             $('table.display').DataTable({
@@ -444,6 +448,19 @@ $session = session();
             }).buttons().container().appendTo('#tabledata6_wrapper .col-md-6:eq(0)');
         });
     </script>
+    <script>
+        $(function() {
+            $('table.displayumum').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": true,
+                "ordering": false,
+                "info": true,
+                "autoWidth": false,
+                "scrollX": true
+            }).buttons().container().appendTo('#tabledata_wrapper .col-md-6:eq(0)');
+        });
+    </script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     <script type="text/javascript" src="<?= base_url(); ?>/assets/sigpad/jquery.signature.js"></script>
 
@@ -457,6 +474,12 @@ $session = session();
             sig.signature('clear');
             $("#signature").val('');
         });
+    </script>
+    <script>
+        $(function() {
+            // Summernote
+            $('#umum_desc').summernote();
+        })
     </script>
 </body>
 

@@ -40,3 +40,9 @@
         <p>Konfigurasi Web</p>
     </a>
 </li>
+<li class="nav-item">
+    <a href="<?php echo base_url(); ?>/manpengumuman" class="nav-link">
+        <i class="fas fa-scroll nav-icon"></i>
+        <p>Manajemen Pengumuman</p>
+    </a>
+</li>
