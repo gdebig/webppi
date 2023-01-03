@@ -1779,7 +1779,7 @@ class Nilairpl extends BaseController
         $sem = $model4->where('user_id', $mhs_id)->where('Type', 'Mak')->like('kompetensi', 'W.4.')->orderby('Year', 'DESC')->findall();
         $dataid52 = $modelnilai->select('id_tbl, nilaip, nilaiq, nilair')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Pembimbing')->where('namatbl', '52')->where('namamk', 'studikasus')->findall();
         if (!empty($dataid52)) {
-            foreach ($dataid3 as $dataid) :
+            foreach ($dataid52 as $dataid) :
                 $id52[] = $dataid['id_tbl'];
                 $nilaip52[] = $dataid['nilaip'];
                 $nilaiq52[] = $dataid['nilaiq'];
