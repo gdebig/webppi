@@ -453,6 +453,9 @@
                         </table>
                     <?php } ?>
                     <!--UserFair16-->
+                    <?php
+                    echo $data_latih1;
+                    ?>
                     <?php if (isset($data_latih1) && ($data_latih1 != "kosong")) {
                     ?>
                         <br />

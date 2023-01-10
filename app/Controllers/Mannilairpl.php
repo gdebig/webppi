@@ -1223,7 +1223,7 @@ class Mannilairpl extends BaseController
                     'tipedosen' => 'Penilai',
                     'id_tbl' => $latih_id[$index],
                     'namatbl' => '16',
-                    'namamk' => 'profesi',
+                    'namamk' => 'k3lh',
                     'nilaip' => $nilailatih_p[$index],
                     'nilaiq' => $nilailatih_q[$index],
                     'nilair' => $nilailatih_r[$index],
@@ -1354,7 +1354,7 @@ class Mannilairpl extends BaseController
         $kerja = $model3->where('user_id', $mhs_id)->like('kompetensi', 'W.4.4.')->orderby('ProjValue', 'DESC')->findall();
         $dataid3 = $modelnilai->select('id_tbl, nilaip, nilaiq, nilair')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Penilai')->where('namatbl', '3')->where('namamk', 'seminar')->findall();
         if (!empty($dataid3)) {
-            foreach ($dataid51 as $dataid) :
+            foreach ($dataid3 as $dataid) :
                 $id3[] = $dataid['id_tbl'];
                 $nilaip3[] = $dataid['nilaip'];
                 $nilaiq3[] = $dataid['nilaiq'];

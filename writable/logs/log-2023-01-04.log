@@ -1,0 +1,15 @@
+ERROR - 2023-01-04 21:04:39 --> Unknown column 'tbl_pengujirpl.uji_id' in 'where clause'
+CRITICAL - 2023-01-04 21:04:39 --> Unknown column 'tbl_pengujirpl.uji_id' in 'where clause'
+#0 D:\wamp64\www\webppi\system\Database\MySQLi\Connection.php(292): mysqli->query('UPDATE `tbl_pen...', 0)
+#1 D:\wamp64\www\webppi\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('UPDATE `tbl_pen...')
+#2 D:\wamp64\www\webppi\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('UPDATE `tbl_pen...')
+#3 D:\wamp64\www\webppi\system\Database\BaseBuilder.php(1913): CodeIgniter\Database\BaseConnection->query('UPDATE `tbl_pen...', Array, false)
+#4 D:\wamp64\www\webppi\system\Model.php(298): CodeIgniter\Database\BaseBuilder->update()
+#5 D:\wamp64\www\webppi\system\BaseModel.php(865): CodeIgniter\Model->doUpdate(Array, Array)
+#6 D:\wamp64\www\webppi\system\Model.php(651): CodeIgniter\BaseModel->update(Array, Array)
+#7 D:\wamp64\www\webppi\app\Controllers\Manpeserta.php(495): CodeIgniter\Model->update('16', Array)
+#8 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Manpeserta->prosesdosbing()
+#9 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Manpeserta))
+#10 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#12 {main}

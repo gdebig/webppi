@@ -147,7 +147,7 @@ class Userfair14 extends BaseController
                         'required' => 'Field Uraian Singkat Tanda Penghargaan harus diisi.',
                     ],
                 ],
-                'komp' => [
+                'komp14' => [
                     'label'  => 'Kompetensi',
                     'rules'  => 'required',
                     'errors' => [

@@ -40,7 +40,7 @@
                             <br />
                             <div class="row">
                                 <div class="container">
-                                    <form action="<?php echo base_url(); ?>/mannilairpl/submitmannilairpl" method="post" enctype="multipart/form-data">
+                                    <form action="<?php echo base_url(); ?>/mannilairpl/submitnilairpl" method="post" enctype="multipart/form-data">
                                         <input type="hidden" name="mhs_id" id="mhs_id" value=<?= $mhs_id; ?> />
                                         <input type="hidden" name="dosen_id" id="dosen_id" value=<?= $dosen_id; ?> />
                                         <div class="row">

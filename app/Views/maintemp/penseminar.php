@@ -255,7 +255,6 @@
                                         <td><?= $sem['Desc']; ?></td>
                                         <td><a href="<?= base_url(); ?>/uploads/docs/<?= $sem['File']; ?>" target="_blank">Lihat Bukti</a></td>
                                         <td><?= $sem['kompetensi']; ?></td>
-                                        <td><?= $kartul['kompetensi']; ?></td>
                                         <td>
                                             <select name="nilaisem_p[]" id="nilaisem_p[]">
                                                 <option value="1">1</option>
