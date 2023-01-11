@@ -27,7 +27,9 @@
                                                 <tr>
                                                     <th>No.</th>
                                                     <th>Nama MK</th>
+                                                    <th>Bobot Penilai 1</th>
                                                     <th>Rata-rata (Nilai Huruf) Penilai 1</th>
+                                                    <th>Bobot Penilai 2</th>
                                                     <th>Rata-rata (Nilai Huruf) Penilai 2</th>
                                                     <th>Rata-rata (Nilai Huruf) Total</th>
                                                     <th>Selisih</th>
@@ -35,6 +37,7 @@
                                                 <tr>
                                                     <td>1.</td>
                                                     <td>Kode Etik dan Etika Profesi Insinyur</td>
+                                                    <td><?= !empty($nilaikodeetikbimbing) ? $nilaikodeetikbimbing : '0'; ?></td>
                                                     <td>
                                                         <?php
                                                         if (!empty($jmlkodeetikbimbing)) {
@@ -45,9 +48,10 @@
                                                             $nilaihurufbimbing1 = nilai_huruf_rpl($rataratabimbing1);
                                                         }
 
-                                                        echo (!empty($rataratabimbing1) ? $rataratabimbing1 . ' (' . $nilaihurufbimbing1 . ')' : '0');
+                                                        echo (!empty($rataratabimbing1) ? number_format($rataratabimbing1, 2) . ' (' . $nilaihurufbimbing1 . ')' : '0');
                                                         ?>
                                                     </td>
+                                                    <td><?= !empty($nilaikodeetikpenilai) ? $nilaikodeetikpenilai : '0'; ?></td>
                                                     <td>
                                                         <?php
                                                         if (!empty($jmlkodeetikpenilai)) {
@@ -58,7 +62,7 @@
                                                             $nilaihurufnilai1 = nilai_huruf_rpl($rataratanilai1);
                                                         }
 
-                                                        echo (!empty($rataratanilai1) ? $rataratanilai1 . ' (' . $nilaihurufnilai1 . ')' : '0');
+                                                        echo (!empty($rataratanilai1) ? number_format($rataratanilai1, 2) . ' (' . $nilaihurufnilai1 . ')' : '0');
                                                         ?>
                                                     </td>
                                                     <td>
@@ -71,7 +75,7 @@
                                                             $nilaihurufrataratatot1 = nilai_huruf_rpl($rataratatot1);
                                                         }
 
-                                                        echo (!empty($rataratatot1) ? $rataratatot1 . ' (' . $nilaihurufrataratatot1 . ')' : '0');
+                                                        echo (!empty($rataratatot1) ? number_format($rataratatot1, 2) . ' (' . $nilaihurufrataratatot1 . ')' : '0');
                                                         ?>
                                                         <input type="hidden" name="kodeetik" id="kodeetik" value="<?= $rataratatot1; ?>" />
                                                     </td>
@@ -83,11 +87,12 @@
                                                         $bgcolor = '';
                                                     }
                                                     ?>
-                                                    <td <?= $bgcolor; ?>><?= $kurang1; ?></td>
+                                                    <td <?= $bgcolor; ?>><?= abs(number_format($kurang1, 2)); ?></td>
                                                 </tr>
                                                 <tr>
                                                     <td>2.</td>
                                                     <td>Profesionalisme</td>
+                                                    <td><?= !empty($nilaiprofesibimbing) ? $nilaiprofesibimbing : '0'; ?></td>
                                                     <td>
                                                         <?php
                                                         if (!empty($jmlprofesibimbing)) {
@@ -98,9 +103,10 @@
                                                             $nilaihurufbimbing2 = nilai_huruf_rpl($rataratabimbing2);
                                                         }
 
-                                                        echo (!empty($rataratabimbing2) ? $rataratabimbing2 . ' (' . $nilaihurufbimbing2 . ')' : '0');
+                                                        echo (!empty($rataratabimbing2) ? number_format($rataratabimbing2, 2) . ' (' . $nilaihurufbimbing2 . ')' : '0');
                                                         ?>
                                                     </td>
+                                                    <td><?= !empty($nilaiprofesipenilai) ? $nilaiprofesipenilai : '0'; ?></td>
                                                     <td>
                                                         <?php
                                                         if (!empty($jmlprofesipenilai)) {
@@ -111,7 +117,7 @@
                                                             $nilaihurufnilai2 = nilai_huruf_rpl($rataratanilai2);
                                                         }
 
-                                                        echo (!empty($rataratanilai2) ? $rataratanilai2 . ' (' . $nilaihurufnilai2 . ')' : '0');
+                                                        echo (!empty($rataratanilai2) ? number_format($rataratanilai2, 2) . ' (' . $nilaihurufnilai2 . ')' : '0');
                                                         ?>
                                                     </td>
                                                     <td>
@@ -124,7 +130,7 @@
                                                             $nilaihurufrataratatot2 = nilai_huruf_rpl($rataratatot2);
                                                         }
 
-                                                        echo (!empty($rataratatot2) ? $rataratatot2 . ' (' . $nilaihurufrataratatot2 . ')' : '0');
+                                                        echo (!empty($rataratatot2) ? number_format($rataratatot2, 2) . ' (' . $nilaihurufrataratatot2 . ')' : '0');
                                                         ?>
                                                         <input type="hidden" name="profesi" id="profesi" value="<?= $rataratatot2; ?>" />
                                                     </td>
@@ -136,11 +142,12 @@
                                                         $bgcolor = '';
                                                     }
                                                     ?>
-                                                    <td <?= $bgcolor; ?>><?= $kurang2; ?></td>
+                                                    <td <?= $bgcolor; ?>><?= abs(number_format($kurang2, 2)); ?></td>
                                                 </tr>
                                                 <tr>
                                                     <td>3.</td>
                                                     <td>Keselamatan, Kesehatan, Keamanan Kerja dan Lingkungan Hidup</td>
+                                                    <td><?= !empty($nilaik3lhbimbing) ? $nilaik3lhbimbing : '0'; ?></td>
                                                     <td>
                                                         <?php
                                                         if (!empty($jmlk3lhbimbing)) {
@@ -151,9 +158,10 @@
                                                             $nilaihurufbimbing3 = nilai_huruf_rpl($rataratabimbing3);
                                                         }
 
-                                                        echo (!empty($rataratabimbing3) ? $rataratabimbing3 . ' (' . $nilaihurufbimbing3 . ')' : '0');
+                                                        echo (!empty($rataratabimbing3) ? number_format($rataratabimbing3, 2) . ' (' . $nilaihurufbimbing3 . ')' : '0');
                                                         ?>
                                                     </td>
+                                                    <td><?= !empty($nilaik3lhpenilai) ? $nilaik3lhpenilai : '0'; ?></td>
                                                     <td>
                                                         <?php
                                                         if (!empty($jmlk3lhpenilai)) {
@@ -164,7 +172,7 @@
                                                             $nilaihurufnilai3 = nilai_huruf_rpl($rataratanilai3);
                                                         }
 
-                                                        echo (!empty($rataratanilai3) ? $rataratanilai3 . ' (' . $nilaihurufnilai3 . ')' : '0');
+                                                        echo (!empty($rataratanilai3) ? number_format($rataratanilai3, 2) . ' (' . $nilaihurufnilai3 . ')' : '0');
                                                         ?>
                                                     </td>
                                                     <td>
@@ -177,7 +185,7 @@
                                                             $nilaihurufrataratatot3 = nilai_huruf_rpl($rataratatot3);
                                                         }
 
-                                                        echo (!empty($rataratatot3) ? $rataratatot3 . ' (' . $nilaihurufrataratatot3 . ')' : '0');
+                                                        echo (!empty($rataratatot3) ? number_format($rataratatot3, 2) . ' (' . $nilaihurufrataratatot3 . ')' : '0');
                                                         ?>
                                                         <input type="hidden" name="k3lh" id="k3lh" value="<?= $rataratatot3; ?>" />
                                                     </td>
@@ -189,11 +197,12 @@
                                                         $bgcolor = '';
                                                     }
                                                     ?>
-                                                    <td <?= $bgcolor; ?>><?= $kurang3; ?></td>
+                                                    <td <?= $bgcolor; ?>><?= abs(number_format($kurang3, 2)); ?></td>
                                                 </tr>
                                                 <tr>
                                                     <td>4.</td>
                                                     <td>Studi Kasus</td>
+                                                    <td><?= !empty($nilaistudikasusbimbing) ? $nilaistudikasusbimbing : '0'; ?></td>
                                                     <td>
                                                         <?php
                                                         if (!empty($jmlstudikasusbimbing)) {
@@ -204,9 +213,10 @@
                                                             $nilaihurufbimbing4 = nilai_huruf_rpl($rataratabimbing4);
                                                         }
 
-                                                        echo (!empty($rataratabimbing4) ? $rataratabimbing4 . ' (' . $nilaihurufbimbing4 . ')' : '0');
+                                                        echo (!empty($rataratabimbing4) ? number_format($rataratabimbing4, 2) . ' (' . $nilaihurufbimbing4 . ')' : '0');
                                                         ?>
                                                     </td>
+                                                    <td><?= !empty($nilaistudikasuspenilai) ? $nilaistudikasuspenilai : '0'; ?></td>
                                                     <td>
                                                         <?php
                                                         if (!empty($jmlstudikasuspenilai)) {
@@ -217,7 +227,7 @@
                                                             $nilaihurufnilai4 = nilai_huruf_rpl($rataratanilai4);
                                                         }
 
-                                                        echo (!empty($rataratanilai4) ? $rataratanilai4 . ' (' . $nilaihurufnilai4 . ')' : '0');
+                                                        echo (!empty($rataratanilai4) ? number_format($rataratanilai4, 2) . ' (' . $nilaihurufnilai4 . ')' : '0');
                                                         ?>
                                                     </td>
                                                     <td>
@@ -230,7 +240,7 @@
                                                             $nilaihurufrataratatot4 = nilai_huruf_rpl($rataratatot4);
                                                         }
 
-                                                        echo (!empty($rataratatot4) ? $rataratatot4 . ' (' . $nilaihurufrataratatot4 . ')' : '0');
+                                                        echo (!empty($rataratatot4) ? number_format($rataratatot4, 2) . ' (' . $nilaihurufrataratatot4 . ')' : '0');
                                                         ?>
                                                         <input type="hidden" name="studikasus" id="studikasus" value="<?= $rataratatot4; ?>" />
                                                     </td>
@@ -242,11 +252,12 @@
                                                         $bgcolor = '';
                                                     }
                                                     ?>
-                                                    <td <?= $bgcolor; ?>><?= $kurang4; ?></td>
+                                                    <td <?= $bgcolor; ?>><?= abs(number_format($kurang4, 2)); ?></td>
                                                 </tr>
                                                 <tr>
                                                     <td>5.</td>
                                                     <td>Seminar</td>
+                                                    <td><?= !empty($nilaiseminarbimbing) ? $nilaiseminarbimbing : '0'; ?></td>
                                                     <td>
                                                         <?php
                                                         if (!empty($jmlseminarbimbing)) {
@@ -257,9 +268,10 @@
                                                             $nilaihurufbimbing5 = nilai_huruf_rpl($rataratabimbing5);
                                                         }
 
-                                                        echo (!empty($rataratabimbing5) ? $rataratabimbing5 . ' (' . $nilaihurufbimbing5 . ')' : '0');
+                                                        echo (!empty($rataratabimbing5) ? number_format($rataratabimbing5, 2) . ' (' . $nilaihurufbimbing5 . ')' : '0');
                                                         ?>
                                                     </td>
+                                                    <td><?= !empty($nilaiseminarpenilai) ? $nilaiseminarpenilai : '0'; ?></td>
                                                     <td>
                                                         <?php
                                                         if (!empty($jmlseminarpenilai)) {
@@ -270,7 +282,7 @@
                                                             $nilaihurufnilai5 = nilai_huruf_rpl($rataratanilai5);
                                                         }
 
-                                                        echo (!empty($rataratanilai5) ? $rataratanilai5 . ' (' . $nilaihurufnilai5 . ')' : '0');
+                                                        echo (!empty($rataratanilai5) ? number_format($rataratanilai5, 2) . ' (' . $nilaihurufnilai5 . ')' : '0');
                                                         ?>
                                                     </td>
                                                     <td>
@@ -283,7 +295,7 @@
                                                             $nilaihurufrataratatot5 = nilai_huruf_rpl($rataratatot5);
                                                         }
 
-                                                        echo (!empty($rataratatot5) ? $rataratatot5 . ' (' . $nilaihurufrataratatot5 . ')' : '0');
+                                                        echo (!empty($rataratatot5) ? number_format($rataratatot5, 2) . ' (' . $nilaihurufrataratatot5 . ')' : '0');
                                                         ?>
                                                         <input type="hidden" name="seminar" id="seminar" value="<?= $rataratatot5; ?>" />
                                                     </td>
@@ -295,7 +307,7 @@
                                                         $bgcolor = '';
                                                     }
                                                     ?>
-                                                    <td <?= $bgcolor; ?>><?= $kurang5; ?></td>
+                                                    <td <?= $bgcolor; ?>><?= abs(number_format($kurang5, 2)); ?></td>
                                                 </tr>
                                             </table>
                                         </div>
