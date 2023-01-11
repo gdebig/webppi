@@ -133,6 +133,13 @@ class Userfair3 extends BaseController
                         'ext_in' => "Hanya menerima file PDF, JPG, JPEG atau PNG",
                         'max_size' => "Ukuran File Maksimal 700KB"
                     ],
+                ],
+                'komp3' => [
+                    'label'  => 'Kompetensi',
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => 'Field Kompetensi harus diisi.',
+                    ],
                 ]
             ]);
 
@@ -433,6 +440,13 @@ class Userfair3 extends BaseController
                     'errors' => [
                         'ext_in' => "Hanya menerima file PDF, JPG, JPEG atau PNG",
                         'max_size' => "Ukuran File Maksimal 700KB"
+                    ],
+                ],
+                'komp3' => [
+                    'label'  => 'Kompetensi',
+                    'rules'  => 'required',
+                    'errors' => [
+                        'required' => 'Field Kompetensi harus diisi.',
                     ],
                 ]
             ]);
