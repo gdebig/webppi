@@ -8,6 +8,7 @@ use App\Models\NilaitaModel;
 use App\Models\TugasAkhirModel;
 use App\Models\ProfileModel;
 use App\Models\ConfigModel;
+use App\Models\NilairplModel;
 
 class Manbimbing extends BaseController
 {
@@ -25,10 +26,26 @@ class Manbimbing extends BaseController
 
         $user_id = $session->get('user_id');
         $model = new BimbingModel();
+        $model1 = new NilairplModel();
         $data['logged_in'] = $logged_in;
         $user = $model->where('tbl_bimbing.dosen_id', $user_id)->join('tbl_profile', 'tbl_bimbing.mhs_id = tbl_profile.user_id', 'left')->join('tbl_tugasakhir', 'tbl_bimbing.mhs_id = tbl_tugasakhir.user_id', 'left')->orderby('tbl_tugasakhir.ta_tahun', 'DESC')->orderby('tbl_profile.FullName', 'ASC')->findall();
         if (!empty($user)) {
             $data['data_user'] = $user;
+            foreach ($user as $datauser) :
+                $nilairpl = $model1->where('mhs_id', $datauser['mhs_id'])->first();
+                if ($nilairpl) {
+                    $nilairplsave[$datauser['mhs_id']] = $nilairpl['nilairpl_save'];
+                    $nilairplsubmit[$datauser['mhs_id']] = $nilairpl['nilairpl_submit'];
+                    $nilairplconfirm[$datauser['mhs_id']] = $nilairpl['nilairpl_confirm'];
+                } else {
+                    $nilairplsave[$datauser['mhs_id']] = "Tidak";
+                    $nilairplsubmit[$datauser['mhs_id']] = "Tidak";
+                    $nilairplconfirm[$datauser['mhs_id']] = "Tidak";
+                }
+            endforeach;
+            $data['nilairplsave'] = $nilairplsave;
+            $data['nilairplsubmit'] = $nilairplsubmit;
+            $data['nilairplconfirm'] = $nilairplconfirm;
         } else {
             $data['data_user'] = 'kosong';
         }

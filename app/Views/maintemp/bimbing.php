@@ -47,9 +47,19 @@
                                     <td><a href="<?= base_url(); ?>/bimbingfair/docs/<?= $user['mhs_id']; ?>">Lihat Detail</a>
                                     </td>
                                     <td>
-
+                                        <?php
+                                        if ((isset($nilairplconfirm[$user['mhs_id']])) && ($nilairplconfirm[$user['mhs_id']] == "Ya")) {
+                                            $status = "Sudah confirm";
+                                        } elseif ((isset($nilairplsubmit[$user['mhs_id']])) && ($nilairplsubmit[$user['mhs_id']] == "Ya")) {
+                                            $status = "Sudah submit";
+                                        } elseif ((isset($nilairplsave[$user['mhs_id']])) && ($nilairplsave[$user['mhs_id']] == "Ya")) {
+                                            $status = "Sudah save";
+                                        } else {
+                                            $status = "Belum diproses";
+                                        }
+                                        ?>
                                         <a href="<?= base_url(); ?>/nilairpl/docs/<?= $user['mhs_id']; ?>/<?= $user['dosen_id']; ?>">Lihat
-                                            Nilai RPL</a>
+                                            Nilai RPL (<?= $status; ?>)</a>
                                     </td>
                                     <td><?php
                                         if (!empty($user['ta_buku'])) {

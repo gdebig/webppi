@@ -37,7 +37,20 @@
                                     <td><?php echo $i;
                                         $i++; ?></td>
                                     <td><?= $user['FullName']; ?></td>
-                                    <td><a href="<?= base_url(); ?>/mannilairpl/penilaianrpl/<?= $user['mhsrpl_id']; ?>/<?= $dosen_id; ?>">Lihat Nilai</a></td>
+                                    <td>
+                                        <?php
+                                        if ((isset($nilairplconfirm[$user['mhsrpl_id']])) && ($nilairplconfirm[$user['mhsrpl_id']] == "Ya")) {
+                                            $status = "Sudah confirm";
+                                        } elseif ((isset($nilairplsubmit[$user['mhsrpl_id']])) && ($nilairplsubmit[$user['mhsrpl_id']] == "Ya")) {
+                                            $status = "Sudah submit";
+                                        } elseif ((isset($nilairplsave[$user['mhsrpl_id']])) && ($nilairplsave[$user['mhsrpl_id']] == "Ya")) {
+                                            $status = "Sudah save";
+                                        } else {
+                                            $status = "Belum diproses";
+                                        }
+                                        ?>
+                                        <a href="<?= base_url(); ?>/mannilairpl/penilaianrpl/<?= $user['mhsrpl_id']; ?>/<?= $dosen_id; ?>">Lihat Nilai (<?= $status; ?>)</a>
+                                    </td>
                                 </tr>
                             <?php
                             endforeach

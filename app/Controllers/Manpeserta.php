@@ -11,8 +11,10 @@ use App\Models\CapesSertModel;
 use App\Models\CapesKartulModel;
 use App\Models\CapesSemModel;
 use App\Models\BimbingModel;
+use App\Models\ConfigModel;
 use App\Models\PengujiRplModel;
 use App\Models\NilairplModel;
+use App\Models\NilairplsiakModel;
 use App\Models\ProfileModel;
 
 class Manpeserta extends BaseController
@@ -699,8 +701,6 @@ class Manpeserta extends BaseController
         $ispenilai = $session->get('ispenilai');
         if ((!$logged_in) && ((!$issadmin) || (!$isadmin) || (!$ispenilai))) {
             return redirect()->to('/home');
-        } else {
-            $session->set('role', 'penilai');
         }
         helper(['tanggal']);
 
@@ -717,6 +717,54 @@ class Manpeserta extends BaseController
         $model->where('mhs_id', $mhs_id);
         $model->where('tipedosen', 'Penilai');
         $model->update();
+
+        $model1 = new ConfigModel();
+        $tahun = $model1->where('config_name', 'tahun_aktif')->first();
+        if ($tahun) {
+            $tahunaktif = $tahun['config_value'];
+        } else {
+            $tahunaktif = date('Y');
+        }
+        $semester = $model1->where('config_name', 'sem_aktif')->first();
+        if ($semester) {
+            $semaktif = $semester['config_value'];
+        } else {
+            $semaktif = "None";
+        }
+
+        $kodeetik = $this->request->getVar('kodeetik');
+        $profesi = $this->request->getVar('profesi');
+        $k3lh = $this->request->getVar('k3lh');
+        $studikasus = $this->request->getVar('studikasus');
+        $seminar = $this->request->getVar('seminar');
+
+        $model2 = new NilairplsiakModel();
+        $dataexist = $model2->where('mhs_id', $mhs_id)->first();
+        if ($dataexist) {
+            $data = array(
+                'kodeetik' => $kodeetik,
+                'profesi' => $profesi,
+                'k3lh' => $k3lh,
+                'studikasus' => $studikasus,
+                'seminar' => $seminar,
+                'date_modified' => date('Y-m-d H:i:s')
+            );
+            $model2->update($mhs_id, $data);
+        } else {
+            $data = array(
+                'mhs_id' => $mhs_id,
+                'tahun' => $tahunaktif,
+                'semester' => $semaktif,
+                'kodeetik' => $kodeetik,
+                'profesi' => $profesi,
+                'k3lh' => $k3lh,
+                'studikasus' => $studikasus,
+                'seminar' => $seminar,
+                'date_created' => date('Y-m-d H:i:s'),
+                'date_modified' => date('Y-m-d H:i:s')
+            );
+            $model2->save($data);
+        }
 
         $session->setFlashdata('msg', 'Data Nilai berhasil di submit.');
         return redirect()->to('manpeserta/lihatnilairpl/' . $mhs_id);

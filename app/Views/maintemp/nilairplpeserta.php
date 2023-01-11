@@ -73,6 +73,7 @@
 
                                                         echo (!empty($rataratatot1) ? $rataratatot1 . ' (' . $nilaihurufrataratatot1 . ')' : '0');
                                                         ?>
+                                                        <input type="hidden" name="kodeetik" id="kodeetik" value="<?= $rataratatot1; ?>" />
                                                     </td>
                                                     <?php
                                                     $kurang1 = $rataratabimbing1 - $rataratanilai1;
@@ -125,6 +126,7 @@
 
                                                         echo (!empty($rataratatot2) ? $rataratatot2 . ' (' . $nilaihurufrataratatot2 . ')' : '0');
                                                         ?>
+                                                        <input type="hidden" name="profesi" id="profesi" value="<?= $rataratatot2; ?>" />
                                                     </td>
                                                     <?php
                                                     $kurang2 = $rataratabimbing2 - $rataratanilai2;
@@ -177,6 +179,7 @@
 
                                                         echo (!empty($rataratatot3) ? $rataratatot3 . ' (' . $nilaihurufrataratatot3 . ')' : '0');
                                                         ?>
+                                                        <input type="hidden" name="k3lh" id="k3lh" value="<?= $rataratatot3; ?>" />
                                                     </td>
                                                     <?php
                                                     $kurang3 = $rataratabimbing3 - $rataratanilai3;
@@ -229,6 +232,7 @@
 
                                                         echo (!empty($rataratatot4) ? $rataratatot4 . ' (' . $nilaihurufrataratatot4 . ')' : '0');
                                                         ?>
+                                                        <input type="hidden" name="studikasus" id="studikasus" value="<?= $rataratatot4; ?>" />
                                                     </td>
                                                     <?php
                                                     $kurang4 = $rataratabimbing4 - $rataratanilai4;
@@ -281,6 +285,7 @@
 
                                                         echo (!empty($rataratatot5) ? $rataratatot5 . ' (' . $nilaihurufrataratatot5 . ')' : '0');
                                                         ?>
+                                                        <input type="hidden" name="seminar" id="seminar" value="<?= $rataratatot5; ?>" />
                                                     </td>
                                                     <?php
                                                     $kurang5 = $rataratabimbing5 - $rataratanilai5;

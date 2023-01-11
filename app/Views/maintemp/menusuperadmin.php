@@ -46,3 +46,9 @@
         <p>Manajemen Pengumuman</p>
     </a>
 </li>
+<li class="nav-item">
+    <a href="<?php echo base_url(); ?>/rekapnilairpl" class="nav-link">
+        <i class="fas fa-sticky-note nav-icon"></i>
+        <p>Rekap Nilai RPL</p>
+    </a>
+</li>

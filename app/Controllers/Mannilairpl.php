@@ -33,10 +33,26 @@ class Mannilairpl extends BaseController
 
         $user_id = $session->get('user_id');
         $model = new PengujiRplModel();
+        $model1 = new NilairplModel();
         $data['logged_in'] = $logged_in;
         $user = $model->where('dosenrpl_id', $user_id)->join('tbl_profile', 'tbl_pengujirpl.mhsrpl_id = tbl_profile.user_id', 'left')->orderby('tbl_pengujirpl.ujirpl_id', 'DESC')->findall();
         if (!empty($user)) {
             $data['data_user'] = $user;
+            foreach ($user as $datauser) :
+                $nilairpl = $model1->where('mhs_id', $datauser['mhsrpl_id'])->first();
+                if ($nilairpl) {
+                    $nilairplsave[$datauser['mhsrpl_id']] = $nilairpl['nilairpl_save'];
+                    $nilairplsubmit[$datauser['mhsrpl_id']] = $nilairpl['nilairpl_submit'];
+                    $nilairplconfirm[$datauser['mhsrpl_id']] = $nilairpl['nilairpl_confirm'];
+                } else {
+                    $nilairplsave[$datauser['mhsrpl_id']] = "Tidak";
+                    $nilairplsubmit[$datauser['mhsrpl_id']] = "Tidak";
+                    $nilairplconfirm[$datauser['mhsrpl_id']] = "Tidak";
+                }
+            endforeach;
+            $data['nilairplsave'] = $nilairplsave;
+            $data['nilairplsubmit'] = $nilairplsubmit;
+            $data['nilairplconfirm'] = $nilairplconfirm;
         } else {
             $data['data_user'] = 'kosong';
         }
