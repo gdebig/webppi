@@ -36,7 +36,7 @@
                                 <tr>
                                     <td><?php echo $i;
                                         $i++; ?></td>
-                                    <td><?= $user['FullName']; ?></td>
+                                    <td><?= !empty($user['FullName']) ? $user['FullName'] : "(Belum isi Profile)"; ?></td>
                                     <td>
                                         <?php
                                         if ((isset($nilairplconfirm[$user['mhsrpl_id']])) && ($nilairplconfirm[$user['mhsrpl_id']] == "Ya")) {

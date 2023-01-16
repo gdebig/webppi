@@ -32,7 +32,7 @@ class Manbimbing extends BaseController
         if (!empty($user)) {
             $data['data_user'] = $user;
             foreach ($user as $datauser) :
-                $nilairpl = $model1->where('mhs_id', $datauser['mhs_id'])->first();
+                $nilairpl = $model1->where('mhs_id', $datauser['mhs_id'])->where('tipedosen', 'Pembimbing')->first();
                 if ($nilairpl) {
                     $nilairplsave[$datauser['mhs_id']] = $nilairpl['nilairpl_save'];
                     $nilairplsubmit[$datauser['mhs_id']] = $nilairpl['nilairpl_submit'];

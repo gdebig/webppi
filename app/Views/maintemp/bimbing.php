@@ -42,7 +42,7 @@
                                 <tr>
                                     <td><?php echo $i;
                                         $i++; ?></td>
-                                    <td><?= $user['FullName']; ?></td>
+                                    <td><?= !empty($user['FullName']) ? $user['FullName'] : "(Belum isi profile)"; ?></td>
                                     <td><?= $user['ta_tahun'] . ' - ' . $user['ta_semester']; ?></td>
                                     <td><a href="<?= base_url(); ?>/bimbingfair/docs/<?= $user['mhs_id']; ?>">Lihat Detail</a>
                                     </td>

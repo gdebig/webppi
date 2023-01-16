@@ -498,7 +498,9 @@ class Nilairpl extends BaseController
         //UserFair3
         $model = new CapesKualifikasiModel();
         $data['capeslogged_in'] = $session->get('capeslogged_in');
-        $kerja = $model->where('user_id', $mhs_id)->like('kompetensi', 'W.2.2.')->orderby('ProjValue', 'DESC')->findall();
+        $where = "user_id = '$mhs_id' AND (kompetensi LIKE '%W.1.1.%' OR kompetensi LIKE '%W.2.2.%')";
+        $kerja = $model->where($where)->orderby('ProjValue', 'DESC')->findall();
+        //$kerja = $model->where('user_id', $mhs_id)->like('kompetensi', 'W.2.2.')->orderby('ProjValue', 'DESC')->findall();
         $dataid3 = $modelnilai->select('id_tbl, nilaip, nilaiq, nilair')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Pembimbing')->where('namatbl', '3')->where('namamk', 'profesi')->findall();
         if (!empty($dataid3)) {
             foreach ($dataid3 as $dataid) :
@@ -526,7 +528,8 @@ class Nilairpl extends BaseController
 
         //UserFair12
         $model1 = new CapesPendModel();
-        $pend = $model1->where('user_id', $mhs_id)->like('kompetensi', 'W.2.2.')->orderby('GradYear', 'DESC')->findall();
+        //$pend = $model1->where('user_id', $mhs_id)->like('kompetensi', 'W.2.2.')->orderby('GradYear', 'DESC')->findall();
+        $pend = $model1->where($where)->orderby('GradYear', 'DESC')->findall();
         $dataid12 = $modelnilai->select('id_tbl, nilaip, nilaiq, nilair')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Pembimbing')->where('namatbl', '12')->where('namamk', 'profesi')->findall();
         if (!empty($dataid12)) {
             foreach ($dataid12 as $dataid) :
@@ -554,7 +557,8 @@ class Nilairpl extends BaseController
 
         //UserFair13
         $model2 = new CapesOrgModel();
-        $org = $model2->where('user_id', $mhs_id)->like('kompetensi', 'W.1.1.')->orderby('StartPeriodYear', 'DESC')->findall();
+        //$org = $model2->where('user_id', $mhs_id)->like('kompetensi', 'W.1.1.')->orderby('StartPeriodYear', 'DESC')->findall();
+        $org = $model2->where($where)->orderby('StartPeriodYear', 'DESC')->findall();
         $data['jumlah_org'] = $model2->where('user_id', $mhs_id)->like('kompetensi', 'W.1.1.')->countAllResults();
         $data['org_pii'] = $model2->where('Type', 'PII')->findall();
         $dataid13 = $modelnilai->select('id_tbl, nilaip, nilaiq, nilair')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Pembimbing')->where('namatbl', '13')->where('namamk', 'profesi')->findall();
@@ -584,7 +588,8 @@ class Nilairpl extends BaseController
 
         //UserFair14
         $model3 = new PenghargaanModel();
-        $penghargaan = $model3->where('user_id', $mhs_id)->like('kompetensi', 'W.1.1.')->orderby('Year', 'DESC')->orderby('Month', 'DESC')->findall();
+        //$penghargaan = $model3->where('user_id', $mhs_id)->like('kompetensi', 'W.1.1.')->orderby('Year', 'DESC')->orderby('Month', 'DESC')->findall();
+        $penghargaan = $model3->where($where)->orderby('Year', 'DESC')->orderby('Month', 'DESC')->findall();
         $data['jumlah_harga'] = $model3->where('user_id', $mhs_id)->like('kompetensi', 'W.1.1.')->countAllResults();
         $dataid14 = $modelnilai->select('id_tbl, nilaip, nilaiq, nilair')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Pembimbing')->where('namatbl', '14')->where('namamk', 'profesi')->findall();
         if (!empty($dataid14)) {
@@ -613,7 +618,8 @@ class Nilairpl extends BaseController
 
         //UserFair15
         $model4 = new CapesSertModel();
-        $latih = $model4->where('user_id', $mhs_id)->where('Jenis', 'pelatihan')->like('kompetensi', 'W.2.2.')->orderby('StartYear', 'DESC')->findall();
+        //$latih = $model4->where('user_id', $mhs_id)->where('Jenis', 'pelatihan')->like('kompetensi', 'W.2.2.')->orderby('StartYear', 'DESC')->findall();
+        $latih = $model4->where($where)->orderby('StartYear', 'DESC')->findall();
         $dataid15 = $modelnilai->select('id_tbl, nilaip, nilaiq, nilair')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Pembimbing')->where('namatbl', '15')->where('namamk', 'profesi')->findall();
         if (!empty($dataid15)) {
             foreach ($dataid15 as $dataid) :
@@ -640,7 +646,8 @@ class Nilairpl extends BaseController
         }
 
         //UserFair16
-        $latih1 = $model4->where('user_id', $mhs_id)->where('Jenis', 'sertifikat')->like('kompetensi', 'W.1.1.')->findall();
+        //$latih1 = $model4->where('user_id', $mhs_id)->where('Jenis', 'sertifikat')->like('kompetensi', 'W.1.1.')->findall();
+        $latih1 = $model4->where('Jenis', 'sertifikat')->where($where)->like('kompetensi', 'W.1.1.')->findall();
         $dataid16 = $modelnilai->select('id_tbl, nilaip, nilaiq, nilair')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Pembimbing')->where('namatbl', '16')->where('namamk', 'profesi')->findall();
         if (!empty($dataid16)) {
             foreach ($dataid16 as $dataid) :
@@ -668,7 +675,8 @@ class Nilairpl extends BaseController
 
         //UserFair4
         $model7 = new MengajarModel();
-        $ajar = $model7->where('user_id', $mhs_id)->like('kompetensi', 'W.2.2.')->orderby('StartPeriod', 'DESC')->findall();
+        //$ajar = $model7->where('user_id', $mhs_id)->like('kompetensi', 'W.2.2.')->orderby('StartPeriod', 'DESC')->findall();
+        $ajar = $model7->where($where)->orderby('StartPeriod', 'DESC')->findall();
         $dataid4 = $modelnilai->select('id_tbl, nilaip, nilaiq, nilair')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Pembimbing')->where('namatbl', '4')->where('namamk', 'profesi')->findall();
         if (!empty($dataid4)) {
             foreach ($dataid4 as $dataid) :
@@ -696,7 +704,8 @@ class Nilairpl extends BaseController
 
         //UserFair53
         $model8 = new CapesSemModel();
-        $sem = $model8->where('user_id', $mhs_id)->where('Type', 'Sem')->like('kompetensi', 'W.2.2.')->orderby('Year', 'DESC')->findall();
+        //$sem = $model8->where('user_id', $mhs_id)->where('Type', 'Sem')->like('kompetensi', 'W.2.2.')->orderby('Year', 'DESC')->findall();
+        $sem = $model8->where('Type', 'Sem')->where($where)->orderby('Year', 'DESC')->findall();
         $dataid53 = $modelnilai->select('id_tbl, nilaip, nilaiq, nilair')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Pembimbing')->where('namatbl', '53')->where('namamk', 'profesi')->findall();
         if (!empty($dataid53)) {
             foreach ($dataid53 as $dataid) :
@@ -1008,8 +1017,11 @@ class Nilairpl extends BaseController
 
         //UserFair13
         $model2 = new CapesOrgModel();
-        $org = $model2->where('user_id', $mhs_id)->like('kompetensi', 'W.1.3.')->orderby('StartPeriodYear', 'DESC')->findall();
-        $data['jumlah_org'] = $model2->where('user_id', $mhs_id)->like('kompetensi', 'W.1.3.')->countAllResults();
+        $where = "user_id = '$mhs_id' AND (kompetensi LIKE '%W.1.3.%' OR kompetensi LIKE '%W.1.4.')";
+        //$org = $model2->where('user_id', $mhs_id)->like('kompetensi', 'W.1.3.')->orderby('StartPeriodYear', 'DESC')->findall();
+        //$data['jumlah_org'] = $model2->where('user_id', $mhs_id)->like('kompetensi', 'W.1.3.')->countAllResults();
+        $org = $model2->where($where)->orderby('StartPeriodYear', 'DESC')->findall();
+        $data['jumlah_org'] = $model2->where($where)->countAllResults();
         $data['org_pii'] = $model2->where('Type', 'PII')->findall();
         $dataid13 = $modelnilai->select('id_tbl, nilaip, nilaiq, nilair')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Pembimbing')->where('namatbl', '13')->where('namamk', 'k3lh')->findall();
         if (!empty($dataid13)) {
@@ -1038,8 +1050,10 @@ class Nilairpl extends BaseController
 
         //UserFair14
         $model3 = new PenghargaanModel();
-        $penghargaan = $model3->where('user_id', $mhs_id)->like('kompetensi', 'W.1.3.')->orderby('Year', 'DESC')->orderby('Month', 'DESC')->findall();
-        $data['jumlah_harga'] = $model3->where('user_id', $mhs_id)->like('kompetensi', 'W.1.3.')->countAllResults();
+        //$penghargaan = $model3->where('user_id', $mhs_id)->like('kompetensi', 'W.1.3.')->orderby('Year', 'DESC')->orderby('Month', 'DESC')->findall();
+        //$data['jumlah_harga'] = $model3->where('user_id', $mhs_id)->like('kompetensi', 'W.1.3.')->countAllResults();
+        $penghargaan = $model3->where($where)->orderby('Year', 'DESC')->orderby('Month', 'DESC')->findall();
+        $data['jumlah_harga'] = $model3->where($where)->countAllResults();
         $dataid14 = $modelnilai->select('id_tbl, nilaip, nilaiq, nilair')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Pembimbing')->where('namatbl', '14')->where('namamk', 'k3lh')->findall();
         if (!empty($dataid14)) {
             foreach ($dataid14 as $dataid) :
@@ -1067,7 +1081,7 @@ class Nilairpl extends BaseController
 
         //UserFair16
         $model4 = new CapesSertModel();
-        $latih1 = $model4->where('user_id', $mhs_id)->where('Jenis', 'sertifikat')->like('kompetensi', '%W.1.3.%')->findall();
+        $latih1 = $model4->where('Jenis', 'sertifikat')->where($where)->findall();
         $dataid16 = $modelnilai->select('id_tbl, nilaip, nilaiq, nilair')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Pembimbing')->where('namatbl', '16')->where('namamk', 'k3lh')->findall();
         if (!empty($dataid16)) {
             foreach ($dataid16 as $dataid) :
@@ -1239,7 +1253,9 @@ class Nilairpl extends BaseController
 
         //USerFair51
         $model = new CapesKartulModel();
-        $kartul = $model->where('user_id', $mhs_id)->like('kompetensi', 'W.4.4.')->orderby('Year', 'DESC')->findall();
+        $where = "user_id = '$mhs_id' AND (kompetensi LIKE '%W.4.4.%' OR kompetensi LIKE '%W.4.5.%')";
+        $kartul = $model->where($where)->orderby('Year', 'DESC')->findall();
+        //$kartul = $model->where('user_id', $mhs_id)->like('kompetensi', 'W.4.4.')->orderby('Year', 'DESC')->findall();
         $dataid51 = $modelnilai->select('id_tbl, nilaip, nilaiq, nilair')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Pembimbing')->where('namatbl', '51')->where('namamk', 'seminar')->findall();
         if (!empty($dataid51)) {
             foreach ($dataid51 as $dataid) :
@@ -1267,7 +1283,8 @@ class Nilairpl extends BaseController
 
         //UserFair52
         $model1 = new CapesSemModel();
-        $sem = $model1->where('user_id', $mhs_id)->where('Type', 'Mak')->like('kompetensi', 'W.4.4.')->orderby('Year', 'DESC')->findall();
+        //$sem = $model1->where('user_id', $mhs_id)->where('Type', 'Mak')->like('kompetensi', 'W.4.4.')->orderby('Year', 'DESC')->findall();
+        $sem = $model1->where('Type', 'Mak')->where($where)->orderby('Year', 'DESC')->findall();
         $dataid52 = $modelnilai->select('id_tbl, nilaip, nilaiq, nilair')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Pembimbing')->where('namatbl', '52')->where('namamk', 'seminar')->findall();
         if (!empty($dataid52)) {
             foreach ($dataid52 as $dataid) :
@@ -1295,7 +1312,8 @@ class Nilairpl extends BaseController
 
         //UserFair4
         $model2 = new MengajarModel();
-        $ajar = $model2->where('user_id', $mhs_id)->like('kompetensi', 'W.4.4.')->orderby('StartPeriod', 'DESC')->findall();
+        //$ajar = $model2->where('user_id', $mhs_id)->like('kompetensi', 'W.4.4.')->orderby('StartPeriod', 'DESC')->findall();
+        $ajar = $model2->where($where)->orderby('StartPeriod', 'DESC')->findall();
         $dataid4 = $modelnilai->select('id_tbl, nilaip, nilaiq, nilair')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Pembimbing')->where('namatbl', '4')->where('namamk', 'seminar')->findall();
         if (!empty($dataid4)) {
             foreach ($dataid4 as $dataid) :
@@ -1323,7 +1341,8 @@ class Nilairpl extends BaseController
 
         //UserFair3
         $model3 = new CapesKualifikasiModel();
-        $kerja = $model3->where('user_id', $mhs_id)->like('kompetensi', 'W.4.4.')->orderby('ProjValue', 'DESC')->findall();
+        //$kerja = $model3->where('user_id', $mhs_id)->like('kompetensi', 'W.4.4.')->orderby('ProjValue', 'DESC')->findall();
+        $kerja = $model3->where($where)->orderby('ProjValue', 'DESC')->findall();
         $dataid3 = $modelnilai->select('id_tbl, nilaip, nilaiq, nilair')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Pembimbing')->where('namatbl', '3')->where('namamk', 'seminar')->findall();
         if (!empty($dataid3)) {
             foreach ($dataid3 as $dataid) :
@@ -1351,7 +1370,8 @@ class Nilairpl extends BaseController
 
         //UserFair15
         $model4 = new CapesSertModel();
-        $latih = $model4->where('user_id', $mhs_id)->where('Jenis', 'pelatihan')->like('kompetensi', 'W.4.4.')->orderby('StartYear', 'DESC')->findall();
+        //$latih = $model4->where('user_id', $mhs_id)->where('Jenis', 'pelatihan')->like('kompetensi', 'W.4.4.')->orderby('StartYear', 'DESC')->findall();
+        $latih = $model4->where('Jenis', 'pelatihan')->where($where)->orderby('StartYear', 'DESC')->findall();
         $dataid15 = $modelnilai->select('id_tbl, nilaip, nilaiq, nilair')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Pembimbing')->where('namatbl', '15')->where('namamk', 'seminar')->findall();
         if (!empty($dataid15)) {
             foreach ($dataid15 as $dataid) :
@@ -1378,7 +1398,8 @@ class Nilairpl extends BaseController
         }
 
         //UserFair16
-        $latih1 = $model4->where('user_id', $mhs_id)->where('Jenis', 'sertifikat')->like('kompetensi', 'W.4.4.')->findall();
+        //$latih1 = $model4->where('user_id', $mhs_id)->where('Jenis', 'sertifikat')->like('kompetensi', 'W.4.4.')->findall();
+        $latih1 = $model4->where('Jenis', 'sertifikat')->where($where)->findall();
         $dataid16 = $modelnilai->select('id_tbl, nilaip, nilaiq, nilair')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Pembimbing')->where('namatbl', '16')->where('namamk', 'seminar')->findall();
         if (!empty($dataid16)) {
             foreach ($dataid16 as $dataid) :
@@ -1406,8 +1427,10 @@ class Nilairpl extends BaseController
 
         //UserFair6
         $model5 = new BahasaModel();
-        $bahasa = $model5->where('user_id', $mhs_id)->like('kompetensi', 'W.4.4.')->orderby('Num', 'DESC')->findall();
-        $data['jml_bahasa'] = $model5->where('user_id', $mhs_id)->like('kompetensi', 'W.4.4.')->countAllResults();
+        //$bahasa = $model5->where('user_id', $mhs_id)->like('kompetensi', 'W.4.4.')->orderby('Num', 'DESC')->findall();
+        $bahasa = $model5->where($where)->orderby('Num', 'DESC')->findall();
+        // $data['jml_bahasa'] = $model5->where('user_id', $mhs_id)->like('kompetensi', 'W.4.4.')->countAllResults();
+        $data['jml_bahasa'] = $model5->where($where)->countAllResults();
         $dataid6 = $modelnilai->select('id_tbl, nilaip, nilaiq, nilair')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Pembimbing')->where('namatbl', '6')->where('namamk', 'seminar')->findall();
         if (!empty($dataid6)) {
             foreach ($dataid6 as $dataid) :
@@ -1692,7 +1715,9 @@ class Nilairpl extends BaseController
         //UserFair3
         $model = new CapesKualifikasiModel();
         $data['capeslogged_in'] = $session->get('capeslogged_in');
-        $kerja = $model->where('user_id', $mhs_id)->like('kompetensi', 'W.2.1.')->orderby('ProjValue', 'DESC')->findall();
+        $where = "user_id='$mhs_id' AND (kompetensi LIKE '%W.2.1.%' OR kompetensi LIKE '%W.2.3.%' OR kompetensi LIKE '%W.2.4.%' OR kompetensi LIKE '%W.2.5.%' OR kompetensi LIKE '%W.2.6.%' OR kompetensi LIKE '%W.3.1.%' OR kompetensi LIKE '%W.3.2.%' OR kompetensi LIKE '%W.3.3.%' OR kompetensi LIKE '%W.3.4.%' OR kompetensi LIKE '%W.3.5.%' OR kompetensi LIKE '%W.3.6.%' OR kompetensi LIKE '%W.4.1.%' OR kompetensi LIKE '%W.4.2.%' OR kompetensi LIKE '%W.4.3.%')";
+        //$kerja = $model->where('user_id', $mhs_id)->like('kompetensi', 'W.2.1.')->orderby('ProjValue', 'DESC')->findall();
+        $kerja = $model->where($where)->orderby('ProjValue', 'DESC')->findall();
         $dataid3 = $modelnilai->select('id_tbl, nilaip, nilaiq, nilair')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Pembimbing')->where('namatbl', '3')->where('namamk', 'studikasus')->findall();
         if (!empty($dataid3)) {
             foreach ($dataid3 as $dataid) :
@@ -1720,7 +1745,8 @@ class Nilairpl extends BaseController
 
         //UserFair4
         $model2 = new MengajarModel();
-        $ajar = $model2->where('user_id', $mhs_id)->like('kompetensi', 'W.2.1.')->orderby('StartPeriod', 'DESC')->findall();
+        //$ajar = $model2->where('user_id', $mhs_id)->like('kompetensi', 'W.2.1.')->orderby('StartPeriod', 'DESC')->findall();
+        $ajar = $model2->where($where)->orderby('StartPeriod', 'DESC')->findall();
         $dataid4 = $modelnilai->select('id_tbl, nilaip, nilaiq, nilair')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Pembimbing')->where('namatbl', '4')->where('namamk', 'studikasus')->findall();
         if (!empty($dataid4)) {
             foreach ($dataid4 as $dataid) :
@@ -1748,7 +1774,8 @@ class Nilairpl extends BaseController
 
         //USerFair51
         $model3 = new CapesKartulModel();
-        $kartul = $model3->where('user_id', $mhs_id)->like('kompetensi', 'W.4.')->orderby('Year', 'DESC')->findall();
+        //$kartul = $model3->where('user_id', $mhs_id)->like('kompetensi', 'W.4.')->orderby('Year', 'DESC')->findall();
+        $kartul = $model3->where($where)->orderby('Year', 'DESC')->findall();
         $dataid51 = $modelnilai->select('id_tbl, nilaip, nilaiq, nilair')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Pembimbing')->where('namatbl', '51')->where('namamk', 'studikasus')->findall();
         if (!empty($dataid51)) {
             foreach ($dataid51 as $dataid) :
@@ -1776,7 +1803,8 @@ class Nilairpl extends BaseController
 
         //UserFair52
         $model4 = new CapesSemModel();
-        $sem = $model4->where('user_id', $mhs_id)->where('Type', 'Mak')->like('kompetensi', 'W.4.')->orderby('Year', 'DESC')->findall();
+        //$sem = $model4->where('user_id', $mhs_id)->where('Type', 'Mak')->like('kompetensi', 'W.4.')->orderby('Year', 'DESC')->findall();
+        $sem = $model4->where('Type', 'Mak')->where($where)->orderby('Year', 'DESC')->findall();
         $dataid52 = $modelnilai->select('id_tbl, nilaip, nilaiq, nilair')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Pembimbing')->where('namatbl', '52')->where('namamk', 'studikasus')->findall();
         if (!empty($dataid52)) {
             foreach ($dataid52 as $dataid) :
@@ -1803,7 +1831,8 @@ class Nilairpl extends BaseController
         }
 
         //UserFair53
-        $sem1 = $model4->where('user_id', $mhs_id)->where('Type', 'Sem')->like('kompetensi', 'W.2.1.')->orderby('Year', 'DESC')->findall();
+        //$sem1 = $model4->where('user_id', $mhs_id)->where('Type', 'Sem')->like('kompetensi', 'W.2.1.')->orderby('Year', 'DESC')->findall();
+        $sem1 = $model4->where('Type', 'Sem')->where($where)->orderby('Year', 'DESC')->findall();
         $dataid53 = $modelnilai->select('id_tbl, nilaip, nilaiq, nilair')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Pembimbing')->where('namatbl', '53')->where('namamk', 'studikasus')->findall();
         if (!empty($dataid53)) {
             foreach ($dataid53 as $dataid) :
@@ -1831,7 +1860,8 @@ class Nilairpl extends BaseController
 
         //UserFair12
         $model5 = new CapesPendModel();
-        $pend = $model5->where('user_id', $mhs_id)->like('kompetensi', 'W.2.1.')->orderby('GradYear', 'DESC')->findall();
+        //$pend = $model5->where('user_id', $mhs_id)->like('kompetensi', 'W.2.1.')->orderby('GradYear', 'DESC')->findall();
+        $pend = $model5->where($where)->orderby('GradYear', 'DESC')->findall();
         $dataid12 = $modelnilai->select('id_tbl, nilaip, nilaiq, nilair')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Pembimbing')->where('namatbl', '12')->where('namamk', 'studikasus')->findall();
         if (!empty($dataid12)) {
             foreach ($dataid12 as $dataid) :
@@ -1859,7 +1889,8 @@ class Nilairpl extends BaseController
 
         //UserFair15
         $model6 = new CapesSertModel();
-        $latih = $model6->where('user_id', $mhs_id)->where('Jenis', 'pelatihan')->like('kompetensi', 'W.2.1.')->orderby('StartYear', 'DESC')->findall();
+        //$latih = $model6->where('user_id', $mhs_id)->where('Jenis', 'pelatihan')->like('kompetensi', 'W.2.1.')->orderby('StartYear', 'DESC')->findall();
+        $latih = $model6->where('Jenis', 'pelatihan')->where($where)->orderby('StartYear', 'DESC')->findall();
         $dataid15 = $modelnilai->select('id_tbl, nilaip, nilaiq, nilair')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Pembimbing')->where('namatbl', '15')->where('namamk', 'studikasus')->findall();
         if (!empty($dataid15)) {
             foreach ($dataid15 as $dataid) :
@@ -1886,7 +1917,8 @@ class Nilairpl extends BaseController
         }
 
         //UserFair16
-        $latih1 = $model6->where('user_id', $mhs_id)->where('Jenis', 'sertifikat')->like('kompetensi', 'W.4.')->findall();
+        //$latih1 = $model6->where('user_id', $mhs_id)->where('Jenis', 'sertifikat')->like('kompetensi', 'W.4.')->findall();
+        $latih1 = $model6->where('Jenis', 'sertifikat')->where($where)->findall();
         $dataid16 = $modelnilai->select('id_tbl, nilaip, nilaiq, nilair')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Pembimbing')->where('namatbl', '16')->where('namamk', 'studikasus')->findall();
         if (!empty($dataid16)) {
             foreach ($dataid16 as $dataid) :
@@ -1914,8 +1946,10 @@ class Nilairpl extends BaseController
 
         //UserFair6
         $model7 = new BahasaModel();
-        $bahasa = $model7->where('user_id', $mhs_id)->like('kompetensi', 'W.4.')->orderby('Num', 'DESC')->findall();
-        $data['jml_bahasa'] = $model5->where('user_id', $mhs_id)->like('kompetensi', 'W.4.4.')->countAllResults();
+        //$bahasa = $model7->where('user_id', $mhs_id)->like('kompetensi', 'W.4.')->orderby('Num', 'DESC')->findall();
+        $bahasa = $model7->where($where)->orderby('Num', 'DESC')->findall();
+        //$data['jml_bahasa'] = $model5->where('user_id', $mhs_id)->like('kompetensi', 'W.4.4.')->countAllResults();
+        $data['jml_bahasa'] = $model5->where($where)->countAllResults();
         $dataid6 = $modelnilai->select('id_tbl, nilaip, nilaiq, nilair')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Pembimbing')->where('namatbl', '6')->where('namamk', 'studikasus')->findall();
         if (!empty($dataid6)) {
             foreach ($dataid6 as $dataid) :

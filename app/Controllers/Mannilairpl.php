@@ -39,7 +39,7 @@ class Mannilairpl extends BaseController
         if (!empty($user)) {
             $data['data_user'] = $user;
             foreach ($user as $datauser) :
-                $nilairpl = $model1->where('mhs_id', $datauser['mhsrpl_id'])->first();
+                $nilairpl = $model1->where('mhs_id', $datauser['mhsrpl_id'])->where('tipedosen', 'Penilai')->first();
                 if ($nilairpl) {
                     $nilairplsave[$datauser['mhsrpl_id']] = $nilairpl['nilairpl_save'];
                     $nilairplsubmit[$datauser['mhsrpl_id']] = $nilairpl['nilairpl_submit'];
