@@ -75,6 +75,7 @@
                         <select id="Mediatype" name="Mediatype" class="form-control">
                             <option value="Lok">Dimuat di Media Lokal</option>
                             <option value="Nas">Dimuat di Media Nasional</option>
+                            <option value="Reg">Dimuat di Media Regional</option>
                             <option value="Int">Dimuat di Media Internasional</option>
                         </select>
                     </div>

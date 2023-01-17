@@ -109,6 +109,7 @@
                                 Nasional</option>
                             <option value="Int" <?php echo set_value('Level') == 'Int' ? 'selected' : ''; ?>>Pada Seminar
                                 Internasional</option>
+                            <option value="Inv" <?php echo set_value('Level') == 'Inv' ? 'selected' : ''; ?>>Invited/Keynote Speaker</option>
                         </select>
                     </div>
                     <br />

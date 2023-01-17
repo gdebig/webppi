@@ -70,6 +70,9 @@
                                             case "Nas":
                                                 echo "Dimuat di Media Nasional";
                                                 break;
+                                            case "Reg":
+                                                echo "Dimuat di Media Regional";
+                                                break;
                                             case "Int":
                                                 echo "Dimuat di Media Internasional";
                                                 break;

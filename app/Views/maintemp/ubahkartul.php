@@ -105,6 +105,9 @@
                             <option value="Nas" <?php echo $Mediatype == 'Nas' ? 'selected' : ''; ?>>Dimuat
                                 di
                                 Media Nasional</option>
+                            <option value="Reg" <?php echo $Mediatype == 'Reg' ? 'selected' : ''; ?>>Dimuat
+                                di
+                                Media Regional</option>
                             <option value="Int" <?php echo $Mediatype == 'Int' ? 'selected' : ''; ?>>Dimuat
                                 di
                                 Media Internasional</option>

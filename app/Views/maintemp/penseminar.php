@@ -82,6 +82,9 @@
                                                 case "Nas":
                                                     echo "Dimuat di Media Nasional";
                                                     break;
+                                                case "Reg":
+                                                    echo "Dimuat di Media Regional";
+                                                    break;
                                                 case "Int":
                                                     echo "Dimuat di Media Internasional";
                                                     break;
@@ -120,8 +123,12 @@
                                                     $typescore = 1;
                                                 } elseif ($kartul['Mediatype'] == "Nas") {
                                                     $typescore = 2;
-                                                } else {
+                                                } elseif ($kartul['Mediatype'] == "Reg") {
                                                     $typescore = 3;
+                                                } elseif ($kartul['Mediatype'] == "Int") {
+                                                    $typescore = 4;
+                                                } else {
+                                                    $typescore = '';
                                                 }
                                             }
                                             ?>
@@ -234,6 +241,9 @@
                                                 case "Int":
                                                     echo "Pada Seminar Internasional";
                                                     break;
+                                                case "Inv":
+                                                    echo "Invited/Keynote Speaker";
+                                                    break;
                                             }
                                             ?></td>
                                         <td><?php
@@ -269,8 +279,12 @@
                                                     $typescore = 1;
                                                 } elseif ($sem['Level'] == "Nas") {
                                                     $typescore = 2;
-                                                } else {
+                                                } elseif ($sem['Level'] == "Int") {
                                                     $typescore = 3;
+                                                } elseif ($sem['Level'] == "Inv") {
+                                                    $typescore = 4;
+                                                } else {
+                                                    $typescore = '';
                                                 }
                                             }
                                             ?>
@@ -419,27 +433,56 @@
                                             ?></td>
                                         <td><?= $ajar['kompetensi']; ?></td>
                                         <td>
+                                            <?php
+                                            if ((isset($nilaiajarp[$j])) && (!empty($nilaiajarp[$j]))) {
+                                                $ajarscore = $nilaiajarp[$j];
+                                            } else {
+                                                if ($ajar['Period'] == 'smp9') {
+                                                    $ajarscore = 1;
+                                                } elseif ($ajar['Period'] == 'smp14') {
+                                                    $ajarscore = 2;
+                                                } elseif ($ajar['Period'] == 'smp19') {
+                                                    $ajarscore = 3;
+                                                } elseif ($ajar['Period'] == 'lbih20') {
+                                                    $ajarscore = 4;
+                                                } else {
+                                                    $ajarscore = '';
+                                                }
+                                            }
+                                            ?>
                                             <select name="nilaiajar_p[]" id="nilaiajar_p[]">
-                                                <option value="4" <?= ((isset($nilaiajarp[$j])) && ($nilaiajarp[$j] == 4)) ? 'selected' : ''; ?>>4</option>
-                                                <option value="3" <?= ((isset($nilaiajarp[$j])) && ($nilaiajarp[$j] == 3)) ? 'selected' : ''; ?>>3</option>
-                                                <option value="2" <?= ((isset($nilaiajarp[$j])) && ($nilaiajarp[$j] == 2)) ? 'selected' : ''; ?>>2</option>
-                                                <option value="1" <?= ((isset($nilaiajarp[$j])) && ($nilaiajarp[$j] == 1)) ? 'selected' : ''; ?>>1</option>
+                                                <option value="4" <?= $ajarscore == 4 ? 'selected' : ''; ?>>4</option>
+                                                <option value="3" <?= $ajarscore == 3 ? 'selected' : ''; ?>>3</option>
+                                                <option value="2" <?= $ajarscore == 2 ? 'selected' : ''; ?>>2</option>
+                                                <option value="1" <?= $ajarscore == 1 ? 'selected' : ''; ?>>1</option>
                                             </select>
                                         </td>
                                         <td>
                                             <select name="nilaiajar_q[]" id="nilaiajar_q[]">
-                                                <option value="4" <?= ((isset($nilaiajarq[$j])) && ($nilaiajarq[$j] == 4)) ? 'selected' : ''; ?>>4</option>
-                                                <option value="3" <?= ((isset($nilaiajarq[$j])) && ($nilaiajarq[$j] == 3)) ? 'selected' : ''; ?>>3</option>
                                                 <option value="2" <?= ((isset($nilaiajarq[$j])) && ($nilaiajarq[$j] == 2)) ? 'selected' : ''; ?>>2</option>
-                                                <option value="1" <?= ((isset($nilaiajarq[$j])) && ($nilaiajarq[$j] == 1)) ? 'selected' : ''; ?>>1</option>
                                             </select>
                                         </td>
                                         <td>
+                                            <?php
+                                            if ((isset($nilaiajarr[$j])) && (!empty($nilaiajarr[$j]))) {
+                                                $sksscore = $nilaiajarr[$j];
+                                            } else {
+                                                if ($ajar['Skshour'] == 'sks1') {
+                                                    $sksscore = 1;
+                                                } elseif ($ajar['Skshour'] == 'sks2') {
+                                                    $sksscore = 2;
+                                                } elseif ($ajar['Skshour'] == 'sks4') {
+                                                    $sksscore = 3;
+                                                } else {
+                                                    $sksscore = '';
+                                                }
+                                            }
+                                            ?>
                                             <select name="nilaiajar_r[]" id="nilaiajar_r[]">
-                                                <option value="4" <?= ((isset($nilaiajarr[$j])) && ($nilaiajarr[$j] == 4)) ? 'selected' : ''; ?>>4</option>
-                                                <option value="3" <?= ((isset($nilaiajarr[$j])) && ($nilaiajarr[$j] == 3)) ? 'selected' : ''; ?>>3</option>
-                                                <option value="2" <?= ((isset($nilaiajarr[$j])) && ($nilaiajarr[$j] == 2)) ? 'selected' : ''; ?>>2</option>
-                                                <option value="1" <?= ((isset($nilaiajarr[$j])) && ($nilaiajarr[$j] == 1)) ? 'selected' : ''; ?>>1</option>
+                                                <option value="4" <?= $sksscore == 4 ? 'selected' : ''; ?>>4</option>
+                                                <option value="3" <?= $sksscore == 3 ? 'selected' : ''; ?>>3</option>
+                                                <option value="2" <?= $sksscore == 2 ? 'selected' : ''; ?>>2</option>
+                                                <option value="1" <?= $sksscore == 1 ? 'selected' : ''; ?>>1</option>
                                             </select>
                                         </td>
                                     </tr>

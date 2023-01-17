@@ -82,6 +82,7 @@
                             <option value="Lok">Pada Seminar Lokal</option>
                             <option value="Nas">Pada Seminar Nasional</option>
                             <option value="Int">Pada Seminar Internasional</option>
+                            <option value="Inv">Invited/Keynote Speaker</option>
                         </select>
                     </div>
                     <br />

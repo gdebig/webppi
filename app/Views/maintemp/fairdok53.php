@@ -71,6 +71,9 @@
                                             case "Int":
                                                 echo "Pada Seminar Internasional";
                                                 break;
+                                            case "Inv":
+                                                echo "Invited/Keynote Speaker";
+                                                break;
                                         }
                                         ?></td>
                                     <td><?php

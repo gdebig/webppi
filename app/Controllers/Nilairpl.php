@@ -499,7 +499,7 @@ class Nilairpl extends BaseController
         $model = new CapesKualifikasiModel();
         $data['capeslogged_in'] = $session->get('capeslogged_in');
         $where = "user_id = '$mhs_id' AND (kompetensi LIKE '%W.1.1.%' OR kompetensi LIKE '%W.2.2.%')";
-        $kerja = $model->where($where)->orderby('ProjValue', 'DESC')->findall();
+        $kerja = $model->where($where)->orderby('nilai_q', 'DESC')->orderby('ProjValue', 'DESC')->findall();
         //$kerja = $model->where('user_id', $mhs_id)->like('kompetensi', 'W.2.2.')->orderby('ProjValue', 'DESC')->findall();
         $dataid3 = $modelnilai->select('id_tbl, nilaip, nilaiq, nilair')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Pembimbing')->where('namatbl', '3')->where('namamk', 'profesi')->findall();
         if (!empty($dataid3)) {
@@ -559,7 +559,8 @@ class Nilairpl extends BaseController
         $model2 = new CapesOrgModel();
         //$org = $model2->where('user_id', $mhs_id)->like('kompetensi', 'W.1.1.')->orderby('StartPeriodYear', 'DESC')->findall();
         $org = $model2->where($where)->orderby('StartPeriodYear', 'DESC')->findall();
-        $data['jumlah_org'] = $model2->where('user_id', $mhs_id)->like('kompetensi', 'W.1.1.')->countAllResults();
+        //$data['jumlah_org'] = $model2->where('user_id', $mhs_id)->like('kompetensi', 'W.1.1.')->countAllResults();
+        $data['jumlah_org'] = $model2->where($where)->countAllResults();
         $data['org_pii'] = $model2->where('Type', 'PII')->findall();
         $dataid13 = $modelnilai->select('id_tbl, nilaip, nilaiq, nilair')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Pembimbing')->where('namatbl', '13')->where('namamk', 'profesi')->findall();
         if (!empty($dataid13)) {
@@ -1081,6 +1082,7 @@ class Nilairpl extends BaseController
 
         //UserFair16
         $model4 = new CapesSertModel();
+        //$latih1 = $model4->where('user_id', $mhs_id)->where('Jenis', 'sertifikat')->like('kompetensi', 'W.1.3.')->findall();
         $latih1 = $model4->where('Jenis', 'sertifikat')->where($where)->findall();
         $dataid16 = $modelnilai->select('id_tbl, nilaip, nilaiq, nilair')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Pembimbing')->where('namatbl', '16')->where('namamk', 'k3lh')->findall();
         if (!empty($dataid16)) {
