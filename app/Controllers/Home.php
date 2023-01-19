@@ -50,7 +50,7 @@ class Home extends BaseController
             $model = new AkunModel();
             $username = $this->request->getVar('username');
             $password = $this->request->getVar('password');
-            $data = $model->where('username', $username)->where('active', 'yes')->where('confirmcapes', 'Ya')->where('status !=', 'ditolak')->first();
+            $data = $model->where('username', $username)->where('active', 'yes')->where('confirmcapes', 'Ya')->where('status !=', 'baru')->where('status !=', 'ditolak')->first();
             if ($data) {
                 $pass = $data['password'];
                 $verify_pass = password_verify($password, $pass);
