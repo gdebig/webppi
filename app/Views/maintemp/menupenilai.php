@@ -16,3 +16,9 @@
         <p>Penilaian RPL</p>
     </a>
 </li>
+<li class="nav-item">
+    <a href="<?php echo base_url(); ?>/penilai/dokumen" class="nav-link">
+        <i class="fas fa-folder-open nav-icon"></i>
+        <p>Dokumen Akreditasi Penilai</p>
+    </a>
+</li>

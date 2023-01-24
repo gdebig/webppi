@@ -115,13 +115,33 @@ class Penilai extends BaseController
     {
         $session = session();
         $logged_in = $session->get('logged_in');
-        if (!$logged_in) {
+        $ispenilai = $session->get('ispenilai');
+        if ((!$logged_in) && (!$ispenilai)) {
             return redirect()->to('/home');
+        } else {
+            $session->set('role', 'penilai');
         }
 
         $data['title_page'] = "Dashboard PPI RPL";
         $data['data_bread'] = "dashboard";
         $data['logged_in'] = $session->get('logged_in');
         return view('maintemp/dashboard', $data);
+    }
+
+    public function dokumen()
+    {
+        $session = session();
+        $logged_in = $session->get('logged_in');
+        $ispenilai = $session->get('ispenilai');
+        if ((!$logged_in) && (!$ispenilai)) {
+            return redirect()->to('/home');
+        } else {
+            $session->set('role', 'penilai');
+        }
+
+        $data['title_page'] = "Dokumen Akreditasi Penilai";
+        $data['data_bread'] = "Dokumen Akreditasi";
+        $data['logged_in'] = $session->get('logged_in');
+        return view('maintemp/akreditasi', $data);
     }
 }

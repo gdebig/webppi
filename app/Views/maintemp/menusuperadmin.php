@@ -52,3 +52,9 @@
         <p>Rekap Nilai RPL</p>
     </a>
 </li>
+<li class="nav-item">
+    <a href="<?php echo base_url(); ?>/manakreditasi" class="nav-link">
+        <i class="fas fa-folder-open nav-icon"></i>
+        <p>Manajemen Akreditasi Penilai</p>
+    </a>
+</li>
