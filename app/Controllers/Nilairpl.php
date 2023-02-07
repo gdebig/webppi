@@ -2278,16 +2278,34 @@ class Nilairpl extends BaseController
 
         $mhs_id = $this->request->getVar('mhs_id');
         $dosen_id = $this->request->getVar('dosen_id');
+        $nilaikodeetik = $this->request->getVar('nilaikodeetik');
+        $nilaiprofesi = $this->request->getVar('nilaiprofesi');
+        $nilaik3lh = $this->request->getVar('nilaik3lh');
+        $nilaistudikasus = $this->request->getVar('nilaistudikasus');
+        $nilaiseminar = $this->request->getVar('nilaiseminar');
 
         $model = new NilairplModel();
 
-        $model->set('nilairpl_submit', 'Ya');
-        $model->where('mhs_id', $mhs_id);
-        $model->where('dosen_id', $dosen_id);
-        $model->where('tipedosen', 'Pembimbing');
-        $model->update();
+        if (($nilaikodeetik >= 50) && ($nilaiprofesi >= 50) && ($nilaik3lh >= 50) && ($nilaistudikasus >= 100) && ($nilaiseminar >= 50)) {
 
-        $session->setFlashdata('msg', 'Data Nilai berhasil di submit.');
-        return redirect()->to('nilairpl/docs/' . $mhs_id . '/' . $dosen_id);
+            $model->set('nilairpl_submit', 'Ya');
+            $model->where('mhs_id', $mhs_id);
+            $model->where('dosen_id', $dosen_id);
+            $model->where('tipedosen', 'Pembimbing');
+            $model->update();
+
+            $session->setFlashdata('msg', 'Data Nilai berhasil di submit.');
+            return redirect()->to('nilairpl/docs/' . $mhs_id . '/' . $dosen_id);
+        } else {
+
+            $model->set('nilairpl_submit', 'Tidak');
+            $model->where('mhs_id', $mhs_id);
+            $model->where('dosen_id', $dosen_id);
+            $model->where('tipedosen', 'Pembimbing');
+            $model->update();
+
+            $session->setFlashdata('err', 'Ada data bobot yang masih kurang. Mohon diperiksa kembali.');
+            return redirect()->to('nilairpl/docs/' . $mhs_id . '/' . $dosen_id);
+        }
     }
 }
