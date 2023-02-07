@@ -52,10 +52,16 @@
                     </label>
                     <div class="element">
                         <select id="jenis" name="jenis" class="form-control">
-                            <option value='Jurnal Nasional' <?= set_value('jenis') == "Jurnal Nasional" ? 'selected' : ''; ?>>Jurnal Nasional</option>
+                            <option value='Jurnal Nasional Tidak Terakreditasi' <?= set_value('jenis') == "Jurnal Nasional Tidak Terakreditasi" ? 'selected' : ''; ?>>Jurnal Nasional Tidak Terakreditasi</option>
+                            <option value='Jurnal Nasional Terakreditasi/Majalah Profesi Nasional' <?= set_value('jenis') == "Jurnal Nasional Terakreditasi/Majalah Profesi Nasional" ? 'selected' : ''; ?>>Jurnal Nasional Terakreditasi/Majalah Profesi Nasional</option>
                             <option value='Jurnal Internasional' <?= set_value('jenis') == "Jurnal Internasional" ? 'selected' : ''; ?>>Jurnal Internasional</option>
-                            <option value='Prosiding Conference Internasional' <?= set_value('jenis') == "Prosiding Conference Internasional" ? 'selected' : ''; ?>>Prosiding Conference Internasional</option>
-                            <option value='Prosiding Conference Nasional' <?= set_value('jenis') == "Prosiding Conference Nasional" ? 'selected' : ''; ?>>Prosiding Conference Nasional</option>
+                            <option value='Jurnal Internasional Bereputasi/Majalah Profesi Internasional' <?= set_value('jenis') == "Jurnal Internasional Bereputasi/Majalah Profesi Internasional" ? 'selected' : ''; ?>>Jurnal Internasional Bereputasi/Majalah Profesi Internasional</option>
+                            <option value='Seminar Wilayah/Lokal/PT' <?= set_value('jenis') == "Seminar Wilayah/Lokal/PT" ? 'selected' : ''; ?>>Seminar Wilayah/Lokal/PT</option>
+                            <option value='Seminar/Pertemuan Himpunan Profesi Nasional' <?= set_value('jenis') == "Seminar/Pertemuan Himpunan Profesi Nasional" ? 'selected' : ''; ?>>Seminar/Pertemuan Himpunan Profesi Nasional</option>
+                            <option value='Seminar/pertemuan Himpunan Profesi Internasional' <?= set_value('jenis') == "Seminar/pertemuan Himpunan Profesi Internasional" ? 'selected' : ''; ?>>Seminar/pertemuan Himpunan Profesi Internasional</option>
+                            <option value='Tulisan di Media Massa Wilayah' <?= set_value('jenis') == "Tulisan di Media Massa Wilayah" ? 'selected' : ''; ?>>Tulisan di Media Massa Wilayah</option>
+                            <option value='Tulisan di Media Massa Nasional' <?= set_value('jenis') == "Tulisan di Media Massa Nasional" ? 'selected' : ''; ?>>Tulisan di Media Massa Nasional</option>
+                            <option value='Tulisan di Media Massa Internasional' <?= set_value('jenis') == "Tulisan di Media Massa Internasional" ? 'selected' : ''; ?>>Tulisan di Media Massa Internasional</option>
                         </select>
                     </div>
                     <br />

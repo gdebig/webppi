@@ -481,6 +481,25 @@ $session = session();
             $('#umum_desc').summernote();
         })
     </script>
+
+    <script>
+        $(document).ready(function() {
+            $("#posisi").change(function() {
+                getelementfromdropdown()
+            });
+        });
+
+        function getelementfromdropdown() {
+            var value = $("#posisi").val();
+            if (value == "Saksi Ahli") {
+                $("#saksiahli option[value='Ya']").attr('selected', 'selected');
+            } else if (value != "Saksi Ahli") {
+                $("#saksiahli option[value='Tidak']").attr('selected', 'selected');
+            } else {
+                $("#saksiahli option[value='Tidak']").attr('selected', 'selected');
+            }
+        }
+    </script>
 </body>
 
 </html>

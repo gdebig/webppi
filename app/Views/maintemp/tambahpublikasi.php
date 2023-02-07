@@ -52,10 +52,16 @@
                     </label>
                     <div class="element">
                         <select id="jenis" name="jenis" class="form-control">
-                            <option value='Jurnal Nasional'>Jurnal Nasional</option>
+                            <option value='Jurnal Nasional Tidak Terakreditasi'>Jurnal Nasional Tidak Terakreditasi</option>
+                            <option value='Jurnal Nasional Terakreditasi/Majalah Profesi Nasional'>Jurnal Nasional Terakreditasi/Majalah Profesi Nasional</option>
                             <option value='Jurnal Internasional'>Jurnal Internasional</option>
-                            <option value='Prosiding Conference Internasional'>Prosiding Conference Internasional</option>
-                            <option value='Prosiding Conference Nasional'>Prosiding Conference Nasional</option>
+                            <option value='Jurnal Internasional Bereputasi/Majalah Profesi Internasional'>Jurnal Internasional Bereputasi/Majalah Profesi Internasional</option>
+                            <option value='Seminar Wilayah/Lokal/PT'>Seminar Wilayah/Lokal/PT</option>
+                            <option value='Seminar/Pertemuan Himpunan Profesi Nasional'>Seminar/Pertemuan Himpunan Profesi Nasional</option>
+                            <option value='Seminar/pertemuan Himpunan Profesi Internasional'>Tulisan di Media Massa Wilayah</option>
+                            <option value='Tulisan di Media Massa Wilayah'>Tulisan di Media Massa Wilayah</option>
+                            <option value='Tulisan di Media Massa Nasional'>Tulisan di Media Massa Nasional</option>
+                            <option value='Tulisan di Media Massa Internasional'>Tulisan di Media Massa Internasional</option>
                         </select>
                     </div>
                     <br />

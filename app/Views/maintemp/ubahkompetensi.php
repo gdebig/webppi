@@ -5,12 +5,21 @@
 <div class="card card-primary" style="width: auto; margin: 30px;">
     <div class="col-sm-13" style="width: auto; margin: 30px;">
         <div class="">
-            <h3>Form Ubah Data PKM</h3>
+            <h3>Form Ubah Data Kompetensi</h3>
         </div>
 
         <?php if (isset($validation)) : ?>
             <div class="alert alert-danger"><?= $validation->listErrors() ?></div>
         <?php endif; ?>
+
+        <div class="">
+            <p>Pengakuan/rekognisi atas kepakaran/prestasi/kinerja DTPSPPI berupa:</p>
+            <ul>
+                <li>Mewakili PT atas dasar kepakaran keinsinyuran, menjadi ketua atau anggota komisi/badan/panitia yang menangani masalah keinsinyuran yang dibentuk oleh pemerintah di tingkat nasional.</li>
+                <li>Mewakili pemerintah, atas dasar kepakaran keinsinyuran, menjadi ketua atau anggota delegasi yang menangani masalah keinsinyuran di tingkat internasional, dan/atau</li>
+                <li>Menjadi saksi ahli, atas dasar kepakaran keinsinyuran, dalam persidangan sengketa perdata atau pidana masalah praktik keinsinyuran yang sesuai bidangnya.</li>
+            </ul>
+        </div>
 
         <!-- /.card-header -->
         <div class="card-body" style="width: auto; margin: 30px;">

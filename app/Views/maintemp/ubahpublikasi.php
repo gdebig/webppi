@@ -53,10 +53,16 @@
                     </label>
                     <div class="element">
                         <select id="jenis" name="jenis" class="form-control">
-                            <option value='Jurnal Nasional' <?= $jenis == "Jurnal Nasional" ? 'selected' : ''; ?>>Jurnal Nasional</option>
+                            <option value='Jurnal Nasional Tidak Terakreditasi' <?= $jenis == "Jurnal Nasional Tidak Terakreditasi" ? 'selected' : ''; ?>>Jurnal Nasional Tidak Terakreditasi</option>
+                            <option value='Jurnal Nasional Terakreditasi/Majalah Profesi Nasional' <?= $jenis == "Jurnal Nasional Terakreditasi/Majalah Profesi Nasional" ? 'selected' : ''; ?>>Jurnal Nasional Terakreditasi/Majalah Profesi Nasional</option>
                             <option value='Jurnal Internasional' <?= $jenis == "Jurnal Internasional" ? 'selected' : ''; ?>>Jurnal Internasional</option>
-                            <option value='Prosiding Conference Internasional' <?= $jenis == "Prosiding Conference Internasional" ? 'selected' : ''; ?>>Prosiding Conference Internasional</option>
-                            <option value='Prosiding Conference Nasional' <?= $jenis == "Prosiding Conference Nasional" ? 'selected' : ''; ?>>Prosiding Conference Nasional</option>
+                            <option value='Jurnal Internasional Bereputasi/Majalah Profesi Internasional' <?= $jenis == "Jurnal Internasional Bereputasi/Majalah Profesi Internasional" ? 'selected' : ''; ?>>Jurnal Internasional Bereputasi/Majalah Profesi Internasional</option>
+                            <option value='Seminar Wilayah/Lokal/PT' <?= $jenis == "Seminar Wilayah/Lokal/PT" ? 'selected' : ''; ?>>Seminar Wilayah/Lokal/PT</option>
+                            <option value='Seminar/Pertemuan Himpunan Profesi Nasional' <?= $jenis == "Seminar/Pertemuan Himpunan Profesi Nasional" ? 'selected' : ''; ?>>Seminar/Pertemuan Himpunan Profesi Nasional</option>
+                            <option value='Seminar/pertemuan Himpunan Profesi Internasional' <?= $jenis == "Seminar/pertemuan Himpunan Profesi Internasional" ? 'selected' : ''; ?>>Seminar/pertemuan Himpunan Profesi Internasional</option>
+                            <option value='Tulisan di Media Massa Wilayah' <?= $jenis == "Tulisan di Media Massa Wilayah" ? 'selected' : ''; ?>>Tulisan di Media Massa Wilayah</option>
+                            <option value='Tulisan di Media Massa Nasional' <?= $jenis == "Tulisan di Media Massa Nasional" ? 'selected' : ''; ?>>Tulisan di Media Massa Nasional</option>
+                            <option value='Tulisan di Media Massa Internasional' <?= $jenis == "Tulisan di Media Massa Internasional" ? 'selected' : ''; ?>>Tulisan di Media Massa Internasional</option>
                         </select>
                     </div>
                     <br />

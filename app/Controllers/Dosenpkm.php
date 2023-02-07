@@ -25,7 +25,7 @@ class Dosenpkm extends BaseController
         } else {
             $data['data_pkm'] = 'kosong';
         }
-        $data['title_page'] = "Data PKM";
+        $data['title_page'] = "Data Program Kreativitas Mahasiswa (PKM)";
         $data['data_bread'] = "PKM";
         return view('maintemp/dosenpkm', $data);
     }
