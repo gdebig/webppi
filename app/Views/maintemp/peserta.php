@@ -174,9 +174,9 @@ use App\Models\ProfileModel;
                             </div>
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="dosbing" class="element">Nama Dosen Penilai RPL</label>
+                                    <label for="dosnilai" class="element">Nama Dosen Penilai RPL</label>
                                     <div class="element">
-                                        <select name="dosbing" id="dosbing" class="form-control">
+                                        <select name="dosnilai" id="dosnilai" class="form-control">
                                             <?php
                                             foreach ($data_dosbing as $dosbing) :
                                             ?>

@@ -455,7 +455,7 @@ class Manpeserta extends BaseController
             }
         } elseif ($button == "setpenilai") {
             $userid = $this->request->getVar('user_id');
-            $dosbing = $this->request->getVar('dosbing');
+            $dosnilai = $this->request->getVar('dosnilai');
             if (!empty($userid)) {
                 foreach ($userid as $id) {
                     $mhs = $model1->where('mhsrpl_id', $id)->countAllResults();
@@ -465,7 +465,7 @@ class Manpeserta extends BaseController
                     } else {
                         $data = array(
                             'mhsrpl_id' => $id,
-                            'dosenrpl_id' => $dosbing,
+                            'dosenrpl_id' => $dosnilai,
                             'date_created' => date('Y-m-d'),
                             'date_modified' => date('Y-m-d')
                         );
@@ -485,12 +485,12 @@ class Manpeserta extends BaseController
             }
         } elseif ($button == "gantipenilai") {
             $user_id = $this->request->getVar('user_id');
-            $dosbing = $this->request->getVar('dosbing');
+            $dosnilai = $this->request->getVar('dosnilai');
             if (!empty($user_id)) {
                 foreach ($user_id as $userid) {
                     $bimbing = $model1->where('mhsrpl_id', $userid)->first();
                     $data = array(
-                        'dosenrpl_id' => $dosbing,
+                        'dosenrpl_id' => $dosnilai,
                         'date_modified' => date('Y-m-d')
                     );
 

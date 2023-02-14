@@ -7,7 +7,7 @@ use CodeIgniter\Model;
 class PengujiRplModel extends Model
 {
     protected $table = 'tbl_pengujirpl';
-    protected $primaryKey = 'uji_id';
+    protected $primaryKey = 'ujirpl_id';
     protected $allowedFields = ['ujirpl_id', 'dosenrpl_id', 'mhsrpl_id', 'date_created', 'date_modified'];
     protected $useAutoIncrement = true;
     protected $returnType     = 'array';
