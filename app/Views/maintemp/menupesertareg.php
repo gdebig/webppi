@@ -1,5 +1,5 @@
 <li class="nav-item">
-    <a href="<?php echo base_url(); ?>/regseminar" class="nav-link">
+    <a href="<?php echo base_url(); ?>/seminarreg" class="nav-link">
         <i class="fas fa-users nav-icon"></i>
         <p>Seminar</p>
     </a>

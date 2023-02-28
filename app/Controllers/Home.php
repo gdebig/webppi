@@ -73,7 +73,7 @@ class Home extends BaseController
                         'isadmin'           => $isadmin,
                         'ispenilai'         => $ispenilai,
                         'ispeserta'         => $ispeserta,
-                        $tipepeserta        => $tipepeserta,
+                        'tipepeserta'       => $tipepeserta,
                         'logged_in'         => TRUE
                     ];
                     $session->set($ses_data);

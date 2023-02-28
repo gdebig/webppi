@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `tbl_bahasa` (
   `date_modified` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`Num`) USING BTREE,
   KEY `ID` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Bagian VI';
+) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8mb4 COMMENT='Bagian VI';
 
 --
 -- Dumping data for table `tbl_bahasa`
@@ -230,7 +230,7 @@ CREATE TABLE IF NOT EXISTS `tbl_ethicref` (
   `date_modified` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`Num`) USING BTREE,
   KEY `ID` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=90 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Bagian II.1';
+) ENGINE=InnoDB AUTO_INCREMENT=90 DEFAULT CHARSET=utf8mb4 COMMENT='Bagian II.1';
 
 --
 -- Dumping data for table `tbl_ethicref`
@@ -377,7 +377,7 @@ CREATE TABLE IF NOT EXISTS `tbl_inovasi` (
   `date_modified` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`Num`) USING BTREE,
   KEY `ID` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=82 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Bagian V.4';
+) ENGINE=InnoDB AUTO_INCREMENT=82 DEFAULT CHARSET=utf8mb4 COMMENT='Bagian V.4';
 
 --
 -- Dumping data for table `tbl_inovasi`
@@ -483,7 +483,7 @@ CREATE TABLE IF NOT EXISTS `tbl_jadwalsidang` (
   `date_created` timestamp NULL DEFAULT NULL,
   `date_modified` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`sidang_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tbl_jadwalsidang`
@@ -555,7 +555,7 @@ CREATE TABLE IF NOT EXISTS `tbl_karyatulis` (
   `date_modified` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`Num`) USING BTREE,
   KEY `ID` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=637 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Bagian V.1';
+) ENGINE=InnoDB AUTO_INCREMENT=637 DEFAULT CHARSET=utf8mb4 COMMENT='Bagian V.1';
 
 --
 -- Dumping data for table `tbl_karyatulis`
@@ -1215,7 +1215,7 @@ CREATE TABLE IF NOT EXISTS `tbl_kompetensi` (
   `date_created` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `date_modified` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`komp_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=338 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=338 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tbl_kompetensi`
@@ -1624,7 +1624,7 @@ CREATE TABLE IF NOT EXISTS `tbl_kualifikasi` (
   `date_modified` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`Num`) USING BTREE,
   KEY `ID` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=962 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Bagian III';
+) ENGINE=InnoDB AUTO_INCREMENT=962 DEFAULT CHARSET=utf8mb4 COMMENT='Bagian III';
 
 --
 -- Dumping data for table `tbl_kualifikasi`
@@ -2523,7 +2523,7 @@ CREATE TABLE IF NOT EXISTS `tbl_makalahseminar` (
   `date_modified` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`Num`) USING BTREE,
   KEY `ID` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=713 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Bagian V.2 dan V.3';
+) ENGINE=InnoDB AUTO_INCREMENT=713 DEFAULT CHARSET=utf8mb4 COMMENT='Bagian V.2 dan V.3';
 
 --
 -- Dumping data for table `tbl_makalahseminar`
@@ -3271,7 +3271,7 @@ CREATE TABLE IF NOT EXISTS `tbl_nilaimkrpl` (
   `date_created` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `date_modified` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`nilairpl_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=8100 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=8100 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tbl_nilaimkrpl`
@@ -5428,7 +5428,7 @@ CREATE TABLE IF NOT EXISTS `tbl_nilaita` (
   `date_created` timestamp NULL DEFAULT NULL,
   `date_modified` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`nilaita_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=64 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=64 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tbl_nilaita`
@@ -5532,7 +5532,7 @@ CREATE TABLE IF NOT EXISTS `tbl_organisasi` (
   `date_modified` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`Num`) USING BTREE,
   KEY `ID` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=214 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Bagian I.3';
+) ENGINE=InnoDB AUTO_INCREMENT=214 DEFAULT CHARSET=utf8mb4 COMMENT='Bagian I.3';
 
 --
 -- Dumping data for table `tbl_organisasi`
@@ -5772,7 +5772,7 @@ CREATE TABLE IF NOT EXISTS `tbl_pelatihan` (
   `date_modified` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`Num`),
   KEY `ID` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -5789,7 +5789,7 @@ CREATE TABLE IF NOT EXISTS `tbl_pendapat` (
   `date_modified` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`Num`) USING BTREE,
   KEY `ID` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Bagian II.2';
+) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=utf8mb4 COMMENT='Bagian II.2';
 
 --
 -- Dumping data for table `tbl_pendapat`
@@ -5884,7 +5884,7 @@ CREATE TABLE IF NOT EXISTS `tbl_pendidikan` (
   `date_modified` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`Num`) USING BTREE,
   KEY `ID` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=154 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Bagian I.2';
+) ENGINE=InnoDB AUTO_INCREMENT=154 DEFAULT CHARSET=utf8mb4 COMMENT='Bagian I.2';
 
 --
 -- Dumping data for table `tbl_pendidikan`
@@ -6075,7 +6075,7 @@ CREATE TABLE IF NOT EXISTS `tbl_pengalaman` (
   `date_modified` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`Num`) USING BTREE,
   KEY `ID` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=484 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Bagian IV';
+) ENGINE=InnoDB AUTO_INCREMENT=484 DEFAULT CHARSET=utf8mb4 COMMENT='Bagian IV';
 
 --
 -- Dumping data for table `tbl_pengalaman`
@@ -6582,7 +6582,7 @@ CREATE TABLE IF NOT EXISTS `tbl_penghargaan` (
   `date_modified` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`Num`) USING BTREE,
   KEY `ID` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=298 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Bagian I.4';
+) ENGINE=InnoDB AUTO_INCREMENT=298 DEFAULT CHARSET=utf8mb4 COMMENT='Bagian I.4';
 
 --
 -- Dumping data for table `tbl_penghargaan`
@@ -6905,7 +6905,7 @@ CREATE TABLE IF NOT EXISTS `tbl_penguji` (
   `date_created` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   `date_modified` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`uji_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -7018,7 +7018,7 @@ CREATE TABLE IF NOT EXISTS `tbl_profile` (
   `date_created` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `date_modified` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=89 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='Bagian I.1';
+) ENGINE=InnoDB AUTO_INCREMENT=89 DEFAULT CHARSET=utf8mb4 COMMENT='Bagian I.1';
 
 --
 -- Dumping data for table `tbl_profile`
@@ -8126,7 +8126,7 @@ CREATE TABLE IF NOT EXISTS `tbl_user` (
   `date_created` timestamp NULL DEFAULT NULL,
   `date_modified` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`user_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=126 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=126 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tbl_user`
