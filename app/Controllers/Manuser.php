@@ -121,6 +121,7 @@ class Manuser extends BaseController
                 $peserta = $this->request->getVar('peserta') == "yes" ? "y" : "n";
                 $tipe_user = $superadmin . $admin . $penilai . $peserta;
                 $filesigned = $this->request->getFile('filesigned');
+                $tipe_peserta = $this->request->getVar('tipepeserta');
 
                 $ext = $filesigned->getClientExtension();
                 if (!empty($ext)) {
@@ -144,6 +145,7 @@ class Manuser extends BaseController
                     'confirmcapes' => 'Ya',
                     'softdelete' => 'no',
                     'signed' => $signedname,
+                    'tipe_peserta' => $tipe_peserta,
                     'date_created' => date('Y-m-d H:i:s'),
                     'date_modified' => date('Y-m-d H:i:s')
                 );
@@ -206,7 +208,8 @@ class Manuser extends BaseController
                 'tipe_user' => $anggota['tipe_user'],
                 'signed' => $anggota['signed'],
                 'confirmcapes' => $anggota['confirmcapes'],
-                'confirmfair' => $anggota['confirmfair']
+                'confirmfair' => $anggota['confirmfair'],
+                'tipe_peserta' => $anggota['tipe_peserta']
             ];
         }
         $data['logged_in'] = $logged_in;
@@ -275,6 +278,7 @@ class Manuser extends BaseController
                 $filesigned = $this->request->getFile('filesigned');
                 $confirmcapes = $this->request->getVar('confirmcapes');
                 $confirmfair = $this->request->getVar('confirmfair');
+                $tipe_peserta = $this->request->getVar('tipepeserta');
 
                 $ext1 = $filesigned->getClientExtension();
                 if (!empty($ext1)) {
@@ -302,6 +306,7 @@ class Manuser extends BaseController
                         'confirmcapes' => $confirmcapes,
                         'confirmfair' => $confirmfair,
                         'signed' => $signedname,
+                        'tipe_peserta' => $tipe_peserta,
                         'date_modified' => date('Y-m-d H:i:s')
                     );
                 } else {
@@ -317,6 +322,7 @@ class Manuser extends BaseController
                         'confirmcapes' => $confirmcapes,
                         'confirmfair' => $confirmfair,
                         'signed' => $signedname,
+                        'tipe_peserta' => $tipe_peserta,
                         'date_modified' => date('Y-m-d H:i:s')
                     );
                 }
@@ -340,7 +346,8 @@ class Manuser extends BaseController
                         'semester' => $anggota['semester'],
                         'tipe_user' => $anggota['tipe_user'],
                         'confirmcapes' => $anggota['confirmcapes'],
-                        'confirmfair' => $anggota['confirmfair']
+                        'confirmfair' => $anggota['confirmfair'],
+                        'tipe_peserta' => $anggota['tipe_peserta']
                     ];
                 }
                 $data['logged_in'] = $logged_in;

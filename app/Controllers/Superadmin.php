@@ -32,7 +32,7 @@ class Superadmin extends BaseController
         $data['logged_in'] = $session->get('logged_in');
         return view('maintemp/dashboard', $data);
     }
-
+    /*
     //Fungsi autentikasi hasil login CaPes
     public function auth()
     {
@@ -123,5 +123,5 @@ class Superadmin extends BaseController
         $data['data_bread'] = "dashboard";
         $data['logged_in'] = $session->get('logged_in');
         return view('maintemp/dashboard', $data);
-    }
+    }*/
 }

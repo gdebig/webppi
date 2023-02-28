@@ -46,6 +46,7 @@
                                 <th>Status Keaktifan</th>
                                 <th>Tahun Terdaftar</th>
                                 <th>Tipe User</th>
+                                <th>Tipe Peserta</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -104,6 +105,7 @@
                                             ?>
                                         </uL>
                                     </td>
+                                    <td><?= $user['tipe_peserta']; ?></td>
                                     <td style="text-align: center"><a href="<?php echo base_url(); ?>/manuser/ubahanggota/<?= $user['user_id']; ?>" class="btn btn-warning"> <i class="fas fa-file-signature"></i> Ubah</a>
                                         <a href="<?php echo base_url(); ?>/manuser/hapusanggota/<?= $user['user_id']; ?>" onclick="return confirm('Apakah anda yakin akan menghapus data anggota?')" class="btn btn-danger"> <i class="fas fa-trash"></i>
                                             Hapus</a>

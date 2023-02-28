@@ -92,13 +92,21 @@ $session = session();
                     <li class="nav-item d-none d-sm-inline-block">
                         <a href="<?php echo base_url(); ?>/penilai" class="nav-link">Beranda</a>
                     </li>
-                <?php
+                    <?php
                 } elseif ($session->get('role') == "peserta") {
-                ?>
-                    <li class="nav-item d-none d-sm-inline-block">
-                        <a href="<?php echo base_url(); ?>/peserta" class="nav-link">Beranda</a>
-                    </li>
+                    if ((isset($menureg)) && ($menureg == "menureg")) {
+                    ?>
+                        <li class="nav-item d-none d-sm-inline-block">
+                            <a href="<?php echo base_url(); ?>/pesertareg" class="nav-link">Beranda</a>
+                        </li>
+                    <?php
+                    } else {
+                    ?>
+                        <li class="nav-item d-none d-sm-inline-block">
+                            <a href="<?php echo base_url(); ?>/peserta" class="nav-link">Beranda</a>
+                        </li>
                 <?php
+                    }
                 }
                 ?>
                 <li class="nav-item d-none d-sm-inline-block">
@@ -132,13 +140,21 @@ $session = session();
                 <a href="<?php echo base_url(); ?>/penilai" class="brand-link">
                     <span class="brand-text font-weight-light">fair.eng.ui.ac.id<br />Dashboard Penilai</span>
                 </a>
-            <?php
+                <?php
             } elseif ($session->get('role') == "peserta") {
-            ?>
-                <a href="<?php echo base_url(); ?>/peserta" class="brand-link">
-                    <span class="brand-text font-weight-light">fair.eng.ui.ac.id<br />Dashboard Peserta</span>
-                </a>
+                if ((isset($menureg)) && ($menureg == "menureg")) {
+                ?>
+                    <a href="<?php echo base_url(); ?>/pesertareg" class="brand-link">
+                        <span class="brand-text font-weight-light">fair.eng.ui.ac.id<br />Dashboard Peserta</span>
+                    </a>
+                <?php
+                } else {
+                ?>
+                    <a href="<?php echo base_url(); ?>/peserta" class="brand-link">
+                        <span class="brand-text font-weight-light">fair.eng.ui.ac.id<br />Dashboard Peserta</span>
+                    </a>
             <?php
+                }
             }
             ?>
             <?php
@@ -169,7 +185,11 @@ $session = session();
                                     } elseif ($session->get('role') == "penilai") {
                                         echo $this->include('maintemp/menupenilai');
                                     } elseif ($session->get('role') == "peserta") {
-                                        echo $this->include('maintemp/menupeserta');
+                                        if ((isset($menureg)) && ($menureg == "menureg")) {
+                                            echo $this->include('maintemp/menupesertareg');
+                                        } else {
+                                            echo $this->include('maintemp/menupeserta');
+                                        }
                                     }
                                     ?>
                                     <li class="nav-item">

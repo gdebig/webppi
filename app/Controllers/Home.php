@@ -60,6 +60,7 @@ class Home extends BaseController
                     $isadmin = $tipe_user[1] == 'y' ? TRUE : FALSE;
                     $ispenilai = $tipe_user[2] == 'y' ? TRUE : FALSE;
                     $ispeserta = $tipe_user[3] == 'y' ? TRUE : FALSE;
+                    $tipepeserta = $data['tipe_peserta'];
 
                     $ses_data = [
                         'user_id'           => $data['user_id'],
@@ -72,6 +73,7 @@ class Home extends BaseController
                         'isadmin'           => $isadmin,
                         'ispenilai'         => $ispenilai,
                         'ispeserta'         => $ispeserta,
+                        $tipepeserta        => $tipepeserta,
                         'logged_in'         => TRUE
                     ];
                     $session->set($ses_data);
@@ -86,7 +88,11 @@ class Home extends BaseController
                         return redirect()->to('/penilai');
                     } elseif ($ispeserta) {
                         $session->set('role', 'peserta');
-                        return redirect()->to('/peserta');
+                        if ($tipepeserta == "RPL") {
+                            return redirect()->to('/peserta');
+                        } elseif ($tipepeserta == "Reguler") {
+                            return redirect()->to('/pesertareg');
+                        }
                     } else {
                         $session->destroy();
                         return redirect()->to('/home');

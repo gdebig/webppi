@@ -73,8 +73,6 @@
                             <option value="lulus" <?php echo $status == "lulus" ? "selected" : ""; ?>>Lulus</option>
                             <option value="keluar" <?php echo $status == "keluar" ? "selected" : ""; ?>>Keluar / DO
                             </option>
-                            <option value="diterima" <?php echo $status == "diterima" ? "selected" : ""; ?>>Sudah
-                                Diterima</option>
                             <option value="staff" <?php echo $status == "staff" ? "selected" : ""; ?>>Staff / Penilai
                             </option>
                         </select>
@@ -147,7 +145,16 @@
                             <option value="Ya" <?php echo $confirmfair == "Ya" ? "selected" : ""; ?>>Ya</option>
                             <option value="Tidak" <?php echo $confirmfair == "Tidak" ? "selected" : ""; ?>>Tidak</option>
                         </select>
-                    </div><br /><br />
+                    </div><br />
+                    <label for="tipepeserta" class="element">Tipe Peserta <span class="required"> *</span>&nbsp;
+                    </label>
+                    <div class="element">
+                        <select name="tipepeserta" id="tipepeserta" class="form-control">
+                            <option value="RPL" <?= $tipe_peserta == "RPL" ? "selected" : ""; ?>>RPL</option>
+                            <option value="Reguler" <?= $tipe_peserta == "Reguler" ? "selected" : ""; ?>>Reguler</option>
+                        </select>
+                    </div>
+                    <br /><br />
                     <div class="form-group">
                         <label>Field bertanda * harus diisi.</label>
                     </div>

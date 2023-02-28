@@ -121,7 +121,16 @@
                     <label for="filesigned" class="element">Scan tanda tangan</label>
                     <div class="element">
                         <input id="filesigned" name="filesigned" type="file" class="form-control" placeholder="Scan tanda tangan..." />
-                    </div><br /><br />
+                    </div><br />
+                    <label for="tipepeserta" class="element">Tipe Peserta <span class="required"> *</span>&nbsp;
+                    </label>
+                    <div class="element">
+                        <select name="tipepeserta" id="tipepeserta" class="form-control">
+                            <option value="RPL">RPL</option>
+                            <option value="Reguler">Reguler</option>
+                        </select>
+                    </div>
+                    <br /><br />
                     <div class="form-group">
                         <label>Field bertanda * harus diisi.</label>
                     </div>
