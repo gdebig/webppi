@@ -2,26 +2,27 @@
 
 namespace App\Controllers;
 
-use App\Models\TugasAkhirModel;
+use App\Models\TarModel;
 use App\Models\BimbingModel;
 use App\Models\NilaitaModel;
 
-class Tugasakhir extends BaseController
+class Regtugasakhir extends BaseController
 {
     public function index()
     {
         $session = session();
         $logged_in = $session->get('logged_in');
         $ispeserta = $session->get('ispeserta');
-        if ((!$logged_in) && (!$ispeserta)) {
+        $tipepeserta = $session->get('tipepeserta');
+        if ((!$logged_in) && (!$ispeserta) && ($tipepeserta != 'Reguler')) {
             return redirect()->to('/home');
         }
         helper(['tanggal']);
 
         $user_id = $session->get('user_id');
-        $model = new TugasAkhirModel();
+        $model = new TarModel();
         $data['logged_in'] = $logged_in;
-        $ta = $model->where('tbl_tugasakhir.user_id', $user_id)->join('tbl_profile', 'tbl_tugasakhir.ta_penguji = tbl_profile.user_id', 'left')->orderBy('tbl_tugasakhir.ta_id', 'DESC')->findall();
+        $ta = $model->where('tbl_tugasakhirreg.user_id', $user_id)->join('tbl_profile', 'tbl_tugasakhirreg.tar_penguji = tbl_profile.user_id', 'left')->orderBy('tbl_tugasakhirreg.tar_id', 'DESC')->findall();
         if (!empty($ta)) {
             $data['data_ta'] = $ta;
         } else {
@@ -34,9 +35,11 @@ class Tugasakhir extends BaseController
         } else {
             $data['dosen_bimbing'] = "Belum ada pembimbing";
         }
-        $data['title_page'] = "Praktek Keinsinyuran PPI";
-        $data['data_bread'] = "Praktek Keinsinyuran";
-        return view('maintemp/tugasakhir', $data);
+
+        $data['menureg'] = 'menureg';
+        $data['title_page'] = "Praktik Keinsinyuran PPI Reguler";
+        $data['data_bread'] = "Praktik Keinsinyuran Reguler";
+        return view('maintemp/tugasakhirreg', $data);
     }
 
     public function tambahta()
@@ -45,40 +48,43 @@ class Tugasakhir extends BaseController
         $user_id = $session->get('user_id');
         $logged_in = $session->get('logged_in');
         $ispeserta = $session->get('ispeserta');
-        if ((!$logged_in) && (!$ispeserta)) {
+        $tipepeserta = $session->get('tipepeserta');
+        if ((!$logged_in) && (!$ispeserta) && ($tipepeserta != 'Reguler')) {
             return redirect()->to('/home');
         }
+        $data['menureg'] = 'menureg';
         $data['logged_in'] = $logged_in;
-        $data['title_page'] = "Upload Buku Praktek Keinsinyuran";
-        $data['data_bread'] = "Upload Buku Praktek Keinsinyuran";
+        $data['title_page'] = "Upload Buku Praktik Keinsinyuran";
+        $data['data_bread'] = "Upload Buku Praktik Keinsinyuran";
         $data['user_id'] = $user_id;
-        return view('maintemp/tambahta', $data);
+        return view('maintemp/tambahtareg', $data);
     }
 
-    public function tambahtaproses()
+    public function tambahtarproses()
     {
 
-        $model = new TugasAkhirModel();
+        $model = new TarModel();
         $session = session();
         $user_id = $session->get('user_id');
         $ispeserta = $session->get('ispeserta');
         $logged_in = $session->get('logged_in');
-        if ((!$logged_in) && (!$ispeserta)) {
+        $tipepeserta = $session->get('tipepeserta');
+        if ((!$logged_in) && (!$ispeserta) && ($tipepeserta != 'Reguler')) {
             return redirect()->to('/home');
         }
 
         $button = $this->request->getVar('submit');
         if ($button == "batal") {
-            return redirect()->to('/tugasakhir');
+            return redirect()->to('/regtugasakhir');
         } else {
             helper(['form', 'url']);
 
             $formvalid = $this->validate([
-                'ta_usuljudul' => [
-                    'label'  => 'Judul Praktek Keinsinyuran',
+                'tar_usuljudul' => [
+                    'label'  => 'Judul Praktik Keinsinyuran',
                     'rules'  => 'required',
                     'errors' => [
-                        'required' => 'Field Judul Praktek Keinsinyuran harus diisi',
+                        'required' => 'Field Judul Praktik Keinsinyuran harus diisi',
                     ],
                 ],
                 'startdate' => [
@@ -109,14 +115,14 @@ class Tugasakhir extends BaseController
                         'required' => 'Field divisi harus diisi',
                     ],
                 ],
-                'ta_buku' => [
-                    'rules'  => 'ext_in[ta_buku,pdf]',
+                'tar_buku' => [
+                    'rules'  => 'ext_in[tar_buku,pdf]',
                     'errors' => [
                         'ext_in' => "Hanya menerima file PDF."
                     ],
                 ],
-                'ta_log' => [
-                    'rules'  => 'ext_in[ta_log,pdf]',
+                'tar_log' => [
+                    'rules'  => 'ext_in[tar_log,pdf]',
                     'errors' => [
                         'ext_in' => "Hanya menerima file PDF."
                     ],
@@ -125,146 +131,155 @@ class Tugasakhir extends BaseController
 
             if ($formvalid) {
 
-                $ta_usuljudul = $this->request->getVar('ta_usuljudul');
-                $ta_semester = $this->request->getVar('ta_semester');
-                $ta_tahun = $this->request->getVar('ta_tahun');
+                $tar_usuljudul = $this->request->getVar('tar_usuljudul');
+                $tar_semester = $this->request->getVar('tar_semester');
+                $tar_tahun = $this->request->getVar('tar_tahun');
                 $startdate = $this->request->getVar('startdate');
                 $enddate = $this->request->getVar('enddate');
                 $instansi = $this->request->getVar('instansi');
                 $divisi = $this->request->getVar('divisi');
-                $ta_buku = $this->request->getFile('ta_buku');
-                $ta_log = $this->request->getFile('ta_log');
+                $tar_buku = $this->request->getFile('tar_buku');
+                $tar_log = $this->request->getFile('tar_log');
+                $tar_linkvideo = $this->request->getVar('tar_linkvideo');
 
-                $ext = $ta_buku->getClientExtension();
+                $ext = $tar_buku->getClientExtension();
                 if (!empty($ext)) {
-                    $bukuname = $user_id . "_bukuta." . $ext;
-                    $ta_buku->move('uploads/docs/', $bukuname, true);
+                    $bukuname = $user_id . "_bukutar." . $ext;
+                    $tar_buku->move('uploads/docs/', $bukuname, true);
                 } else {
                     $bukuname = "";
                 }
 
-                $ext1 = $ta_log->getClientExtension();
+                $ext1 = $tar_log->getClientExtension();
                 if (!empty($ext1)) {
-                    $logname = $user_id . "_logta." . $ext1;
-                    $ta_log->move('uploads/docs/', $logname, true);
+                    $logname = $user_id . "_logtar." . $ext1;
+                    $tar_log->move('uploads/docs/', $logname, true);
                 } else {
                     $logname = "";
                 }
 
                 $datata = array(
                     'user_id' => $user_id,
-                    'ta_usuljudul' => $ta_usuljudul,
-                    'ta_semester' => $ta_semester,
-                    'ta_tahun' => $ta_tahun,
+                    'tar_usuljudul' => $tar_usuljudul,
+                    'tar_semester' => $tar_semester,
+                    'tar_tahun' => $tar_tahun,
                     'startdate' => $startdate,
                     'enddate' => $enddate,
                     'instansi' => $instansi,
                     'divisi' => $divisi,
-                    'ta_buku' => $bukuname,
-                    'ta_log' => $logname,
+                    'tar_buku' => $bukuname,
+                    'tar_log' => $logname,
+                    'tar_linkvideo' => $tar_linkvideo,
                     'date_created' => date('Y-m-d H:i:s'),
                     'date_modified' => date('Y-m-d H:i:s')
                 );
 
                 $model->save($datata);
 
-                $session->setFlashdata('msg', 'Data praktek keinsinyuran berhasil ditambahkan.');
+                $session->setFlashdata('msg', 'Data praktik keinsinyuran berhasil ditambahkan.');
 
-                return redirect()->to('/tugasakhir');
+                return redirect()->to('/regtugasakhir');
             } else {
                 $user_id = $session->get('user_id');
+
+                $data['menureg'] = 'menureg';
                 $data['logged_in'] = $logged_in;
-                $data['title_page'] = "Upload Buku Praktek Keinsinyuran";
-                $data['data_bread'] = "Upload Buku Praktek Keinsinyuran";
+                $data['title_page'] = "Upload Buku Praktik Keinsinyuran";
+                $data['data_bread'] = "Upload Buku Praktik Keinsinyuran";
                 $data['validation'] = $this->validator;
                 $data['user_id'] = $user_id;
-                return view('maintemp/tambahtavalid', $data);
+                return view('maintemp/tambahtaregvalid', $data);
             }
         }
     }
 
-    public function hapusta($id)
+    public function hapustar($id)
     {
-        $model = new TugasAkhirModel();
+        $model = new TarModel();
         $session = session();
-        $user_id = $session->get('user_id');
         $logged_in = $session->get('logged_in');
         $ispeserta = $session->get('ispeserta');
-        if ((!$logged_in) && (!$ispeserta)) {
+        $tipepeserta = $session->get('tipepeserta');
+        if ((!$logged_in) && (!$ispeserta) && ($tipepeserta != 'Reguler')) {
             return redirect()->to('/home');
         }
 
         $ta = $model->find($id);
-        $path = './uploads/docs/' . $ta['ta_buku'];
+        $path = './uploads/docs/' . $ta['tar_buku'];
         if (is_file($path)) {
             unlink($path);
         }
-        $path = './uploads/docs/' . $ta['ta_log'];
+        $path = './uploads/docs/' . $ta['tar_log'];
         if (is_file($path)) {
             unlink($path);
         }
 
         $model->delete($id);
-        $session->setFlashdata('msg', 'Data praktek keinsinyuran berhasil dihapus.');
-        return redirect()->to('/tugasakhir');
+        $session->setFlashdata('msg', 'Data praktik keinsinyuran berhasil dihapus.');
+        return redirect()->to('/regtugasakhir');
     }
 
-    public function ubahta($id)
+    public function ubahtar($id)
     {
-        $model = new TugasAkhirModel();
+        $model = new TarModel();
         $session = session();
         $logged_in = $session->get('logged_in');
         $ispeserta = $session->get('ispeserta');
-        if ((!$logged_in) && (!$ispeserta)) {
+        $tipepeserta = $session->get('tipepeserta');
+        if ((!$logged_in) && (!$ispeserta) && ($tipepeserta != 'Reguler')) {
             return redirect()->to('/home');
         }
-        $ta = $model->where('ta_id', $id)->first();
+        $ta = $model->where('tar_id', $id)->first();
         if ($ta) {
             $data = [
-                'ta_id' => $ta['ta_id'],
+                'tar_id' => $ta['tar_id'],
                 'user_id' => $ta['user_id'],
-                'ta_usuljudul' => $ta['ta_usuljudul'],
-                'ta_semester' => $ta['ta_semester'],
-                'ta_tahun' => $ta['ta_tahun'],
+                'tar_usuljudul' => $ta['tar_usuljudul'],
+                'tar_semester' => $ta['tar_semester'],
+                'tar_tahun' => $ta['tar_tahun'],
                 'startdate' => $ta['startdate'],
                 'enddate' => $ta['enddate'],
                 'instansi' => $ta['instansi'],
                 'divisi' => $ta['divisi'],
-                'ta_buku' => $ta['ta_buku'],
-                'ta_log' => $ta['ta_log']
+                'tar_buku' => $ta['tar_buku'],
+                'tar_log' => $ta['tar_log'],
+                'tar_linkvideo' => $ta['tar_linkvideo']
             ];
         }
+
+        $data['menureg'] = 'menureg';
         $data['logged_in'] = $logged_in;
-        $data['title_page'] = "Ubah Data Praktek Keinsinyuran";
-        $data['data_bread'] = "Ubah Data Praktek Keinsinyuran";
-        return view('maintemp/ubahta', $data);
+        $data['title_page'] = "Ubah Data Praktik Keinsinyuran";
+        $data['data_bread'] = "Ubah Data Praktik Keinsinyuran";
+        return view('maintemp/ubahtar', $data);
     }
 
-    public function ubahtaproses()
+    public function ubahtarproses()
     {
-        $model = new TugasAkhirModel();
+        $model = new TarModel();
         $session = session();
         $user_id = $this->request->getVar('user_id');
-        $ta_id = $this->request->getVar('ta_id');
+        $tar_id = $this->request->getVar('tar_id');
         $logged_in = $session->get('logged_in');
         $ispeserta = $session->get('ispeserta');
-        if ((!$logged_in) && (!$ispeserta)) {
+        $tipepeserta = $session->get('tipepeserta');
+        if ((!$logged_in) && (!$ispeserta) && ($tipepeserta != 'Reguler')) {
             return redirect()->to('/home');
         }
 
         $button = $this->request->getVar('submit');
 
         if ($button == "batal") {
-            return redirect()->to('/tugasakhir');
+            return redirect()->to('/regtugasakhir');
         } else {
             helper(['form', 'url']);
 
             $formvalid = $this->validate([
-                'ta_usuljudul' => [
-                    'label'  => 'Judul Praktek Keinsinyuran',
+                'tar_usuljudul' => [
+                    'label'  => 'Judul Praktik Keinsinyuran',
                     'rules'  => 'required',
                     'errors' => [
-                        'required' => 'Field Judul Praktek Keinsinyuran harus diisi',
+                        'required' => 'Field Judul Praktik Keinsinyuran harus diisi',
                     ],
                 ],
                 'startdate' => [
@@ -295,14 +310,14 @@ class Tugasakhir extends BaseController
                         'required' => 'Field divisi harus diisi',
                     ],
                 ],
-                'ta_buku' => [
-                    'rules'  => 'ext_in[ta_buku,pdf]',
+                'tar_buku' => [
+                    'rules'  => 'ext_in[tar_buku,pdf]',
                     'errors' => [
                         'ext_in' => "Hanya menerima file PDF."
                     ],
                 ],
-                'ta_log' => [
-                    'rules'  => 'ext_in[ta_log,pdf]',
+                'tar_log' => [
+                    'rules'  => 'ext_in[tar_log,pdf]',
                     'errors' => [
                         'ext_in' => "Hanya menerima file PDF."
                     ],
@@ -313,96 +328,111 @@ class Tugasakhir extends BaseController
                 $user_id = $this->request->getVar('user_id');
                 $namabuku = $this->request->getVar('namabuku');
                 $namalog = $this->request->getVar('namalog');
-                $ta_usuljudul = $this->request->getVar('ta_usuljudul');
-                $ta_semester = $this->request->getVar('ta_semester');
-                $ta_tahun = $this->request->getVar('ta_tahun');
+                $tar_usuljudul = $this->request->getVar('tar_usuljudul');
+                $tar_semester = $this->request->getVar('tar_semester');
+                $tar_tahun = $this->request->getVar('tar_tahun');
                 $startdate = $this->request->getVar('startdate');
                 $enddate = $this->request->getVar('enddate');
                 $instansi = $this->request->getVar('instansi');
                 $divisi = $this->request->getVar('divisi');
-                $ta_buku = $this->request->getFile('ta_buku');
-                $ta_log = $this->request->getFile('ta_log');
+                $tar_buku = $this->request->getFile('tar_buku');
+                $tar_log = $this->request->getFile('tar_log');
+                $tar_linkvideo = $this->request->getVar('tar_linkvideo');
 
-                $ext = $ta_buku->getClientExtension();
+                $ext = $tar_buku->getClientExtension();
                 if (!empty($ext)) {
-                    $bukuname = $user_id . "_bukuta." . $ext;
-                    $ta_buku->move('uploads/docs/', $bukuname, true);
+                    $path = './uploads/docs/' . $namabuku;
+                    if (is_file($path)) {
+                        unlink($path);
+                    }
+                    $bukuname = $user_id . "_bukutar." . $ext;
+                    $tar_buku->move('uploads/docs/', $bukuname, true);
                 } else {
                     $bukuname = $namabuku;
                 }
 
-                $ext1 = $ta_log->getClientExtension();
+                $ext1 = $tar_log->getClientExtension();
                 if (!empty($ext1)) {
-                    $logname = $user_id . "_logta." . $ext1;
-                    $ta_log->move('uploads/docs/', $logname, true);
+                    $path = './uploads/docs/' . $namalog;
+                    if (is_file($path)) {
+                        unlink($path);
+                    }
+                    $logname = $user_id . "_logtar." . $ext1;
+                    $tar_log->move('uploads/docs/', $logname, true);
                 } else {
                     $logname = $namalog;
                 }
 
                 $datata = array(
                     'user_id' => $user_id,
-                    'ta_usuljudul' => $ta_usuljudul,
-                    'ta_semester' => $ta_semester,
-                    'ta_tahun' => $ta_tahun,
+                    'tar_usuljudul' => $tar_usuljudul,
+                    'tar_semester' => $tar_semester,
+                    'tar_tahun' => $tar_tahun,
                     'startdate' => $startdate,
                     'enddate' => $enddate,
                     'instansi' => $instansi,
                     'divisi' => $divisi,
-                    'ta_buku' => $bukuname,
-                    'ta_log' => $logname,
+                    'tar_buku' => $bukuname,
+                    'tar_log' => $logname,
+                    'tar_linkvideo' => $tar_linkvideo,
                     'date_modified' => date('Y-m-d H:i:s')
                 );
 
-                $model->update($ta_id, $datata);
+                $model->update($tar_id, $datata);
 
-                $session->setFlashdata('msg', 'Data praktek keinsinyuran berhasil diubah.');
+                $session->setFlashdata('msg', 'Data praktik keinsinyuran berhasil diubah.');
 
-                return redirect()->to('/tugasakhir');
+                return redirect()->to('/regtugasakhir');
             } else {
-                $ta = $model->where('ta_id', $ta_id)->first();
+                $ta = $model->where('tar_id', $tar_id)->first();
                 if ($ta) {
                     $data = [
-                        'ta_id' => $ta['ta_id'],
+                        'tar_id' => $ta['tar_id'],
                         'user_id' => $ta['user_id'],
-                        'ta_usuljudul' => $ta['ta_usuljudul'],
-                        'ta_semester' => $ta['ta_semester'],
-                        'ta_tahun' => $ta['ta_tahun'],
+                        'tar_usuljudul' => $ta['tar_usuljudul'],
+                        'tar_semester' => $ta['tar_semester'],
+                        'tar_tahun' => $ta['tar_tahun'],
                         'startdate' => $ta['startdate'],
                         'enddate' => $ta['enddate'],
                         'instansi' => $ta['instansi'],
                         'divisi' => $ta['divisi'],
-                        'ta_buku' => $ta['ta_buku'],
-                        'ta_log' => $ta['ta_log']
+                        'tar_buku' => $ta['tar_buku'],
+                        'tar_log' => $ta['tar_log'],
+                        'tar_linkvideo' => $ta['tar_linkvideo']
                     ];
                 }
                 $data['logged_in'] = $logged_in;
-                $data['title_page'] = "Ubah Data Praktek Keinsinyuran";
-                $data['data_bread'] = "Ubah Data Praktek Keinsinyuran";
+
+                $data['menureg'] = 'menureg';
+                $data['title_page'] = "Ubah Data Praktik Keinsinyuran";
+                $data['data_bread'] = "Ubah Data Praktik Keinsinyuran";
                 $data['user_id'] = $user_id;
                 $data['validation'] = $this->validator;
-                return view('maintemp/ubahta', $data);
+                return view('maintemp/ubahtar', $data);
             }
         }
     }
 
-    public function bukurevisi($ta_id)
+    public function bukurevisireg($tar_id)
     {
         $session = session();
         $user_id = $session->get('user_id');
         $logged_in = $session->get('logged_in');
         $ispeserta = $session->get('ispeserta');
-        if ((!$logged_in) && (!$ispeserta)) {
+        $tipepeserta = $session->get('tipepeserta');
+        if ((!$logged_in) && (!$ispeserta) && ($tipepeserta != 'Reguler')) {
             return redirect()->to('/home');
         }
+        $data['menureg'] = 'menureg';
         $data['logged_in'] = $logged_in;
-        $data['title_page'] = "Upload Buku Revisi Praktek Keinsinyuran";
-        $data['data_bread'] = "Upload Buku Revisi Praktek Keinsinyuran";
+        $data['title_page'] = "Upload Buku Revisi Praktik Keinsinyuran";
+        $data['data_bread'] = "Upload Buku Revisi Praktik Keinsinyuran";
         $data['user_id'] = $user_id;
-        $data['ta_id'] = $ta_id;
-        return view('maintemp/bukurevisi', $data);
+        $data['tar_id'] = $tar_id;
+        return view('maintemp/bukurevisireg', $data);
     }
 
-    public function bukurevisiproses()
+    public function bukurevisiregproses()
     {
         $session = session();
         $user_id = $session->get('user_id');
@@ -411,17 +441,17 @@ class Tugasakhir extends BaseController
         if ((!$logged_in) && (!$ispeserta)) {
             return redirect()->to('/home');
         }
-        $model = new TugasAkhirModel();
+        $model = new TarModel();
         $button = $this->request->getVar('submit');
 
         if ($button == "batal") {
-            return redirect()->to('/tugasakhir');
+            return redirect()->to('/regtugasakhir');
         } else {
             helper(['form', 'url']);
 
             $formvalid = $this->validate([
-                'ta_bukurevisi' => [
-                    'rules'  => 'ext_in[ta_bukurevisi,pdf]',
+                'tar_bukurevisi' => [
+                    'rules'  => 'ext_in[tar_bukurevisi,pdf]',
                     'errors' => [
                         'ext_in' => "Hanya menerima file PDF"
                     ],
@@ -429,47 +459,49 @@ class Tugasakhir extends BaseController
             ]);
 
             if ($formvalid) {
-                $ta_id = $this->request->getVar('ta_id');
-                $ta_bukurevisi = $this->request->getFile('ta_bukurevisi');
+                $tar_id = $this->request->getVar('tar_id');
+                $tar_bukurevisi = $this->request->getFile('tar_bukurevisi');
 
-                $ta = $model->find($ta_id);
-                $path = './uploads/docs/' . $ta['ta_bukurevisi'];
+                $ta = $model->find($tar_id);
+                $path = './uploads/docs/' . $ta['tar_bukurevisi'];
                 if (is_file($path)) {
                     unlink($path);
                 }
 
-                $ext = $ta_bukurevisi->getClientExtension();
+                $ext = $tar_bukurevisi->getClientExtension();
                 if (!empty($ext)) {
                     $bukuname = $user_id . "_bukurevisita." . $ext;
-                    $ta_bukurevisi->move('uploads/docs/', $bukuname, true);
+                    $tar_bukurevisi->move('uploads/docs/', $bukuname, true);
                 } else {
                     $bukuname = "";
                 }
 
                 $datata = array(
-                    'ta_bukurevisi' => $bukuname,
+                    'tar_bukurevisi' => $bukuname,
                     'date_modified' => date('Y-m-d H:i:s')
                 );
 
-                $model->update($ta_id, $datata);
+                $model->update($tar_id, $datata);
 
-                $session->setFlashdata('msg', 'Buku revisi praktek keinsinyuran berhasil diupload.');
+                $session->setFlashdata('msg', 'Buku revisi praktik keinsinyuran berhasil diupload.');
 
-                return redirect()->to('/tugasakhir');
+                return redirect()->to('/regtugasakhir');
             } else {
-                $ta_id = $this->request->getVar('ta_id');
+                $tar_id = $this->request->getVar('tar_id');
+
+                $data['menureg'] = 'menureg';
                 $data['logged_in'] = $logged_in;
-                $data['title_page'] = "Upload Buku Revisi Praktek Keinsinyuran";
-                $data['data_bread'] = "Upload Buku Revisi Praktek Keinsinyuran";
+                $data['title_page'] = "Upload Buku Revisi Praktik Keinsinyuran";
+                $data['data_bread'] = "Upload Buku Revisi Praktik Keinsinyuran";
                 $data['user_id'] = $user_id;
-                $data['ta_id'] = $ta_id;
+                $data['tar_id'] = $tar_id;
                 $data['validation'] = $this->validator;
                 return view('maintemp/bukurevisi', $data);
             }
         }
     }
 
-    public function nilai($ta_id)
+    public function nilai($tar_id)
     {
         $session = session();
         $user_id = $session->get('user_id');
@@ -481,7 +513,7 @@ class Tugasakhir extends BaseController
 
         $model = new NilaitaModel();
 
-        $datanilai = $model->join('tbl_profile', 'tbl_nilaita.dosen_id = tbl_profile.user_id', 'left')->orderby('nilaita_id', 'DESC')->where('ta_id', $ta_id)->findall();
+        $datanilai = $model->join('tbl_profile', 'tbl_nilaita.dosen_id = tbl_profile.user_id', 'left')->orderby('nilaitar_id', 'DESC')->where('tar_id', $tar_id)->findall();
 
         if ($datanilai) {
             $data['datanilai'] = $datanilai;
@@ -489,11 +521,12 @@ class Tugasakhir extends BaseController
             $data['datanilai'] = 'kosong';
         }
 
+        $data['menureg'] = 'menureg';
         $data['logged_in'] = $logged_in;
-        $data['title_page'] = "Nilai Praktek Keinsinyuran";
-        $data['data_bread'] = "Nilai Praktek Keinsinyuran";
+        $data['title_page'] = "Nilai Praktik Keinsinyuran";
+        $data['data_bread'] = "Nilai Praktik Keinsinyuran";
         $data['user_id'] = $user_id;
-        $data['ta_id'] = $ta_id;
+        $data['tar_id'] = $tar_id;
         return view('maintemp/nilaipk', $data);
     }
 }

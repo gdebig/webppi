@@ -1,0 +1,39 @@
+ERROR - 2023-03-13 22:21:37 --> Unknown column 'tbl_tugasakhir.user_id' in 'where clause'
+CRITICAL - 2023-03-13 22:21:37 --> Unknown column 'tbl_tugasakhir.user_id' in 'where clause'
+#0 D:\wamp64\www\webppi\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT *\nFROM `...', 0)
+#1 D:\wamp64\www\webppi\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *\nFROM `...')
+#2 D:\wamp64\www\webppi\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *\nFROM `...')
+#3 D:\wamp64\www\webppi\system\Database\BaseBuilder.php(1455): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 D:\wamp64\www\webppi\system\Model.php(183): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\wamp64\www\webppi\system\BaseModel.php(584): CodeIgniter\Model->doFindAll(0, 0)
+#6 D:\wamp64\www\webppi\app\Controllers\Regtugasakhir.php(24): CodeIgniter\BaseModel->findAll()
+#7 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Regtugasakhir->index()
+#8 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Regtugasakhir))
+#9 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#11 {main}
+ERROR - 2023-03-13 22:26:32 --> Unknown column 'tbl_tugasakhirreg.ta_penguji' in 'on clause'
+CRITICAL - 2023-03-13 22:26:32 --> Unknown column 'tbl_tugasakhirreg.ta_penguji' in 'on clause'
+#0 D:\wamp64\www\webppi\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT *\nFROM `...', 0)
+#1 D:\wamp64\www\webppi\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *\nFROM `...')
+#2 D:\wamp64\www\webppi\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *\nFROM `...')
+#3 D:\wamp64\www\webppi\system\Database\BaseBuilder.php(1455): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 D:\wamp64\www\webppi\system\Model.php(183): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\wamp64\www\webppi\system\BaseModel.php(584): CodeIgniter\Model->doFindAll(0, 0)
+#6 D:\wamp64\www\webppi\app\Controllers\Regtugasakhir.php(24): CodeIgniter\BaseModel->findAll()
+#7 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Regtugasakhir->index()
+#8 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Regtugasakhir))
+#9 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#11 {main}
+CRITICAL - 2023-03-13 23:02:33 --> Undefined index: ta_usuljudul
+#0 D:\wamp64\www\webppi\app\Views\maintemp\tugasakhirreg.php(67): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'D:\\wamp64\\www\\w...', 67, Array)
+#1 D:\wamp64\www\webppi\system\View\View.php(210): include('D:\\wamp64\\www\\w...')
+#2 D:\wamp64\www\webppi\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 D:\wamp64\www\webppi\system\Common.php(1089): CodeIgniter\View\View->render('maintemp/tugasa...', Array, true)
+#4 D:\wamp64\www\webppi\app\Controllers\Regtugasakhir.php(42): view('maintemp/tugasa...', Array)
+#5 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Regtugasakhir->index()
+#6 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Regtugasakhir))
+#7 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
