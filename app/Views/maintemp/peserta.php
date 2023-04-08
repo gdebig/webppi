@@ -146,6 +146,9 @@ use App\Models\ProfileModel;
                                         <select name="dosbing" id="dosbing" class="form-control">
                                             <?php
                                             foreach ($data_dosbing as $dosbing) :
+                                                if ($dosbing['user_id'] == "") {
+                                                    continue;
+                                                }
                                             ?>
                                                 <option value="<?= $dosbing['user_id']; ?>">
                                                     <?= empty($dosbing['FullName']) ? $dosbing['username'] : $dosbing['FullName']; ?>
@@ -179,6 +182,9 @@ use App\Models\ProfileModel;
                                         <select name="dosnilai" id="dosnilai" class="form-control">
                                             <?php
                                             foreach ($data_dosbing as $dosbing) :
+                                                if ($dosbing['user_id'] == "") {
+                                                    continue;
+                                                }
                                             ?>
                                                 <option value="<?= $dosbing['user_id']; ?>">
                                                     <?= empty($dosbing['FullName']) ? $dosbing['username'] : $dosbing['FullName']; ?>
