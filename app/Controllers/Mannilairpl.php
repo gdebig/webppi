@@ -16,6 +16,7 @@ use App\Models\CapesSemModel;
 use App\Models\BahasaModel;
 use App\Models\NilairplModel;
 use App\Models\PengujiRplModel;
+use App\Models\ConfigModel;
 
 class Mannilairpl extends BaseController
 {
@@ -32,6 +33,15 @@ class Mannilairpl extends BaseController
         helper(['tanggal']);
 
         $user_id = $session->get('user_id');
+
+        $model2 = new ConfigModel();
+        $config = $model2->where('config_name', 'koor_tugasakhir')->where('config_value', $user_id)->first();
+        if ($config) {
+            $data['koor_tugasakhir'] = True;
+        } else {
+            $data['koor_tugasakhir'] = False;
+        }
+
         $model = new PengujiRplModel();
         $model1 = new NilairplModel();
         $data['logged_in'] = $logged_in;
@@ -160,6 +170,17 @@ class Mannilairpl extends BaseController
         } else {
             $nilaiseminar = 0;
         }
+
+        $user_id = $session->get('user_id');
+
+        $modelconfig = new ConfigModel();
+        $config = $modelconfig->where('config_name', 'koor_tugasakhir')->where('config_value', $user_id)->first();
+        if ($config) {
+            $data['koor_tugasakhir'] = True;
+        } else {
+            $data['koor_tugasakhir'] = False;
+        }
+
         $data['nilaiseminar'] = $nilaiseminar;
         $data['jmlseminar'] = $jmlseminar;
 
@@ -184,6 +205,16 @@ class Mannilairpl extends BaseController
             $session->set('role', 'penilai');
         }
         helper(['tanggal']);
+
+        $user_id = $session->get('user_id');
+
+        $modelconfig = new ConfigModel();
+        $config = $modelconfig->where('config_name', 'koor_tugasakhir')->where('config_value', $user_id)->first();
+        if ($config) {
+            $data['koor_tugasakhir'] = True;
+        } else {
+            $data['koor_tugasakhir'] = False;
+        }
 
         $modelprof = new ProfileModel();
         $mhsprofile = $modelprof->where('user_id', $mhs_id)->first();
@@ -362,6 +393,16 @@ class Mannilairpl extends BaseController
         }
         helper(['tanggal']);
 
+        $user_id = $session->get('user_id');
+
+        $modelconfig = new ConfigModel();
+        $config = $modelconfig->where('config_name', 'koor_tugasakhir')->where('config_value', $user_id)->first();
+        if ($config) {
+            $data['koor_tugasakhir'] = True;
+        } else {
+            $data['koor_tugasakhir'] = False;
+        }
+
         $mhs_id = $this->request->getVar('mhs_id');
         $dosen_id = $this->request->getVar('dosen_id');
 
@@ -528,6 +569,16 @@ class Mannilairpl extends BaseController
             $session->set('role', 'penilai');
         }
         helper(['tanggal']);
+
+        $user_id = $session->get('user_id');
+
+        $modelconfig = new ConfigModel();
+        $config = $modelconfig->where('config_name', 'koor_tugasakhir')->where('config_value', $user_id)->first();
+        if ($config) {
+            $data['koor_tugasakhir'] = True;
+        } else {
+            $data['koor_tugasakhir'] = False;
+        }
 
         $modelprof = new ProfileModel();
         $mhsprofile = $modelprof->where('user_id', $mhs_id)->first();
@@ -802,6 +853,16 @@ class Mannilairpl extends BaseController
         $mhs_id = $this->request->getVar('mhs_id');
         $dosen_id = $this->request->getVar('dosen_id');
 
+        $user_id = $session->get('user_id');
+
+        $modelconfig = new ConfigModel();
+        $config = $modelconfig->where('config_name', 'koor_tugasakhir')->where('config_value', $user_id)->first();
+        if ($config) {
+            $data['koor_tugasakhir'] = True;
+        } else {
+            $data['koor_tugasakhir'] = False;
+        }
+
         $model = new NilairplModel();
 
         //Hapus data yang ada
@@ -1050,6 +1111,16 @@ class Mannilairpl extends BaseController
         }
         helper(['tanggal']);
 
+        $user_id = $session->get('user_id');
+
+        $modelconfig = new ConfigModel();
+        $config = $modelconfig->where('config_name', 'koor_tugasakhir')->where('config_value', $user_id)->first();
+        if ($config) {
+            $data['koor_tugasakhir'] = True;
+        } else {
+            $data['koor_tugasakhir'] = False;
+        }
+
         $modelprof = new ProfileModel();
         $mhsprofile = $modelprof->where('user_id', $mhs_id)->first();
         if ($mhsprofile) {
@@ -1175,6 +1246,16 @@ class Mannilairpl extends BaseController
             $session->set('role', 'penilai');
         }
         helper(['tanggal']);
+
+        $user_id = $session->get('user_id');
+
+        $modelconfig = new ConfigModel();
+        $config = $modelconfig->where('config_name', 'koor_tugasakhir')->where('config_value', $user_id)->first();
+        if ($config) {
+            $data['koor_tugasakhir'] = True;
+        } else {
+            $data['koor_tugasakhir'] = False;
+        }
 
         $mhs_id = $this->request->getVar('mhs_id');
         $dosen_id = $this->request->getVar('dosen_id');
@@ -1528,6 +1609,16 @@ class Mannilairpl extends BaseController
         $mhs_id = $this->request->getVar('mhs_id');
         $dosen_id = $this->request->getVar('dosen_id');
 
+        $user_id = $session->get('user_id');
+
+        $modelconfig = new ConfigModel();
+        $config = $modelconfig->where('config_name', 'koor_tugasakhir')->where('config_value', $user_id)->first();
+        if ($config) {
+            $data['koor_tugasakhir'] = True;
+        } else {
+            $data['koor_tugasakhir'] = False;
+        }
+
         $model = new NilairplModel();
 
         //Hapus data yang ada
@@ -1747,6 +1838,16 @@ class Mannilairpl extends BaseController
             $session->set('role', 'penilai');
         }
         helper(['tanggal']);
+
+        $user_id = $session->get('user_id');
+
+        $modelconfig = new ConfigModel();
+        $config = $modelconfig->where('config_name', 'koor_tugasakhir')->where('config_value', $user_id)->first();
+        if ($config) {
+            $data['koor_tugasakhir'] = True;
+        } else {
+            $data['koor_tugasakhir'] = False;
+        }
 
         $modelprof = new ProfileModel();
         $mhsprofile = $modelprof->where('user_id', $mhs_id)->first();

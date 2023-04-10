@@ -32,6 +32,15 @@ class Manujipk extends BaseController
         } else {
             $data['data_user'] = 'kosong';
         }
+
+        $model2 = new ConfigModel();
+        $config = $model2->where('config_name', 'koor_tugasakhir')->where('config_value', $user_id)->first();
+        if ($config) {
+            $data['koor_tugasakhir'] = True;
+        } else {
+            $data['koor_tugasakhir'] = False;
+        }
+
         $data['title_page'] = "Data Peserta Ujian PK";
         $data['data_bread'] = "Ujian";
         return view('maintemp/ujipk', $data);
@@ -50,6 +59,15 @@ class Manujipk extends BaseController
         helper(['tanggal']);
         helper(['nilai']);
         $user_id = $session->get('user_id');
+
+        $model2 = new ConfigModel();
+        $config = $model2->where('config_name', 'koor_tugasakhir')->where('config_value', $user_id)->first();
+        if ($config) {
+            $data['koor_tugasakhir'] = True;
+        } else {
+            $data['koor_tugasakhir'] = False;
+        }
+
 
         $model = new NilaitaModel();
         $nilaita = $model->where('ta_id', $ta_id)->join('tbl_profile', 'tbl_nilaita.dosen_id = tbl_profile.user_id')->orderby('nilaita_id', 'ASC')->findall();
@@ -79,6 +97,16 @@ class Manujipk extends BaseController
             return redirect()->to('/home');
         }
         helper(['tanggal']);
+
+        $user_id = $session->get('user_id');
+        $model2 = new ConfigModel();
+        $config = $model2->where('config_name', 'koor_tugasakhir')->where('config_value', $user_id)->first();
+        if ($config) {
+            $data['koor_tugasakhir'] = True;
+        } else {
+            $data['koor_tugasakhir'] = False;
+        }
+
 
         $data['logged_in'] = $logged_in;
         $data['mhs_id'] = $mhs_id;
@@ -189,6 +217,15 @@ class Manujipk extends BaseController
 
             return redirect()->to('/manujipk/lihatnilai/' . $mhs_id . '/' . $dosen_id . '/' . $ta_id);
         } else {
+
+            $model2 = new ConfigModel();
+            $config = $model2->where('config_name', 'koor_tugasakhir')->where('config_value', $user_id)->first();
+            if ($config) {
+                $data['koor_tugasakhir'] = True;
+            } else {
+                $data['koor_tugasakhir'] = False;
+            }
+
             $data['logged_in'] = $logged_in;
             $data['mhs_id'] = $mhs_id;
             $data['dosen_id'] = $dosen_id;

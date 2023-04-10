@@ -24,7 +24,7 @@ class Manconfig extends BaseController
         } else {
             $data['data_config'] = 'kosong';
         }
-        $data['title_page'] = "Konfigurasi WEb";
+        $data['title_page'] = "Konfigurasi Web";
         $data['data_bread'] = "Konfigurasi";
         return view('maintemp/konfigurasi', $data);
     }

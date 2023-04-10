@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\RisetModel;
+use App\Models\ConfigModel;
 
 class Dosenriset extends BaseController
 {
@@ -16,6 +17,14 @@ class Dosenriset extends BaseController
             return redirect()->to('/home');
         }
         helper(['tanggal']);
+
+        $modelconfig = new ConfigModel();
+        $config = $modelconfig->where('config_name', 'koor_tugasakhir')->where('config_value', $user_id)->first();
+        if ($config) {
+            $data['koor_tugasakhir'] = True;
+        } else {
+            $data['koor_tugasakhir'] = False;
+        }
 
         $model = new RisetModel();
         $data['logged_in'] = $logged_in;
@@ -38,6 +47,17 @@ class Dosenriset extends BaseController
         if ((!$logged_in) && (!$issadmin)) {
             return redirect()->to('/home');
         }
+
+        $user_id = $session->get('user_id');
+
+        $modelconfig = new ConfigModel();
+        $config = $modelconfig->where('config_name', 'koor_tugasakhir')->where('config_value', $user_id)->first();
+        if ($config) {
+            $data['koor_tugasakhir'] = True;
+        } else {
+            $data['koor_tugasakhir'] = False;
+        }
+
         $data['logged_in'] = $logged_in;
         $data['title_page'] = "Tambah Data Riset dan Pengabdian Masyarakat";
         $data['data_bread'] = "Tambah Data Riset dan Pengmas";
@@ -216,6 +236,17 @@ class Dosenriset extends BaseController
                 'ProjValue' => $str
             ];
         }
+
+        $user_id = $session->get('user_id');
+
+        $modelconfig = new ConfigModel();
+        $config = $modelconfig->where('config_name', 'koor_tugasakhir')->where('config_value', $user_id)->first();
+        if ($config) {
+            $data['koor_tugasakhir'] = True;
+        } else {
+            $data['koor_tugasakhir'] = False;
+        }
+
         $data['logged_in'] = $logged_in;
         $data['title_page'] = "Ubah Data Riset dan Pengabdian Masyarakat";
         $data['data_bread'] = "Ubah Data Riset / Pengmas";

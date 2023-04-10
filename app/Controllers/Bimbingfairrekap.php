@@ -15,6 +15,7 @@ use App\Models\InovasiModel;
 use App\Models\BahasaModel;
 use App\Models\ProfileModel;
 use App\Libraries\Slug;
+use App\Models\ConfigModel;
 
 class Bimbingfairrekap extends BaseController
 {
@@ -34,6 +35,17 @@ class Bimbingfairrekap extends BaseController
         } else {
             $user_id = $session->get('user_id');
         }
+
+        $user_id1 = $session->get('user_id');
+
+        $model2 = new ConfigModel();
+        $config = $model2->where('config_name', 'koor_tugasakhir')->where('config_value', $user_id1)->first();
+        if ($config) {
+            $data['koor_tugasakhir'] = True;
+        } else {
+            $data['koor_tugasakhir'] = False;
+        }
+
         helper(['tanggal']);
 
         $model = new UserModel();

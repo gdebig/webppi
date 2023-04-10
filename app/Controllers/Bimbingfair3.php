@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Models\CapesKualifikasiModel;
 use App\Models\KompModel;
 use App\Libraries\Slug;
+use App\Models\ConfigModel;
 
 class Bimbingfair3 extends BaseController
 {
@@ -24,6 +25,17 @@ class Bimbingfair3 extends BaseController
         } else {
             $user_id = $session->get('user_id');
         }
+
+        $user_id1 = $session->get('user_id');
+
+        $model2 = new ConfigModel();
+        $config = $model2->where('config_name', 'koor_tugasakhir')->where('config_value', $user_id1)->first();
+        if ($config) {
+            $data['koor_tugasakhir'] = True;
+        } else {
+            $data['koor_tugasakhir'] = False;
+        }
+
         helper(['tanggal']);
         $model = new CapesKualifikasiModel();
         $data['capeslogged_in'] = $session->get('capeslogged_in');

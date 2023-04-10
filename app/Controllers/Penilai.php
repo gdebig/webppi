@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\AkunModel;
+use App\Models\ConfigModel;
 use App\Models\UmumModel;
 
 class Penilai extends BaseController
@@ -12,6 +13,7 @@ class Penilai extends BaseController
         $session = session();
         $logged_in = $session->get('logged_in');
         $ispenilai = $session->get('ispenilai');
+        $user_id = $session->get('user_id');
         if ((!$logged_in) && (!$ispenilai)) {
             return redirect()->to('/home');
         } else {
@@ -26,6 +28,14 @@ class Penilai extends BaseController
             $data['data_umum'] = 'kosong';
         }
 
+        $model2 = new ConfigModel();
+        $config = $model2->where('config_name', 'koor_tugasakhir')->where('config_value', $user_id)->first();
+        if ($config) {
+            $data['koor_tugasakhir'] = True;
+        } else {
+            $data['koor_tugasakhir'] = False;
+        }
+
         $data['informasi'] = 'Selamat datang sebagai role Penilai. Pada modul ini, tersedia menu yang diperlukan penilai untuk melakukan penilaian Peserta RPL.';
         $data['title_page'] = "Dashboard PPI RPL";
         $data['data_bread'] = "dashboard";
@@ -33,93 +43,24 @@ class Penilai extends BaseController
         return view('maintemp/dashboard', $data);
     }
 
-    //Fungsi autentikasi hasil login CaPes
-    public function auth()
-    {
-
-        helper(['form']);
-        $rules = [
-            'username'     => 'required',
-            'password'     => 'required'
-        ];
-
-        if ($this->validate($rules)) {
-            $session = session();
-            $model = new AkunModel();
-            $username = $this->request->getVar('username');
-            $password = $this->request->getVar('password');
-            $data = $model->where('username', $username)->first();
-            if ($data) {
-                $pass = $data['password'];
-                $verify_pass = password_verify($password, $pass);
-                $tipe_user = $data['tipe_user'];
-                if ($verify_pass) {
-                    $issadmin = $tipe_user[0] == 'y' ? TRUE : FALSE;
-                    $isadmin = $tipe_user[1] == 'y' ? TRUE : FALSE;
-                    $ispenilai = $tipe_user[2] == 'y' ? TRUE : FALSE;
-                    $ispeserta = $tipe_user[3] == 'y' ? TRUE : FALSE;
-
-                    $ses_data = [
-                        'user_id'           => $data['user_id'],
-                        'username'          => $data['username'],
-                        'nodaftar'          => $data['nodaftar'],
-                        'status'            => $data['status'],
-                        'tipe_user'         => $data['tipe_user'],
-                        'confirmcapes'      => $data['confirmcapes'],
-                        'issadmin'          => $issadmin,
-                        'isadmin'           => $isadmin,
-                        'ispenilai'         => $ispenilai,
-                        'ispeserta'         => $ispeserta,
-                        'logged_in'         => TRUE
-                    ];
-                    $session->set($ses_data);
-                    if ($issadmin) {
-                        $session->set('role', 'superadmin');
-                        return redirect()->to('/superadmin');
-                    } elseif ($isadmin) {
-                        $session->set('role', 'admin');
-                        return redirect()->to('/admin');
-                    } elseif ($ispenilai) {
-                        $session->set('role', 'penilai');
-                        return redirect()->to('/penilai');
-                    } elseif ($ispeserta) {
-                        $session->set('role', 'peserta');
-                        return redirect()->to('/peserta');
-                    } else {
-                        $session->destroy();
-                        return redirect()->to('/home');
-                    }
-                } else {
-                    $session->setFlashdata('msg', 'Salah password');
-                    return redirect()->to('/home');
-                }
-            } else {
-                $session->setFlashdata('msg', 'Username tidak ditemukan');
-                return redirect()->to('/home');
-            }
-        } else {
-            $data['validation'] = $this->validator;
-            return view('/home', $data);
-        }
-    }
-
-    //fungsi logout
-    public function logout()
-    {
-        $session = session();
-        $session->destroy();
-        return redirect()->to('/home');
-    }
-
     public function dashboard()
     {
         $session = session();
         $logged_in = $session->get('logged_in');
         $ispenilai = $session->get('ispenilai');
+        $user_id = $session->get('user_id');
         if ((!$logged_in) && (!$ispenilai)) {
             return redirect()->to('/home');
         } else {
             $session->set('role', 'penilai');
+        }
+
+        $model2 = new ConfigModel();
+        $config = $model2->where('config_name', 'koor_tugasakhir')->where('config_value', $user_id)->first();
+        if ($config) {
+            $data['koor_tugasakhir'] = True;
+        } else {
+            $data['koor_tugasakhir'] = False;
         }
 
         $data['title_page'] = "Dashboard PPI RPL";
@@ -133,10 +74,19 @@ class Penilai extends BaseController
         $session = session();
         $logged_in = $session->get('logged_in');
         $ispenilai = $session->get('ispenilai');
+        $user_id = $session->get('user_id');
         if ((!$logged_in) && (!$ispenilai)) {
             return redirect()->to('/home');
         } else {
             $session->set('role', 'penilai');
+        }
+
+        $model2 = new ConfigModel();
+        $config = $model2->where('config_name', 'koor_tugasakhir')->where('config_value', $user_id)->first();
+        if ($config) {
+            $data['koor_tugasakhir'] = True;
+        } else {
+            $data['koor_tugasakhir'] = False;
         }
 
         $data['title_page'] = "Dokumen Akreditasi Penilai";

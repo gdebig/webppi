@@ -107,7 +107,7 @@ class Home extends BaseController
             }
         } else {
             $data['validation'] = $this->validator;
-            return view('/home', $data);
+            return view('/login', $data);
         }
     }
 

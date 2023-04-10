@@ -49,6 +49,15 @@ class Manbimbing extends BaseController
         } else {
             $data['data_user'] = 'kosong';
         }
+
+        $model2 = new ConfigModel();
+        $config = $model2->where('config_name', 'koor_tugasakhir')->where('config_value', $user_id)->first();
+        if ($config) {
+            $data['koor_tugasakhir'] = True;
+        } else {
+            $data['koor_tugasakhir'] = False;
+        }
+
         $data['title_page'] = "Data Mahasiswa Bimbingan PPI RPL";
         $data['data_bread'] = "Bimbingan";
         return view('maintemp/bimbing', $data);
@@ -76,6 +85,15 @@ class Manbimbing extends BaseController
         } else {
             $data['nilai_ta'] = 'kosong';
         }
+
+        $model2 = new ConfigModel();
+        $config = $model2->where('config_name', 'koor_tugasakhir')->where('config_value', $user_id)->first();
+        if ($config) {
+            $data['koor_tugasakhir'] = True;
+        } else {
+            $data['koor_tugasakhir'] = False;
+        }
+
         $data['logged_in'] = $logged_in;
         $data['user_id'] = $session->get('user_id');
         $data['mhs_id'] = $mhs_id;
@@ -93,10 +111,19 @@ class Manbimbing extends BaseController
         $issadmin = $session->get('issadmin');
         $isadmin = $session->get('isadmin');
         $ispenilai = $session->get('ispenilai');
+        $user_id = $session->get('user_id');
         if ((!$logged_in) && ((!$issadmin) || (!$isadmin) || (!$ispenilai))) {
             return redirect()->to('/home');
         }
         helper(['tanggal']);
+
+        $model2 = new ConfigModel();
+        $config = $model2->where('config_name', 'koor_tugasakhir')->where('config_value', $user_id)->first();
+        if ($config) {
+            $data['koor_tugasakhir'] = True;
+        } else {
+            $data['koor_tugasakhir'] = False;
+        }
 
         $data['logged_in'] = $logged_in;
         $data['mhs_id'] = $mhs_id;
@@ -123,6 +150,14 @@ class Manbimbing extends BaseController
         $mhs_id = $this->request->getVar('mhs_id');
         $dosen_id = $this->request->getVar('dosen_id');
         $ta_id = $this->request->getVar('ta_id');
+
+        $model2 = new ConfigModel();
+        $config = $model2->where('config_name', 'koor_tugasakhir')->where('config_value', $user_id)->first();
+        if ($config) {
+            $data['koor_tugasakhir'] = True;
+        } else {
+            $data['koor_tugasakhir'] = False;
+        }
 
         $submit = $this->request->getVar('submit');
         if ($submit == "batal") {

@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\PublikasiModel;
+use App\Models\ConfigModel;
 
 class Dosenpublikasi extends BaseController
 {
@@ -16,6 +17,14 @@ class Dosenpublikasi extends BaseController
             return redirect()->to('/home');
         }
         helper(['tanggal']);
+
+        $modelconfig = new ConfigModel();
+        $config = $modelconfig->where('config_name', 'koor_tugasakhir')->where('config_value', $user_id)->first();
+        if ($config) {
+            $data['koor_tugasakhir'] = True;
+        } else {
+            $data['koor_tugasakhir'] = False;
+        }
 
         $model = new PublikasiModel();
         $data['logged_in'] = $logged_in;
@@ -38,6 +47,17 @@ class Dosenpublikasi extends BaseController
         if ((!$logged_in) && (!$issadmin)) {
             return redirect()->to('/home');
         }
+
+        $user_id = $session->get('user_id');
+
+        $modelconfig = new ConfigModel();
+        $config = $modelconfig->where('config_name', 'koor_tugasakhir')->where('config_value', $user_id)->first();
+        if ($config) {
+            $data['koor_tugasakhir'] = True;
+        } else {
+            $data['koor_tugasakhir'] = False;
+        }
+
         $data['logged_in'] = $logged_in;
         $data['title_page'] = "Tambah Data Publikasi";
         $data['data_bread'] = "Tambah Data Publikasi";
@@ -168,6 +188,17 @@ class Dosenpublikasi extends BaseController
         if ((!$logged_in) && (!$issadmin)) {
             return redirect()->to('/home');
         }
+
+        $user_id = $session->get('user_id');
+
+        $modelconfig = new ConfigModel();
+        $config = $modelconfig->where('config_name', 'koor_tugasakhir')->where('config_value', $user_id)->first();
+        if ($config) {
+            $data['koor_tugasakhir'] = True;
+        } else {
+            $data['koor_tugasakhir'] = False;
+        }
+
         $pub = $model->where('pub_id', $id)->first();
         if ($pub) {
             $data = [
