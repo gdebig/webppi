@@ -27,13 +27,13 @@
 if (isset($koor_tugasakhir) && ($koor_tugasakhir)) {
 ?>
     <li class="nav-item">
-        <a href="<?php echo base_url(); ?>/mannilairpl" class="nav-link">
+        <a href="<?php echo base_url(); ?>/mansemreg" class="nav-link">
             <i class="fas fa-graduation-cap nav-icon"></i>
             <p>Manajemen Seminar Regular</p>
         </a>
     </li>
     <li class="nav-item">
-        <a href="<?php echo base_url(); ?>/penilai/dokumen" class="nav-link">
+        <a href="<?php echo base_url(); ?>/mantareg" class="nav-link">
             <i class="fas fa-folder-open nav-icon"></i>
             <p>Manajemen Tugas Akhir Regular</p>
         </a>
