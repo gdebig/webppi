@@ -26,12 +26,6 @@
                         &nbsp;
                     </div>
                 </div>
-
-                <div class="col">
-                    <div class="row">
-                        <p>Dosen pembimbing: <?= $dosen_bimbing; ?></p>
-                    </div>
-                </div>
                 <?php if (isset($data_ta) && ($data_ta == "kosong")) {
                 ?>
 
@@ -51,7 +45,6 @@
                                 <th>Buku TA</th>
                                 <th>Log</th>
                                 <th>Video</th>
-                                <th>Penguji</th>
                                 <th>Nilai</th>
                                 <th>Buku Revisi</th>
                                 <th>Aksi</th>
@@ -96,15 +89,6 @@
                                             echo "<a href='" . $ta['tar_linkvideo'] . "' target='_blank'>Video</a>";
                                         } else {
                                             echo "Belum ada video";
-                                        }
-                                        ?>
-                                    </td>
-                                    <td>
-                                        <?php
-                                        if (!empty($ta['FullName'])) {
-                                            echo $ta['FullName'];
-                                        } else {
-                                            echo "Belum ada penguji";
                                         }
                                         ?>
                                     </td>

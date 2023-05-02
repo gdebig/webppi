@@ -51,6 +51,9 @@ use App\Models\ProfileModel;
                                 <?php
                                 $i = 1;
                                 foreach ($data_user as $user) :
+                                    if (empty($user['user_id'])) {
+                                        continue;
+                                    }
                                 ?>
                                     <tr>
                                         <td><?php echo $i;

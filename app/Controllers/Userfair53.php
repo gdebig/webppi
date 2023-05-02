@@ -272,7 +272,7 @@ class Userfair53 extends BaseController
         }
     }
 
-    public function hapusmak($id)
+    public function hapussem($id)
     {
         $session = session();
         $logged_in = $session->get('logged_in');

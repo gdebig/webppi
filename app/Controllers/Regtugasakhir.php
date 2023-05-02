@@ -22,18 +22,11 @@ class Regtugasakhir extends BaseController
         $user_id = $session->get('user_id');
         $model = new TarModel();
         $data['logged_in'] = $logged_in;
-        $ta = $model->where('tbl_tugasakhirreg.user_id', $user_id)->join('tbl_profile', 'tbl_tugasakhirreg.tar_penguji = tbl_profile.user_id', 'left')->orderBy('tbl_tugasakhirreg.tar_id', 'DESC')->findall();
+        $ta = $model->where('tbl_tugasakhirreg.user_id', $user_id)->orderBy('tbl_tugasakhirreg.tar_id', 'DESC')->findall();
         if (!empty($ta)) {
             $data['data_ta'] = $ta;
         } else {
             $data['data_ta'] = 'kosong';
-        }
-        $model1 = new BimbingModel();
-        $bimbing = $model1->where('tbl_bimbing.mhs_id', $user_id)->join('tbl_profile', 'tbl_profile.user_id = tbl_bimbing.dosen_id', 'left')->first();
-        if ($bimbing) {
-            $data['dosen_bimbing'] = $bimbing['FullName'];
-        } else {
-            $data['dosen_bimbing'] = "Belum ada pembimbing";
         }
 
         $data['menureg'] = 'menureg';

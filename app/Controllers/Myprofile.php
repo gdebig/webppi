@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Models\ProfileModel;
 use App\Models\AkunModel;
 use App\Models\UserModel;
+use App\Models\ConfigModel;
 
 class Myprofile extends BaseController
 {
@@ -58,6 +59,22 @@ class Myprofile extends BaseController
         } else {
             $data['kosong'] = "kosong";
         }
+
+        //Peserta Reguler
+        $tipepeserta = $session->get('tipepeserta');
+        if ($tipepeserta == "Reguler") {
+            $data['menureg'] = 'menureg';
+        }
+
+        //Koordinator TA Reguler
+        $model2 = new ConfigModel();
+        $config = $model2->where('config_name', 'koor_tugasakhir')->where('config_value', $user_id)->first();
+        if ($config) {
+            $data['koor_tugasakhir'] = True;
+        } else {
+            $data['koor_tugasakhir'] = False;
+        }
+
         $data['role'] = $role;
         $data['logged_in'] = $logged_in;
         $data['title_page'] = "Profile Saya";
@@ -74,6 +91,22 @@ class Myprofile extends BaseController
         if (!$logged_in) {
             return redirect()->to('/home');
         }
+
+        //Peserta Reguler
+        $tipepeserta = $session->get('tipepeserta');
+        if ($tipepeserta == "Reguler") {
+            $data['menureg'] = 'menureg';
+        }
+
+        //Koordinator TA Reguler
+        $model2 = new ConfigModel();
+        $config = $model2->where('config_name', 'koor_tugasakhir')->where('config_value', $user_id)->first();
+        if ($config) {
+            $data['koor_tugasakhir'] = True;
+        } else {
+            $data['koor_tugasakhir'] = False;
+        }
+
         $data['user_id'] = $user_id;
         $data['role'] = $role;
         $data['title_page'] = "Buat Profile Saya";
@@ -404,6 +437,22 @@ class Myprofile extends BaseController
                 'signed' => $user['signed']
             ];
         }
+
+        //Peserta Reguler
+        $tipepeserta = $session->get('tipepeserta');
+        if ($tipepeserta == "Reguler") {
+            $data['menureg'] = 'menureg';
+        }
+
+        //Koordinator TA Reguler
+        $model2 = new ConfigModel();
+        $config = $model2->where('config_name', 'koor_tugasakhir')->where('config_value', $id)->first();
+        if ($config) {
+            $data['koor_tugasakhir'] = True;
+        } else {
+            $data['koor_tugasakhir'] = False;
+        }
+
         $data['role'] = $session->get('role');
         $data['title_page'] = "Ubah Profile Peserta PPI RPL";
         $data['data_bread'] = "Ubah Profile";
@@ -767,6 +816,22 @@ class Myprofile extends BaseController
                 'username' => $user1['username']
             ];
         }
+
+        //Peserta Reguler
+        $tipepeserta = $session->get('tipepeserta');
+        if ($tipepeserta == "Reguler") {
+            $data['menureg'] = 'menureg';
+        }
+
+        //Koordinator TA Reguler
+        $model2 = new ConfigModel();
+        $config = $model2->where('config_name', 'koor_tugasakhir')->where('config_value', $id)->first();
+        if ($config) {
+            $data['koor_tugasakhir'] = True;
+        } else {
+            $data['koor_tugasakhir'] = False;
+        }
+
         $data['title_page'] = "Ubah Password";
         $data['data_bread'] = "Ubah Password";
         $data['logged_in'] = $session->get('logged_in');
