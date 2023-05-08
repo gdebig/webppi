@@ -5,9 +5,8 @@ namespace App\Controllers;
 use App\Models\UserModel;
 use App\Models\ProfileModel;
 use App\Models\TarModel;
-use App\Models\BimbingModel;
 use App\Models\JadwalSidangRegModel;
-use App\Models\NilaitaModel;
+use App\Models\NilaitarModel;
 use App\Models\ConfigModel;
 
 class Mantareg extends BaseController
@@ -66,6 +65,17 @@ class Mantareg extends BaseController
         } else {
             $data['data_js'] = 'kosong';
         }
+
+        //Koordinator TA Reguler
+        $id = $session->get('user_id');
+        $model2 = new ConfigModel();
+        $config = $model2->where('config_name', 'koor_tugasakhir')->where('config_value', $id)->first();
+        if ($config) {
+            $data['koor_tugasakhir'] = True;
+        } else {
+            $data['koor_tugasakhir'] = False;
+        }
+
         $data['tar_id'] = $tar_id;
         $data['user_id'] = $user_id;
         $data['title_page'] = "Jadwal Sidang Peserta PPI Reguler";
@@ -74,7 +84,7 @@ class Mantareg extends BaseController
         return view('maintemp/manjadwalsidangreg', $data);
     }
 
-    public function tambahjadwal($id, $user_id)
+    public function tambahjadwal($tar_id, $user_id)
     {
         $session = session();
         $logged_in = $session->get('logged_in');
@@ -85,7 +95,18 @@ class Mantareg extends BaseController
         }
         helper(['tanggal']);
 
-        $data['tar_id'] = $id;
+        //Koordinator TA Reguler
+        $id = $session->get('user_id');
+        $model2 = new ConfigModel();
+        $config = $model2->where('config_name', 'koor_tugasakhir')->where('config_value', $id)->first();
+        if ($config) {
+            $data['koor_tugasakhir'] = True;
+        } else {
+            $data['koor_tugasakhir'] = False;
+        }
+
+
+        $data['tar_id'] = $tar_id;
         $data['user_id'] = $user_id;
         $data['title_page'] = "Jadwal Sidang Peserta PPI Reguler";
         $data['data_bread'] = "Tambah Jadwal Sidang";
@@ -148,6 +169,17 @@ class Mantareg extends BaseController
         } else {
             $data['tar_id'] = $tar_id;
             $data['user_id'] = $user_id;
+
+            //Koordinator TA Reguler
+            $id = $session->get('user_id');
+            $model2 = new ConfigModel();
+            $config = $model2->where('config_name', 'koor_tugasakhir')->where('config_value', $id)->first();
+            if ($config) {
+                $data['koor_tugasakhir'] = True;
+            } else {
+                $data['koor_tugasakhir'] = False;
+            }
+
             $data['title_page'] = "Jadwal Sidang Peserta PPI Reguler";
             $data['data_bread'] = "Tambah Jadwal Sidang";
             $data['logged_in'] = $logged_in;
@@ -181,13 +213,23 @@ class Mantareg extends BaseController
         if ((!$logged_in) && ((!$issadmin) || (!$isadmin))) {
             return redirect()->to('/home');
         }
-        $model = new TarModel();
-        $penguji = $model->where('tar_id', $tar_id)->orderby('tar_id', 'DESC')->findall();
+        $model = new NilaitarModel();
+        $penguji = $model->where('tar_id', $tar_id)->where('tipedosen', 'Penguji')->join('tbl_profile', 'tbl_nilaitar.dosen_id = tbl_profile.user_id', 'left')->orderby('tar_id', 'DESC')->findall();
 
         if ($penguji) {
             $data['data_uji'] = $penguji;
         } else {
             $data['data_uji'] = 'kosong';
+        }
+
+        //Koordinator TA Reguler
+        $id = $session->get('user_id');
+        $model2 = new ConfigModel();
+        $config = $model2->where('config_name', 'koor_tugasakhir')->where('config_value', $id)->first();
+        if ($config) {
+            $data['koor_tugasakhir'] = True;
+        } else {
+            $data['koor_tugasakhir'] = False;
         }
 
         helper(['tanggal']);
@@ -197,10 +239,10 @@ class Mantareg extends BaseController
         $data['title_page'] = "Daftar Penguji Proyek Akhir Peserta PPI Reguler";
         $data['data_bread'] = "Penguji Proyek Akhir";
         $data['logged_in'] = $logged_in;
-        return view('maintemp/manpenguji', $data);
+        return view('maintemp/manpengujitar', $data);
     }
 
-    public function tambahpenguji($id, $user_id)
+    public function tambahpenguji($tar_id, $user_id)
     {
         $session = session();
         $logged_in = $session->get('logged_in');
@@ -219,12 +261,22 @@ class Mantareg extends BaseController
             $data['data_user'] = 'kosong';
         }
 
-        $data['tar_id'] = $id;
+        //Koordinator TA Reguler
+        $id = $session->get('user_id');
+        $model2 = new ConfigModel();
+        $config = $model2->where('config_name', 'koor_tugasakhir')->where('config_value', $id)->first();
+        if ($config) {
+            $data['koor_tugasakhir'] = True;
+        } else {
+            $data['koor_tugasakhir'] = False;
+        }
+
+        $data['tar_id'] = $tar_id;
         $data['user_id'] = $user_id;
         $data['title_page'] = "Tambah Penguji Proyek Akhir Peserta PPI Reguler";
         $data['data_bread'] = "Tambah Penguji";
         $data['logged_in'] = $logged_in;
-        return view('maintemp/tambahpenguji', $data);
+        return view('maintemp/tambahpengujireg', $data);
     }
 
     public function tambahujiproses()
@@ -237,7 +289,7 @@ class Mantareg extends BaseController
             return redirect()->to('/home');
         }
         helper(['tanggal']);
-        $model = new TarModel();
+        $model = new NilaitarModel();
         $user_id = $this->request->getVar('user_id');
         $tar_id = $this->request->getVar('tar_id');
         $submit = $this->request->getVar('submit');
@@ -249,10 +301,15 @@ class Mantareg extends BaseController
             $user_id = $this->request->getVar('user_id');
 
             $dataarray = array(
-                'ta_penguji' => $penguji,
+                'tar_id' => $tar_id,
+                'dosen_id' => $penguji,
+                'mhs_id' => $user_id,
+                'tipedosen' => 'Penguji',
+                'date_created' => date('Y-m-d'),
+                'date_modified' => date('Y-m-d')
             );
 
-            $model->update($tar_id, $dataarray);
+            $model->save($dataarray);
 
             $session->setFlashdata('msg', 'Penguji Praktek Keinsinyuran berhasil di set.');
             return redirect()->to('/mantareg/setpenguji/' . $tar_id . '/' . $user_id);
@@ -268,16 +325,139 @@ class Mantareg extends BaseController
         if ((!$logged_in) && ((!$issadmin) || (!$isadmin))) {
             return redirect()->to('/home');
         }
-        $model = new TarModel();
-
-        $dataarray = array(
-            'ta_penguji' => '',
-        );
-
-        $model->update($tar_id, $dataarray);
+        $model = new NilaitarModel();
+        $model->delete($tar_id);
         $session->setFlashdata('msg', 'Data penguji berhasil dihapus.');
 
         return redirect()->to('/mantareg/setpenguji/' . $tar_id . '/' . $user_id);
+    }
+
+    public function setpembimbing($tar_id, $user_id)
+    {
+        $session = session();
+        $logged_in = $session->get('logged_in');
+        $issadmin = $session->get('issadmin');
+        $isadmin = $session->get('isadmin');
+        if ((!$logged_in) && ((!$issadmin) || (!$isadmin))) {
+            return redirect()->to('/home');
+        }
+        $model = new NilaitarModel();
+        $penguji = $model->where('tar_id', $tar_id)->where('tipedosen', 'Pembimbing')->join('tbl_profile', 'tbl_nilaitar.dosen_id = tbl_profile.user_id', 'left')->orderby('tar_id', 'DESC')->findall();
+
+        if ($penguji) {
+            $data['data_uji'] = $penguji;
+        } else {
+            $data['data_uji'] = 'kosong';
+        }
+
+        //Koordinator TA Reguler
+        $id = $session->get('user_id');
+        $model2 = new ConfigModel();
+        $config = $model2->where('config_name', 'koor_tugasakhir')->where('config_value', $id)->first();
+        if ($config) {
+            $data['koor_tugasakhir'] = True;
+        } else {
+            $data['koor_tugasakhir'] = False;
+        }
+
+        helper(['tanggal']);
+
+        $data['tar_id'] = $tar_id;
+        $data['user_id'] = $user_id;
+        $data['title_page'] = "Daftar Pembimbing Proyek Akhir Peserta PPI Reguler";
+        $data['data_bread'] = "Pembimbing Proyek Akhir";
+        $data['logged_in'] = $logged_in;
+        return view('maintemp/manpembimbingtar', $data);
+    }
+
+    public function tambahpembimbing($tar_id, $user_id)
+    {
+        $session = session();
+        $logged_in = $session->get('logged_in');
+        $issadmin = $session->get('issadmin');
+        $isadmin = $session->get('isadmin');
+        if ((!$logged_in) && ((!$issadmin) || (!$isadmin))) {
+            return redirect()->to('/home');
+        }
+        helper(['tanggal']);
+        $model = new UserModel();
+        $where = "tipe_user LIKE '__y_'";
+        $user = $model->join('tbl_profile', 'tbl_user.user_id = tbl_profile.user_id', 'left')->where($where)->orderby('tbl_profile.FullName', 'ASC')->findall();
+        if (!empty($user)) {
+            $data['data_user'] = $user;
+        } else {
+            $data['data_user'] = 'kosong';
+        }
+
+        //Koordinator TA Reguler
+        $id = $session->get('user_id');
+        $model2 = new ConfigModel();
+        $config = $model2->where('config_name', 'koor_tugasakhir')->where('config_value', $id)->first();
+        if ($config) {
+            $data['koor_tugasakhir'] = True;
+        } else {
+            $data['koor_tugasakhir'] = False;
+        }
+
+        $data['tar_id'] = $tar_id;
+        $data['user_id'] = $user_id;
+        $data['title_page'] = "Tambah Pembimbing Proyek Akhir Peserta PPI Reguler";
+        $data['data_bread'] = "Tambah Pembimbing";
+        $data['logged_in'] = $logged_in;
+        return view('maintemp/tambahpembimbingreg', $data);
+    }
+
+    public function tambahbimbingproses()
+    {
+        $session = session();
+        $logged_in = $session->get('logged_in');
+        $issadmin = $session->get('issadmin');
+        $isadmin = $session->get('isadmin');
+        if ((!$logged_in) && ((!$issadmin) || (!$isadmin))) {
+            return redirect()->to('/home');
+        }
+        helper(['tanggal']);
+        $model = new NilaitarModel();
+        $user_id = $this->request->getVar('user_id');
+        $tar_id = $this->request->getVar('tar_id');
+        $submit = $this->request->getVar('submit');
+        if ($submit == "batal") {
+            return redirect()->to('/mantareg/setpembimbing/' . $tar_id . '/' . $user_id);
+        } else {
+            $penguji = $this->request->getVar('penguji');
+            $tar_id = $this->request->getVar('tar_id');
+            $user_id = $this->request->getVar('user_id');
+
+            $dataarray = array(
+                'tar_id' => $tar_id,
+                'dosen_id' => $penguji,
+                'mhs_id' => $user_id,
+                'tipedosen' => 'Pembimbing',
+                'date_created' => date('Y-m-d'),
+                'date_modified' => date('Y-m-d')
+            );
+
+            $model->save($dataarray);
+
+            $session->setFlashdata('msg', 'Penguji Praktek Keinsinyuran berhasil di set.');
+            return redirect()->to('/mantareg/setpembimbing/' . $tar_id . '/' . $user_id);
+        }
+    }
+
+    public function hapusbimbing($id, $tar_id, $user_id)
+    {
+        $session = session();
+        $logged_in = $session->get('logged_in');
+        $issadmin = $session->get('issadmin');
+        $isadmin = $session->get('isadmin');
+        if ((!$logged_in) && ((!$issadmin) || (!$isadmin))) {
+            return redirect()->to('/home');
+        }
+        $model = new NilaitarModel();
+        $model->delete($tar_id);
+        $session->setFlashdata('msg', 'Data Pembimbing berhasil dihapus.');
+
+        return redirect()->to('/mantareg/setpembimbing/' . $tar_id . '/' . $user_id);
     }
 
     public function admta($tar_id, $user_id)
@@ -292,7 +472,7 @@ class Mantareg extends BaseController
 
         helper(['tanggal']);
 
-        $model = new NilaitaModel();
+        $model = new NilaitarModel();
         $bimbing = $model->where('tar_id', $tar_id)->where('tipedosen', 'Pembimbing')->first();
         if ($bimbing) {
             $data['bimbing_id'] = $bimbing['dosen_id'];
@@ -309,12 +489,22 @@ class Mantareg extends BaseController
             $data['uji_id'] = "kosong";
         }
 
+        //Koordinator TA Reguler
+        $id = $session->get('user_id');
+        $model2 = new ConfigModel();
+        $config = $model2->where('config_name', 'koor_tugasakhir')->where('config_value', $id)->first();
+        if ($config) {
+            $data['koor_tugasakhir'] = True;
+        } else {
+            $data['koor_tugasakhir'] = False;
+        }
+
         $data['tar_id'] = $tar_id;
         $data['user_id'] = $user_id;
         $data['title_page'] = "Daftar Administrasi Praktek Keinsinyuran";
         $data['data_bread'] = "Daftar Administrasi";
         $data['logged_in'] = $logged_in;
-        return view('maintemp/daftaradm', $data);
+        return view('maintemp/daftaradmreg', $data);
     }
 
     public function lihatnilai($tar_id, $mhs_id)
@@ -332,8 +522,17 @@ class Mantareg extends BaseController
 
         $user_id = $session->get('user_id');
 
-        $model = new NilaitaModel();
-        $nilaita = $model->where('tar_id', $tar_id)->join('tbl_profile', 'tbl_nilaita.dosen_id = tbl_profile.user_id')->orderby('nilaitar_id', 'ASC')->findall();
+        //Koordinator TA Reguler
+        $model2 = new ConfigModel();
+        $config = $model2->where('config_name', 'koor_tugasakhir')->where('config_value', $user_id)->first();
+        if ($config) {
+            $data['koor_tugasakhir'] = True;
+        } else {
+            $data['koor_tugasakhir'] = False;
+        }
+
+        $model = new NilaitarModel();
+        $nilaita = $model->where('tar_id', $tar_id)->where('mhs_id', $mhs_id)->join('tbl_profile', 'tbl_nilaitar.dosen_id = tbl_profile.user_id')->orderby('nilaitar_id', 'ASC')->findall();
         if (!empty($nilaita)) {
             $data['nilai_ta'] = $nilaita;
         } else {
@@ -343,7 +542,7 @@ class Mantareg extends BaseController
         $data['user_id'] = $session->get('user_id');
         $data['title_page'] = "Lihat Nilai Praktek Keinsinyuran";
         $data['data_bread'] = "Nilai PK";
-        return view('maintemp/lihatnilaipkadmin', $data);
+        return view('maintemp/lihatnilaireg', $data);
     }
 
     public function lihatformevaluasi($mhs_id, $dosen_id, $tar_id)
@@ -359,8 +558,8 @@ class Mantareg extends BaseController
         helper(['tanggal']);
         helper(['nilai']);
 
-        $model = new BimbingModel();
-        $bimbing = $model->where('mhs_id', $mhs_id)->first();
+        $model = new NilaitarModel();
+        $bimbing = $model->where('tar_id', $tar_id)->where('tipedosen', 'Pembimbing')->first();
         if ($bimbing) {
             $bimbing_id = $bimbing['dosen_id'];
         }
@@ -396,8 +595,8 @@ class Mantareg extends BaseController
             $data['instansi'] = $tugasakhir['instansi'];
             $data['divisi'] = $tugasakhir['divisi'];
             $data['periode'] = format_indo($tugasakhir['startdate']) . ' - ' . format_indo($tugasakhir['enddate']);
-            $data['lapjudul'] = $tugasakhir['ta_usuljudul'];
-            $data['confirm'] = $tugasakhir['ta_confirm'];
+            $data['lapjudul'] = $tugasakhir['tar_usuljudul'];
+            $data['confirm'] = $tugasakhir['tar_confirm'];
         }
 
         if ($data['confirm'] == 'Ya') {
@@ -410,7 +609,7 @@ class Mantareg extends BaseController
             }
         }
 
-        $model = new NilaitaModel();
+        $model = new NilaitarModel();
         $nilaita = $model->where('tar_id', $tar_id)->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->first();
         if ($nilaita) {
             $data['penulisan'] = $nilaita['penulisan'];
@@ -442,8 +641,8 @@ class Mantareg extends BaseController
         helper(['tanggal']);
         helper(['nilai']);
 
-        $model = new BimbingModel();
-        $bimbing = $model->where('mhs_id', $mhs_id)->first();
+        $model = new NilaitarModel();
+        $bimbing = $model->where('tar_id', $tar_id)->where('tipedosen', 'Pembimbing')->first();
         if ($bimbing) {
             $bimbing_id = $bimbing['dosen_id'];
         }
@@ -462,8 +661,8 @@ class Mantareg extends BaseController
             $data['instansi'] = $tugasakhir['instansi'];
             $data['divisi'] = $tugasakhir['divisi'];
             $data['periode'] = format_indo($tugasakhir['startdate']) . ' - ' . format_indo($tugasakhir['enddate']);
-            $data['lapjudul'] = $tugasakhir['ta_usuljudul'];
-            $data['confirm'] = $tugasakhir['ta_confirm'];
+            $data['lapjudul'] = $tugasakhir['tar_usuljudul'];
+            $data['confirm'] = $tugasakhir['tar_confirm'];
         }
 
         if ($data['confirm'] == 'Ya') {
@@ -476,8 +675,8 @@ class Mantareg extends BaseController
             }
         }
 
-        $model = new NilaitaModel();
-        $nilaita = $model->where('tar_id', $tar_id)->join('tbl_profile', 'tbl_nilaita.dosen_id = tbl_profile.user_id', 'left')->findall();
+        $model = new NilaitarModel();
+        $nilaita = $model->where('tar_id', $tar_id)->join('tbl_profile', 'tbl_nilaitar.dosen_id = tbl_profile.user_id', 'left')->findall();
         if ($nilaita) {
             $data['nilaita'] = $nilaita;
         } else {
@@ -518,8 +717,8 @@ class Mantareg extends BaseController
             $data['instansi'] = $tugasakhir['instansi'];
             $data['divisi'] = $tugasakhir['divisi'];
             $data['periode'] = format_indo($tugasakhir['startdate']) . ' - ' . format_indo($tugasakhir['enddate']);
-            $data['lapjudul'] = $tugasakhir['ta_usuljudul'];
-            $data['confirm'] = $tugasakhir['ta_confirm'];
+            $data['lapjudul'] = $tugasakhir['tar_usuljudul'];
+            $data['confirm'] = $tugasakhir['tar_confirm'];
         }
 
         if ($data['confirm'] == 'Ya') {
@@ -544,8 +743,8 @@ class Mantareg extends BaseController
             $data['semaktif'] = $semester['config_value'];
         }
 
-        $model = new NilaitaModel();
-        $nilaita = $model->where('tar_id', $tar_id)->join('tbl_profile', 'tbl_nilaita.dosen_id = tbl_profile.user_id', 'left')->findall();
+        $model = new NilaitarModel();
+        $nilaita = $model->where('tar_id', $tar_id)->join('tbl_profile', 'tbl_nilaitar.dosen_id = tbl_profile.user_id', 'left')->findall();
         if ($nilaita) {
             $data['nilaita'] = $nilaita;
         } else {
@@ -557,7 +756,7 @@ class Mantareg extends BaseController
         return view('maintemp/beritaacara', $data);
     }
 
-    function prosesconfirmta()
+    function prosesconfirmtar()
     {
         $session = session();
         $logged_in = $session->get('logged_in');
@@ -575,7 +774,7 @@ class Mantareg extends BaseController
             if (!empty($taid)) {
                 foreach ($taid as $id) {
                     $data = array(
-                        'ta_confirm' => $confirmta,
+                        'tar_confirm' => $confirmta,
                         'date_modified' => date('Y-m-d')
                     );
 

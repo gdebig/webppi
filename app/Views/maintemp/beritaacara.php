@@ -176,17 +176,17 @@
     <table>
         <tr>
             <td valign="top" width="20%">Tanggal</td>
-            <td valign="top" width="3%">&nbsp; :</td>
+            <td valign="top" width="3%">:</td>
             <td valign="top" width="77%"><?= $tanggal_sidang; ?></td>
         </tr>
         <tr>
             <td valign="top" width="20%">Jam</td>
-            <td valign="top" width="3%">&nbsp; :</td>
+            <td valign="top" width="3%">:</td>
             <td valign="top" width="77%"><?= $jam_sidang . " WIB"; ?></td>
         </tr>
         <tr>
             <td valign="top" width="20%">Tempat</td>
-            <td valign="top" width="3%">&nbsp; :</td>
+            <td valign="top" width="3%">:</td>
             <td valign="top" width="77%"><?= $tempat_sidang; ?></td>
         </tr>
     </table>

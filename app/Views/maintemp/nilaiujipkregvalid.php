@@ -5,7 +5,7 @@
 <div class="card card-primary" style="width: auto; margin: 30px;">
     <div class="col-sm-13" style="width: auto; margin: 30px;">
         <div class="">
-            <h3>Penilaian Tugas Akhir oleh Penguji</h3>
+            <h3>Penilaian Tugas Akhir Peserta Reguler</h3>
         </div>
 
         <?php if (isset($validation)) : ?>
@@ -14,10 +14,10 @@
 
         <!-- /.card-header -->
         <div class="card-body" style="width: auto; margin: 30px;">
-            <form action="<?php echo base_url(); ?>/manujipk/nilaiujipkproses" method="post" enctype="multipart/form-data">
+            <form action="<?php echo base_url(); ?>/manujipkreg/nilaiujipkproses" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="mhs_id" id="mhs_id" value="<?= $mhs_id; ?>" />
                 <input type="hidden" id="dosen_id" name="dosen_id" value="<?= $dosen_id ?>">
-                <input type="hidden" id="ta_id" name="ta_id" value="<?= $ta_id ?>">
+                <input type="hidden" id="tar_id" name="tar_id" value="<?= $tar_id ?>">
                 <div class="form-group">
                     <label for="penulisan" class="element">Penulisan Laporan (30%) <span class="required">
                             *</span>&nbsp;

@@ -11,6 +11,12 @@
     </a>
 </li>
 <li class="nav-item">
+    <a href="<?php echo base_url(); ?>/manujipkreg" class="nav-link">
+        <i class="fas fa-graduation-cap nav-icon"></i>
+        <p>Pengujian Praktik Keinsinyuran Peserta Reguler</p>
+    </a>
+</li>
+<li class="nav-item">
     <a href="<?php echo base_url(); ?>/mannilairpl" class="nav-link">
         <i class="fas fa-graduation-cap nav-icon"></i>
         <p>Penilaian RPL</p>

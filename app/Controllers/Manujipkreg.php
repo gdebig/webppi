@@ -4,12 +4,12 @@ namespace App\Controllers;
 
 use App\Models\UserModel;
 use App\Models\BimbingModel;
-use App\Models\NilaitaModel;
-use App\Models\TugasAkhirModel;
+use App\Models\NilaitarModel;
+use App\Models\TarModel;
 use App\Models\ProfileModel;
 use App\Models\ConfigModel;
 
-class Manujipk extends BaseController
+class Manujipkreg extends BaseController
 {
     public function index()
     {
@@ -24,9 +24,9 @@ class Manujipk extends BaseController
         helper(['tanggal']);
 
         $user_id = $session->get('user_id');
-        $model = new TugasAkhirModel();
+        $model = new NilaitarModel();
         $data['logged_in'] = $logged_in;
-        $user = $model->where('tbl_tugasakhir.ta_penguji', $user_id)->join('tbl_profile', 'tbl_tugasakhir.user_id = tbl_profile.user_id', 'left')->orderby('tbl_tugasakhir.ta_tahun', 'DESC')->orderby('tbl_profile.FullName', 'ASC')->findall();
+        $user = $model->where('tbl_nilaitar.dosen_id', $user_id)->join('tbl_profile', 'tbl_nilaitar.mhs_id = tbl_profile.user_id', 'left')->join('tbl_tugasakhirreg', 'tbl_nilaitar.tar_id = tbl_tugasakhirreg.tar_id', 'left')->orderby('tbl_tugasakhirreg.tar_tahun', 'DESC')->orderby('tbl_profile.FullName', 'ASC')->findall();
         if (!empty($user)) {
             $data['data_user'] = $user;
         } else {
@@ -41,12 +41,12 @@ class Manujipk extends BaseController
             $data['koor_tugasakhir'] = False;
         }
 
-        $data['title_page'] = "Data Peserta Ujian PK";
-        $data['data_bread'] = "Ujian";
-        return view('maintemp/ujipk', $data);
+        $data['title_page'] = "Data Peserta Ujian PK Reguler";
+        $data['data_bread'] = "Ujian Reguler";
+        return view('maintemp/ujipkreg', $data);
     }
 
-    public function lihatnilai($mhs_id, $dosen_id, $ta_id)
+    public function lihatnilai($mhs_id, $dosen_id, $tar_id)
     {
         $session = session();
         $logged_in = $session->get('logged_in');
@@ -69,8 +69,8 @@ class Manujipk extends BaseController
         }
 
 
-        $model = new NilaitaModel();
-        $nilaita = $model->where('ta_id', $ta_id)->join('tbl_profile', 'tbl_nilaita.dosen_id = tbl_profile.user_id')->orderby('nilaita_id', 'ASC')->findall();
+        $model = new NilaitarModel();
+        $nilaita = $model->where('tar_id', $tar_id)->join('tbl_profile', 'tbl_nilaitar.dosen_id = tbl_profile.user_id')->orderby('nilaitar_id', 'ASC')->findall();
         if (!empty($nilaita)) {
             $data['nilai_ta'] = $nilaita;
         } else {
@@ -80,13 +80,13 @@ class Manujipk extends BaseController
         $data['user_id'] = $session->get('user_id');
         $data['mhs_id'] = $mhs_id;
         $data['dosen_id'] = $dosen_id;
-        $data['ta_id'] = $ta_id;
-        $data['title_page'] = "Lihat Nilai Praktek Keinsinyuran";
-        $data['data_bread'] = "Nilai PK";
-        return view('maintemp/lihatnilaiujipk', $data);
+        $data['tar_id'] = $tar_id;
+        $data['title_page'] = "Lihat Nilai Praktek Keinsinyuran Reguler";
+        $data['data_bread'] = "Nilai PK Reguler";
+        return view('maintemp/lihatnilaiujipkreg', $data);
     }
 
-    public function berinilai($mhs_id, $dosen_id, $ta_id)
+    public function berinilai($mhs_id, $dosen_id, $tar_id)
     {
         $session = session();
         $logged_in = $session->get('logged_in');
@@ -111,10 +111,10 @@ class Manujipk extends BaseController
         $data['logged_in'] = $logged_in;
         $data['mhs_id'] = $mhs_id;
         $data['dosen_id'] = $dosen_id;
-        $data['ta_id'] = $ta_id;
-        $data['title_page'] = "Nilai Ujian Praktek Keinsinyuran PPI RPL";
+        $data['tar_id'] = $tar_id;
+        $data['title_page'] = "Nilai Ujian Praktek Keinsinyuran PPI Reguler";
         $data['data_bread'] = "Nilai PK";
-        return view('maintemp/nilaiujipk', $data);
+        return view('maintemp/nilaiujipkreg', $data);
     }
 
     public function nilaiujipkproses()
@@ -132,13 +132,20 @@ class Manujipk extends BaseController
         $user_id = $session->get('user_id');
         $mhs_id = $this->request->getVar('mhs_id');
         $dosen_id = $this->request->getVar('dosen_id');
-        $ta_id = $this->request->getVar('ta_id');
+        $tar_id = $this->request->getVar('tar_id');
 
         $submit = $this->request->getVar('submit');
         if ($submit == "batal") {
-            return redirect()->to('/manujipk/lihatnilai/' . $mhs_id . '/' . $dosen_id . '/' . $ta_id);
+            return redirect()->to('/manujipkreg/lihatnilai/' . $mhs_id . '/' . $dosen_id . '/' . $tar_id);
         } else {
-            $model = new NilaitaModel();
+            $model = new NilaitarModel();
+            $nilaitar = $model->where('tar_id', $tar_id)->where('dosen_id', $dosen_id)->where('mhs_id', $mhs_id)->first();
+            if ($nilaitar) {
+                $nilaitar_id = $nilaitar['nilaitar_id'];
+            } else {
+                $nilaitar_id = 0;
+            }
+
             helper(['form', 'url']);
 
             $formvalid = $this->validate([
@@ -176,7 +183,7 @@ class Manujipk extends BaseController
                 $data['logged_in'] = $logged_in;
                 $data['mhs_id'] = $mhs_id;
                 $data['dosen_id'] = $dosen_id;
-                $data['ta_id'] = $ta_id;
+                $data['tar_id'] = $tar_id;
                 $data['title_page'] = "Nilai Praktek Keinsinyuran Mahasiswa Bimbingan PPI RPL";
                 $data['data_bread'] = "Nilai PK";
                 $data['error'] = "Belum memberikan tanda tangan.";
@@ -201,10 +208,9 @@ class Manujipk extends BaseController
             }
 
             $data = array(
-                'ta_id' => $ta_id,
+                'tar_id' => $tar_id,
                 'dosen_id' => $dosen_id,
                 'mhs_id' => $mhs_id,
-                'tipedosen' => 'Penguji',
                 'penulisan' => $penulisan,
                 'presentasi' => $presentasi,
                 'materi' => $materi,
@@ -213,9 +219,9 @@ class Manujipk extends BaseController
                 'date_modified' => date('Y-m-d')
             );
 
-            $model->save($data);
+            $model->update($nilaitar_id, $data);
 
-            return redirect()->to('/manujipk/lihatnilai/' . $mhs_id . '/' . $dosen_id . '/' . $ta_id);
+            return redirect()->to('/manujipkreg/lihatnilai/' . $mhs_id . '/' . $dosen_id . '/' . $tar_id);
         } else {
 
             $model2 = new ConfigModel();
@@ -229,15 +235,15 @@ class Manujipk extends BaseController
             $data['logged_in'] = $logged_in;
             $data['mhs_id'] = $mhs_id;
             $data['dosen_id'] = $dosen_id;
-            $data['ta_id'] = $ta_id;
+            $data['tar_id'] = $tar_id;
             $data['title_page'] = "Nilai Ujian Praktek Keinsinyuran PPI RPL";
             $data['data_bread'] = "Nilai PK";
             $data['validation'] = $this->validator;
-            return view('maintemp/nilaiujipkvalid', $data);
+            return view('maintemp/nilaiujipkregvalid', $data);
         }
     }
 
-    public function lihatformevaluasi($mhs_id, $dosen_id, $ta_id)
+    public function lihatformevaluasi($mhs_id, $dosen_id, $tar_id)
     {
         $session = session();
         $logged_in = $session->get('logged_in');
@@ -250,8 +256,8 @@ class Manujipk extends BaseController
         helper(['tanggal']);
         helper(['nilai']);
 
-        $model = new BimbingModel();
-        $bimbing = $model->where('mhs_id', $mhs_id)->first();
+        $model = new NilaitarModel();
+        $bimbing = $model->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tar_id', $tar_id)->first();
         if ($bimbing) {
             $bimbing_id = $bimbing['dosen_id'];
         }
@@ -279,16 +285,16 @@ class Manujipk extends BaseController
             $data['nipttd'] = $dosennipttd['NIP'];
         }
 
-        $model = new TugasAkhirModel();
-        $tugasakhir = $model->where('ta_id', $ta_id)->join('tbl_profile', 'tbl_tugasakhir.user_id = tbl_profile.user_id', 'left')->join('tbl_user', 'tbl_tugasakhir.user_id = tbl_user.user_id', 'left')->first();
+        $model = new TarModel();
+        $tugasakhir = $model->where('tar_id', $tar_id)->join('tbl_profile', 'tbl_tugasakhirreg.user_id = tbl_profile.user_id', 'left')->join('tbl_user', 'tbl_tugasakhirreg.user_id = tbl_user.user_id', 'left')->first();
         if ($tugasakhir) {
             $data['namamahasiswa'] = $tugasakhir['FullName'];
             $data['npm'] = $tugasakhir['NPM'];
             $data['instansi'] = $tugasakhir['instansi'];
             $data['divisi'] = $tugasakhir['divisi'];
             $data['periode'] = format_indo($tugasakhir['startdate']) . ' - ' . format_indo($tugasakhir['enddate']);
-            $data['lapjudul'] = $tugasakhir['ta_usuljudul'];
-            $data['confirm'] = $tugasakhir['ta_confirm'];
+            $data['lapjudul'] = $tugasakhir['tar_usuljudul'];
+            $data['confirm'] = $tugasakhir['tar_confirm'];
         }
 
         if ($data['confirm'] == 'Ya') {
@@ -301,8 +307,8 @@ class Manujipk extends BaseController
             }
         }
 
-        $model = new NilaitaModel();
-        $nilaita = $model->where('ta_id', $ta_id)->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->first();
+        $model = new NilaitarModel();
+        $nilaita = $model->where('tar_id', $tar_id)->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->first();
         if ($nilaita) {
             $data['penulisan'] = $nilaita['penulisan'];
             $data['presentasi'] = $nilaita['presentasi'];
@@ -318,7 +324,7 @@ class Manujipk extends BaseController
         return view('maintemp/formevaluasi', $data);
     }
 
-    public function lihatadm($mhs_id, $dosen_id, $ta_id)
+    public function lihatadm($mhs_id, $dosen_id, $tar_id)
     {
         $session = session();
         $logged_in = $session->get('logged_in');
@@ -331,14 +337,7 @@ class Manujipk extends BaseController
         helper(['tanggal']);
         helper(['nilai']);
 
-        $model = new BimbingModel();
-        $bimbing = $model->where('mhs_id', $mhs_id)->first();
-        if ($bimbing) {
-            $bimbing_id = $bimbing['dosen_id'];
-        } else {
-            $session->setFlashdata('err', 'Data bimbingan tidak sesuai.');
-            return redirect()->to('/manujipk');
-        }
+        $bimbing_id = $dosen_id;
 
         $model = new ProfileModel();
         $dosen = $model->where('user_id', $bimbing_id)->first();
@@ -363,16 +362,16 @@ class Manujipk extends BaseController
             $data['nipttd'] = $dosennipttd['NIP'];
         }
 
-        $model = new TugasAkhirModel();
-        $tugasakhir = $model->where('ta_id', $ta_id)->join('tbl_profile', 'tbl_tugasakhir.user_id = tbl_profile.user_id', 'left')->join('tbl_user', 'tbl_tugasakhir.user_id = tbl_user.user_id', 'left')->first();
+        $model = new TarModel();
+        $tugasakhir = $model->where('tar_id', $tar_id)->join('tbl_profile', 'tbl_tugasakhirreg.user_id = tbl_profile.user_id', 'left')->join('tbl_user', 'tbl_tugasakhirreg.user_id = tbl_user.user_id', 'left')->first();
         if ($tugasakhir) {
             $data['namamahasiswa'] = $tugasakhir['FullName'];
             $data['npm'] = $tugasakhir['NPM'];
             $data['instansi'] = $tugasakhir['instansi'];
             $data['divisi'] = $tugasakhir['divisi'];
             $data['periode'] = format_indo($tugasakhir['startdate']) . ' - ' . format_indo($tugasakhir['enddate']);
-            $data['lapjudul'] = $tugasakhir['ta_usuljudul'];
-            $data['confirm'] = $tugasakhir['ta_confirm'];
+            $data['lapjudul'] = $tugasakhir['tar_usuljudul'];
+            $data['confirm'] = $tugasakhir['tar_confirm'];
         }
 
         if ($data['confirm'] == 'Ya') {
@@ -385,8 +384,8 @@ class Manujipk extends BaseController
             }
         }
 
-        $model = new NilaitaModel();
-        $nilaita = $model->where('ta_id', $ta_id)->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->first();
+        $model = new NilaitarModel();
+        $nilaita = $model->where('tar_id', $tar_id)->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->first();
         if ($nilaita) {
             $data['penulisan'] = $nilaita['penulisan'];
             $data['presentasi'] = $nilaita['presentasi'];

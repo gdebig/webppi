@@ -1,0 +1,125 @@
+CRITICAL - 2023-05-02 02:05:25 --> Undefined variable: ta_id
+#0 D:\wamp64\www\webppi\app\Views\maintemp\manpenguji.php(32): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'D:\\wamp64\\www\\w...', 32, Array)
+#1 D:\wamp64\www\webppi\system\View\View.php(210): include('D:\\wamp64\\www\\w...')
+#2 D:\wamp64\www\webppi\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 D:\wamp64\www\webppi\system\Common.php(1089): CodeIgniter\View\View->render('maintemp/manpen...', Array, true)
+#4 D:\wamp64\www\webppi\app\Controllers\Mantareg.php(200): view('maintemp/manpen...', Array)
+#5 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Mantareg->setpenguji('2', '115')
+#6 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Mantareg))
+#7 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2023-05-02 02:07:13 --> Undefined variable: ta_id
+#0 D:\wamp64\www\webppi\app\Views\maintemp\manpenguji.php(32): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'D:\\wamp64\\www\\w...', 32, Array)
+#1 D:\wamp64\www\webppi\system\View\View.php(210): include('D:\\wamp64\\www\\w...')
+#2 D:\wamp64\www\webppi\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 D:\wamp64\www\webppi\system\Common.php(1089): CodeIgniter\View\View->render('maintemp/manpen...', Array, true)
+#4 D:\wamp64\www\webppi\app\Controllers\Mantareg.php(200): view('maintemp/manpen...', Array)
+#5 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Mantareg->setpenguji('2', '115')
+#6 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Mantareg))
+#7 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+ERROR - 2023-05-02 02:13:26 --> You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '.`user_id` USING (`left`)
+WHERE `tar_id` = '2'
+AND `tipedosen` = 'Penguji'
+ORDER' at line 3
+CRITICAL - 2023-05-02 02:13:26 --> You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '.`user_id` USING (`left`)
+WHERE `tar_id` = '2'
+AND `tipedosen` = 'Penguji'
+ORDER' at line 3
+#0 D:\wamp64\www\webppi\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT *\nFROM `...', 0)
+#1 D:\wamp64\www\webppi\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *\nFROM `...')
+#2 D:\wamp64\www\webppi\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *\nFROM `...')
+#3 D:\wamp64\www\webppi\system\Database\BaseBuilder.php(1455): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 D:\wamp64\www\webppi\system\Model.php(183): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\wamp64\www\webppi\system\BaseModel.php(584): CodeIgniter\Model->doFindAll(0, 0)
+#6 D:\wamp64\www\webppi\app\Controllers\Mantareg.php(215): CodeIgniter\BaseModel->findAll()
+#7 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Mantareg->setpenguji('2', '115')
+#8 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Mantareg))
+#9 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#11 {main}
+ERROR - 2023-05-02 02:17:27 --> Unknown column 'tipedosen' in 'where clause'
+CRITICAL - 2023-05-02 02:17:27 --> Unknown column 'tipedosen' in 'where clause'
+#0 D:\wamp64\www\webppi\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT *\nFROM `...', 0)
+#1 D:\wamp64\www\webppi\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *\nFROM `...')
+#2 D:\wamp64\www\webppi\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *\nFROM `...')
+#3 D:\wamp64\www\webppi\system\Database\BaseBuilder.php(1455): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 D:\wamp64\www\webppi\system\Model.php(183): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\wamp64\www\webppi\system\BaseModel.php(584): CodeIgniter\Model->doFindAll(0, 0)
+#6 D:\wamp64\www\webppi\app\Controllers\Mantareg.php(215): CodeIgniter\BaseModel->findAll()
+#7 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Mantareg->setpenguji('2', '115')
+#8 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Mantareg))
+#9 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#11 {main}
+CRITICAL - 2023-05-02 02:33:59 --> Undefined variable: ta_id
+#0 D:\wamp64\www\webppi\app\Views\maintemp\tambahpenguji.php(19): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'D:\\wamp64\\www\\w...', 19, Array)
+#1 D:\wamp64\www\webppi\system\View\View.php(210): include('D:\\wamp64\\www\\w...')
+#2 D:\wamp64\www\webppi\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 D:\wamp64\www\webppi\system\Common.php(1089): CodeIgniter\View\View->render('maintemp/tambah...', Array, true)
+#4 D:\wamp64\www\webppi\app\Controllers\Mantareg.php(280): view('maintemp/tambah...', Array)
+#5 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Mantareg->tambahpenguji('72', '115')
+#6 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Mantareg))
+#7 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2023-05-02 03:17:35 --> Undefined variable: ta_id
+#0 D:\wamp64\www\webppi\app\Views\maintemp\tambahpenguji.php(19): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'D:\\wamp64\\www\\w...', 19, Array)
+#1 D:\wamp64\www\webppi\system\View\View.php(210): include('D:\\wamp64\\www\\w...')
+#2 D:\wamp64\www\webppi\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 D:\wamp64\www\webppi\system\Common.php(1089): CodeIgniter\View\View->render('maintemp/tambah...', Array, true)
+#4 D:\wamp64\www\webppi\app\Controllers\Mantareg.php(280): view('maintemp/tambah...', Array)
+#5 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Mantareg->tambahpenguji('72', '115')
+#6 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Mantareg))
+#7 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2023-05-02 03:24:10 --> Call to undefined function App\Controllers\NOW()
+#0 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Mantareg->tambahujiproses()
+#1 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Mantareg))
+#2 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
+ERROR - 2023-05-02 03:52:33 --> Unknown column 'tbl_nilaita.dosen_id' in 'on clause'
+CRITICAL - 2023-05-02 03:52:33 --> Unknown column 'tbl_nilaita.dosen_id' in 'on clause'
+#0 D:\wamp64\www\webppi\system\Database\MySQLi\Connection.php(292): mysqli->query('SELECT *\nFROM `...', 0)
+#1 D:\wamp64\www\webppi\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *\nFROM `...')
+#2 D:\wamp64\www\webppi\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *\nFROM `...')
+#3 D:\wamp64\www\webppi\system\Database\BaseBuilder.php(1455): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 D:\wamp64\www\webppi\system\Model.php(183): CodeIgniter\Database\BaseBuilder->get()
+#5 D:\wamp64\www\webppi\system\BaseModel.php(584): CodeIgniter\Model->doFindAll(0, 0)
+#6 D:\wamp64\www\webppi\app\Controllers\Mantareg.php(536): CodeIgniter\BaseModel->findAll()
+#7 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Mantareg->lihatnilai('2', '115')
+#8 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Mantareg))
+#9 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#11 {main}
+CRITICAL - 2023-05-02 03:53:00 --> Invalid file: maintemp/lihatnilaitar.php
+#0 D:\wamp64\www\webppi\system\View\View.php(198): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('maintemp/lihatn...')
+#1 D:\wamp64\www\webppi\system\Common.php(1089): CodeIgniter\View\View->render('maintemp/lihatn...', Array, true)
+#2 D:\wamp64\www\webppi\app\Controllers\Mantareg.php(546): view('maintemp/lihatn...', Array)
+#3 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Mantareg->lihatnilai('2', '115')
+#4 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Mantareg))
+#5 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#7 {main}
+CRITICAL - 2023-05-02 03:53:18 --> Undefined index: ta_id
+#0 D:\wamp64\www\webppi\app\Views\maintemp\lihatnilaireg.php(49): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'D:\\wamp64\\www\\w...', 49, Array)
+#1 D:\wamp64\www\webppi\system\View\View.php(210): include('D:\\wamp64\\www\\w...')
+#2 D:\wamp64\www\webppi\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 D:\wamp64\www\webppi\system\Common.php(1089): CodeIgniter\View\View->render('maintemp/lihatn...', Array, true)
+#4 D:\wamp64\www\webppi\app\Controllers\Mantareg.php(546): view('maintemp/lihatn...', Array)
+#5 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Mantareg->lihatnilai('2', '115')
+#6 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Mantareg))
+#7 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2023-05-02 03:57:27 --> Undefined variable: bimbing_id
+#0 D:\wamp64\www\webppi\app\Controllers\Manbimbing.php(276): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'D:\\wamp64\\www\\w...', 276, Array)
+#1 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Manbimbing->lihatformevaluasi('115', '72', '2')
+#2 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Manbimbing))
+#3 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
