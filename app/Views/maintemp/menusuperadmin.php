@@ -58,3 +58,9 @@
         <p>Manajemen Akreditasi Penilai</p>
     </a>
 </li>
+<li class="nav-item">
+    <a href="<?php echo base_url(); ?>/apifaip" class="nav-link">
+        <i class="fas fa-folder-open nav-icon"></i>
+        <p>Kirim FAIP</p>
+    </a>
+</li>
