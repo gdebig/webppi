@@ -20,13 +20,14 @@
                 <?php if (isset($data_user) && ($data_user == "kosong")) {
                 ?>
 
-                    <div class="alert alert-danger">Data peserta ujian belum ada.</div>
+                    <div class="alert alert-danger">Data peserta ujian reguler belum ada.</div>
                 <?php } else { ?>
 
                     <table id="tabledata" class="display table table-bordered table-hover">
                         <thead>
                             <tr>
                                 <th>No</th>
+                                <th>Role</th>
                                 <th>Nama Peserta PPI</th>
                                 <th>Term</th>
                                 <th>Buku Proyek Akhir</th>
@@ -43,27 +44,27 @@
                                 <tr>
                                     <td><?php echo $i;
                                         $i++; ?></td>
+                                    <td><?= $user['tipedosen']; ?></td>
                                     <td><?= $user['FullName']; ?></td>
-                                    <td><?= $user['ta_tahun'] . ' - ' . $user['ta_semester']; ?></td>
+                                    <td><?= $user['tar_tahun'] . ' - ' . $user['tar_semester']; ?></td>
                                     <td><?php
-                                        if (!empty($user['ta_buku'])) {
-                                            echo "<a href='" . base_url() . "/uploads/docs/" . $user['ta_buku'] . "' target='_blank'>Buku TA</a>";
+                                        if (!empty($user['tar_buku'])) {
+                                            echo "<a href='" . base_url() . "/uploads/docs/" . $user['tar_buku'] . "' target='_blank'>Buku TA</a>";
                                         } else {
                                             echo "Belum ada buku";
                                         }
                                         ?></td>
                                     <td><?php
-                                        if (!empty($user['ta_log'])) {
-                                            echo "<a href='" . base_url() . "/uploads/docs/" . $user['ta_log'] . "' target='_blank'>Log TA</a>";
+                                        if (!empty($user['tar_log'])) {
+                                            echo "<a href='" . base_url() . "/uploads/docs/" . $user['tar_log'] . "' target='_blank'>Log TA</a>";
                                         } else {
                                             echo "Belum ada buku";
                                         }
                                         ?></td>
                                     <td><?php
-                                        if (!empty($user['ta_buku'])) {
+                                        if (!empty($user['tar_buku'])) {
                                         ?>
-                                            <a href="<?= base_url(); ?>/manujipk/lihatnilai/<?= $user['user_id']; ?>/<?= $user['ta_penguji']; ?>/<?= $user['ta_id']; ?>">Lihat
-                                                Nilai PK</a>
+                                            <a href="<?= base_url(); ?>/manujipkreg/lihatnilai/<?= $user['mhs_id']; ?>/<?= $user['dosen_id']; ?>/<?= $user['tar_id']; ?>">Lihat Nilai PK</a>
                                         <?php
                                         } else {
                                             echo "Belum ada buku";
@@ -71,10 +72,9 @@
                                         ?>
                                     </td>
                                     <td><?php
-                                        if (!empty($user['ta_buku'])) {
+                                        if (!empty($user['tar_buku'])) {
                                         ?>
-                                            <a href="<?= base_url(); ?>/manujipk/lihatadm/<?= $user['user_id']; ?>/<?= $user['ta_penguji']; ?>/<?= $user['ta_id']; ?>" target="_blank">Lihat
-                                                Administrasi</a>
+                                            <a href="<?= base_url(); ?>/manujipkreg/lihatadm/<?= $user['mhs_id']; ?>/<?= $user['dosen_id']; ?>/<?= $user['tar_id']; ?>" target="_blank">Lihat Administrasi</a>
                                         <?php
                                         } else {
                                             echo "Belum ada buku";
