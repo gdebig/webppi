@@ -44,6 +44,7 @@
                                 <th>Penghargaan yang diterima tingkat</th>
                                 <th>Penghargaan diberikan oleh lembaga</th>
                                 <th>Uraian Singkat Tanda Penghargaan</th>
+                                <th>Bukti Penghargaan</th>
                                 <th>Klaim Kompetensi</th>
                                 <th>Aksi</th>
                             </tr>
@@ -135,6 +136,13 @@
                                         ?>
                                     </td>
                                     <td><?= $penghargaan['Desc']; ?></td>
+                                    <td><?php
+                                        if (!empty($penghargaan['File'])) {
+                                            echo "<a href='" . base_url('uploads/docs/' . $penghargaan['File']) . "' target='_blank'>" . "Lihat Bukti" . "</a>";
+                                        } else {
+                                            echo "";
+                                        }
+                                        ?></td>
                                     <td><?= $penghargaan['kompetensi']; ?></td>
                                     <td style="text-align: center"><a href="<?php echo base_url(); ?>/userfair14/ubahpenghargaan/<?= $penghargaan['Num']; ?>" class="btn btn-warning"> <i class="fas fa-file-signature"></i> Ubah</a>
                                         <a href="<?php echo base_url(); ?>/userfair14/hapuspenghargaan/<?= $penghargaan['Num']; ?>" onclick="return confirm('Apakah anda yakin akan menghapus data penghargaan?')" class="btn btn-danger"> <i class="fas fa-trash"></i>
