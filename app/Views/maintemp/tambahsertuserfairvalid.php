@@ -99,7 +99,7 @@
                                 pendidikan 36 - 100 Jam</option>
                             <option value="smp240" <?php echo set_value('Length') == "smp240" ? "selected" : ""; ?>>Lama
                                 pendidikan 100 - 240 Jam</option>
-                            <option value="lbih240" <?php echo set_value('Length') == "lbih240" ? "selected" : ""; ?>>
+                            <option value="lbh240" <?php echo set_value('Length') == "lbh240" ? "selected" : ""; ?>>
                                 Lebih dari 240 Jam</option>
                         </select>
                     </div>

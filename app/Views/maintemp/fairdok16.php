@@ -89,7 +89,7 @@
                                             case 'smp240':
                                                 echo "Lama pendidikan 100 - 240 Jam";
                                                 break;
-                                            case 'lbih240':
+                                            case 'lbh240':
                                                 echo "Lebih dari 240 Jam
                                         
                                         ";

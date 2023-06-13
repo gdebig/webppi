@@ -83,7 +83,7 @@
                             <option value="sd36">Lama pendidikan s/d 36 Jam</option>
                             <option value="smp100">Lama pendidikan 36 - 100 Jam</option>
                             <option value="smp240">Lama pendidikan 100 - 240 Jam</option>
-                            <option value="lbih240">Lebih dari 240 Jam</option>
+                            <option value="lbh240">Lebih dari 240 Jam</option>
                         </select>
                     </div>
                     <br />
