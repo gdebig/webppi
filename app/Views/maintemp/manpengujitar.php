@@ -64,7 +64,7 @@
                                         $i++; ?></td>
                                     <td><?= !empty($ta['FullName']) ? $ta['FullName'] : "Belum ada penguji."; ?></td>
                                     <td style="text-align: center">
-                                        <a href="<?php echo base_url(); ?>/mantareg/hapusuji/<?= $ta['tar_id']; ?>/<?= $tar_id; ?>/<?= $ta['user_id']; ?>" onclick="return confirm('Apakah anda yakin akan menghapus data penguji?')" class="btn btn-danger"> <i class="fas fa-trash"></i>
+                                        <a href="<?php echo base_url(); ?>/mantareg/hapusuji/<?= $ta['nilaitar_id']; ?>/<?= $ta['tar_id'] ?>/<?= $ta['mhs_id'] ?>" onclick="return confirm('Apakah anda yakin akan menghapus data penguji?')" class="btn btn-danger"> <i class="fas fa-trash"></i>
                                             Hapus</a>
                                     </td>
                                 </tr>

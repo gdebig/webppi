@@ -316,7 +316,7 @@ class Mantareg extends BaseController
         }
     }
 
-    public function hapusuji($id, $tar_id, $user_id)
+    public function hapusuji($nilaitar_id, $tar_id, $user_id)
     {
         $session = session();
         $logged_in = $session->get('logged_in');
@@ -326,7 +326,7 @@ class Mantareg extends BaseController
             return redirect()->to('/home');
         }
         $model = new NilaitarModel();
-        $model->delete($tar_id);
+        $model->delete($nilaitar_id);
         $session->setFlashdata('msg', 'Data penguji berhasil dihapus.');
 
         return redirect()->to('/mantareg/setpenguji/' . $tar_id . '/' . $user_id);
