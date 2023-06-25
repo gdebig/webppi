@@ -1133,7 +1133,7 @@ class Mannilairpl extends BaseController
 
         //UserFair13
         $model2 = new CapesOrgModel();
-        $where = "user_id = '$mhs_id' AND (kompetensi LIKE '%W.1.3.%' OR kompetensi LIKE '%W.1.4.')";
+        $where = "user_id = '$mhs_id' AND (kompetensi LIKE '%W.1.3.%' OR kompetensi LIKE '%W.1.4.%')";
         //$org = $model2->where('user_id', $mhs_id)->like('kompetensi', 'W.1.3.')->orderby('StartPeriodYear', 'DESC')->findall();
         //$data['jumlah_org'] = $model2->where('user_id', $mhs_id)->like('kompetensi', 'W.1.3.')->countAllResults();
         $org = $model2->where($where)->orderby('StartPeriodYear', 'DESC')->findall();
@@ -1218,7 +1218,7 @@ class Mannilairpl extends BaseController
         $data['nilaiq16'] = $nilaiq16;
         $data['nilair16'] = $nilair16;
 
-        if (!empty($latih)) {
+        if (!empty($latih1)) {
             $data['data_latih1'] = $latih1;
         } else {
             $data['data_latih1'] = 'kosong';
