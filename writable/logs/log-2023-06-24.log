@@ -1,0 +1,41 @@
+CRITICAL - 2023-06-24 23:06:08 --> Undefined variable $id52
+#0 D:\wamp64\www\webppi\app\Controllers\Mannilairpl.php(1969): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined varia...', 'D:\\wamp64\\www\\w...', 1969)
+#1 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Mannilairpl->studikasus('101', '1')
+#2 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Mannilairpl))
+#3 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-06-24 23:11:46 --> Undefined variable $id52
+#0 D:\wamp64\www\webppi\app\Controllers\Mannilairpl.php(1969): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined varia...', 'D:\\wamp64\\www\\w...', 1969)
+#1 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Mannilairpl->studikasus('101', '1')
+#2 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Mannilairpl))
+#3 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-06-24 23:12:38 --> Undefined variable $id52
+#0 D:\wamp64\www\webppi\app\Controllers\Mannilairpl.php(1969): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined varia...', 'D:\\wamp64\\www\\w...', 1969)
+#1 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Mannilairpl->studikasus('101', '1')
+#2 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Mannilairpl))
+#3 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-06-24 23:13:06 --> Unsupported operand types: string + array
+#0 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Mannilairpl->studikasus('101', '1')
+#1 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Mannilairpl))
+#2 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}
+CRITICAL - 2023-06-24 23:13:29 --> Undefined variable $nilaip52
+#0 D:\wamp64\www\webppi\app\Controllers\Mannilairpl.php(1971): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined varia...', 'D:\\wamp64\\www\\w...', 1971)
+#1 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Mannilairpl->studikasus('101', '1')
+#2 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Mannilairpl))
+#3 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2023-06-24 23:14:07 --> Undefined variable $nilaip52
+#0 D:\wamp64\www\webppi\app\Controllers\Mannilairpl.php(1972): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined varia...', 'D:\\wamp64\\www\\w...', 1972)
+#1 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Mannilairpl->studikasus('101', '1')
+#2 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Mannilairpl))
+#3 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}

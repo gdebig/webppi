@@ -1954,7 +1954,7 @@ class Mannilairpl extends BaseController
         $sem = $model4->where('Type', 'Mak')->where($where)->orderby('Year', 'DESC')->findall();
         $dataid52 = $modelnilai->select('id_tbl, nilaip, nilaiq, nilair')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Penilai')->where('namatbl', '52')->where('namamk', 'studikasus')->findall();
         if (!empty($dataid52)) {
-            foreach ($dataid3 as $dataid) :
+            foreach ($dataid52 as $dataid) :
                 $id52[] = $dataid['id_tbl'];
                 $nilaip52[] = $dataid['nilaip'];
                 $nilaiq52[] = $dataid['nilaiq'];
