@@ -248,7 +248,7 @@ class Seminarreg extends BaseController
             ]);
 
             if ($formvalid) {
-                $user_id = $this->request->getVar('user_id');
+                //$user_id = $this->request->getVar('user_id');
                 $sem_judul = $this->request->getVar('sem_judul');
                 $sem_tahun = $this->request->getVar('sem_tahun');
                 $sem_term = $this->request->getVar('sem_term');

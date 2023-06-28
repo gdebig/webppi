@@ -608,6 +608,13 @@ class Myprofile extends BaseController
                         'ext_in' => "Field SIP Hanya menerima file PDF, JPG, JPEG atau PNG",
                         'max_size' => "Ukuran File Maksimal 700KB"
                     ],
+                ],
+                'filettd' => [
+                    'rules'  => 'ext_in[filettd,jpg,jpeg,png]|max_size[sip, 700]',
+                    'errors' => [
+                        'ext_in' => "Field TTD Digital Hanya menerima file JPG, JPEG atau PNG",
+                        'max_size' => "Ukuran File Maksimal 700KB"
+                    ],
                 ]
             ]);
 
