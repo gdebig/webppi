@@ -268,6 +268,13 @@ class Myprofile extends BaseController
                         'ext_in' => "Hanya menerima file JPG, JPEG atau PNG",
                         'max_size' => "Ukuran File Maksimal 700KB"
                     ],
+                ],
+                'filettd' => [
+                    'rules'  => 'ext_in[filettd,jpg,jpeg,png]|max_size[filettd, 700]',
+                    'errors' => [
+                        'ext_in' => "Field TTD Digital Hanya menerima file JPG, JPEG atau PNG",
+                        'max_size' => "Ukuran File Maksimal 700KB"
+                    ],
                 ]
             ]);
 
@@ -603,14 +610,14 @@ class Myprofile extends BaseController
                     ],
                 ],
                 'sip' => [
-                    'rules'  => 'ext_in[sip,pdf,jpg,jpeg,png]|max_size[sip, 700]',
+                    'rules'  => 'ext_in[sip,jpg,jpeg,png]|max_size[sip, 700]',
                     'errors' => [
-                        'ext_in' => "Field SIP Hanya menerima file PDF, JPG, JPEG atau PNG",
+                        'ext_in' => "Field SIP Hanya menerima file JPG, JPEG atau PNG",
                         'max_size' => "Ukuran File Maksimal 700KB"
                     ],
                 ],
                 'filettd' => [
-                    'rules'  => 'ext_in[filettd,jpg,jpeg,png]|max_size[sip, 700]',
+                    'rules'  => 'ext_in[filettd,jpg,jpeg,png]|max_size[filettd, 700]',
                     'errors' => [
                         'ext_in' => "Field TTD Digital Hanya menerima file JPG, JPEG atau PNG",
                         'max_size' => "Ukuran File Maksimal 700KB"

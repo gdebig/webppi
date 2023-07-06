@@ -256,6 +256,12 @@
                         <?php
                         } elseif ($role == 'peserta') {
                         ?>
+                            <div class="form-group" style="display:none;">
+                                <label for="filettd" class="element">TTD Digital</label>
+                                <div class="element">
+                                    <input id="filettd" name="filettd" type="file" class="form-control" placeholder="TTD Digital..." />
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <label for="NPM" class="element">NPM</label>
                                 <div class="element">

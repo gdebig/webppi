@@ -218,7 +218,7 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label for="sip" class="element">Apakah anda memiliki SIP?Jika iya, unggah softcopy SIP anda
-                                di sini (Format: .pdf, .jpeg, .png | Ukuran Maksimum: 700KB).</label>
+                                di sini (Format: .jpeg, .png | Ukuran Maksimum: 700KB).</label>
                             <div class="element">
                                 <input id="sip" name="sip" type="file" class="form-control" placeholder="Nomor SIP..." />
                             </div>
@@ -248,6 +248,12 @@
                         <?php
                         } elseif ($role == 'peserta') {
                         ?>
+                            <div class="form-group" style="display:none;">
+                                <label for="filettd" class="element">TTD Digital</label>
+                                <div class="element">
+                                    <input id="filettd" name="filettd" type="file" class="form-control" placeholder="TTD Digital..." />
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <label for="NPM" class="element">NPM</label>
                                 <div class="element">
