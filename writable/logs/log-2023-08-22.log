@@ -1,0 +1,6 @@
+CRITICAL - 2023-08-22 17:07:57 --> Too few arguments to function App\Controllers\Apifaip::sendfaip(), 1 passed in D:\wamp64\www\webppi\system\CodeIgniter.php on line 832 and exactly 2 expected
+#0 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Apifaip->sendfaip('16')
+#1 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Apifaip))
+#2 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#3 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#4 {main}

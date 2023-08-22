@@ -112,6 +112,7 @@ class Manuser extends BaseController
                 $nodaftar = $this->request->getVar('nodaftar');
                 $npm = $this->request->getVar('npm');
                 $nip = $this->request->getVar('nip');
+                $id_faip = $this->request->getVar('id_faip');
                 $status = $this->request->getVar('status');
                 $thnajaran = $this->request->getVar('thnajaran');
                 $semester = $this->request->getVar('semester');
@@ -138,6 +139,7 @@ class Manuser extends BaseController
                     'nodaftar' => $nodaftar,
                     'NPM' => $npm,
                     'NIP' => $nip,
+                    'id_faip' => $id_faip,
                     'status' => $status,
                     'thnajaran' => $thnajaran,
                     'semester' => $semester,
@@ -202,6 +204,7 @@ class Manuser extends BaseController
                 'nodaftar' => $anggota['nodaftar'],
                 'NPM' => $anggota['NPM'],
                 'NIP' => $anggota['NIP'],
+                'id_faip' => $anggota['id_faip'],
                 'status' => $anggota['status'],
                 'thnajaran' => $anggota['thnajaran'],
                 'semester' => $anggota['semester'],
@@ -267,6 +270,7 @@ class Manuser extends BaseController
                 $nodaftar = $this->request->getVar('nodaftar');
                 $npm = $this->request->getVar('npm');
                 $nip = $this->request->getVar('nip');
+                $id_faip = $this->request->getVar('id_faip');
                 $status = $this->request->getVar('status');
                 $thnajaran = $this->request->getVar('thnajaran');
                 $semester = $this->request->getVar('semester');
@@ -299,6 +303,7 @@ class Manuser extends BaseController
                         'nodaftar' => $nodaftar,
                         'NPM' => $npm,
                         'NIP' => $nip,
+                        'id_faip' => $id_faip,
                         'status' => $status,
                         'thnajaran' => $thnajaran,
                         'semester' => $semester,
@@ -315,6 +320,7 @@ class Manuser extends BaseController
                         'nodaftar' => $nodaftar,
                         'NPM' => $npm,
                         'NIP' => $nip,
+                        'id_faip' => $id_faip,
                         'status' => $status,
                         'thnajaran' => $thnajaran,
                         'semester' => $semester,
@@ -341,6 +347,7 @@ class Manuser extends BaseController
                         'nodaftar' => $anggota['nodaftar'],
                         'NPM' => $anggota['NPM'],
                         'NIP' => $anggota['NIP'],
+                        'id_faip' => $anggota['id_faip'],
                         'status' => $anggota['status'],
                         'thnajaran' => $anggota['thnajaran'],
                         'semester' => $anggota['semester'],

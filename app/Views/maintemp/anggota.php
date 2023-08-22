@@ -42,6 +42,7 @@
                                 <th>No Daftar</th>
                                 <th>NPM</th>
                                 <th>NIP</th>
+                                <th>ID FAIP</th>
                                 <th>Status User</th>
                                 <th>Status Keaktifan</th>
                                 <th>Tahun Terdaftar</th>
@@ -62,6 +63,7 @@
                                     <td><?= $user['nodaftar']; ?></td>
                                     <td><?= $user['NPM']; ?></td>
                                     <td><?= $user['NIP']; ?></td>
+                                    <td><?= $user['id_faip']; ?></td>
                                     <td><?php
                                         switch ($user['status']) {
                                             case 'baru':
