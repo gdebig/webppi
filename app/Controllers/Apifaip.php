@@ -4,6 +4,8 @@ namespace App\Controllers;
 
 use App\Models\UserModel;
 use App\Models\ProfileModel;
+use App\Models\CapesPendModel;
+use App\Models\CapesOrgModel;
 
 use App\Libraries\Sendfaip;
 
@@ -77,6 +79,62 @@ class Apifaip extends BaseController
                     /*$session->setFlashdata('msg', "Insert FAIP berhasil.");
                     return redirect()->to('/apifaip');*/
                     $send_faip = "success";
+                }
+
+                #insert FAIP 1.1.3
+                $data = "user_id='" . $id_faip . "'&phone_type='home_phone'&phone_value='" . $user['Hpnum'] . "'";
+                $insertfaip113 = $sendfaip->sendfaip113($token, $data);
+                if ($insertfaip113 != "ok") {
+                    $session->setFlushdata("err", "Insert FAIP 1.1.3. gagal.");
+                    return redirect()->to('/apifaip');
+                } else {
+                    $send_faip = "success";
+                }
+                $data = "user_id='" . $id_faip . "'&phone_type='office_phone'&phone_value='" . $user['Wnum'] . "'";
+                $insertfaip113 = $sendfaip->sendfaip113($token, $data);
+                if ($insertfaip113 != "ok") {
+                    $session->setFlushdata("err", "Insert FAIP 1.1.3. gagal.");
+                    return redirect()->to('/apifaip');
+                } else {
+                    $send_faip = "success";
+                }
+
+                #insert FAIP 1.2
+                $model12 = new CapesPendModel();
+                $datapend = $model12->where('user_id', $user_id)->findall();
+                if (!empty($datapend)) {
+                    foreach ($datapend as $pend) :
+                        $data = "user_id='" . $id_faip . "'school_type='" . $pend['Rank'] . "'&school='" . $pend['Name'] . "'&fakultas='" . $pend['Faculty'] . "'&jurusan='" . $pend['Major'] . "'&kota='" . $pend['City'] . "'&provinsi='" . $pend['Province'] . "'&negara='" . $pend['Country'] . "'&tahun_lulus='" . $pend['GradYear'] . "'&title='" . $pend['Degree'] . "'&judul='" . $pend['Title'] . "'&uraian='" . $pend['Desc'] . "'&score='" . $pend['Mark'] . "'&judicium='" . $pend['Judicium'] . "'";
+                        $insertfaip12 = $sendfaip->sendfaip12($token, $data);
+                        if ($insertfaip12 != "ok") {
+                            $session->setFlushdata("err", "Insert FAIP 1.2 gagal.");
+                            return redirect()->to('/apifaip');
+                        } else {
+                            $send_faip = "success";
+                        }
+                    endforeach;
+                } else {
+                    $session->setFlushdata('err', 'Insert FAIP 1.2. gagal karena data kosong.');
+                    return redirect()->to('/apifaip');
+                }
+
+                #insert FAIP 1.3
+                $model13 = new CapesOrgModel();
+                $dataorg = $model13->where('user_id', $user_id)->findall();
+                if (!empty($dataorg)) {
+                    foreach ($dataorg as $org) :
+                        $data = "user_id='" . $id_faip . "'&nama_org='" . $org['Name'] . "'&tingkat='" . $org['OrgLevel'] . "'&jabatan='" . $org['Position'] . "'&lingkup='" . $org['OrgScp'] . "'&tempat='" . $org['City'] . "'&provinsi='" . $org['City'] . "'&negara='" . $org['Country'] . "'&startdate='" . $org['StartPeriodBulan'] . "'&startyear='" . $org['StartPeriodYear'] . "'&enddate='" . $org['EndPeriodBulan'] . "'&endyear='" . $org['EndPeriodYear'] . "'&is_present='0'&aktifitas='" . $org["Desc"] . "'&kompetensi='" . $org['kompetensi'] . "'";
+                        $insertfaip13 = $sendfaip->sendfaip13($token, $data);
+                        if ($insertfaip13 != "ok") {
+                            $session->setFlushdata("err", "Insert FAIP 1.3. gagal.");
+                            return redirect()->to('/apifaip');
+                        } else {
+                            $send_faip = "success";
+                        }
+                    endforeach;
+                } else {
+                    $session->setFlushdata('err', 'Insert FAIP 1.3. gagal karena data kosong.');
+                    return redirect()->to('/apifaip');
                 }
             }
 

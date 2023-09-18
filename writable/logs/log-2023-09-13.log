@@ -1,0 +1,7 @@
+CRITICAL - 2023-09-13 20:57:12 --> Path cannot be empty
+#0 D:\wamp64\www\webppi\app\Controllers\Myprofile.php(735): getimagesize('')
+#1 D:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Myprofile->ubahproses()
+#2 D:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Myprofile))
+#3 D:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 D:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
