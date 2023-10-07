@@ -60,6 +60,11 @@
                         <input id="nip" name="nip" class="form-control" placeholder="NIP..." type="text" value="<?= $NIP; ?>" />
                     </div>
                     <br />
+                    <label for="id_faip" class="element">ID FAIP (Diisi setelah mendaftar ke FAIP)</label>
+                    <div class="element">
+                        <input id="id_faip" name="id_faip" class="form-control" placeholder="ID FAIP..." type="text" value="<?= $id_faip; ?>" />
+                    </div>
+                    <br />
                     <label for="status" class="element">Status <span class="required"> *</span>&nbsp;
                     </label>
                     <div class="element">

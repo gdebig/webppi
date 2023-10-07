@@ -22,13 +22,6 @@
 
                 <div class="col">
                     <div class="row">
-                        <a href="<?php echo base_url(); ?>/apifaip/tambahanggota" class="btn btn-primary">Tambah
-                            Anggota</a>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="row">
                         &nbsp;
                     </div>
                 </div>
@@ -36,8 +29,7 @@
                 <?php if (isset($data_user) && ($data_user == "kosong")) {
                 ?>
 
-                    <div class="alert alert-danger">Data Anggota belum ada. <a href="<?= base_url(); ?>/apifaip/tambahanggota">Klik
-                            di sini untuk menambah data anggota</a></div>
+                    <div class="alert alert-danger">Belum ada anggota yang mendapat ID FAIP</div>
                 <?php } else { ?>
 
                     <table id="tabledata" class="display table table-bordered table-hover">
@@ -46,9 +38,11 @@
                                 <th>No</th>
                                 <th>Username</th>
                                 <th>NPM</th>
+                                <th>ID FAIP</th>
                                 <th>Tahun Terdaftar</th>
                                 <th>Tipe User</th>
                                 <th>Tipe Peserta</th>
+                                <th>Status Kirim FAIP</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -65,6 +59,7 @@
                                         $i++; ?></td>
                                     <td><?= $user['FullName']; ?></td>
                                     <td><?= $user['NPM']; ?></td>
+                                    <td><?= $user['id_faip']; ?></td>
                                     <td><?= $user['thnajaran'] . " / " . $user['semester']; ?></td>
                                     <td>
                                         <ul>
@@ -77,7 +72,8 @@
                                         </uL>
                                     </td>
                                     <td><?= $user['tipe_peserta']; ?></td>
-                                    <td style="text-align: center"><a href="<?php echo base_url(); ?>/apifaip/sendfaip/<?= $user['user_id']; ?>" class="btn btn-warning"> <i class="fas fa-file-signature"></i> Kirim FAIP</a>
+                                    <td><?= $user['confirm_faip']; ?></td>
+                                    <td style="text-align: center"><a href="<?php echo base_url(); ?>/apifaip/sendfaip/<?= $user['id_faip']; ?>/<?= $user['user_id']; ?>" class="btn btn-warning"> <i class="fas fa-file-signature"></i> Kirim FAIP</a>
                                     </td>
                                 </tr>
                             <?php
