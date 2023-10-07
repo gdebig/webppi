@@ -128,15 +128,23 @@ $session = session();
                 <a href="<?php echo base_url(); ?>/superadmin" class="brand-link">
                     <span class="brand-text font-weight-light">fair.eng.ui.ac.id<br />Dashboard Super Admin</span>
                 </a>
-            <?php
+                <?php
             } elseif ($session->get('role') == "admin") {
-            ?>
-                <a href="<?php echo base_url(); ?>/admin" class="brand-link">
-                    <span class="brand-text font-weight-light">fair.eng.ui.ac.id<br />Dashboard Admin</span>
-                </a>
-            <?php
+                if ($session->get('status') == "pii_jabar") {
+                ?>
+                    <a href="<?php echo base_url(); ?>/adminpii" class="brand-link">
+                        <span class="brand-text font-weight-light">fair.eng.ui.ac.id<br />Dashboard Admin</span>
+                    </a>
+                <?php
+                } else {
+                ?>
+                    <a href="<?php echo base_url(); ?>/admin" class="brand-link">
+                        <span class="brand-text font-weight-light">fair.eng.ui.ac.id<br />Dashboard Admin</span>
+                    </a>
+                <?php
+                }
             } elseif ($session->get('role') == "penilai") {
-            ?>
+                ?>
                 <a href="<?php echo base_url(); ?>/penilai" class="brand-link">
                     <span class="brand-text font-weight-light">fair.eng.ui.ac.id<br />Dashboard Penilai</span>
                 </a>
@@ -181,7 +189,11 @@ $session = session();
                                     if ($session->get('role') == "superadmin") {
                                         echo $this->include('maintemp/menusuperadmin');
                                     } elseif ($session->get('role') == "admin") {
-                                        echo $this->include('maintemp/menuadmin');
+                                        if ($session->get('status') == "pii_jabar") {
+                                            echo $this->include('maintemp/menuadminpii');
+                                        } else {
+                                            echo $this->include('maintemp/menuadmin');
+                                        }
                                     } elseif ($session->get('role') == "penilai") {
                                         echo $this->include('maintemp/menupenilai');
                                     } elseif ($session->get('role') == "peserta") {

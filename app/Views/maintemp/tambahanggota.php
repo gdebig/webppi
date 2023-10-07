@@ -68,6 +68,7 @@
                             <option value="lulus">Lulus</option>
                             <option value="keluar">Keluar / DO</option>
                             <option value="staff">Staff / Penilai</option>
+                            <option value="pii_jabar">PII Jabar</option>
                         </select>
                     </div>
                     <br />

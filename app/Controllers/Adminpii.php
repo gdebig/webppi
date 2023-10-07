@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Models\UmumModel;
 
-class Admin extends BaseController
+class Adminpii extends BaseController
 {
     public function index()
     {

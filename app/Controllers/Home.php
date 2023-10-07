@@ -61,12 +61,13 @@ class Home extends BaseController
                     $ispenilai = $tipe_user[2] == 'y' ? TRUE : FALSE;
                     $ispeserta = $tipe_user[3] == 'y' ? TRUE : FALSE;
                     $tipepeserta = $data['tipe_peserta'];
+                    $status = $data['status'];
 
                     $ses_data = [
                         'user_id'           => $data['user_id'],
                         'username'          => $data['username'],
                         'nodaftar'          => $data['nodaftar'],
-                        'status'            => $data['status'],
+                        'status'            => $status,
                         'tipe_user'         => $data['tipe_user'],
                         'confirmcapes'      => $data['confirmcapes'],
                         'issadmin'          => $issadmin,
@@ -82,7 +83,11 @@ class Home extends BaseController
                         return redirect()->to('/superadmin');
                     } elseif ($isadmin) {
                         $session->set('role', 'admin');
-                        return redirect()->to('/admin');
+                        if ($status == "pii_jabar") {
+                            return redirect()->to('/adminpii');
+                        } else {
+                            return redirect()->to('/admin');
+                        }
                     } elseif ($ispenilai) {
                         $session->set('role', 'penilai');
                         return redirect()->to('/penilai');
