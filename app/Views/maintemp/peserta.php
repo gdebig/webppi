@@ -44,6 +44,7 @@ use App\Models\ProfileModel;
                                     <th>Status</th>
                                     <th>Dosen Pembimbing</th>
                                     <th>Dosen Penilai RPL</th>
+                                    <th>Pengajuan Fair</th>
                                     <th>Lihat Nilai RPL</th>
                                 </tr>
                             </thead>
@@ -129,6 +130,7 @@ use App\Models\ProfileModel;
                                                 echo "Belum ada penilai RPL";
                                             }
                                             ?></td>
+                                        <td><?= $user['ajukanfair'] ?></td>
                                         <td><a href="<?= base_url(); ?>/manpeserta/lihatnilairpl/<?= $user['user_id']; ?>">Lihat</a>
                                         </td>
                                     </tr>
@@ -207,6 +209,31 @@ use App\Models\ProfileModel;
                             </div>
                             <div class="col">
                                 <button type="submit" name="submit" value="gantipenilai" class="btn btn-block btn-warning col">Ganti Penilai RPL</button>
+                            </div>
+                        </div>
+                        <br /><br />
+                        <div class="card card-success">
+                            <div class="card-header">
+                                <h3 class="card-title">Ajukan FAIR PII</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="dosnilai" class="element">Ajukan Peserta untuk Pengurusan FAIR</label>
+                                    <div class="element">
+                                        <select name="ajukanfair" id="ajukanfair" class="form-control">
+                                            <option value="Ya">Ya</option>
+                                            <option value="Tidak">Tidak</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><br />
+                        <div class="row">
+                            <div class="col">
+                                <button type="submit" name="submit" value="setajukan" class="btn btn-primary col">Ajukan Fair</button>
+                            </div>
+                            <div class="col">
+                                <button type="submit" name="submit" value="ubahajukan" class="btn btn-block btn-warning col">Ubah Pengajuan</button>
                             </div>
                         </div>
                     </form>

@@ -390,6 +390,7 @@ class Manpeserta extends BaseController
         $session = session();
         $model = new BimbingModel();
         $model1 = new PengujiRplModel();
+        $model2 = new UserModel();
         $user_id = $session->get('user_id');
         $logged_in = $session->get('logged_in');
         $issadmin = $session->get('issadmin');
@@ -504,6 +505,44 @@ class Manpeserta extends BaseController
 
                 $session->setFlashdata('errmsg', 'Tidak ada peserta yang dicentang.');
 
+                return redirect()->to('/manpeserta');
+            }
+        } elseif ($button == "setajukan") {
+            $user_id = $this->request->getVar('user_id');
+            $ajukanfair = $this->request->getVar('ajukanfair');
+            if (!empty($user_id)) {
+                foreach ($user_id as $userid) {
+                    $data = array(
+                        'ajukanfair' => $ajukanfair,
+                        'date_modified' => date('Y-m-d')
+                    );
+                    $model2->update($userid, $data);
+                }
+
+                $session->setFlashdata('msg', 'FAIR Peserta berhasil diajukan.');
+
+                return redirect()->to('/manpeserta');
+            } else {
+                $session->setFlashdata('errmsg', 'Tidak ada peserta yang dicentang.');
+                return redirect()->to('/manpeserta');
+            }
+        } elseif ($button == "ubahajukan") {
+            $user_id = $this->request->getVar('user_id');
+            $ajukanfair = $this->request->getVar('ajukanfair');
+            if (!empty($user_id)) {
+                foreach ($user_id as $userid) {
+                    $data = array(
+                        'ajukanfair' => $ajukanfair,
+                        'date_modified' => date('Y-m-d')
+                    );
+                    $model2->update($userid, $data);
+                }
+
+                $session->setFlashdata('msg', 'Pengajuan FAIR Peserta berhasil diubah.');
+
+                return redirect()->to('/manpeserta');
+            } else {
+                $session->setFlashdata('errmsg', 'Tidak ada peserta yang dicentang.');
                 return redirect()->to('/manpeserta');
             }
         } else {
