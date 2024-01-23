@@ -40,6 +40,7 @@
                                     <th>Instansi</th>
                                     <th>Divisi</th>
                                     <th>Buku TA</th>
+                                    <th>Buku Revisi</th>
                                     <th>Log</th>
                                     <th>Konfirmasi</th>
                                     <th>Aksi</th>
@@ -70,6 +71,13 @@
                                         <td><?php
                                             if (!empty($ta['ta_buku'])) {
                                                 echo "<a href='" . base_url() . "/uploads/docs/" . $ta['ta_buku'] . "' target='_blank'>Buku TA</a>";
+                                            } else {
+                                                echo "Belum ada buku";
+                                            }
+                                            ?></td>
+                                        <td><?php
+                                            if (!empty($ta['ta_bukurevisi'])) {
+                                                echo "<a href='" . base_url() . "/uploads/docs/" . $ta['ta_bukurevisi'] . "' target='_blank'>Buku TA Revisi</a>";
                                             } else {
                                                 echo "Belum ada buku";
                                             }

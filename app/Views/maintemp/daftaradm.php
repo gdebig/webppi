@@ -39,7 +39,17 @@
                         <tr>
                             <td>1.</td>
                             <td>Berita Acara Sidang Praktek Keinsinyuran</td>
-                            <td><a href="<?= base_url(); ?>/mantugasakhir/beritaacara/<?= $mhs_id; ?>/<?= $ta_id; ?>" target='_blank'>Lihat Berita Acara</a></td>
+                            <td>
+                                <?php
+                                if (($bimbing_id == "kosong") || ($uji_id == "kosong")) {
+                                    echo "Pembimbing atau Penguji belum memberi nilai.";
+                                } else {
+                                ?>
+                                    <a href="<?= base_url(); ?>/mantugasakhir/beritaacara/<?= $mhs_id; ?>/<?= $ta_id; ?>" target='_blank'>Lihat Berita Acara</a>
+                                <?php
+                                }
+                                ?>
+                            </td>
                         </tr>
                         <tr>
                             <td>2.</td>
@@ -74,7 +84,17 @@
                         <tr>
                             <td>4.</td>
                             <td>Daftar Hadir</td>
-                            <td><a href="<?= base_url(); ?>/mantugasakhir/daftarhadir/<?= $mhs_id; ?>/<?= $ta_id; ?>" target='_blank'>Lihat Daftar Hadir</a></td>
+                            <td>
+                                <?php
+                                if (($bimbing_id == "kosong") || ($uji_id == "kosong")) {
+                                    echo "Pembimbing dan Penguji belum memberi nilai.";
+                                } else {
+                                ?>
+                                    <a href="<?= base_url(); ?>/mantugasakhir/daftarhadir/<?= $mhs_id; ?>/<?= $ta_id; ?>" target='_blank'>Lihat Daftar Hadir</a>
+                                <?php
+                                }
+                                ?>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

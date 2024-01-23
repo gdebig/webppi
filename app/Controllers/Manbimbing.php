@@ -239,7 +239,6 @@ class Manbimbing extends BaseController
             );
 
             $model->save($data);
-
             return redirect()->to('/manbimbing/lihatnilai/' . $mhs_id . '/' . $dosen_id . '/' . $ta_id);
         } else {
             $data['logged_in'] = $logged_in;
