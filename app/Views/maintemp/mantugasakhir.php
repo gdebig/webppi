@@ -60,7 +60,7 @@
                                         <td><?= $ta['ta_usuljudul']; ?></td>
                                         <td><?= $ta['ta_tahun'] . ' - ' . $ta['ta_semester']; ?></td>
                                         <td><?php
-                                            if (!empty($ta['startdate'])) {
+                                            if ((!empty($ta['startdate'])) && (!empty($ta['enddate']))) {
                                                 echo format_indo($ta['startdate']) . ' - ' . format_indo($ta['enddate']);
                                             } else {
                                                 echo "Belum ada periode";
