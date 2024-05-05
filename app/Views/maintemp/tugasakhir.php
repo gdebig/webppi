@@ -67,8 +67,13 @@
                                     <td><?= $ta['ta_usuljudul']; ?></td>
                                     <td><?= $ta['ta_tahun'] . ' - ' . $ta['ta_semester']; ?></td>
                                     <td><?php
-                                        if (!empty($ta['startdate'])) {
-                                            echo format_indo($ta['startdate']) . ' - ' . format_indo($ta['enddate']);
+                                        if ((!empty($ta['startdate'])) && (!empty($ta['enddate']))) {
+                                            //echo format_indo($ta['startdate']) . ' - ' . format_indo($ta['enddate']);
+                                            if (($ta['startdate'] == '0000-00-00') && ($ta['enddate'] == '0000-00-00')) {
+                                                echo "Format data tanggal belum benar";
+                                            } else {
+                                                echo format_indo($ta['startdate']) . ' - ' . format_indo($ta['enddate']);
+                                            }
                                         } else {
                                             echo "Belum ada periode";
                                         }
