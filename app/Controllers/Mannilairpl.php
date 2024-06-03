@@ -1133,7 +1133,7 @@ class Mannilairpl extends BaseController
 
         //UserFair13
         $model2 = new CapesOrgModel();
-        $where = "user_id = '$mhs_id' AND (kompetensi LIKE '%W.1.3.%' OR kompetensi LIKE '%W.1.4.%')";
+        $where = "user_id = '$mhs_id' AND (kompetensi LIKE '%W.1.3.%' OR kompetensi LIKE '%W.1.4.%' OR kompetensi LIKE '%P.8.3.6%' OR kompetensi LIKE '%P.10.2.1%' OR kompetensi LIKE '%P.11.3.%' OR kompetensi LIKE '%W.2.%' OR kompetensi LIKE '%W.3.1.5%' OR kompetensi LIKE '%W.4.5.8%' OR kompetensi LIKE '%W.4.5.9%' OR kompetensi LIKE '%P.9.1.4%' OR kompetensi LIKE '%P.9.1.5%' OR kompetensi LIKE '%P.9.4.1%' OR kompetensi LIKE '%P.9.4.2%' OR kompetensi LIKE '%P.9.4.6%' OR kompetensi LIKE '%P.11.1.2%')";
         //$org = $model2->where('user_id', $mhs_id)->like('kompetensi', 'W.1.3.')->orderby('StartPeriodYear', 'DESC')->findall();
         //$data['jumlah_org'] = $model2->where('user_id', $mhs_id)->like('kompetensi', 'W.1.3.')->countAllResults();
         $org = $model2->where($where)->orderby('StartPeriodYear', 'DESC')->findall();
@@ -1222,6 +1222,37 @@ class Mannilairpl extends BaseController
             $data['data_latih1'] = $latih1;
         } else {
             $data['data_latih1'] = 'kosong';
+        }
+
+        //UserFair3
+        $model5 = new CapesKualifikasiModel();
+        $data['capeslogged_in'] = $session->get('capeslogged_in');
+        $where = "user_id = '$mhs_id' AND (kompetensi LIKE '%W.1.3.%' OR kompetensi LIKE '%W.1.4.%' OR kompetensi LIKE '%P.8.3.6%' OR kompetensi LIKE '%P.10.2.1%' OR kompetensi LIKE '%P.11.3.%' OR kompetensi LIKE '%W.2.%' OR kompetensi LIKE '%W.3.1.5%' OR kompetensi LIKE '%W.4.5.8%' OR kompetensi LIKE '%W.4.5.9%' OR kompetensi LIKE '%P.9.1.4%' OR kompetensi LIKE '%P.9.1.5%' OR kompetensi LIKE '%P.9.4.1%' OR kompetensi LIKE '%P.9.4.2%' OR kompetensi LIKE '%P.9.4.6%' OR kompetensi LIKE '%P.11.1.2%')";
+        $kerja = $model5->where($where)->orderby('nilai_q', 'DESC')->orderby('ProjValue', 'DESC')->findall();
+        //$kerja = $model->where('user_id', $mhs_id)->like('kompetensi', 'W.2.2.')->orderby('ProjValue', 'DESC')->findall();
+        $dataid3 = $modelnilai->select('id_tbl, nilaip, nilaiq, nilair')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Penilai')->where('namatbl', '3')->where('namamk', 'profesi')->findall();
+        if (!empty($dataid3)) {
+            foreach ($dataid3 as $dataid) :
+                $id3[] = $dataid['id_tbl'];
+                $nilaip3[] = $dataid['nilaip'];
+                $nilaiq3[] = $dataid['nilaiq'];
+                $nilair3[] = $dataid['nilair'];
+            endforeach;
+        } else {
+            $id3[] = '';
+            $nilaip3[] = '';
+            $nilaiq3[] = '';
+            $nilair3[] = '';
+        }
+        $data['id3'] = $id3;
+        $data['nilaip3'] = $nilaip3;
+        $data['nilaiq3'] = $nilaiq3;
+        $data['nilair3'] = $nilair3;
+
+        if (!empty($kerja)) {
+            $data['data_kerja'] = $kerja;
+        } else {
+            $data['data_kerja'] = 'kosong';
         }
 
         $data['mhs_id'] = $mhs_id;
@@ -1340,6 +1371,34 @@ class Mannilairpl extends BaseController
                     'nilaip' => $nilailatih_p[$index],
                     'nilaiq' => $nilailatih_q[$index],
                     'nilair' => $nilailatih_r[$index],
+                    'nilairpl_save' => 'Ya',
+                    'nilairpl_submit' => 'Tidak',
+                    'nilairpl_confirm' => 'Tidak',
+                    'date_created' => date('Y-m-d'),
+                    'date_modified' => date('Y-m-d')
+                );
+                $model->save($data);
+            endforeach;
+        }
+
+        //Simpan UserFair3
+        $kerja_index = $this->request->getVar('kerja_index');
+        if (!empty($kerja_index)) {
+            $kerja_id = $this->request->getVar('kerja_id');
+            $nilaikerja_p = $this->request->getVar('nilaikerja_p');
+            $nilaikerja_q = $this->request->getVar('nilaikerja_q');
+            $nilaikerja_r = $this->request->getVar('nilaikerja_r');
+            foreach ($kerja_index as $index) :
+                $data = array(
+                    'mhs_id' => $mhs_id,
+                    'dosen_id' => $dosen_id,
+                    'tipedosen' => 'Penilai',
+                    'id_tbl' => $kerja_id[$index],
+                    'namatbl' => '3',
+                    'namamk' => 'k3lh',
+                    'nilaip' => $nilaikerja_p[$index],
+                    'nilaiq' => $nilaikerja_q[$index],
+                    'nilair' => $nilaikerja_r[$index],
                     'nilairpl_save' => 'Ya',
                     'nilairpl_submit' => 'Tidak',
                     'nilairpl_confirm' => 'Tidak',
