@@ -609,6 +609,235 @@
                             </tbody>
                         </table>
                     <?php } ?>
+                    <br />
+                    <!--UserFair3-->
+                    <?php if (isset($data_kerja) && ($data_kerja != "kosong")) { ?>
+                        <br />
+                        <h3>III. KUALIFIKASI PROFESIONAL (W2,W3,W4,P6,P7,P8,P9,P10,P11)</h3>
+                        <br />
+                        <table id="tabledata" class="display table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Check</th>
+                                    <th>Periode</th>
+                                    <th>Nama Instansi/Perusahaan</th>
+                                    <th>Jabatan/tugas</th>
+                                    <th>Nama Aktifitas/Kegiatan/Proyek</th>
+                                    <th>Pemberi Tugas</th>
+                                    <th>Lokasi</th>
+                                    <th>Durasi</th>
+                                    <th>Posisi Tugas, Jabatan</th>
+                                    <th>Nilai Proyek</th>
+                                    <th>Nilai Tanggung Jawab</th>
+                                    <th>SDM yang terlibat</th>
+                                    <th>Tingkat Kesulitan</th>
+                                    <th>Skala Proyek</th>
+                                    <th>Uraian Singkat Tugas dan Tanggung Jawab Prof sesuai NSPK</th>
+                                    <th>Bukti kualifikasi profesional</th>
+                                    <th>Klaim Kompetensi</th>
+                                    <th>Nilai P</th>
+                                    <th>Nilai Q</th>
+                                    <th>Nilai R</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $i = 1;
+                                $j = 0;
+                                foreach ($data_kerja as $kerja) :
+                                ?>
+                                    <tr>
+                                        <td><?php echo $i;
+                                            $i++; ?></td>
+                                        <td>
+                                            <?php
+                                            if (in_array($kerja['Num'], $id3)) {
+                                                $idx = array_search($kerja['Num'], $id3);
+                                                $nilaikerjap[$j] = $nilaip3[$idx];
+                                                $nilaikerjaq[$j] = $nilaiq3[$idx];
+                                                $nilaikerjar[$j] = $nilair3[$idx];
+                                                $checked[$j] = 'checked';
+                                            } else {
+                                                $nilaikerjap[$j] = '';
+                                                $nilaikerjaq[$j] = '';
+                                                $nilaikerjar[$j] = '';
+                                                $checked[$j] = '';
+                                            }
+                                            ?>
+                                            <input type="checkbox" name="kerja_index[]" id="kerja_index[]" value="<?= $j; ?>" <?= $checked[$j]; ?> />
+                                            <input type="hidden" name="kerja_id[]" id="kerja_id[]" value="<?= $kerja['Num']; ?>" />
+                                        </td>
+                                        <td><?php
+                                            if (!empty($kerja['EndDate']) && ($kerja['EndDate'] != '0000-00-00')) {
+                                                echo format_indo($kerja['StartDate']) . " hingga " . format_indo($kerja['EndDate']);
+                                            } else {
+                                                echo format_indo($kerja['StartDate']) . " hingga sekarang.";
+                                            }
+                                            ?></td>
+                                        <td><?= $kerja['NameInstance']; ?></td>
+                                        <td><?= $kerja['Position']; ?></td>
+                                        <td><?= $kerja['Name']; ?></td>
+                                        <td><?= $kerja['Giver']; ?></td>
+                                        <td><?= $kerja['LocCity'] . ', ' . $kerja['LocProv'] . ', ' . $kerja['LocCountry']; ?></td>
+                                        <td><?php
+                                            switch ($kerja['Duration']) {
+                                                case 'smp3':
+                                                    echo "1 - 3 tahun";
+                                                    break;
+                                                case 'smp7':
+                                                    echo "4 - 7 tahun";
+                                                    break;
+                                                case 'smpe10':
+                                                    echo "8 - 10 tahun";
+                                                    break;
+                                                case 'lbh10':
+                                                    echo "> dari 10 tahun";
+                                                    break;
+                                            }
+                                            ?></td>
+                                        <td><?php
+                                            switch ($kerja['Jabatan']) {
+                                                case 'anggota':
+                                                    echo "Anggota / Staff / Dosen";
+                                                    break;
+                                                case 'supervisor':
+                                                    echo "Supervisor / Site Engineer / Site Manager / KaLab / Sekretaris Jurusan / Ketua Jurusan / PD";
+                                                    break;
+                                                case 'direktur':
+                                                    echo "Direktur / Ketua Tim / Dekan / PR / Rektor";
+                                                    break;
+                                                case 'pengarah':
+                                                    echo "Pengarah / Adviser / Narasumber Ahli";
+                                                    break;
+                                            }
+                                            ?></td>
+                                        <td><?= $kerja['ProjValue']; ?></td>
+                                        <td><?= $kerja['RspnValue']; ?></td>
+                                        <td><?php
+                                            switch ($kerja['Hresource']) {
+                                                case 'dik':
+                                                    echo "Sedikit";
+                                                    break;
+                                                case 'sed':
+                                                    echo "Sedang";
+                                                    break;
+                                                case 'bny':
+                                                    echo "Banyak";
+                                                    break;
+                                                case 'sbny':
+                                                    echo "Sangat Banyak";
+                                                    break;
+                                            }
+                                            ?></td>
+                                        <td><?php
+                                            switch ($kerja['Diff']) {
+                                                case 'ren':
+                                                    echo "Rendah";
+                                                    break;
+                                                case 'sed':
+                                                    echo "Sedang";
+                                                    break;
+                                                case 'tin':
+                                                    echo "Tinggi";
+                                                    break;
+                                                case 'stin':
+                                                    echo "Sangat Tinggi";
+                                                    break;
+                                            }
+                                            ?></td>
+                                        <td><?php
+                                            switch ($kerja['Scale']) {
+                                                case 'ren':
+                                                    echo "Rendah";
+                                                    break;
+                                                case 'sed':
+                                                    echo "Sedang";
+                                                    break;
+                                                case 'tin':
+                                                    echo "Tinggi";
+                                                    break;
+                                                case 'stin':
+                                                    echo "Sangat Tinggi";
+                                                    break;
+                                            }
+                                            ?></td>
+                                        <td><?= $kerja['Desc']; ?></td>
+                                        <td><?php
+                                            if (!empty($kerja['File'])) {
+                                                echo "<a href='" . base_url('uploads/docs/' . $kerja['File']) . "' target='_blank'>" . "Lihat Bukti" . "</a>";
+                                            } else {
+                                                echo "";
+                                            }
+                                            ?></td>
+                                        <td><?= $kerja['kompetensi']; ?></td>
+                                        <td>
+                                            <?php
+                                            if ((isset($nilaikerjap[$j])) && (!empty($nilaikerjap[$j]))) {
+                                                $durscore = $nilaikerjap[$j];
+                                            } else {
+                                                if ($kerja['Duration'] == 'smp3') {
+                                                    $durscore = 1;
+                                                } elseif ($kerja['Duration'] == 'smp7') {
+                                                    $durscore = 2;
+                                                } elseif ($kerja['Duration'] == 'smp10') {
+                                                    $durscore = 3;
+                                                } elseif ($kerja['Duration'] == 'lbih10') {
+                                                    $durscore = 4;
+                                                } else {
+                                                    $durscore = '';
+                                                }
+                                            }
+                                            ?>
+                                            <select name="nilaikerja_p[]" id="nilaikerja_p[]">
+                                                <option value="4" <?= $durscore == 4 ? 'selected' : ''; ?>>4</option>
+                                                <option value="3" <?= $durscore == 3 ? 'selected' : ''; ?>>3</option>
+                                                <option value="2" <?= $durscore == 2 ? 'selected' : ''; ?>>2</option>
+                                                <option value="1" <?= $durscore == 1 ? 'selected' : ''; ?>>1</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <?php
+                                            if ((isset($nilaikerjaq[$j])) && (!empty($nilaikerjaq[$j]))) {
+                                                $jabscore = $nilaikerjaq[$j];
+                                            } else {
+                                                if ($kerja['Jabatan'] == 'anggota') {
+                                                    $jabscore = 1;
+                                                } elseif ($kerja['Jabatan'] == 'supervisor') {
+                                                    $jabscore = 2;
+                                                } elseif ($kerja['Jabatan'] == 'direktur') {
+                                                    $jabscore = 3;
+                                                } elseif ($kerja['Jabatan'] == 'pengarah') {
+                                                    $jabscore = 4;
+                                                } else {
+                                                    $jabscore = '';
+                                                }
+                                            }
+                                            ?>
+                                            <select name="nilaikerja_q[]" id="nilaikerja_q[]">
+                                                <option value="4" <?= $jabscore == 4 ? 'selected' : ''; ?>>4</option>
+                                                <option value="3" <?= $jabscore == 3 ? 'selected' : ''; ?>>3</option>
+                                                <option value="2" <?= $jabscore == 2 ? 'selected' : ''; ?>>2</option>
+                                                <option value="1" <?= $jabscore == 1 ? 'selected' : ''; ?>>1</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select name="nilaikerja_r[]" id="nilaikerja_r[]">
+                                                <option value="4" <?= ((isset($nilaikerjar[$j])) && ($nilaikerjar[$j] == 4)) ? 'selected' : ''; ?>>4</option>
+                                                <option value="3" <?= ((isset($nilaikerjar[$j])) && ($nilaikerjar[$j] == 3)) ? 'selected' : ''; ?>>3</option>
+                                                <option value="2" <?= ((isset($nilaikerjar[$j])) && ($nilaikerjar[$j] == 2)) ? 'selected' : ''; ?>>2</option>
+                                                <option value="1" <?= ((isset($nilaikerjar[$j])) && ($nilaikerjar[$j] == 1)) ? 'selected' : ''; ?>>1</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                <?php
+                                    $j++;
+                                endforeach
+                                ?>
+                            </tbody>
+                        </table>
+                    <?php } ?>
+                    <br />
                 </form>
             </div>
         </div>
