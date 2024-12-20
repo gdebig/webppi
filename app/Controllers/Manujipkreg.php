@@ -84,6 +84,7 @@ class Manujipkreg extends BaseController
         $data['title_page'] = "Lihat Nilai Praktek Keinsinyuran Reguler";
         $data['data_bread'] = "Nilai PK Reguler";
         return view('maintemp/lihatnilaiujipkreg', $data);
+        //var_dump($data);
     }
 
     public function berinilai($mhs_id, $dosen_id, $tar_id)

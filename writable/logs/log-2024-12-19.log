@@ -1,0 +1,33 @@
+CRITICAL - 2024-12-19 23:40:10 --> Undefined index: ajukanfair
+#0 C:\wamp64\www\webppi\app\Views\maintemp\peserta.php(133): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\wamp64\\www\\w...', 133, Array)
+#1 C:\wamp64\www\webppi\system\View\View.php(210): include('C:\\wamp64\\www\\w...')
+#2 C:\wamp64\www\webppi\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\wamp64\www\webppi\system\Common.php(1089): CodeIgniter\View\View->render('maintemp/pesert...', Array, true)
+#4 C:\wamp64\www\webppi\app\Controllers\Manpeserta.php(55): view('maintemp/pesert...', Array)
+#5 C:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Manpeserta->index()
+#6 C:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Manpeserta))
+#7 C:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2024-12-19 23:41:12 --> Undefined index: ajukanfair
+#0 C:\wamp64\www\webppi\app\Views\maintemp\peserta.php(133): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\wamp64\\www\\w...', 133, Array)
+#1 C:\wamp64\www\webppi\system\View\View.php(210): include('C:\\wamp64\\www\\w...')
+#2 C:\wamp64\www\webppi\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\wamp64\www\webppi\system\Common.php(1089): CodeIgniter\View\View->render('maintemp/pesert...', Array, true)
+#4 C:\wamp64\www\webppi\app\Controllers\Manpeserta.php(55): view('maintemp/pesert...', Array)
+#5 C:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Manpeserta->index()
+#6 C:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Manpeserta))
+#7 C:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2024-12-19 23:53:32 --> Undefined index: ajukanfair
+#0 C:\wamp64\www\webppi\app\Views\maintemp\peserta.php(133): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index...', 'C:\\wamp64\\www\\w...', 133, Array)
+#1 C:\wamp64\www\webppi\system\View\View.php(210): include('C:\\wamp64\\www\\w...')
+#2 C:\wamp64\www\webppi\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\wamp64\www\webppi\system\Common.php(1089): CodeIgniter\View\View->render('maintemp/pesert...', Array, true)
+#4 C:\wamp64\www\webppi\app\Controllers\Manpeserta.php(55): view('maintemp/pesert...', Array)
+#5 C:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Manpeserta->index()
+#6 C:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Manpeserta))
+#7 C:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}

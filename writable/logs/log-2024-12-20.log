@@ -1,0 +1,32 @@
+CRITICAL - 2024-12-20 01:16:50 --> Undefined variable: result
+#0 C:\wamp64\www\webppi\app\Helpers\nilai_helper.php(28): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\wamp64\\www\\w...', 28, Array)
+#1 C:\wamp64\www\webppi\app\Views\maintemp\lihatnilaiujipkreg.php(61): nilai_huruf(360)
+#2 C:\wamp64\www\webppi\system\View\View.php(210): include('C:\\wamp64\\www\\w...')
+#3 C:\wamp64\www\webppi\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#4 C:\wamp64\www\webppi\system\Common.php(1089): CodeIgniter\View\View->render('maintemp/lihatn...', Array, true)
+#5 C:\wamp64\www\webppi\app\Controllers\Manujipkreg.php(86): view('maintemp/lihatn...', Array)
+#6 C:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Manujipkreg->lihatnilai('419', '13', '106')
+#7 C:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Manujipkreg))
+#8 C:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-12-20 14:20:59 --> Undefined variable: result
+#0 C:\wamp64\www\webppi\app\Helpers\nilai_helper.php(28): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\wamp64\\www\\w...', 28, Array)
+#1 C:\wamp64\www\webppi\app\Controllers\Manujipkreg.php(397): nilai_huruf(360)
+#2 C:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Manujipkreg->lihatadm('419', '13', '106')
+#3 C:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Manujipkreg))
+#4 C:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2024-12-20 01:22:32 --> Undefined variable: result
+#0 C:\wamp64\www\webppi\app\Helpers\nilai_helper.php(28): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\wamp64\\www\\w...', 28, Array)
+#1 C:\wamp64\www\webppi\app\Views\maintemp\lihatnilaiujipkreg.php(61): nilai_huruf(360)
+#2 C:\wamp64\www\webppi\system\View\View.php(210): include('C:\\wamp64\\www\\w...')
+#3 C:\wamp64\www\webppi\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#4 C:\wamp64\www\webppi\system\Common.php(1089): CodeIgniter\View\View->render('maintemp/lihatn...', Array, true)
+#5 C:\wamp64\www\webppi\app\Controllers\Manujipkreg.php(86): view('maintemp/lihatn...', Array)
+#6 C:\wamp64\www\webppi\system\CodeIgniter.php(832): App\Controllers\Manujipkreg->lihatnilai('419', '13', '106')
+#7 C:\wamp64\www\webppi\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Manujipkreg))
+#8 C:\wamp64\www\webppi\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\wamp64\www\webppi\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#10 {main}
