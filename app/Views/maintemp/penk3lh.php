@@ -532,9 +532,7 @@
                                                     echo "Lama pendidikan 100 - 240 Jam";
                                                     break;
                                                 case 'lbih240':
-                                                    echo "Lebih dari 240 Jam
-                    
-                    ";
+                                                    echo "Lebih dari 240 Jam";
                                                     break;
                                             }
                                             ?></td>
@@ -573,11 +571,18 @@
                                             </select>
                                         </td>
                                         <td>
+                                            <?php
+                                            if ((isset($nilailatihq[$j])) && (!empty($nilailatihq[$j]))) {
+                                                $pesertascore = $nilailatihq[$j];
+                                            } else {
+                                                $pesertascore = 2;
+                                            }
+                                            ?>
                                             <select name="nilailatih_q[]" id="nilailatih_q[]">
-                                                <option value="4">4</option>
-                                                <option value="3">3</option>
-                                                <option value="2" selected>2</option>
-                                                <option value="1">1</option>
+                                                <option value="4" <?= $pesertascore == 4 ? 'selected' : ''; ?>>4</option>
+                                                <option value="3" <?= $pesertascore == 3 ? 'selected' : ''; ?>>3</option>
+                                                <option value="2" <?= $pesertascore == 2 ? 'selected' : ''; ?>>2</option>
+                                                <option value="1" <?= $pesertascore == 1 ? 'selected' : ''; ?>>1</option>
                                             </select>
                                         </td>
                                         <td>
