@@ -1647,7 +1647,7 @@ class Mannilairpl extends BaseController
 
         //USerFair51
         $model = new CapesKartulModel();
-        $where = "user_id = '$mhs_id' AND (kompetensi LIKE '%W.4.4.%' OR kompetensi LIKE '%W.4.5.%')";
+        $where = "user_id = '$mhs_id' AND (kompetensi LIKE '%W.4.4.%' OR kompetensi LIKE '%.4.3.%' OR kompetensi LIKE '%.4.5.%')";
         $kartul = $model->where($where)->orderby('Year', 'DESC')->findall();
         //$kartul = $model->where('user_id', $mhs_id)->like('kompetensi', 'W.4.4.')->orderby('Year', 'DESC')->findall();
         $dataid51 = $modelnilai->select('id_tbl, nilaip, nilaiq, nilair')

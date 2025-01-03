@@ -385,13 +385,15 @@ $session = session();
     <script>
         $(function() {
             $('table.display').DataTable({
-                "paging": true,
+                "paging": false,
                 "lengthChange": false,
                 "searching": true,
                 "ordering": true,
                 "info": true,
                 "autoWidth": false,
                 "scrollX": true,
+                "scrollCollapse": true,
+                "scrollY": '600px',
                 "buttons": ["csv", "excel", "pdf", "print"]
             }).buttons().container().appendTo('#tabledata_wrapper .col-md-6:eq(0)');
         });

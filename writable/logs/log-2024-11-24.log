@@ -1,0 +1,6 @@
+CRITICAL - 2024-11-24 15:10:24 --> The framework needs the following extension(s) installed and loaded: curl.
+#0 D:\wamp64\www\webppi\system\CodeIgniter.php(219): CodeIgniter\Exceptions\FrameworkException::forMissingExtension('curl')
+#1 D:\wamp64\www\webppi\system\CodeIgniter.php(177): CodeIgniter\CodeIgniter->resolvePlatformExtensions()
+#2 D:\wamp64\www\webppi\system\bootstrap.php(146): CodeIgniter\CodeIgniter->initialize()
+#3 D:\wamp64\www\webppi\public\index.php(28): require('D:\\wamp64\\www\\w...')
+#4 {main}
