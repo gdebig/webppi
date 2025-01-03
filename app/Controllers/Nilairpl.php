@@ -1115,7 +1115,7 @@ class Nilairpl extends BaseController
         $where = "user_id = '$mhs_id' AND (kompetensi LIKE '%W.1.3.%' OR kompetensi LIKE '%W.1.4.%' OR kompetensi LIKE '%P.8.3.6%' OR kompetensi LIKE '%P.10.2.1%' OR kompetensi LIKE '%P.11.3.%' OR kompetensi LIKE '%W.2.%' OR kompetensi LIKE '%W.3.1.5%' OR kompetensi LIKE '%W.4.5.8%' OR kompetensi LIKE '%W.4.5.9%' OR kompetensi LIKE '%P.9.1.4%' OR kompetensi LIKE '%P.9.1.5%' OR kompetensi LIKE '%P.9.4.1%' OR kompetensi LIKE '%P.9.4.2%' OR kompetensi LIKE '%P.9.4.6%' OR kompetensi LIKE '%P.11.1.2%')";
         $kerja = $model5->where($where)->orderby('nilai_q', 'DESC')->orderby('ProjValue', 'DESC')->findall();
         //$kerja = $model->where('user_id', $mhs_id)->like('kompetensi', 'W.2.2.')->orderby('ProjValue', 'DESC')->findall();
-        $dataid3 = $modelnilai->select('id_tbl, nilaip, nilaiq, nilair')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Pembimbing')->where('namatbl', '3')->where('namamk', 'profesi')->findall();
+        $dataid3 = $modelnilai->select('id_tbl, nilaip, nilaiq, nilair')->where('mhs_id', $mhs_id)->where('dosen_id', $dosen_id)->where('tipedosen', 'Pembimbing')->where('namatbl', '3')->where('namamk', 'k3lh')->findall();
         if (!empty($dataid3)) {
             foreach ($dataid3 as $dataid) :
                 $id3[] = $dataid['id_tbl'];
@@ -1281,12 +1281,11 @@ class Nilairpl extends BaseController
                     'date_modified' => date('Y-m-d')
                 );
                 $model->save($data);
-                print_r($data);
             endforeach;
         }
 
         $session->setFlashdata('msg', 'Data MK Keselamatan, Kesehatan, Keamanan Kerja dan Lingkungan berhasil disimpan.');
-        //return redirect()->to('nilairpl/docs/' . $mhs_id . '/' . $dosen_id);
+        return redirect()->to('nilairpl/docs/' . $mhs_id . '/' . $dosen_id);
     }
 
     public function seminar($mhs_id, $dosen_id)
