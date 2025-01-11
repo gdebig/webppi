@@ -328,6 +328,124 @@
                             </tbody>
                         </table>
                     <?php } ?>
+                    <!--UserFair53-->
+                    <?php if (isset($data_sem1) && ($data_sem1 != "kosong")) {
+                    ?>
+                        <h3>V.3 Seminar/Lokakarya Keinsinyuran Yang Diikuti (W2) </h3>
+                        <table id="tabledata" class="display table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Check</th>
+                                    <th>Bulan-Tahun</th>
+                                    <th>Nama Seminar/Lokakarya</th>
+                                    <th>Penyelenggara</th>
+                                    <th>Lokasi</th>
+                                    <th>Seminar/Lokakarya Tingkat</th>
+                                    <th>Tingkat Kesulitan dan Manfaat</th>
+                                    <th>Uraian Singkat Materi Makalah/Tulisan</th>
+                                    <th>Bukti Seminar</th>
+                                    <th>Klaim Kompetensi</th>
+                                    <th>Nilai P</th>
+                                    <th>Nilai Q</th>
+                                    <th>Nilai R</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $i = 1;
+                                $j = 0;
+                                foreach ($data_sem1 as $sem1) :
+                                ?>
+                                    <tr>
+                                        <td><?php echo $i;
+                                            $i++; ?></td>
+                                        <td>
+                                            <?php
+                                            if (in_array($sem1['Num'], $id53)) {
+                                                $idx = array_search($sem1['Num'], $id53);
+                                                $nilaisem1p[$j] = $nilaip53[$idx];
+                                                $nilaisem1q[$j] = $nilaiq53[$idx];
+                                                $nilaisem1r[$j] = $nilair53[$idx];
+                                                $checked[$j] = 'checked';
+                                            } else {
+                                                $nilaisem1p[$j] = '';
+                                                $nilaisem1q[$j] = '';
+                                                $nilaisem1r[$j] = '';
+                                                $checked[$j] = '';
+                                            }
+                                            ?>
+                                            <input type="checkbox" name="sem1_index[]" id="sem1_index[]" value="<?= $j; ?>" <?= $checked[$j]; ?> />
+                                            <input type="hidden" name="sem1_id[]" id="sem1_id[]" value="<?= $sem1['Num']; ?>" />
+                                        </td>
+                                        <td><?= $sem1['Month'] . '-' . $sem1['Year']; ?></td>
+                                        <td><?= $sem1['Name']; ?></td>
+                                        <td><?= $sem1['Organizer']; ?></td>
+                                        <td><?= $sem1['LocCity'] . ", " . $sem1['LocCountry'] ?></td>
+                                        <td><?php
+                                            switch ($sem1['Level']) {
+                                                case "Lok":
+                                                    echo "Pada Seminar Lokal";
+                                                    break;
+                                                case "Nas":
+                                                    echo "Pada Seminar Nasional";
+                                                    break;
+                                                case "Int":
+                                                    echo "Pada Seminar Internasional";
+                                                    break;
+                                            }
+                                            ?></td>
+                                        <td><?php
+                                            switch ($sem1['DiffBenefit']) {
+                                                case "ren":
+                                                    echo "Rendah";
+                                                    break;
+                                                case "sed":
+                                                    echo "Sedang";
+                                                    break;
+                                                case "tin":
+                                                    echo "Tinggi";
+                                                    break;
+                                                case "stin":
+                                                    echo "Sangat Tinggi";
+                                                    break;
+                                            }
+                                            ?></td>
+                                        <td><?= $sem1['Desc']; ?></td>
+                                        <td><a href="<?= base_url(); ?>/uploads/docs/<?= $sem1['File']; ?>" target="_blank">Lihat Bukti</a></td>
+                                        <td><?= $sem1['kompetensi']; ?></td>
+                                        <td>
+                                            <select name="nilaisem1_p[]" id="nilaisem1_p[]">
+                                                <option value="4" <?= ((isset($nilaisem1p[$j])) && ($nilaisem1p[$j] == 4)) ? 'selected' : ''; ?>>4</option>
+                                                <option value="3" <?= ((isset($nilaisem1p[$j])) && ($nilaisem1p[$j] == 3)) ? 'selected' : ''; ?>>3</option>
+                                                <option value="2" <?= ((isset($nilaisem1p[$j])) && ($nilaisem1p[$j] == 2)) ? 'selected' : ''; ?>>2</option>
+                                                <option value="1" <?= ((isset($nilaisem1p[$j])) && ($nilaisem1p[$j] == 1)) ? 'selected' : ''; ?>>1</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select name="nilaisem1_q[]" id="nilaisem1_q[]">
+                                                <option value="4" <?= ((isset($nilaisem1q[$j])) && ($nilaisem1q[$j] == 4)) ? 'selected' : ''; ?>>4</option>
+                                                <option value="3" <?= ((isset($nilaisem1q[$j])) && ($nilaisem1q[$j] == 3)) ? 'selected' : ''; ?>>3</option>
+                                                <option value="2" <?= ((isset($nilaisem1q[$j])) && ($nilaisem1q[$j] == 2)) ? 'selected' : ''; ?>>2</option>
+                                                <option value="1" <?= ((isset($nilaisem1q[$j])) && ($nilaisem1q[$j] == 1)) ? 'selected' : ''; ?>>1</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select name="nilaisem1_r[]" id="nilaisem1_r[]">
+                                                <option value="4" <?= ((isset($nilaisem1r[$j])) && ($nilaisem1r[$j] == 4)) ? 'selected' : ''; ?>>4</option>
+                                                <option value="3" <?= ((isset($nilaisem1r[$j])) && ($nilaisem1r[$j] == 3)) ? 'selected' : ''; ?>>3</option>
+                                                <option value="2" <?= ((isset($nilaisem1r[$j])) && ($nilaisem1r[$j] == 2)) ? 'selected' : ''; ?>>2</option>
+                                                <option value="1" <?= ((isset($nilaisem1r[$j])) && ($nilaisem1r[$j] == 1)) ? 'selected' : ''; ?>>1</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                <?php
+                                    $j++;
+                                endforeach
+                                ?>
+                            </tbody>
+                        </table>
+                    <?php } ?>
                     <!--UserFair4-->
                     <?php if (isset($data_ajar) && ($data_ajar != "kosong")) {
                     ?>

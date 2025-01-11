@@ -1571,6 +1571,41 @@ class Nilairpl extends BaseController
             $data['data_sem'] = 'kosong';
         }
 
+        //UserFair53
+        //$sem = $model8->where('user_id', $mhs_id)->where('Type', 'Sem')->like('kompetensi', 'W.2.2.')->orderby('Year', 'DESC')->findall();
+        //$where = "user_id = '$mhs_id' AND (kompetensi LIKE '%W.4.4.%' OR kompetensi LIKE '%W.4.5.%')";
+        $sem1 = $model1->where('Type', 'Sem')->where('user_id', $mhs_id)->orderby('Year', 'DESC')->findall();
+        $dataid53 = $modelnilai->select('id_tbl, nilaip, nilaiq, nilair')
+            ->where('mhs_id', $mhs_id)
+            ->where('dosen_id', $dosen_id)
+            ->where('tipedosen', 'Pembimbing')
+            ->where('namatbl', '53')
+            ->where('namamk', 'seminar')
+            ->findall();
+        if (!empty($dataid53)) {
+            foreach ($dataid53 as $dataid) :
+                $id53[] = $dataid['id_tbl'];
+                $nilaip53[] = $dataid['nilaip'];
+                $nilaiq53[] = $dataid['nilaiq'];
+                $nilair53[] = $dataid['nilair'];
+            endforeach;
+        } else {
+            $id53[] = '';
+            $nilaip53[] = '';
+            $nilaiq53[] = '';
+            $nilair53[] = '';
+        }
+        $data['id53'] = $id53;
+        $data['nilaip53'] = $nilaip53;
+        $data['nilaiq53'] = $nilaiq53;
+        $data['nilair53'] = $nilair53;
+
+        if (!empty($sem1)) {
+            $data['data_sem1'] = $sem1;
+        } else {
+            $data['data_sem1'] = 'kosong';
+        }
+
         //UserFair4
         $model2 = new MengajarModel();
         //$ajar = $model2->where('user_id', $mhs_id)->like('kompetensi', 'W.4.4.')->orderby('StartPeriod', 'DESC')->findall();
@@ -1830,6 +1865,34 @@ class Nilairpl extends BaseController
                     'nilaip' => $nilaisem_p[$index],
                     'nilaiq' => $nilaisem_q[$index],
                     'nilair' => $nilaisem_r[$index],
+                    'nilairpl_save' => 'Ya',
+                    'nilairpl_submit' => 'Tidak',
+                    'nilairpl_confirm' => 'Tidak',
+                    'date_created' => date('Y-m-d'),
+                    'date_modified' => date('Y-m-d')
+                );
+                $model->save($data);
+            endforeach;
+        }
+
+        //Simpan UserFair53
+        $sem1_index = $this->request->getVar('sem1_index');
+        if (!empty($sem1_index)) {
+            $sem1_id = $this->request->getVar('sem1_id');
+            $nilaisem1_p = $this->request->getVar('nilaisem1_p');
+            $nilaisem1_q = $this->request->getVar('nilaisem1_q');
+            $nilaisem1_r = $this->request->getVar('nilaisem1_r');
+            foreach ($sem1_index as $index) :
+                $data = array(
+                    'mhs_id' => $mhs_id,
+                    'dosen_id' => $dosen_id,
+                    'tipedosen' => 'Pembimbing',
+                    'id_tbl' => $sem1_id[$index],
+                    'namatbl' => '53',
+                    'namamk' => 'seminar',
+                    'nilaip' => $nilaisem1_p[$index],
+                    'nilaiq' => $nilaisem1_q[$index],
+                    'nilair' => $nilaisem1_r[$index],
                     'nilairpl_save' => 'Ya',
                     'nilairpl_submit' => 'Tidak',
                     'nilairpl_confirm' => 'Tidak',
